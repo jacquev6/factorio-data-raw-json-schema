@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import TwoNodes from '../components/TwoNodes.vue'
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <TwoNodes />
 </template>
