@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref, watch } from 'vue'
+import { nextTick, reactive, ref, watch } from 'vue'
 import { useElementSize } from '@vueuse/core'
 
 function assert(condition: boolean): asserts condition {
@@ -14,40 +14,66 @@ const { width, height } = useElementSize(container)
 const { width: canvasWidth, height: canvasHeight } = useElementSize(canvas)
 
 interface GraphNode {
-  x: number
-  y: number
+  left: number
+  top: number
   text: string
-  left: GraphNode[]
-  right: GraphNode[]
+  leftChildren: GraphNode[]
+  rightChildren: GraphNode[]
 }
 
 const nodes = reactive<GraphNode[]>([
-  { x: 200, y: 100, text: 'R1', left: [], right: [] },
-  { x: 200, y: 200, text: 'R2', left: [], right: [] },
+  { left: 300, top: 100, text: 'R1', leftChildren: [], rightChildren: [] },
+  { left: 300, top: 200, text: 'R2', leftChildren: [], rightChildren: [] },
 ])
 
-function addRight(nodeIndex: number) {
+async function add(nodeIndex: number, dir: 'l' | 'r') {
   const node = nodes[nodeIndex]
+  const element = nodeElements.value[nodeIndex]
+
+  const siblings = dir === 'r' ? node.rightChildren : node.leftChildren
+  const newNodeIndex = nodes.length
   nodes.push({
-    x: node.x + 100,
-    y: node.y,
-    text: node.text + `.r${node.right.length + 1}`,
-    left: [node],
-    right: [],
+    left: node.left,
+    top: node.top,
+    text: node.text + `.${dir}${siblings.length + 1}`,
+    leftChildren: dir === 'r' ? [node] : [],
+    rightChildren: dir === 'l' ? [node] : [],
   })
-  node.right.push(nodes[nodes.length - 1])
+  const newNode = nodes[newNodeIndex]
+  siblings.push(newNode)
+
+  assert(nodeElements.value.length <= newNodeIndex)
+
+  await nextTick()
+
+  assert(nodeElements.value.length > newNodeIndex)
+  const newElement = nodeElements.value[newNodeIndex]
+
+  // Fixed horizontal distance between node edges
+  if (dir === 'r') {
+    newNode.left = node.left + element.offsetWidth + 60
+  } else {
+    newNode.left = node.left - newElement.offsetWidth - 60
+  }
+
+  // Below all siblings (dumb approach -- there might be room between siblings -- but somewhat reliable)
+  siblings.forEach((sibling) => {
+    if (sibling !== newNode) {
+      const siblingIndex = nodes.indexOf(sibling)
+      const siblingElement = nodeElements.value[siblingIndex]
+      if (sibling.top + siblingElement.offsetHeight >= newNode.top) {
+        newNode.top = sibling.top + siblingElement.offsetHeight + 10
+      }
+    }
+  })
 }
 
-function addLeft(nodeIndex: number) {
-  const node = nodes[nodeIndex]
-  nodes.push({
-    x: node.x - 100,
-    y: node.y,
-    text: node.text + `.l${node.left.length + 1}`,
-    left: [],
-    right: [node],
-  })
-  node.left.push(nodes[nodes.length - 1])
+async function addRight(nodeIndex: number) {
+  add(nodeIndex, 'r')
+}
+
+async function addLeft(nodeIndex: number) {
+  add(nodeIndex, 'l')
 }
 
 const nodeElements = ref<HTMLDivElement[]>([])
@@ -69,8 +95,8 @@ function maybeStartMoving(nodeIndex: number, e: PointerEvent) {
     moving.value = {
       node,
       element: nodeElements.value[nodeIndex],
-      initialX: node.x,
-      initialY: node.y,
+      initialX: node.left,
+      initialY: node.top,
       startX: e.clientX,
       startY: e.clientY,
     }
@@ -80,11 +106,11 @@ function maybeStartMoving(nodeIndex: number, e: PointerEvent) {
 function move(e: PointerEvent) {
   assert(moving.value !== null)
   const node = moving.value.node
-  node.x = Math.min(
+  node.left = Math.min(
     Math.max(0, moving.value.initialX + e.clientX - moving.value.startX),
     width.value - moving.value.element.offsetWidth,
   )
-  node.y = Math.min(
+  node.top = Math.min(
     Math.max(0, moving.value.initialY + e.clientY - moving.value.startY),
     height.value - moving.value.element.offsetHeight,
   )
@@ -100,10 +126,10 @@ watch(
     if (canvas !== null && elements.length === nodes.length) {
       const edges = new Set<[number, number]>()
       for (const node of nodes) {
-        for (const left of node.left) {
+        for (const left of node.leftChildren) {
           edges.add([nodes.indexOf(left), nodes.indexOf(node)])
         }
-        for (const right of node.right) {
+        for (const right of node.rightChildren) {
           edges.add([nodes.indexOf(node), nodes.indexOf(right)])
         }
       }
@@ -117,16 +143,16 @@ watch(
 
       for (const [orig, dest] of edges) {
         ctx.moveTo(
-          nodes[orig].x + elements[orig].offsetWidth,
-          nodes[orig].y + elements[orig].offsetHeight / 2,
+          nodes[orig].left + elements[orig].offsetWidth,
+          nodes[orig].top + elements[orig].offsetHeight / 2,
         )
         ctx.bezierCurveTo(
-          nodes[orig].x + elements[orig].offsetWidth + 50,
-          nodes[orig].y + elements[orig].offsetHeight / 2,
-          nodes[dest].x - 50,
-          nodes[dest].y + elements[dest].offsetHeight / 2,
-          nodes[dest].x,
-          nodes[dest].y + elements[dest].offsetHeight / 2,
+          nodes[orig].left + elements[orig].offsetWidth + 50,
+          nodes[orig].top + elements[orig].offsetHeight / 2,
+          nodes[dest].left - 50,
+          nodes[dest].top + elements[dest].offsetHeight / 2,
+          nodes[dest].left,
+          nodes[dest].top + elements[dest].offsetHeight / 2,
         )
       }
       ctx.stroke()
@@ -145,7 +171,7 @@ watch(
       v-for="(node, nodeIndex) in nodes"
       ref="nodeElements"
       class="node"
-      :style="{ top: `${node.y}px`, left: `${node.x}px` }"
+      :style="{ top: `${node.top}px`, left: `${node.left}px` }"
       @pointerdown="(e) => maybeStartMoving(nodeIndex, e)"
     >
       <button @click="addLeft(nodeIndex)">+</button>
