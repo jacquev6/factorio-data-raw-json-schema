@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TwoNodes from '../components/TwoNodes.vue'
+import MoreNodes from '../components/MoreNodes.vue'
 </script>
 
 <template>
@@ -7,8 +7,8 @@ import TwoNodes from '../components/TwoNodes.vue'
     <div style="width: 1.5em; background-color: lightblue">L</div>
     <div style="flex: 1; overflow: hidden; display: flex; flex-direction: column">
       <div style="height: 1.5em; background-color: lightblue">T</div>
-      <div style="flex: 1; overflow: hidden">
-        <TwoNodes />
+      <div style="flex: 1 1 75%; overflow: hidden">
+        <MoreNodes />
       </div>
       <div style="height: 1.5em; background-color: lightblue">B</div>
     </div>
