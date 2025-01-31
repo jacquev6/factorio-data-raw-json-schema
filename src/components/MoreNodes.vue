@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import { useElementSize } from '@vueuse/core'
 
 function assert(condition: boolean): asserts condition {
@@ -17,20 +17,38 @@ interface GraphNode {
   x: number
   y: number
   text: string
+  left: GraphNode[]
+  right: GraphNode[]
 }
 
 const nodes = reactive<GraphNode[]>([
-  { x: 40, y: 40, text: 'Alpha' },
-  { x: 160, y: 80, text: 'Bravo' },
-  { x: 80, y: 160, text: 'Charlie' },
-  { x: 200, y: 200, text: 'Delta' },
+  { x: 200, y: 100, text: 'R1', left: [], right: [] },
+  { x: 200, y: 200, text: 'R2', left: [], right: [] },
 ])
 
-const edges = reactive([
-  [0, 1],
-  [2, 1],
-  [2, 3],
-])
+function addRight(nodeIndex: number) {
+  const node = nodes[nodeIndex]
+  nodes.push({
+    x: node.x + 100,
+    y: node.y,
+    text: node.text + `.r${node.right.length + 1}`,
+    left: [node],
+    right: [],
+  })
+  node.right.push(nodes[nodes.length - 1])
+}
+
+function addLeft(nodeIndex: number) {
+  const node = nodes[nodeIndex]
+  nodes.push({
+    x: node.x - 100,
+    y: node.y,
+    text: node.text + `.l${node.left.length + 1}`,
+    left: [],
+    right: [node],
+  })
+  node.left.push(nodes[nodes.length - 1])
+}
 
 const nodeElements = ref<HTMLDivElement[]>([])
 
@@ -45,15 +63,17 @@ interface Moving {
 
 const moving = ref<Moving | null>(null)
 
-function startMoving(nodeIndex: number, e: PointerEvent) {
-  const node = nodes[nodeIndex]
-  moving.value = {
-    node,
-    element: nodeElements.value[nodeIndex],
-    initialX: node.x,
-    initialY: node.y,
-    startX: e.clientX,
-    startY: e.clientY,
+function maybeStartMoving(nodeIndex: number, e: PointerEvent) {
+  if (e.target === nodeElements.value[nodeIndex]) {
+    const node = nodes[nodeIndex]
+    moving.value = {
+      node,
+      element: nodeElements.value[nodeIndex],
+      initialX: node.x,
+      initialY: node.y,
+      startX: e.clientX,
+      startY: e.clientY,
+    }
   }
 }
 
@@ -75,9 +95,19 @@ function stopMoving() {
 }
 
 watch(
-  [canvas, nodes, nodeElements, edges, canvasWidth, canvasHeight],
-  ([canvas, nodes, elements, edges]) => {
+  [canvas, nodes, nodeElements, canvasWidth, canvasHeight],
+  ([canvas, nodes, elements]) => {
     if (canvas !== null && elements.length === nodes.length) {
+      const edges = new Set<[number, number]>()
+      for (const node of nodes) {
+        for (const left of node.left) {
+          edges.add([nodes.indexOf(left), nodes.indexOf(node)])
+        }
+        for (const right of node.right) {
+          edges.add([nodes.indexOf(node), nodes.indexOf(right)])
+        }
+      }
+
       const ctx = canvas.getContext('2d')
       assert(ctx !== null)
       ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -116,9 +146,11 @@ watch(
       ref="nodeElements"
       class="node"
       :style="{ top: `${node.y}px`, left: `${node.x}px` }"
-      @pointerdown="(e) => startMoving(nodeIndex, e)"
+      @pointerdown="(e) => maybeStartMoving(nodeIndex, e)"
     >
+      <button @click="addLeft(nodeIndex)">+</button>
       {{ node.text }}
+      <button @click="addRight(nodeIndex)">+</button>
     </div>
     <div
       v-if="moving !== null"
