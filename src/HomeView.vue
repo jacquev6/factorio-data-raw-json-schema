@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MoreNodes from '../components/MoreNodes.vue'
+import MoreNodes from './MoreNodes.vue'
 </script>
 
 <template>
