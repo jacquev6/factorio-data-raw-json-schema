@@ -172,7 +172,7 @@ export interface DataRaw {
   // explosion: Record<string, Prototype>
   // fire: Record<string, Prototype>
   // fish: Record<string, Prototype>
-  // fluid: Record<string, Prototype>
+  fluid: Record<string, Prototype>
   // 'fluid-turret': Record<string, Prototype>
   // 'fluid-wagon': Record<string, Prototype>
   // font: Record<string, Prototype>

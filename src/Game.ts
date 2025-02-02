@@ -1,7 +1,8 @@
 import assert from './assert'
 import { type DataRaw, itemPrototypeKeys } from './FactorioDataRaw'
 
-export interface Item {
+export interface Thing {
+  kind: 'item' | 'fluid'
   name: string
   ingredientOf: Recipe[]
   productOf: Recipe[]
@@ -9,12 +10,12 @@ export interface Item {
 
 export interface Recipe {
   name: string
-  ingredients: { item: Item }[]
-  products: { item: Item }[]
+  ingredients: { thing: Thing }[]
+  products: { thing: Thing }[]
 }
 
 export interface Game {
-  items: Record<string, Item>
+  things: Record<string, Thing>
   recipes: Record<string, Recipe>
 }
 
@@ -23,21 +24,35 @@ function ensureArray<T>(a: T[] | {} | undefined): T[] {
 }
 
 export function makeGame(dataRaw: DataRaw): Game {
-  const items: Record<string, Item> = Object.fromEntries(
-    itemPrototypeKeys
+  const things: Record<string, Thing> = Object.fromEntries([
+    ...itemPrototypeKeys
       .flatMap((key) => Object.entries(dataRaw[key]))
       .map(([name, itemPrototype]) => {
         assert(name === itemPrototype.name)
         return [
           name,
           {
+            kind: 'item',
             name,
             ingredientOf: [],
             productOf: [],
           },
         ]
       }),
-  )
+    ...Object.entries(dataRaw.fluid).map(([name, fluidPrototype]) => {
+      assert(name === fluidPrototype.name)
+      return [
+        name,
+        {
+          kind: 'fluid',
+          name,
+          ingredientOf: [],
+          productOf: [],
+        },
+      ]
+    }),
+  ])
+
   let recipes: Record<string, Recipe> = Object.fromEntries(
     Object.entries(dataRaw.recipe).map(([name, recipe]) => {
       assert(name === recipe.name)
@@ -47,27 +62,14 @@ export function makeGame(dataRaw: DataRaw): Game {
           name,
           ingredients: ensureArray(recipe.ingredients)
             .map((ingredientPrototype) => {
-              if (ingredientPrototype.type === 'fluid') {
-                return undefined
-              } else {
-                assert(ingredientPrototype.type === 'item')
-                const item = items[ingredientPrototype.name]
-                if (item === undefined) {
-                  console.log(`Item not found: ${ingredientPrototype.name}`)
-                }
-                return {
-                  kind: 'item' as const,
-                  item,
-                }
-              }
+              return { thing: things[ingredientPrototype.name] }
             })
-            .filter((ingredient) => ingredient !== undefined)
-            .filter((ingredient) => ingredient.item !== undefined),
+            .filter((ingredient) => ingredient.thing !== undefined),
           products: ensureArray(recipe.results)
             .map((productPrototype) => ({
-              item: items[productPrototype.name],
+              thing: things[productPrototype.name],
             }))
-            .filter((result) => result.item !== undefined),
+            .filter((result) => result.thing !== undefined),
         },
       ]
     }),
@@ -79,12 +81,12 @@ export function makeGame(dataRaw: DataRaw): Game {
 
   for (const recipe of Object.values(recipes)) {
     for (const ingredient of recipe.ingredients) {
-      ingredient.item.ingredientOf.push(recipe)
+      ingredient.thing.ingredientOf.push(recipe)
     }
     for (const product of recipe.products) {
-      product.item.productOf.push(recipe)
+      product.thing.productOf.push(recipe)
     }
   }
 
-  return { items, recipes }
+  return { things, recipes }
 }

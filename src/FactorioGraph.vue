@@ -18,19 +18,20 @@ const { width: canvasWidth, height: canvasHeight } = useElementSize(canvas)
 interface GraphNode {
   left: number
   top: number
-  content: { kind: 'item' | 'recipe'; name: string }
+  content: { kind: 'thing' | 'recipe'; imageDirectory: string; name: string }
   leftNeighbors: GraphNode[]
   rightNeighbors: GraphNode[]
 }
 
 const nodes = reactive<GraphNode[]>([])
 
+// const fluidNodes = reactive<Record<string, GraphNode>>({})
 const recipeNodes = reactive<Record<string, GraphNode>>({})
-const itemNodes = reactive<Record<string, GraphNode>>({})
+const thingNodes = reactive<Record<string, GraphNode>>({})
 
-function findRecipeProducing(itemName: string): string | null {
-  const item = props.game.items[itemName]
-  for (const recipe of item.productOf) {
+function findRecipeProducing(thingName: string): string | null {
+  const thing = props.game.things[thingName]
+  for (const recipe of thing.productOf) {
     if (recipeNodes[recipe.name] === undefined) {
       return recipe.name
     }
@@ -38,9 +39,9 @@ function findRecipeProducing(itemName: string): string | null {
   return null
 }
 
-function findRecipeConsuming(itemName: string): string | null {
-  const item = props.game.items[itemName]
-  for (const recipe of item.ingredientOf) {
+function findRecipeConsuming(thingName: string): string | null {
+  const thing = props.game.things[thingName]
+  for (const recipe of thing.ingredientOf) {
     if (recipeNodes[recipe.name] === undefined) {
       return recipe.name
     }
@@ -56,7 +57,7 @@ async function addRecipe(recipeName: string) {
   nodes.push({
     left: 0,
     top: 0,
-    content: { kind: 'recipe', name: recipe.name },
+    content: { kind: 'recipe', imageDirectory: 'recipe', name: recipe.name },
     leftNeighbors: [],
     rightNeighbors: [],
   })
@@ -65,18 +66,22 @@ async function addRecipe(recipeName: string) {
   const nodesToPosition = [newRecipeNodeIndex]
 
   for (const ingredient of recipe.ingredients) {
-    let ingredientNode = itemNodes[ingredient.item.name]
+    let ingredientNode = thingNodes[ingredient.thing.name]
     if (ingredientNode === undefined) {
       const newIngredientNodeIndex = nodes.length
       nodes.push({
         left: 0,
         top: 0,
-        content: { kind: 'item', name: ingredient.item.name },
+        content: {
+          kind: 'thing',
+          imageDirectory: ingredient.thing.kind,
+          name: ingredient.thing.name,
+        },
         leftNeighbors: [],
         rightNeighbors: [],
       })
       ingredientNode = nodes[newIngredientNodeIndex]
-      itemNodes[ingredient.item.name] = ingredientNode
+      thingNodes[ingredient.thing.name] = ingredientNode
       nodesToPosition.push(newIngredientNodeIndex)
     }
     ingredientNode.rightNeighbors.push(newRecipeNode)
@@ -84,18 +89,18 @@ async function addRecipe(recipeName: string) {
   }
 
   for (const product of recipe.products) {
-    let productNode = itemNodes[product.item.name]
+    let productNode = thingNodes[product.thing.name]
     if (productNode === undefined) {
       const newProductNodeIndex = nodes.length
       nodes.push({
         left: 0,
         top: 0,
-        content: { kind: 'item', name: product.item.name },
+        content: { kind: 'thing', imageDirectory: product.thing.kind, name: product.thing.name },
         leftNeighbors: [],
         rightNeighbors: [],
       })
       productNode = nodes[newProductNodeIndex]
-      itemNodes[product.item.name] = productNode
+      thingNodes[product.thing.name] = productNode
       nodesToPosition.push(newProductNodeIndex)
     }
     productNode.leftNeighbors.push(newRecipeNode)
@@ -182,11 +187,11 @@ function removeRecipeNode(recipeNodeIndex: number) {
 
   const recipe = props.game.recipes[recipeNode.content.name]
   for (const ingredient of [...recipe.ingredients, ...recipe.products]) {
-    const itemNode = itemNodes[ingredient.item.name]
-    assert(itemNode !== undefined)
-    if (itemNode.leftNeighbors.length === 0 && itemNode.rightNeighbors.length === 0) {
-      nodes.splice(nodes.indexOf(itemNode), 1)
-      delete itemNodes[ingredient.item.name]
+    const thingNode = thingNodes[ingredient.thing.name]
+    assert(thingNode !== undefined)
+    if (thingNode.leftNeighbors.length === 0 && thingNode.rightNeighbors.length === 0) {
+      nodes.splice(nodes.indexOf(thingNode), 1)
+      delete thingNodes[ingredient.thing.name]
     }
   }
 }
@@ -298,7 +303,7 @@ const stopInitialWatch = watch([width, height], ([width, height]) => {
         <button @pointerdown.stop @click="removeRecipeNode(nodeIndex)">X</button>
       </template>
       <div>
-        <template v-if="node.content.kind === 'item'">
+        <template v-if="node.content.kind === 'thing'">
           <template v-for="recipe of [findRecipeProducing(node.content.name)]">
             <button
               :disabled="recipe === null"
@@ -312,10 +317,10 @@ const stopInitialWatch = watch([width, height], ([width, height]) => {
         <img
           width="32"
           height="32"
-          :src="`script-output/${node.content.kind}/${node.content.name}.png`"
+          :src="`script-output/${node.content.imageDirectory}/${node.content.name}.png`"
           draggable="false"
         />
-        <template v-if="node.content.kind === 'item'">
+        <template v-if="node.content.kind === 'thing'">
           <template v-for="recipe of [findRecipeConsuming(node.content.name)]">
             <button
               :disabled="recipe === null"
