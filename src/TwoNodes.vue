@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive, ref, watch } from 'vue'
 import { useElementSize } from '@vueuse/core'
-
-function assert(condition: boolean): asserts condition {
-  console.assert(condition)
-}
+import assert from './assert'
 
 const container = ref<HTMLDivElement | null>(null)
 const canvas = ref<HTMLCanvasElement | null>(null)

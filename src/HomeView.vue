@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import MoreNodes from './MoreNodes.vue'
+import FactorioGraph from './FactorioGraph.vue'
+import type { DataRaw } from './FactorioDataRaw'
+import { makeGame } from './Game'
+import dataRaw from '../script-output/data-raw-dump.json'
+
+const game = makeGame(dataRaw as DataRaw)
 </script>
 
 <template>
@@ -8,7 +13,7 @@ import MoreNodes from './MoreNodes.vue'
     <div style="flex: 1; overflow: hidden; display: flex; flex-direction: column">
       <div style="height: 1.5em; background-color: lightblue">T</div>
       <div style="flex: 1 1 75%; overflow: hidden">
-        <MoreNodes />
+        <FactorioGraph :game />
       </div>
       <div style="height: 1.5em; background-color: lightblue">B</div>
     </div>
