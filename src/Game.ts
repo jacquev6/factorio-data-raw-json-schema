@@ -1,5 +1,5 @@
 import assert from './assert'
-import type { DataRaw } from './FactorioDataRaw'
+import { type DataRaw, itemPrototypeKeys } from './FactorioDataRaw'
 
 export interface Item {
   name: string
@@ -24,17 +24,19 @@ function ensureArray<T>(a: T[] | {} | undefined): T[] {
 
 export function makeGame(dataRaw: DataRaw): Game {
   const items: Record<string, Item> = Object.fromEntries(
-    Object.entries(dataRaw.item).map(([name, itemPrototype]) => {
-      assert(name === itemPrototype.name)
-      return [
-        name,
-        {
+    itemPrototypeKeys
+      .flatMap((key) => Object.entries(dataRaw[key]))
+      .map(([name, itemPrototype]) => {
+        assert(name === itemPrototype.name)
+        return [
           name,
-          ingredientOf: [],
-          productOf: [],
-        },
-      ]
-    }),
+          {
+            name,
+            ingredientOf: [],
+            productOf: [],
+          },
+        ]
+      }),
   )
   let recipes: Record<string, Recipe> = Object.fromEntries(
     Object.entries(dataRaw.recipe).map(([name, recipe]) => {
@@ -44,9 +46,22 @@ export function makeGame(dataRaw: DataRaw): Game {
         {
           name,
           ingredients: ensureArray(recipe.ingredients)
-            .map((ingredientPrototype) => ({
-              item: items[ingredientPrototype.name],
-            }))
+            .map((ingredientPrototype) => {
+              if (ingredientPrototype.type === 'fluid') {
+                return undefined
+              } else {
+                assert(ingredientPrototype.type === 'item')
+                const item = items[ingredientPrototype.name]
+                if (item === undefined) {
+                  console.log(`Item not found: ${ingredientPrototype.name}`)
+                }
+                return {
+                  kind: 'item' as const,
+                  item,
+                }
+              }
+            })
+            .filter((ingredient) => ingredient !== undefined)
             .filter((ingredient) => ingredient.item !== undefined),
           products: ensureArray(recipe.results)
             .map((productPrototype) => ({
