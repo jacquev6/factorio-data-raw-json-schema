@@ -18,7 +18,11 @@ const { width: canvasWidth, height: canvasHeight } = useElementSize(canvas)
 interface GraphNode {
   left: number
   top: number
-  content: { kind: 'thing' | 'recipe'; imageDirectory: string; name: string }
+  content: {
+    kind: 'thing' | 'recipe'
+    name: string
+    image: string
+  }
   leftNeighbors: GraphNode[]
   rightNeighbors: GraphNode[]
 }
@@ -57,7 +61,11 @@ async function addRecipe(recipeName: string) {
   nodes.push({
     left: 0,
     top: 0,
-    content: { kind: 'recipe', imageDirectory: 'recipe', name: recipe.name },
+    content: {
+      kind: 'recipe',
+      name: recipe.name,
+      image: recipe.image,
+    },
     leftNeighbors: [],
     rightNeighbors: [],
   })
@@ -74,8 +82,8 @@ async function addRecipe(recipeName: string) {
         top: 0,
         content: {
           kind: 'thing',
-          imageDirectory: ingredient.thing.kind,
           name: ingredient.thing.name,
+          image: ingredient.thing.image,
         },
         leftNeighbors: [],
         rightNeighbors: [],
@@ -95,7 +103,11 @@ async function addRecipe(recipeName: string) {
       nodes.push({
         left: 0,
         top: 0,
-        content: { kind: 'thing', imageDirectory: product.thing.kind, name: product.thing.name },
+        content: {
+          kind: 'thing',
+          name: product.thing.name,
+          image: product.thing.image,
+        },
         leftNeighbors: [],
         rightNeighbors: [],
       })
@@ -314,12 +326,7 @@ const stopInitialWatch = watch([width, height], ([width, height]) => {
             </button>
           </template>
         </template>
-        <img
-          width="32"
-          height="32"
-          :src="`script-output/${node.content.imageDirectory}/${node.content.name}.png`"
-          draggable="false"
-        />
+        <img width="32" height="32" :src="node.content.image" draggable="false" />
         <template v-if="node.content.kind === 'thing'">
           <template v-for="recipe of [findRecipeConsuming(node.content.name)]">
             <button

@@ -17,7 +17,9 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@types/zip.js": "^2.0.33",
     "@vueuse/core": "^12.5.0",
+    "@zip.js/zip.js": "^2.7.57",
     "pinia": "^2.3.1",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
