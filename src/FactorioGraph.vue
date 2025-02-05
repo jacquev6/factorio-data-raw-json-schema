@@ -292,12 +292,21 @@ watch(
   },
 )
 
+function reset() {
+  nodes.splice(0, nodes.length)
+  Object.keys(recipeNodes).forEach((key) => delete recipeNodes[key])
+  Object.keys(thingNodes).forEach((key) => delete thingNodes[key])
+  addRecipe('electronic-circuit')
+}
+
 const stopInitialWatch = watch([width, height], ([width, height]) => {
   if (width !== 0 && height !== 0) {
     stopInitialWatch()
-    addRecipe('electronic-circuit')
+    reset()
   }
 })
+
+watch(() => props.game, reset)
 </script>
 
 <template>

@@ -12,10 +12,8 @@ import { load as loadGameDefinition, type GameDefinition } from './GameDefinitio
 const baseGameDefinition: GameDefinition = baseGameDefinition_
 const spaceAgeGameDefinition: GameDefinition = spaceAgeGameDefinition_
 
-const gameDefinition = ref<GameDefinition | null>(null)
-const game = computed<Game | null>(() =>
-  gameDefinition.value !== null ? makeGame(gameDefinition.value) : null,
-)
+const gameDefinition = ref<GameDefinition>(baseGameDefinition_)
+const game = computed(() => makeGame(gameDefinition.value))
 const loading = ref(false)
 
 async function changeGameDefinitionFile(event: Event) {
@@ -29,24 +27,21 @@ async function changeGameDefinitionFile(event: Event) {
 </script>
 
 <template>
-  <div v-if="loading">Loading...</div>
-  <div
-    v-else-if="game !== null"
-    style="display: flex; flex-direction: row; height: 100vh; width: 100%"
-  >
+  <div style="display: flex; flex-direction: row; height: 100vh; width: 100%">
     <div style="width: 1.5em; background-color: lightblue">L</div>
     <div style="flex: 1; overflow: hidden; display: flex; flex-direction: column">
-      <div style="height: 1.5em; background-color: lightblue">T</div>
+      <div style="background-color: lightblue">
+        <input type="file" @change="changeGameDefinitionFile" />
+        <button @click="gameDefinition = baseGameDefinition">Load base game</button>
+        <wbr /> <wbr />
+        <button @click="gameDefinition = spaceAgeGameDefinition">Load Space Age game</button>
+      </div>
       <div style="flex: 1 1 75%; overflow: hidden">
-        <FactorioGraph :game />
+        <div v-if="loading">Loading...</div>
+        <FactorioGraph v-else :game />
       </div>
       <div style="height: 1.5em; background-color: lightblue">B</div>
     </div>
     <div style="width: 1.5em; background-color: lightblue">R</div>
-  </div>
-  <div v-else>
-    <input type="file" @change="changeGameDefinitionFile" />
-    <button @click="gameDefinition = baseGameDefinition">Load base game</button>
-    <button @click="gameDefinition = spaceAgeGameDefinition">Load Space Age game</button>
   </div>
 </template>
