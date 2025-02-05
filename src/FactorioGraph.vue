@@ -29,7 +29,6 @@ interface GraphNode {
 
 const nodes = reactive<GraphNode[]>([])
 
-// const fluidNodes = reactive<Record<string, GraphNode>>({})
 const recipeNodes = reactive<Record<string, GraphNode>>({})
 const thingNodes = reactive<Record<string, GraphNode>>({})
 
