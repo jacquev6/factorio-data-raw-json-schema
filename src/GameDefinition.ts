@@ -10,10 +10,19 @@ export interface ThingDefinition {
 
 export interface TransformationDefinition {
   kind: 'recipe'
+  // @todo Support other kinds of transformations:
+  // - spoilage
+  // - mining
+  // - burning (for fuels)
+  // What else?
   name: string
   imageIndex: number
+  // @todo Record machines that can perform the transformation
   ingredients: { thing: string }[]
   products: { thing: string }[]
+  // @todo Separate byproducts from products
+  // (a product is in fact a by product if it is used as an ingredient in larger quantities than it is produced)
+  // (e.g. U-238 in Kovarex enrichment process, while U-235 is an actual product of that recipe)
 }
 
 export interface GameDefinition {
