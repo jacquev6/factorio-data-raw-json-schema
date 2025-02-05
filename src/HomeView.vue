@@ -1,17 +1,28 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import FactorioGraph from './FactorioGraph.vue'
-import { loadGame, type Game } from './Game'
+import { make as makeGame, type Game } from './Game'
+// @ts-ignore @todo Fix typing of .zip modules imported through the Vite plugin
+import baseGameDefinition_ from '../game-definitions/base-2.0.28.zip'
+// @ts-ignore (Same as above)
+import spaceAgeGameDefinition_ from '../game-definitions/space-age-2.0.28.zip'
+import { load as loadGameDefinition, type GameDefinition } from './GameDefinition'
 
-const game = ref<Game | null>(null)
+const baseGameDefinition: GameDefinition = baseGameDefinition_
+const spaceAgeGameDefinition: GameDefinition = spaceAgeGameDefinition_
+
+const gameDefinition = ref<GameDefinition | null>(null)
+const game = computed<Game | null>(() =>
+  gameDefinition.value !== null ? makeGame(gameDefinition.value) : null,
+)
 const loading = ref(false)
 
-async function loadGameDefinition(event: Event) {
+async function changeGameDefinitionFile(event: Event) {
   const target = event.target as HTMLInputElement
   if (target.files !== null && target.files.length === 1) {
     loading.value = true
-    game.value = await loadGame(target.files[0])
+    gameDefinition.value = await loadGameDefinition(target.files[0])
     loading.value = false
   }
 }
@@ -34,6 +45,8 @@ async function loadGameDefinition(event: Event) {
     <div style="width: 1.5em; background-color: lightblue">R</div>
   </div>
   <div v-else>
-    <input type="file" @change="loadGameDefinition" />
+    <input type="file" @change="changeGameDefinitionFile" />
+    <button @click="gameDefinition = baseGameDefinition">Load base game</button>
+    <button @click="gameDefinition = spaceAgeGameDefinition">Load Space Age game</button>
   </div>
 </template>

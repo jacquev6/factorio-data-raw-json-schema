@@ -1,7 +1,5 @@
-import * as zip from '@zip.js/zip.js'
-
 import assert from './assert'
-import { type DataRaw, itemPrototypeKeys } from './FactorioDataRaw'
+import type { GameDefinition } from './GameDefinition'
 
 export interface Thing {
   kind: 'item' | 'fluid'
@@ -23,71 +21,28 @@ export interface Game {
   recipes: Record<string, Recipe>
 }
 
-function ensureArray<T>(a: T[] | {} | undefined): T[] {
-  return Array.isArray(a) ? a : []
-}
-
-export async function loadGame(file: Blob): Promise<Game> {
-  const zipReader = new zip.ZipReader(new zip.BlobReader(file))
-  const entriesByName = Object.fromEntries(
-    (await zipReader.getEntries()).map((entry) => [entry.filename, entry]),
-  )
-  const hasScriptOutput = Object.keys(entriesByName).includes('script-output/')
-
-  type CheckedEntry = zip.Entry & { getData<T>(writer: zip.Writer<T>): Promise<T> }
-  function getEntry(entryName: string): CheckedEntry {
-    if (hasScriptOutput) {
-      entryName = `script-output/${entryName}`
-    }
-    const entry = entriesByName[entryName]
-    assert(entry !== undefined)
-    assert(entry.getData !== undefined)
-    return entry as CheckedEntry // @todo Remove this type assertion; the runtime assertion on previous line should be enough
-  }
-
-  function readEntry(entryName: string): Promise<string> {
-    return getEntry(entryName).getData(new zip.TextWriter())
-  }
-
-  function readImageAsDataURL(entryName: string): Promise<string> {
-    return getEntry(entryName).getData(new zip.Data64URIWriter('image/png'))
-  }
-
-  const dataRaw: DataRaw = JSON.parse(await readEntry('data-raw-dump.json'))
-
+export function make(definition: GameDefinition): Game {
   const things: Record<string, Thing> = {}
-  for (const key of itemPrototypeKeys) {
-    for (const item of Object.values(dataRaw[key] ?? {})) {
-      things[item.name] = {
-        kind: 'item',
-        name: item.name,
-        image: await readImageAsDataURL(`item/${item.name}.png`),
-        ingredientOf: [],
-        productOf: [],
-      }
-    }
-  }
-  for (const fluid of Object.values(dataRaw.fluid)) {
-    things[fluid.name] = {
-      kind: 'fluid',
-      name: fluid.name,
-      image: await readImageAsDataURL(`fluid/${fluid.name}.png`),
+  for (const thing of definition.things) {
+    things[thing.name] = {
+      kind: thing.kind,
+      name: thing.name,
+      image: definition.images[thing.imageIndex],
       ingredientOf: [],
       productOf: [],
     }
   }
 
   const recipes: Record<string, Recipe> = {}
-  for (const recipe of Object.values(dataRaw.recipe)) {
+  for (const recipe of definition.transformations) {
+    assert(recipe.kind === 'recipe')
     recipes[recipe.name] = {
       name: recipe.name,
-      image: await readImageAsDataURL(`recipe/${recipe.name}.png`),
-      ingredients: ensureArray(recipe.ingredients)
-        .map((ingredientPrototype) => ({ thing: things[ingredientPrototype.name] }))
-        .filter((ingredient) => ingredient.thing !== undefined),
-      products: ensureArray(recipe.results)
-        .map((productPrototype) => ({ thing: things[productPrototype.name] }))
-        .filter((result) => result.thing !== undefined),
+      image: definition.images[recipe.imageIndex],
+      ingredients: recipe.ingredients.map((ingredient) => ({
+        thing: things[ingredient.thing.name],
+      })),
+      products: recipe.products.map((product) => ({ thing: things[product.thing.name] })),
     }
   }
 
