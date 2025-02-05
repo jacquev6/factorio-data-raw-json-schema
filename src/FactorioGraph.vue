@@ -199,8 +199,7 @@ function removeRecipeNode(recipeNodeIndex: number) {
   const recipe = props.game.recipes[recipeNode.content.name]
   for (const ingredient of [...recipe.ingredients, ...recipe.products]) {
     const thingNode = thingNodes[ingredient.thing.name]
-    assert(thingNode !== undefined)
-    if (thingNode.leftNeighbors.length === 0 && thingNode.rightNeighbors.length === 0) {
+    if (thingNode !== undefined && thingNode.leftNeighbors.length === 0 && thingNode.rightNeighbors.length === 0) {
       nodes.splice(nodes.indexOf(thingNode), 1)
       delete thingNodes[ingredient.thing.name]
     }
