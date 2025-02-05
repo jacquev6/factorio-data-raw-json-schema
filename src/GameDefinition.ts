@@ -3,12 +3,8 @@ import * as zip from '@zip.js/zip.js'
 import assert from './assert'
 import { type DataRaw, itemPrototypeKeys } from './FactorioDataRaw'
 
-export interface ThingId {
-  kind: 'item' | 'fluid'
+export interface ThingDefinition {
   name: string
-}
-
-export interface ThingDefinition extends ThingId {
   imageIndex: number
 }
 
@@ -16,8 +12,8 @@ export interface TransformationDefinition {
   kind: 'recipe'
   name: string
   imageIndex: number
-  ingredients: { thing: ThingId }[]
-  products: { thing: ThingId }[]
+  ingredients: { thing: string }[]
+  products: { thing: string }[]
 }
 
 export interface GameDefinition {
@@ -75,7 +71,6 @@ export async function load(file: Blob): Promise<GameDefinition> {
   for (const key of itemPrototypeKeys) {
     for (const item of Object.values(dataRaw[key] ?? {})) {
       things.push({
-        kind: 'item',
         name: item.name,
         imageIndex: await addImage(`item/${item.name}.png`),
       })
@@ -83,7 +78,6 @@ export async function load(file: Blob): Promise<GameDefinition> {
   }
   for (const fluid of Object.values(dataRaw.fluid)) {
     things.push({
-      kind: 'fluid',
       name: fluid.name,
       imageIndex: await addImage(`fluid/${fluid.name}.png`),
     })
@@ -96,10 +90,10 @@ export async function load(file: Blob): Promise<GameDefinition> {
       name: recipe.name,
       imageIndex: await addImage(`recipe/${recipe.name}.png`),
       ingredients: ensureArray(recipe.ingredients)
-        .map((ingredient) => ({ thing: { kind: ingredient.type, name: ingredient.name } }))
+        .map((ingredient) => ({ thing: ingredient.name }))
         .filter((ingredient) => ingredient.thing !== undefined),
       products: ensureArray(recipe.results)
-        .map((product) => ({ thing: { kind: product.type, name: product.name } }))
+        .map((product) => ({ thing: product.name }))
         .filter((result) => result.thing !== undefined),
     })
   }

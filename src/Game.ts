@@ -2,7 +2,6 @@ import assert from './assert'
 import type { GameDefinition } from './GameDefinition'
 
 export interface Thing {
-  kind: 'item' | 'fluid'
   name: string
   image: string
   ingredientOf: Recipe[]
@@ -25,7 +24,6 @@ export function make(definition: GameDefinition): Game {
   const things: Record<string, Thing> = {}
   for (const thing of definition.things) {
     things[thing.name] = {
-      kind: thing.kind,
       name: thing.name,
       image: definition.images[thing.imageIndex],
       ingredientOf: [],
@@ -40,9 +38,9 @@ export function make(definition: GameDefinition): Game {
       name: recipe.name,
       image: definition.images[recipe.imageIndex],
       ingredients: recipe.ingredients.map((ingredient) => ({
-        thing: things[ingredient.thing.name],
+        thing: things[ingredient.thing],
       })),
-      products: recipe.products.map((product) => ({ thing: things[product.thing.name] })),
+      products: recipe.products.map((product) => ({ thing: things[product.thing] })),
     }
   }
 
