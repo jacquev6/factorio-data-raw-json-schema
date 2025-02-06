@@ -37,30 +37,6 @@ export type ProductPrototype = ItemProductPrototype | FluidProductPrototype
 // All prototypes: https://lua-api.factorio.com/stable/prototypes.html
 // Whole prototypes hierarchy: https://lua-api.factorio.com/stable/auxiliary/prototype-tree.html
 
-export const itemPrototypeKeys = [
-  'ammo',
-  'armor',
-  'blueprint-book',
-  'blueprint',
-  'capsule',
-  'copy-paste-tool',
-  'deconstruction-item',
-  'gun',
-  'item',
-  'item-with-entity-data',
-  // 'item-with-inventory',
-  // 'item-with-label',
-  // 'item-with-tags',
-  'module',
-  'rail-planner',
-  'repair-tool',
-  'selection-tool',
-  'space-platform-starter-pack',
-  'spidertron-remote',
-  'tool',
-  'upgrade-item',
-] as const
-
 // https://lua-api.factorio.com/stable/prototypes/PrototypeBase.html
 export interface PrototypeBase {
   name: string
@@ -77,6 +53,17 @@ export interface ItemPrototype extends Prototype {}
 export interface RecipePrototype extends Prototype {
   ingredients?: IngredientPrototype[] | {} // The '| {}' part is not part of the spec, but empty arrays are weirdly serialized as {} in JSON
   results?: ProductPrototype[] | {} // Same as above
+  category?: string
+}
+
+// https://lua-api.factorio.com/stable/prototypes/CraftingMachinePrototype.html
+export interface CraftingMachinePrototype extends Prototype /* @todo Add intermediate hierarchy? */ {
+  crafting_categories: string[]
+}
+
+// https://lua-api.factorio.com/stable/prototypes/CharacterPrototype.html
+export interface CharacterPrototype extends Prototype {
+  crafting_categories: string[]
 }
 
 /***** Data.raw *****/
@@ -97,7 +84,7 @@ export interface DataRaw {
   // 'artillery-projectile': Record<string, Prototype>
   // 'artillery-turret': Record<string, Prototype>
   // 'artillery-wagon': Record<string, Prototype>
-  // 'assembling-machine': Record<string, Prototype>
+  'assembling-machine': Record<string, CraftingMachinePrototype>
   // asteroid: Record<string, Prototype>
   // 'asteroid-chunk': Record<string, Prototype>
   // 'asteroid-collector': Record<string, Prototype>
@@ -121,7 +108,7 @@ export interface DataRaw {
   // 'cargo-wagon': Record<string, Prototype>
   // 'chain-active-trigger': Record<string, Prototype>
   // 'change-surface-achievement': Record<string, Prototype>
-  // character: Record<string, Prototype>
+  character: Record<string, CharacterPrototype>
   // 'character-corpse': Record<string, Prototype>
   // cliff: Record<string, Prototype>
   // 'collision-layer': Record<string, Prototype>
@@ -177,7 +164,7 @@ export interface DataRaw {
   // 'fluid-wagon': Record<string, Prototype>
   // font: Record<string, Prototype>
   // 'fuel-category': Record<string, Prototype>
-  // furnace: Record<string, Prototype>
+  furnace: Record<string, CraftingMachinePrototype>
   // 'fusion-generator': Record<string, Prototype>
   // 'fusion-reactor': Record<string, Prototype>
   // gate: Record<string, Prototype>
@@ -267,7 +254,7 @@ export interface DataRaw {
   // 'resource-category': Record<string, Prototype>
   // roboport: Record<string, Prototype>
   // 'roboport-equipment': Record<string, Prototype>
-  // 'rocket-silo': Record<string, Prototype>
+  'rocket-silo': Record<string, CraftingMachinePrototype>
   // 'rocket-silo-rocket': Record<string, Prototype>
   // 'rocket-silo-rocket-shadow': Record<string, Prototype>
   // segment: Record<string, Prototype>

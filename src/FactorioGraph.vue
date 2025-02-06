@@ -15,27 +15,38 @@ const { width, height } = useElementSize(container)
 
 const { width: canvasWidth, height: canvasHeight } = useElementSize(canvas)
 
+interface TransformationNodeContent {
+  kind: 'transformation'
+  name: string
+  image: string
+  crafters: string[]
+}
+
+interface ThingNodeContent {
+  kind: 'thing'
+  name: string
+  image: string
+}
+
+type NodeContent = TransformationNodeContent | ThingNodeContent
+
 interface GraphNode {
   left: number
   top: number
-  content: {
-    kind: 'thing' | 'recipe'
-    name: string
-    image: string
-  }
+  content: NodeContent
   leftNeighbors: GraphNode[]
   rightNeighbors: GraphNode[]
 }
 
 const nodes = reactive<GraphNode[]>([])
 
-const recipeNodes = reactive<Record<string, GraphNode>>({})
+const transformationNodes = reactive<Record<string, GraphNode>>({})
 const thingNodes = reactive<Record<string, GraphNode>>({})
 
 function findRecipeProducing(thingName: string): string | null {
   const thing = props.game.things[thingName]
   for (const recipe of thing.productOf) {
-    if (recipeNodes[recipe.name] === undefined) {
+    if (transformationNodes[recipe.name] === undefined) {
       return recipe.name
     }
   }
@@ -45,7 +56,7 @@ function findRecipeProducing(thingName: string): string | null {
 function findRecipeConsuming(thingName: string): string | null {
   const thing = props.game.things[thingName]
   for (const recipe of thing.ingredientOf) {
-    if (recipeNodes[recipe.name] === undefined) {
+    if (transformationNodes[recipe.name] === undefined) {
       return recipe.name
     }
   }
@@ -53,26 +64,27 @@ function findRecipeConsuming(thingName: string): string | null {
 }
 
 async function addRecipe(recipeName: string) {
-  assert(recipeNodes[recipeName] === undefined)
-  const recipe = props.game.recipes[recipeName]
+  assert(transformationNodes[recipeName] === undefined)
+  const transformation = props.game.transformations[recipeName]
 
-  const newRecipeNodeIndex = nodes.length
+  const newTransformationNodeIndex = nodes.length
   nodes.push({
     left: 0,
     top: 0,
     content: {
-      kind: 'recipe',
-      name: recipe.name,
-      image: recipe.image,
+      kind: 'transformation',
+      name: transformation.name,
+      image: transformation.image,
+      crafters: transformation.crafters.map((crafter) => crafter.image),
     },
     leftNeighbors: [],
     rightNeighbors: [],
   })
-  const newRecipeNode = nodes[newRecipeNodeIndex]
-  recipeNodes[recipe.name] = newRecipeNode
-  const nodesToPosition = [newRecipeNodeIndex]
+  const newTransformationNode = nodes[newTransformationNodeIndex]
+  transformationNodes[transformation.name] = newTransformationNode
+  const nodesToPosition = [newTransformationNodeIndex]
 
-  for (const ingredient of recipe.ingredients) {
+  for (const ingredient of transformation.ingredients) {
     let ingredientNode = thingNodes[ingredient.thing.name]
     if (ingredientNode === undefined) {
       const newIngredientNodeIndex = nodes.length
@@ -91,11 +103,11 @@ async function addRecipe(recipeName: string) {
       thingNodes[ingredient.thing.name] = ingredientNode
       nodesToPosition.push(newIngredientNodeIndex)
     }
-    ingredientNode.rightNeighbors.push(newRecipeNode)
-    newRecipeNode.leftNeighbors.push(ingredientNode)
+    ingredientNode.rightNeighbors.push(newTransformationNode)
+    newTransformationNode.leftNeighbors.push(ingredientNode)
   }
 
-  for (const product of recipe.products) {
+  for (const product of transformation.products) {
     let productNode = thingNodes[product.thing.name]
     if (productNode === undefined) {
       const newProductNodeIndex = nodes.length
@@ -114,8 +126,8 @@ async function addRecipe(recipeName: string) {
       thingNodes[product.thing.name] = productNode
       nodesToPosition.push(newProductNodeIndex)
     }
-    productNode.leftNeighbors.push(newRecipeNode)
-    newRecipeNode.rightNeighbors.push(productNode)
+    productNode.leftNeighbors.push(newTransformationNode)
+    newTransformationNode.rightNeighbors.push(productNode)
   }
 
   await nextTick()
@@ -194,9 +206,9 @@ function removeRecipeNode(recipeNodeIndex: number) {
     right.leftNeighbors.splice(right.leftNeighbors.indexOf(recipeNode), 1)
   }
   nodes.splice(recipeNodeIndex, 1)
-  delete recipeNodes[recipeNode.content.name]
+  delete transformationNodes[recipeNode.content.name]
 
-  const recipe = props.game.recipes[recipeNode.content.name]
+  const recipe = props.game.transformations[recipeNode.content.name]
   for (const ingredient of [...recipe.ingredients, ...recipe.products]) {
     const thingNode = thingNodes[ingredient.thing.name]
     if (thingNode !== undefined && thingNode.leftNeighbors.length === 0 && thingNode.rightNeighbors.length === 0) {
@@ -293,7 +305,7 @@ watch(
 
 function reset() {
   nodes.splice(0, nodes.length)
-  Object.keys(recipeNodes).forEach((key) => delete recipeNodes[key])
+  Object.keys(transformationNodes).forEach((key) => delete transformationNodes[key])
   Object.keys(thingNodes).forEach((key) => delete thingNodes[key])
   addRecipe('electronic-circuit')
 }
@@ -318,34 +330,39 @@ watch(() => props.game, reset)
       :style="{ top: `${node.top}px`, left: `${node.left}px` }"
       @pointerdown="(e) => startMoving(nodeIndex, e)"
     >
-      <template v-if="node.content.kind === 'recipe'">
-        <button @pointerdown.stop @click="removeRecipeNode(nodeIndex)">X</button>
+      <template v-if="node.content.kind === 'transformation'">
+        <div>
+          <button @pointerdown.stop @click="removeRecipeNode(nodeIndex)">X</button>
+          <img width="48" height="48" :src="node.content.image" draggable="false" />
+        </div>
+        <div>
+          <img v-for="crafter in node.content.crafters" width="24" height="24" :src="crafter" draggable="false" />
+        </div>
       </template>
-      <div>
-        <template v-if="node.content.kind === 'thing'">
-          <template v-for="recipe of [findRecipeProducing(node.content.name)]">
-            <button
-              :disabled="recipe === null"
-              @pointerdown.stop
-              @click="(e) => (recipe !== null ? addRecipe(recipe) : undefined)"
-            >
-              +
-            </button>
-          </template>
+      <template v-else-if="node.content.kind === 'thing'">
+        <template v-for="recipe of [findRecipeProducing(node.content.name)]">
+          <button
+            :disabled="recipe === null"
+            @pointerdown.stop
+            @click="(e) => (recipe !== null ? addRecipe(recipe) : undefined)"
+          >
+            +
+          </button>
         </template>
         <img width="32" height="32" :src="node.content.image" draggable="false" />
-        <template v-if="node.content.kind === 'thing'">
-          <template v-for="recipe of [findRecipeConsuming(node.content.name)]">
-            <button
-              :disabled="recipe === null"
-              @pointerdown.stop
-              @click="(e) => (recipe !== null ? addRecipe(recipe) : undefined)"
-            >
-              +
-            </button>
-          </template>
+        <template v-for="recipe of [findRecipeConsuming(node.content.name)]">
+          <button
+            :disabled="recipe === null"
+            @pointerdown.stop
+            @click="(e) => (recipe !== null ? addRecipe(recipe) : undefined)"
+          >
+            +
+          </button>
         </template>
-      </div>
+      </template>
+      <template v-else>
+        Unknown node kind: {{ ((c: never) => (c as any).kind)(node.content) }}
+      </template>
     </div>
     <div
       v-if="moving !== null"

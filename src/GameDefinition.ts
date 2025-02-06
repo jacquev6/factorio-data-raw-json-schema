@@ -1,7 +1,18 @@
 import * as zip from '@zip.js/zip.js'
 
 import assert from './assert'
-import { type DataRaw, itemPrototypeKeys } from './FactorioDataRaw'
+import { type DataRaw } from './FactorioDataRaw'
+
+export interface CrafterDefinition {
+  name: string
+  imageIndex: number
+  // @todo Display number of module slots
+  // @todo Display modules applicable to recipe
+  // @todo Display crafting speed
+  // @todo Display intrinsic productivity bonus
+  // @todo Display energy consumption of burner machines (in kW and user-selected fuel per time unit)
+  // @todo Display energy consumption of electric machines (in kW)
+}
 
 export interface ThingDefinition {
   name: string
@@ -17,7 +28,7 @@ export interface TransformationDefinition {
   // What else?
   name: string
   imageIndex: number
-  // @todo Record machines that can perform the transformation
+  crafters: string[]
   ingredients: { thing: string }[]
   products: { thing: string }[]
   // @todo Separate byproducts from products
@@ -27,6 +38,7 @@ export interface TransformationDefinition {
 
 export interface GameDefinition {
   images: string[]
+  crafters: CrafterDefinition[]
   things: ThingDefinition[]
   transformations: TransformationDefinition[]
 }
@@ -76,8 +88,41 @@ export async function load(file: Blob): Promise<GameDefinition> {
     return index
   }
 
+  const craftersByRecipeCategory: Record<string, string[]> = {}
+  const crafters: CrafterDefinition[] = []
+  for (const key of ['character', 'assembling-machine', 'rocket-silo', 'furnace'] as const) {
+    for (const entity of Object.values(dataRaw[key])) {
+      crafters.push({
+        name: entity.name,
+        imageIndex: await addImage(`entity/${entity.name}.png`),
+      })
+      for (const category of ensureArray(entity.crafting_categories)) {
+        (craftersByRecipeCategory[category ?? 'crafting'] ??= []).push(entity.name)
+      }
+    }
+  }
+
   const things: ThingDefinition[] = []
-  for (const key of itemPrototypeKeys) {
+  for (const key of [
+    'ammo',
+    'armor',
+    'blueprint-book',
+    'blueprint',
+    'capsule',
+    'copy-paste-tool',
+    'deconstruction-item',
+    'gun',
+    'item',
+    'item-with-entity-data',
+    'module',
+    'rail-planner',
+    'repair-tool',
+    'selection-tool',
+    'space-platform-starter-pack',
+    'spidertron-remote',
+    'tool',
+    'upgrade-item',
+  ] as const) {
     for (const item of Object.values(dataRaw[key] ?? {})) {
       things.push({
         name: item.name,
@@ -104,10 +149,11 @@ export async function load(file: Blob): Promise<GameDefinition> {
       products: ensureArray(recipe.results)
         .map((product) => ({ thing: product.name }))
         .filter((result) => result.thing !== undefined),
+      crafters: craftersByRecipeCategory[recipe.category ?? 'crafting'] ?? [],
     })
   }
 
-  return { images, things, transformations }
+  return { images, crafters, things, transformations }
 }
 
 export default load
