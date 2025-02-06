@@ -97,7 +97,8 @@ export async function load(file: Blob): Promise<GameDefinition> {
         imageIndex: await addImage(`entity/${entity.name}.png`),
       })
       for (const category of ensureArray(entity.crafting_categories)) {
-        (craftersByRecipeCategory[category ?? 'crafting'] ??= []).push(entity.name)
+        craftersByRecipeCategory[category ?? 'crafting'] ??= []
+        craftersByRecipeCategory[category ?? 'crafting'].push(entity.name)
       }
     }
   }

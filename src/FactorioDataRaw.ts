@@ -57,7 +57,8 @@ export interface RecipePrototype extends Prototype {
 }
 
 // https://lua-api.factorio.com/stable/prototypes/CraftingMachinePrototype.html
-export interface CraftingMachinePrototype extends Prototype /* @todo Add intermediate hierarchy? */ {
+// @todo Add intermediate hierarchy?
+export interface CraftingMachinePrototype extends Prototype {
   crafting_categories: string[]
 }
 
