@@ -148,33 +148,6 @@
       }
     }
   },
-  "additionalProperties": false,
-  "required": [
-    "ammo",
-    "armor",
-    "assembling-machine",
-    "blueprint",
-    "blueprint-book",
-    "capsule",
-    "character",
-    "copy-paste-tool",
-    "deconstruction-item",
-    "fluid",
-    "furnace",
-    "gun",
-    "item",
-    "item-with-entity-data",
-    "module",
-    "rail-planner",
-    "recipe",
-    "repair-tool",
-    "rocket-silo",
-    "selection-tool",
-    "space-platform-starter-pack",
-    "spidertron-remote",
-    "tool",
-    "upgrade-item"
-  ],
   "$defs": {
     "ItemIngredientPrototype": {
       "description": "https://lua-api.factorio.com/stable/types/ItemIngredientPrototype.html",
@@ -188,7 +161,6 @@
           "type": "string"
         }
       },
-      "additionalProperties": false,
       "required": ["type", "name"]
     },
     "FluidIngredientPrototype": {
@@ -203,7 +175,6 @@
           "type": "string"
         }
       },
-      "additionalProperties": false,
       "required": ["type", "name"]
     },
     "IngredientPrototype": {
@@ -228,7 +199,6 @@
           "type": "string"
         }
       },
-      "additionalProperties": false,
       "required": ["type", "name"]
     },
     "FluidProductPrototype": {
@@ -243,7 +213,6 @@
           "type": "string"
         }
       },
-      "additionalProperties": false,
       "required": ["type", "name"]
     },
     "ProductPrototype": {
@@ -267,7 +236,6 @@
           "type": "string"
         }
       },
-      "additionalProperties": false,
       "required": ["type", "name"]
     },
     "Prototype": {
@@ -296,20 +264,37 @@
           "type": "object",
           "properties": {
             "ingredients": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/IngredientPrototype"
-              }
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/IngredientPrototype"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
             },
             "results": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/ProductPrototype"
-              }
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/ProductPrototype"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
             },
-            "category": "string"
-          },
-          "additionalProperties": false
+            "category": {
+              "type": "string"
+            }
+          }
         }
       ]
     },
@@ -328,8 +313,7 @@
                 "type": "string"
               }
             }
-          },
-          "additionalProperties": false
+          }
         }
       ]
     },
@@ -348,8 +332,7 @@
                 "type": "string"
               }
             }
-          },
-          "additionalProperties": false
+          }
         }
       ]
     }

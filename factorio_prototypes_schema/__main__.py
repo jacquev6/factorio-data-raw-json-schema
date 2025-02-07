@@ -41,33 +41,6 @@ def main():
             "tool": {"type": "object", "additionalProperties": {"$ref": "#/$defs/ItemPrototype"}},
             "upgrade-item": {"type": "object", "additionalProperties": {"$ref": "#/$defs/ItemPrototype"}},
         },
-        "additionalProperties": False,
-        "required": [
-            "ammo",
-            "armor",
-            "assembling-machine",
-            "blueprint",
-            "blueprint-book",
-            "capsule",
-            "character",
-            "copy-paste-tool",
-            "deconstruction-item",
-            "fluid",
-            "furnace",
-            "gun",
-            "item",
-            "item-with-entity-data",
-            "module",
-            "rail-planner",
-            "recipe",
-            "repair-tool",
-            "rocket-silo",
-            "selection-tool",
-            "space-platform-starter-pack",
-            "spidertron-remote",
-            "tool",
-            "upgrade-item",
-        ],
         "$defs": {
             # Types
             "ItemIngredientPrototype": {
@@ -77,7 +50,6 @@ def main():
                     "type": {"type": "string", "const": "item"},
                     "name": {"type": "string"},
                 },
-                "additionalProperties": False,
                 "required": ["type", "name"],
             },
             "FluidIngredientPrototype": {
@@ -87,7 +59,6 @@ def main():
                     "type": {"type": "string", "const": "fluid"},
                     "name": {"type": "string"},
                 },
-                "additionalProperties": False,
                 "required": ["type", "name"],
             },
             "IngredientPrototype": {
@@ -103,7 +74,6 @@ def main():
                     "type": {"type": "string", "const": "item"},
                     "name": {"type": "string"},
                 },
-                "additionalProperties": False,
                 "required": ["type", "name"],
             },
             "FluidProductPrototype": {
@@ -113,7 +83,6 @@ def main():
                     "type": {"type": "string", "const": "fluid"},
                     "name": {"type": "string"},
                 },
-                "additionalProperties": False,
                 "required": ["type", "name"],
             },
             "ProductPrototype": {
@@ -130,7 +99,6 @@ def main():
                     "type": {"type": "string"},
                     "name": {"type": "string"},
                 },
-                "additionalProperties": False,
                 "required": ["type", "name"],
             },
             "Prototype": {
@@ -153,16 +121,31 @@ def main():
                         "type": "object",
                         "properties": {
                             "ingredients": {
-                                "type": "array",
-                                "items": {"$ref": "#/$defs/IngredientPrototype"},
+                                "oneOf": [
+                                    {
+                                        "type": "array",
+                                        "items": {"$ref": "#/$defs/IngredientPrototype"},
+                                    },
+                                    {
+                                        "type": "object",
+                                        "additionalProperties": False,
+                                    },
+                                ],
                             },
                             "results": {
-                                "type": "array",
-                                "items": {"$ref": "#/$defs/ProductPrototype"},
+                                "oneOf": [
+                                    {
+                                        "type": "array",
+                                        "items": {"$ref": "#/$defs/ProductPrototype"},
+                                    },
+                                    {
+                                        "type": "object",
+                                        "additionalProperties": False,
+                                    },
+                                ],
                             },
-                            "category": "string",
+                            "category": {"type": "string"},
                         },
-                        "additionalProperties": False,
                     },
                 ],
             },
@@ -178,7 +161,6 @@ def main():
                                 "items": {"type": "string"},
                             },
                         },
-                        "additionalProperties": False,
                     },
                 ],
             },
@@ -194,7 +176,6 @@ def main():
                                 "items": {"type": "string"},
                             },
                         },
-                        "additionalProperties": False,
                     },
                 ],
             },

@@ -1,7 +1,9 @@
 import * as zip from '@zip.js/zip.js'
+import { validate } from 'jsonschema'
 
 import assert from './assert'
 import { type FactorioDataRaw } from './factorio_prototypes_schema'
+import dataRawSchema from './factorio_prototypes_schema.json'
 
 export interface CrafterDefinition {
   name: string
@@ -74,6 +76,11 @@ export async function load(file: Blob): Promise<GameDefinition> {
   }
 
   const dataRaw: FactorioDataRaw = JSON.parse(await readEntry('data-raw-dump.json'))
+  const validationErrors = validate(dataRaw, dataRawSchema).errors
+  if (validationErrors.length > 0) {
+    console.error(validationErrors)
+    throw new Error('Factorio data-raw dump does not match the expected schema')
+  }
 
   const images: string[] = []
   const imageIndexes: Record<string, number> = {}
@@ -91,14 +98,14 @@ export async function load(file: Blob): Promise<GameDefinition> {
   const craftersByRecipeCategory: Record<string, string[]> = {}
   const crafters: CrafterDefinition[] = []
   for (const key of ['character', 'assembling-machine', 'rocket-silo', 'furnace'] as const) {
-    for (const entity of Object.values(dataRaw[key])) {
+    for (const entity of Object.values(dataRaw[key] ?? {})) {
       crafters.push({
         name: entity.name,
         imageIndex: await addImage(`entity/${entity.name}.png`),
       })
-      for (const category of ensureArray(entity.crafting_categories)) {
-        craftersByRecipeCategory[category ?? 'crafting'] ??= []
-        craftersByRecipeCategory[category ?? 'crafting'].push(entity.name)
+      for (const category of entity.crafting_categories ?? []) {
+        craftersByRecipeCategory[category] ??= []
+        craftersByRecipeCategory[category].push(entity.name)
       }
     }
   }
@@ -131,7 +138,7 @@ export async function load(file: Blob): Promise<GameDefinition> {
       })
     }
   }
-  for (const fluid of Object.values(dataRaw.fluid)) {
+  for (const fluid of Object.values(dataRaw.fluid ?? {})) {
     things.push({
       name: fluid.name,
       imageIndex: await addImage(`fluid/${fluid.name}.png`),
@@ -139,7 +146,7 @@ export async function load(file: Blob): Promise<GameDefinition> {
   }
 
   const transformations: TransformationDefinition[] = []
-  for (const recipe of Object.values(dataRaw.recipe)) {
+  for (const recipe of Object.values(dataRaw.recipe ?? {})) {
     transformations.push({
       kind: 'recipe',
       name: recipe.name,

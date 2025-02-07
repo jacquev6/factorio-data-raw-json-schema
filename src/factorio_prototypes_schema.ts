@@ -29,84 +29,84 @@ export type CharacterPrototype = Prototype & {
  * https://lua-api.factorio.com/stable/prototypes/RecipePrototype.html
  */
 export type RecipePrototype = Prototype & {
-  ingredients?: IngredientPrototype[]
-  results?: ProductPrototype[]
-  category?: 'string'
+  ingredients?: IngredientPrototype[] | {}
+  results?: ProductPrototype[] | {}
+  category?: string
 }
 export type IngredientPrototype = ItemIngredientPrototype | FluidIngredientPrototype
 export type ProductPrototype = ItemProductPrototype | FluidProductPrototype
 
 export interface FactorioDataRaw {
-  ammo: {
+  ammo?: {
     [k: string]: ItemPrototype
   }
-  armor: {
+  armor?: {
     [k: string]: ItemPrototype
   }
-  'assembling-machine': {
+  'assembling-machine'?: {
     [k: string]: CraftingMachinePrototype
   }
-  blueprint: {
+  blueprint?: {
     [k: string]: ItemPrototype
   }
-  'blueprint-book': {
+  'blueprint-book'?: {
     [k: string]: ItemPrototype
   }
-  capsule: {
+  capsule?: {
     [k: string]: ItemPrototype
   }
-  character: {
+  character?: {
     [k: string]: CharacterPrototype
   }
-  'copy-paste-tool': {
+  'copy-paste-tool'?: {
     [k: string]: ItemPrototype
   }
-  'deconstruction-item': {
+  'deconstruction-item'?: {
     [k: string]: ItemPrototype
   }
-  fluid: {
+  fluid?: {
     [k: string]: ItemPrototype
   }
-  furnace: {
+  furnace?: {
     [k: string]: CraftingMachinePrototype
   }
-  gun: {
+  gun?: {
     [k: string]: ItemPrototype
   }
-  item: {
+  item?: {
     [k: string]: ItemPrototype
   }
-  'item-with-entity-data': {
+  'item-with-entity-data'?: {
     [k: string]: ItemPrototype
   }
-  module: {
+  module?: {
     [k: string]: ItemPrototype
   }
-  'rail-planner': {
+  'rail-planner'?: {
     [k: string]: ItemPrototype
   }
-  recipe: {
+  recipe?: {
     [k: string]: RecipePrototype
   }
-  'repair-tool': {
+  'repair-tool'?: {
     [k: string]: ItemPrototype
   }
-  'rocket-silo': {
+  'rocket-silo'?: {
     [k: string]: CraftingMachinePrototype
   }
-  'selection-tool': {
+  'selection-tool'?: {
     [k: string]: ItemPrototype
   }
-  'space-platform-starter-pack': {
+  'space-platform-starter-pack'?: {
     [k: string]: ItemPrototype
   }
-  'spidertron-remote': {
+  'spidertron-remote'?: {
     [k: string]: ItemPrototype
   }
-  tool: {
+  tool?: {
     [k: string]: ItemPrototype
   }
-  'upgrade-item': {
+  'upgrade-item'?: {
     [k: string]: ItemPrototype
   }
 }
