@@ -1,7 +1,7 @@
 import * as zip from '@zip.js/zip.js'
 
 import assert from './assert'
-import { type DataRaw } from './FactorioDataRaw'
+import { type FactorioDataRaw } from './factorio_prototypes_schema'
 
 export interface CrafterDefinition {
   name: string
@@ -73,7 +73,7 @@ export async function load(file: Blob): Promise<GameDefinition> {
     return getEntry(entryName).getData(new zip.Data64URIWriter('image/png'))
   }
 
-  const dataRaw: DataRaw = JSON.parse(await readEntry('data-raw-dump.json'))
+  const dataRaw: FactorioDataRaw = JSON.parse(await readEntry('data-raw-dump.json'))
 
   const images: string[] = []
   const imageIndexes: Record<string, number> = {}

@@ -1,0 +1,357 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "title": "Factorio Data.raw",
+  "type": "object",
+  "properties": {
+    "ammo": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "armor": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "assembling-machine": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/CraftingMachinePrototype"
+      }
+    },
+    "blueprint": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "blueprint-book": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "capsule": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "character": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/CharacterPrototype"
+      }
+    },
+    "copy-paste-tool": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "deconstruction-item": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "fluid": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "furnace": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/CraftingMachinePrototype"
+      }
+    },
+    "gun": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "item-with-entity-data": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "module": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "rail-planner": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "recipe": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/RecipePrototype"
+      }
+    },
+    "repair-tool": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "rocket-silo": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/CraftingMachinePrototype"
+      }
+    },
+    "selection-tool": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "space-platform-starter-pack": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "spidertron-remote": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "tool": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    },
+    "upgrade-item": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/ItemPrototype"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ammo",
+    "armor",
+    "assembling-machine",
+    "blueprint",
+    "blueprint-book",
+    "capsule",
+    "character",
+    "copy-paste-tool",
+    "deconstruction-item",
+    "fluid",
+    "furnace",
+    "gun",
+    "item",
+    "item-with-entity-data",
+    "module",
+    "rail-planner",
+    "recipe",
+    "repair-tool",
+    "rocket-silo",
+    "selection-tool",
+    "space-platform-starter-pack",
+    "spidertron-remote",
+    "tool",
+    "upgrade-item"
+  ],
+  "$defs": {
+    "ItemIngredientPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/ItemIngredientPrototype.html",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "item"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["type", "name"]
+    },
+    "FluidIngredientPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/FluidIngredientPrototype.html",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "fluid"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["type", "name"]
+    },
+    "IngredientPrototype": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ItemIngredientPrototype"
+        },
+        {
+          "$ref": "#/$defs/FluidIngredientPrototype"
+        }
+      ]
+    },
+    "ItemProductPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/ItemProductPrototype.html",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "item"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["type", "name"]
+    },
+    "FluidProductPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/FluidProductPrototype.html",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "fluid"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["type", "name"]
+    },
+    "ProductPrototype": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ItemProductPrototype"
+        },
+        {
+          "$ref": "#/$defs/FluidProductPrototype"
+        }
+      ]
+    },
+    "PrototypeBase": {
+      "description": "https://lua-api.factorio.com/stable/prototypes/PrototypeBase.html",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["type", "name"]
+    },
+    "Prototype": {
+      "description": "https://lua-api.factorio.com/stable/prototypes/Prototype.html",
+      "allOf": [
+        {
+          "$ref": "#/$defs/PrototypeBase"
+        }
+      ]
+    },
+    "ItemPrototype": {
+      "description": "https://lua-api.factorio.com/stable/prototypes/ItemPrototype.html",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Prototype"
+        }
+      ]
+    },
+    "RecipePrototype": {
+      "description": "https://lua-api.factorio.com/stable/prototypes/RecipePrototype.html",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Prototype"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ingredients": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/IngredientPrototype"
+              }
+            },
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/ProductPrototype"
+              }
+            },
+            "category": "string"
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CraftingMachinePrototype": {
+      "description": "https://lua-api.factorio.com/stable/prototypes/CraftingMachinePrototype.html",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Prototype"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "crafting_categories": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CharacterPrototype": {
+      "description": "https://lua-api.factorio.com/stable/prototypes/CharacterPrototype.html",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Prototype"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "crafting_categories": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}
