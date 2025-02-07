@@ -1,2 +1,0 @@
-datamodel-code-generator
-Pydantic

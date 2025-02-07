@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
   "title": "Factorio Data.raw",
   "type": "object",
   "properties": {
@@ -147,35 +148,34 @@
       }
     }
   },
-  "$schema": "https://json-schema.org/draft/2019-09/schema",
   "definitions": {
     "ItemIngredientPrototype": {
       "description": "https://lua-api.factorio.com/stable/types/ItemIngredientPrototype.html",
-      "required": ["type", "name"],
       "type": "object",
       "properties": {
         "type": {
-          "const": "item",
-          "type": "string"
+          "type": "string",
+          "const": "item"
         },
         "name": {
           "type": "string"
         }
-      }
+      },
+      "required": ["type", "name"]
     },
     "FluidIngredientPrototype": {
       "description": "https://lua-api.factorio.com/stable/types/FluidIngredientPrototype.html",
-      "required": ["type", "name"],
       "type": "object",
       "properties": {
         "type": {
-          "const": "fluid",
-          "type": "string"
+          "type": "string",
+          "const": "fluid"
         },
         "name": {
           "type": "string"
         }
-      }
+      },
+      "required": ["type", "name"]
     },
     "IngredientPrototype": {
       "anyOf": [
@@ -189,31 +189,31 @@
     },
     "ItemProductPrototype": {
       "description": "https://lua-api.factorio.com/stable/types/ItemProductPrototype.html",
-      "required": ["type", "name"],
       "type": "object",
       "properties": {
         "type": {
-          "const": "item",
-          "type": "string"
+          "type": "string",
+          "const": "item"
         },
         "name": {
           "type": "string"
         }
-      }
+      },
+      "required": ["type", "name"]
     },
     "FluidProductPrototype": {
       "description": "https://lua-api.factorio.com/stable/types/FluidProductPrototype.html",
-      "required": ["type", "name"],
       "type": "object",
       "properties": {
         "type": {
-          "const": "fluid",
-          "type": "string"
+          "type": "string",
+          "const": "fluid"
         },
         "name": {
           "type": "string"
         }
-      }
+      },
+      "required": ["type", "name"]
     },
     "ProductPrototype": {
       "anyOf": [
@@ -227,7 +227,6 @@
     },
     "PrototypeBase": {
       "description": "https://lua-api.factorio.com/stable/prototypes/PrototypeBase.html",
-      "required": ["type", "name"],
       "type": "object",
       "properties": {
         "type": {
@@ -236,7 +235,8 @@
         "name": {
           "type": "string"
         }
-      }
+      },
+      "required": ["type", "name"]
     },
     "Prototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/Prototype.html",

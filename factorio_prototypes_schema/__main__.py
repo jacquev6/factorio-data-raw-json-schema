@@ -1,13 +1,9 @@
 #!/usr/bin/env python3
 
+import json
 # import os
 
 # from bs4 import BeautifulSoup
-
-from .json_schema import (
-    CoreAndValidationSpecificationsMetaSchema as JsonSchema,
-    SimpleTypes as JsonTypes,
-)
 
 
 # factorio_location = os.environ["FACTORIO_LOCATION"]
@@ -15,304 +11,180 @@ from .json_schema import (
 
 
 def main():
-    schema = JsonSchema(
-        field_schema="https://json-schema.org/draft/2019-09/schema",
-        title="Factorio Data.raw",
-        type=JsonTypes.object,
-        properties={
-            "ammo": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "armor": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "assembling-machine": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/CraftingMachinePrototype"
-                ),
-            ),
-            "blueprint": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "blueprint-book": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "capsule": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "character": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/CharacterPrototype"
-                ),
-            ),
-            "copy-paste-tool": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "deconstruction-item": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "fluid": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "furnace": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/CraftingMachinePrototype"
-                ),
-            ),
-            "gun": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "item": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "item-with-entity-data": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "module": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "rail-planner": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "recipe": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/RecipePrototype"
-                ),
-            ),
-            "repair-tool": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "rocket-silo": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/CraftingMachinePrototype"
-                ),
-            ),
-            "selection-tool": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "space-platform-starter-pack": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "spidertron-remote": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "tool": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
-            "upgrade-item": JsonSchema(
-                type=JsonTypes.object,
-                additionalProperties=JsonSchema(
-                    field_ref="#/definitions/ItemPrototype"
-                ),
-            ),
+    schema = {
+        "$schema": "https://json-schema.org/draft/2019-09/schema",
+        "title": "Factorio Data.raw",
+        "type": "object",
+        "properties": {
+            "ammo": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "armor": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "assembling-machine": {"type": "object", "additionalProperties": {"$ref": "#/definitions/CraftingMachinePrototype"}},
+            "blueprint": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "blueprint-book": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "capsule": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "character": {"type": "object", "additionalProperties": {"$ref": "#/definitions/CharacterPrototype"}},
+            "copy-paste-tool": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "deconstruction-item": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "fluid": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "furnace": {"type": "object", "additionalProperties": {"$ref": "#/definitions/CraftingMachinePrototype"}},
+            "gun": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "item": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "item-with-entity-data": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "module": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "rail-planner": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "recipe": {"type": "object", "additionalProperties": {"$ref": "#/definitions/RecipePrototype"}},
+            "repair-tool": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "rocket-silo": {"type": "object", "additionalProperties": {"$ref": "#/definitions/CraftingMachinePrototype"}},
+            "selection-tool": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "space-platform-starter-pack": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "spidertron-remote": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "tool": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+            "upgrade-item": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
         },
-        definitions={
+        "definitions": {
             # Types
-            "ItemIngredientPrototype": JsonSchema(
-                description="https://lua-api.factorio.com/stable/types/ItemIngredientPrototype.html",
-                type=JsonTypes.object,
-                properties={
-                    "type": JsonSchema(type=JsonTypes.string, const="item"),
-                    "name": JsonSchema(type=JsonTypes.string),
+            "ItemIngredientPrototype": {
+                "description": "https://lua-api.factorio.com/stable/types/ItemIngredientPrototype.html",
+                "type": "object",
+                "properties": {
+                    "type": {"type": "string", "const": "item"},
+                    "name": {"type": "string"},
                 },
-                required=["type", "name"],
-            ),
-            "FluidIngredientPrototype": JsonSchema(
-                description="https://lua-api.factorio.com/stable/types/FluidIngredientPrototype.html",
-                type=JsonTypes.object,
-                properties={
-                    "type": JsonSchema(type=JsonTypes.string, const="fluid"),
-                    "name": JsonSchema(type=JsonTypes.string),
+                "required": ["type", "name"],
+            },
+            "FluidIngredientPrototype": {
+                "description": "https://lua-api.factorio.com/stable/types/FluidIngredientPrototype.html",
+                "type": "object",
+                "properties": {
+                    "type": {"type": "string", "const": "fluid"},
+                    "name": {"type": "string"},
                 },
-                required=["type", "name"],
-            ),
-            "IngredientPrototype": JsonSchema(
-                anyOf=[
-                    JsonSchema(field_ref="#/definitions/ItemIngredientPrototype"),
-                    JsonSchema(field_ref="#/definitions/FluidIngredientPrototype"),
+                "required": ["type", "name"],
+            },
+            "IngredientPrototype": {
+                "anyOf": [
+                    {"$ref": "#/definitions/ItemIngredientPrototype"},
+                    {"$ref": "#/definitions/FluidIngredientPrototype"},
                 ],
-            ),
-            "ItemProductPrototype": JsonSchema(
-                description="https://lua-api.factorio.com/stable/types/ItemProductPrototype.html",
-                type=JsonTypes.object,
-                properties={
-                    "type": JsonSchema(type=JsonTypes.string, const="item"),
-                    "name": JsonSchema(type=JsonTypes.string),
+            },
+            "ItemProductPrototype": {
+                "description": "https://lua-api.factorio.com/stable/types/ItemProductPrototype.html",
+                "type": "object",
+                "properties": {
+                    "type": {"type": "string", "const": "item"},
+                    "name": {"type": "string"},
                 },
-                required=["type", "name"],
-            ),
-            "FluidProductPrototype": JsonSchema(
-                description="https://lua-api.factorio.com/stable/types/FluidProductPrototype.html",
-                type=JsonTypes.object,
-                properties={
-                    "type": JsonSchema(type=JsonTypes.string, const="fluid"),
-                    "name": JsonSchema(type=JsonTypes.string),
+                "required": ["type", "name"],
+            },
+            "FluidProductPrototype": {
+                "description": "https://lua-api.factorio.com/stable/types/FluidProductPrototype.html",
+                "type": "object",
+                "properties": {
+                    "type": {"type": "string", "const": "fluid"},
+                    "name": {"type": "string"},
                 },
-                required=["type", "name"],
-            ),
-            "ProductPrototype": JsonSchema(
-                anyOf=[
-                    JsonSchema(field_ref="#/definitions/ItemProductPrototype"),
-                    JsonSchema(field_ref="#/definitions/FluidProductPrototype"),
+                "required": ["type", "name"],
+            },
+            "ProductPrototype": {
+                "anyOf": [
+                    {"$ref": "#/definitions/ItemProductPrototype"},
+                    {"$ref": "#/definitions/FluidProductPrototype"},
                 ],
-            ),
+            },
             # Prototypes
-            "PrototypeBase": JsonSchema(
-                description="https://lua-api.factorio.com/stable/prototypes/PrototypeBase.html",
-                type=JsonTypes.object,
-                properties={
-                    "type": JsonSchema(type=JsonTypes.string),
-                    "name": JsonSchema(type=JsonTypes.string),
+            "PrototypeBase": {
+                "description": "https://lua-api.factorio.com/stable/prototypes/PrototypeBase.html",
+                "type": "object",
+                "properties": {
+                    "type": {"type": "string"},
+                    "name": {"type": "string"},
                 },
-                required=["type", "name"],
-            ),
-            "Prototype": JsonSchema(
-                description="https://lua-api.factorio.com/stable/prototypes/Prototype.html",
-                allOf=[
-                    JsonSchema(field_ref="#/definitions/PrototypeBase"),
+                "required": ["type", "name"],
+            },
+            "Prototype": {
+                "description": "https://lua-api.factorio.com/stable/prototypes/Prototype.html",
+                "allOf": [
+                    {"$ref": "#/definitions/PrototypeBase"},
                 ],
-            ),
-            "ItemPrototype": JsonSchema(
-                description="https://lua-api.factorio.com/stable/prototypes/ItemPrototype.html",
-                allOf=[
-                    JsonSchema(field_ref="#/definitions/Prototype"),
+            },
+            "ItemPrototype": {
+                "description": "https://lua-api.factorio.com/stable/prototypes/ItemPrototype.html",
+                "allOf": [
+                    {"$ref": "#/definitions/Prototype"},
                 ],
-            ),
-            "RecipePrototype": JsonSchema(
-                description="https://lua-api.factorio.com/stable/prototypes/RecipePrototype.html",
-                allOf=[
-                    JsonSchema(field_ref="#/definitions/Prototype"),
-                    JsonSchema(
-                        type=JsonTypes.object,
-                        properties={
-                            "ingredients": JsonSchema(
-                                oneOf=[
-                                    JsonSchema(
-                                        type=JsonTypes.array,
-                                        items=JsonSchema(
-                                            field_ref="#/definitions/IngredientPrototype"
-                                        ),
-                                    ),
-                                    JsonSchema(
-                                        type=JsonTypes.object,
-                                        additionalProperties=False,
-                                    ),
-                                ]
-                            ),
-                            "results": JsonSchema(
-                                oneOf=[
-                                    JsonSchema(
-                                        type=JsonTypes.array,
-                                        items=JsonSchema(
-                                            field_ref="#/definitions/ProductPrototype"
-                                        ),
-                                    ),
-                                    JsonSchema(
-                                        type=JsonTypes.object,
-                                        additionalProperties=False,
-                                    ),
-                                ]
-                            ),
-                            "category": JsonSchema(type=JsonTypes.string),
+            },
+            "RecipePrototype": {
+                "description": "https://lua-api.factorio.com/stable/prototypes/RecipePrototype.html",
+                "allOf": [
+                    {"$ref": "#/definitions/Prototype"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "ingredients": {
+                                "oneOf": [
+                                    {
+                                        "type": "array",
+                                        "items": {"$ref": "#/definitions/IngredientPrototype"},
+                                    },
+                                    {
+                                        "type": "object",
+                                        "additionalProperties": False,
+                                    },
+                                ],
+                            },
+                            "results": {
+                                "oneOf": [
+                                    {
+                                        "type": "array",
+                                        "items": {"$ref": "#/definitions/ProductPrototype"},
+                                    },
+                                    {
+                                        "type": "object",
+                                        "additionalProperties": False,
+                                    },
+                                ],
+                            },
+                            "category": {"type": "string"},
                         },
-                    ),
+                    },
                 ],
-            ),
-            "CraftingMachinePrototype": JsonSchema(
-                description="https://lua-api.factorio.com/stable/prototypes/CraftingMachinePrototype.html",
-                allOf=[
-                    JsonSchema(field_ref="#/definitions/Prototype"),
-                    JsonSchema(
-                        type=JsonTypes.object,
-                        properties={
-                            "crafting_categories": JsonSchema(
-                                type=JsonTypes.array,
-                                items=JsonSchema(type=JsonTypes.string),
-                            )
+            },
+            "CraftingMachinePrototype": {
+                "description": "https://lua-api.factorio.com/stable/prototypes/CraftingMachinePrototype.html",
+                "allOf": [
+                    {"$ref": "#/definitions/Prototype"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "crafting_categories": {
+                                "type": "array",
+                                "items": {"type": "string"},
+                            },
                         },
-                    ),
+                    },
                 ],
-            ),
-            "CharacterPrototype": JsonSchema(
-                description="https://lua-api.factorio.com/stable/prototypes/CharacterPrototype.html",
-                allOf=[
-                    JsonSchema(field_ref="#/definitions/Prototype"),
-                    JsonSchema(
-                        type=JsonTypes.object,
-                        properties={
-                            "crafting_categories": JsonSchema(
-                                type=JsonTypes.array,
-                                items=JsonSchema(type=JsonTypes.string),
-                            )
+            },
+            "CharacterPrototype": {
+                "description": "https://lua-api.factorio.com/stable/prototypes/CharacterPrototype.html",
+                "allOf": [
+                    {"$ref": "#/definitions/Prototype"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "crafting_categories": {
+                                "type": "array",
+                                "items": {"type": "string"},
+                            },
                         },
-                    ),
+                    },
                 ],
-            ),
+            },
         },
-    )
+    }
     # prototypes = {name: extract_prototype_definition(name) for name in extract_all_prototype_names()}
     # type_names = extract_all_type_names()
     # print(f"Found {len(prototypes)} prototypes and {len(type_names)} types")
-    print(schema.model_dump_json(exclude_unset=True, by_alias=True, indent=2))
+    print(json.dumps(schema, indent=2))
 
 
 # def extract_all_prototype_names():
