@@ -18,6 +18,16 @@ fi
 
 (
   . .venv/bin/activate
+
+  curl -L https://json-schema.org/draft/2019-09/schema \
+  | datamodel-codegen \
+      --disable-timestamp \
+      --input-file-type jsonschema \
+      --output-model-type pydantic_v2.BaseModel \
+      --keyword-only \
+      --allow-population-by-field-name \
+      --output factorio_prototypes_schema/json_schema.py
+
   python -m factorio_prototypes_schema >src/factorio_prototypes_schema.tmp.json
 )
 npx prettier --write src/factorio_prototypes_schema.tmp.json
