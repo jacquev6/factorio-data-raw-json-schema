@@ -8,6 +8,7 @@ set -o pipefail
 # Generate a JSON schema for the Factorio prototypes
 if ! diff .venv/requirements.txt factorio_prototypes_schema/requirements.txt 2>/dev/null >/dev/null
 then
+  rm -rf .venv
   python3 -m venv .venv
   (
     . .venv/bin/activate
@@ -18,6 +19,16 @@ fi
 
 (
   . .venv/bin/activate
+
+  mypy \
+    factorio_prototypes_schema \
+    --strict
+
+  black \
+    factorio_prototypes_schema \
+    --skip-magic-trailing-comma \
+    --line-length 120
+
   python -m factorio_prototypes_schema >src/factorio_prototypes_schema.tmp.json
 )
 npx prettier --write src/factorio_prototypes_schema.tmp.json

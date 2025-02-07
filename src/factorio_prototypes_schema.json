@@ -178,6 +178,7 @@
       "required": ["type", "name"]
     },
     "IngredientPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/IngredientPrototype.html",
       "anyOf": [
         {
           "$ref": "#/definitions/ItemIngredientPrototype"
@@ -216,6 +217,7 @@
       "required": ["type", "name"]
     },
     "ProductPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/ProductPrototype.html",
       "anyOf": [
         {
           "$ref": "#/definitions/ItemProductPrototype"

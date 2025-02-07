@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 
+from __future__ import annotations
+
+import abc
 import json
-# import os
+import sys
 
 # from bs4 import BeautifulSoup
 
@@ -9,182 +12,224 @@ import json
 # factorio_location = os.environ["FACTORIO_LOCATION"]
 # prototypes_location = "src/FactorioDataRaw.ts"
 
+JsonValue = None | bool | int | float | str | list["JsonValue"] | dict[str, "JsonValue"]
 
-def main():
-    schema = {
-        "$schema": "https://json-schema.org/draft/2019-09/schema",
-        "title": "Factorio Data.raw",
-        "type": "object",
-        "properties": {
-            "ammo": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "armor": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "assembling-machine": {"type": "object", "additionalProperties": {"$ref": "#/definitions/CraftingMachinePrototype"}},
-            "blueprint": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "blueprint-book": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "capsule": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "character": {"type": "object", "additionalProperties": {"$ref": "#/definitions/CharacterPrototype"}},
-            "copy-paste-tool": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "deconstruction-item": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "fluid": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "furnace": {"type": "object", "additionalProperties": {"$ref": "#/definitions/CraftingMachinePrototype"}},
-            "gun": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "item": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "item-with-entity-data": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "module": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "rail-planner": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "recipe": {"type": "object", "additionalProperties": {"$ref": "#/definitions/RecipePrototype"}},
-            "repair-tool": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "rocket-silo": {"type": "object", "additionalProperties": {"$ref": "#/definitions/CraftingMachinePrototype"}},
-            "selection-tool": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "space-platform-starter-pack": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "spidertron-remote": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "tool": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
-            "upgrade-item": {"type": "object", "additionalProperties": {"$ref": "#/definitions/ItemPrototype"}},
+
+def json_value(value: JsonValue) -> JsonValue:
+    """
+    Identity function that asserts that the input is a valid JSON value and erases its concrete type.
+    Helps with type checking where invariant (as opposed to covariant or contravariant) containers are involved (e.g. list and dict).
+    """
+    return value
+
+
+class FactorioSchema:
+    def __init__(
+        self, *, properties: dict[str, str], types: list[TypeDefinition], prototypes: list[TypeDefinition]
+    ) -> None:
+        self.properties = properties
+        self.types = types
+        self.prototypes = prototypes
+
+    def to_json_value(self) -> JsonValue:
+        return {
+            "$schema": "https://json-schema.org/draft/2019-09/schema",
+            "title": "Factorio Data.raw",
+            "type": "object",
+            "properties": {
+                k: {"type": "object", "additionalProperties": {"$ref": f"#/definitions/{v}"}}
+                for k, v in self.properties.items()
+            },
+            "definitions": (
+                {
+                    d.name: json_value(
+                        {"description": json_value(f"https://lua-api.factorio.com/stable/types/{d.name}.html")}
+                        | d.to_json_dict()
+                    )
+                    for d in self.types
+                }
+                | {
+                    d.name: json_value(
+                        {"description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{d.name}.html")}
+                        | d.to_json_dict()
+                    )
+                    for d in self.prototypes
+                }
+            ),
+        }
+
+    class TypeDefinition(abc.ABC):
+        def __init__(self, name: str) -> None:
+            self.name = name
+
+        @abc.abstractmethod
+        def to_json_dict(self) -> dict[str, JsonValue]:
+            pass
+
+    class Property:
+        # @todo Give a more specific type to 'type'
+        def __init__(self, *, name: str, type: JsonValue, required: bool = False) -> None:
+            self.name = name
+            self.type = type
+            self.required = required
+
+    class ObjectTypeDefinition(TypeDefinition):
+        def __init__(self, name: str, *, base: str | None = None, properties: list[FactorioSchema.Property]):
+            super().__init__(name)
+            self.base = base
+            self.properties = properties
+
+        def to_json_dict(self) -> dict[str, JsonValue]:
+            required = [json_value(p.name) for p in self.properties if p.required]
+            self_type = {"type": "object", "properties": json_value({p.name: p.type for p in self.properties})} | (
+                {"required": json_value(required)} if required else {}
+            )
+            if self.base is None:
+                assert len(self.properties) > 0
+                return self_type
+            else:
+                if len(self.properties) == 0:
+                    return {"allOf": [{"$ref": f"#/definitions/{self.base}"}]}  # @todo Consider removing the "allOf"
+                else:
+                    return {"allOf": [{"$ref": f"#/definitions/{self.base}"}, self_type]}
+
+    class UnionTypeDefinition(TypeDefinition):
+        def __init__(self, name: str, *, types: list[JsonValue]):
+            super().__init__(name)
+            self.types = types
+
+        def to_json_dict(self) -> dict[str, JsonValue]:
+            return {"anyOf": self.types}
+
+
+def main() -> None:
+    schema = FactorioSchema(
+        properties={
+            "ammo": "ItemPrototype",
+            "armor": "ItemPrototype",
+            "assembling-machine": "CraftingMachinePrototype",
+            "blueprint": "ItemPrototype",
+            "blueprint-book": "ItemPrototype",
+            "capsule": "ItemPrototype",
+            "character": "CharacterPrototype",
+            "copy-paste-tool": "ItemPrototype",
+            "deconstruction-item": "ItemPrototype",
+            "fluid": "ItemPrototype",
+            "furnace": "CraftingMachinePrototype",
+            "gun": "ItemPrototype",
+            "item": "ItemPrototype",
+            "item-with-entity-data": "ItemPrototype",
+            "module": "ItemPrototype",
+            "rail-planner": "ItemPrototype",
+            "recipe": "RecipePrototype",
+            "repair-tool": "ItemPrototype",
+            "rocket-silo": "CraftingMachinePrototype",
+            "selection-tool": "ItemPrototype",
+            "space-platform-starter-pack": "ItemPrototype",
+            "spidertron-remote": "ItemPrototype",
+            "tool": "ItemPrototype",
+            "upgrade-item": "ItemPrototype",
         },
-        "definitions": {
-            # Types
-            "ItemIngredientPrototype": {
-                "description": "https://lua-api.factorio.com/stable/types/ItemIngredientPrototype.html",
-                "type": "object",
-                "properties": {
-                    "type": {"type": "string", "const": "item"},
-                    "name": {"type": "string"},
-                },
-                "required": ["type", "name"],
-            },
-            "FluidIngredientPrototype": {
-                "description": "https://lua-api.factorio.com/stable/types/FluidIngredientPrototype.html",
-                "type": "object",
-                "properties": {
-                    "type": {"type": "string", "const": "fluid"},
-                    "name": {"type": "string"},
-                },
-                "required": ["type", "name"],
-            },
-            "IngredientPrototype": {
-                "anyOf": [
+        types=[
+            FactorioSchema.ObjectTypeDefinition(
+                "ItemIngredientPrototype",
+                properties=[
+                    FactorioSchema.Property(name="type", type={"type": "string", "const": "item"}, required=True),
+                    FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
+                ],
+            ),
+            FactorioSchema.ObjectTypeDefinition(
+                "FluidIngredientPrototype",
+                properties=[
+                    FactorioSchema.Property(name="type", type={"type": "string", "const": "fluid"}, required=True),
+                    FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
+                ],
+            ),
+            FactorioSchema.UnionTypeDefinition(
+                "IngredientPrototype",
+                types=[
                     {"$ref": "#/definitions/ItemIngredientPrototype"},
                     {"$ref": "#/definitions/FluidIngredientPrototype"},
                 ],
-            },
-            "ItemProductPrototype": {
-                "description": "https://lua-api.factorio.com/stable/types/ItemProductPrototype.html",
-                "type": "object",
-                "properties": {
-                    "type": {"type": "string", "const": "item"},
-                    "name": {"type": "string"},
-                },
-                "required": ["type", "name"],
-            },
-            "FluidProductPrototype": {
-                "description": "https://lua-api.factorio.com/stable/types/FluidProductPrototype.html",
-                "type": "object",
-                "properties": {
-                    "type": {"type": "string", "const": "fluid"},
-                    "name": {"type": "string"},
-                },
-                "required": ["type", "name"],
-            },
-            "ProductPrototype": {
-                "anyOf": [
-                    {"$ref": "#/definitions/ItemProductPrototype"},
-                    {"$ref": "#/definitions/FluidProductPrototype"},
+            ),
+            FactorioSchema.ObjectTypeDefinition(
+                "ItemProductPrototype",
+                properties=[
+                    FactorioSchema.Property(name="type", type={"type": "string", "const": "item"}, required=True),
+                    FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
                 ],
-            },
-            # Prototypes
-            "PrototypeBase": {
-                "description": "https://lua-api.factorio.com/stable/prototypes/PrototypeBase.html",
-                "type": "object",
-                "properties": {
-                    "type": {"type": "string"},
-                    "name": {"type": "string"},
-                },
-                "required": ["type", "name"],
-            },
-            "Prototype": {
-                "description": "https://lua-api.factorio.com/stable/prototypes/Prototype.html",
-                "allOf": [
-                    {"$ref": "#/definitions/PrototypeBase"},
+            ),
+            FactorioSchema.ObjectTypeDefinition(
+                "FluidProductPrototype",
+                properties=[
+                    FactorioSchema.Property(name="type", type={"type": "string", "const": "fluid"}, required=True),
+                    FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
                 ],
-            },
-            "ItemPrototype": {
-                "description": "https://lua-api.factorio.com/stable/prototypes/ItemPrototype.html",
-                "allOf": [
-                    {"$ref": "#/definitions/Prototype"},
+            ),
+            FactorioSchema.UnionTypeDefinition(
+                "ProductPrototype",
+                types=[{"$ref": "#/definitions/ItemProductPrototype"}, {"$ref": "#/definitions/FluidProductPrototype"}],
+            ),
+        ],
+        prototypes=[
+            FactorioSchema.ObjectTypeDefinition(
+                "PrototypeBase",
+                properties=[
+                    FactorioSchema.Property(name="type", type={"type": "string"}, required=True),
+                    FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
                 ],
-            },
-            "RecipePrototype": {
-                "description": "https://lua-api.factorio.com/stable/prototypes/RecipePrototype.html",
-                "allOf": [
-                    {"$ref": "#/definitions/Prototype"},
-                    {
-                        "type": "object",
-                        "properties": {
-                            "ingredients": {
-                                "oneOf": [
-                                    {
-                                        "type": "array",
-                                        "items": {"$ref": "#/definitions/IngredientPrototype"},
-                                    },
-                                    {
-                                        "type": "object",
-                                        "additionalProperties": False,
-                                    },
-                                ],
-                            },
-                            "results": {
-                                "oneOf": [
-                                    {
-                                        "type": "array",
-                                        "items": {"$ref": "#/definitions/ProductPrototype"},
-                                    },
-                                    {
-                                        "type": "object",
-                                        "additionalProperties": False,
-                                    },
-                                ],
-                            },
-                            "category": {"type": "string"},
+            ),
+            FactorioSchema.ObjectTypeDefinition("Prototype", base="PrototypeBase", properties=[]),
+            FactorioSchema.ObjectTypeDefinition("ItemPrototype", base="Prototype", properties=[]),
+            FactorioSchema.ObjectTypeDefinition(
+                "RecipePrototype",
+                base="Prototype",
+                properties=[
+                    FactorioSchema.Property(
+                        name="ingredients",
+                        type={
+                            "oneOf": [
+                                {"type": "array", "items": {"$ref": "#/definitions/IngredientPrototype"}},
+                                {"type": "object", "additionalProperties": False},
+                            ]
                         },
-                    },
-                ],
-            },
-            "CraftingMachinePrototype": {
-                "description": "https://lua-api.factorio.com/stable/prototypes/CraftingMachinePrototype.html",
-                "allOf": [
-                    {"$ref": "#/definitions/Prototype"},
-                    {
-                        "type": "object",
-                        "properties": {
-                            "crafting_categories": {
-                                "type": "array",
-                                "items": {"type": "string"},
-                            },
+                    ),
+                    FactorioSchema.Property(
+                        name="results",
+                        type={
+                            "oneOf": [
+                                {"type": "array", "items": {"$ref": "#/definitions/ProductPrototype"}},
+                                {"type": "object", "additionalProperties": False},
+                            ]
                         },
-                    },
+                    ),
+                    FactorioSchema.Property(name="category", type={"type": "string"}),
                 ],
-            },
-            "CharacterPrototype": {
-                "description": "https://lua-api.factorio.com/stable/prototypes/CharacterPrototype.html",
-                "allOf": [
-                    {"$ref": "#/definitions/Prototype"},
-                    {
-                        "type": "object",
-                        "properties": {
-                            "crafting_categories": {
-                                "type": "array",
-                                "items": {"type": "string"},
-                            },
-                        },
-                    },
+            ),
+            FactorioSchema.ObjectTypeDefinition(
+                "CraftingMachinePrototype",
+                base="Prototype",
+                properties=[
+                    FactorioSchema.Property(
+                        name="crafting_categories", type={"type": "array", "items": {"type": "string"}}
+                    )
                 ],
-            },
-        },
-    }
+            ),
+            FactorioSchema.ObjectTypeDefinition(
+                "CharacterPrototype",
+                base="Prototype",
+                properties=[
+                    FactorioSchema.Property(
+                        name="crafting_categories", type={"type": "array", "items": {"type": "string"}}
+                    )
+                ],
+            ),
+        ],
+    )
     # prototypes = {name: extract_prototype_definition(name) for name in extract_all_prototype_names()}
     # type_names = extract_all_type_names()
     # print(f"Found {len(prototypes)} prototypes and {len(type_names)} types")
-    print(json.dumps(schema, indent=2))
+    json.dump(schema.to_json_value(), sys.stdout, indent=2)
 
 
 # def extract_all_prototype_names():

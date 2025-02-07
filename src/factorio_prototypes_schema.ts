@@ -33,7 +33,13 @@ export type RecipePrototype = Prototype & {
   results?: ProductPrototype[] | {}
   category?: string
 }
+/**
+ * https://lua-api.factorio.com/stable/types/IngredientPrototype.html
+ */
 export type IngredientPrototype = ItemIngredientPrototype | FluidIngredientPrototype
+/**
+ * https://lua-api.factorio.com/stable/types/ProductPrototype.html
+ */
 export type ProductPrototype = ItemProductPrototype | FluidProductPrototype
 
 export interface FactorioDataRaw {
