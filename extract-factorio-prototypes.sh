@@ -20,16 +20,12 @@ fi
   . .venv/bin/activate
   python -m factorio_prototypes_schema >src/factorio_prototypes_schema.tmp.json
 )
+npx prettier --write src/factorio_prototypes_schema.tmp.json
+mv src/factorio_prototypes_schema.tmp.json src/factorio_prototypes_schema.json
 
 
 # Generate Typescript types from the JSON schema
 # https://www.npmjs.com/package/json-schema-to-typescript
-npx json2ts --no-format --no-additionalProperties src/factorio_prototypes_schema.tmp.json src/factorio_prototypes_schema.tmp.ts
-
-
-# Format generated files
-npx prettier --write src/factorio_prototypes_schema.tmp.json src/factorio_prototypes_schema.tmp.ts
-
-# Finalize
-mv src/factorio_prototypes_schema.tmp.json src/factorio_prototypes_schema.json
+npx json2ts --no-format --no-additionalProperties src/factorio_prototypes_schema.json src/factorio_prototypes_schema.tmp.ts
+npx prettier --write src/factorio_prototypes_schema.tmp.ts
 mv src/factorio_prototypes_schema.tmp.ts src/factorio_prototypes_schema.ts
