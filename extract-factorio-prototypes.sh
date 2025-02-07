@@ -6,7 +6,7 @@ set -o pipefail
 
 
 # Generate a JSON schema for the Factorio prototypes
-if ! diff .venv/requirements.txt factorio_prototypes_schema/requirements.txt 2>/dev/null
+if ! diff .venv/requirements.txt factorio_prototypes_schema/requirements.txt 2>/dev/null >/dev/null
 then
   python3 -m venv .venv
   (
