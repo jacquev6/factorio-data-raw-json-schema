@@ -13,29 +13,44 @@ export type ItemPrototype = Prototype
  * https://lua-api.factorio.com/stable/prototypes/Prototype.html
  */
 export type Prototype = PrototypeBase & {
-  factoriopedia_alternative?: string
+  factoriopedia_alternative?: String
 }
+/**
+ * https://lua-api.factorio.com/stable/types/string.html
+ */
+export type String = string
 /**
  * https://lua-api.factorio.com/stable/types/Order.html
  */
-export type Order = string
+export type Order = String
 /**
  * https://lua-api.factorio.com/stable/types/LocalisedString.html
  */
-export type LocalisedString = string | LocalisedStringArray
-type LocalisedStringArray = LocalisedString[]
+export type LocalisedString = String | unknown[]
 /**
  * https://lua-api.factorio.com/stable/types/ItemSubGroupID.html
  */
-export type ItemSubGroupID = string
+export type ItemSubGroupID = String
+/**
+ * https://lua-api.factorio.com/stable/types/bool.html
+ */
+export type Bool = boolean
 /**
  * https://lua-api.factorio.com/stable/types/SpaceLocationID.html
  */
-export type SpaceLocationID = string
+export type SpaceLocationID = String
 /**
  * https://lua-api.factorio.com/stable/types/FileName.html
  */
-export type FileName = string
+export type FileName = String
+/**
+ * https://lua-api.factorio.com/stable/types/uint32.html
+ */
+export type Uint32 = number
+/**
+ * https://lua-api.factorio.com/stable/types/float.html
+ */
+export type Float = number
 /**
  * https://lua-api.factorio.com/stable/prototypes/CraftingMachinePrototype.html
  */
@@ -63,15 +78,27 @@ export type IngredientPrototype = ItemIngredientPrototype | FluidIngredientProto
 /**
  * https://lua-api.factorio.com/stable/types/ItemID.html
  */
-export type ItemID = string
+export type ItemID = String
+/**
+ * https://lua-api.factorio.com/stable/types/uint16.html
+ */
+export type Uint16 = number
 /**
  * https://lua-api.factorio.com/stable/types/FluidID.html
  */
-export type FluidID = string
+export type FluidID = String
 /**
  * https://lua-api.factorio.com/stable/types/FluidAmount.html
  */
-export type FluidAmount = number
+export type FluidAmount = Double
+/**
+ * https://lua-api.factorio.com/stable/types/double.html
+ */
+export type Double = number
+/**
+ * https://lua-api.factorio.com/stable/types/uint8.html
+ */
+export type Uint8 = number
 /**
  * https://lua-api.factorio.com/stable/types/ProductPrototype.html
  */
@@ -158,16 +185,16 @@ export interface FactorioDataRaw {
  * https://lua-api.factorio.com/stable/prototypes/PrototypeBase.html
  */
 export interface PrototypeBase {
-  type: string
-  name: string
+  type: String
+  name: String
   order?: Order
   localised_name?: LocalisedString
   localised_description?: LocalisedString
   factoriopedia_description?: LocalisedString
   subgroup?: ItemSubGroupID
-  hidden?: boolean
-  hidden_in_factoriopedia?: boolean
-  parameter?: boolean
+  hidden?: Bool
+  hidden_in_factoriopedia?: Bool
+  parameter?: Bool
   factoriopedia_simulation?: SimulationDefinition
 }
 /**
@@ -178,43 +205,43 @@ export interface SimulationDefinition {
   game_view_settings?: GameViewSettings
   save?: FileName
   init_file?: FileName
-  init?: string
+  init?: String
   update_file?: FileName
-  update?: string
-  mods?: string
-  init_update_count?: number
-  length?: number
-  generate_map?: boolean
-  checkboard?: boolean
-  hide_health_bars?: boolean
-  mute_technology_finished_sound?: boolean
-  mute_alert_sounds?: boolean
-  volume_modifier?: number
-  override_volume?: boolean
-  mute_wind_sounds?: boolean
-  hide_factoriopedia_gradient?: boolean
+  update?: String
+  mods?: String
+  init_update_count?: Uint32
+  length?: Uint32
+  generate_map?: Bool
+  checkboard?: Bool
+  hide_health_bars?: Bool
+  mute_technology_finished_sound?: Bool
+  mute_alert_sounds?: Bool
+  volume_modifier?: Float
+  override_volume?: Bool
+  mute_wind_sounds?: Bool
+  hide_factoriopedia_gradient?: Bool
 }
 /**
  * https://lua-api.factorio.com/stable/types/GameViewSettings.html
  */
 export interface GameViewSettings {
-  default_show_value?: boolean
-  show_controller_gui?: boolean
-  show_minimap?: boolean
-  show_research_info?: boolean
-  show_entity_info?: boolean
-  show_alert_gui?: boolean
-  update_entity_selection?: boolean
-  show_rail_block_visualisation?: boolean
-  show_side_menu?: boolean
-  show_map_view_options?: boolean
-  show_entity_tooltip?: boolean
-  show_quickbar?: boolean
-  show_shortcut_bar?: boolean
-  show_crafting_queue?: boolean
-  show_tool_bar?: boolean
-  show_hotkey_suggestions?: boolean
-  show_surface_list?: boolean
+  default_show_value?: Bool
+  show_controller_gui?: Bool
+  show_minimap?: Bool
+  show_research_info?: Bool
+  show_entity_info?: Bool
+  show_alert_gui?: Bool
+  update_entity_selection?: Bool
+  show_rail_block_visualisation?: Bool
+  show_side_menu?: Bool
+  show_map_view_options?: Bool
+  show_entity_tooltip?: Bool
+  show_quickbar?: Bool
+  show_shortcut_bar?: Bool
+  show_crafting_queue?: Bool
+  show_tool_bar?: Bool
+  show_hotkey_suggestions?: Bool
+  show_surface_list?: Bool
 }
 /**
  * https://lua-api.factorio.com/stable/types/ItemIngredientPrototype.html
@@ -222,8 +249,8 @@ export interface GameViewSettings {
 export interface ItemIngredientPrototype {
   type: 'item'
   name: ItemID
-  amount: number
-  ignored_by_stats?: number
+  amount: Uint16
+  ignored_by_stats?: Uint16
 }
 /**
  * https://lua-api.factorio.com/stable/types/FluidIngredientPrototype.html
@@ -232,12 +259,12 @@ export interface FluidIngredientPrototype {
   type: 'fluid'
   name: FluidID
   amount: FluidAmount
-  temperature?: number
-  minimum_temperature?: number
-  maximum_temperature?: number
+  temperature?: Float
+  minimum_temperature?: Float
+  maximum_temperature?: Float
   ignored_by_stats?: FluidAmount
-  fluidbox_index?: number
-  fluidbox_multiplier?: number
+  fluidbox_index?: Uint32
+  fluidbox_multiplier?: Uint8
 }
 /**
  * https://lua-api.factorio.com/stable/types/ItemProductPrototype.html
@@ -245,15 +272,15 @@ export interface FluidIngredientPrototype {
 export interface ItemProductPrototype {
   type: 'item'
   name: ItemID
-  amount?: number
-  amount_min?: number
-  amount_max?: number
-  probability?: number
-  ignored_by_stats?: number
-  ignored_by_productivity?: number
-  show_details_in_recipe_tooltip?: boolean
-  extra_count_fraction?: number
-  percent_spoiled?: number
+  amount?: Double
+  amount_min?: Uint16
+  amount_max?: Uint16
+  probability?: Double
+  ignored_by_stats?: Uint16
+  ignored_by_productivity?: Uint16
+  show_details_in_recipe_tooltip?: Bool
+  extra_count_fraction?: Float
+  percent_spoiled?: Float
 }
 /**
  * https://lua-api.factorio.com/stable/types/FluidProductPrototype.html
@@ -264,18 +291,18 @@ export interface FluidProductPrototype {
   amount?: FluidAmount
   amount_min?: FluidAmount
   amount_max?: FluidAmount
-  probability?: number
+  probability?: Double
   ignored_by_stats?: FluidAmount
   ignored_by_productivity?: FluidAmount
-  temperature?: number
-  fluidbox_index?: number
-  show_details_in_recipe_tooltip?: boolean
+  temperature?: Float
+  fluidbox_index?: Uint32
+  show_details_in_recipe_tooltip?: Bool
 }
 /**
  * https://lua-api.factorio.com/stable/types/ResearchProgressProductPrototype.html
  */
 export interface ResearchProgressProductPrototype {
   type: 'research-progress'
-  amount?: number
+  amount?: Double
   research_item: ItemID
 }

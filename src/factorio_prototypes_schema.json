@@ -153,7 +153,7 @@
       "description": "https://lua-api.factorio.com/stable/types/Order.html",
       "anyOf": [
         {
-          "type": "string"
+          "$ref": "#/definitions/string"
         }
       ]
     },
@@ -161,7 +161,7 @@
       "description": "https://lua-api.factorio.com/stable/types/LocalisedString.html",
       "anyOf": [
         {
-          "type": "string"
+          "$ref": "#/definitions/string"
         },
         {
           "type": "array",
@@ -188,53 +188,49 @@
           "$ref": "#/definitions/FileName"
         },
         "init": {
-          "type": "string"
+          "$ref": "#/definitions/string"
         },
         "update_file": {
           "$ref": "#/definitions/FileName"
         },
         "update": {
-          "type": "string"
+          "$ref": "#/definitions/string"
         },
         "mods": {
-          "type": "string"
+          "$ref": "#/definitions/string"
         },
         "init_update_count": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 4294967295
+          "$ref": "#/definitions/uint32"
         },
         "length": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 4294967295
+          "$ref": "#/definitions/uint32"
         },
         "generate_map": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "checkboard": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "hide_health_bars": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "mute_technology_finished_sound": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "mute_alert_sounds": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "volume_modifier": {
-          "type": "number"
+          "$ref": "#/definitions/float"
         },
         "override_volume": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "mute_wind_sounds": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "hide_factoriopedia_gradient": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         }
       }
     },
@@ -242,7 +238,7 @@
       "description": "https://lua-api.factorio.com/stable/types/SpaceLocationID.html",
       "anyOf": [
         {
-          "type": "string"
+          "$ref": "#/definitions/string"
         }
       ]
     },
@@ -251,55 +247,55 @@
       "type": "object",
       "properties": {
         "default_show_value": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "show_controller_gui": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "show_minimap": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "show_research_info": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "show_entity_info": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "show_alert_gui": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "update_entity_selection": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "show_rail_block_visualisation": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "show_side_menu": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "show_map_view_options": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "show_entity_tooltip": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "show_quickbar": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "show_shortcut_bar": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "show_crafting_queue": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "show_tool_bar": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "show_hotkey_suggestions": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "show_surface_list": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         }
       }
     },
@@ -307,7 +303,7 @@
       "description": "https://lua-api.factorio.com/stable/types/FileName.html",
       "anyOf": [
         {
-          "type": "string"
+          "$ref": "#/definitions/string"
         }
       ]
     },
@@ -315,7 +311,7 @@
       "description": "https://lua-api.factorio.com/stable/types/ItemSubGroupID.html",
       "anyOf": [
         {
-          "type": "string"
+          "$ref": "#/definitions/string"
         }
       ]
     },
@@ -323,7 +319,7 @@
       "description": "https://lua-api.factorio.com/stable/types/ItemID.html",
       "anyOf": [
         {
-          "type": "string"
+          "$ref": "#/definitions/string"
         }
       ]
     },
@@ -331,7 +327,7 @@
       "description": "https://lua-api.factorio.com/stable/types/FluidID.html",
       "anyOf": [
         {
-          "type": "string"
+          "$ref": "#/definitions/string"
         }
       ]
     },
@@ -339,7 +335,7 @@
       "description": "https://lua-api.factorio.com/stable/types/FluidAmount.html",
       "anyOf": [
         {
-          "type": "number"
+          "$ref": "#/definitions/double"
         }
       ]
     },
@@ -355,14 +351,10 @@
           "$ref": "#/definitions/ItemID"
         },
         "amount": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 65535
+          "$ref": "#/definitions/uint16"
         },
         "ignored_by_stats": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 65535
+          "$ref": "#/definitions/uint16"
         }
       },
       "required": ["type", "name", "amount"]
@@ -382,26 +374,22 @@
           "$ref": "#/definitions/FluidAmount"
         },
         "temperature": {
-          "type": "number"
+          "$ref": "#/definitions/float"
         },
         "minimum_temperature": {
-          "type": "number"
+          "$ref": "#/definitions/float"
         },
         "maximum_temperature": {
-          "type": "number"
+          "$ref": "#/definitions/float"
         },
         "ignored_by_stats": {
           "$ref": "#/definitions/FluidAmount"
         },
         "fluidbox_index": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 4294967295
+          "$ref": "#/definitions/uint32"
         },
         "fluidbox_multiplier": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 255
+          "$ref": "#/definitions/uint8"
         }
       },
       "required": ["type", "name", "amount"]
@@ -429,39 +417,31 @@
           "$ref": "#/definitions/ItemID"
         },
         "amount": {
-          "type": "number"
+          "$ref": "#/definitions/double"
         },
         "amount_min": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 65535
+          "$ref": "#/definitions/uint16"
         },
         "amount_max": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 65535
+          "$ref": "#/definitions/uint16"
         },
         "probability": {
-          "type": "number"
+          "$ref": "#/definitions/double"
         },
         "ignored_by_stats": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 65535
+          "$ref": "#/definitions/uint16"
         },
         "ignored_by_productivity": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 65535
+          "$ref": "#/definitions/uint16"
         },
         "show_details_in_recipe_tooltip": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "extra_count_fraction": {
-          "type": "number"
+          "$ref": "#/definitions/float"
         },
         "percent_spoiled": {
-          "type": "number"
+          "$ref": "#/definitions/float"
         }
       },
       "required": ["type", "name"]
@@ -487,7 +467,7 @@
           "$ref": "#/definitions/FluidAmount"
         },
         "probability": {
-          "type": "number"
+          "$ref": "#/definitions/double"
         },
         "ignored_by_stats": {
           "$ref": "#/definitions/FluidAmount"
@@ -496,15 +476,13 @@
           "$ref": "#/definitions/FluidAmount"
         },
         "temperature": {
-          "type": "number"
+          "$ref": "#/definitions/float"
         },
         "fluidbox_index": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 4294967295
+          "$ref": "#/definitions/uint32"
         },
         "show_details_in_recipe_tooltip": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         }
       },
       "required": ["type", "name"]
@@ -518,7 +496,7 @@
           "const": "research-progress"
         },
         "amount": {
-          "type": "number"
+          "$ref": "#/definitions/double"
         },
         "research_item": {
           "$ref": "#/definitions/ItemID"
@@ -540,15 +518,79 @@
         }
       ]
     },
+    "string": {
+      "description": "https://lua-api.factorio.com/stable/types/string.html",
+      "type": "string"
+    },
+    "float": {
+      "description": "https://lua-api.factorio.com/stable/types/float.html",
+      "type": "number"
+    },
+    "double": {
+      "description": "https://lua-api.factorio.com/stable/types/double.html",
+      "type": "number"
+    },
+    "bool": {
+      "description": "https://lua-api.factorio.com/stable/types/bool.html",
+      "type": "boolean"
+    },
+    "uint8": {
+      "description": "https://lua-api.factorio.com/stable/types/uint8.html",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255
+    },
+    "uint16": {
+      "description": "https://lua-api.factorio.com/stable/types/uint16.html",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535
+    },
+    "uint32": {
+      "description": "https://lua-api.factorio.com/stable/types/uint32.html",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "uint64": {
+      "description": "https://lua-api.factorio.com/stable/types/uint64.html",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "int8": {
+      "description": "https://lua-api.factorio.com/stable/types/int8.html",
+      "type": "integer",
+      "minimum": -128,
+      "maximum": 127
+    },
+    "int16": {
+      "description": "https://lua-api.factorio.com/stable/types/int16.html",
+      "type": "integer",
+      "minimum": -32768,
+      "maximum": 32767
+    },
+    "int32": {
+      "description": "https://lua-api.factorio.com/stable/types/int32.html",
+      "type": "integer",
+      "minimum": -2147483648,
+      "maximum": 2147483647
+    },
+    "int64": {
+      "description": "https://lua-api.factorio.com/stable/types/int64.html",
+      "type": "integer",
+      "minimum": -9223372036854775808,
+      "maximum": 9223372036854775807
+    },
     "PrototypeBase": {
       "description": "https://lua-api.factorio.com/stable/prototypes/PrototypeBase.html",
       "type": "object",
       "properties": {
         "type": {
-          "type": "string"
+          "$ref": "#/definitions/string"
         },
         "name": {
-          "type": "string"
+          "$ref": "#/definitions/string"
         },
         "order": {
           "$ref": "#/definitions/Order"
@@ -566,13 +608,13 @@
           "$ref": "#/definitions/ItemSubGroupID"
         },
         "hidden": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "hidden_in_factoriopedia": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "parameter": {
-          "type": "boolean"
+          "$ref": "#/definitions/bool"
         },
         "factoriopedia_simulation": {
           "$ref": "#/definitions/SimulationDefinition"
@@ -590,7 +632,7 @@
           "type": "object",
           "properties": {
             "factoriopedia_alternative": {
-              "type": "string"
+              "$ref": "#/definitions/string"
             }
           }
         }

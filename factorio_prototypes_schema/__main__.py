@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import re
 from typing import Any, Iterable
-import abc
 import json
 import os
 import sys
@@ -29,7 +28,7 @@ def json_value(value: JsonValue) -> JsonValue:
 
 
 class FactorioSchema:
-    simple_types_mapping: dict[str, JsonValue] = {
+    builtin_types: dict[str, dict[str, JsonValue]] = {
         "string": {"type": "string"},
         "float": {"type": "number"},
         "double": {"type": "number"},
@@ -37,6 +36,11 @@ class FactorioSchema:
         "uint8": {"type": "integer", "minimum": 0, "maximum": 255},
         "uint16": {"type": "integer", "minimum": 0, "maximum": 65535},
         "uint32": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        "uint64": {"type": "integer", "minimum": 0, "maximum": 18446744073709551615},
+        "int8": {"type": "integer", "minimum": -128, "maximum": 127},
+        "int16": {"type": "integer", "minimum": -32768, "maximum": 32767},
+        "int32": {"type": "integer", "minimum": -2147483648, "maximum": 2147483647},
+        "int64": {"type": "integer", "minimum": -9223372036854775808, "maximum": 9223372036854775807},
     }
 
     def __init__(
@@ -59,27 +63,24 @@ class FactorioSchema:
                 {
                     d.name: json_value(
                         {"description": json_value(f"https://lua-api.factorio.com/stable/types/{d.name}.html")}
-                        | d.to_json_dict()
+                        | d.definition
                     )
                     for d in self.types
                 }
                 | {
                     d.name: json_value(
                         {"description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{d.name}.html")}
-                        | d.to_json_dict()
+                        | d.definition
                     )
                     for d in self.prototypes
                 }
             ),
         }
 
-    class TypeDefinition(abc.ABC):
-        def __init__(self, name: str) -> None:
+    class TypeDefinition:
+        def __init__(self, *, name: str, definition: dict[str, JsonValue]) -> None:
             self.name = name
-
-        @abc.abstractmethod
-        def to_json_dict(self) -> dict[str, JsonValue]:
-            pass
+            self.definition = definition
 
     class Property:
         # @todo Give a more specific type to 'type'
@@ -88,33 +89,27 @@ class FactorioSchema:
             self.type = type
             self.required = required
 
-    class StructTypeDefinition(TypeDefinition):
-        def __init__(self, name: str, *, base: str | None = None, properties: list[FactorioSchema.Property]):
-            super().__init__(name)
-            self.base = base
-            self.properties = properties
-
-        def to_json_dict(self) -> dict[str, JsonValue]:
-            required = [json_value(p.name) for p in self.properties if p.required]
-            self_type = {"type": "object", "properties": json_value({p.name: p.type for p in self.properties})} | (
-                {"required": json_value(required)} if required else {}
-            )
-            if self.base is None:
-                assert len(self.properties) > 0
-                return self_type
+    @staticmethod
+    def StructTypeDefinition(
+        name: str, *, base: str | None = None, properties: list[FactorioSchema.Property]
+    ) -> TypeDefinition:
+        required = [json_value(p.name) for p in properties if p.required]
+        self_definition = {"type": "object", "properties": json_value({p.name: p.type for p in properties})} | (
+            {"required": json_value(required)} if required else {}
+        )
+        if base is None:
+            assert len(properties) > 0
+            definition = self_definition
+        else:
+            if len(properties) == 0:
+                definition = {"allOf": [{"$ref": f"#/definitions/{base}"}]}  # @todo Consider removing the "allOf"
             else:
-                if len(self.properties) == 0:
-                    return {"allOf": [{"$ref": f"#/definitions/{self.base}"}]}  # @todo Consider removing the "allOf"
-                else:
-                    return {"allOf": [{"$ref": f"#/definitions/{self.base}"}, self_type]}
+                definition = {"allOf": [{"$ref": f"#/definitions/{base}"}, self_definition]}
+        return FactorioSchema.TypeDefinition(name=name, definition=definition)
 
-    class UnionTypeDefinition(TypeDefinition):
-        def __init__(self, name: str, *, types: list[JsonValue]):
-            super().__init__(name)
-            self.types = types
-
-        def to_json_dict(self) -> dict[str, JsonValue]:
-            return {"anyOf": self.types}
+    @staticmethod
+    def UnionTypeDefinition(*, name: str, types: list[JsonValue]) -> TypeDefinition:
+        return FactorioSchema.TypeDefinition(name=name, definition={"anyOf": types})
 
 
 def main(factorio_location: str) -> None:
@@ -151,11 +146,8 @@ def main(factorio_location: str) -> None:
 
     # Ad-hoc patches because the doc doesn't match the actual data
     # types/ItemProductPrototype.html#amount_min is documented as uint16 but is some sort of floating point in e.g. 'speed-module-recycling'
-    assert (
-        schema["definitions"]["ItemProductPrototype"]["properties"]["amount"]
-        == FactorioSchema.simple_types_mapping["uint16"]
-    )
-    schema["definitions"]["ItemProductPrototype"]["properties"]["amount"] = {"type": "number"}
+    assert schema["definitions"]["ItemProductPrototype"]["properties"]["amount"] == {"$ref": "#/definitions/uint16"}
+    schema["definitions"]["ItemProductPrototype"]["properties"]["amount"] = {"$ref": "#/definitions/double"}
 
     # Ad-hoc patches because our extraction tool is weak
     # LocalisedString is a union of string and list[LocalisedString]
@@ -185,8 +177,29 @@ def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDef
         "FluidProductPrototype",
         "ResearchProgressProductPrototype",
         "ProductPrototype",
+        "string",
+        "float",
+        "double",
+        "bool",
+        "uint8",
+        "uint16",
+        "uint32",
+        "uint64",
+        "int8",
+        "int16",
+        "int32",
+        "int64",
     ]:
         yield extract_type(factorio_location, type_name)
+
+
+def extract_all_type_names(factorio_location: str) -> Iterable[str]:
+    for a in read_file(factorio_location, "types").find_all("a"):
+        link = tag(a).get("href")
+        if link is not None and str(link).startswith("types/"):
+            type = str(link).split("#")[0].split("/")[-1]
+            assert type.endswith(".html")
+            yield type[:-5]
 
 
 def extract_type(factorio_location: str, type_name: str) -> FactorioSchema.TypeDefinition:
@@ -196,7 +209,7 @@ def extract_type(factorio_location: str, type_name: str) -> FactorioSchema.TypeD
     kind_link_soup = kind_soup.find("a")
     if kind_link_soup is None:
         match kind_soup.text.strip(" :\xa0"):
-            case "struct":
+            case "struct" | "struct - abstract":
 
                 def extract_properties() -> Iterable[FactorioSchema.Property]:
                     for h3_soup in (tag(el) for el in tag(soup.find("div", id="attributes-body-main")).find_all("h3")):
@@ -204,13 +217,11 @@ def extract_type(factorio_location: str, type_name: str) -> FactorioSchema.TypeD
                         type_soup = tag(tag(tag(h3_soup.contents[0]).contents[1]).contents[1])
 
                         if type_soup.name == "a":
-                            property_type = FactorioSchema.simple_types_mapping.get(type_soup.text.strip())
-                            if property_type is None:
-                                property_type = {"$ref": f"#/definitions/{type_soup.text}"}
+                            property_type = json_value({"$ref": f"#/definitions/{type_soup.text}"})
                         elif type_soup.name == "code":
-                            property_type = {"type": "string", "const": type_soup.text.strip().strip('"')}
+                            property_type = json_value({"type": "string", "const": type_soup.text.strip().strip('"')})
                         else:
-                            property_type = None
+                            property_type = json_value(None)
 
                         optional = h3_soup.contents[1].text.strip() == "optional"
 
@@ -227,11 +238,14 @@ def extract_type(factorio_location: str, type_name: str) -> FactorioSchema.TypeD
                         yield {"$ref": f"#/definitions/{tag(span_soup.contents[0]).text}"}
 
                 return FactorioSchema.UnionTypeDefinition(name=type_name, types=list(extract_union_types()))
+
+            case "builtin":
+                return FactorioSchema.TypeDefinition(name=type_name, definition=FactorioSchema.builtin_types[type_name])
             case _:
                 assert False, (type_name, soup.find("h2"))
     else:
         return FactorioSchema.UnionTypeDefinition(
-            name=type_name, types=[FactorioSchema.simple_types_mapping[kind_link_soup.text]]
+            name=type_name, types=[{"$ref": f"#/definitions/{kind_link_soup.text}"}]
         )
 
 
@@ -300,13 +314,11 @@ def extract_prototype(factorio_location: str, prototype_name: str) -> FactorioSc
             type_soup = tag(tag(tag(h3_soup.contents[0]).contents[1]).contents[1])
 
             if type_soup.name == "a":
-                property_type = FactorioSchema.simple_types_mapping.get(type_soup.text.strip())
-                if property_type is None:
-                    property_type = {"$ref": f"#/definitions/{type_soup.text}"}
+                property_type = json_value({"$ref": f"#/definitions/{type_soup.text}"})
             elif type_soup.name == "code":
-                property_type = {"type": "string", "const": type_soup.text.strip().strip('"')}
+                property_type = json_value({"type": "string", "const": type_soup.text.strip().strip('"')})
             else:
-                property_type = None
+                property_type = json_value(None)
 
             optional = h3_soup.contents[1].text.strip() == "optional"
 
@@ -359,19 +371,6 @@ def tag(tag: bs4.element.PageElement | None) -> bs4.element.Tag:
 #             except:
 #                 print(h3)
 #     return None
-
-
-# def extract_all_type_names():
-#     types = set()
-#     for a in read_file("types").find_all('a'):
-#         link = a.get("href")
-#         if link is not None and link.startswith("types/"):
-#             type = link.split("#")[0].split("/")[-1]
-#             assert type.endswith(".html")
-#             types.add(type[:-5])
-#     assert "IngredientPrototype" in types
-#     assert "ItemIngredientPrototype" in types
-#     return {"IngredientPrototype", "ItemIngredientPrototype"}
 
 
 def read_file(factorio_location: str, *stem: str) -> BeautifulSoup:
