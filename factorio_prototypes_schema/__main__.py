@@ -117,7 +117,7 @@ class FactorioSchema:
 
 
 def main(factorio_location: str) -> None:
-    schema = FactorioSchema(
+    schema: Any = FactorioSchema(
         properties={
             "ammo": "ItemPrototype",
             "armor": "ItemPrototype",
@@ -199,11 +199,17 @@ def main(factorio_location: str) -> None:
                 ],
             ),
         ],
+    ).to_json_value()
+
+    # Ad-hoc patches because the doc doesn't match the actual data
+    # types/ItemProductPrototype.html#amount_min is documented as uint16 but is some sort of floating point in e.g. 'speed-module-recycling'
+    assert (
+        schema["definitions"]["ItemProductPrototype"]["properties"]["amount"]
+        == FactorioSchema.simple_types_mapping["uint16"]
     )
-    # prototypes = {name: extract_prototype_definition(name) for name in extract_all_prototype_names()}
-    # type_names = extract_all_type_names()
-    # print(f"Found {len(prototypes)} prototypes and {len(type_names)} types")
-    json.dump(schema.to_json_value(), sys.stdout, indent=2)
+    schema["definitions"]["ItemProductPrototype"]["properties"]["amount"] = {"type": "number"}
+
+    json.dump(schema, sys.stdout, indent=2)
 
 
 def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDefinition]:

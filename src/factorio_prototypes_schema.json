@@ -259,9 +259,7 @@
           "$ref": "#/definitions/ItemID"
         },
         "amount": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 65535
+          "type": "number"
         },
         "amount_min": {
           "type": "integer",
