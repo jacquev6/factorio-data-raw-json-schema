@@ -138,6 +138,13 @@ export interface ItemIngredientPrototype {
 export interface FluidIngredientPrototype {
   type: 'fluid'
   name: string
+  amount: number
+  temperature?: number
+  minimum_temperature?: number
+  maximum_temperature?: number
+  ignored_by_stats?: number
+  fluidbox_index?: number
+  fluidbox_multiplier?: number
 }
 /**
  * https://lua-api.factorio.com/stable/types/ItemProductPrototype.html
@@ -145,6 +152,15 @@ export interface FluidIngredientPrototype {
 export interface ItemProductPrototype {
   type: 'item'
   name: string
+  amount?: number
+  amount_min?: number
+  amount_max?: number
+  probability?: number
+  ignored_by_stats?: number
+  ignored_by_productivity?: number
+  show_details_in_recipe_tooltip?: boolean
+  extra_count_fraction?: number
+  percent_spoiled?: number
 }
 /**
  * https://lua-api.factorio.com/stable/types/FluidProductPrototype.html
@@ -152,4 +168,13 @@ export interface ItemProductPrototype {
 export interface FluidProductPrototype {
   type: 'fluid'
   name: string
+  amount?: number
+  amount_min?: number
+  amount_max?: number
+  probability?: number
+  ignored_by_stats?: number
+  ignored_by_productivity?: number
+  temperature?: number
+  fluidbox_index?: number
+  show_details_in_recipe_tooltip?: boolean
 }

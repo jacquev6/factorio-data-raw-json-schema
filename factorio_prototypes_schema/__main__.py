@@ -29,8 +29,16 @@ def json_value(value: JsonValue) -> JsonValue:
 
 class FactorioSchema:
     simple_types_mapping: dict[str, JsonValue] = {
-        "ItemID": {"type": "string"},
+        "float": {"type": "number"},
+        "double": {"type": "number"},
+        "bool": {"type": "boolean"},
+        "uint8": {"type": "integer", "minimum": 0, "maximum": 255},
         "uint16": {"type": "integer", "minimum": 0, "maximum": 65535},
+        "uint32": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+        # @todo Remove these aliases: extract them from the documentation
+        "ItemID": {"type": "string"},
+        "FluidID": {"type": "string"},
+        "FluidAmount": {"type": "number"},
     }
 
     def __init__(
@@ -202,56 +210,18 @@ def main(factorio_location: str) -> None:
 
 
 def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDefinition]:
-    for type_name in [
-        "ItemIngredientPrototype",
-        # "FluidIngredientPrototype",
-        # "IngredientPrototype",
-        # "ItemProductPrototype",
-        # "FluidProductPrototype",
-        # "ProductPrototype",
-    ]:
-        yield extract_type(factorio_location, type_name)
-    yield from [
-        # FactorioSchema.ObjectTypeDefinition(
-        #     "ItemIngredientPrototype",
-        #     properties=[
-        #         FactorioSchema.Property(name="type", type={"type": "string", "const": "item"}, required=True),
-        #         FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
-        #     ],
-        # ),
-        FactorioSchema.ObjectTypeDefinition(
-            "FluidIngredientPrototype",
-            properties=[
-                FactorioSchema.Property(name="type", type={"type": "string", "const": "fluid"}, required=True),
-                FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
-            ],
-        ),
-        FactorioSchema.UnionTypeDefinition(
-            "IngredientPrototype",
-            types=[
-                {"$ref": "#/definitions/ItemIngredientPrototype"},
-                {"$ref": "#/definitions/FluidIngredientPrototype"},
-            ],
-        ),
-        FactorioSchema.ObjectTypeDefinition(
-            "ItemProductPrototype",
-            properties=[
-                FactorioSchema.Property(name="type", type={"type": "string", "const": "item"}, required=True),
-                FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
-            ],
-        ),
-        FactorioSchema.ObjectTypeDefinition(
-            "FluidProductPrototype",
-            properties=[
-                FactorioSchema.Property(name="type", type={"type": "string", "const": "fluid"}, required=True),
-                FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
-            ],
-        ),
-        FactorioSchema.UnionTypeDefinition(
-            "ProductPrototype",
-            types=[{"$ref": "#/definitions/ItemProductPrototype"}, {"$ref": "#/definitions/FluidProductPrototype"}],
-        ),
-    ]
+    yield extract_type(factorio_location, "ItemIngredientPrototype")
+    yield extract_type(factorio_location, "FluidIngredientPrototype")
+    yield FactorioSchema.UnionTypeDefinition(
+        "IngredientPrototype",
+        types=[{"$ref": "#/definitions/ItemIngredientPrototype"}, {"$ref": "#/definitions/FluidIngredientPrototype"}],
+    )
+    yield extract_type(factorio_location, "ItemProductPrototype")
+    yield extract_type(factorio_location, "FluidProductPrototype")
+    yield FactorioSchema.UnionTypeDefinition(
+        "ProductPrototype",
+        types=[{"$ref": "#/definitions/ItemProductPrototype"}, {"$ref": "#/definitions/FluidProductPrototype"}],
+    )
 
 
 def extract_type(factorio_location: str, type_name: str) -> FactorioSchema.TypeDefinition:

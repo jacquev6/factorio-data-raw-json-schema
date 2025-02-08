@@ -183,9 +183,34 @@
         },
         "name": {
           "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "temperature": {
+          "type": "number"
+        },
+        "minimum_temperature": {
+          "type": "number"
+        },
+        "maximum_temperature": {
+          "type": "number"
+        },
+        "ignored_by_stats": {
+          "type": "number"
+        },
+        "fluidbox_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "fluidbox_multiplier": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
         }
       },
-      "required": ["type", "name"]
+      "required": ["type", "name", "amount"]
     },
     "IngredientPrototype": {
       "description": "https://lua-api.factorio.com/stable/types/IngredientPrototype.html",
@@ -208,6 +233,43 @@
         },
         "name": {
           "type": "string"
+        },
+        "amount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "amount_min": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "amount_max": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "probability": {
+          "type": "number"
+        },
+        "ignored_by_stats": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "ignored_by_productivity": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "show_details_in_recipe_tooltip": {
+          "type": "boolean"
+        },
+        "extra_count_fraction": {
+          "type": "number"
+        },
+        "percent_spoiled": {
+          "type": "number"
         }
       },
       "required": ["type", "name"]
@@ -222,6 +284,35 @@
         },
         "name": {
           "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "amount_min": {
+          "type": "number"
+        },
+        "amount_max": {
+          "type": "number"
+        },
+        "probability": {
+          "type": "number"
+        },
+        "ignored_by_stats": {
+          "type": "number"
+        },
+        "ignored_by_productivity": {
+          "type": "number"
+        },
+        "temperature": {
+          "type": "number"
+        },
+        "fluidbox_index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "show_details_in_recipe_tooltip": {
+          "type": "boolean"
         }
       },
       "required": ["type", "name"]
