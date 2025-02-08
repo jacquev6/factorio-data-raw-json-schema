@@ -159,9 +159,19 @@
         },
         "name": {
           "type": "string"
+        },
+        "amount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "ignored_by_stats": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
         }
       },
-      "required": ["type", "name"]
+      "required": ["type", "name", "amount"]
     },
     "FluidIngredientPrototype": {
       "description": "https://lua-api.factorio.com/stable/types/FluidIngredientPrototype.html",

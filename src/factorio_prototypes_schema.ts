@@ -129,6 +129,8 @@ export interface PrototypeBase {
 export interface ItemIngredientPrototype {
   type: 'item'
   name: string
+  amount: number
+  ignored_by_stats?: number
 }
 /**
  * https://lua-api.factorio.com/stable/types/FluidIngredientPrototype.html

@@ -1,2 +1,3 @@
 mypy
 black
+beautifulsoup4

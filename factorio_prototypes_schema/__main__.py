@@ -2,28 +2,37 @@
 
 from __future__ import annotations
 
+from typing import Any, Iterable
 import abc
 import json
+import os
 import sys
 
-# from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
+import bs4
 
-
-# factorio_location = os.environ["FACTORIO_LOCATION"]
-# prototypes_location = "src/FactorioDataRaw.ts"
 
 JsonValue = None | bool | int | float | str | list["JsonValue"] | dict[str, "JsonValue"]
 
 
+def debug(*arg: Any, **kwds: Any) -> None:
+    print(*arg, **kwds, file=sys.stderr)
+
+
 def json_value(value: JsonValue) -> JsonValue:
     """
-    Identity function that asserts that the input is a valid JSON value and erases its concrete type.
+    Statically assert that a value is a JsonValue and erase its concrete type.
     Helps with type checking where invariant (as opposed to covariant or contravariant) containers are involved (e.g. list and dict).
     """
     return value
 
 
 class FactorioSchema:
+    simple_types_mapping: dict[str, JsonValue] = {
+        "ItemID": {"type": "string"},
+        "uint16": {"type": "integer", "minimum": 0, "maximum": 65535},
+    }
+
     def __init__(
         self, *, properties: dict[str, str], types: list[TypeDefinition], prototypes: list[TypeDefinition]
     ) -> None:
@@ -102,7 +111,7 @@ class FactorioSchema:
             return {"anyOf": self.types}
 
 
-def main() -> None:
+def main(factorio_location: str) -> None:
     schema = FactorioSchema(
         properties={
             "ammo": "ItemPrototype",
@@ -130,47 +139,7 @@ def main() -> None:
             "tool": "ItemPrototype",
             "upgrade-item": "ItemPrototype",
         },
-        types=[
-            FactorioSchema.ObjectTypeDefinition(
-                "ItemIngredientPrototype",
-                properties=[
-                    FactorioSchema.Property(name="type", type={"type": "string", "const": "item"}, required=True),
-                    FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
-                ],
-            ),
-            FactorioSchema.ObjectTypeDefinition(
-                "FluidIngredientPrototype",
-                properties=[
-                    FactorioSchema.Property(name="type", type={"type": "string", "const": "fluid"}, required=True),
-                    FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
-                ],
-            ),
-            FactorioSchema.UnionTypeDefinition(
-                "IngredientPrototype",
-                types=[
-                    {"$ref": "#/definitions/ItemIngredientPrototype"},
-                    {"$ref": "#/definitions/FluidIngredientPrototype"},
-                ],
-            ),
-            FactorioSchema.ObjectTypeDefinition(
-                "ItemProductPrototype",
-                properties=[
-                    FactorioSchema.Property(name="type", type={"type": "string", "const": "item"}, required=True),
-                    FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
-                ],
-            ),
-            FactorioSchema.ObjectTypeDefinition(
-                "FluidProductPrototype",
-                properties=[
-                    FactorioSchema.Property(name="type", type={"type": "string", "const": "fluid"}, required=True),
-                    FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
-                ],
-            ),
-            FactorioSchema.UnionTypeDefinition(
-                "ProductPrototype",
-                types=[{"$ref": "#/definitions/ItemProductPrototype"}, {"$ref": "#/definitions/FluidProductPrototype"}],
-            ),
-        ],
+        types=list(extract_all_types(factorio_location)),
         prototypes=[
             FactorioSchema.ObjectTypeDefinition(
                 "PrototypeBase",
@@ -232,6 +201,102 @@ def main() -> None:
     json.dump(schema.to_json_value(), sys.stdout, indent=2)
 
 
+def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDefinition]:
+    for type_name in [
+        "ItemIngredientPrototype",
+        # "FluidIngredientPrototype",
+        # "IngredientPrototype",
+        # "ItemProductPrototype",
+        # "FluidProductPrototype",
+        # "ProductPrototype",
+    ]:
+        yield extract_type(factorio_location, type_name)
+    yield from [
+        # FactorioSchema.ObjectTypeDefinition(
+        #     "ItemIngredientPrototype",
+        #     properties=[
+        #         FactorioSchema.Property(name="type", type={"type": "string", "const": "item"}, required=True),
+        #         FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
+        #     ],
+        # ),
+        FactorioSchema.ObjectTypeDefinition(
+            "FluidIngredientPrototype",
+            properties=[
+                FactorioSchema.Property(name="type", type={"type": "string", "const": "fluid"}, required=True),
+                FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
+            ],
+        ),
+        FactorioSchema.UnionTypeDefinition(
+            "IngredientPrototype",
+            types=[
+                {"$ref": "#/definitions/ItemIngredientPrototype"},
+                {"$ref": "#/definitions/FluidIngredientPrototype"},
+            ],
+        ),
+        FactorioSchema.ObjectTypeDefinition(
+            "ItemProductPrototype",
+            properties=[
+                FactorioSchema.Property(name="type", type={"type": "string", "const": "item"}, required=True),
+                FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
+            ],
+        ),
+        FactorioSchema.ObjectTypeDefinition(
+            "FluidProductPrototype",
+            properties=[
+                FactorioSchema.Property(name="type", type={"type": "string", "const": "fluid"}, required=True),
+                FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
+            ],
+        ),
+        FactorioSchema.UnionTypeDefinition(
+            "ProductPrototype",
+            types=[{"$ref": "#/definitions/ItemProductPrototype"}, {"$ref": "#/definitions/FluidProductPrototype"}],
+        ),
+    ]
+
+
+def extract_type(factorio_location: str, type_name: str) -> FactorioSchema.TypeDefinition:
+    soup = read_file(factorio_location, "types", type_name)
+    attributes_soup = soup.find("div", id="attributes-body-main")
+
+    def extract_properties() -> Iterable[FactorioSchema.Property]:
+        if attributes_soup is not None:
+            assert isinstance(attributes_soup, bs4.element.Tag)
+            for h3_soup in (tag(el) for el in attributes_soup.find_all("h3")):
+                property_name = tag(h3_soup.contents[0]).contents[0].text.strip()
+                type_soup = tag(tag(tag(h3_soup.contents[0]).contents[1]).contents[1])
+
+                if type_soup.name == "a":
+                    # assert type_soup.get("href") == f"../types/{type_soup.text}.html", (
+                    #     type_name,
+                    #     property_name,
+                    #     type_soup,
+                    # )
+                    property_type = FactorioSchema.simple_types_mapping.get(type_soup.text.strip())
+                elif type_soup.name == "code":
+                    property_type = {"type": "string", "const": type_soup.text.strip().strip('"')}
+                else:
+                    property_type = None
+
+                optional = h3_soup.contents[1].text.strip() == "optional"
+
+                if property_type is None:
+                    debug(property_name, type_soup)
+                else:
+                    yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
+
+    return FactorioSchema.ObjectTypeDefinition(name=type_name, properties=list(extract_properties()))
+
+
+def tag(tag: bs4.element.PageElement) -> bs4.element.Tag:
+    """
+    Assert at runtime that a PageElement is actually a Tag.
+    (Tag is a subclass of PageElement.)
+    Helps with static type checking.
+    """
+    assert isinstance(tag, bs4.element.Tag)
+    return tag
+
+
 # def extract_all_prototype_names():
 #     prototypes = set()
 #     for a in read_file("prototypes").find_all('a'):
@@ -276,10 +341,10 @@ def main() -> None:
 #     return {"IngredientPrototype", "ItemIngredientPrototype"}
 
 
-# def read_file(*stem):
-#     with open(os.path.join(factorio_location, "doc-html", *stem[:-1], stem[-1] + ".html")) as f:
-#         return BeautifulSoup(f.read(), 'html.parser')
+def read_file(factorio_location: str, *stem: str) -> BeautifulSoup:
+    with open(os.path.join(factorio_location, "doc-html", *stem[:-1], stem[-1] + ".html")) as f:
+        return BeautifulSoup(f.read(), "html.parser")
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1])
