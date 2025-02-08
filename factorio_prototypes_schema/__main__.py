@@ -98,8 +98,10 @@ class FactorioSchema:
             {"required": json_value(required)} if required else {}
         )
         if base is None:
-            assert len(properties) > 0
-            definition = self_definition
+            if len(properties) > 0:
+                definition = self_definition
+            else:
+                definition = {"type": "object"}
         else:
             if len(properties) == 0:
                 definition = {"allOf": [{"$ref": f"#/definitions/{base}"}]}  # @todo Consider removing the "allOf"
@@ -145,52 +147,68 @@ def main(factorio_location: str) -> None:
     ).to_json_value()
 
     # Ad-hoc patches because the doc doesn't match the actual data
-    # types/ItemProductPrototype.html#amount_min is documented as uint16 but is some sort of floating point in e.g. 'speed-module-recycling'
-    assert schema["definitions"]["ItemProductPrototype"]["properties"]["amount"] == {"$ref": "#/definitions/uint16"}
-    schema["definitions"]["ItemProductPrototype"]["properties"]["amount"] = {"$ref": "#/definitions/double"}
+    # ============================================================
+
+    # types/ItemProductPrototype.html#amount_min is documented as uint16
+    # but is some sort of floating point in e.g. 'speed-module-recycling'
+
+    if schema["definitions"].get("ItemProductPrototype", {}).get("properties", {}).get("amount", {}) == {
+        "$ref": "#/definitions/uint16"
+    }:
+        schema["definitions"]["ItemProductPrototype"]["properties"]["amount"] = {"$ref": "#/definitions/double"}
+    else:
+        debug("Failed to patch ItemProductPrototype")
+
+    # types/TriggerEffect.html documents DamageTileTriggerEffectItem as having type="damage-tile",
+    # but DamageTileTriggerEffectItem.html documents it as having type="damage"
+    if (
+        schema["definitions"].get("TriggerEffect", {}).get("anyOf", [{}])[0].get("$ref", {})
+        == "#/definitions/DamageEntityTriggerEffectItem"
+    ):
+        schema["definitions"]["TriggerEffect"]["anyOf"][0]["$ref"] = "#/definitions/DamageTriggerEffectItem"
+    else:
+        debug("Failed to patch TriggerEffect")
+
+    # types/TriggerEffect.html refers to non-documented type DamageEntityTriggerEffectItem,
+    # and types/DamageTriggerEffectItem.html is documented but used nowhere
 
     # Ad-hoc patches because our extraction tool is weak
+    # ==================================================
+
     # LocalisedString is a union of string and list[LocalisedString]
-    schema["definitions"]["LocalisedString"]["anyOf"].append(
-        {"type": "array", "item": {"$ref": "#/definitions/LocalisedString"}}
-    )
+    if schema["definitions"].get("LocalisedString", {}).get("anyOf", []) == [{"$ref": "#/definitions/string"}]:
+        schema["definitions"]["LocalisedString"]["anyOf"].append(
+            {"type": "array", "item": {"$ref": "#/definitions/LocalisedString"}}
+        )
+    else:
+        debug("Failed to patch LocalisedString")
+
+    # IconSequencePositioning.inventory_index comes from "defines"
+    if schema["definitions"].get("IconSequencePositioning", {}).get("properties", {}).get("inventory_index", {}) == {
+        "$ref": "#/definitions/defines.inventory"
+    }:
+        del schema["definitions"]["IconSequencePositioning"]["properties"]["inventory_index"]
+    else:
+        debug("Failed to patch IconSequencePositioning")
+
+    # RandomRange can be {min: double, max: double}
+    if schema["definitions"].get("RandomRange", {}).get("anyOf", [{}])[0] == {"$ref": "#/definitions/{"}:
+        schema["definitions"]["RandomRange"]["anyOf"] = schema["definitions"]["RandomRange"]["anyOf"][1:]
+    else:
+        debug("Failed to patch RandomRange")
 
     json.dump(schema, sys.stdout, indent=2)
 
 
 def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDefinition]:
-    for type_name in [
-        "Order",
-        "LocalisedString",
-        "SimulationDefinition",
-        "SpaceLocationID",
-        "GameViewSettings",
-        "FileName",
-        "ItemSubGroupID",
-        "ItemID",
-        "FluidID",
-        "FluidAmount",
-        "ItemIngredientPrototype",
-        "FluidIngredientPrototype",
-        "IngredientPrototype",
-        "ItemProductPrototype",
-        "FluidProductPrototype",
-        "ResearchProgressProductPrototype",
-        "ProductPrototype",
-        "string",
-        "float",
-        "double",
-        "bool",
-        "uint8",
-        "uint16",
-        "uint32",
-        "uint64",
-        "int8",
-        "int16",
-        "int32",
-        "int64",
-    ]:
-        yield extract_type(factorio_location, type_name)
+    for type_name in sorted(set(extract_all_type_names(factorio_location))):
+        if type_name in ["Data", "DataExtendMethod", "AnyPrototype"]:
+            continue
+        try:
+            yield extract_type(factorio_location, type_name)
+        except:
+            debug("Failed to extract type:", type_name)
+            raise
 
 
 def extract_all_type_names(factorio_location: str) -> Iterable[str]:
@@ -209,33 +227,20 @@ def extract_type(factorio_location: str, type_name: str) -> FactorioSchema.TypeD
     kind_link_soup = kind_soup.find("a")
     if kind_link_soup is None:
         match kind_soup.text.strip(" :\xa0"):
-            case "struct" | "struct - abstract":
+            case "struct" | "struct - abstract" | "struct or array[struct]":
 
-                def extract_properties() -> Iterable[FactorioSchema.Property]:
-                    for h3_soup in (tag(el) for el in tag(soup.find("div", id="attributes-body-main")).find_all("h3")):
-                        property_name = tag(h3_soup.contents[0]).contents[0].text.strip()
-                        type_soup = tag(tag(tag(h3_soup.contents[0]).contents[1]).contents[1])
-
-                        if type_soup.name == "a":
-                            property_type = json_value({"$ref": f"#/definitions/{type_soup.text}"})
-                        elif type_soup.name == "code":
-                            property_type = json_value({"type": "string", "const": type_soup.text.strip().strip('"')})
-                        else:
-                            property_type = json_value(None)
-
-                        optional = h3_soup.contents[1].text.strip() == "optional"
-
-                        if property_type is None:
-                            debug(property_name, type_soup)
-                        else:
-                            yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
-
-                return FactorioSchema.StructTypeDefinition(name=type_name, properties=list(extract_properties()))
-            case "union":
+                return FactorioSchema.StructTypeDefinition(
+                    name=type_name, properties=list(extract_struct_properties(type_name, soup))
+                )
+            case "union" | "union or array[union]" | "array[union]":
 
                 def extract_union_types() -> Iterable[JsonValue]:
                     for span_soup in (tag(el) for el in soup.find_all("span", class_="docs-attribute-name")):
-                        yield {"$ref": f"#/definitions/{tag(span_soup.contents[0]).text}"}
+                        content_soup = span_soup.contents[0]
+                        if isinstance(content_soup, bs4.element.Tag) and content_soup.name == "code":
+                            yield {"type": "string", "const": content_soup.text.strip().strip('"')}
+                        else:
+                            yield {"$ref": f"#/definitions/{content_soup.text.strip()}"}
 
                 return FactorioSchema.UnionTypeDefinition(name=type_name, types=list(extract_union_types()))
 
@@ -252,6 +257,7 @@ def extract_type(factorio_location: str, type_name: str) -> FactorioSchema.TypeD
 def extract_all_prototypes(factorio_location: str) -> Iterable[FactorioSchema.TypeDefinition]:
     yield extract_prototype(factorio_location, "PrototypeBase")
     yield extract_prototype(factorio_location, "Prototype")
+    # yield extract_prototype(factorio_location, "ItemPrototype")
     yield FactorioSchema.StructTypeDefinition("ItemPrototype", base="Prototype", properties=[])
     yield FactorioSchema.StructTypeDefinition(
         "RecipePrototype",
@@ -311,25 +317,48 @@ def extract_prototype(factorio_location: str, prototype_name: str) -> FactorioSc
     def extract_properties() -> Iterable[FactorioSchema.Property]:
         for h3_soup in (tag(el) for el in tag(soup.find("div", id="attributes-body-main")).find_all("h3")):
             property_name = tag(h3_soup.contents[0]).contents[0].text.strip()
+
             type_soup = tag(tag(tag(h3_soup.contents[0]).contents[1]).contents[1])
 
-            if type_soup.name == "a":
-                property_type = json_value({"$ref": f"#/definitions/{type_soup.text}"})
-            elif type_soup.name == "code":
+            if type_soup.name == "code":
                 property_type = json_value({"type": "string", "const": type_soup.text.strip().strip('"')})
             else:
-                property_type = json_value(None)
+                property_type = json_value({"$ref": f"#/definitions/{type_soup.text}"})
 
             optional = h3_soup.contents[1].text.strip() == "optional"
 
-            if property_type is None:
-                debug(property_name, type_soup)
-            else:
-                yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
+            yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
 
     return FactorioSchema.StructTypeDefinition(
         prototype_name, base=extract_base(), properties=list(extract_properties())
     )
+
+
+def extract_struct_properties(type_name: str, soup: bs4.BeautifulSoup) -> Iterable[FactorioSchema.Property]:
+    main_soup = soup.find("div", id="attributes-body-main")
+    if main_soup is not None:
+        for h3_soup in (tag(el) for el in tag(main_soup).find_all("h3")):
+            property_name = tag(h3_soup.contents[0]).contents[0].text.strip()
+            try:
+                try:
+                    type_soup = tag(tag(tag(h3_soup.contents[0]).contents[1]).contents[1])
+                except IndexError:
+                    debug("Failed to extract property:", type_name, property_name)
+                    continue
+
+                if type_soup.name == "a":
+                    property_type = json_value({"$ref": f"#/definitions/{type_soup.text}"})
+                elif type_soup.name == "code":
+                    property_type = json_value({"type": "string", "const": type_soup.text.strip().strip('"')})
+                else:
+                    property_type = json_value(None)
+
+                optional = h3_soup.contents[1].text.strip() == "optional"
+
+                yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
+            except:
+                debug("Failed to extract property:", type_name, property_name)
+                raise
 
 
 def tag(tag: bs4.element.PageElement | None) -> bs4.element.Tag:
