@@ -230,8 +230,11 @@ def extract_type(factorio_location: str, type_name: str) -> FactorioSchema.TypeD
             case "struct" | "struct - abstract" | "struct or array[struct]":
 
                 return FactorioSchema.StructTypeDefinition(
-                    name=type_name, properties=list(extract_struct_properties(type_name, soup))
+                    name=type_name,
+                    base=extract_struct_base(soup),
+                    properties=list(extract_struct_properties(type_name, soup)),
                 )
+
             case "union" | "union or array[union]" | "array[union]":
 
                 def extract_union_types() -> Iterable[JsonValue]:
@@ -303,35 +306,21 @@ def extract_all_prototypes(factorio_location: str) -> Iterable[FactorioSchema.Ty
 def extract_prototype(factorio_location: str, prototype_name: str) -> FactorioSchema.TypeDefinition:
     soup = read_file(factorio_location, "prototypes", prototype_name)
 
-    def extract_base() -> str | None:
-        base_soup = soup.find(string=re.compile(r"Inherits from"))
-        if base_soup is not None:
-            base_link_soup = tag(base_soup.parent).find("a")
-            assert base_link_soup is not None
-            base = base_link_soup.text
-            assert isinstance(base, str)
-            return base
-
-        return None
-
-    def extract_properties() -> Iterable[FactorioSchema.Property]:
-        for h3_soup in (tag(el) for el in tag(soup.find("div", id="attributes-body-main")).find_all("h3")):
-            property_name = tag(h3_soup.contents[0]).contents[0].text.strip()
-
-            type_soup = tag(tag(tag(h3_soup.contents[0]).contents[1]).contents[1])
-
-            if type_soup.name == "code":
-                property_type = json_value({"type": "string", "const": type_soup.text.strip().strip('"')})
-            else:
-                property_type = json_value({"$ref": f"#/definitions/{type_soup.text}"})
-
-            optional = h3_soup.contents[1].text.strip() == "optional"
-
-            yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
-
     return FactorioSchema.StructTypeDefinition(
-        prototype_name, base=extract_base(), properties=list(extract_properties())
+        prototype_name, base=extract_struct_base(soup), properties=list(extract_struct_properties(prototype_name, soup))
     )
+
+
+def extract_struct_base(soup: bs4.BeautifulSoup) -> str | None:
+    base_soup = soup.find(string=re.compile(r"Inherits from"))
+    if base_soup is not None:
+        base_link_soup = tag(base_soup.parent).find("a")
+        assert base_link_soup is not None
+        base = base_link_soup.text
+        assert isinstance(base, str)
+        return base
+
+    return None
 
 
 def extract_struct_properties(type_name: str, soup: bs4.BeautifulSoup) -> Iterable[FactorioSchema.Property]:
