@@ -29,16 +29,13 @@ def json_value(value: JsonValue) -> JsonValue:
 
 class FactorioSchema:
     simple_types_mapping: dict[str, JsonValue] = {
+        "string": {"type": "string"},
         "float": {"type": "number"},
         "double": {"type": "number"},
         "bool": {"type": "boolean"},
         "uint8": {"type": "integer", "minimum": 0, "maximum": 255},
         "uint16": {"type": "integer", "minimum": 0, "maximum": 65535},
         "uint32": {"type": "integer", "minimum": 0, "maximum": 4294967295},
-        # @todo Remove these aliases: extract them from the documentation
-        "ItemID": {"type": "string"},
-        "FluidID": {"type": "string"},
-        "FluidAmount": {"type": "number"},
     }
 
     def __init__(
@@ -211,6 +208,9 @@ def main(factorio_location: str) -> None:
 
 def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDefinition]:
     for type_name in [
+        "ItemID",
+        "FluidID",
+        "FluidAmount",
         "ItemIngredientPrototype",
         "FluidIngredientPrototype",
         "IngredientPrototype",
@@ -225,43 +225,47 @@ def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDef
 def extract_type(factorio_location: str, type_name: str) -> FactorioSchema.TypeDefinition:
     soup = read_file(factorio_location, "types", type_name)
 
-    match tag(tag(soup.find("h2")).find("span")).text.strip(" :\xa0"):
-        case "struct":
+    kind_soup = tag(tag(soup.find("h2")).find("span"))
+    kind_link_soup = kind_soup.find("a")
+    if kind_link_soup is None:
+        match kind_soup.text.strip(" :\xa0"):
+            case "struct":
 
-            def extract_properties() -> Iterable[FactorioSchema.Property]:
-                for h3_soup in (tag(el) for el in tag(soup.find("div", id="attributes-body-main")).find_all("h3")):
-                    property_name = tag(h3_soup.contents[0]).contents[0].text.strip()
-                    type_soup = tag(tag(tag(h3_soup.contents[0]).contents[1]).contents[1])
+                def extract_properties() -> Iterable[FactorioSchema.Property]:
+                    for h3_soup in (tag(el) for el in tag(soup.find("div", id="attributes-body-main")).find_all("h3")):
+                        property_name = tag(h3_soup.contents[0]).contents[0].text.strip()
+                        type_soup = tag(tag(tag(h3_soup.contents[0]).contents[1]).contents[1])
 
-                    if type_soup.name == "a":
-                        # assert type_soup.get("href") == f"../types/{type_soup.text}.html", (
-                        #     type_name,
-                        #     property_name,
-                        #     type_soup,
-                        # )
-                        property_type = FactorioSchema.simple_types_mapping.get(type_soup.text.strip())
-                    elif type_soup.name == "code":
-                        property_type = {"type": "string", "const": type_soup.text.strip().strip('"')}
-                    else:
-                        property_type = None
+                        if type_soup.name == "a":
+                            property_type = FactorioSchema.simple_types_mapping.get(type_soup.text.strip())
+                            if property_type is None:
+                                property_type = {"$ref": f"#/definitions/{type_soup.text}"}
+                        elif type_soup.name == "code":
+                            property_type = {"type": "string", "const": type_soup.text.strip().strip('"')}
+                        else:
+                            property_type = None
 
-                    optional = h3_soup.contents[1].text.strip() == "optional"
+                        optional = h3_soup.contents[1].text.strip() == "optional"
 
-                    if property_type is None:
-                        debug(property_name, type_soup)
-                    else:
-                        yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
+                        if property_type is None:
+                            debug(property_name, type_soup)
+                        else:
+                            yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
 
-            return FactorioSchema.StructTypeDefinition(name=type_name, properties=list(extract_properties()))
-        case "union":
+                return FactorioSchema.StructTypeDefinition(name=type_name, properties=list(extract_properties()))
+            case "union":
 
-            def extract_union_types() -> Iterable[JsonValue]:
-                for span_soup in (tag(el) for el in soup.find_all("span", class_="docs-attribute-name")):
-                    yield {"$ref": f"#/definitions/{tag(span_soup.contents[0]).text}"}
+                def extract_union_types() -> Iterable[JsonValue]:
+                    for span_soup in (tag(el) for el in soup.find_all("span", class_="docs-attribute-name")):
+                        yield {"$ref": f"#/definitions/{tag(span_soup.contents[0]).text}"}
 
-            return FactorioSchema.UnionTypeDefinition(name=type_name, types=list(extract_union_types()))
-        case _:
-            assert False, (type_name, soup.find("h2"))
+                return FactorioSchema.UnionTypeDefinition(name=type_name, types=list(extract_union_types()))
+            case _:
+                assert False, (type_name, soup.find("h2"))
+    else:
+        return FactorioSchema.UnionTypeDefinition(
+            name=type_name, types=[FactorioSchema.simple_types_mapping[kind_link_soup.text]]
+        )
 
 
 def tag(tag: bs4.element.PageElement | None) -> bs4.element.Tag:

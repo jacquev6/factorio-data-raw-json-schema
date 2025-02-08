@@ -38,6 +38,18 @@ export type RecipePrototype = Prototype & {
  */
 export type IngredientPrototype = ItemIngredientPrototype | FluidIngredientPrototype
 /**
+ * https://lua-api.factorio.com/stable/types/ItemID.html
+ */
+export type ItemID = string
+/**
+ * https://lua-api.factorio.com/stable/types/FluidID.html
+ */
+export type FluidID = string
+/**
+ * https://lua-api.factorio.com/stable/types/FluidAmount.html
+ */
+export type FluidAmount = number
+/**
  * https://lua-api.factorio.com/stable/types/ProductPrototype.html
  */
 export type ProductPrototype =
@@ -131,7 +143,7 @@ export interface PrototypeBase {
  */
 export interface ItemIngredientPrototype {
   type: 'item'
-  name: string
+  name: ItemID
   amount: number
   ignored_by_stats?: number
 }
@@ -140,12 +152,12 @@ export interface ItemIngredientPrototype {
  */
 export interface FluidIngredientPrototype {
   type: 'fluid'
-  name: string
-  amount: number
+  name: FluidID
+  amount: FluidAmount
   temperature?: number
   minimum_temperature?: number
   maximum_temperature?: number
-  ignored_by_stats?: number
+  ignored_by_stats?: FluidAmount
   fluidbox_index?: number
   fluidbox_multiplier?: number
 }
@@ -154,7 +166,7 @@ export interface FluidIngredientPrototype {
  */
 export interface ItemProductPrototype {
   type: 'item'
-  name: string
+  name: ItemID
   amount?: number
   amount_min?: number
   amount_max?: number
@@ -170,13 +182,13 @@ export interface ItemProductPrototype {
  */
 export interface FluidProductPrototype {
   type: 'fluid'
-  name: string
-  amount?: number
-  amount_min?: number
-  amount_max?: number
+  name: FluidID
+  amount?: FluidAmount
+  amount_min?: FluidAmount
+  amount_max?: FluidAmount
   probability?: number
-  ignored_by_stats?: number
-  ignored_by_productivity?: number
+  ignored_by_stats?: FluidAmount
+  ignored_by_productivity?: FluidAmount
   temperature?: number
   fluidbox_index?: number
   show_details_in_recipe_tooltip?: boolean
@@ -187,5 +199,5 @@ export interface FluidProductPrototype {
 export interface ResearchProgressProductPrototype {
   type: 'research-progress'
   amount?: number
-  research_item: string
+  research_item: ItemID
 }

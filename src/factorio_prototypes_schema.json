@@ -149,6 +149,30 @@
     }
   },
   "definitions": {
+    "ItemID": {
+      "description": "https://lua-api.factorio.com/stable/types/ItemID.html",
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "FluidID": {
+      "description": "https://lua-api.factorio.com/stable/types/FluidID.html",
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "FluidAmount": {
+      "description": "https://lua-api.factorio.com/stable/types/FluidAmount.html",
+      "anyOf": [
+        {
+          "type": "number"
+        }
+      ]
+    },
     "ItemIngredientPrototype": {
       "description": "https://lua-api.factorio.com/stable/types/ItemIngredientPrototype.html",
       "type": "object",
@@ -158,7 +182,7 @@
           "const": "item"
         },
         "name": {
-          "type": "string"
+          "$ref": "#/definitions/ItemID"
         },
         "amount": {
           "type": "integer",
@@ -182,10 +206,10 @@
           "const": "fluid"
         },
         "name": {
-          "type": "string"
+          "$ref": "#/definitions/FluidID"
         },
         "amount": {
-          "type": "number"
+          "$ref": "#/definitions/FluidAmount"
         },
         "temperature": {
           "type": "number"
@@ -197,7 +221,7 @@
           "type": "number"
         },
         "ignored_by_stats": {
-          "type": "number"
+          "$ref": "#/definitions/FluidAmount"
         },
         "fluidbox_index": {
           "type": "integer",
@@ -232,7 +256,7 @@
           "const": "item"
         },
         "name": {
-          "type": "string"
+          "$ref": "#/definitions/ItemID"
         },
         "amount": {
           "type": "integer",
@@ -283,25 +307,25 @@
           "const": "fluid"
         },
         "name": {
-          "type": "string"
+          "$ref": "#/definitions/FluidID"
         },
         "amount": {
-          "type": "number"
+          "$ref": "#/definitions/FluidAmount"
         },
         "amount_min": {
-          "type": "number"
+          "$ref": "#/definitions/FluidAmount"
         },
         "amount_max": {
-          "type": "number"
+          "$ref": "#/definitions/FluidAmount"
         },
         "probability": {
           "type": "number"
         },
         "ignored_by_stats": {
-          "type": "number"
+          "$ref": "#/definitions/FluidAmount"
         },
         "ignored_by_productivity": {
-          "type": "number"
+          "$ref": "#/definitions/FluidAmount"
         },
         "temperature": {
           "type": "number"
@@ -329,7 +353,7 @@
           "type": "number"
         },
         "research_item": {
-          "type": "string"
+          "$ref": "#/definitions/ItemID"
         }
       },
       "required": ["type", "research_item"]
