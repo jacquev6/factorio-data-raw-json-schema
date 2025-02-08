@@ -90,7 +90,7 @@ class FactorioSchema:
             self.type = type
             self.required = required
 
-    class ObjectTypeDefinition(TypeDefinition):
+    class StructTypeDefinition(TypeDefinition):
         def __init__(self, name: str, *, base: str | None = None, properties: list[FactorioSchema.Property]):
             super().__init__(name)
             self.base = base
@@ -149,16 +149,16 @@ def main(factorio_location: str) -> None:
         },
         types=list(extract_all_types(factorio_location)),
         prototypes=[
-            FactorioSchema.ObjectTypeDefinition(
+            FactorioSchema.StructTypeDefinition(
                 "PrototypeBase",
                 properties=[
                     FactorioSchema.Property(name="type", type={"type": "string"}, required=True),
                     FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
                 ],
             ),
-            FactorioSchema.ObjectTypeDefinition("Prototype", base="PrototypeBase", properties=[]),
-            FactorioSchema.ObjectTypeDefinition("ItemPrototype", base="Prototype", properties=[]),
-            FactorioSchema.ObjectTypeDefinition(
+            FactorioSchema.StructTypeDefinition("Prototype", base="PrototypeBase", properties=[]),
+            FactorioSchema.StructTypeDefinition("ItemPrototype", base="Prototype", properties=[]),
+            FactorioSchema.StructTypeDefinition(
                 "RecipePrototype",
                 base="Prototype",
                 properties=[
@@ -183,7 +183,7 @@ def main(factorio_location: str) -> None:
                     FactorioSchema.Property(name="category", type={"type": "string"}),
                 ],
             ),
-            FactorioSchema.ObjectTypeDefinition(
+            FactorioSchema.StructTypeDefinition(
                 "CraftingMachinePrototype",
                 base="Prototype",
                 properties=[
@@ -192,7 +192,7 @@ def main(factorio_location: str) -> None:
                     )
                 ],
             ),
-            FactorioSchema.ObjectTypeDefinition(
+            FactorioSchema.StructTypeDefinition(
                 "CharacterPrototype",
                 base="Prototype",
                 properties=[
@@ -210,54 +210,61 @@ def main(factorio_location: str) -> None:
 
 
 def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDefinition]:
-    yield extract_type(factorio_location, "ItemIngredientPrototype")
-    yield extract_type(factorio_location, "FluidIngredientPrototype")
-    yield FactorioSchema.UnionTypeDefinition(
+    for type_name in [
+        "ItemIngredientPrototype",
+        "FluidIngredientPrototype",
         "IngredientPrototype",
-        types=[{"$ref": "#/definitions/ItemIngredientPrototype"}, {"$ref": "#/definitions/FluidIngredientPrototype"}],
-    )
-    yield extract_type(factorio_location, "ItemProductPrototype")
-    yield extract_type(factorio_location, "FluidProductPrototype")
-    yield FactorioSchema.UnionTypeDefinition(
+        "ItemProductPrototype",
+        "FluidProductPrototype",
+        "ResearchProgressProductPrototype",
         "ProductPrototype",
-        types=[{"$ref": "#/definitions/ItemProductPrototype"}, {"$ref": "#/definitions/FluidProductPrototype"}],
-    )
+    ]:
+        yield extract_type(factorio_location, type_name)
 
 
 def extract_type(factorio_location: str, type_name: str) -> FactorioSchema.TypeDefinition:
     soup = read_file(factorio_location, "types", type_name)
-    attributes_soup = soup.find("div", id="attributes-body-main")
 
-    def extract_properties() -> Iterable[FactorioSchema.Property]:
-        if attributes_soup is not None:
-            assert isinstance(attributes_soup, bs4.element.Tag)
-            for h3_soup in (tag(el) for el in attributes_soup.find_all("h3")):
-                property_name = tag(h3_soup.contents[0]).contents[0].text.strip()
-                type_soup = tag(tag(tag(h3_soup.contents[0]).contents[1]).contents[1])
+    match tag(tag(soup.find("h2")).find("span")).text.strip(" :\xa0"):
+        case "struct":
 
-                if type_soup.name == "a":
-                    # assert type_soup.get("href") == f"../types/{type_soup.text}.html", (
-                    #     type_name,
-                    #     property_name,
-                    #     type_soup,
-                    # )
-                    property_type = FactorioSchema.simple_types_mapping.get(type_soup.text.strip())
-                elif type_soup.name == "code":
-                    property_type = {"type": "string", "const": type_soup.text.strip().strip('"')}
-                else:
-                    property_type = None
+            def extract_properties() -> Iterable[FactorioSchema.Property]:
+                for h3_soup in (tag(el) for el in tag(soup.find("div", id="attributes-body-main")).find_all("h3")):
+                    property_name = tag(h3_soup.contents[0]).contents[0].text.strip()
+                    type_soup = tag(tag(tag(h3_soup.contents[0]).contents[1]).contents[1])
 
-                optional = h3_soup.contents[1].text.strip() == "optional"
+                    if type_soup.name == "a":
+                        # assert type_soup.get("href") == f"../types/{type_soup.text}.html", (
+                        #     type_name,
+                        #     property_name,
+                        #     type_soup,
+                        # )
+                        property_type = FactorioSchema.simple_types_mapping.get(type_soup.text.strip())
+                    elif type_soup.name == "code":
+                        property_type = {"type": "string", "const": type_soup.text.strip().strip('"')}
+                    else:
+                        property_type = None
 
-                if property_type is None:
-                    debug(property_name, type_soup)
-                else:
-                    yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
+                    optional = h3_soup.contents[1].text.strip() == "optional"
 
-    return FactorioSchema.ObjectTypeDefinition(name=type_name, properties=list(extract_properties()))
+                    if property_type is None:
+                        debug(property_name, type_soup)
+                    else:
+                        yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
+
+            return FactorioSchema.StructTypeDefinition(name=type_name, properties=list(extract_properties()))
+        case "union":
+
+            def extract_union_types() -> Iterable[JsonValue]:
+                for span_soup in (tag(el) for el in soup.find_all("span", class_="docs-attribute-name")):
+                    yield {"$ref": f"#/definitions/{tag(span_soup.contents[0]).text}"}
+
+            return FactorioSchema.UnionTypeDefinition(name=type_name, types=list(extract_union_types()))
+        case _:
+            assert False, (type_name, soup.find("h2"))
 
 
-def tag(tag: bs4.element.PageElement) -> bs4.element.Tag:
+def tag(tag: bs4.element.PageElement | None) -> bs4.element.Tag:
     """
     Assert at runtime that a PageElement is actually a Tag.
     (Tag is a subclass of PageElement.)

@@ -317,6 +317,23 @@
       },
       "required": ["type", "name"]
     },
+    "ResearchProgressProductPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/ResearchProgressProductPrototype.html",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "research-progress"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "research_item": {
+          "type": "string"
+        }
+      },
+      "required": ["type", "research_item"]
+    },
     "ProductPrototype": {
       "description": "https://lua-api.factorio.com/stable/types/ProductPrototype.html",
       "anyOf": [
@@ -325,6 +342,9 @@
         },
         {
           "$ref": "#/definitions/FluidProductPrototype"
+        },
+        {
+          "$ref": "#/definitions/ResearchProgressProductPrototype"
         }
       ]
     },

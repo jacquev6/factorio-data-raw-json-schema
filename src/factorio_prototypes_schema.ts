@@ -40,7 +40,10 @@ export type IngredientPrototype = ItemIngredientPrototype | FluidIngredientProto
 /**
  * https://lua-api.factorio.com/stable/types/ProductPrototype.html
  */
-export type ProductPrototype = ItemProductPrototype | FluidProductPrototype
+export type ProductPrototype =
+  | ItemProductPrototype
+  | FluidProductPrototype
+  | ResearchProgressProductPrototype
 
 export interface FactorioDataRaw {
   ammo?: {
@@ -177,4 +180,12 @@ export interface FluidProductPrototype {
   temperature?: number
   fluidbox_index?: number
   show_details_in_recipe_tooltip?: boolean
+}
+/**
+ * https://lua-api.factorio.com/stable/types/ResearchProgressProductPrototype.html
+ */
+export interface ResearchProgressProductPrototype {
+  type: 'research-progress'
+  amount?: number
+  research_item: string
 }
