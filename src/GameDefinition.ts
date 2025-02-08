@@ -155,7 +155,10 @@ export async function load(file: Blob): Promise<GameDefinition> {
         .map((ingredient) => ({ thing: ingredient.name }))
         .filter((ingredient) => ingredient.thing !== undefined),
       products: ensureArray(recipe.results)
-        .map((product) => ({ thing: product.name }))
+        .map((product) => {
+          assert(product.type !== 'research-progress')
+          return { thing: product.name }
+        })
         .filter((result) => result.thing !== undefined),
       crafters: craftersByRecipeCategory[recipe.category ?? 'crafting'] ?? [],
     })
