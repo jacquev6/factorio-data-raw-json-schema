@@ -12,7 +12,30 @@ export type ItemPrototype = Prototype
 /**
  * https://lua-api.factorio.com/stable/prototypes/Prototype.html
  */
-export type Prototype = PrototypeBase
+export type Prototype = PrototypeBase & {
+  factoriopedia_alternative?: string
+}
+/**
+ * https://lua-api.factorio.com/stable/types/Order.html
+ */
+export type Order = string
+/**
+ * https://lua-api.factorio.com/stable/types/LocalisedString.html
+ */
+export type LocalisedString = string | LocalisedStringArray
+type LocalisedStringArray = LocalisedString[]
+/**
+ * https://lua-api.factorio.com/stable/types/ItemSubGroupID.html
+ */
+export type ItemSubGroupID = string
+/**
+ * https://lua-api.factorio.com/stable/types/SpaceLocationID.html
+ */
+export type SpaceLocationID = string
+/**
+ * https://lua-api.factorio.com/stable/types/FileName.html
+ */
+export type FileName = string
 /**
  * https://lua-api.factorio.com/stable/prototypes/CraftingMachinePrototype.html
  */
@@ -137,6 +160,61 @@ export interface FactorioDataRaw {
 export interface PrototypeBase {
   type: string
   name: string
+  order?: Order
+  localised_name?: LocalisedString
+  localised_description?: LocalisedString
+  factoriopedia_description?: LocalisedString
+  subgroup?: ItemSubGroupID
+  hidden?: boolean
+  hidden_in_factoriopedia?: boolean
+  parameter?: boolean
+  factoriopedia_simulation?: SimulationDefinition
+}
+/**
+ * https://lua-api.factorio.com/stable/types/SimulationDefinition.html
+ */
+export interface SimulationDefinition {
+  planet?: SpaceLocationID
+  game_view_settings?: GameViewSettings
+  save?: FileName
+  init_file?: FileName
+  init?: string
+  update_file?: FileName
+  update?: string
+  mods?: string
+  init_update_count?: number
+  length?: number
+  generate_map?: boolean
+  checkboard?: boolean
+  hide_health_bars?: boolean
+  mute_technology_finished_sound?: boolean
+  mute_alert_sounds?: boolean
+  volume_modifier?: number
+  override_volume?: boolean
+  mute_wind_sounds?: boolean
+  hide_factoriopedia_gradient?: boolean
+}
+/**
+ * https://lua-api.factorio.com/stable/types/GameViewSettings.html
+ */
+export interface GameViewSettings {
+  default_show_value?: boolean
+  show_controller_gui?: boolean
+  show_minimap?: boolean
+  show_research_info?: boolean
+  show_entity_info?: boolean
+  show_alert_gui?: boolean
+  update_entity_selection?: boolean
+  show_rail_block_visualisation?: boolean
+  show_side_menu?: boolean
+  show_map_view_options?: boolean
+  show_entity_tooltip?: boolean
+  show_quickbar?: boolean
+  show_shortcut_bar?: boolean
+  show_crafting_queue?: boolean
+  show_tool_bar?: boolean
+  show_hotkey_suggestions?: boolean
+  show_surface_list?: boolean
 }
 /**
  * https://lua-api.factorio.com/stable/types/ItemIngredientPrototype.html

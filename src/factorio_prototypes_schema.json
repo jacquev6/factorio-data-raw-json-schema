@@ -149,6 +149,176 @@
     }
   },
   "definitions": {
+    "Order": {
+      "description": "https://lua-api.factorio.com/stable/types/Order.html",
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "LocalisedString": {
+      "description": "https://lua-api.factorio.com/stable/types/LocalisedString.html",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "item": {
+            "$ref": "#/definitions/LocalisedString"
+          }
+        }
+      ]
+    },
+    "SimulationDefinition": {
+      "description": "https://lua-api.factorio.com/stable/types/SimulationDefinition.html",
+      "type": "object",
+      "properties": {
+        "planet": {
+          "$ref": "#/definitions/SpaceLocationID"
+        },
+        "game_view_settings": {
+          "$ref": "#/definitions/GameViewSettings"
+        },
+        "save": {
+          "$ref": "#/definitions/FileName"
+        },
+        "init_file": {
+          "$ref": "#/definitions/FileName"
+        },
+        "init": {
+          "type": "string"
+        },
+        "update_file": {
+          "$ref": "#/definitions/FileName"
+        },
+        "update": {
+          "type": "string"
+        },
+        "mods": {
+          "type": "string"
+        },
+        "init_update_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "length": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "generate_map": {
+          "type": "boolean"
+        },
+        "checkboard": {
+          "type": "boolean"
+        },
+        "hide_health_bars": {
+          "type": "boolean"
+        },
+        "mute_technology_finished_sound": {
+          "type": "boolean"
+        },
+        "mute_alert_sounds": {
+          "type": "boolean"
+        },
+        "volume_modifier": {
+          "type": "number"
+        },
+        "override_volume": {
+          "type": "boolean"
+        },
+        "mute_wind_sounds": {
+          "type": "boolean"
+        },
+        "hide_factoriopedia_gradient": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SpaceLocationID": {
+      "description": "https://lua-api.factorio.com/stable/types/SpaceLocationID.html",
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "GameViewSettings": {
+      "description": "https://lua-api.factorio.com/stable/types/GameViewSettings.html",
+      "type": "object",
+      "properties": {
+        "default_show_value": {
+          "type": "boolean"
+        },
+        "show_controller_gui": {
+          "type": "boolean"
+        },
+        "show_minimap": {
+          "type": "boolean"
+        },
+        "show_research_info": {
+          "type": "boolean"
+        },
+        "show_entity_info": {
+          "type": "boolean"
+        },
+        "show_alert_gui": {
+          "type": "boolean"
+        },
+        "update_entity_selection": {
+          "type": "boolean"
+        },
+        "show_rail_block_visualisation": {
+          "type": "boolean"
+        },
+        "show_side_menu": {
+          "type": "boolean"
+        },
+        "show_map_view_options": {
+          "type": "boolean"
+        },
+        "show_entity_tooltip": {
+          "type": "boolean"
+        },
+        "show_quickbar": {
+          "type": "boolean"
+        },
+        "show_shortcut_bar": {
+          "type": "boolean"
+        },
+        "show_crafting_queue": {
+          "type": "boolean"
+        },
+        "show_tool_bar": {
+          "type": "boolean"
+        },
+        "show_hotkey_suggestions": {
+          "type": "boolean"
+        },
+        "show_surface_list": {
+          "type": "boolean"
+        }
+      }
+    },
+    "FileName": {
+      "description": "https://lua-api.factorio.com/stable/types/FileName.html",
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "ItemSubGroupID": {
+      "description": "https://lua-api.factorio.com/stable/types/ItemSubGroupID.html",
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
     "ItemID": {
       "description": "https://lua-api.factorio.com/stable/types/ItemID.html",
       "anyOf": [
@@ -379,6 +549,33 @@
         },
         "name": {
           "type": "string"
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "localised_name": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "localised_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "factoriopedia_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "subgroup": {
+          "$ref": "#/definitions/ItemSubGroupID"
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "hidden_in_factoriopedia": {
+          "type": "boolean"
+        },
+        "parameter": {
+          "type": "boolean"
+        },
+        "factoriopedia_simulation": {
+          "$ref": "#/definitions/SimulationDefinition"
         }
       },
       "required": ["type", "name"]
@@ -388,6 +585,14 @@
       "allOf": [
         {
           "$ref": "#/definitions/PrototypeBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "factoriopedia_alternative": {
+              "type": "string"
+            }
+          }
         }
       ]
     },

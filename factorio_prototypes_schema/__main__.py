@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import Any, Iterable
 import abc
 import json
@@ -145,60 +146,7 @@ def main(factorio_location: str) -> None:
             "upgrade-item": "ItemPrototype",
         },
         types=list(extract_all_types(factorio_location)),
-        prototypes=[
-            FactorioSchema.StructTypeDefinition(
-                "PrototypeBase",
-                properties=[
-                    FactorioSchema.Property(name="type", type={"type": "string"}, required=True),
-                    FactorioSchema.Property(name="name", type={"type": "string"}, required=True),
-                ],
-            ),
-            FactorioSchema.StructTypeDefinition("Prototype", base="PrototypeBase", properties=[]),
-            FactorioSchema.StructTypeDefinition("ItemPrototype", base="Prototype", properties=[]),
-            FactorioSchema.StructTypeDefinition(
-                "RecipePrototype",
-                base="Prototype",
-                properties=[
-                    FactorioSchema.Property(
-                        name="ingredients",
-                        type={
-                            "oneOf": [
-                                {"type": "array", "items": {"$ref": "#/definitions/IngredientPrototype"}},
-                                {"type": "object", "additionalProperties": False},
-                            ]
-                        },
-                    ),
-                    FactorioSchema.Property(
-                        name="results",
-                        type={
-                            "oneOf": [
-                                {"type": "array", "items": {"$ref": "#/definitions/ProductPrototype"}},
-                                {"type": "object", "additionalProperties": False},
-                            ]
-                        },
-                    ),
-                    FactorioSchema.Property(name="category", type={"type": "string"}),
-                ],
-            ),
-            FactorioSchema.StructTypeDefinition(
-                "CraftingMachinePrototype",
-                base="Prototype",
-                properties=[
-                    FactorioSchema.Property(
-                        name="crafting_categories", type={"type": "array", "items": {"type": "string"}}
-                    )
-                ],
-            ),
-            FactorioSchema.StructTypeDefinition(
-                "CharacterPrototype",
-                base="Prototype",
-                properties=[
-                    FactorioSchema.Property(
-                        name="crafting_categories", type={"type": "array", "items": {"type": "string"}}
-                    )
-                ],
-            ),
-        ],
+        prototypes=list(extract_all_prototypes(factorio_location)),
     ).to_json_value()
 
     # Ad-hoc patches because the doc doesn't match the actual data
@@ -209,11 +157,24 @@ def main(factorio_location: str) -> None:
     )
     schema["definitions"]["ItemProductPrototype"]["properties"]["amount"] = {"type": "number"}
 
+    # Ad-hoc patches because our extraction tool is weak
+    # LocalisedString is a union of string and list[LocalisedString]
+    schema["definitions"]["LocalisedString"]["anyOf"].append(
+        {"type": "array", "item": {"$ref": "#/definitions/LocalisedString"}}
+    )
+
     json.dump(schema, sys.stdout, indent=2)
 
 
 def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDefinition]:
     for type_name in [
+        "Order",
+        "LocalisedString",
+        "SimulationDefinition",
+        "SpaceLocationID",
+        "GameViewSettings",
+        "FileName",
+        "ItemSubGroupID",
         "ItemID",
         "FluidID",
         "FluidAmount",
@@ -272,6 +233,91 @@ def extract_type(factorio_location: str, type_name: str) -> FactorioSchema.TypeD
         return FactorioSchema.UnionTypeDefinition(
             name=type_name, types=[FactorioSchema.simple_types_mapping[kind_link_soup.text]]
         )
+
+
+def extract_all_prototypes(factorio_location: str) -> Iterable[FactorioSchema.TypeDefinition]:
+    yield extract_prototype(factorio_location, "PrototypeBase")
+    yield extract_prototype(factorio_location, "Prototype")
+    yield FactorioSchema.StructTypeDefinition("ItemPrototype", base="Prototype", properties=[])
+    yield FactorioSchema.StructTypeDefinition(
+        "RecipePrototype",
+        base="Prototype",
+        properties=[
+            FactorioSchema.Property(
+                name="ingredients",
+                type={
+                    "oneOf": [
+                        {"type": "array", "items": {"$ref": "#/definitions/IngredientPrototype"}},
+                        {"type": "object", "additionalProperties": False},
+                    ]
+                },
+            ),
+            FactorioSchema.Property(
+                name="results",
+                type={
+                    "oneOf": [
+                        {"type": "array", "items": {"$ref": "#/definitions/ProductPrototype"}},
+                        {"type": "object", "additionalProperties": False},
+                    ]
+                },
+            ),
+            FactorioSchema.Property(name="category", type={"type": "string"}),
+        ],
+    )
+    yield FactorioSchema.StructTypeDefinition(
+        "CraftingMachinePrototype",
+        base="Prototype",
+        properties=[
+            FactorioSchema.Property(name="crafting_categories", type={"type": "array", "items": {"type": "string"}})
+        ],
+    )
+    yield FactorioSchema.StructTypeDefinition(
+        "CharacterPrototype",
+        base="Prototype",
+        properties=[
+            FactorioSchema.Property(name="crafting_categories", type={"type": "array", "items": {"type": "string"}})
+        ],
+    )
+
+
+def extract_prototype(factorio_location: str, prototype_name: str) -> FactorioSchema.TypeDefinition:
+    soup = read_file(factorio_location, "prototypes", prototype_name)
+
+    def extract_base() -> str | None:
+        base_soup = soup.find(string=re.compile(r"Inherits from"))
+        if base_soup is not None:
+            base_link_soup = tag(base_soup.parent).find("a")
+            assert base_link_soup is not None
+            base = base_link_soup.text
+            assert isinstance(base, str)
+            return base
+
+        return None
+
+    def extract_properties() -> Iterable[FactorioSchema.Property]:
+        for h3_soup in (tag(el) for el in tag(soup.find("div", id="attributes-body-main")).find_all("h3")):
+            property_name = tag(h3_soup.contents[0]).contents[0].text.strip()
+            type_soup = tag(tag(tag(h3_soup.contents[0]).contents[1]).contents[1])
+
+            if type_soup.name == "a":
+                property_type = FactorioSchema.simple_types_mapping.get(type_soup.text.strip())
+                if property_type is None:
+                    property_type = {"$ref": f"#/definitions/{type_soup.text}"}
+            elif type_soup.name == "code":
+                property_type = {"type": "string", "const": type_soup.text.strip().strip('"')}
+            else:
+                property_type = None
+
+            optional = h3_soup.contents[1].text.strip() == "optional"
+
+            if property_type is None:
+                debug(property_name, type_soup)
+            else:
+                yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
+
+    return FactorioSchema.StructTypeDefinition(
+        prototype_name, base=extract_base(), properties=list(extract_properties())
+    )
 
 
 def tag(tag: bs4.element.PageElement | None) -> bs4.element.Tag:

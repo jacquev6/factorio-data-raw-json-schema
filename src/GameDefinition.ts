@@ -77,9 +77,8 @@ export async function load(file: Blob): Promise<GameDefinition> {
 
   const dataRaw: FactorioDataRaw = JSON.parse(await readEntry('data-raw-dump.json'))
   const validationErrors = validate(dataRaw, dataRawSchema).errors
-  if (validationErrors.length > 0) {
-    console.error(validationErrors.splice(0, 5))
-    throw new Error('Factorio data-raw dump does not match the expected schema')
+  for (const error of validationErrors) {
+    console.error(error)
   }
 
   const images: string[] = []
