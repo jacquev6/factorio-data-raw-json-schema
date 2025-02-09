@@ -119,11 +119,17 @@ class FactorioSchema:
 @click.command()
 @click.argument("factorio_location")
 @click.option("--load-types")
-def main(factorio_location: str, load_types: str | None) -> None:
+@click.option("--load-prototypes")
+def main(factorio_location: str, load_types: str | None, load_prototypes: str | None) -> None:
     if load_types is None:
         types = list(extract_all_types(factorio_location))
     else:
         types = list(load_all_types(factorio_location, load_types))
+
+    if load_prototypes is None:
+        prototypes = list(extract_all_prototypes(factorio_location, {type.name for type in types}))
+    else:
+        prototypes = list(load_all_prototypes(factorio_location, load_prototypes))
 
     schema: Any = FactorioSchema(
         properties={
@@ -153,7 +159,7 @@ def main(factorio_location: str, load_types: str | None) -> None:
             "upgrade-item": "ItemPrototype",
         },
         types=types,
-        prototypes=list(extract_all_prototypes(factorio_location)),
+        prototypes=prototypes,
     ).to_json_value()
 
     if load_types is None:
