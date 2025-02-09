@@ -6589,6 +6589,10 @@
       "anyOf": [
         {
           "$ref": "#/definitions/uint16"
+        },
+        {
+          "type": "string",
+          "const": "dynamic"
         }
       ]
     },
@@ -12365,7 +12369,7 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "required": ["filename"]
+      "required": []
     },
     "SpriteUsageHint": {
       "description": "https://lua-api.factorio.com/stable/types/SpriteUsageHint.html",
