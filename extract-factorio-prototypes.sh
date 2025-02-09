@@ -61,7 +61,7 @@ mv src/factorio_prototypes_schema.tmp.json src/factorio_prototypes_schema.json
 
 # Generate Typescript types from the JSON schema
 # https://www.npmjs.com/package/json-schema-to-typescript
-npx json2ts --no-format --no-additionalProperties src/factorio_prototypes_schema.json src/factorio_prototypes_schema.tmp.ts
+npx json2ts --no-format --unreachableDefinitions --no-additionalProperties src/factorio_prototypes_schema.json src/factorio_prototypes_schema.tmp.ts
 
 # Recursive type aliases seem unsupported by json2ts
 sed -i 's/export type LocalisedString = (string | unknown\[\])/export type LocalisedString = (string | LocalisedStringArray)\ntype LocalisedStringArray = LocalisedString[]/' src/factorio_prototypes_schema.tmp.ts
