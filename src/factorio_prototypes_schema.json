@@ -153,7 +153,10 @@
       "description": "https://lua-api.factorio.com/stable/types/ActivateEquipmentCapsuleAction.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "equipment-remote"
+        },
         "equipment": {
           "$ref": "#/definitions/EquipmentID"
         }
@@ -169,7 +172,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "activate-impact"
+            },
             "deliver_category": {
               "$ref": "#/definitions/string"
             }
@@ -187,7 +193,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "activate-paste"
+            }
           },
           "required": ["type"]
         }
@@ -210,7 +219,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "activity_bar_style"
+            },
             "speed": {
               "$ref": "#/definitions/float"
             },
@@ -289,7 +301,26 @@
         "count_already_playing": {
           "$ref": "#/definitions/bool"
         },
-        "priority": {}
+        "priority": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "closest"
+            },
+            {
+              "type": "string",
+              "const": "farthest"
+            },
+            {
+              "type": "string",
+              "const": "newest"
+            },
+            {
+              "type": "string",
+              "const": "oldest"
+            }
+          ]
+        }
       },
       "required": ["max_count", "remove"]
     },
@@ -395,7 +426,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "alternative-build"
+            }
           },
           "required": ["type"]
         }
@@ -439,7 +473,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "ammo-damage"
+            },
             "infer_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -500,7 +537,22 @@
         "consumption_modifier": {
           "$ref": "#/definitions/float"
         },
-        "target_type": {},
+        "target_type": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "entity"
+            },
+            {
+              "type": "string",
+              "const": "position"
+            },
+            {
+              "type": "string",
+              "const": "direction"
+            }
+          ]
+        },
         "source_type": {
           "$ref": "#/definitions/AmmoSourceType"
         },
@@ -524,7 +576,10 @@
       "description": "https://lua-api.factorio.com/stable/types/AndTipTrigger.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "and"
+        },
         "triggers": {
           "oneOf": [
             {
@@ -751,7 +806,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "apply-starter-pack"
+            }
           },
           "required": ["type"]
         }
@@ -766,7 +824,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "area"
+            },
             "radius": {
               "$ref": "#/definitions/double"
             },
@@ -782,7 +843,18 @@
             "show_in_tooltip": {
               "$ref": "#/definitions/bool"
             },
-            "collision_mode": {}
+            "collision_mode": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "distance-from-collision-box"
+                },
+                {
+                  "type": "string",
+                  "const": "distance-from-center"
+                }
+              ]
+            }
           },
           "required": ["type", "radius"]
         }
@@ -797,7 +869,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "artillery-range"
+            },
             "infer_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -813,7 +888,10 @@
       "description": "https://lua-api.factorio.com/stable/types/ArtilleryRemoteCapsuleAction.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "artillery-remote"
+        },
         "flare": {
           "$ref": "#/definitions/EntityID"
         },
@@ -832,7 +910,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "artillery"
+            },
             "projectile": {
               "$ref": "#/definitions/EntityID"
             },
@@ -1133,7 +1214,26 @@
         "ammo_type": {
           "$ref": "#/definitions/AmmoType"
         },
-        "activation_type": {},
+        "activation_type": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "shoot"
+            },
+            {
+              "type": "string",
+              "const": "throw"
+            },
+            {
+              "type": "string",
+              "const": "consume"
+            },
+            {
+              "type": "string",
+              "const": "activate"
+            }
+          ]
+        },
         "sound": {
           "$ref": "#/definitions/LayeredSound"
         },
@@ -1313,7 +1413,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "beacon-distribution"
+            },
             "infer_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -1396,7 +1499,18 @@
             }
           ]
         },
-        "module_tint_mode": {}
+        "module_tint_mode": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "single-module"
+            },
+            {
+              "type": "string",
+              "const": "mix"
+            }
+          ]
+        }
       }
     },
     "BeaconModuleVisualization": {
@@ -1470,7 +1584,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "beam"
+            },
             "source_direction_count": {
               "$ref": "#/definitions/uint32"
             },
@@ -1515,7 +1632,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "beam"
+            },
             "beam": {
               "$ref": "#/definitions/EntityID"
             },
@@ -1561,7 +1681,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "belt-stack-size-bonus"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -1579,7 +1702,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "belt-traverse"
+            }
           },
           "required": ["type"]
         }
@@ -1741,7 +1867,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "build-entity-by-robot"
+            }
           },
           "required": ["type"]
         }
@@ -1751,7 +1880,10 @@
       "description": "https://lua-api.factorio.com/stable/types/BuildEntityTechnologyTrigger.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "build-entity"
+        },
         "entity": {
           "$ref": "#/definitions/EntityIDFilter"
         }
@@ -1767,7 +1899,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "build-entity"
+            },
             "entity": {
               "$ref": "#/definitions/EntityID"
             },
@@ -1820,7 +1955,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "bulk-inserter-capacity-bonus"
+            },
             "infer_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -1841,7 +1979,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "burner"
+            },
             "fuel_inventory_size": {
               "$ref": "#/definitions/ItemStackIndex"
             },
@@ -1913,7 +2054,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "button_style"
+            },
             "font": {
               "$ref": "#/definitions/string"
             },
@@ -1976,7 +2120,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "camera-effect"
+            },
             "duration": {
               "$ref": "#/definitions/uint8"
             },
@@ -2035,7 +2182,10 @@
       "description": "https://lua-api.factorio.com/stable/types/CaptureSpawnerTechnologyTrigger.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "capture-spawner"
+        },
         "entity": {
           "$ref": "#/definitions/EntityID"
         }
@@ -2188,7 +2338,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "cargo-landing-pad-count"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -2243,7 +2396,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "chain"
+            },
             "chain": {
               "$ref": "#/definitions/ActiveTriggerID"
             }
@@ -2261,7 +2417,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "change-recipe-productivity"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             },
@@ -2285,7 +2444,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "change-surface"
+            },
             "surface": {
               "$ref": "#/definitions/string"
             }
@@ -2394,7 +2556,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "character-build-distance"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -2412,7 +2577,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "character-crafting-speed"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -2430,7 +2598,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "character-health-bonus"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -2448,7 +2619,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "character-inventory-slots-bonus"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -2466,7 +2640,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "character-item-drop-distance"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -2484,7 +2661,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "character-item-pickup-distance"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -2502,7 +2682,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "character-logistic-requests"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -2520,7 +2703,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "character-logistic-trash-slots"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -2538,7 +2724,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "character-loot-pickup-distance"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -2556,7 +2745,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "character-mining-speed"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -2574,7 +2766,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "character-reach-distance"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -2592,7 +2787,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "character-resource-reach-distance"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -2610,7 +2808,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "character-running-speed"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -2853,7 +3054,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "checkbox_style"
+            },
             "font": {
               "$ref": "#/definitions/string"
             },
@@ -2977,7 +3181,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "unlock-circuit-network"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -3050,7 +3257,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "clear-cursor"
+            }
           },
           "required": ["type"]
         }
@@ -3065,7 +3275,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "cliff-deconstruction-enabled"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -3236,7 +3449,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "cluster"
+            },
             "cluster_count": {
               "$ref": "#/definitions/uint32"
             },
@@ -3497,7 +3713,10 @@
       "description": "https://lua-api.factorio.com/stable/types/CoverGraphicProcessionLayer.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "cover-graphic"
+        },
         "reference_group": {
           "$ref": "#/definitions/ProcessionLayerInheritanceGroupID"
         },
@@ -3554,7 +3773,10 @@
       "description": "https://lua-api.factorio.com/stable/types/CraftFluidTechnologyTrigger.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "craft-fluid"
+        },
         "fluid": {
           "$ref": "#/definitions/FluidID"
         },
@@ -3568,7 +3790,10 @@
       "description": "https://lua-api.factorio.com/stable/types/CraftItemTechnologyTrigger.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "craft-item"
+        },
         "item": {
           "$ref": "#/definitions/ItemIDFilter"
         },
@@ -3587,7 +3812,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "craft-item"
+            },
             "item": {
               "$ref": "#/definitions/ItemID"
             },
@@ -3751,7 +3979,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "create-asteroid-chunk"
+            },
             "asteroid_name": {
               "$ref": "#/definitions/AsteroidChunkID"
             },
@@ -3786,7 +4017,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "create-decorative"
+            },
             "decorative": {
               "$ref": "#/definitions/DecorativeID"
             },
@@ -3825,7 +4059,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "create-entity"
+            },
             "entity_name": {
               "$ref": "#/definitions/EntityID"
             },
@@ -3931,7 +4168,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "create-ghost-on-entity-death"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -3949,7 +4189,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "create-particle"
+            },
             "particle_name": {
               "$ref": "#/definitions/ParticleID"
             },
@@ -4015,7 +4258,18 @@
             "only_when_visible": {
               "$ref": "#/definitions/bool"
             },
-            "apply_tile_tint": {},
+            "apply_tile_tint": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "primary"
+                },
+                {
+                  "type": "string",
+                  "const": "secondary"
+                }
+              ]
+            },
             "tint": {
               "$ref": "#/definitions/Color"
             }
@@ -4065,7 +4319,10 @@
       "description": "https://lua-api.factorio.com/stable/types/CreateSpacePlatformTechnologyTrigger.html",
       "type": "object",
       "properties": {
-        "type": {}
+        "type": {
+          "type": "string",
+          "const": "create-space-platform"
+        }
       },
       "required": ["type"]
     },
@@ -4078,7 +4335,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "create-sticker"
+            },
             "sticker": {
               "$ref": "#/definitions/EntityID"
             },
@@ -4099,7 +4359,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "create-trivial-smoke"
+            },
             "smoke_name": {
               "$ref": "#/definitions/TrivialSmokeID"
             },
@@ -4238,7 +4501,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "damage"
+            },
             "damage": {
               "$ref": "#/definitions/DamageParameters"
             },
@@ -4259,7 +4525,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "damage"
+            },
             "damage": {
               "$ref": "#/definitions/DamageParameters"
             },
@@ -4318,7 +4587,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "deconstruction-time-to-live"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -4344,7 +4616,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "delayed"
+            },
             "delayed_trigger": {
               "$ref": "#/definitions/ActiveTriggerID"
             }
@@ -4357,7 +4632,10 @@
       "description": "https://lua-api.factorio.com/stable/types/DependenciesMetTipTrigger.html",
       "type": "object",
       "properties": {
-        "type": {}
+        "type": {
+          "type": "string",
+          "const": "dependencies-met"
+        }
       },
       "required": ["type"]
     },
@@ -4365,7 +4643,10 @@
       "description": "https://lua-api.factorio.com/stable/types/DestroyCliffsCapsuleAction.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "destroy-cliffs"
+        },
         "attack_parameters": {
           "$ref": "#/definitions/AttackParameters"
         },
@@ -4393,7 +4674,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "destroy-cliffs"
+            },
             "radius": {
               "$ref": "#/definitions/float"
             },
@@ -4417,7 +4701,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "destroy-decoratives"
+            },
             "radius": {
               "$ref": "#/definitions/float"
             },
@@ -4465,7 +4752,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "direct"
+            },
             "filter_enabled": {
               "$ref": "#/definitions/bool"
             }
@@ -4629,7 +4919,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "dropdown_style"
+            },
             "button_style": {
               "$ref": "#/definitions/ButtonStyleSpecification"
             },
@@ -4659,7 +4952,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "drop-item"
+            },
             "drop_into_entity": {
               "$ref": "#/definitions/bool"
             }
@@ -4773,7 +5069,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "electric"
+            },
             "buffer_capacity": {
               "$ref": "#/definitions/Energy"
             },
@@ -4842,7 +5141,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "empty_widget_style"
+            },
             "graphical_set": {
               "$ref": "#/definitions/ElementImageSet"
             }
@@ -5004,7 +5306,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "enter-vehicle"
+            },
             "vehicle": {
               "$ref": "#/definitions/EntityID"
             },
@@ -5325,8 +5630,22 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
-            "transfer": {}
+            "type": {
+              "type": "string",
+              "const": "entity-transfer"
+            },
+            "transfer": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "in"
+                },
+                {
+                  "type": "string",
+                  "const": "out"
+                }
+              ]
+            }
           },
           "required": ["type"]
         }
@@ -5366,7 +5685,18 @@
         "height": {
           "$ref": "#/definitions/uint32"
         },
-        "type": {},
+        "type": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "full"
+            },
+            {
+              "type": "string",
+              "const": "manual"
+            }
+          ]
+        },
         "points": {}
       },
       "required": ["width", "height", "type"]
@@ -5398,7 +5728,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "fast-belt-bend"
+            }
           },
           "required": ["type"]
         }
@@ -5413,7 +5746,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "fast-replace"
+            },
             "source": {
               "$ref": "#/definitions/EntityID"
             },
@@ -5481,7 +5817,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "flip-entity"
+            }
           },
           "required": ["type"]
         }
@@ -5496,7 +5835,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "flow_style"
+            },
             "max_on_row": {
               "$ref": "#/definitions/int32"
             },
@@ -5621,7 +5963,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "fluid"
+            },
             "fluid_box": {
               "$ref": "#/definitions/FluidBox"
             },
@@ -5677,7 +6022,10 @@
       "description": "https://lua-api.factorio.com/stable/types/FluidIngredientPrototype.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "fluid"
+        },
         "name": {
           "$ref": "#/definitions/FluidID"
         },
@@ -5709,7 +6057,10 @@
       "description": "https://lua-api.factorio.com/stable/types/FluidProductPrototype.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "fluid"
+        },
         "name": {
           "$ref": "#/definitions/FluidID"
         },
@@ -5747,7 +6098,18 @@
       "description": "https://lua-api.factorio.com/stable/types/FogEffectProperties.html",
       "type": "object",
       "properties": {
-        "fog_type": {},
+        "fog_type": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "vulcanus"
+            },
+            {
+              "type": "string",
+              "const": "gleba"
+            }
+          ]
+        },
         "shape_noise_texture": {
           "$ref": "#/definitions/EffectTexture"
         },
@@ -5788,7 +6150,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "follower-robot-lifetime"
+            },
             "infer_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -5917,7 +6282,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "frame_style"
+            },
             "graphical_set": {
               "$ref": "#/definitions/ElementImageSet"
             },
@@ -6199,7 +6567,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "gate-over-rail-build"
+            }
           },
           "required": ["type"]
         }
@@ -6214,7 +6585,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "generating-power"
+            }
           },
           "required": ["type"]
         }
@@ -6402,7 +6776,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "give-item"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             },
@@ -6491,7 +6868,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "glow_style"
+            },
             "image_set": {
               "$ref": "#/definitions/ElementImageSet"
             }
@@ -6509,7 +6889,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "graph_style"
+            },
             "background_color": {
               "$ref": "#/definitions/Color"
             },
@@ -6580,7 +6963,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "group-attack"
+            }
           },
           "required": ["type"]
         }
@@ -6595,7 +6981,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "gun-speed"
+            },
             "infer_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -6689,7 +7078,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "heat"
+            },
             "max_temperature": {
               "$ref": "#/definitions/double"
             },
@@ -6768,7 +7160,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "horizontal_flow_style"
+            },
             "horizontal_spacing": {
               "$ref": "#/definitions/int32"
             }
@@ -6786,7 +7181,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "horizontal_scrollbar_style"
+            }
           },
           "required": ["type"]
         }
@@ -6830,7 +7228,22 @@
         "scale_for_many": {
           "$ref": "#/definitions/float"
         },
-        "renderLayer": {}
+        "renderLayer": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "entity-info-icon-below"
+            },
+            {
+              "type": "string",
+              "const": "entity-info-icon-above"
+            },
+            {
+              "type": "string",
+              "const": "air-entity-info-icon"
+            }
+          ]
+        }
       }
     },
     "IconSequencePositioning": {
@@ -6868,7 +7281,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "image_style"
+            },
             "graphical_set": {
               "$ref": "#/definitions/ElementImageSet"
             },
@@ -6903,7 +7319,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "insert-item"
+            },
             "item": {
               "$ref": "#/definitions/ItemID"
             },
@@ -6927,7 +7346,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "inserter-stack-size-bonus"
+            },
             "infer_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -6948,7 +7370,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "instant"
+            }
           },
           "required": ["type"]
         }
@@ -6984,7 +7409,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "invoke-tile-trigger"
+            },
             "tile_collision_mask": {
               "$ref": "#/definitions/CollisionMaskConnector"
             }
@@ -7024,7 +7452,10 @@
       "description": "https://lua-api.factorio.com/stable/types/ItemIngredientPrototype.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "item"
+        },
         "name": {
           "$ref": "#/definitions/ItemID"
         },
@@ -7041,7 +7472,10 @@
       "description": "https://lua-api.factorio.com/stable/types/ItemProductPrototype.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "item"
+        },
         "name": {
           "$ref": "#/definitions/ItemID"
         },
@@ -7120,7 +7554,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "kill"
+            },
             "entity": {
               "$ref": "#/definitions/EntityID"
             },
@@ -7144,7 +7581,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "label_style"
+            },
             "font": {
               "$ref": "#/definitions/string"
             },
@@ -7198,7 +7638,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "laboratory-productivity"
+            },
             "infer_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -7219,7 +7662,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "laboratory-speed"
+            },
             "infer_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -7448,7 +7894,26 @@
       "description": "https://lua-api.factorio.com/stable/types/LightningRuleBase.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "impact-soundset"
+            },
+            {
+              "type": "string",
+              "const": "prototype"
+            },
+            {
+              "type": "string",
+              "const": "id"
+            },
+            {
+              "type": "string",
+              "const": "countAsRockForFilteredDeconstruction"
+            }
+          ]
+        },
         "string": {
           "$ref": "#/definitions/string"
         }
@@ -7464,7 +7929,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "limit-chest"
+            }
           },
           "required": ["type"]
         }
@@ -7479,7 +7947,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "line_style"
+            },
             "border": {
               "$ref": "#/definitions/BorderImageSet"
             }
@@ -7497,7 +7968,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "line"
+            },
             "range": {
               "$ref": "#/definitions/double"
             },
@@ -8270,7 +8744,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "list_box_style"
+            },
             "item_style": {
               "$ref": "#/definitions/ButtonStyleSpecification"
             },
@@ -8345,7 +8822,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "low-power"
+            }
           },
           "required": ["type"]
         }
@@ -8413,7 +8893,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "manual-transfer"
+            }
           },
           "required": ["type"]
         }
@@ -8428,7 +8911,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "manual-wire-drag"
+            },
             "source": {
               "$ref": "#/definitions/EntityID"
             },
@@ -8438,7 +8924,22 @@
             "match_type_only": {
               "$ref": "#/definitions/bool"
             },
-            "wire_type": {}
+            "wire_type": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "red"
+                },
+                {
+                  "type": "string",
+                  "const": "green"
+                },
+                {
+                  "type": "string",
+                  "const": "copper"
+                }
+              ]
+            }
           },
           "required": ["type"]
         }
@@ -8731,7 +9232,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "max-failed-attempts-per-tick-per-construction-queue"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -8749,7 +9253,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "max-successful-attempts-per-tick-per-construction-queue"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -8767,7 +9274,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "maximum-following-robots-count"
+            },
             "infer_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -8828,7 +9338,10 @@
       "description": "https://lua-api.factorio.com/stable/types/MineEntityTechnologyTrigger.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "mine-entity"
+        },
         "entity": {
           "$ref": "#/definitions/EntityID"
         }
@@ -8844,7 +9357,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "mine-item-by-robot"
+            }
           },
           "required": ["type"]
         }
@@ -8894,7 +9410,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "mining-drill-productivity-bonus"
+            },
             "infer_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -8915,7 +9434,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "mining-with-fluid"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -9147,7 +9669,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "module-transfer"
+            },
             "module": {
               "$ref": "#/definitions/ItemID"
             }
@@ -9233,7 +9758,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "nested-result"
+            },
             "action": {
               "$ref": "#/definitions/Trigger"
             }
@@ -9280,7 +9808,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "nothing"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             },
@@ -9323,7 +9854,10 @@
       "description": "https://lua-api.factorio.com/stable/types/OrTipTrigger.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "or"
+        },
         "triggers": {
           "oneOf": [
             {
@@ -9385,7 +9919,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "paste-entity-settings"
+            },
             "source": {
               "$ref": "#/definitions/EntityID"
             },
@@ -9611,7 +10148,22 @@
       "description": "https://lua-api.factorio.com/stable/types/PipeConnectionDefinition.html",
       "type": "object",
       "properties": {
-        "flow_direction": {},
+        "flow_direction": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "input-output"
+            },
+            {
+              "type": "string",
+              "const": "input"
+            },
+            {
+              "type": "string",
+              "const": "output"
+            }
+          ]
+        },
         "connection_type": {},
         "enable_working_visualisations": {
           "oneOf": [
@@ -9901,7 +10453,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "place-equipment"
+            },
             "equipment": {
               "$ref": "#/definitions/EquipmentID"
             }
@@ -9914,7 +10469,10 @@
       "description": "https://lua-api.factorio.com/stable/types/PlanTrainPathTipTrigger.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "plan-train-path"
+        },
         "distance": {
           "$ref": "#/definitions/double"
         }
@@ -9951,7 +10509,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "play-sound"
+            },
             "sound": {
               "$ref": "#/definitions/Sound"
             },
@@ -10031,7 +10592,10 @@
       "description": "https://lua-api.factorio.com/stable/types/PodAnimationProcessionLayer.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "pod-animation"
+        },
         "graphic": {
           "$ref": "#/definitions/ProcessionGraphic"
         },
@@ -10043,7 +10607,10 @@
       "description": "https://lua-api.factorio.com/stable/types/PodDistanceTraveledProcessionLayer.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "pod-distance-traveled"
+        },
         "reference_group": {
           "$ref": "#/definitions/ProcessionLayerInheritanceGroupID"
         },
@@ -10061,7 +10628,10 @@
       "description": "https://lua-api.factorio.com/stable/types/PodMovementProcessionLayer.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "pod-movement"
+        },
         "reference_group": {
           "$ref": "#/definitions/ProcessionLayerInheritanceGroupID"
         },
@@ -10082,7 +10652,10 @@
       "description": "https://lua-api.factorio.com/stable/types/PodOpacityProcessionLayer.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "pod-opacity"
+        },
         "lut": {
           "$ref": "#/definitions/ColorLookupTable"
         },
@@ -10518,7 +11091,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "progressbar_style"
+            },
             "bar_width": {
               "$ref": "#/definitions/uint32"
             },
@@ -10561,7 +11137,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "projectile"
+            },
             "apply_projection_to_projectile_creation_position": {
               "$ref": "#/definitions/bool"
             },
@@ -10608,7 +11187,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "projectile"
+            },
             "projectile": {
               "$ref": "#/definitions/EntityID"
             },
@@ -10774,7 +11356,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "push-back"
+            },
             "distance": {
               "$ref": "#/definitions/float"
             }
@@ -10800,7 +11385,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "radiobutton_style"
+            },
             "font": {
               "$ref": "#/definitions/string"
             },
@@ -11019,7 +11607,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "rail-planner-allow-elevated-rails"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -11236,7 +11827,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "rail-support-on-deep-oil-ocean"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -11611,7 +12205,10 @@
       "description": "https://lua-api.factorio.com/stable/types/ResearchProgressProductPrototype.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "research-progress"
+        },
         "amount": {
           "$ref": "#/definitions/double"
         },
@@ -11625,7 +12222,10 @@
       "description": "https://lua-api.factorio.com/stable/types/ResearchTechnologyTipTrigger.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "research"
+        },
         "technology": {
           "$ref": "#/definitions/TechnologyID"
         }
@@ -11636,7 +12236,10 @@
       "description": "https://lua-api.factorio.com/stable/types/ResearchWithSciencePackTipTrigger.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "research-with-science-pack"
+        },
         "science_pack": {
           "$ref": "#/definitions/ItemID"
         }
@@ -11712,7 +12315,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "rotate-entity"
+            }
           },
           "required": ["type"]
         }
@@ -11924,7 +12530,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "script"
+            },
             "effect_id": {
               "$ref": "#/definitions/string"
             }
@@ -11961,7 +12570,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "scroll_pane_style"
+            },
             "vertical_flow_style": {
               "$ref": "#/definitions/VerticalFlowStyleSpecification"
             },
@@ -12122,8 +12734,30 @@
         "play_ended_sound_when_nothing_selected": {
           "$ref": "#/definitions/bool"
         },
-        "entity_filter_mode": {},
-        "tile_filter_mode": {}
+        "entity_filter_mode": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "whitelist"
+            },
+            {
+              "type": "string",
+              "const": "blacklist"
+            }
+          ]
+        },
+        "tile_filter_mode": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "whitelist"
+            },
+            {
+              "type": "string",
+              "const": "blacklist"
+            }
+          ]
+        }
       },
       "required": ["border_color", "cursor_box_type", "mode"]
     },
@@ -12137,7 +12771,10 @@
       "description": "https://lua-api.factorio.com/stable/types/SendItemToOrbitTechnologyTrigger.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "send-item-to-orbit"
+        },
         "item": {
           "$ref": "#/definitions/ItemIDFilter"
         }
@@ -12153,7 +12790,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "send-spidertron"
+            },
             "append": {
               "$ref": "#/definitions/bool"
             }
@@ -12183,7 +12823,10 @@
       "description": "https://lua-api.factorio.com/stable/types/SequenceTipTrigger.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "sequence"
+        },
         "triggers": {
           "oneOf": [
             {
@@ -12210,7 +12853,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "set-filter"
+            },
             "entity": {
               "$ref": "#/definitions/EntityID"
             },
@@ -12234,7 +12880,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "set-logistic-request"
+            },
             "logistic_chest_only": {
               "$ref": "#/definitions/bool"
             },
@@ -12255,7 +12904,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "set-recipe"
+            },
             "recipe": {
               "$ref": "#/definitions/RecipeID"
             },
@@ -12285,7 +12937,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "set-tile"
+            },
             "tile_name": {
               "$ref": "#/definitions/TileID"
             },
@@ -12386,8 +13041,22 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
-            "target": {}
+            "type": {
+              "type": "string",
+              "const": "shoot"
+            },
+            "target": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "enemy"
+                },
+                {
+                  "type": "string",
+                  "const": "entity"
+                }
+              ]
+            }
           },
           "required": ["type"]
         }
@@ -12402,7 +13071,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "show-explosion-on-chart"
+            },
             "scale": {
               "$ref": "#/definitions/float"
             }
@@ -12535,7 +13207,10 @@
       "description": "https://lua-api.factorio.com/stable/types/SingleGraphicProcessionLayer.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "single-graphic"
+        },
         "graphic": {
           "$ref": "#/definitions/ProcessionGraphic"
         },
@@ -12579,7 +13254,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "slider_style"
+            },
             "full_bar": {
               "$ref": "#/definitions/ElementImageSet"
             },
@@ -12861,7 +13539,18 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "entity"
+                },
+                {
+                  "type": "string",
+                  "const": "asteroid-chunk"
+                }
+              ]
+            },
             "asteroid": {}
           },
           "required": ["asteroid"]
@@ -12898,7 +13587,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "unlock-space-platforms"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -12983,7 +13675,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "speech_bubble_style"
+            },
             "frame_style": {
               "$ref": "#/definitions/FrameStyleSpecification"
             },
@@ -13608,7 +14303,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "stack-transfer"
+            },
             "transfer": {}
           },
           "required": ["type"]
@@ -13795,7 +14493,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "stream"
+            },
             "fluid_consumption": {
               "$ref": "#/definitions/FluidAmount"
             },
@@ -13821,7 +14522,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "stream"
+            },
             "stream": {
               "$ref": "#/definitions/EntityID"
             },
@@ -14085,7 +14789,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "switch_style"
+            },
             "left_button_position": {
               "$ref": "#/definitions/uint32"
             },
@@ -14127,7 +14834,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "tab_style"
+            },
             "font": {
               "$ref": "#/definitions/string"
             },
@@ -14199,7 +14909,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "tabbed_pane_style"
+            },
             "vertical_spacing": {
               "$ref": "#/definitions/uint32"
             },
@@ -14223,7 +14936,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "table_style"
+            },
             "horizontal_spacing": {},
             "vertical_spacing": {},
             "cell_padding": {
@@ -14541,7 +15257,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "textbox_style"
+            },
             "font": {
               "$ref": "#/definitions/string"
             },
@@ -14596,7 +15315,10 @@
       "description": "https://lua-api.factorio.com/stable/types/ThrowCapsuleAction.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "throw"
+        },
         "attack_parameters": {
           "$ref": "#/definitions/AttackParameters"
         },
@@ -15409,7 +16131,10 @@
       "description": "https://lua-api.factorio.com/stable/types/TimeElapsedTipTrigger.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "time-elapsed"
+        },
         "ticks": {
           "$ref": "#/definitions/uint32"
         }
@@ -15420,7 +16145,10 @@
       "description": "https://lua-api.factorio.com/stable/types/TimeSinceLastTipActivationTipTrigger.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "time-since-last-tip-activation"
+        },
         "ticks": {
           "$ref": "#/definitions/MapTick"
         }
@@ -15431,7 +16159,10 @@
       "description": "https://lua-api.factorio.com/stable/types/TintProcessionLayer.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "tint"
+        },
         "render_layer": {
           "$ref": "#/definitions/RenderLayer"
         },
@@ -15637,7 +16368,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "toggle-rail-layer"
+            }
           },
           "required": ["type"]
         }
@@ -15652,7 +16386,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "toggle-show-entity-info"
+            }
           },
           "required": ["type"]
         }
@@ -15667,7 +16404,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "train-braking-force-bonus"
+            },
             "infer_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -16193,7 +16933,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "turret-attack"
+            },
             "infer_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -16270,7 +17013,10 @@
       "description": "https://lua-api.factorio.com/stable/types/TurretSpecialEffect.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "mask-by-circle"
+        },
         "center": {
           "$ref": "#/definitions/TurretSpecialEffectCenter"
         },
@@ -16552,7 +17298,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "unlock-quality"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             },
@@ -16573,7 +17322,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "unlock-recipe"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             },
@@ -16589,7 +17341,10 @@
       "description": "https://lua-api.factorio.com/stable/types/UnlockRecipeTipTrigger.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "unlock-recipe"
+        },
         "recipe": {
           "$ref": "#/definitions/RecipeID"
         }
@@ -16605,7 +17360,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "unlock-space-location"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             },
@@ -16626,7 +17384,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "use-confirm"
+            }
           },
           "required": ["type"]
         }
@@ -16636,7 +17397,10 @@
       "description": "https://lua-api.factorio.com/stable/types/UseOnSelfCapsuleAction.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "use-on-self"
+        },
         "attack_parameters": {
           "$ref": "#/definitions/AttackParameters"
         },
@@ -16655,7 +17419,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "use-pipette"
+            }
           },
           "required": ["type"]
         }
@@ -16670,7 +17437,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "use-rail-planner"
+            },
             "build_mode": {
               "$ref": "#/definitions/BuildMode"
             }
@@ -16977,7 +17747,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "vehicle-logistics"
+            },
             "use_icon_overlay_constant": {
               "$ref": "#/definitions/bool"
             }
@@ -17012,7 +17785,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "vertical_flow_style"
+            },
             "vertical_spacing": {
               "$ref": "#/definitions/int32"
             }
@@ -17030,7 +17806,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "vertical_scrollbar_style"
+            }
           },
           "required": ["type"]
         }
@@ -17075,7 +17854,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {}
+            "type": {
+              "type": "string",
+              "const": "void"
+            }
           },
           "required": ["type"]
         }
@@ -17213,7 +17995,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "worker-robot-battery"
+            },
             "infer_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -17234,7 +18019,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "worker-robot-speed"
+            },
             "infer_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -17255,7 +18043,10 @@
         {
           "type": "object",
           "properties": {
-            "type": {},
+            "type": {
+              "type": "string",
+              "const": "worker-robot-storage"
+            },
             "infer_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -17304,9 +18095,74 @@
         "light": {
           "$ref": "#/definitions/LightDefinition"
         },
-        "effect": {},
-        "apply_recipe_tint": {},
-        "apply_tint": {},
+        "effect": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "flicker"
+            },
+            {
+              "type": "string",
+              "const": "uranium-glow"
+            },
+            {
+              "type": "string",
+              "const": "none"
+            }
+          ]
+        },
+        "apply_recipe_tint": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "primary"
+            },
+            {
+              "type": "string",
+              "const": "secondary"
+            },
+            {
+              "type": "string",
+              "const": "tertiary"
+            },
+            {
+              "type": "string",
+              "const": "quaternary"
+            },
+            {
+              "type": "string",
+              "const": "none"
+            }
+          ]
+        },
+        "apply_tint": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "resource-color"
+            },
+            {
+              "type": "string",
+              "const": "input-fluid-base-color"
+            },
+            {
+              "type": "string",
+              "const": "input-fluid-flow-color"
+            },
+            {
+              "type": "string",
+              "const": "status"
+            },
+            {
+              "type": "string",
+              "const": "none"
+            },
+            {
+              "type": "string",
+              "const": "visual-state-color"
+            }
+          ]
+        },
         "north_animation": {
           "$ref": "#/definitions/Animation"
         },
@@ -17602,7 +18458,18 @@
         {
           "type": "object",
           "properties": {
-            "objective_condition": {}
+            "objective_condition": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "game-finished"
+                },
+                {
+                  "type": "string",
+                  "const": "rocket-launched"
+                }
+              ]
+            }
           },
           "required": ["objective_condition"]
         }
@@ -17793,7 +18660,10 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/AmbientSound.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "ambient-sound"
+        },
         "name": {
           "$ref": "#/definitions/string"
         },
@@ -17909,7 +18779,10 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/AnimationPrototype.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "animation"
+        },
         "name": {
           "$ref": "#/definitions/string"
         },
@@ -18865,7 +19738,18 @@
                 }
               ]
             },
-            "beacon_counter": {}
+            "beacon_counter": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "total"
+                },
+                {
+                  "type": "string",
+                  "const": "same_type"
+                }
+              ]
+            }
           },
           "required": [
             "energy_usage",
@@ -20351,7 +21235,30 @@
             "item_to_spawn": {
               "$ref": "#/definitions/ItemID"
             },
-            "action": {},
+            "action": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "lua"
+                },
+                {
+                  "type": "string",
+                  "const": "spawn-item"
+                },
+                {
+                  "type": "string",
+                  "const": "toggle-personal-roboport"
+                },
+                {
+                  "type": "string",
+                  "const": "toggle-personal-logistic-requests"
+                },
+                {
+                  "type": "string",
+                  "const": "toggle-equipment-movement-bonus"
+                }
+              ]
+            },
             "block_modifiers": {
               "$ref": "#/definitions/bool"
             }
@@ -20559,7 +21466,10 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/DeliverCategory.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "deliver-category"
+        },
         "name": {
           "$ref": "#/definitions/string"
         }
@@ -20570,7 +21480,10 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/DeliverImpactCombination.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "deliver-impact-combination"
+        },
         "name": {
           "$ref": "#/definitions/string"
         },
@@ -20757,7 +21670,10 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/EditorControllerPrototype.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "editor-controller"
+        },
         "name": {
           "$ref": "#/definitions/string"
         },
@@ -20885,7 +21801,22 @@
             "energy_usage": {
               "$ref": "#/definitions/Energy"
             },
-            "gui_mode": {},
+            "gui_mode": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "all"
+                },
+                {
+                  "type": "string",
+                  "const": "none"
+                },
+                {
+                  "type": "string",
+                  "const": "admins"
+                }
+              ]
+            },
             "continuous_animation": {
               "$ref": "#/definitions/bool"
             },
@@ -22200,7 +23131,10 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/FontPrototype.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "font"
+        },
         "name": {
           "$ref": "#/definitions/string"
         },
@@ -22504,7 +23438,10 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/GodControllerPrototype.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "god-controller"
+        },
         "name": {
           "$ref": "#/definitions/string"
         },
@@ -22654,7 +23591,22 @@
             "picture": {
               "$ref": "#/definitions/Sprite"
             },
-            "gui_mode": {}
+            "gui_mode": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "all"
+                },
+                {
+                  "type": "string",
+                  "const": "none"
+                },
+                {
+                  "type": "string",
+                  "const": "admins"
+                }
+              ]
+            }
           },
           "required": ["heat_buffer"]
         }
@@ -22698,7 +23650,10 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/ImpactCategory.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "impact-category"
+        },
         "name": {
           "$ref": "#/definitions/string"
         }
@@ -22720,7 +23675,22 @@
             "preserve_contents_when_created": {
               "$ref": "#/definitions/bool"
             },
-            "gui_mode": {}
+            "gui_mode": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "all"
+                },
+                {
+                  "type": "string",
+                  "const": "none"
+                },
+                {
+                  "type": "string",
+                  "const": "admins"
+                }
+              ]
+            }
           },
           "required": ["erase_contents_when_mined"]
         }
@@ -22735,7 +23705,22 @@
         {
           "type": "object",
           "properties": {
-            "gui_mode": {}
+            "gui_mode": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "all"
+                },
+                {
+                  "type": "string",
+                  "const": "none"
+                },
+                {
+                  "type": "string",
+                  "const": "admins"
+                }
+              ]
+            }
           }
         }
       ]
@@ -23238,7 +24223,18 @@
                 }
               ]
             },
-            "filter_mode": {},
+            "filter_mode": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "blacklist"
+                },
+                {
+                  "type": "string",
+                  "const": "whitelist"
+                }
+              ]
+            },
             "filter_message_key": {
               "$ref": "#/definitions/string"
             }
@@ -23451,7 +24447,18 @@
                 }
               ]
             },
-            "glow_render_mode": {},
+            "glow_render_mode": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "additive"
+                },
+                {
+                  "type": "string",
+                  "const": "multiplicative"
+                }
+              ]
+            },
             "default_red_signal": {
               "$ref": "#/definitions/SignalIDConnector"
             },
@@ -23667,7 +24674,22 @@
               "$ref": "#/definitions/Sprite"
             },
             "inventory_type": {},
-            "gui_mode": {},
+            "gui_mode": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "all"
+                },
+                {
+                  "type": "string",
+                  "const": "none"
+                },
+                {
+                  "type": "string",
+                  "const": "admins"
+                }
+              ]
+            },
             "circuit_wire_max_distance": {
               "$ref": "#/definitions/double"
             },
@@ -23871,7 +24893,10 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/MapGenPresets.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "map-gen-presets"
+        },
         "name": {
           "$ref": "#/definitions/string"
         }
@@ -23882,7 +24907,10 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/MapSettings.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "map-settings"
+        },
         "name": {
           "$ref": "#/definitions/string"
         },
@@ -24142,11 +25170,45 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/MouseCursor.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "mouse-cursor"
+        },
         "name": {
           "$ref": "#/definitions/string"
         },
-        "system_cursor": {},
+        "system_cursor": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "arrow"
+            },
+            {
+              "type": "string",
+              "const": "i-beam"
+            },
+            {
+              "type": "string",
+              "const": "crosshair"
+            },
+            {
+              "type": "string",
+              "const": "wait-arrow"
+            },
+            {
+              "type": "string",
+              "const": "size-all"
+            },
+            {
+              "type": "string",
+              "const": "no"
+            },
+            {
+              "type": "string",
+              "const": "hand"
+            }
+          ]
+        },
         "filename": {
           "$ref": "#/definitions/FileName"
         },
@@ -24718,7 +25780,22 @@
             "ground_timeline": {
               "$ref": "#/definitions/ProcessionTimeline"
             },
-            "usage": {},
+            "usage": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "departure"
+                },
+                {
+                  "type": "string",
+                  "const": "arrival"
+                },
+                {
+                  "type": "string",
+                  "const": "intermezzo"
+                }
+              ]
+            },
             "procession_style": {}
           },
           "required": ["timeline", "usage", "procession_style"]
@@ -25664,7 +26741,10 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/RemoteControllerPrototype.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "remote-controller"
+        },
         "name": {
           "$ref": "#/definitions/string"
         },
@@ -26855,7 +27935,50 @@
         {
           "type": "object",
           "properties": {
-            "action": {},
+            "action": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "toggle-alt-mode"
+                },
+                {
+                  "type": "string",
+                  "const": "undo"
+                },
+                {
+                  "type": "string",
+                  "const": "copy"
+                },
+                {
+                  "type": "string",
+                  "const": "cut"
+                },
+                {
+                  "type": "string",
+                  "const": "paste"
+                },
+                {
+                  "type": "string",
+                  "const": "import-string"
+                },
+                {
+                  "type": "string",
+                  "const": "toggle-personal-roboport"
+                },
+                {
+                  "type": "string",
+                  "const": "toggle-equipment-movement-bonus"
+                },
+                {
+                  "type": "string",
+                  "const": "spawn-item"
+                },
+                {
+                  "type": "string",
+                  "const": "lua"
+                }
+              ]
+            },
             "icons": {
               "oneOf": [
                 {
@@ -26907,7 +28030,26 @@
             "associated_control_input": {
               "$ref": "#/definitions/string"
             },
-            "style": {}
+            "style": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "default"
+                },
+                {
+                  "type": "string",
+                  "const": "blue"
+                },
+                {
+                  "type": "string",
+                  "const": "red"
+                },
+                {
+                  "type": "string",
+                  "const": "green"
+                }
+              ]
+            }
           },
           "required": ["action"]
         }
@@ -27189,7 +28331,10 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/SoundPrototype.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "sound"
+        },
         "name": {
           "$ref": "#/definitions/string"
         },
@@ -27549,7 +28694,10 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/SpectatorControllerPrototype.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "spectator-controller"
+        },
         "name": {
           "$ref": "#/definitions/string"
         },
@@ -27848,7 +28996,10 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/SpritePrototype.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "sprite"
+        },
         "name": {
           "$ref": "#/definitions/string"
         },
@@ -28303,11 +29454,29 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/TileEffectDefinition.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "tile-effect"
+        },
         "name": {
           "$ref": "#/definitions/string"
         },
-        "shader": {},
+        "shader": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "water"
+            },
+            {
+              "type": "string",
+              "const": "space"
+            },
+            {
+              "type": "string",
+              "const": "puddle"
+            }
+          ]
+        },
         "water": {
           "$ref": "#/definitions/WaterTileEffectParameters"
         },
@@ -28625,7 +29794,10 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/TipsAndTricksItemCategory.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "tips-and-tricks-item-category"
+        },
         "name": {
           "$ref": "#/definitions/string"
         },
@@ -28882,7 +30054,10 @@
       "description": "https://lua-api.factorio.com/stable/prototypes/TriggerTargetType.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "type": "string",
+          "const": "trigger-target-type"
+        },
         "name": {
           "$ref": "#/definitions/string"
         }

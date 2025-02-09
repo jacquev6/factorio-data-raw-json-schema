@@ -391,12 +391,26 @@ def extract_struct_properties(
                                 },
                                 required=not optional,
                             )
+                        elif type_kind.startswith('"') and type_kind.endswith('"'):
+                            values = type_kind.strip('"').split('" or "')
+                            if len(values) == 1:
+                                yield FactorioSchema.Property(
+                                    name=property_name,
+                                    type={"type": "string", "const": values[0]},
+                                    required=not optional,
+                                )
+                            else:
+                                yield FactorioSchema.Property(
+                                    name=property_name,
+                                    type={"oneOf": [{"type": "string", "const": value} for value in values]},
+                                    required=not optional,
+                                )
                         else:
                             assert False, f"unsupported struct property kind: {type_kind!r}"
                     else:
                         assert False, f"failed to parse property header: {h3_text!r}"
                 except AssertionError as exc:
-                    debug(f"Failed to extract property {type_name}.{property_name!r}: {exc}")
+                    debug(f"Failed to extract property {type_name}.{property_name}: {exc}")
                     yield FactorioSchema.Property(name=property_name, type={}, required="optional" not in h3_soup.text)
 
 

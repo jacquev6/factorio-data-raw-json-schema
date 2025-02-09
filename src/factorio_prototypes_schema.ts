@@ -481,7 +481,7 @@ export type SurfacePropertyID = String
  * via the `definition` "CreateTrivialSmokeEffectItem".
  */
 export type CreateTrivialSmokeEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'create-trivial-smoke'
   smoke_name: TrivialSmokeID
   offset_deviation?: BoundingBox
   offsets?: Vector[] | {}
@@ -713,7 +713,7 @@ export type EnergySource =
  * via the `definition` "ElectricEnergySource".
  */
 export type ElectricEnergySource = BaseEnergySource & {
-  type: unknown
+  type: 'electric'
   buffer_capacity?: Energy
   usage_priority: ElectricUsagePriority
   input_flow_limit?: Energy
@@ -741,7 +741,7 @@ export type ElectricUsagePriority =
  * via the `definition` "BurnerEnergySource".
  */
 export type BurnerEnergySource = BaseEnergySource & {
-  type: unknown
+  type: 'burner'
   fuel_inventory_size: ItemStackIndex
   burnt_inventory_size?: ItemStackIndex
   smoke?: SmokeSource[] | {}
@@ -766,7 +766,7 @@ export type BurnerUsageID = String
  * via the `definition` "HeatEnergySource".
  */
 export type HeatEnergySource = BaseEnergySource & {
-  type: unknown
+  type: 'heat'
   max_temperature: Double
   specific_heat: Energy
   max_transfer: Energy
@@ -794,7 +794,7 @@ export type Direction = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 1
  * via the `definition` "FluidEnergySource".
  */
 export type FluidEnergySource = BaseEnergySource & {
-  type: unknown
+  type: 'fluid'
   fluid_box: FluidBox
   smoke?: SmokeSource[] | {}
   light_flicker?: LightFlickeringDefinition
@@ -826,7 +826,7 @@ export type Int8 = number
  * via the `definition` "VoidEnergySource".
  */
 export type VoidEnergySource = BaseEnergySource & {
-  type: unknown
+  type: 'void'
 }
 /**
  * https://lua-api.factorio.com/stable/types/EffectValue.html
@@ -959,7 +959,7 @@ export type ItemWithInventoryPrototype = ItemWithLabelPrototype & {
   item_filters?: ItemID[] | {}
   item_group_filters?: ItemGroupID[] | {}
   item_subgroup_filters?: ItemSubGroupID[] | {}
-  filter_mode?: unknown
+  filter_mode?: 'blacklist' | 'whitelist'
   filter_message_key?: String
 }
 /**
@@ -1008,7 +1008,7 @@ export type AttackParameters =
  * via the `definition` "ProjectileAttackParameters".
  */
 export type ProjectileAttackParameters = BaseAttackParameters & {
-  type: unknown
+  type: 'projectile'
   apply_projection_to_projectile_creation_position?: Bool
   projectile_center?: Vector
   projectile_creation_distance?: Float
@@ -1093,7 +1093,7 @@ export type RealOrientation = Float
  * via the `definition` "BeamAttackParameters".
  */
 export type BeamAttackParameters = BaseAttackParameters & {
-  type: unknown
+  type: 'beam'
   source_direction_count?: Uint32
   source_offset?: Vector
 }
@@ -1104,7 +1104,7 @@ export type BeamAttackParameters = BaseAttackParameters & {
  * via the `definition` "StreamAttackParameters".
  */
 export type StreamAttackParameters = BaseAttackParameters & {
-  type: unknown
+  type: 'stream'
   fluid_consumption?: FluidAmount
   gun_barrel_length?: Float
   projectile_creation_parameters?: CircularProjectileCreationSpecification
@@ -1457,7 +1457,7 @@ export type UpgradeItemPrototype = SelectionToolPrototype
  * via the `definition` "ActivateImpactTriggerEffectItem".
  */
 export type ActivateImpactTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'activate-impact'
   deliver_category?: String
 }
 /**
@@ -1467,7 +1467,7 @@ export type ActivateImpactTriggerEffectItem = TriggerEffectItem & {
  * via the `definition` "ActivatePasteTipTrigger".
  */
 export type ActivatePasteTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'activate-paste'
 }
 /**
  * https://lua-api.factorio.com/stable/types/ActiveTriggerID.html
@@ -1483,7 +1483,7 @@ export type ActiveTriggerID = String
  * via the `definition` "ActivityBarStyleSpecification".
  */
 export type ActivityBarStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'activity_bar_style'
   speed?: Float
   bar_width?: Uint32
   color?: Color
@@ -1519,7 +1519,7 @@ export type StretchRule = 'on' | 'off' | 'auto' | 'stretch_and_expand'
  * via the `definition` "CreateParticleTriggerEffectItem".
  */
 export type CreateParticleTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'create-particle'
   particle_name: ParticleID
   initial_height: Float
   offset_deviation?: SimpleBoundingBox
@@ -1538,7 +1538,7 @@ export type CreateParticleTriggerEffectItem = TriggerEffectItem & {
   tail_width?: Float
   rotate_offsets?: Bool
   only_when_visible?: Bool
-  apply_tile_tint?: unknown
+  apply_tile_tint?: 'primary' | 'secondary'
   tint?: Color
 }
 /**
@@ -1584,7 +1584,7 @@ export type AirbornePollutantID = String
  * via the `definition` "AlternativeBuildTipTrigger".
  */
 export type AlternativeBuildTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'alternative-build'
 }
 /**
  * https://lua-api.factorio.com/stable/types/AmbientSoundType.html
@@ -1600,7 +1600,7 @@ export type AmbientSoundType = 'menu-track' | 'main-track' | 'hero-track' | 'int
  * via the `definition` "AmmoDamageModifier".
  */
 export type AmmoDamageModifier = BaseModifier & {
-  type: unknown
+  type: 'ammo-damage'
   infer_icon?: Bool
   use_icon_overlay_constant?: Bool
   ammo_category: AmmoCategoryID
@@ -1676,7 +1676,7 @@ export type MapTick = Uint64
  * via the `definition` "CraftItemTipTrigger".
  */
 export type CraftItemTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'craft-item'
   item?: ItemID
   event_type: unknown
   consecutive?: Bool
@@ -1688,7 +1688,7 @@ export type CraftItemTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "BuildEntityTipTrigger".
  */
 export type BuildEntityTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'build-entity'
   entity?: EntityID
   match_type_only?: Bool
   build_by_dragging?: Bool
@@ -1704,7 +1704,7 @@ export type BuildEntityTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "ManualTransferTipTrigger".
  */
 export type ManualTransferTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'manual-transfer'
 }
 /**
  * https://lua-api.factorio.com/stable/types/ModuleTransferTipTrigger.html
@@ -1713,7 +1713,7 @@ export type ManualTransferTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "ModuleTransferTipTrigger".
  */
 export type ModuleTransferTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'module-transfer'
   module: ItemID
 }
 /**
@@ -1723,7 +1723,7 @@ export type ModuleTransferTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "StackTransferTipTrigger".
  */
 export type StackTransferTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'stack-transfer'
   transfer?: unknown
 }
 /**
@@ -1733,8 +1733,8 @@ export type StackTransferTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "EntityTransferTipTrigger".
  */
 export type EntityTransferTipTrigger = CountBasedTipTrigger & {
-  type: unknown
-  transfer?: unknown
+  type: 'entity-transfer'
+  transfer?: 'in' | 'out'
 }
 /**
  * https://lua-api.factorio.com/stable/types/DropItemTipTrigger.html
@@ -1743,7 +1743,7 @@ export type EntityTransferTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "DropItemTipTrigger".
  */
 export type DropItemTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'drop-item'
   drop_into_entity?: Bool
 }
 /**
@@ -1753,7 +1753,7 @@ export type DropItemTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "SetRecipeTipTrigger".
  */
 export type SetRecipeTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'set-recipe'
   recipe?: RecipeID
   machine?: EntityID
   consecutive?: Bool
@@ -1767,7 +1767,7 @@ export type SetRecipeTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "SetFilterTipTrigger".
  */
 export type SetFilterTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'set-filter'
   entity?: EntityID
   match_type_only?: Bool
   consecutive?: Bool
@@ -1779,7 +1779,7 @@ export type SetFilterTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "LimitChestTipTrigger".
  */
 export type LimitChestTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'limit-chest'
 }
 /**
  * https://lua-api.factorio.com/stable/types/UsePipetteTipTrigger.html
@@ -1788,7 +1788,7 @@ export type LimitChestTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "UsePipetteTipTrigger".
  */
 export type UsePipetteTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'use-pipette'
 }
 /**
  * https://lua-api.factorio.com/stable/types/SetLogisticRequestTipTrigger.html
@@ -1797,7 +1797,7 @@ export type UsePipetteTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "SetLogisticRequestTipTrigger".
  */
 export type SetLogisticRequestTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'set-logistic-request'
   logistic_chest_only?: Bool
   entity?: EntityID
 }
@@ -1808,7 +1808,7 @@ export type SetLogisticRequestTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "UseConfirmTipTrigger".
  */
 export type UseConfirmTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'use-confirm'
 }
 /**
  * https://lua-api.factorio.com/stable/types/ToggleShowEntityInfoTipTrigger.html
@@ -1817,7 +1817,7 @@ export type UseConfirmTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "ToggleShowEntityInfoTipTrigger".
  */
 export type ToggleShowEntityInfoTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'toggle-show-entity-info'
 }
 /**
  * https://lua-api.factorio.com/stable/types/GeneratingPowerTipTrigger.html
@@ -1826,7 +1826,7 @@ export type ToggleShowEntityInfoTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "GeneratingPowerTipTrigger".
  */
 export type GeneratingPowerTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'generating-power'
 }
 /**
  * https://lua-api.factorio.com/stable/types/LowPowerTipTrigger.html
@@ -1835,7 +1835,7 @@ export type GeneratingPowerTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "LowPowerTipTrigger".
  */
 export type LowPowerTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'low-power'
 }
 /**
  * https://lua-api.factorio.com/stable/types/PasteEntitySettingsTipTrigger.html
@@ -1844,7 +1844,7 @@ export type LowPowerTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "PasteEntitySettingsTipTrigger".
  */
 export type PasteEntitySettingsTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'paste-entity-settings'
   source?: EntityID
   target?: EntityID
   match_type_only?: Bool
@@ -1856,7 +1856,7 @@ export type PasteEntitySettingsTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "FastReplaceTipTrigger".
  */
 export type FastReplaceTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'fast-replace'
   source?: EntityID
   target?: EntityID
   match_type_only?: Bool
@@ -1868,7 +1868,7 @@ export type FastReplaceTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "GroupAttackTipTrigger".
  */
 export type GroupAttackTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'group-attack'
 }
 /**
  * https://lua-api.factorio.com/stable/types/FastBeltBendTipTrigger.html
@@ -1877,7 +1877,7 @@ export type GroupAttackTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "FastBeltBendTipTrigger".
  */
 export type FastBeltBendTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'fast-belt-bend'
 }
 /**
  * https://lua-api.factorio.com/stable/types/BeltTraverseTipTrigger.html
@@ -1886,7 +1886,7 @@ export type FastBeltBendTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "BeltTraverseTipTrigger".
  */
 export type BeltTraverseTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'belt-traverse'
 }
 /**
  * https://lua-api.factorio.com/stable/types/PlaceEquipmentTipTrigger.html
@@ -1895,7 +1895,7 @@ export type BeltTraverseTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "PlaceEquipmentTipTrigger".
  */
 export type PlaceEquipmentTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'place-equipment'
   equipment?: EquipmentID
 }
 /**
@@ -1905,7 +1905,7 @@ export type PlaceEquipmentTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "ClearCursorTipTrigger".
  */
 export type ClearCursorTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'clear-cursor'
 }
 /**
  * https://lua-api.factorio.com/stable/types/RotateEntityTipTrigger.html
@@ -1914,7 +1914,7 @@ export type ClearCursorTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "RotateEntityTipTrigger".
  */
 export type RotateEntityTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'rotate-entity'
 }
 /**
  * https://lua-api.factorio.com/stable/types/FlipEntityTipTrigger.html
@@ -1923,7 +1923,7 @@ export type RotateEntityTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "FlipEntityTipTrigger".
  */
 export type FlipEntityTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'flip-entity'
 }
 /**
  * https://lua-api.factorio.com/stable/types/GateOverRailBuildTipTrigger.html
@@ -1932,7 +1932,7 @@ export type FlipEntityTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "GateOverRailBuildTipTrigger".
  */
 export type GateOverRailBuildTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'gate-over-rail-build'
 }
 /**
  * https://lua-api.factorio.com/stable/types/ManualWireDragTipTrigger.html
@@ -1941,11 +1941,11 @@ export type GateOverRailBuildTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "ManualWireDragTipTrigger".
  */
 export type ManualWireDragTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'manual-wire-drag'
   source?: EntityID
   target?: EntityID
   match_type_only?: Bool
-  wire_type?: unknown
+  wire_type?: 'red' | 'green' | 'copper'
 }
 /**
  * https://lua-api.factorio.com/stable/types/ShootTipTrigger.html
@@ -1954,8 +1954,8 @@ export type ManualWireDragTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "ShootTipTrigger".
  */
 export type ShootTipTrigger = CountBasedTipTrigger & {
-  type: unknown
-  target?: unknown
+  type: 'shoot'
+  target?: 'enemy' | 'entity'
 }
 /**
  * https://lua-api.factorio.com/stable/types/ChangeSurfaceTipTrigger.html
@@ -1964,7 +1964,7 @@ export type ShootTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "ChangeSurfaceTipTrigger".
  */
 export type ChangeSurfaceTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'change-surface'
   surface: String
 }
 /**
@@ -1974,7 +1974,7 @@ export type ChangeSurfaceTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "ApplyStarterPackTipTrigger".
  */
 export type ApplyStarterPackTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'apply-starter-pack'
 }
 /**
  * https://lua-api.factorio.com/stable/types/MineItemByRobotTipTrigger.html
@@ -1983,7 +1983,7 @@ export type ApplyStarterPackTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "MineItemByRobotTipTrigger".
  */
 export type MineItemByRobotTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'mine-item-by-robot'
 }
 /**
  * https://lua-api.factorio.com/stable/types/BuildEntityByRobotTipTrigger.html
@@ -1992,7 +1992,7 @@ export type MineItemByRobotTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "BuildEntityByRobotTipTrigger".
  */
 export type BuildEntityByRobotTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'build-entity-by-robot'
 }
 /**
  * https://lua-api.factorio.com/stable/types/UseRailPlannerTipTrigger.html
@@ -2001,7 +2001,7 @@ export type BuildEntityByRobotTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "UseRailPlannerTipTrigger".
  */
 export type UseRailPlannerTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'use-rail-planner'
   build_mode: BuildMode
 }
 /**
@@ -2018,7 +2018,7 @@ export type BuildMode = 'normal' | 'forced' | 'superforced'
  * via the `definition` "ToggleRailLayerTipTrigger".
  */
 export type ToggleRailLayerTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'toggle-rail-layer'
 }
 /**
  * https://lua-api.factorio.com/stable/types/EnterVehicleTipTrigger.html
@@ -2027,7 +2027,7 @@ export type ToggleRailLayerTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "EnterVehicleTipTrigger".
  */
 export type EnterVehicleTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'enter-vehicle'
   vehicle?: EntityID
   match_type_only?: Bool
 }
@@ -2038,7 +2038,7 @@ export type EnterVehicleTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "SendSpidertronTipTrigger".
  */
 export type SendSpidertronTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'send-spidertron'
   append?: Bool
 }
 /**
@@ -2048,7 +2048,7 @@ export type SendSpidertronTipTrigger = CountBasedTipTrigger & {
  * via the `definition` "KillTipTrigger".
  */
 export type KillTipTrigger = CountBasedTipTrigger & {
-  type: unknown
+  type: 'kill'
   entity?: EntityID
   match_type_only?: Bool
   damage_type?: DamageTypeID
@@ -2071,13 +2071,13 @@ export type AnimationSheet = AnimationParameters & {
  * via the `definition` "AreaTriggerItem".
  */
 export type AreaTriggerItem = TriggerItem & {
-  type: unknown
+  type: 'area'
   radius: Double
   trigger_from_target?: Bool
   target_entities?: Bool
   target_enemies?: Bool
   show_in_tooltip?: Bool
-  collision_mode?: unknown
+  collision_mode?: 'distance-from-collision-box' | 'distance-from-center'
 }
 /**
  * https://lua-api.factorio.com/stable/types/ForceCondition.html
@@ -2100,7 +2100,7 @@ export type ForceCondition =
  * via the `definition` "ArtilleryRangeModifier".
  */
 export type ArtilleryRangeModifier = SimpleModifier & {
-  type: unknown
+  type: 'artillery-range'
   infer_icon?: Bool
   use_icon_overlay_constant?: Bool
 }
@@ -2120,7 +2120,7 @@ export type SimpleModifier = BaseModifier & {
  * via the `definition` "ArtilleryTriggerDelivery".
  */
 export type ArtilleryTriggerDelivery = TriggerDeliveryItem & {
-  type: unknown
+  type: 'artillery'
   projectile: EntityID
   starting_speed: Float
   starting_speed_deviation?: Float
@@ -2155,7 +2155,7 @@ export type AttenuationType =
  * via the `definition` "BeaconDistributionModifier".
  */
 export type BeaconDistributionModifier = SimpleModifier & {
-  type: unknown
+  type: 'beacon-distribution'
   infer_icon?: Bool
   use_icon_overlay_constant?: Bool
 }
@@ -2180,7 +2180,7 @@ export type Int32 = number
  * via the `definition` "BeamTriggerDelivery".
  */
 export type BeamTriggerDelivery = TriggerDeliveryItem & {
-  type: unknown
+  type: 'beam'
   beam: EntityID
   add_to_shooter?: Bool
   max_length?: Uint32
@@ -2195,7 +2195,7 @@ export type BeamTriggerDelivery = TriggerDeliveryItem & {
  * via the `definition` "BeltStackSizeBonusModifier".
  */
 export type BeltStackSizeBonusModifier = SimpleModifier & {
-  type: unknown
+  type: 'belt-stack-size-bonus'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2214,7 +2214,7 @@ export type BoolModifier = BaseModifier & {
  * via the `definition` "BulkInserterCapacityBonusModifier".
  */
 export type BulkInserterCapacityBonusModifier = SimpleModifier & {
-  type: unknown
+  type: 'bulk-inserter-capacity-bonus'
   infer_icon?: Bool
   use_icon_overlay_constant?: Bool
 }
@@ -2225,7 +2225,7 @@ export type BulkInserterCapacityBonusModifier = SimpleModifier & {
  * via the `definition` "ButtonStyleSpecification".
  */
 export type ButtonStyleSpecification = StyleWithClickableGraphicalSetSpecification & {
-  type: unknown
+  type: 'button_style'
   font?: String
   default_font_color?: Color
   hovered_font_color?: Color
@@ -2267,7 +2267,7 @@ export type StyleWithClickableGraphicalSetSpecification = BaseStyleSpecification
  * via the `definition` "CameraEffectTriggerEffectItem".
  */
 export type CameraEffectTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'camera-effect'
   duration: Uint8
   ease_in_duration?: Uint8
   ease_out_duration?: Uint8
@@ -2290,7 +2290,7 @@ export type CameraStyleSpecification = EmptyWidgetStyleSpecification
  * via the `definition` "EmptyWidgetStyleSpecification".
  */
 export type EmptyWidgetStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'empty_widget_style'
   graphical_set?: ElementImageSet
 }
 /**
@@ -2300,7 +2300,7 @@ export type EmptyWidgetStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "CargoLandingPadLimitModifier".
  */
 export type CargoLandingPadLimitModifier = SimpleModifier & {
-  type: unknown
+  type: 'cargo-landing-pad-count'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2310,7 +2310,7 @@ export type CargoLandingPadLimitModifier = SimpleModifier & {
  * via the `definition` "ChainTriggerDelivery".
  */
 export type ChainTriggerDelivery = TriggerDeliveryItem & {
-  type: unknown
+  type: 'chain'
   chain: ActiveTriggerID
 }
 /**
@@ -2320,7 +2320,7 @@ export type ChainTriggerDelivery = TriggerDeliveryItem & {
  * via the `definition` "ChangeRecipeProductivityModifier".
  */
 export type ChangeRecipeProductivityModifier = BaseModifier & {
-  type: unknown
+  type: 'change-recipe-productivity'
   use_icon_overlay_constant?: Bool
   recipe: RecipeID
   change: EffectValue
@@ -2332,7 +2332,7 @@ export type ChangeRecipeProductivityModifier = BaseModifier & {
  * via the `definition` "CharacterBuildDistanceModifier".
  */
 export type CharacterBuildDistanceModifier = SimpleModifier & {
-  type: unknown
+  type: 'character-build-distance'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2342,7 +2342,7 @@ export type CharacterBuildDistanceModifier = SimpleModifier & {
  * via the `definition` "CharacterCraftingSpeedModifier".
  */
 export type CharacterCraftingSpeedModifier = SimpleModifier & {
-  type: unknown
+  type: 'character-crafting-speed'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2352,7 +2352,7 @@ export type CharacterCraftingSpeedModifier = SimpleModifier & {
  * via the `definition` "CharacterHealthBonusModifier".
  */
 export type CharacterHealthBonusModifier = SimpleModifier & {
-  type: unknown
+  type: 'character-health-bonus'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2362,7 +2362,7 @@ export type CharacterHealthBonusModifier = SimpleModifier & {
  * via the `definition` "CharacterInventorySlotsBonusModifier".
  */
 export type CharacterInventorySlotsBonusModifier = SimpleModifier & {
-  type: unknown
+  type: 'character-inventory-slots-bonus'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2372,7 +2372,7 @@ export type CharacterInventorySlotsBonusModifier = SimpleModifier & {
  * via the `definition` "CharacterItemDropDistanceModifier".
  */
 export type CharacterItemDropDistanceModifier = SimpleModifier & {
-  type: unknown
+  type: 'character-item-drop-distance'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2382,7 +2382,7 @@ export type CharacterItemDropDistanceModifier = SimpleModifier & {
  * via the `definition` "CharacterItemPickupDistanceModifier".
  */
 export type CharacterItemPickupDistanceModifier = SimpleModifier & {
-  type: unknown
+  type: 'character-item-pickup-distance'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2392,7 +2392,7 @@ export type CharacterItemPickupDistanceModifier = SimpleModifier & {
  * via the `definition` "CharacterLogisticRequestsModifier".
  */
 export type CharacterLogisticRequestsModifier = BoolModifier & {
-  type: unknown
+  type: 'character-logistic-requests'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2402,7 +2402,7 @@ export type CharacterLogisticRequestsModifier = BoolModifier & {
  * via the `definition` "CharacterLogisticTrashSlotsModifier".
  */
 export type CharacterLogisticTrashSlotsModifier = SimpleModifier & {
-  type: unknown
+  type: 'character-logistic-trash-slots'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2412,7 +2412,7 @@ export type CharacterLogisticTrashSlotsModifier = SimpleModifier & {
  * via the `definition` "CharacterLootPickupDistanceModifier".
  */
 export type CharacterLootPickupDistanceModifier = SimpleModifier & {
-  type: unknown
+  type: 'character-loot-pickup-distance'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2422,7 +2422,7 @@ export type CharacterLootPickupDistanceModifier = SimpleModifier & {
  * via the `definition` "CharacterMiningSpeedModifier".
  */
 export type CharacterMiningSpeedModifier = SimpleModifier & {
-  type: unknown
+  type: 'character-mining-speed'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2432,7 +2432,7 @@ export type CharacterMiningSpeedModifier = SimpleModifier & {
  * via the `definition` "CharacterReachDistanceModifier".
  */
 export type CharacterReachDistanceModifier = SimpleModifier & {
-  type: unknown
+  type: 'character-reach-distance'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2442,7 +2442,7 @@ export type CharacterReachDistanceModifier = SimpleModifier & {
  * via the `definition` "CharacterResourceReachDistanceModifier".
  */
 export type CharacterResourceReachDistanceModifier = SimpleModifier & {
-  type: unknown
+  type: 'character-resource-reach-distance'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2452,7 +2452,7 @@ export type CharacterResourceReachDistanceModifier = SimpleModifier & {
  * via the `definition` "CharacterRunningSpeedModifier".
  */
 export type CharacterRunningSpeedModifier = SimpleModifier & {
-  type: unknown
+  type: 'character-running-speed'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2462,7 +2462,7 @@ export type CharacterRunningSpeedModifier = SimpleModifier & {
  * via the `definition` "CheckBoxStyleSpecification".
  */
 export type CheckBoxStyleSpecification = StyleWithClickableGraphicalSetSpecification & {
-  type: unknown
+  type: 'checkbox_style'
   font?: String
   font_color?: Color
   disabled_font_color?: Color
@@ -2478,7 +2478,7 @@ export type CheckBoxStyleSpecification = StyleWithClickableGraphicalSetSpecifica
  * via the `definition` "CircuitNetworkModifier".
  */
 export type CircuitNetworkModifier = BoolModifier & {
-  type: unknown
+  type: 'unlock-circuit-network'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2488,7 +2488,7 @@ export type CircuitNetworkModifier = BoolModifier & {
  * via the `definition` "CliffDeconstructionEnabledModifier".
  */
 export type CliffDeconstructionEnabledModifier = BoolModifier & {
-  type: unknown
+  type: 'cliff-deconstruction-enabled'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2520,7 +2520,7 @@ export type EffectTexture = SpriteSource
  * via the `definition` "ClusterTriggerItem".
  */
 export type ClusterTriggerItem = TriggerItem & {
-  type: unknown
+  type: 'cluster'
   cluster_count: Uint32
   distance: Float
   distance_deviation?: Float
@@ -2589,7 +2589,7 @@ export type ProcessionGraphicType =
  * via the `definition` "CreateAsteroidChunkEffectItem".
  */
 export type CreateAsteroidChunkEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'create-asteroid-chunk'
   asteroid_name: AsteroidChunkID
   offset_deviation?: BoundingBox
   offsets?: Vector[] | {}
@@ -2601,7 +2601,7 @@ export type CreateAsteroidChunkEffectItem = TriggerEffectItem & {
  * via the `definition` "CreateDecorativesTriggerEffectItem".
  */
 export type CreateDecorativesTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'create-decorative'
   decorative: DecorativeID
   spawn_max: Uint16
   spawn_min_radius: Float
@@ -2625,7 +2625,7 @@ export type DecorativeID = String
  * via the `definition` "CreateEntityTriggerEffectItem".
  */
 export type CreateEntityTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'create-entity'
   entity_name: EntityID
   offset_deviation?: BoundingBox
   trigger_created_entity?: Bool
@@ -2668,7 +2668,7 @@ export type CreateFireTriggerEffectItem = CreateEntityTriggerEffectItem & {
  * via the `definition` "CreateGhostOnEntityDeathModifier".
  */
 export type CreateGhostOnEntityDeathModifier = BoolModifier & {
-  type: unknown
+  type: 'create-ghost-on-entity-death'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2694,7 +2694,7 @@ export type CreateSmokeTriggerEffectItem = CreateEntityTriggerEffectItem & {
  * via the `definition` "CreateStickerTriggerEffectItem".
  */
 export type CreateStickerTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'create-sticker'
   sticker: EntityID
   trigger_created_entity?: Bool
 }
@@ -2705,7 +2705,7 @@ export type CreateStickerTriggerEffectItem = TriggerEffectItem & {
  * via the `definition` "DamageTileTriggerEffectItem".
  */
 export type DamageTileTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'damage'
   damage: DamageParameters
   radius?: Float
 }
@@ -2716,7 +2716,7 @@ export type DamageTileTriggerEffectItem = TriggerEffectItem & {
  * via the `definition` "DamageTriggerEffectItem".
  */
 export type DamageTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'damage'
   damage: DamageParameters
   apply_damage_to_trees?: Bool
   vaporize?: Bool
@@ -2733,7 +2733,7 @@ export type DamageTriggerEffectItem = TriggerEffectItem & {
  * via the `definition` "DeconstructionTimeToLiveModifier".
  */
 export type DeconstructionTimeToLiveModifier = SimpleModifier & {
-  type: unknown
+  type: 'deconstruction-time-to-live'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -2743,7 +2743,7 @@ export type DeconstructionTimeToLiveModifier = SimpleModifier & {
  * via the `definition` "DelayedTriggerDelivery".
  */
 export type DelayedTriggerDelivery = TriggerDeliveryItem & {
-  type: unknown
+  type: 'delayed'
   delayed_trigger: ActiveTriggerID
 }
 /**
@@ -2753,7 +2753,7 @@ export type DelayedTriggerDelivery = TriggerDeliveryItem & {
  * via the `definition` "DestroyCliffsTriggerEffectItem".
  */
 export type DestroyCliffsTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'destroy-cliffs'
   radius: Float
   explosion_at_trigger?: EntityID
   explosion_at_cliff?: EntityID
@@ -2765,7 +2765,7 @@ export type DestroyCliffsTriggerEffectItem = TriggerEffectItem & {
  * via the `definition` "DestroyDecorativesTriggerEffectItem".
  */
 export type DestroyDecorativesTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'destroy-decoratives'
   radius: Float
   from_render_layer?: RenderLayer
   to_render_layer?: RenderLayer
@@ -2781,7 +2781,7 @@ export type DestroyDecorativesTriggerEffectItem = TriggerEffectItem & {
  * via the `definition` "DirectTriggerItem".
  */
 export type DirectTriggerItem = TriggerItem & {
-  type: unknown
+  type: 'direct'
   filter_enabled?: Bool
 }
 /**
@@ -2821,7 +2821,7 @@ export type DoubleSliderStyleSpecification = SliderStyleSpecification
  * via the `definition` "SliderStyleSpecification".
  */
 export type SliderStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'slider_style'
   full_bar?: ElementImageSet
   full_bar_disabled?: ElementImageSet
   empty_bar?: ElementImageSet
@@ -2838,7 +2838,7 @@ export type SliderStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "DropDownStyleSpecification".
  */
 export type DropDownStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'dropdown_style'
   button_style?: ButtonStyleSpecification
   icon?: Sprite
   list_box_style?: ListBoxStyleSpecification
@@ -2852,7 +2852,7 @@ export type DropDownStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "ListBoxStyleSpecification".
  */
 export type ListBoxStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'list_box_style'
   item_style?: ButtonStyleSpecification
   scroll_pane_style?: ScrollPaneStyleSpecification
 }
@@ -2863,7 +2863,7 @@ export type ListBoxStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "ScrollPaneStyleSpecification".
  */
 export type ScrollPaneStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'scroll_pane_style'
   vertical_flow_style?: VerticalFlowStyleSpecification
   horizontal_scrollbar_style?: HorizontalScrollBarStyleSpecification
   vertical_scrollbar_style?: VerticalScrollBarStyleSpecification
@@ -2890,7 +2890,7 @@ export type ScrollPaneStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "VerticalFlowStyleSpecification".
  */
 export type VerticalFlowStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'vertical_flow_style'
   vertical_spacing?: Int32
 }
 /**
@@ -2900,7 +2900,7 @@ export type VerticalFlowStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "HorizontalScrollBarStyleSpecification".
  */
 export type HorizontalScrollBarStyleSpecification = ScrollBarStyleSpecification & {
-  type: unknown
+  type: 'horizontal_scrollbar_style'
 }
 /**
  * https://lua-api.factorio.com/stable/types/ScrollBarStyleSpecification.html
@@ -2919,7 +2919,7 @@ export type ScrollBarStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "VerticalScrollBarStyleSpecification".
  */
 export type VerticalScrollBarStyleSpecification = ScrollBarStyleSpecification & {
-  type: unknown
+  type: 'vertical_scrollbar_style'
 }
 /**
  * https://lua-api.factorio.com/stable/types/EffectVariation.html
@@ -3016,7 +3016,7 @@ export type EquipmentCategoryID = String
  * via the `definition` "FlowStyleSpecification".
  */
 export type FlowStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'flow_style'
   max_on_row?: Int32
   horizontal_spacing?: Int32
   vertical_spacing?: Int32
@@ -3028,7 +3028,7 @@ export type FlowStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "FollowerRobotLifetimeModifier".
  */
 export type FollowerRobotLifetimeModifier = SimpleModifier & {
-  type: unknown
+  type: 'follower-robot-lifetime'
   infer_icon?: Bool
   use_icon_overlay_constant?: Bool
 }
@@ -3050,7 +3050,7 @@ export type FootstepTriggerEffectItem = CreateParticleTriggerEffectItem & {
  * via the `definition` "FrameStyleSpecification".
  */
 export type FrameStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'frame_style'
   graphical_set?: ElementImageSet
   horizontal_flow_style?: HorizontalFlowStyleSpecification
   vertical_flow_style?: VerticalFlowStyleSpecification
@@ -3070,7 +3070,7 @@ export type FrameStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "HorizontalFlowStyleSpecification".
  */
 export type HorizontalFlowStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'horizontal_flow_style'
   horizontal_spacing?: Int32
 }
 /**
@@ -3080,7 +3080,7 @@ export type HorizontalFlowStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "LabelStyleSpecification".
  */
 export type LabelStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'label_style'
   font?: String
   font_color?: Color
   hovered_font_color?: Color
@@ -3140,7 +3140,7 @@ export type NeighbourConnectableConnectionCategory = String
  * via the `definition` "GiveItemModifier".
  */
 export type GiveItemModifier = BaseModifier & {
-  type: unknown
+  type: 'give-item'
   use_icon_overlay_constant?: Bool
   item: ItemID
   quality?: QualityID
@@ -3153,7 +3153,7 @@ export type GiveItemModifier = BaseModifier & {
  * via the `definition` "GlowStyleSpecification".
  */
 export type GlowStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'glow_style'
   image_set?: ElementImageSet
 }
 /**
@@ -3163,7 +3163,7 @@ export type GlowStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "GraphStyleSpecification".
  */
 export type GraphStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'graph_style'
   background_color?: Color
   line_colors?: Color[] | {}
   horizontal_label_style?: LabelStyleSpecification
@@ -3187,7 +3187,7 @@ export type GraphStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "GunSpeedModifier".
  */
 export type GunSpeedModifier = BaseModifier & {
-  type: unknown
+  type: 'gun-speed'
   infer_icon?: Bool
   use_icon_overlay_constant?: Bool
   ammo_category: AmmoCategoryID
@@ -3200,7 +3200,7 @@ export type GunSpeedModifier = BaseModifier & {
  * via the `definition` "ImageStyleSpecification".
  */
 export type ImageStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'image_style'
   graphical_set?: ElementImageSet
   stretch_image_to_widget_size?: Bool
   invert_colors_of_picture_when_hovered_or_toggled?: Bool
@@ -3212,7 +3212,7 @@ export type ImageStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "InsertItemTriggerEffectItem".
  */
 export type InsertItemTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'insert-item'
   item: ItemID
   quality?: QualityID
   count?: ItemCountType
@@ -3224,7 +3224,7 @@ export type InsertItemTriggerEffectItem = TriggerEffectItem & {
  * via the `definition` "InserterStackSizeBonusModifier".
  */
 export type InserterStackSizeBonusModifier = SimpleModifier & {
-  type: unknown
+  type: 'inserter-stack-size-bonus'
   infer_icon?: Bool
   use_icon_overlay_constant?: Bool
 }
@@ -3235,7 +3235,7 @@ export type InserterStackSizeBonusModifier = SimpleModifier & {
  * via the `definition` "InstantTriggerDelivery".
  */
 export type InstantTriggerDelivery = TriggerDeliveryItem & {
-  type: unknown
+  type: 'instant'
 }
 /**
  * https://lua-api.factorio.com/stable/types/InvokeTileEffectTriggerEffectItem.html
@@ -3244,7 +3244,7 @@ export type InstantTriggerDelivery = TriggerDeliveryItem & {
  * via the `definition` "InvokeTileEffectTriggerEffectItem".
  */
 export type InvokeTileEffectTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'invoke-tile-trigger'
   tile_collision_mask?: CollisionMaskConnector
 }
 /**
@@ -3254,7 +3254,7 @@ export type InvokeTileEffectTriggerEffectItem = TriggerEffectItem & {
  * via the `definition` "LaboratoryProductivityModifier".
  */
 export type LaboratoryProductivityModifier = SimpleModifier & {
-  type: unknown
+  type: 'laboratory-productivity'
   infer_icon?: Bool
   use_icon_overlay_constant?: Bool
 }
@@ -3265,7 +3265,7 @@ export type LaboratoryProductivityModifier = SimpleModifier & {
  * via the `definition` "LaboratorySpeedModifier".
  */
 export type LaboratorySpeedModifier = SimpleModifier & {
-  type: unknown
+  type: 'laboratory-speed'
   infer_icon?: Bool
   use_icon_overlay_constant?: Bool
 }
@@ -3285,7 +3285,7 @@ export type LightningPriorityRule = LightningRuleBase & {
  * via the `definition` "LineStyleSpecification".
  */
 export type LineStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'line_style'
   border?: BorderImageSet
 }
 /**
@@ -3295,7 +3295,7 @@ export type LineStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "LineTriggerItem".
  */
 export type LineTriggerItem = TriggerItem & {
-  type: unknown
+  type: 'line'
   range: Double
   width: Double
   range_effects?: TriggerEffect
@@ -3521,7 +3521,7 @@ export type MathExpression = String
  * via the `definition` "MaxFailedAttemptsPerTickPerConstructionQueueModifier".
  */
 export type MaxFailedAttemptsPerTickPerConstructionQueueModifier = SimpleModifier & {
-  type: unknown
+  type: 'max-failed-attempts-per-tick-per-construction-queue'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -3531,7 +3531,7 @@ export type MaxFailedAttemptsPerTickPerConstructionQueueModifier = SimpleModifie
  * via the `definition` "MaxSuccessfulAttemptsPerTickPerConstructionQueueModifier".
  */
 export type MaxSuccessfulAttemptsPerTickPerConstructionQueueModifier = SimpleModifier & {
-  type: unknown
+  type: 'max-successful-attempts-per-tick-per-construction-queue'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -3541,7 +3541,7 @@ export type MaxSuccessfulAttemptsPerTickPerConstructionQueueModifier = SimpleMod
  * via the `definition` "MaximumFollowingRobotsCountModifier".
  */
 export type MaximumFollowingRobotsCountModifier = SimpleModifier & {
-  type: unknown
+  type: 'maximum-following-robots-count'
   infer_icon?: Bool
   use_icon_overlay_constant?: Bool
 }
@@ -3573,7 +3573,7 @@ export type MiningDrillGraphicsSet = WorkingVisualisations & {
  * via the `definition` "MiningDrillProductivityBonusModifier".
  */
 export type MiningDrillProductivityBonusModifier = SimpleModifier & {
-  type: unknown
+  type: 'mining-drill-productivity-bonus'
   infer_icon?: Bool
   use_icon_overlay_constant?: Bool
 }
@@ -3584,7 +3584,7 @@ export type MiningDrillProductivityBonusModifier = SimpleModifier & {
  * via the `definition` "MiningWithFluidModifier".
  */
 export type MiningWithFluidModifier = BoolModifier & {
-  type: unknown
+  type: 'mining-with-fluid'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -3649,7 +3649,7 @@ export type Modifier =
  * via the `definition` "WorkerRobotSpeedModifier".
  */
 export type WorkerRobotSpeedModifier = SimpleModifier & {
-  type: unknown
+  type: 'worker-robot-speed'
   infer_icon?: Bool
   use_icon_overlay_constant?: Bool
 }
@@ -3660,7 +3660,7 @@ export type WorkerRobotSpeedModifier = SimpleModifier & {
  * via the `definition` "WorkerRobotStorageModifier".
  */
 export type WorkerRobotStorageModifier = SimpleModifier & {
-  type: unknown
+  type: 'worker-robot-storage'
   infer_icon?: Bool
   use_icon_overlay_constant?: Bool
 }
@@ -3671,7 +3671,7 @@ export type WorkerRobotStorageModifier = SimpleModifier & {
  * via the `definition` "TurretAttackModifier".
  */
 export type TurretAttackModifier = BaseModifier & {
-  type: unknown
+  type: 'turret-attack'
   infer_icon?: Bool
   use_icon_overlay_constant?: Bool
   turret_id: EntityID
@@ -3684,7 +3684,7 @@ export type TurretAttackModifier = BaseModifier & {
  * via the `definition` "UnlockRecipeModifier".
  */
 export type UnlockRecipeModifier = BaseModifier & {
-  type: unknown
+  type: 'unlock-recipe'
   use_icon_overlay_constant?: Bool
   recipe: RecipeID
 }
@@ -3695,7 +3695,7 @@ export type UnlockRecipeModifier = BaseModifier & {
  * via the `definition` "TrainBrakingForceBonusModifier".
  */
 export type TrainBrakingForceBonusModifier = SimpleModifier & {
-  type: unknown
+  type: 'train-braking-force-bonus'
   infer_icon?: Bool
   use_icon_overlay_constant?: Bool
 }
@@ -3706,7 +3706,7 @@ export type TrainBrakingForceBonusModifier = SimpleModifier & {
  * via the `definition` "WorkerRobotBatteryModifier".
  */
 export type WorkerRobotBatteryModifier = SimpleModifier & {
-  type: unknown
+  type: 'worker-robot-battery'
   infer_icon?: Bool
   use_icon_overlay_constant?: Bool
 }
@@ -3717,7 +3717,7 @@ export type WorkerRobotBatteryModifier = SimpleModifier & {
  * via the `definition` "NothingModifier".
  */
 export type NothingModifier = BaseModifier & {
-  type: unknown
+  type: 'nothing'
   use_icon_overlay_constant?: Bool
   effect_description?: LocalisedString
 }
@@ -3728,7 +3728,7 @@ export type NothingModifier = BaseModifier & {
  * via the `definition` "VehicleLogisticsModifier".
  */
 export type VehicleLogisticsModifier = BoolModifier & {
-  type: unknown
+  type: 'vehicle-logistics'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -3738,7 +3738,7 @@ export type VehicleLogisticsModifier = BoolModifier & {
  * via the `definition` "UnlockSpaceLocationModifier".
  */
 export type UnlockSpaceLocationModifier = BaseModifier & {
-  type: unknown
+  type: 'unlock-space-location'
   use_icon_overlay_constant?: Bool
   space_location: SpaceLocationID
 }
@@ -3749,7 +3749,7 @@ export type UnlockSpaceLocationModifier = BaseModifier & {
  * via the `definition` "UnlockQualityModifier".
  */
 export type UnlockQualityModifier = BaseModifier & {
-  type: unknown
+  type: 'unlock-quality'
   use_icon_overlay_constant?: Bool
   quality: QualityID
 }
@@ -3760,7 +3760,7 @@ export type UnlockQualityModifier = BaseModifier & {
  * via the `definition` "SpacePlatformsModifier".
  */
 export type SpacePlatformsModifier = BoolModifier & {
-  type: unknown
+  type: 'unlock-space-platforms'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -3770,7 +3770,7 @@ export type SpacePlatformsModifier = BoolModifier & {
  * via the `definition` "RailSupportOnDeepOilOceanModifier".
  */
 export type RailSupportOnDeepOilOceanModifier = BoolModifier & {
-  type: unknown
+  type: 'rail-support-on-deep-oil-ocean'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -3780,7 +3780,7 @@ export type RailSupportOnDeepOilOceanModifier = BoolModifier & {
  * via the `definition` "RailPlannerAllowElevatedRailsModifier".
  */
 export type RailPlannerAllowElevatedRailsModifier = BoolModifier & {
-  type: unknown
+  type: 'rail-planner-allow-elevated-rails'
   use_icon_overlay_constant?: Bool
 }
 /**
@@ -3790,7 +3790,7 @@ export type RailPlannerAllowElevatedRailsModifier = BoolModifier & {
  * via the `definition` "NestedTriggerEffectItem".
  */
 export type NestedTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'nested-result'
   action: Trigger
 }
 /**
@@ -3809,7 +3809,7 @@ export type PersistentWorldAmbientSoundsDefinitionCrossfade = Fade & {
  * via the `definition` "PlaySoundTriggerEffectItem".
  */
 export type PlaySoundTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'play-sound'
   sound: Sound
   min_distance?: Float
   max_distance?: Float
@@ -3894,7 +3894,7 @@ export type ProcessionLayerWithTime = ProcessionLayer
  * via the `definition` "ProgressBarStyleSpecification".
  */
 export type ProgressBarStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'progressbar_style'
   bar_width?: Uint32
   color?: Color
   other_colors?: unknown
@@ -3913,7 +3913,7 @@ export type ProgressBarStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "ProjectileTriggerDelivery".
  */
 export type ProjectileTriggerDelivery = TriggerDeliveryItem & {
-  type: unknown
+  type: 'projectile'
   projectile: EntityID
   starting_speed: Float
   starting_speed_deviation?: Float
@@ -3936,7 +3936,7 @@ export type TileEffectDefinitionID = String
  * via the `definition` "PushBackTriggerEffectItem".
  */
 export type PushBackTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'push-back'
   distance: Float
 }
 /**
@@ -3946,7 +3946,7 @@ export type PushBackTriggerEffectItem = TriggerEffectItem & {
  * via the `definition` "RadioButtonStyleSpecification".
  */
 export type RadioButtonStyleSpecification = StyleWithClickableGraphicalSetSpecification & {
-  type: unknown
+  type: 'radiobutton_style'
   font?: String
   font_color?: Color
   disabled_font_color?: Color
@@ -3975,7 +3975,7 @@ export type RandomRange = Uint8
  * via the `definition` "ScriptTriggerEffectItem".
  */
 export type ScriptTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'script'
   effect_id: String
 }
 /**
@@ -3985,7 +3985,7 @@ export type ScriptTriggerEffectItem = TriggerEffectItem & {
  * via the `definition` "SetTileTriggerEffectItem".
  */
 export type SetTileTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'set-tile'
   tile_name: TileID
   radius: Float
   apply_projection?: Bool
@@ -3999,7 +3999,7 @@ export type SetTileTriggerEffectItem = TriggerEffectItem & {
  * via the `definition` "ShowExplosionOnChartTriggerEffectItem".
  */
 export type ShowExplosionOnChartTriggerEffectItem = TriggerEffectItem & {
-  type: unknown
+  type: 'show-explosion-on-chart'
   scale: Float
 }
 /**
@@ -4065,7 +4065,7 @@ export type SpaceConnectionID = String
  * via the `definition` "SpaceLocationAsteroidSpawnDefinition".
  */
 export type SpaceLocationAsteroidSpawnDefinition = AsteroidSpawnPoint & {
-  type?: unknown
+  type?: 'entity' | 'asteroid-chunk'
   asteroid: unknown
 }
 /**
@@ -4075,7 +4075,7 @@ export type SpaceLocationAsteroidSpawnDefinition = AsteroidSpawnPoint & {
  * via the `definition` "SpeechBubbleStyleSpecification".
  */
 export type SpeechBubbleStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'speech_bubble_style'
   frame_style?: FrameStyleSpecification
   label_style?: LabelStyleSpecification
   arrow_graphical_set?: ElementImageSet
@@ -4125,7 +4125,7 @@ export type SpriteSheet = SpriteParameters & {
  * via the `definition` "StreamTriggerDelivery".
  */
 export type StreamTriggerDelivery = TriggerDeliveryItem & {
-  type: unknown
+  type: 'stream'
   stream: EntityID
   source_offset?: Vector
 }
@@ -4174,7 +4174,7 @@ export type StyleSpecification =
  * via the `definition` "SwitchStyleSpecification".
  */
 export type SwitchStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'switch_style'
   left_button_position?: Uint32
   middle_button_position?: Uint32
   right_button_position?: Uint32
@@ -4192,7 +4192,7 @@ export type SwitchStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "TableStyleSpecification".
  */
 export type TableStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'table_style'
   horizontal_spacing?: unknown
   vertical_spacing?: unknown
   cell_padding?: Int16
@@ -4231,7 +4231,7 @@ export type TableStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "TabStyleSpecification".
  */
 export type TabStyleSpecification = StyleWithClickableGraphicalSetSpecification & {
-  type: unknown
+  type: 'tab_style'
   font?: String
   badge_font?: String
   badge_horizontal_spacing?: Int16
@@ -4259,7 +4259,7 @@ export type TabStyleSpecification = StyleWithClickableGraphicalSetSpecification 
  * via the `definition` "TextBoxStyleSpecification".
  */
 export type TextBoxStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'textbox_style'
   font?: String
   font_color?: Color
   disabled_font_color?: Color
@@ -4283,7 +4283,7 @@ export type TextBoxStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "TabbedPaneStyleSpecification".
  */
 export type TabbedPaneStyleSpecification = BaseStyleSpecification & {
-  type: unknown
+  type: 'tabbed_pane_style'
   vertical_spacing?: Uint32
   tab_content_frame?: FrameStyleSpecification
   tab_container?: TableStyleSpecification
@@ -4657,7 +4657,7 @@ export type AchievementPrototype = Prototype & {
  * via the `definition` "AchievementPrototypeWithCondition".
  */
 export type AchievementPrototypeWithCondition = AchievementPrototype & {
-  objective_condition: unknown
+  objective_condition: 'game-finished' | 'rocket-launched'
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/ActiveDefenseEquipmentPrototype.html
@@ -5179,7 +5179,7 @@ export type BeaconPrototype = EntityWithOwnerPrototype & {
   allowed_effects?: EffectTypeLimitation
   allowed_module_categories?: ModuleCategoryID[] | {}
   profile?: Double[] | {}
-  beacon_counter?: unknown
+  beacon_counter?: 'total' | 'same_type'
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/BeamPrototype.html
@@ -5659,7 +5659,12 @@ export type CustomInputPrototype = Prototype & {
   enabled_while_in_cutscene?: Bool
   include_selected_prototype?: Bool
   item_to_spawn?: ItemID
-  action?: unknown
+  action?:
+    | 'lua'
+    | 'spawn-item'
+    | 'toggle-personal-roboport'
+    | 'toggle-personal-logistic-requests'
+    | 'toggle-equipment-movement-bonus'
   block_modifiers?: Bool
 }
 /**
@@ -5845,7 +5850,7 @@ export type ElectricEnergyInterfacePrototype = EntityWithOwnerPrototype & {
   energy_source: ElectricEnergySource
   energy_production?: Energy
   energy_usage?: Energy
-  gui_mode?: unknown
+  gui_mode?: 'all' | 'none' | 'admins'
   continuous_animation?: Bool
   render_layer?: RenderLayer
   light?: LightDefinition
@@ -6319,7 +6324,7 @@ export type GuiStyle = PrototypeBase & {
 export type HeatInterfacePrototype = EntityWithOwnerPrototype & {
   heat_buffer: HeatBuffer
   picture?: Sprite
-  gui_mode?: unknown
+  gui_mode?: 'all' | 'none' | 'admins'
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/HeatPipePrototype.html
@@ -6349,7 +6354,7 @@ export type HighlightBoxEntityPrototype = EntityPrototype
 export type InfinityContainerPrototype = LogisticContainerPrototype & {
   erase_contents_when_mined: Bool
   preserve_contents_when_created?: Bool
-  gui_mode?: unknown
+  gui_mode?: 'all' | 'none' | 'admins'
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/LogisticContainerPrototype.html
@@ -6375,7 +6380,7 @@ export type LogisticContainerPrototype = ContainerPrototype & {
  * via the `definition` "InfinityPipePrototype".
  */
 export type InfinityPipePrototype = PipePrototype & {
-  gui_mode?: unknown
+  gui_mode?: 'all' | 'none' | 'admins'
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/PipePrototype.html
@@ -6549,7 +6554,7 @@ export type LampPrototype = EntityWithOwnerPrototype & {
   darkness_for_all_lamps_off?: Float
   always_on?: Bool
   signal_to_color_mapping?: SignalColorMapping[] | {}
-  glow_render_mode?: unknown
+  glow_render_mode?: 'additive' | 'multiplicative'
   default_red_signal?: SignalIDConnector
   default_green_signal?: SignalIDConnector
   default_blue_signal?: SignalIDConnector
@@ -6664,7 +6669,7 @@ export type LinkedContainerPrototype = EntityWithOwnerPrototype & {
   inventory_size: ItemStackIndex
   picture?: Sprite
   inventory_type?: unknown
-  gui_mode?: unknown
+  gui_mode?: 'all' | 'none' | 'admins'
   circuit_wire_max_distance?: Double
   draw_copper_wires?: Bool
   draw_circuit_wires?: Bool
@@ -7071,7 +7076,7 @@ export type ProcessionLayerInheritanceGroup = Prototype & {
 export type ProcessionPrototype = Prototype & {
   timeline: ProcessionTimeline
   ground_timeline?: ProcessionTimeline
-  usage: unknown
+  usage: 'departure' | 'arrival' | 'intermezzo'
   procession_style: unknown
 }
 /**
@@ -7593,7 +7598,17 @@ export type ShootAchievementPrototype = AchievementPrototype & {
  * via the `definition` "ShortcutPrototype".
  */
 export type ShortcutPrototype = Prototype & {
-  action: unknown
+  action:
+    | 'toggle-alt-mode'
+    | 'undo'
+    | 'copy'
+    | 'cut'
+    | 'paste'
+    | 'import-string'
+    | 'toggle-personal-roboport'
+    | 'toggle-equipment-movement-bonus'
+    | 'spawn-item'
+    | 'lua'
   icons?: IconData[] | {}
   icon?: unknown
   icon_size?: SpriteSizeType
@@ -7605,7 +7620,7 @@ export type ShortcutPrototype = Prototype & {
   unavailable_until_unlocked?: Bool
   toggleable?: Bool
   associated_control_input?: String
-  style?: unknown
+  style?: 'default' | 'blue' | 'red' | 'green'
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/SimpleEntityPrototype.html
@@ -9353,7 +9368,7 @@ export interface Trigger {
  * via the `definition` "ItemProductPrototype".
  */
 export interface ItemProductPrototype {
-  type: unknown
+  type: 'item'
   name: ItemID
   amount?: Double
   amount_min?: Uint16
@@ -9473,7 +9488,7 @@ export interface MinableProperties {
  * via the `definition` "FluidProductPrototype".
  */
 export interface FluidProductPrototype {
-  type: unknown
+  type: 'fluid'
   name: FluidID
   amount?: FluidAmount
   amount_min?: FluidAmount
@@ -9492,7 +9507,7 @@ export interface FluidProductPrototype {
  * via the `definition` "ResearchProgressProductPrototype".
  */
 export interface ResearchProgressProductPrototype {
-  type: unknown
+  type: 'research-progress'
   amount?: Double
   research_item: ItemID
 }
@@ -9645,7 +9660,7 @@ export interface IconDrawSpecification {
   shift?: Vector
   scale?: Float
   scale_for_many?: Float
-  renderLayer?: unknown
+  renderLayer?: 'entity-info-icon-below' | 'entity-info-icon-above' | 'air-entity-info-icon'
 }
 /**
  * https://lua-api.factorio.com/stable/types/IconSequencePositioning.html
@@ -9802,7 +9817,7 @@ export interface FluidBox {
  * via the `definition` "PipeConnectionDefinition".
  */
 export interface PipeConnectionDefinition {
-  flow_direction?: unknown
+  flow_direction?: 'input-output' | 'input' | 'output'
   connection_type?: unknown
   enable_working_visualisations?: String[] | {}
   direction?: Direction
@@ -9978,8 +9993,8 @@ export interface SelectionModeData {
   started_sound?: Sound
   ended_sound?: Sound
   play_ended_sound_when_nothing_selected?: Bool
-  entity_filter_mode?: unknown
-  tile_filter_mode?: unknown
+  entity_filter_mode?: 'whitelist' | 'blacklist'
+  tile_filter_mode?: 'whitelist' | 'blacklist'
 }
 /**
  * https://lua-api.factorio.com/stable/types/SelectionModeFlags.html
@@ -9997,7 +10012,7 @@ export interface SelectionModeFlags {
  * via the `definition` "ThrowCapsuleAction".
  */
 export interface ThrowCapsuleAction {
-  type: unknown
+  type: 'throw'
   attack_parameters: AttackParameters
   uses_stack?: Bool
 }
@@ -10026,7 +10041,7 @@ export interface BaseAttackParameters {
   movement_slow_down_cooldown?: Float
   movement_slow_down_factor?: Double
   ammo_type?: AmmoType
-  activation_type?: unknown
+  activation_type?: 'shoot' | 'throw' | 'consume' | 'activate'
   sound?: LayeredSound
   animation?: RotatedAnimation
   cyclic_sound?: CyclicSound
@@ -10047,7 +10062,7 @@ export interface AmmoType {
   range_modifier?: Double
   cooldown_modifier?: Double
   consumption_modifier?: Float
-  target_type?: unknown
+  target_type?: 'entity' | 'position' | 'direction'
   source_type?: AmmoSourceType
   target_filter?: EntityID[] | {}
 }
@@ -10132,7 +10147,7 @@ export interface CircularProjectileCreationSpecification {
  * via the `definition` "ActivateEquipmentCapsuleAction".
  */
 export interface ActivateEquipmentCapsuleAction {
-  type: unknown
+  type: 'equipment-remote'
   equipment: EquipmentID
 }
 /**
@@ -10142,7 +10157,7 @@ export interface ActivateEquipmentCapsuleAction {
  * via the `definition` "UseOnSelfCapsuleAction".
  */
 export interface UseOnSelfCapsuleAction {
-  type: unknown
+  type: 'use-on-self'
   attack_parameters: AttackParameters
   uses_stack?: Bool
 }
@@ -10153,7 +10168,7 @@ export interface UseOnSelfCapsuleAction {
  * via the `definition` "DestroyCliffsCapsuleAction".
  */
 export interface DestroyCliffsCapsuleAction {
-  type: unknown
+  type: 'destroy-cliffs'
   attack_parameters: AttackParameters
   radius: Float
   timeout?: Uint32
@@ -10167,7 +10182,7 @@ export interface DestroyCliffsCapsuleAction {
  * via the `definition` "ArtilleryRemoteCapsuleAction".
  */
 export interface ArtilleryRemoteCapsuleAction {
-  type: unknown
+  type: 'artillery-remote'
   flare: EntityID
   play_sound_on_failure?: Bool
 }
@@ -10232,7 +10247,7 @@ export interface FootprintParticle {
  * via the `definition` "ItemIngredientPrototype".
  */
 export interface ItemIngredientPrototype {
-  type: unknown
+  type: 'item'
   name: ItemID
   amount: Uint16
   ignored_by_stats?: Uint16
@@ -10244,7 +10259,7 @@ export interface ItemIngredientPrototype {
  * via the `definition` "FluidIngredientPrototype".
  */
 export interface FluidIngredientPrototype {
-  type: unknown
+  type: 'fluid'
   name: FluidID
   amount: FluidAmount
   temperature?: Float
@@ -10426,7 +10441,7 @@ export interface AggregationSpecification {
   volume_reduction_rate?: Float
   remove: Bool
   count_already_playing?: Bool
-  priority?: unknown
+  priority?: 'closest' | 'farthest' | 'newest' | 'oldest'
 }
 /**
  * https://lua-api.factorio.com/stable/types/AgriculturalCraneProperties.html
@@ -10569,7 +10584,7 @@ export interface BaseModifier {
  * via the `definition` "AndTipTrigger".
  */
 export interface AndTipTrigger {
-  type: unknown
+  type: 'and'
   triggers: TipTrigger[] | {}
 }
 /**
@@ -10579,7 +10594,7 @@ export interface AndTipTrigger {
  * via the `definition` "OrTipTrigger".
  */
 export interface OrTipTrigger {
-  type: unknown
+  type: 'or'
   triggers: TipTrigger[] | {}
 }
 /**
@@ -10589,7 +10604,7 @@ export interface OrTipTrigger {
  * via the `definition` "SequenceTipTrigger".
  */
 export interface SequenceTipTrigger {
-  type: unknown
+  type: 'sequence'
   triggers: TipTrigger[] | {}
 }
 /**
@@ -10599,7 +10614,7 @@ export interface SequenceTipTrigger {
  * via the `definition` "DependenciesMetTipTrigger".
  */
 export interface DependenciesMetTipTrigger {
-  type: unknown
+  type: 'dependencies-met'
 }
 /**
  * https://lua-api.factorio.com/stable/types/TimeElapsedTipTrigger.html
@@ -10608,7 +10623,7 @@ export interface DependenciesMetTipTrigger {
  * via the `definition` "TimeElapsedTipTrigger".
  */
 export interface TimeElapsedTipTrigger {
-  type: unknown
+  type: 'time-elapsed'
   ticks: Uint32
 }
 /**
@@ -10618,7 +10633,7 @@ export interface TimeElapsedTipTrigger {
  * via the `definition` "TimeSinceLastTipActivationTipTrigger".
  */
 export interface TimeSinceLastTipActivationTipTrigger {
-  type: unknown
+  type: 'time-since-last-tip-activation'
   ticks: MapTick
 }
 /**
@@ -10628,7 +10643,7 @@ export interface TimeSinceLastTipActivationTipTrigger {
  * via the `definition` "ResearchTechnologyTipTrigger".
  */
 export interface ResearchTechnologyTipTrigger {
-  type: unknown
+  type: 'research'
   technology: TechnologyID
 }
 /**
@@ -10638,7 +10653,7 @@ export interface ResearchTechnologyTipTrigger {
  * via the `definition` "ResearchWithSciencePackTipTrigger".
  */
 export interface ResearchWithSciencePackTipTrigger {
-  type: unknown
+  type: 'research-with-science-pack'
   science_pack: ItemID
 }
 /**
@@ -10648,7 +10663,7 @@ export interface ResearchWithSciencePackTipTrigger {
  * via the `definition` "UnlockRecipeTipTrigger".
  */
 export interface UnlockRecipeTipTrigger {
-  type: unknown
+  type: 'unlock-recipe'
   recipe: RecipeID
 }
 /**
@@ -10658,7 +10673,7 @@ export interface UnlockRecipeTipTrigger {
  * via the `definition` "PlanTrainPathTipTrigger".
  */
 export interface PlanTrainPathTipTrigger {
-  type: unknown
+  type: 'plan-train-path'
   distance: Double
 }
 /**
@@ -10837,7 +10852,7 @@ export interface BeaconGraphicsSet {
   frozen_patch?: Sprite
   light?: LightDefinition
   module_visualisations?: BeaconModuleVisualizations[] | {}
-  module_tint_mode?: unknown
+  module_tint_mode?: 'single-module' | 'mix'
 }
 /**
  * https://lua-api.factorio.com/stable/types/BeaconModuleVisualizations.html
@@ -10959,7 +10974,7 @@ export interface BoxSpecification {
  * via the `definition` "BuildEntityTechnologyTrigger".
  */
 export interface BuildEntityTechnologyTrigger {
-  type: unknown
+  type: 'build-entity'
   entity: EntityIDFilter
 }
 /**
@@ -10978,7 +10993,7 @@ export interface EntityIDFilter {
  * via the `definition` "CaptureSpawnerTechnologyTrigger".
  */
 export interface CaptureSpawnerTechnologyTrigger {
-  type: unknown
+  type: 'capture-spawner'
   entity?: EntityID
 }
 /**
@@ -11318,7 +11333,7 @@ export interface CoverGraphicEffectData {
  * via the `definition` "CoverGraphicProcessionLayer".
  */
 export interface CoverGraphicProcessionLayer {
-  type: unknown
+  type: 'cover-graphic'
   reference_group?: ProcessionLayerInheritanceGroupID
   inherit_from?: ProcessionLayerInheritanceGroupID
   graphic?: ProcessionGraphic
@@ -11356,7 +11371,7 @@ export interface ProcessionGraphic {
  * via the `definition` "CraftFluidTechnologyTrigger".
  */
 export interface CraftFluidTechnologyTrigger {
-  type: unknown
+  type: 'craft-fluid'
   fluid: FluidID
   amount?: Double
 }
@@ -11367,7 +11382,7 @@ export interface CraftFluidTechnologyTrigger {
  * via the `definition` "CraftItemTechnologyTrigger".
  */
 export interface CraftItemTechnologyTrigger {
-  type: unknown
+  type: 'craft-item'
   item: ItemIDFilter
   count?: ItemCountType
 }
@@ -11398,7 +11413,7 @@ export interface CraterPlacementDefinition {
  * via the `definition` "CreateSpacePlatformTechnologyTrigger".
  */
 export interface CreateSpacePlatformTechnologyTrigger {
-  type: unknown
+  type: 'create-space-platform'
 }
 /**
  * https://lua-api.factorio.com/stable/types/DamageParameters.html
@@ -11532,7 +11547,7 @@ export interface EntityBuildAnimationPiece {
 export interface EquipmentShape {
   width: Uint32
   height: Uint32
-  type: unknown
+  type: 'full' | 'manual'
   points?: unknown
 }
 /**
@@ -11557,7 +11572,7 @@ export interface FeatureFlags {
  * via the `definition` "FogEffectProperties".
  */
 export interface FogEffectProperties {
-  fog_type?: unknown
+  fog_type?: 'vulcanus' | 'gleba'
   shape_noise_texture: EffectTexture
   detail_noise_texture: EffectTexture
   color1?: Color
@@ -11822,7 +11837,7 @@ export interface LightningGraphicsSet {
  * via the `definition` "LightningRuleBase".
  */
 export interface LightningRuleBase {
-  type: unknown
+  type: 'impact-soundset' | 'prototype' | 'id' | 'countAsRockForFilteredDeconstruction'
   string: String
 }
 /**
@@ -11997,7 +12012,7 @@ export interface MaterialTextureParameters {
  * via the `definition` "MineEntityTechnologyTrigger".
  */
 export interface MineEntityTechnologyTrigger {
-  type: unknown
+  type: 'mine-entity'
   entity: EntityID
 }
 /**
@@ -12313,7 +12328,7 @@ export interface PlumesSpecification {
  * via the `definition` "PodAnimationProcessionLayer".
  */
 export interface PodAnimationProcessionLayer {
-  type: unknown
+  type: 'pod-animation'
   graphic?: ProcessionGraphic
   frames: unknown
 }
@@ -12324,7 +12339,7 @@ export interface PodAnimationProcessionLayer {
  * via the `definition` "PodDistanceTraveledProcessionLayer".
  */
 export interface PodDistanceTraveledProcessionLayer {
-  type: unknown
+  type: 'pod-distance-traveled'
   reference_group?: ProcessionLayerInheritanceGroupID
   contribute_to_distance_traveled?: Bool
   distance_traveled_contribution?: Float
@@ -12337,7 +12352,7 @@ export interface PodDistanceTraveledProcessionLayer {
  * via the `definition` "PodMovementProcessionLayer".
  */
 export interface PodMovementProcessionLayer {
-  type: unknown
+  type: 'pod-movement'
   reference_group?: ProcessionLayerInheritanceGroupID
   inherit_from?: ProcessionLayerInheritanceGroupID
   contribute_to_distance_traveled?: Bool
@@ -12351,7 +12366,7 @@ export interface PodMovementProcessionLayer {
  * via the `definition` "PodOpacityProcessionLayer".
  */
 export interface PodOpacityProcessionLayer {
-  type: unknown
+  type: 'pod-opacity'
   lut: ColorLookupTable
   frames: unknown
 }
@@ -12464,7 +12479,7 @@ export interface ProcessionGraphicCatalogueItem {
  * via the `definition` "SingleGraphicProcessionLayer".
  */
 export interface SingleGraphicProcessionLayer {
-  type: unknown
+  type: 'single-graphic'
   graphic: ProcessionGraphic
   render_layer?: RenderLayer
   secondary_draw_order?: Int8
@@ -12484,7 +12499,7 @@ export interface SingleGraphicProcessionLayer {
  * via the `definition` "TintProcessionLayer".
  */
 export interface TintProcessionLayer {
-  type: unknown
+  type: 'tint'
   render_layer?: RenderLayer
   frames: unknown
 }
@@ -12879,7 +12894,7 @@ export interface SemiPersistentWorldAmbientSoundDefinition {
  * via the `definition` "SendItemToOrbitTechnologyTrigger".
  */
 export interface SendItemToOrbitTechnologyTrigger {
-  type: unknown
+  type: 'send-item-to-orbit'
   item: ItemIDFilter
 }
 /**
@@ -13378,7 +13393,7 @@ export interface TurretGraphicsSet {
  * via the `definition` "TurretSpecialEffect".
  */
 export interface TurretSpecialEffect {
-  type: unknown
+  type: 'mask-by-circle'
   center?: TurretSpecialEffectCenter
   min_radius?: Float
   max_radius?: Float
@@ -13575,9 +13590,15 @@ export interface WorkingVisualisation {
   mining_drill_scorch_mark?: Bool
   secondary_draw_order?: Int8
   light?: LightDefinition
-  effect?: unknown
-  apply_recipe_tint?: unknown
-  apply_tint?: unknown
+  effect?: 'flicker' | 'uranium-glow' | 'none'
+  apply_recipe_tint?: 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'none'
+  apply_tint?:
+    | 'resource-color'
+    | 'input-fluid-base-color'
+    | 'input-fluid-flow-color'
+    | 'status'
+    | 'none'
+    | 'visual-state-color'
   north_animation?: Animation
   east_animation?: Animation
   south_animation?: Animation
@@ -13623,7 +13644,7 @@ export interface WorldAmbientSoundDefinition {
  * via the `definition` "AmbientSound".
  */
 export interface AmbientSound {
-  type: unknown
+  type: 'ambient-sound'
   name: String
   weight?: Double
   track_type: unknown
@@ -13638,7 +13659,7 @@ export interface AmbientSound {
  * via the `definition` "AnimationPrototype".
  */
 export interface AnimationPrototype {
-  type: unknown
+  type: 'animation'
   name: String
   layers?: Animation[] | {}
   filename?: FileName
@@ -13691,7 +13712,7 @@ export interface AnimationPrototype {
  * via the `definition` "DeliverCategory".
  */
 export interface DeliverCategory {
-  type: unknown
+  type: 'deliver-category'
   name: String
 }
 /**
@@ -13701,7 +13722,7 @@ export interface DeliverCategory {
  * via the `definition` "DeliverImpactCombination".
  */
 export interface DeliverImpactCombination {
-  type: unknown
+  type: 'deliver-impact-combination'
   name: String
   impact_category: String
   deliver_category: String
@@ -13714,7 +13735,7 @@ export interface DeliverImpactCombination {
  * via the `definition` "EditorControllerPrototype".
  */
 export interface EditorControllerPrototype {
-  type: unknown
+  type: 'editor-controller'
   name: String
   inventory_size: ItemStackIndex
   gun_inventory_size: ItemStackIndex
@@ -13749,7 +13770,7 @@ export interface EditorControllerPrototype {
  * via the `definition` "FontPrototype".
  */
 export interface FontPrototype {
-  type: unknown
+  type: 'font'
   name: String
   size: Int32
   from: String
@@ -13765,7 +13786,7 @@ export interface FontPrototype {
  * via the `definition` "GodControllerPrototype".
  */
 export interface GodControllerPrototype {
-  type: unknown
+  type: 'god-controller'
   name: String
   inventory_size: ItemStackIndex
   movement_speed: Double
@@ -13782,7 +13803,7 @@ export interface GodControllerPrototype {
  * via the `definition` "ImpactCategory".
  */
 export interface ImpactCategory {
-  type: unknown
+  type: 'impact-category'
   name: String
 }
 /**
@@ -13792,7 +13813,7 @@ export interface ImpactCategory {
  * via the `definition` "MapGenPresets".
  */
 export interface MapGenPresets {
-  type: unknown
+  type: 'map-gen-presets'
   name: String
 }
 /**
@@ -13802,7 +13823,7 @@ export interface MapGenPresets {
  * via the `definition` "MapSettings".
  */
 export interface MapSettings {
-  type: unknown
+  type: 'map-settings'
   name: String
   pollution: PollutionSettings
   steering: unknown
@@ -13821,9 +13842,9 @@ export interface MapSettings {
  * via the `definition` "MouseCursor".
  */
 export interface MouseCursor {
-  type: unknown
+  type: 'mouse-cursor'
   name: String
-  system_cursor?: unknown
+  system_cursor?: 'arrow' | 'i-beam' | 'crosshair' | 'wait-arrow' | 'size-all' | 'no' | 'hand'
   filename?: FileName
   hot_pixel_x?: Int16
   hot_pixel_y?: Int16
@@ -13835,7 +13856,7 @@ export interface MouseCursor {
  * via the `definition` "RemoteControllerPrototype".
  */
 export interface RemoteControllerPrototype {
-  type: unknown
+  type: 'remote-controller'
   name: String
   movement_speed: Double
 }
@@ -13846,7 +13867,7 @@ export interface RemoteControllerPrototype {
  * via the `definition` "SoundPrototype".
  */
 export interface SoundPrototype {
-  type: unknown
+  type: 'sound'
   name: String
   category?: SoundType
   priority?: Uint8
@@ -13874,7 +13895,7 @@ export interface SoundPrototype {
  * via the `definition` "SpectatorControllerPrototype".
  */
 export interface SpectatorControllerPrototype {
-  type: unknown
+  type: 'spectator-controller'
   name: String
   movement_speed: Double
 }
@@ -13885,7 +13906,7 @@ export interface SpectatorControllerPrototype {
  * via the `definition` "SpritePrototype".
  */
 export interface SpritePrototype {
-  type: unknown
+  type: 'sprite'
   name: String
   layers?: Sprite[] | {}
   filename?: FileName
@@ -13927,9 +13948,9 @@ export interface SpritePrototype {
  * via the `definition` "TileEffectDefinition".
  */
 export interface TileEffectDefinition {
-  type: unknown
+  type: 'tile-effect'
   name: String
-  shader: unknown
+  shader: 'water' | 'space' | 'puddle'
   water?: WaterTileEffectParameters
   space?: SpaceTileEffectParameters
   puddle?: PuddleTileEffectParameters
@@ -13941,7 +13962,7 @@ export interface TileEffectDefinition {
  * via the `definition` "TipsAndTricksItemCategory".
  */
 export interface TipsAndTricksItemCategory {
-  type: unknown
+  type: 'tips-and-tricks-item-category'
   name: String
   order: Order
 }
@@ -13952,6 +13973,6 @@ export interface TipsAndTricksItemCategory {
  * via the `definition` "TriggerTargetType".
  */
 export interface TriggerTargetType {
-  type: unknown
+  type: 'trigger-target-type'
   name: String
 }
