@@ -30,6 +30,8 @@ fi
     --line-length 120
 
   python -m factorio_prototypes_schema $FACTORIO_LOCATION >src/factorio_prototypes_schema.tmp.json
+
+  check-jsonschema --verbose --schemafile src/factorio_prototypes_schema.tmp.json game-definitions/*/script-output/data-raw-dump.json
 )
 npx prettier --write src/factorio_prototypes_schema.tmp.json
 mv src/factorio_prototypes_schema.tmp.json src/factorio_prototypes_schema.json

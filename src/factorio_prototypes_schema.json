@@ -540,26 +540,10 @@
       "description": "https://lua-api.factorio.com/stable/types/AnimatedVector.html",
       "type": "object",
       "properties": {
-        "frames": {
-          "$ref": "#/definitions/Vector"
-        },
         "render_layer": {
           "$ref": "#/definitions/RenderLayer"
-        },
-        "north": {
-          "$ref": "#/definitions/Vector"
-        },
-        "east": {
-          "$ref": "#/definitions/Vector"
-        },
-        "south": {
-          "$ref": "#/definitions/Vector"
-        },
-        "west": {
-          "$ref": "#/definitions/Vector"
         }
-      },
-      "required": ["frames"]
+      }
     },
     "Animation": {
       "description": "https://lua-api.factorio.com/stable/types/Animation.html",
@@ -3569,81 +3553,6 @@
         },
         "alt_effect": {
           "$ref": "#/definitions/CoverGraphicEffectData"
-        },
-        "timestamp": {
-          "$ref": "#/definitions/MapTick"
-        },
-        "opacity": {
-          "$ref": "#/definitions/double"
-        },
-        "opacity_t": {
-          "$ref": "#/definitions/double"
-        },
-        "rotation": {
-          "$ref": "#/definitions/double"
-        },
-        "rotation_t": {
-          "$ref": "#/definitions/double"
-        },
-        "effect_scale_min": {
-          "$ref": "#/definitions/double"
-        },
-        "effect_scale_min_t": {
-          "$ref": "#/definitions/double"
-        },
-        "effect_scale_max": {
-          "$ref": "#/definitions/double"
-        },
-        "effect_scale_max_t": {
-          "$ref": "#/definitions/double"
-        },
-        "alt_effect_scale_min": {
-          "$ref": "#/definitions/double"
-        },
-        "alt_effect_scale_min_t": {
-          "$ref": "#/definitions/double"
-        },
-        "alt_effect_scale_max": {
-          "$ref": "#/definitions/double"
-        },
-        "alt_effect_scale_max_t": {
-          "$ref": "#/definitions/double"
-        },
-        "effect_shift": {
-          "$ref": "#/definitions/Vector"
-        },
-        "effect_shift_t": {
-          "$ref": "#/definitions/Vector"
-        },
-        "effect_shift_rate": {
-          "$ref": "#/definitions/double"
-        },
-        "effect_shift_rate_t": {
-          "$ref": "#/definitions/double"
-        },
-        "alt_effect_shift": {
-          "$ref": "#/definitions/Vector"
-        },
-        "alt_effect_shift_t": {
-          "$ref": "#/definitions/Vector"
-        },
-        "alt_effect_shift_rate": {
-          "$ref": "#/definitions/double"
-        },
-        "alt_effect_shift_rate_t": {
-          "$ref": "#/definitions/double"
-        },
-        "offset": {
-          "$ref": "#/definitions/Vector"
-        },
-        "offset_t": {
-          "$ref": "#/definitions/Vector"
-        },
-        "offset_rate": {
-          "$ref": "#/definitions/double"
-        },
-        "offset_rate_t": {
-          "$ref": "#/definitions/double"
         }
       },
       "required": ["type"]
@@ -3836,15 +3745,8 @@
         },
         "segment_probability": {
           "$ref": "#/definitions/float"
-        },
-        "orientation": {
-          "$ref": "#/definitions/float"
-        },
-        "offset": {
-          "$ref": "#/definitions/Vector"
         }
-      },
-      "required": ["orientation", "offset"]
+      }
     },
     "CreateAsteroidChunkEffectItem": {
       "description": "https://lua-api.factorio.com/stable/types/CreateAsteroidChunkEffectItem.html",
@@ -5880,18 +5782,6 @@
         "secondary_draw_order": {
           "$ref": "#/definitions/int8"
         },
-        "north": {
-          "$ref": "#/definitions/int8"
-        },
-        "east": {
-          "$ref": "#/definitions/int8"
-        },
-        "south": {
-          "$ref": "#/definitions/int8"
-        },
-        "west": {
-          "$ref": "#/definitions/int8"
-        },
         "always_draw_covers": {
           "$ref": "#/definitions/bool"
         },
@@ -7656,18 +7546,6 @@
       "description": "https://lua-api.factorio.com/stable/types/LightningGraphicsSet.html",
       "type": "object",
       "properties": {
-        "color": {
-          "$ref": "#/definitions/Color"
-        },
-        "distortion": {
-          "$ref": "#/definitions/float"
-        },
-        "thickness": {
-          "$ref": "#/definitions/float"
-        },
-        "power": {
-          "$ref": "#/definitions/float"
-        },
         "bolt_half_width": {
           "$ref": "#/definitions/float"
         },
@@ -7731,8 +7609,7 @@
         "light": {
           "$ref": "#/definitions/LightDefinition"
         }
-      },
-      "required": ["color", "distortion", "thickness", "power"]
+      }
     },
     "LightningPriorityRule": {
       "description": "https://lua-api.factorio.com/stable/types/LightningPriorityRule.html",
@@ -8818,21 +8695,6 @@
         },
         "basic_settings": {
           "$ref": "#/definitions/MapGenSettings"
-        },
-        "asteroids": {
-          "$ref": "#/definitions/MapGenPresetAsteroidSettings"
-        },
-        "pollution": {
-          "$ref": "#/definitions/MapGenPresetPollutionSettings"
-        },
-        "enemy_evolution": {
-          "$ref": "#/definitions/MapGenPresetEnemyEvolutionSettings"
-        },
-        "enemy_expansion": {
-          "$ref": "#/definitions/MapGenPresetEnemyExpansionSettings"
-        },
-        "difficulty_settings": {
-          "$ref": "#/definitions/MapGenPresetDifficultySettings"
         }
       },
       "required": ["order"]
@@ -9593,12 +9455,6 @@
       "description": "https://lua-api.factorio.com/stable/types/NeighbourConnectableConnectionDefinition.html",
       "type": "object",
       "properties": {
-        "position": {
-          "$ref": "#/definitions/MapPosition"
-        },
-        "direction": {
-          "$ref": "#/definitions/MapPosition"
-        },
         "category": {
           "$ref": "#/definitions/NeighbourConnectableConnectionCategory"
         },
@@ -9606,7 +9462,7 @@
           "$ref": "#/definitions/NeighbourConnectableConnectionCategory"
         }
       },
-      "required": ["position", "direction", "category"]
+      "required": ["category"]
     },
     "NestedTriggerEffectItem": {
       "description": "https://lua-api.factorio.com/stable/types/NestedTriggerEffectItem.html",
@@ -10425,15 +10281,9 @@
         },
         "graphic": {
           "$ref": "#/definitions/ProcessionGraphic"
-        },
-        "timestamp": {
-          "$ref": "#/definitions/MapTick"
-        },
-        "frame": {
-          "$ref": "#/definitions/float"
         }
       },
-      "required": ["type", "timestamp", "frame"]
+      "required": ["type"]
     },
     "PodDistanceTraveledProcessionLayer": {
       "description": "https://lua-api.factorio.com/stable/types/PodDistanceTraveledProcessionLayer.html",
@@ -10451,15 +10301,6 @@
         },
         "distance_traveled_contribution": {
           "$ref": "#/definitions/float"
-        },
-        "timestamp": {
-          "$ref": "#/definitions/MapTick"
-        },
-        "distance": {
-          "$ref": "#/definitions/double"
-        },
-        "distance_t": {
-          "$ref": "#/definitions/double"
         }
       },
       "required": ["type"]
@@ -10483,27 +10324,6 @@
         },
         "distance_traveled_contribution": {
           "$ref": "#/definitions/float"
-        },
-        "timestamp": {
-          "$ref": "#/definitions/MapTick"
-        },
-        "tilt": {
-          "$ref": "#/definitions/double"
-        },
-        "tilt_t": {
-          "$ref": "#/definitions/double"
-        },
-        "offset": {
-          "$ref": "#/definitions/Vector"
-        },
-        "offset_t": {
-          "$ref": "#/definitions/Vector"
-        },
-        "offset_rate": {
-          "$ref": "#/definitions/double"
-        },
-        "offset_rate_t": {
-          "$ref": "#/definitions/double"
         }
       },
       "required": ["type"]
@@ -10518,27 +10338,6 @@
         },
         "lut": {
           "$ref": "#/definitions/ColorLookupTable"
-        },
-        "timestamp": {
-          "$ref": "#/definitions/MapTick"
-        },
-        "cutscene_opacity": {
-          "$ref": "#/definitions/double"
-        },
-        "cutscene_opacity_t": {
-          "$ref": "#/definitions/double"
-        },
-        "outside_opacity": {
-          "$ref": "#/definitions/double"
-        },
-        "outside_opacity_t": {
-          "$ref": "#/definitions/double"
-        },
-        "lut_blend": {
-          "$ref": "#/definitions/double"
-        },
-        "lut_blend_t": {
-          "$ref": "#/definitions/double"
         }
       },
       "required": ["type", "lut"]
@@ -10957,9 +10756,6 @@
             "color": {
               "$ref": "#/definitions/Color"
             },
-            "less_than": {
-              "$ref": "#/definitions/double"
-            },
             "bar": {
               "$ref": "#/definitions/ElementImageSet"
             },
@@ -10982,7 +10778,7 @@
               "$ref": "#/definitions/int16"
             }
           },
-          "required": ["type", "less_than"]
+          "required": ["type"]
         }
       ]
     },
@@ -11312,25 +11108,25 @@
       "type": "object",
       "properties": {
         "north": {
-          "$ref": "#/definitions/FogMaskShapeDefinition"
+          "$ref": "#/definitions/RailPieceLayers"
         },
         "northeast": {
           "$ref": "#/definitions/RailPieceLayers"
         },
         "east": {
-          "$ref": "#/definitions/FogMaskShapeDefinition"
+          "$ref": "#/definitions/RailPieceLayers"
         },
         "southeast": {
           "$ref": "#/definitions/RailPieceLayers"
         },
         "south": {
-          "$ref": "#/definitions/FogMaskShapeDefinition"
+          "$ref": "#/definitions/RailPieceLayers"
         },
         "southwest": {
           "$ref": "#/definitions/RailPieceLayers"
         },
         "west": {
-          "$ref": "#/definitions/FogMaskShapeDefinition"
+          "$ref": "#/definitions/RailPieceLayers"
         },
         "northwest": {
           "$ref": "#/definitions/RailPieceLayers"
@@ -12933,51 +12729,9 @@
         },
         "animation_driven_by_curve": {
           "$ref": "#/definitions/bool"
-        },
-        "timestamp": {
-          "$ref": "#/definitions/MapTick"
-        },
-        "opacity": {
-          "$ref": "#/definitions/double"
-        },
-        "opacity_t": {
-          "$ref": "#/definitions/double"
-        },
-        "tint": {
-          "$ref": "#/definitions/Color"
-        },
-        "tint_t": {
-          "$ref": "#/definitions/Color"
-        },
-        "rotation": {
-          "$ref": "#/definitions/double"
-        },
-        "rotation_t": {
-          "$ref": "#/definitions/double"
-        },
-        "scale": {
-          "$ref": "#/definitions/double"
-        },
-        "scale_t": {
-          "$ref": "#/definitions/double"
-        },
-        "shift": {
-          "$ref": "#/definitions/Vector"
-        },
-        "shift_t": {
-          "$ref": "#/definitions/Vector"
-        },
-        "shift_rate": {
-          "$ref": "#/definitions/double"
-        },
-        "shift_rate_t": {
-          "$ref": "#/definitions/double"
-        },
-        "frame": {
-          "$ref": "#/definitions/float"
         }
       },
-      "required": ["type", "graphic", "frame"]
+      "required": ["type", "graphic"]
     },
     "SliderStyleSpecification": {
       "description": "https://lua-api.factorio.com/stable/types/SliderStyleSpecification.html",
@@ -14334,7 +14088,8 @@
           "type": "object",
           "properties": {
             "type": {
-              "$ref": "#/definitions/FluidID"
+              "type": "string",
+              "const": "stream"
             },
             "fluid_consumption": {
               "$ref": "#/definitions/FluidAmount"
@@ -14347,24 +14102,9 @@
             },
             "gun_center_shift": {
               "$ref": "#/definitions/Vector"
-            },
-            "north": {
-              "$ref": "#/definitions/Vector"
-            },
-            "east": {
-              "$ref": "#/definitions/Vector"
-            },
-            "south": {
-              "$ref": "#/definitions/Vector"
-            },
-            "west": {
-              "$ref": "#/definitions/Vector"
-            },
-            "damage_modifier": {
-              "$ref": "#/definitions/double"
             }
           },
-          "required": ["type", "north", "type"]
+          "required": ["type"]
         }
       ]
     },
@@ -15904,27 +15644,6 @@
         },
         "render_layer": {
           "$ref": "#/definitions/RenderLayer"
-        },
-        "timestamp": {
-          "$ref": "#/definitions/MapTick"
-        },
-        "opacity": {
-          "$ref": "#/definitions/double"
-        },
-        "opacity_t": {
-          "$ref": "#/definitions/double"
-        },
-        "tint_upper": {
-          "$ref": "#/definitions/Color"
-        },
-        "tint_upper_t": {
-          "$ref": "#/definitions/Color"
-        },
-        "tint_lower": {
-          "$ref": "#/definitions/Color"
-        },
-        "tint_lower_t": {
-          "$ref": "#/definitions/Color"
         }
       },
       "required": ["type"]

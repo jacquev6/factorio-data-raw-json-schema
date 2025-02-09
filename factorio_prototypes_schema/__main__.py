@@ -326,28 +326,29 @@ def extract_struct_base(soup: bs4.BeautifulSoup) -> str | None:
 def extract_struct_properties(type_name: str, soup: bs4.BeautifulSoup) -> Iterable[FactorioSchema.Property]:
     main_soup = soup.find("div", id="attributes-body-main")
     if main_soup is not None:
-        for h3_soup in (tag(el) for el in tag(main_soup).find_all("h3")):
-            property_name = tag(h3_soup.contents[0]).contents[0].text.strip()
-            try:
+        for div_soup in (tag(el) for el in tag(main_soup).find_all("div", recursive=False)):
+            for h3_soup in (tag(el) for el in div_soup.find_all("h3", recursive=False)):
+                property_name = tag(h3_soup.contents[0]).contents[0].text.strip()
                 try:
-                    type_soup = tag(tag(tag(h3_soup.contents[0]).contents[1]).contents[1])
-                except IndexError:
+                    try:
+                        type_soup = tag(tag(tag(h3_soup.contents[0]).contents[1]).contents[1])
+                    except IndexError:
+                        debug("Failed to extract property:", type_name, property_name)
+                        continue
+
+                    if type_soup.name == "a":
+                        property_type = json_value({"$ref": f"#/definitions/{type_soup.text}"})
+                    elif type_soup.name == "code":
+                        property_type = json_value({"type": "string", "const": type_soup.text.strip().strip('"')})
+                    else:
+                        property_type = json_value(None)
+
+                    optional = h3_soup.contents[1].text.strip() == "optional"
+
+                    yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
+                except:
                     debug("Failed to extract property:", type_name, property_name)
-                    continue
-
-                if type_soup.name == "a":
-                    property_type = json_value({"$ref": f"#/definitions/{type_soup.text}"})
-                elif type_soup.name == "code":
-                    property_type = json_value({"type": "string", "const": type_soup.text.strip().strip('"')})
-                else:
-                    property_type = json_value(None)
-
-                optional = h3_soup.contents[1].text.strip() == "optional"
-
-                yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
-            except:
-                debug("Failed to extract property:", type_name, property_name)
-                raise
+                    raise
 
 
 def tag(tag: bs4.element.PageElement | None) -> bs4.element.Tag:
