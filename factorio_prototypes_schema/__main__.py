@@ -2,15 +2,16 @@
 
 from __future__ import annotations
 
-import re
 from typing import Any, Iterable
 import json
 import os
+import re
 import sys
 
 from bs4 import BeautifulSoup
 import bs4
 import click
+import tqdm
 
 
 JsonValue = None | bool | int | float | str | list["JsonValue"] | dict[str, "JsonValue"]
@@ -211,7 +212,7 @@ def main(factorio_location: str, load_types: str | None) -> None:
 
 
 def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDefinition]:
-    for type_name in sorted(set(extract_all_type_names(factorio_location))):
+    for type_name in tqdm.tqdm(sorted(set(extract_all_type_names(factorio_location)))):
         if type_name in ["Data", "DataExtendMethod", "AnyPrototype"]:
             continue
         try:

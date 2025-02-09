@@ -3,3 +3,5 @@ black
 check-jsonschema
 click
 mypy
+tqdm
+types-tqdm
