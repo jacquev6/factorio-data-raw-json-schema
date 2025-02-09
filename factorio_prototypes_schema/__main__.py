@@ -10,6 +10,7 @@ import sys
 
 from bs4 import BeautifulSoup
 import bs4
+import click
 
 
 JsonValue = None | bool | int | float | str | list["JsonValue"] | dict[str, "JsonValue"]
@@ -114,7 +115,15 @@ class FactorioSchema:
         return FactorioSchema.TypeDefinition(name=name, definition={"anyOf": types})
 
 
-def main(factorio_location: str) -> None:
+@click.command()
+@click.argument("factorio_location")
+@click.option("--load-types")
+def main(factorio_location: str, load_types: str | None) -> None:
+    if load_types is None:
+        types = list(extract_all_types(factorio_location))
+    else:
+        types = list(load_all_types(factorio_location, load_types))
+
     schema: Any = FactorioSchema(
         properties={
             "ammo": "ItemPrototype",
@@ -142,60 +151,61 @@ def main(factorio_location: str) -> None:
             "tool": "ItemPrototype",
             "upgrade-item": "ItemPrototype",
         },
-        types=list(extract_all_types(factorio_location)),
+        types=types,
         prototypes=list(extract_all_prototypes(factorio_location)),
     ).to_json_value()
 
-    # Ad-hoc patches because the doc doesn't match the actual data
-    # ============================================================
+    if load_types is None:
+        # Ad-hoc patches because the doc doesn't match the actual data
+        # ============================================================
 
-    # types/ItemProductPrototype.html#amount_min is documented as uint16
-    # but is some sort of floating point in e.g. 'speed-module-recycling'
+        # types/ItemProductPrototype.html#amount_min is documented as uint16
+        # but is some sort of floating point in e.g. 'speed-module-recycling'
 
-    if schema["definitions"].get("ItemProductPrototype", {}).get("properties", {}).get("amount", {}) == {
-        "$ref": "#/definitions/uint16"
-    }:
-        schema["definitions"]["ItemProductPrototype"]["properties"]["amount"] = {"$ref": "#/definitions/double"}
-    else:
-        debug("Failed to patch ItemProductPrototype")
+        if schema["definitions"].get("ItemProductPrototype", {}).get("properties", {}).get("amount", {}) == {
+            "$ref": "#/definitions/uint16"
+        }:
+            schema["definitions"]["ItemProductPrototype"]["properties"]["amount"] = {"$ref": "#/definitions/double"}
+        else:
+            debug("Failed to patch ItemProductPrototype")
 
-    # types/TriggerEffect.html documents DamageTileTriggerEffectItem as having type="damage-tile",
-    # but DamageTileTriggerEffectItem.html documents it as having type="damage"
-    if (
-        schema["definitions"].get("TriggerEffect", {}).get("anyOf", [{}])[0].get("$ref", {})
-        == "#/definitions/DamageEntityTriggerEffectItem"
-    ):
-        schema["definitions"]["TriggerEffect"]["anyOf"][0]["$ref"] = "#/definitions/DamageTriggerEffectItem"
-    else:
-        debug("Failed to patch TriggerEffect")
+        # types/TriggerEffect.html documents DamageTileTriggerEffectItem as having type="damage-tile",
+        # but DamageTileTriggerEffectItem.html documents it as having type="damage"
+        if (
+            schema["definitions"].get("TriggerEffect", {}).get("anyOf", [{}])[0].get("$ref", {})
+            == "#/definitions/DamageEntityTriggerEffectItem"
+        ):
+            schema["definitions"]["TriggerEffect"]["anyOf"][0]["$ref"] = "#/definitions/DamageTriggerEffectItem"
+        else:
+            debug("Failed to patch TriggerEffect")
 
-    # types/TriggerEffect.html refers to non-documented type DamageEntityTriggerEffectItem,
-    # and types/DamageTriggerEffectItem.html is documented but used nowhere
+        # types/TriggerEffect.html refers to non-documented type DamageEntityTriggerEffectItem,
+        # and types/DamageTriggerEffectItem.html is documented but used nowhere
 
-    # Ad-hoc patches because our extraction tool is weak
-    # ==================================================
+        # Ad-hoc patches because our extraction tool is weak
+        # ==================================================
 
-    # LocalisedString is a union of string and list[LocalisedString]
-    if schema["definitions"].get("LocalisedString", {}).get("anyOf", []) == [{"$ref": "#/definitions/string"}]:
-        schema["definitions"]["LocalisedString"]["anyOf"].append(
-            {"type": "array", "item": {"$ref": "#/definitions/LocalisedString"}}
-        )
-    else:
-        debug("Failed to patch LocalisedString")
+        # LocalisedString is a union of string and list[LocalisedString]
+        if schema["definitions"].get("LocalisedString", {}).get("anyOf", []) == [{"$ref": "#/definitions/string"}]:
+            schema["definitions"]["LocalisedString"]["anyOf"].append(
+                {"type": "array", "item": {"$ref": "#/definitions/LocalisedString"}}
+            )
+        else:
+            debug("Failed to patch LocalisedString")
 
-    # IconSequencePositioning.inventory_index comes from "defines"
-    if schema["definitions"].get("IconSequencePositioning", {}).get("properties", {}).get("inventory_index", {}) == {
-        "$ref": "#/definitions/defines.inventory"
-    }:
-        del schema["definitions"]["IconSequencePositioning"]["properties"]["inventory_index"]
-    else:
-        debug("Failed to patch IconSequencePositioning")
+        # IconSequencePositioning.inventory_index comes from "defines"
+        if schema["definitions"].get("IconSequencePositioning", {}).get("properties", {}).get(
+            "inventory_index", {}
+        ) == {"$ref": "#/definitions/defines.inventory"}:
+            del schema["definitions"]["IconSequencePositioning"]["properties"]["inventory_index"]
+        else:
+            debug("Failed to patch IconSequencePositioning")
 
-    # RandomRange can be {min: double, max: double}
-    if schema["definitions"].get("RandomRange", {}).get("anyOf", [{}])[0] == {"$ref": "#/definitions/{"}:
-        schema["definitions"]["RandomRange"]["anyOf"] = schema["definitions"]["RandomRange"]["anyOf"][1:]
-    else:
-        debug("Failed to patch RandomRange")
+        # RandomRange can be {min: double, max: double}
+        if schema["definitions"].get("RandomRange", {}).get("anyOf", [{}])[0] == {"$ref": "#/definitions/{"}:
+            schema["definitions"]["RandomRange"]["anyOf"] = schema["definitions"]["RandomRange"]["anyOf"][1:]
+        else:
+            debug("Failed to patch RandomRange")
 
     json.dump(schema, sys.stdout, indent=2)
 
@@ -209,6 +219,15 @@ def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDef
         except:
             debug("Failed to extract type:", type_name)
             raise
+
+
+def load_all_types(factorio_location: str, load_types: str) -> Iterable[FactorioSchema.TypeDefinition]:
+    with open(load_types) as f:
+        previous_schema = json.load(f)
+    for type_name in sorted(set(extract_all_type_names(factorio_location))):
+        if type_name in ["Data", "DataExtendMethod", "AnyPrototype"]:
+            continue
+        yield FactorioSchema.TypeDefinition(name=type_name, definition=previous_schema["definitions"][type_name])
 
 
 def extract_all_type_names(factorio_location: str) -> Iterable[str]:
@@ -398,4 +417,4 @@ def read_file(factorio_location: str, *stem: str) -> BeautifulSoup:
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main()

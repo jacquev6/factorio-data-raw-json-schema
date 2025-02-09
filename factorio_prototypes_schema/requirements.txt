@@ -1,4 +1,5 @@
-mypy
-black
 beautifulsoup4
+black
 check-jsonschema
+click
+mypy
