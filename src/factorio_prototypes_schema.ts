@@ -10,9 +10,10 @@
  */
 export type ItemPrototype = Prototype & {
   stack_size: ItemCountType
+  icons?: unknown
   icon?: FileName
   icon_size?: SpriteSizeType
-  dark_background_icons?: IconData
+  dark_background_icons?: unknown
   dark_background_icon?: FileName
   dark_background_icon_size?: SpriteSizeType
   place_result?: EntityID
@@ -21,6 +22,9 @@ export type ItemPrototype = Prototype & {
   burnt_result?: ItemID
   spoil_result?: ItemID
   plant_result?: EntityID
+  place_as_tile?: unknown
+  pictures?: SpriteVariations
+  flags?: ItemPrototypeFlags
   spoil_ticks?: Uint32
   fuel_value?: Energy
   fuel_acceleration_multiplier?: Double
@@ -31,11 +35,19 @@ export type ItemPrototype = Prototype & {
   weight?: Weight
   ingredient_to_weight_coefficient?: Double
   fuel_glow_color?: Color
+  open_sound?: Sound
+  close_sound?: Sound
+  pick_sound?: Sound
+  drop_sound?: Sound
+  inventory_move_sound?: Sound
   default_import_location?: SpaceLocationID
   color_hint?: ColorHintSpecification
   has_random_tint?: Bool
+  spoil_to_trigger_result?: SpoilToTriggerResult
   destroyed_by_dropping_trigger?: Trigger
+  rocket_launch_products?: unknown
   send_to_orbit_mode?: SendToOrbitMode
+  random_tint_color?: Color
   spoil_level?: Uint8
 }
 /**
@@ -53,10 +65,6 @@ export type String = string
  */
 export type Order = String
 /**
- * https://lua-api.factorio.com/stable/types/LocalisedString.html
- */
-export type LocalisedString = String | unknown[]
-/**
  * https://lua-api.factorio.com/stable/types/ItemSubGroupID.html
  */
 export type ItemSubGroupID = String
@@ -65,25 +73,17 @@ export type ItemSubGroupID = String
  */
 export type Bool = boolean
 /**
- * https://lua-api.factorio.com/stable/types/SpaceLocationID.html
+ * https://lua-api.factorio.com/stable/types/ItemCountType.html
  */
-export type SpaceLocationID = String
-/**
- * https://lua-api.factorio.com/stable/types/FileName.html
- */
-export type FileName = String
+export type ItemCountType = Uint32
 /**
  * https://lua-api.factorio.com/stable/types/uint32.html
  */
 export type Uint32 = number
 /**
- * https://lua-api.factorio.com/stable/types/float.html
+ * https://lua-api.factorio.com/stable/types/FileName.html
  */
-export type Float = number
-/**
- * https://lua-api.factorio.com/stable/types/ItemCountType.html
- */
-export type ItemCountType = Uint32
+export type FileName = String
 /**
  * https://lua-api.factorio.com/stable/types/SpriteSizeType.html
  */
@@ -92,18 +92,6 @@ export type SpriteSizeType = Int16
  * https://lua-api.factorio.com/stable/types/int16.html
  */
 export type Int16 = number
-/**
- * https://lua-api.factorio.com/stable/types/Color.html
- */
-export type Color = Float
-/**
- * https://lua-api.factorio.com/stable/types/Vector.html
- */
-export type Vector = Double
-/**
- * https://lua-api.factorio.com/stable/types/double.html
- */
-export type Double = number
 /**
  * https://lua-api.factorio.com/stable/types/EntityID.html
  */
@@ -125,709 +113,28 @@ export type ItemID = String
  */
 export type Energy = String
 /**
+ * https://lua-api.factorio.com/stable/types/double.html
+ */
+export type Double = number
+/**
  * https://lua-api.factorio.com/stable/types/Weight.html
  */
 export type Weight = Double
 /**
- * https://lua-api.factorio.com/stable/types/Trigger.html
+ * https://lua-api.factorio.com/stable/types/SpaceLocationID.html
  */
-export type Trigger = DirectTriggerItem | AreaTriggerItem | LineTriggerItem | ClusterTriggerItem
-/**
- * https://lua-api.factorio.com/stable/types/DirectTriggerItem.html
- */
-export type DirectTriggerItem = TriggerItem & {
-  type: 'direct'
-  filter_enabled?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/EntityPrototypeFlags.html
- */
-export type EntityPrototypeFlags =
-  | 'not-rotatable'
-  | 'placeable-neutral'
-  | 'placeable-player'
-  | 'placeable-enemy'
-  | 'placeable-off-grid'
-  | 'player-creation'
-  | 'building-direction-8-way'
-  | 'filter-directions'
-  | 'get-by-unit-number'
-  | 'breaths-air'
-  | 'not-repairable'
-  | 'not-on-map'
-  | 'not-deconstructable'
-  | 'not-blueprintable'
-  | 'hide-alt-info'
-  | 'no-gap-fill-while-building'
-  | 'not-flammable'
-  | 'no-automated-item-removal'
-  | 'no-automated-item-insertion'
-  | 'no-copy-paste'
-  | 'not-selectable-in-game'
-  | 'not-upgradable'
-  | 'not-in-kill-statistics'
-  | 'building-direction-16-way'
-  | 'snap-to-rail-support-spot'
-  | 'not-in-made-in'
-/**
- * https://lua-api.factorio.com/stable/types/CollisionLayerID.html
- */
-export type CollisionLayerID = String
-/**
- * https://lua-api.factorio.com/stable/types/TriggerTargetMask.html
- */
-export type TriggerTargetMask = String
-/**
- * https://lua-api.factorio.com/stable/types/TriggerDelivery.html
- */
-export type TriggerDelivery =
-  | InstantTriggerDelivery
-  | ProjectileTriggerDelivery
-  | BeamTriggerDelivery
-  | StreamTriggerDelivery
-  | ArtilleryTriggerDelivery
-  | ChainTriggerDelivery
-  | DelayedTriggerDelivery
-/**
- * https://lua-api.factorio.com/stable/types/InstantTriggerDelivery.html
- */
-export type InstantTriggerDelivery = TriggerDeliveryItem & {
-  type: 'instant'
-}
-/**
- * https://lua-api.factorio.com/stable/types/TriggerEffect.html
- */
-export type TriggerEffect =
-  | DamageTriggerEffectItem
-  | DamageTileTriggerEffectItem
-  | CreateEntityTriggerEffectItem
-  | CreateExplosionTriggerEffectItem
-  | CreateFireTriggerEffectItem
-  | CreateSmokeTriggerEffectItem
-  | CreateTrivialSmokeEffectItem
-  | CreateAsteroidChunkEffectItem
-  | CreateParticleTriggerEffectItem
-  | CreateStickerTriggerEffectItem
-  | CreateDecorativesTriggerEffectItem
-  | NestedTriggerEffectItem
-  | PlaySoundTriggerEffectItem
-  | PushBackTriggerEffectItem
-  | DestroyCliffsTriggerEffectItem
-  | ShowExplosionOnChartTriggerEffectItem
-  | InsertItemTriggerEffectItem
-  | ScriptTriggerEffectItem
-  | SetTileTriggerEffectItem
-  | InvokeTileEffectTriggerEffectItem
-  | DestroyDecorativesTriggerEffectItem
-  | CameraEffectTriggerEffectItem
-  | ActivateImpactTriggerEffectItem
-/**
- * https://lua-api.factorio.com/stable/types/DamageTriggerEffectItem.html
- */
-export type DamageTriggerEffectItem = TriggerEffectItem & {
-  type: 'damage'
-  damage: DamageParameters
-  apply_damage_to_trees?: Bool
-  vaporize?: Bool
-  use_substitute?: Bool
-  lower_distance_threshold?: Uint16
-  upper_distance_threshold?: Uint16
-  lower_damage_modifier?: Float
-  upper_damage_modifier?: Float
-}
-/**
- * https://lua-api.factorio.com/stable/types/uint16.html
- */
-export type Uint16 = number
-/**
- * https://lua-api.factorio.com/stable/types/DamageTypeFilters.html
- */
-export type DamageTypeFilters = DamageTypeID
-/**
- * https://lua-api.factorio.com/stable/types/DamageTypeID.html
- */
-export type DamageTypeID = String
-/**
- * https://lua-api.factorio.com/stable/types/DamageTileTriggerEffectItem.html
- */
-export type DamageTileTriggerEffectItem = TriggerEffectItem & {
-  type: 'damage'
-  damage: DamageParameters
-  radius?: Float
-}
-/**
- * https://lua-api.factorio.com/stable/types/CreateEntityTriggerEffectItem.html
- */
-export type CreateEntityTriggerEffectItem = TriggerEffectItem & {
-  type: 'create-entity'
-  entity_name: EntityID
-  offset_deviation?: BoundingBox
-  trigger_created_entity?: Bool
-  check_buildability?: Bool
-  tile_collision_mask?: CollisionMaskConnector
-  offsets?: Vector
-  as_enemy?: Bool
-  ignore_no_enemies_mode?: Bool
-  find_non_colliding_position?: Bool
-  non_colliding_search_radius?: Double
-  non_colliding_search_precision?: Double
-  non_colliding_fail_result?: Trigger
-  protected?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/BoundingBox.html
- */
-export type BoundingBox = MapPosition
-/**
- * https://lua-api.factorio.com/stable/types/MapPosition.html
- */
-export type MapPosition = Double
-/**
- * https://lua-api.factorio.com/stable/types/CreateExplosionTriggerEffectItem.html
- */
-export type CreateExplosionTriggerEffectItem = CreateEntityTriggerEffectItem & {
-  max_movement_distance?: Float
-  max_movement_distance_deviation?: Float
-  inherit_movement_distance_from_projectile?: Bool
-  cycle_while_moving?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/CreateFireTriggerEffectItem.html
- */
-export type CreateFireTriggerEffectItem = CreateEntityTriggerEffectItem & {
-  initial_ground_flame_count?: Uint8
-}
-/**
- * https://lua-api.factorio.com/stable/types/uint8.html
- */
-export type Uint8 = number
-/**
- * https://lua-api.factorio.com/stable/types/CreateSmokeTriggerEffectItem.html
- */
-export type CreateSmokeTriggerEffectItem = CreateEntityTriggerEffectItem & {
-  initial_height?: Float
-  speed?: Vector
-  speed_multiplier?: Float
-  speed_multiplier_deviation?: Float
-  starting_frame?: Float
-  starting_frame_deviation?: Float
-  speed_from_center?: Float
-  speed_from_center_deviation?: Float
-}
-/**
- * https://lua-api.factorio.com/stable/types/CreateTrivialSmokeEffectItem.html
- */
-export type CreateTrivialSmokeEffectItem = TriggerEffectItem & {
-  type: 'create-trivial-smoke'
-  smoke_name: TrivialSmokeID
-  offset_deviation?: BoundingBox
-  offsets?: Vector
-  initial_height?: Float
-  max_radius?: Float
-  speed?: Vector
-  speed_multiplier?: Float
-  speed_multiplier_deviation?: Float
-  starting_frame?: Float
-  starting_frame_deviation?: Float
-  speed_from_center?: Float
-  speed_from_center_deviation?: Float
-}
-/**
- * https://lua-api.factorio.com/stable/types/TrivialSmokeID.html
- */
-export type TrivialSmokeID = String
-/**
- * https://lua-api.factorio.com/stable/types/CreateAsteroidChunkEffectItem.html
- */
-export type CreateAsteroidChunkEffectItem = TriggerEffectItem & {
-  type: 'create-asteroid-chunk'
-  asteroid_name: AsteroidChunkID
-  offset_deviation?: BoundingBox
-  offsets?: Vector
-}
-/**
- * https://lua-api.factorio.com/stable/types/AsteroidChunkID.html
- */
-export type AsteroidChunkID = String
-/**
- * https://lua-api.factorio.com/stable/types/CreateParticleTriggerEffectItem.html
- */
-export type CreateParticleTriggerEffectItem = TriggerEffectItem & {
-  type: 'create-particle'
-  particle_name: ParticleID
-  initial_height: Float
-  offset_deviation?: SimpleBoundingBox
-  tile_collision_mask?: CollisionMaskConnector
-  offsets?: Vector
-  initial_height_deviation?: Float
-  initial_vertical_speed?: Float
-  initial_vertical_speed_deviation?: Float
-  speed_from_center?: Float
-  speed_from_center_deviation?: Float
-  frame_speed?: Float
-  frame_speed_deviation?: Float
-  movement_multiplier?: Float
-  tail_length?: Uint8
-  tail_length_deviation?: Uint8
-  tail_width?: Float
-  rotate_offsets?: Bool
-  only_when_visible?: Bool
-  apply_tile_tint?: 'primary'
-  tint?: Color
-}
-/**
- * https://lua-api.factorio.com/stable/types/ParticleID.html
- */
-export type ParticleID = String
-/**
- * https://lua-api.factorio.com/stable/types/SimpleBoundingBox.html
- */
-export type SimpleBoundingBox = MapPosition
-/**
- * https://lua-api.factorio.com/stable/types/CreateStickerTriggerEffectItem.html
- */
-export type CreateStickerTriggerEffectItem = TriggerEffectItem & {
-  type: 'create-sticker'
-  sticker: EntityID
-  trigger_created_entity?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/CreateDecorativesTriggerEffectItem.html
- */
-export type CreateDecorativesTriggerEffectItem = TriggerEffectItem & {
-  type: 'create-decorative'
-  decorative: DecorativeID
-  spawn_max: Uint16
-  spawn_min_radius: Float
-  spawn_max_radius: Float
-  spawn_min?: Uint16
-  radius_curve?: Float
-  apply_projection?: Bool
-  spread_evenly?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/DecorativeID.html
- */
-export type DecorativeID = String
-/**
- * https://lua-api.factorio.com/stable/types/NestedTriggerEffectItem.html
- */
-export type NestedTriggerEffectItem = TriggerEffectItem & {
-  type: 'nested-result'
-  action: Trigger
-}
-/**
- * https://lua-api.factorio.com/stable/types/PlaySoundTriggerEffectItem.html
- */
-export type PlaySoundTriggerEffectItem = TriggerEffectItem & {
-  type: 'play-sound'
-  sound: Sound
-  min_distance?: Float
-  max_distance?: Float
-  volume_modifier?: Float
-  audible_distance_modifier?: Float
-  play_on_target_position?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/Sound.html
- */
-export type Sound = SoundDefinition
-/**
- * https://lua-api.factorio.com/stable/types/SoundDefinition.html
- */
-export type SoundDefinition = FileName
-/**
- * https://lua-api.factorio.com/stable/types/PushBackTriggerEffectItem.html
- */
-export type PushBackTriggerEffectItem = TriggerEffectItem & {
-  type: 'push-back'
-  distance: Float
-}
-/**
- * https://lua-api.factorio.com/stable/types/DestroyCliffsTriggerEffectItem.html
- */
-export type DestroyCliffsTriggerEffectItem = TriggerEffectItem & {
-  type: 'destroy-cliffs'
-  radius: Float
-  explosion_at_trigger?: EntityID
-  explosion_at_cliff?: EntityID
-}
-/**
- * https://lua-api.factorio.com/stable/types/ShowExplosionOnChartTriggerEffectItem.html
- */
-export type ShowExplosionOnChartTriggerEffectItem = TriggerEffectItem & {
-  type: 'show-explosion-on-chart'
-  scale: Float
-}
-/**
- * https://lua-api.factorio.com/stable/types/InsertItemTriggerEffectItem.html
- */
-export type InsertItemTriggerEffectItem = TriggerEffectItem & {
-  type: 'insert-item'
-  item: ItemID
-  quality?: QualityID
-  count?: ItemCountType
-}
-/**
- * https://lua-api.factorio.com/stable/types/QualityID.html
- */
-export type QualityID = String
-/**
- * https://lua-api.factorio.com/stable/types/ScriptTriggerEffectItem.html
- */
-export type ScriptTriggerEffectItem = TriggerEffectItem & {
-  type: 'script'
-  effect_id: String
-}
-/**
- * https://lua-api.factorio.com/stable/types/SetTileTriggerEffectItem.html
- */
-export type SetTileTriggerEffectItem = TriggerEffectItem & {
-  type: 'set-tile'
-  tile_name: TileID
-  radius: Float
-  apply_projection?: Bool
-  apply_on_space_platform?: Bool
-  tile_collision_mask?: CollisionMaskConnector
-}
-/**
- * https://lua-api.factorio.com/stable/types/TileID.html
- */
-export type TileID = String
-/**
- * https://lua-api.factorio.com/stable/types/InvokeTileEffectTriggerEffectItem.html
- */
-export type InvokeTileEffectTriggerEffectItem = TriggerEffectItem & {
-  type: 'invoke-tile-trigger'
-  tile_collision_mask?: CollisionMaskConnector
-}
-/**
- * https://lua-api.factorio.com/stable/types/DestroyDecorativesTriggerEffectItem.html
- */
-export type DestroyDecorativesTriggerEffectItem = TriggerEffectItem & {
-  type: 'destroy-decoratives'
-  radius: Float
-  from_render_layer?: RenderLayer
-  to_render_layer?: RenderLayer
-  include_soft_decoratives?: Bool
-  include_decals?: Bool
-  invoke_decorative_trigger?: Bool
-  decoratives_with_trigger_only?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/RenderLayer.html
- */
-export type RenderLayer =
-  | 'zero'
-  | 'background-transitions'
-  | 'under-tiles'
-  | 'decals'
-  | 'above-tiles'
-  | 'ground-layer-1'
-  | 'ground-layer-2'
-  | 'ground-layer-3'
-  | 'ground-layer-4'
-  | 'ground-layer-5'
-  | 'lower-radius-visualization'
-  | 'radius-visualization'
-  | 'transport-belt-integration'
-  | 'resource'
-  | 'building-smoke'
-  | 'rail-stone-path-lower'
-  | 'rail-stone-path'
-  | 'rail-tie'
-  | 'decorative'
-  | 'ground-patch'
-  | 'ground-patch-higher'
-  | 'ground-patch-higher2'
-  | 'rail-chain-signal-metal'
-  | 'rail-screw'
-  | 'rail-metal'
-  | 'remnants'
-  | 'floor'
-  | 'transport-belt'
-  | 'transport-belt-endings'
-  | 'floor-mechanics-under-corpse'
-  | 'corpse'
-  | 'floor-mechanics'
-  | 'item'
-  | 'transport-belt-reader'
-  | 'lower-object'
-  | 'transport-belt-circuit-connector'
-  | 'lower-object-above-shadow'
-  | 'lower-object-overlay'
-  | 'object-under'
-  | 'object'
-  | 'cargo-hatch'
-  | 'higher-object-under'
-  | 'higher-object-above'
-  | 'train-stop-top'
-  | 'item-in-inserter-hand'
-  | 'above-inserters'
-  | 'wires'
-  | 'under-elevated'
-  | 'elevated-rail-stone-path-lower'
-  | 'elevated-rail-stone-path'
-  | 'elevated-rail-tie'
-  | 'elevated-rail-screw'
-  | 'elevated-rail-metal'
-  | 'elevated-lower-object'
-  | 'elevated-object'
-  | 'elevated-higher-object'
-  | 'fluid-visualization'
-  | 'wires-above'
-  | 'entity-info-icon'
-  | 'entity-info-icon-above'
-  | 'explosion'
-  | 'projectile'
-  | 'smoke'
-  | 'air-object'
-  | 'air-entity-info-icon'
-  | 'light-effect'
-  | 'selection-box'
-  | 'higher-selection-box'
-  | 'collision-selection-box'
-  | 'arrow'
-  | 'cursor'
-/**
- * https://lua-api.factorio.com/stable/types/CameraEffectTriggerEffectItem.html
- */
-export type CameraEffectTriggerEffectItem = TriggerEffectItem & {
-  type: 'camera-effect'
-  duration: Uint8
-  ease_in_duration?: Uint8
-  ease_out_duration?: Uint8
-  delay?: Uint8
-  full_strength_max_distance?: Uint16
-  max_distance?: Uint16
-  strength?: Float
-}
-/**
- * https://lua-api.factorio.com/stable/types/ActivateImpactTriggerEffectItem.html
- */
-export type ActivateImpactTriggerEffectItem = TriggerEffectItem & {
-  type: 'activate-impact'
-  deliver_category?: String
-}
-/**
- * https://lua-api.factorio.com/stable/types/ProjectileTriggerDelivery.html
- */
-export type ProjectileTriggerDelivery = TriggerDeliveryItem & {
-  type: 'projectile'
-  projectile: EntityID
-  starting_speed: Float
-  starting_speed_deviation?: Float
-  direction_deviation?: Float
-  range_deviation?: Float
-  max_range?: Double
-  min_range?: Double
-}
-/**
- * https://lua-api.factorio.com/stable/types/BeamTriggerDelivery.html
- */
-export type BeamTriggerDelivery = TriggerDeliveryItem & {
-  type: 'beam'
-  beam: EntityID
-  add_to_shooter?: Bool
-  max_length?: Uint32
-  duration?: Uint32
-  source_offset?: Vector
-  destroy_with_source_or_target?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/StreamTriggerDelivery.html
- */
-export type StreamTriggerDelivery = TriggerDeliveryItem & {
-  type: 'stream'
-  stream: EntityID
-  source_offset?: Vector
-}
-/**
- * https://lua-api.factorio.com/stable/types/ArtilleryTriggerDelivery.html
- */
-export type ArtilleryTriggerDelivery = TriggerDeliveryItem & {
-  type: 'artillery'
-  projectile: EntityID
-  starting_speed: Float
-  starting_speed_deviation?: Float
-  direction_deviation?: Float
-  range_deviation?: Float
-  trigger_fired_artillery?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/ChainTriggerDelivery.html
- */
-export type ChainTriggerDelivery = TriggerDeliveryItem & {
-  type: 'chain'
-  chain: ActiveTriggerID
-}
-/**
- * https://lua-api.factorio.com/stable/types/ActiveTriggerID.html
- */
-export type ActiveTriggerID = String
-/**
- * https://lua-api.factorio.com/stable/types/DelayedTriggerDelivery.html
- */
-export type DelayedTriggerDelivery = TriggerDeliveryItem & {
-  type: 'delayed'
-  delayed_trigger: ActiveTriggerID
-}
-/**
- * https://lua-api.factorio.com/stable/types/ForceCondition.html
- */
-export type ForceCondition =
-  | 'all'
-  | 'enemy'
-  | 'ally'
-  | 'friend'
-  | 'not-friend'
-  | 'same'
-  | 'not-same'
-/**
- * https://lua-api.factorio.com/stable/types/AreaTriggerItem.html
- */
-export type AreaTriggerItem = TriggerItem & {
-  type: 'area'
-  radius: Double
-  trigger_from_target?: Bool
-  target_entities?: Bool
-  target_enemies?: Bool
-  show_in_tooltip?: Bool
-  collision_mode?: 'distance-from-collision-box'
-}
-/**
- * https://lua-api.factorio.com/stable/types/LineTriggerItem.html
- */
-export type LineTriggerItem = TriggerItem & {
-  type: 'line'
-  range: Double
-  width: Double
-  range_effects?: TriggerEffect
-}
-/**
- * https://lua-api.factorio.com/stable/types/ClusterTriggerItem.html
- */
-export type ClusterTriggerItem = TriggerItem & {
-  type: 'cluster'
-  cluster_count: Uint32
-  distance: Float
-  distance_deviation?: Float
-}
+export type SpaceLocationID = String
 /**
  * https://lua-api.factorio.com/stable/types/SendToOrbitMode.html
  */
 export type SendToOrbitMode = 'not-sendable' | 'manual' | 'automated'
 /**
- * https://lua-api.factorio.com/stable/prototypes/CraftingMachinePrototype.html
+ * https://lua-api.factorio.com/stable/types/uint8.html
  */
-export type CraftingMachinePrototype = Prototype & {
-  crafting_categories?: string[]
-}
-/**
- * https://lua-api.factorio.com/stable/prototypes/CharacterPrototype.html
- */
-export type CharacterPrototype = Prototype & {
-  crafting_categories?: string[]
-}
-/**
- * https://lua-api.factorio.com/stable/prototypes/RecipePrototype.html
- */
-export type RecipePrototype = Prototype & {
-  ingredients?: IngredientPrototype[] | {}
-  results?: ProductPrototype[] | {}
-  category?: string
-}
-/**
- * https://lua-api.factorio.com/stable/types/IngredientPrototype.html
- */
-export type IngredientPrototype = ItemIngredientPrototype | FluidIngredientPrototype
-/**
- * https://lua-api.factorio.com/stable/types/FluidID.html
- */
-export type FluidID = String
-/**
- * https://lua-api.factorio.com/stable/types/FluidAmount.html
- */
-export type FluidAmount = Double
-/**
- * https://lua-api.factorio.com/stable/types/ProductPrototype.html
- */
-export type ProductPrototype =
-  | ItemProductPrototype
-  | FluidProductPrototype
-  | ResearchProgressProductPrototype
+export type Uint8 = number
 
 export interface FactorioDataRaw {
-  ammo?: {
-    [k: string]: ItemPrototype
-  }
-  armor?: {
-    [k: string]: ItemPrototype
-  }
-  'assembling-machine'?: {
-    [k: string]: CraftingMachinePrototype
-  }
-  blueprint?: {
-    [k: string]: ItemPrototype
-  }
-  'blueprint-book'?: {
-    [k: string]: ItemPrototype
-  }
-  capsule?: {
-    [k: string]: ItemPrototype
-  }
-  character?: {
-    [k: string]: CharacterPrototype
-  }
-  'copy-paste-tool'?: {
-    [k: string]: ItemPrototype
-  }
-  'deconstruction-item'?: {
-    [k: string]: ItemPrototype
-  }
-  fluid?: {
-    [k: string]: Prototype
-  }
-  furnace?: {
-    [k: string]: CraftingMachinePrototype
-  }
-  gun?: {
-    [k: string]: ItemPrototype
-  }
   item?: {
-    [k: string]: ItemPrototype
-  }
-  'item-with-entity-data'?: {
-    [k: string]: ItemPrototype
-  }
-  module?: {
-    [k: string]: ItemPrototype
-  }
-  'rail-planner'?: {
-    [k: string]: ItemPrototype
-  }
-  recipe?: {
-    [k: string]: RecipePrototype
-  }
-  'repair-tool'?: {
-    [k: string]: ItemPrototype
-  }
-  'rocket-silo'?: {
-    [k: string]: CraftingMachinePrototype
-  }
-  'selection-tool'?: {
-    [k: string]: ItemPrototype
-  }
-  'space-platform-starter-pack'?: {
-    [k: string]: ItemPrototype
-  }
-  'spidertron-remote'?: {
-    [k: string]: ItemPrototype
-  }
-  tool?: {
-    [k: string]: ItemPrototype
-  }
-  'upgrade-item'?: {
     [k: string]: ItemPrototype
   }
 }
@@ -848,176 +155,76 @@ export interface PrototypeBase {
   factoriopedia_simulation?: SimulationDefinition
 }
 /**
+ * https://lua-api.factorio.com/stable/types/LocalisedString.html
+ */
+export interface LocalisedString {
+  [k: string]: unknown
+}
+/**
  * https://lua-api.factorio.com/stable/types/SimulationDefinition.html
  */
 export interface SimulationDefinition {
-  planet?: SpaceLocationID
-  game_view_settings?: GameViewSettings
-  save?: FileName
-  init_file?: FileName
-  init?: String
-  update_file?: FileName
-  update?: String
-  mods?: String
-  init_update_count?: Uint32
-  length?: Uint32
-  generate_map?: Bool
-  checkboard?: Bool
-  hide_health_bars?: Bool
-  mute_technology_finished_sound?: Bool
-  mute_alert_sounds?: Bool
-  volume_modifier?: Float
-  override_volume?: Bool
-  mute_wind_sounds?: Bool
-  hide_factoriopedia_gradient?: Bool
+  planet?: unknown
+  game_view_settings?: unknown
+  save?: unknown
+  init_file?: unknown
+  init?: unknown
+  update_file?: unknown
+  update?: unknown
+  mods?: unknown
+  init_update_count?: unknown
+  length?: unknown
+  generate_map?: unknown
+  checkboard?: unknown
+  hide_health_bars?: unknown
+  mute_technology_finished_sound?: unknown
+  mute_alert_sounds?: unknown
+  volume_modifier?: unknown
+  override_volume?: unknown
+  mute_wind_sounds?: unknown
+  hide_factoriopedia_gradient?: unknown
 }
 /**
- * https://lua-api.factorio.com/stable/types/GameViewSettings.html
+ * https://lua-api.factorio.com/stable/types/SpriteVariations.html
  */
-export interface GameViewSettings {
-  default_show_value?: Bool
-  show_controller_gui?: Bool
-  show_minimap?: Bool
-  show_research_info?: Bool
-  show_entity_info?: Bool
-  show_alert_gui?: Bool
-  update_entity_selection?: Bool
-  show_rail_block_visualisation?: Bool
-  show_side_menu?: Bool
-  show_map_view_options?: Bool
-  show_entity_tooltip?: Bool
-  show_quickbar?: Bool
-  show_shortcut_bar?: Bool
-  show_crafting_queue?: Bool
-  show_tool_bar?: Bool
-  show_hotkey_suggestions?: Bool
-  show_surface_list?: Bool
+export interface SpriteVariations {
+  [k: string]: unknown
 }
 /**
- * https://lua-api.factorio.com/stable/types/IconData.html
+ * https://lua-api.factorio.com/stable/types/ItemPrototypeFlags.html
  */
-export interface IconData {
-  icon: FileName
-  icon_size?: SpriteSizeType
-  tint?: Color
-  shift?: Vector
-  scale?: Double
-  draw_background?: Bool
+export interface ItemPrototypeFlags {
+  [k: string]: unknown
+}
+/**
+ * https://lua-api.factorio.com/stable/types/Color.html
+ */
+export interface Color {
+  [k: string]: unknown
+}
+/**
+ * https://lua-api.factorio.com/stable/types/Sound.html
+ */
+export interface Sound {
+  [k: string]: unknown
 }
 /**
  * https://lua-api.factorio.com/stable/types/ColorHintSpecification.html
  */
 export interface ColorHintSpecification {
-  text?: String
-  text_color?: Color
+  text?: unknown
+  text_color?: unknown
 }
 /**
- * https://lua-api.factorio.com/stable/types/TriggerItem.html
+ * https://lua-api.factorio.com/stable/types/SpoilToTriggerResult.html
  */
-export interface TriggerItem {
-  entity_flags?: EntityPrototypeFlags
-  collision_mask?: CollisionMaskConnector
-  ignore_collision_condition?: Bool
-  trigger_target_mask?: TriggerTargetMask
-  repeat_count?: Uint32
-  probability?: Float
-  action_delivery?: TriggerDelivery
-  force?: ForceCondition
+export interface SpoilToTriggerResult {
+  trigger: unknown
+  items_per_trigger: unknown
 }
 /**
- * https://lua-api.factorio.com/stable/types/CollisionMaskConnector.html
+ * https://lua-api.factorio.com/stable/types/Trigger.html
  */
-export interface CollisionMaskConnector {
-  layers: CollisionLayerID
-  not_colliding_with_itself?: Bool
-  consider_tile_transitions?: Bool
-  colliding_with_tiles_only?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/TriggerDeliveryItem.html
- */
-export interface TriggerDeliveryItem {
-  source_effects?: TriggerEffect
-  target_effects?: TriggerEffect
-}
-/**
- * https://lua-api.factorio.com/stable/types/TriggerEffectItem.html
- */
-export interface TriggerEffectItem {
-  repeat_count?: Uint16
-  repeat_count_deviation?: Uint16
-  probability?: Float
-  affects_target?: Bool
-  show_in_tooltip?: Bool
-  damage_type_filters?: DamageTypeFilters
-}
-/**
- * https://lua-api.factorio.com/stable/types/DamageParameters.html
- */
-export interface DamageParameters {
-  amount: Float
-  type: DamageTypeID
-}
-/**
- * https://lua-api.factorio.com/stable/types/ItemIngredientPrototype.html
- */
-export interface ItemIngredientPrototype {
-  type: 'item'
-  name: ItemID
-  amount: Uint16
-  ignored_by_stats?: Uint16
-}
-/**
- * https://lua-api.factorio.com/stable/types/FluidIngredientPrototype.html
- */
-export interface FluidIngredientPrototype {
-  type: 'fluid'
-  name: FluidID
-  amount: FluidAmount
-  temperature?: Float
-  minimum_temperature?: Float
-  maximum_temperature?: Float
-  ignored_by_stats?: FluidAmount
-  fluidbox_index?: Uint32
-  fluidbox_multiplier?: Uint8
-}
-/**
- * https://lua-api.factorio.com/stable/types/ItemProductPrototype.html
- */
-export interface ItemProductPrototype {
-  type: 'item'
-  name: ItemID
-  amount?: Double
-  amount_min?: Uint16
-  amount_max?: Uint16
-  probability?: Double
-  ignored_by_stats?: Uint16
-  ignored_by_productivity?: Uint16
-  show_details_in_recipe_tooltip?: Bool
-  extra_count_fraction?: Float
-  percent_spoiled?: Float
-}
-/**
- * https://lua-api.factorio.com/stable/types/FluidProductPrototype.html
- */
-export interface FluidProductPrototype {
-  type: 'fluid'
-  name: FluidID
-  amount?: FluidAmount
-  amount_min?: FluidAmount
-  amount_max?: FluidAmount
-  probability?: Double
-  ignored_by_stats?: FluidAmount
-  ignored_by_productivity?: FluidAmount
-  temperature?: Float
-  fluidbox_index?: Uint32
-  show_details_in_recipe_tooltip?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/ResearchProgressProductPrototype.html
- */
-export interface ResearchProgressProductPrototype {
-  type: 'research-progress'
-  amount?: Double
-  research_item: ItemID
+export interface Trigger {
+  [k: string]: unknown
 }
