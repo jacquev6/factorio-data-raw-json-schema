@@ -388,7 +388,7 @@ export type EntityPrototype = Prototype & {
   icon?: FileName
   icon_size?: SpriteSizeType
   collision_box?: BoundingBox
-  collision_mask?: unknown
+  collision_mask?: CollisionMaskConnector
   map_generator_bounding_box?: BoundingBox
   selection_box?: BoundingBox
   drawing_box_vertical_extension?: Double
@@ -402,9 +402,9 @@ export type EntityPrototype = Prototype & {
   deconstruction_alternative?: EntityID
   selection_priority?: Uint8
   build_grid_size?: Uint8
-  remove_decoratives?: unknown
+  remove_decoratives?: 'automatic' | 'true' | 'false'
   emissions_per_second?: unknown
-  shooting_cursor_size?: unknown
+  shooting_cursor_size?: Double
   created_smoke?: CreateTrivialSmokeEffectItem
   working_sound?: WorkingSound
   created_effect?: Trigger
@@ -430,8 +430,8 @@ export type EntityPrototype = Prototype & {
   placeable_by?: ItemToPlace | ItemToPlace[] | {}
   remains_when_mined?: EntityID | EntityID[] | {}
   additional_pastable_entities?: EntityID[] | {}
-  tile_width?: unknown
-  tile_height?: unknown
+  tile_width?: Int32
+  tile_height?: Int32
   diagonal_tile_grid_size?: TilePosition
   autoplace?: AutoplaceSpecification
   map_color?: Color
@@ -609,6 +609,13 @@ export type SpriteUsageHint =
   | 'air'
   | 'remnant'
   | 'decorative'
+/**
+ * https://lua-api.factorio.com/stable/types/int32.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "int32".
+ */
+export type Int32 = number
 /**
  * https://lua-api.factorio.com/stable/types/AutoplaceControlID.html
  *
@@ -1210,15 +1217,15 @@ export type FluidPrototype = Prototype & {
   icons?: IconData[] | {}
   icon?: FileName
   icon_size?: SpriteSizeType
-  default_temperature: unknown
+  default_temperature: Float
   base_color: Color
   flow_color: Color
   visualization_color?: Color
-  max_temperature?: unknown
+  max_temperature?: Float
   heat_capacity?: Energy
   fuel_value?: Energy
   emissions_multiplier?: Double
-  gas_temperature?: unknown
+  gas_temperature?: Float
   auto_barrel?: Bool
 }
 /**
@@ -1289,7 +1296,7 @@ export type RailPlannerPrototype = ItemPrototype & {
  */
 export type RecipePrototype = Prototype & {
   category?: RecipeCategoryID
-  crafting_machine_tint?: unknown
+  crafting_machine_tint?: RecipeTints
   icons?: IconData[] | {}
   icon?: FileName
   icon_size?: SpriteSizeType
@@ -2258,13 +2265,6 @@ export type BeaconDistributionModifier = SimpleModifier & {
  * via the `definition` "ModuleTint".
  */
 export type ModuleTint = 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'none'
-/**
- * https://lua-api.factorio.com/stable/types/int32.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "int32".
- */
-export type Int32 = number
 /**
  * https://lua-api.factorio.com/stable/types/BeltStackSizeBonusModifier.html
  *
@@ -4773,7 +4773,7 @@ export type AmmoTurretPrototype = TurretPrototype & {
  */
 export type TurretPrototype = EntityWithOwnerPrototype & {
   attack_parameters: AttackParameters
-  folded_animation: unknown
+  folded_animation: RotatedAnimation8Way
   call_for_help_radius: Double
   attack_target_mask?: TriggerTargetMask
   ignore_target_mask?: TriggerTargetMask
@@ -4786,15 +4786,15 @@ export type TurretPrototype = EntityWithOwnerPrototype & {
   gun_animation_secondary_draw_order?: Uint8
   gun_animation_render_layer?: RenderLayer
   graphics_set: TurretGraphicsSet
-  preparing_animation?: unknown
-  prepared_animation?: unknown
-  prepared_alternative_animation?: unknown
-  starting_attack_animation?: unknown
-  attacking_animation?: unknown
-  energy_glow_animation?: unknown
+  preparing_animation?: RotatedAnimation8Way
+  prepared_animation?: RotatedAnimation8Way
+  prepared_alternative_animation?: RotatedAnimation8Way
+  starting_attack_animation?: RotatedAnimation8Way
+  attacking_animation?: RotatedAnimation8Way
+  energy_glow_animation?: RotatedAnimation8Way
   resource_indicator_animation?: RotatedAnimation8Way
-  ending_attack_animation?: unknown
-  folding_animation?: unknown
+  ending_attack_animation?: RotatedAnimation8Way
+  folding_animation?: RotatedAnimation8Way
   integration?: Sprite
   special_effect?: TurretSpecialEffect
   glow_light_intensity?: Float
@@ -4849,7 +4849,7 @@ export type TurretPrototype = EntityWithOwnerPrototype & {
   spawn_decorations_on_expansion?: Bool
   folded_animation_is_stateless?: Bool
   unfolds_before_dying?: Bool
-  spawn_decoration?: unknown
+  spawn_decoration?: CreateDecorativesTriggerEffectItem[] | {}
   folded_state_corpse?: EntityID | EntityID[] | {}
   can_retarget_while_starting_attack?: Bool
   circuit_wire_max_distance?: Double
@@ -5001,11 +5001,11 @@ export type ArtilleryWagonPrototype = RollingStockPrototype & {
   turret_rotation_speed: Double
   manual_range_modifier: Double
   disable_automatic_firing?: Bool
-  cannon_base_pictures?: unknown
+  cannon_base_pictures?: RollingStockRotatedSlopedGraphics
   cannon_base_height?: Double
   cannon_base_shift_when_vertical?: Double
   cannon_base_shift_when_horizontal?: Double
-  cannon_barrel_pictures?: unknown
+  cannon_barrel_pictures?: RollingStockRotatedSlopedGraphics
   rotating_sound?: InterruptibleSound
   turn_after_shooting_cooldown?: Uint16
   cannon_parking_frame_count?: Uint16
@@ -5025,8 +5025,8 @@ export type RollingStockPrototype = VehiclePrototype & {
   air_resistance: Double
   joint_distance: Double
   connection_distance: Double
-  pictures?: unknown
-  wheels?: unknown
+  pictures?: RollingStockRotatedSlopedGraphics
+  wheels?: RollingStockRotatedSlopedGraphics
   vertical_selection_shift: Double
   drive_over_tie_trigger?: TriggerEffect
   drive_over_tie_trigger_minimal_speed?: Double
@@ -5147,7 +5147,7 @@ export type AsteroidPrototype = EntityWithOwnerPrototype & {
  * via the `definition` "AutoplaceControl".
  */
 export type AutoplaceControl = Prototype & {
-  category: unknown
+  category: 'resource' | 'terrain' | 'cliff' | 'enemy'
   richness?: Bool
   can_be_disabled?: Bool
 }
@@ -5189,7 +5189,7 @@ export type BeaconPrototype = EntityWithOwnerPrototype & {
  */
 export type BeamPrototype = EntityPrototype & {
   action?: Trigger
-  width: unknown
+  width: Float
   damage_interval: Uint32
   target_offset?: Vector
   random_target_offset?: Bool
@@ -5218,10 +5218,10 @@ export type BoilerPrototype = EntityWithOwnerPrototype & {
   output_fluid_box: FluidBox
   energy_consumption: Energy
   burning_cooldown: Uint16
-  target_temperature?: unknown
+  target_temperature?: Float
   fire_glow_flicker_enabled?: Bool
   fire_flicker_enabled?: Bool
-  mode?: unknown
+  mode?: 'heat-fluid-inside' | 'output-to-separate-pipe'
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/BuildEntityAchievementPrototype.html
@@ -5547,7 +5547,7 @@ export type ContainerPrototype = EntityWithOwnerPrototype & {
   inventory_size: ItemStackIndex
   quality_affects_inventory_size?: Bool
   picture?: Sprite
-  inventory_type?: unknown
+  inventory_type?: 'normal' | 'with_bar' | 'with_filters_and_bar'
   circuit_wire_max_distance?: Double
   draw_copper_wires?: Bool
   draw_circuit_wires?: Bool
@@ -5719,7 +5719,7 @@ export type DecorativePrototype = Prototype & {
   grows_through_rail_path?: Bool
   tile_layer?: Int16
   decal_overdraw_priority?: Uint16
-  collision_mask?: unknown
+  collision_mask?: CollisionMaskConnector
   walking_sound?: Sound
   trigger_effect?: TriggerEffect
   minimal_separation?: Double
@@ -5747,7 +5747,7 @@ export type DelayedActiveTriggerPrototype = ActiveTriggerPrototype & {
  * via the `definition` "DeliverByRobotsAchievementPrototype".
  */
 export type DeliverByRobotsAchievementPrototype = AchievementPrototype & {
-  amount: unknown
+  amount: Uint32
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/DepleteResourceAchievementPrototype.html
@@ -5804,7 +5804,7 @@ export type DontBuildEntityAchievementPrototype = AchievementPrototypeWithCondit
  * via the `definition` "DontCraftManuallyAchievementPrototype".
  */
 export type DontCraftManuallyAchievementPrototype = AchievementPrototypeWithCondition & {
-  amount: unknown
+  amount: Uint32
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/DontKillManuallyAchievementPrototype.html
@@ -5954,7 +5954,7 @@ export type EnemySpawnerPrototype = EntityWithOwnerPrototype & {
   min_darkness_to_spawn?: Float
   max_darkness_to_spawn?: Float
   spawn_decorations_on_expansion?: Bool
-  spawn_decoration?: unknown
+  spawn_decoration?: CreateDecorativesTriggerEffectItem[] | {}
   captured_spawner_entity?: EntityID
 }
 /**
@@ -6066,7 +6066,7 @@ export type ExplosionPrototype = EntityPrototype & {
  * via the `definition` "FireFlamePrototype".
  */
 export type FireFlamePrototype = EntityPrototype & {
-  damage_per_tick: unknown
+  damage_per_tick: DamageParameters
   spread_delay: Uint32
   spread_delay_deviation: Uint32
   render_layer?: RenderLayer
@@ -6135,7 +6135,7 @@ export type FluidStreamPrototype = EntityPrototype & {
   particle_vertical_acceleration: Float
   initial_action?: Trigger
   action?: Trigger
-  special_neutral_target_damage?: unknown
+  special_neutral_target_damage?: DamageParameters
   width?: Float
   particle_buffer_size?: Uint32
   particle_spawn_timeout?: Uint16
@@ -6166,9 +6166,9 @@ export type FluidStreamPrototype = EntityPrototype & {
  * via the `definition` "FluidTurretPrototype".
  */
 export type FluidTurretPrototype = TurretPrototype & {
-  fluid_buffer_size: unknown
-  fluid_buffer_input_flow: unknown
-  activation_buffer_ratio: unknown
+  fluid_buffer_size: FluidAmount
+  fluid_buffer_input_flow: FluidAmount
+  activation_buffer_ratio: FluidAmount
   fluid_box: FluidBox
   muzzle_light?: LightDefinition
   enough_fuel_indicator_light?: LightDefinition
@@ -6192,7 +6192,7 @@ export type FluidTurretPrototype = TurretPrototype & {
  * via the `definition` "FluidWagonPrototype".
  */
 export type FluidWagonPrototype = RollingStockPrototype & {
-  capacity: unknown
+  capacity: FluidAmount
   tank_count?: Uint8
 }
 /**
@@ -6259,7 +6259,7 @@ export type GatePrototype = EntityWithOwnerPrototype & {
   opening_sound?: Sound
   closing_sound?: Sound
   fadeout_interval?: Uint32
-  opened_collision_mask?: unknown
+  opened_collision_mask?: CollisionMaskConnector
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/GeneratorEquipmentPrototype.html
@@ -6285,8 +6285,8 @@ export type GeneratorPrototype = EntityWithOwnerPrototype & {
   horizontal_frozen_patch?: Sprite
   vertical_frozen_patch?: Sprite
   effectivity?: Double
-  fluid_usage_per_tick: unknown
-  maximum_temperature: unknown
+  fluid_usage_per_tick: FluidAmount
+  maximum_temperature: Float
   smoke?: SmokeSource[] | {}
   burns_fluid?: Bool
   scale_fluid_usage?: Bool
@@ -6500,7 +6500,7 @@ export type ItemWithTagsPrototype = ItemWithLabelPrototype
  * via the `definition` "KillAchievementPrototype".
  */
 export type KillAchievementPrototype = AchievementPrototype & {
-  to_kill?: unknown
+  to_kill?: EntityID | EntityID[] | {}
   type_to_kill?: String
   damage_type?: DamageTypeID
   damage_dealer?: EntityID | EntityID[] | {}
@@ -6576,7 +6576,7 @@ export type LandMinePrototype = EntityWithOwnerPrototype & {
   ammo_category?: AmmoCategoryID
   force_die_on_attack?: Bool
   trigger_force?: ForceCondition
-  trigger_collision_mask?: unknown
+  trigger_collision_mask?: CollisionMaskConnector
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/LaneSplitterPrototype.html
@@ -6668,7 +6668,7 @@ export type LinkedBeltPrototype = TransportBeltConnectablePrototype & {
 export type LinkedContainerPrototype = EntityWithOwnerPrototype & {
   inventory_size: ItemStackIndex
   picture?: Sprite
-  inventory_type?: unknown
+  inventory_type?: 'normal' | 'with_bar' | 'with_filters_and_bar'
   gui_mode?: 'all' | 'none' | 'admins'
   circuit_wire_max_distance?: Double
   draw_copper_wires?: Bool
@@ -6724,7 +6724,7 @@ export type LocomotivePrototype = RollingStockPrototype & {
   reversing_power_modifier: Double
   energy_source: BurnerEnergySource | VoidEnergySource
   front_light?: LightDefinition
-  front_light_pictures?: unknown
+  front_light_pictures?: RollingStockRotatedSlopedGraphics
   darkness_to_render_light_animation?: Float
   max_snap_to_train_stop_distance?: Float
 }
@@ -6862,7 +6862,7 @@ export type NightVisionEquipmentPrototype = EquipmentPrototype & {
  */
 export type OffshorePumpPrototype = EntityWithOwnerPrototype & {
   fluid_box: FluidBox
-  pumping_speed: unknown
+  pumping_speed: FluidAmount
   fluid_source_offset: Vector
   perceived_performance?: PerceivedPerformance
   graphics_set?: OffshorePumpGraphicsSet
@@ -6926,7 +6926,7 @@ export type ParticleSourcePrototype = EntityPrototype & {
  */
 export type PipeToGroundPrototype = EntityWithOwnerPrototype & {
   fluid_box: FluidBox
-  pictures?: unknown
+  pictures?: Sprite4Way
   frozen_patch?: Sprite4Way
   visualization?: Sprite4Way
   disabled_visualization?: Sprite4Way
@@ -7088,7 +7088,7 @@ export type ProcessionPrototype = Prototype & {
 export type ProduceAchievementPrototype = AchievementPrototype & {
   amount: MaterialAmountType
   limited_to_one_game: Bool
-  item_product?: unknown
+  item_product?: ItemIDFilter
   fluid_product?: FluidID
 }
 /**
@@ -7099,7 +7099,7 @@ export type ProduceAchievementPrototype = AchievementPrototype & {
  */
 export type ProducePerHourAchievementPrototype = AchievementPrototype & {
   amount: MaterialAmountType
-  item_product?: unknown
+  item_product?: ItemIDFilter
   fluid_product?: FluidID
 }
 /**
@@ -7128,7 +7128,7 @@ export type ProgrammableSpeakerPrototype = EntityWithOwnerPrototype & {
  */
 export type ProjectilePrototype = EntityPrototype & {
   acceleration: Double
-  animation?: unknown
+  animation?: RotatedAnimationVariations
   rotatable?: Bool
   enable_drawing_with_mask?: Bool
   direction_only?: Bool
@@ -7143,9 +7143,9 @@ export type ProjectilePrototype = EntityPrototype & {
   final_action?: Trigger
   light?: LightDefinition
   smoke?: SmokeSource[] | {}
-  hit_collision_mask?: unknown
+  hit_collision_mask?: CollisionMaskConnector
   turning_speed_increases_exponentially_with_projectile_speed?: Bool
-  shadow?: unknown
+  shadow?: RotatedAnimationVariations
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/PumpPrototype.html
@@ -7157,7 +7157,7 @@ export type PumpPrototype = EntityWithOwnerPrototype & {
   fluid_box: FluidBox
   energy_source: EnergySource
   energy_usage: Energy
-  pumping_speed: unknown
+  pumping_speed: FluidAmount
   animations?: Animation4Way
   fluid_wagon_connector_speed?: Double
   fluid_wagon_connector_alignment_tolerance?: Double
@@ -7291,7 +7291,7 @@ export type RailSupportPrototype = EntityWithOwnerPrototype & {
  * via the `definition` "ReactorPrototype".
  */
 export type ReactorPrototype = EntityWithOwnerPrototype & {
-  working_light_picture?: unknown
+  working_light_picture?: Animation
   heat_buffer: HeatBuffer
   heating_radius?: Double
   energy_source: EnergySource
@@ -7610,10 +7610,10 @@ export type ShortcutPrototype = Prototype & {
     | 'spawn-item'
     | 'lua'
   icons?: IconData[] | {}
-  icon?: unknown
+  icon?: FileName
   icon_size?: SpriteSizeType
   small_icons?: IconData[] | {}
-  small_icon?: unknown
+  small_icon?: FileName
   small_icon_size?: SpriteSizeType
   item_to_spawn?: ItemID
   technology_to_unlock?: TechnologyID
@@ -7810,7 +7810,7 @@ export type SpiderLegPrototype = EntityWithOwnerPrototype & {
   base_position_selection_distance: Double
   movement_based_position_selection_distance: Double
   graphics_set?: unknown
-  walking_sound_volume_modifier?: unknown
+  walking_sound_volume_modifier?: Float
   walking_sound_speed_modifier?: Float
   upper_leg_dying_trigger_effects?: SpiderLegTriggerEffect[] | {}
   lower_leg_dying_trigger_effects?: SpiderLegTriggerEffect[] | {}
@@ -7849,7 +7849,7 @@ export type SpiderVehiclePrototype = VehiclePrototype & {
   energy_source: BurnerEnergySource | VoidEnergySource
   inventory_size: ItemStackIndex
   graphics_set?: SpiderVehicleGraphicsSet
-  spider_engine: unknown
+  spider_engine: SpiderEngineSpecification
   height: Float
   movement_energy_consumption: Energy
   automatic_weapon_cycling: Bool
@@ -7890,7 +7890,7 @@ export type StickerPrototype = EntityPrototype & {
   stickers_per_square_meter?: Float
   force_visibility?: ForceCondition
   single_particle?: Bool
-  damage_per_tick?: unknown
+  damage_per_tick?: DamageParameters
   target_movement_modifier?: Float
   target_movement_modifier_from?: Float
   target_movement_modifier_to?: Float
@@ -8011,7 +8011,7 @@ export type TileGhostPrototype = EntityPrototype
  * via the `definition` "TilePrototype".
  */
 export type TilePrototype = Prototype & {
-  collision_mask: unknown
+  collision_mask: CollisionMaskConnector
   layer: Uint8
   build_animations?: Animation4Way
   build_animations_background?: Animation4Way
@@ -8054,7 +8054,7 @@ export type TilePrototype = Prototype & {
   default_cover_tile?: TileID
   frozen_variant?: TileID
   thawed_variant?: TileID
-  effect?: unknown
+  effect?: TileEffectDefinitionID
   trigger_effect?: TriggerEffect
   default_destroyed_dropped_item_trigger?: Trigger
   scorch_mark_color?: Color
@@ -8403,7 +8403,7 @@ export type UtilityConstants = PrototypeBase & {
   freezing_temperature: Double
   train_on_elevated_rail_shadow_shift_multiplier: Vector
   select_group_row_count: Uint8
-  select_slot_row_count: unknown
+  select_slot_row_count: Uint8
   inventory_width: Uint32
   module_inventory_width: Uint32
   tooltip_monitor_edge_border: Int32
@@ -9431,6 +9431,18 @@ export interface InterruptibleSound {
   fade_ticks?: Uint32
 }
 /**
+ * https://lua-api.factorio.com/stable/types/CollisionMaskConnector.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "CollisionMaskConnector".
+ */
+export interface CollisionMaskConnector {
+  layers: unknown
+  not_colliding_with_itself?: Bool
+  consider_tile_transitions?: Bool
+  colliding_with_tiles_only?: Bool
+}
+/**
  * https://lua-api.factorio.com/stable/types/TriggerTargetMask.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -9468,18 +9480,6 @@ export interface TileBuildabilityRule {
  */
 export interface SimpleBoundingBox {
   [k: string]: unknown
-}
-/**
- * https://lua-api.factorio.com/stable/types/CollisionMaskConnector.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "CollisionMaskConnector".
- */
-export interface CollisionMaskConnector {
-  layers: unknown
-  not_colliding_with_itself?: Bool
-  consider_tile_transitions?: Bool
-  colliding_with_tiles_only?: Bool
 }
 /**
  * https://lua-api.factorio.com/stable/types/MinableProperties.html
@@ -10311,6 +10311,18 @@ export interface FootprintParticle {
   tiles: TileID[] | {}
   particle_name?: ParticleID
   use_as_default?: Bool
+}
+/**
+ * https://lua-api.factorio.com/stable/types/RecipeTints.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "RecipeTints".
+ */
+export interface RecipeTints {
+  primary?: Color
+  secondary?: Color
+  tertiary?: Color
+  quaternary?: Color
 }
 /**
  * https://lua-api.factorio.com/stable/types/ItemIngredientPrototype.html
@@ -12842,18 +12854,6 @@ export interface RailSignalStaticSpriteLayer {
   align_to_frame_index?: Uint8[] | {}
 }
 /**
- * https://lua-api.factorio.com/stable/types/RecipeTints.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "RecipeTints".
- */
-export interface RecipeTints {
-  primary?: Color
-  secondary?: Color
-  tertiary?: Color
-  quaternary?: Color
-}
-/**
  * https://lua-api.factorio.com/stable/types/ResearchIngredient.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -13661,7 +13661,7 @@ export interface AmbientSound {
   type: 'ambient-sound'
   name: String
   weight?: Double
-  track_type: unknown
+  track_type: AmbientSoundType
   planet?: SpaceLocationID
   sound?: Sound
   variable_sound?: VariableAmbientSoundVariableSound
@@ -13704,7 +13704,7 @@ export interface AnimationPrototype {
   generate_sdf?: Bool
   surface?: SpriteUsageSurfaceHint
   usage?: SpriteUsageHint
-  run_mode?: unknown
+  run_mode?: AnimationRunMode
   frame_count?: Uint32
   line_length?: Uint32
   animation_speed?: Float

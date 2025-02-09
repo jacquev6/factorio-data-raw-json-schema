@@ -19029,7 +19029,9 @@
         "weight": {
           "$ref": "#/definitions/double"
         },
-        "track_type": {},
+        "track_type": {
+          "$ref": "#/definitions/AmbientSoundType"
+        },
         "planet": {
           "$ref": "#/definitions/SpaceLocationID"
         },
@@ -19255,7 +19257,9 @@
         "usage": {
           "$ref": "#/definitions/SpriteUsageHint"
         },
-        "run_mode": {},
+        "run_mode": {
+          "$ref": "#/definitions/AnimationRunMode"
+        },
         "frame_count": {
           "$ref": "#/definitions/uint32"
         },
@@ -19700,7 +19704,9 @@
             "disable_automatic_firing": {
               "$ref": "#/definitions/bool"
             },
-            "cannon_base_pictures": {},
+            "cannon_base_pictures": {
+              "$ref": "#/definitions/RollingStockRotatedSlopedGraphics"
+            },
             "cannon_base_height": {
               "$ref": "#/definitions/double"
             },
@@ -19710,7 +19716,9 @@
             "cannon_base_shift_when_horizontal": {
               "$ref": "#/definitions/double"
             },
-            "cannon_barrel_pictures": {},
+            "cannon_barrel_pictures": {
+              "$ref": "#/definitions/RollingStockRotatedSlopedGraphics"
+            },
             "rotating_sound": {
               "$ref": "#/definitions/InterruptibleSound"
             },
@@ -20031,7 +20039,26 @@
         {
           "type": "object",
           "properties": {
-            "category": {},
+            "category": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "resource"
+                },
+                {
+                  "type": "string",
+                  "const": "terrain"
+                },
+                {
+                  "type": "string",
+                  "const": "cliff"
+                },
+                {
+                  "type": "string",
+                  "const": "enemy"
+                }
+              ]
+            },
             "richness": {
               "$ref": "#/definitions/bool"
             },
@@ -20166,7 +20193,9 @@
             "action": {
               "$ref": "#/definitions/Trigger"
             },
-            "width": {},
+            "width": {
+              "$ref": "#/definitions/float"
+            },
             "damage_interval": {
               "$ref": "#/definitions/uint32"
             },
@@ -20245,14 +20274,27 @@
             "burning_cooldown": {
               "$ref": "#/definitions/uint16"
             },
-            "target_temperature": {},
+            "target_temperature": {
+              "$ref": "#/definitions/float"
+            },
             "fire_glow_flicker_enabled": {
               "$ref": "#/definitions/bool"
             },
             "fire_flicker_enabled": {
               "$ref": "#/definitions/bool"
             },
-            "mode": {}
+            "mode": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "heat-fluid-inside"
+                },
+                {
+                  "type": "string",
+                  "const": "output-to-separate-pipe"
+                }
+              ]
+            }
           },
           "required": [
             "energy_source",
@@ -21304,7 +21346,22 @@
             "picture": {
               "$ref": "#/definitions/Sprite"
             },
-            "inventory_type": {},
+            "inventory_type": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "normal"
+                },
+                {
+                  "type": "string",
+                  "const": "with_bar"
+                },
+                {
+                  "type": "string",
+                  "const": "with_filters_and_bar"
+                }
+              ]
+            },
             "circuit_wire_max_distance": {
               "$ref": "#/definitions/double"
             },
@@ -21805,7 +21862,9 @@
             "decal_overdraw_priority": {
               "$ref": "#/definitions/uint16"
             },
-            "collision_mask": {},
+            "collision_mask": {
+              "$ref": "#/definitions/CollisionMaskConnector"
+            },
             "walking_sound": {
               "$ref": "#/definitions/Sound"
             },
@@ -21867,7 +21926,9 @@
         {
           "type": "object",
           "properties": {
-            "amount": {}
+            "amount": {
+              "$ref": "#/definitions/uint32"
+            }
           },
           "required": ["amount"]
         }
@@ -22046,7 +22107,9 @@
         {
           "type": "object",
           "properties": {
-            "amount": {}
+            "amount": {
+              "$ref": "#/definitions/uint32"
+            }
           },
           "required": ["amount"]
         }
@@ -22534,7 +22597,20 @@
             "spawn_decorations_on_expansion": {
               "$ref": "#/definitions/bool"
             },
-            "spawn_decoration": {},
+            "spawn_decoration": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CreateDecorativesTriggerEffectItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "captured_spawner_entity": {
               "$ref": "#/definitions/EntityID"
             }
@@ -22640,7 +22716,9 @@
             "collision_box": {
               "$ref": "#/definitions/BoundingBox"
             },
-            "collision_mask": {},
+            "collision_mask": {
+              "$ref": "#/definitions/CollisionMaskConnector"
+            },
             "map_generator_bounding_box": {
               "$ref": "#/definitions/BoundingBox"
             },
@@ -22702,9 +22780,26 @@
             "build_grid_size": {
               "$ref": "#/definitions/uint8"
             },
-            "remove_decoratives": {},
+            "remove_decoratives": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "automatic"
+                },
+                {
+                  "type": "string",
+                  "const": "true"
+                },
+                {
+                  "type": "string",
+                  "const": "false"
+                }
+              ]
+            },
             "emissions_per_second": {},
-            "shooting_cursor_size": {},
+            "shooting_cursor_size": {
+              "$ref": "#/definitions/double"
+            },
             "created_smoke": {
               "$ref": "#/definitions/CreateTrivialSmokeEffectItem"
             },
@@ -22819,8 +22914,12 @@
                 }
               ]
             },
-            "tile_width": {},
-            "tile_height": {},
+            "tile_width": {
+              "$ref": "#/definitions/int32"
+            },
+            "tile_height": {
+              "$ref": "#/definitions/int32"
+            },
             "diagonal_tile_grid_size": {
               "$ref": "#/definitions/TilePosition"
             },
@@ -23277,7 +23376,9 @@
         {
           "type": "object",
           "properties": {
-            "damage_per_tick": {},
+            "damage_per_tick": {
+              "$ref": "#/definitions/DamageParameters"
+            },
             "spread_delay": {
               "$ref": "#/definitions/uint32"
             },
@@ -23472,7 +23573,9 @@
             "icon_size": {
               "$ref": "#/definitions/SpriteSizeType"
             },
-            "default_temperature": {},
+            "default_temperature": {
+              "$ref": "#/definitions/float"
+            },
             "base_color": {
               "$ref": "#/definitions/Color"
             },
@@ -23482,7 +23585,9 @@
             "visualization_color": {
               "$ref": "#/definitions/Color"
             },
-            "max_temperature": {},
+            "max_temperature": {
+              "$ref": "#/definitions/float"
+            },
             "heat_capacity": {
               "$ref": "#/definitions/Energy"
             },
@@ -23492,7 +23597,9 @@
             "emissions_multiplier": {
               "$ref": "#/definitions/double"
             },
-            "gas_temperature": {},
+            "gas_temperature": {
+              "$ref": "#/definitions/float"
+            },
             "auto_barrel": {
               "$ref": "#/definitions/bool"
             }
@@ -23528,7 +23635,9 @@
             "action": {
               "$ref": "#/definitions/Trigger"
             },
-            "special_neutral_target_damage": {},
+            "special_neutral_target_damage": {
+              "$ref": "#/definitions/DamageParameters"
+            },
             "width": {
               "$ref": "#/definitions/float"
             },
@@ -23625,9 +23734,15 @@
         {
           "type": "object",
           "properties": {
-            "fluid_buffer_size": {},
-            "fluid_buffer_input_flow": {},
-            "activation_buffer_ratio": {},
+            "fluid_buffer_size": {
+              "$ref": "#/definitions/FluidAmount"
+            },
+            "fluid_buffer_input_flow": {
+              "$ref": "#/definitions/FluidAmount"
+            },
+            "activation_buffer_ratio": {
+              "$ref": "#/definitions/FluidAmount"
+            },
             "fluid_box": {
               "$ref": "#/definitions/FluidBox"
             },
@@ -23692,7 +23807,9 @@
         {
           "type": "object",
           "properties": {
-            "capacity": {},
+            "capacity": {
+              "$ref": "#/definitions/FluidAmount"
+            },
             "tank_count": {
               "$ref": "#/definitions/uint8"
             }
@@ -23954,7 +24071,9 @@
             "fadeout_interval": {
               "$ref": "#/definitions/uint32"
             },
-            "opened_collision_mask": {}
+            "opened_collision_mask": {
+              "$ref": "#/definitions/CollisionMaskConnector"
+            }
           },
           "required": ["opening_speed", "activation_distance", "timeout_to_close"]
         }
@@ -24010,8 +24129,12 @@
             "effectivity": {
               "$ref": "#/definitions/double"
             },
-            "fluid_usage_per_tick": {},
-            "maximum_temperature": {},
+            "fluid_usage_per_tick": {
+              "$ref": "#/definitions/FluidAmount"
+            },
+            "maximum_temperature": {
+              "$ref": "#/definitions/float"
+            },
             "smoke": {
               "oneOf": [
                 {
@@ -24891,7 +25014,23 @@
         {
           "type": "object",
           "properties": {
-            "to_kill": {},
+            "to_kill": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/EntityID"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "type_to_kill": {
               "$ref": "#/definitions/string"
             },
@@ -25149,7 +25288,9 @@
             "trigger_force": {
               "$ref": "#/definitions/ForceCondition"
             },
-            "trigger_collision_mask": {}
+            "trigger_collision_mask": {
+              "$ref": "#/definitions/CollisionMaskConnector"
+            }
           },
           "required": ["trigger_radius"]
         }
@@ -25310,7 +25451,22 @@
             "picture": {
               "$ref": "#/definitions/Sprite"
             },
-            "inventory_type": {},
+            "inventory_type": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "normal"
+                },
+                {
+                  "type": "string",
+                  "const": "with_bar"
+                },
+                {
+                  "type": "string",
+                  "const": "with_filters_and_bar"
+                }
+              ]
+            },
             "gui_mode": {
               "oneOf": [
                 {
@@ -25474,7 +25630,9 @@
             "front_light": {
               "$ref": "#/definitions/LightDefinition"
             },
-            "front_light_pictures": {},
+            "front_light_pictures": {
+              "$ref": "#/definitions/RollingStockRotatedSlopedGraphics"
+            },
             "darkness_to_render_light_animation": {
               "$ref": "#/definitions/float"
             },
@@ -26014,7 +26172,9 @@
             "fluid_box": {
               "$ref": "#/definitions/FluidBox"
             },
-            "pumping_speed": {},
+            "pumping_speed": {
+              "$ref": "#/definitions/FluidAmount"
+            },
             "fluid_source_offset": {
               "$ref": "#/definitions/Vector"
             },
@@ -26225,7 +26385,9 @@
             "fluid_box": {
               "$ref": "#/definitions/FluidBox"
             },
-            "pictures": {},
+            "pictures": {
+              "$ref": "#/definitions/Sprite4Way"
+            },
             "frozen_patch": {
               "$ref": "#/definitions/Sprite4Way"
             },
@@ -26510,7 +26672,9 @@
             "limited_to_one_game": {
               "$ref": "#/definitions/bool"
             },
-            "item_product": {},
+            "item_product": {
+              "$ref": "#/definitions/ItemIDFilter"
+            },
             "fluid_product": {
               "$ref": "#/definitions/FluidID"
             }
@@ -26531,7 +26695,9 @@
             "amount": {
               "$ref": "#/definitions/MaterialAmountType"
             },
-            "item_product": {},
+            "item_product": {
+              "$ref": "#/definitions/ItemIDFilter"
+            },
             "fluid_product": {
               "$ref": "#/definitions/FluidID"
             }
@@ -26601,7 +26767,9 @@
             "acceleration": {
               "$ref": "#/definitions/double"
             },
-            "animation": {},
+            "animation": {
+              "$ref": "#/definitions/RotatedAnimationVariations"
+            },
             "rotatable": {
               "$ref": "#/definitions/bool"
             },
@@ -26655,11 +26823,15 @@
                 }
               ]
             },
-            "hit_collision_mask": {},
+            "hit_collision_mask": {
+              "$ref": "#/definitions/CollisionMaskConnector"
+            },
             "turning_speed_increases_exponentially_with_projectile_speed": {
               "$ref": "#/definitions/bool"
             },
-            "shadow": {}
+            "shadow": {
+              "$ref": "#/definitions/RotatedAnimationVariations"
+            }
           },
           "required": ["acceleration"]
         }
@@ -26739,7 +26911,9 @@
             "energy_usage": {
               "$ref": "#/definitions/Energy"
             },
-            "pumping_speed": {},
+            "pumping_speed": {
+              "$ref": "#/definitions/FluidAmount"
+            },
             "animations": {
               "$ref": "#/definitions/Animation4Way"
             },
@@ -27162,7 +27336,9 @@
         {
           "type": "object",
           "properties": {
-            "working_light_picture": {},
+            "working_light_picture": {
+              "$ref": "#/definitions/Animation"
+            },
             "heat_buffer": {
               "$ref": "#/definitions/HeatBuffer"
             },
@@ -27254,7 +27430,9 @@
             "category": {
               "$ref": "#/definitions/RecipeCategoryID"
             },
-            "crafting_machine_tint": {},
+            "crafting_machine_tint": {
+              "$ref": "#/definitions/RecipeTints"
+            },
             "icons": {
               "oneOf": [
                 {
@@ -28317,8 +28495,12 @@
             "connection_distance": {
               "$ref": "#/definitions/double"
             },
-            "pictures": {},
-            "wheels": {},
+            "pictures": {
+              "$ref": "#/definitions/RollingStockRotatedSlopedGraphics"
+            },
+            "wheels": {
+              "$ref": "#/definitions/RollingStockRotatedSlopedGraphics"
+            },
             "vertical_selection_shift": {
               "$ref": "#/definitions/double"
             },
@@ -28704,7 +28886,9 @@
                 }
               ]
             },
-            "icon": {},
+            "icon": {
+              "$ref": "#/definitions/FileName"
+            },
             "icon_size": {
               "$ref": "#/definitions/SpriteSizeType"
             },
@@ -28722,7 +28906,9 @@
                 }
               ]
             },
-            "small_icon": {},
+            "small_icon": {
+              "$ref": "#/definitions/FileName"
+            },
             "small_icon_size": {
               "$ref": "#/definitions/SpriteSizeType"
             },
@@ -29519,7 +29705,9 @@
               "$ref": "#/definitions/double"
             },
             "graphics_set": {},
-            "walking_sound_volume_modifier": {},
+            "walking_sound_volume_modifier": {
+              "$ref": "#/definitions/float"
+            },
             "walking_sound_speed_modifier": {
               "$ref": "#/definitions/float"
             },
@@ -29656,7 +29844,9 @@
             "graphics_set": {
               "$ref": "#/definitions/SpiderVehicleGraphicsSet"
             },
-            "spider_engine": {},
+            "spider_engine": {
+              "$ref": "#/definitions/SpiderEngineSpecification"
+            },
             "height": {
               "$ref": "#/definitions/float"
             },
@@ -29900,7 +30090,9 @@
             "single_particle": {
               "$ref": "#/definitions/bool"
             },
-            "damage_per_tick": {},
+            "damage_per_tick": {
+              "$ref": "#/definitions/DamageParameters"
+            },
             "target_movement_modifier": {
               "$ref": "#/definitions/float"
             },
@@ -30268,7 +30460,9 @@
         {
           "type": "object",
           "properties": {
-            "collision_mask": {},
+            "collision_mask": {
+              "$ref": "#/definitions/CollisionMaskConnector"
+            },
             "layer": {
               "$ref": "#/definitions/uint8"
             },
@@ -30427,7 +30621,9 @@
             "thawed_variant": {
               "$ref": "#/definitions/TileID"
             },
-            "effect": {},
+            "effect": {
+              "$ref": "#/definitions/TileEffectDefinitionID"
+            },
             "trigger_effect": {
               "$ref": "#/definitions/TriggerEffect"
             },
@@ -30961,7 +31157,9 @@
             "attack_parameters": {
               "$ref": "#/definitions/AttackParameters"
             },
-            "folded_animation": {},
+            "folded_animation": {
+              "$ref": "#/definitions/RotatedAnimation8Way"
+            },
             "call_for_help_radius": {
               "$ref": "#/definitions/double"
             },
@@ -30998,17 +31196,33 @@
             "graphics_set": {
               "$ref": "#/definitions/TurretGraphicsSet"
             },
-            "preparing_animation": {},
-            "prepared_animation": {},
-            "prepared_alternative_animation": {},
-            "starting_attack_animation": {},
-            "attacking_animation": {},
-            "energy_glow_animation": {},
+            "preparing_animation": {
+              "$ref": "#/definitions/RotatedAnimation8Way"
+            },
+            "prepared_animation": {
+              "$ref": "#/definitions/RotatedAnimation8Way"
+            },
+            "prepared_alternative_animation": {
+              "$ref": "#/definitions/RotatedAnimation8Way"
+            },
+            "starting_attack_animation": {
+              "$ref": "#/definitions/RotatedAnimation8Way"
+            },
+            "attacking_animation": {
+              "$ref": "#/definitions/RotatedAnimation8Way"
+            },
+            "energy_glow_animation": {
+              "$ref": "#/definitions/RotatedAnimation8Way"
+            },
             "resource_indicator_animation": {
               "$ref": "#/definitions/RotatedAnimation8Way"
             },
-            "ending_attack_animation": {},
-            "folding_animation": {},
+            "ending_attack_animation": {
+              "$ref": "#/definitions/RotatedAnimation8Way"
+            },
+            "folding_animation": {
+              "$ref": "#/definitions/RotatedAnimation8Way"
+            },
             "integration": {
               "$ref": "#/definitions/Sprite"
             },
@@ -31171,7 +31385,20 @@
             "unfolds_before_dying": {
               "$ref": "#/definitions/bool"
             },
-            "spawn_decoration": {},
+            "spawn_decoration": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CreateDecorativesTriggerEffectItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "folded_state_corpse": {
               "oneOf": [
                 {
@@ -31894,7 +32121,9 @@
             "select_group_row_count": {
               "$ref": "#/definitions/uint8"
             },
-            "select_slot_row_count": {},
+            "select_slot_row_count": {
+              "$ref": "#/definitions/uint8"
+            },
             "inventory_width": {
               "$ref": "#/definitions/uint32"
             },

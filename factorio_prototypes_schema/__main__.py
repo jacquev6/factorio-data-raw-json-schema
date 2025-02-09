@@ -367,7 +367,7 @@ def extract_struct_properties(
                 try:
                     h3_text = h3_soup.text
                     if (
-                        m := re.match(r"^" + property_name + r"\s*::\s*(.*?)\s*(optional)?\s*(new)?$", h3_text)
+                        m := re.match(r"^" + property_name + r"\s*::\s*(.*?)\s*(optional)?\s*(new|changed)?$", h3_text)
                     ) is not None:
                         type_kind = m.group(1)
                         optional = m.group(2) == "optional"
