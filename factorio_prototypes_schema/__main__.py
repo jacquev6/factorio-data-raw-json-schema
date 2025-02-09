@@ -371,42 +371,34 @@ def extract_struct_properties(
                     ) is not None:
                         type_kind = m.group(1)
                         optional = m.group(2) == "optional"
-                        if type_kind in known_types:
-                            yield FactorioSchema.Property(
-                                name=property_name, type={"$ref": f"#/definitions/{type_kind}"}, required=not optional
-                            )
-                        elif (
-                            type_kind.startswith("array[")
-                            and type_kind.endswith("]")
-                            and type_kind[6:-1] in known_types
-                        ):
-                            yield FactorioSchema.Property(
-                                name=property_name,
-                                type={
-                                    "oneOf": [
-                                        {"type": "array", "items": {"$ref": f"#/definitions/{type_kind[6:-1]}"}},
-                                        # Empty arrays are serialized as {} instead of []
-                                        {"type": "object", "additionalProperties": False},
-                                    ]
-                                },
-                                required=not optional,
-                            )
-                        elif type_kind.startswith('"') and type_kind.endswith('"'):
-                            values = type_kind.strip('"').split('" or "')
-                            if len(values) == 1:
-                                yield FactorioSchema.Property(
-                                    name=property_name,
-                                    type={"type": "string", "const": values[0]},
-                                    required=not optional,
+
+                        options: list[JsonValue] = []
+                        for option_kind in type_kind.split(" or "):
+                            if option_kind in known_types:
+                                options.append({"$ref": f"#/definitions/{option_kind}"})
+                            elif (
+                                option_kind.startswith("array[")
+                                and option_kind.endswith("]")
+                                and option_kind[6:-1] in known_types
+                            ):
+                                options.append(
+                                    {"type": "array", "items": {"$ref": f"#/definitions/{option_kind[6:-1]}"}}
                                 )
+                                # Empty arrays are serialized as {} instead of []
+                                options.append({"type": "object", "additionalProperties": False})
+                            elif option_kind.startswith('"') and option_kind.endswith('"'):
+                                options.append({"type": "string", "const": option_kind.strip('"')})
                             else:
-                                yield FactorioSchema.Property(
-                                    name=property_name,
-                                    type={"oneOf": [{"type": "string", "const": value} for value in values]},
-                                    required=not optional,
-                                )
+                                assert (
+                                    False
+                                ), f"unsupported option in struct property kind: {type_kind!r} -> {option_kind!r}"
+
+                        if len(options) == 1:
+                            yield FactorioSchema.Property(name=property_name, type=options[0], required=not optional)
                         else:
-                            assert False, f"unsupported struct property kind: {type_kind!r}"
+                            yield FactorioSchema.Property(
+                                name=property_name, type={"oneOf": options}, required=not optional
+                            )
                     else:
                         assert False, f"failed to parse property header: {h3_text!r}"
                 except AssertionError as exc:

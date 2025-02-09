@@ -979,8 +979,40 @@
         "sprite": {
           "$ref": "#/definitions/Sprite"
         },
-        "variations": {},
-        "lights": {},
+        "variations": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AsteroidVariation"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AsteroidVariation"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "lights": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/LightProperties"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LightProperties"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "ambient_light": {
           "$ref": "#/definitions/Color"
         }
@@ -1137,7 +1169,25 @@
         "default_enabled": {
           "$ref": "#/definitions/bool"
         },
-        "force": {},
+        "force": {
+          "oneOf": [
+            {
+              "type": "string",
+              "const": "enemy"
+            },
+            {
+              "type": "string",
+              "const": "player"
+            },
+            {
+              "type": "string",
+              "const": "neutral"
+            },
+            {
+              "$ref": "#/definitions/string"
+            }
+          ]
+        },
         "order": {
           "$ref": "#/definitions/Order"
         },
@@ -3840,8 +3890,26 @@
             "frozen_patch": {
               "$ref": "#/definitions/Sprite4Way"
             },
-            "circuit_connector_layer": {},
-            "circuit_connector_secondary_draw_order": {},
+            "circuit_connector_layer": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/RenderLayer"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorLayer"
+                }
+              ]
+            },
+            "circuit_connector_secondary_draw_order": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/int8"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorSecondaryDrawOrder"
+                }
+              ]
+            },
             "animation_progress": {
               "$ref": "#/definitions/float"
             },
@@ -9389,8 +9457,26 @@
             "reset_animation_when_frozen": {
               "$ref": "#/definitions/bool"
             },
-            "circuit_connector_layer": {},
-            "circuit_connector_secondary_draw_order": {},
+            "circuit_connector_layer": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/RenderLayer"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorLayer"
+                }
+              ]
+            },
+            "circuit_connector_secondary_draw_order": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/int8"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorSecondaryDrawOrder"
+                }
+              ]
+            },
             "drilling_vertical_movement_duration": {
               "$ref": "#/definitions/uint16"
             },
@@ -9471,7 +9557,25 @@
       "description": "https://lua-api.factorio.com/stable/types/ModSetting.html",
       "type": "object",
       "properties": {
-        "value": {}
+        "value": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/int32"
+            },
+            {
+              "$ref": "#/definitions/double"
+            },
+            {
+              "$ref": "#/definitions/bool"
+            },
+            {
+              "$ref": "#/definitions/string"
+            },
+            {
+              "$ref": "#/definitions/Color"
+            }
+          ]
+        }
       },
       "required": ["value"]
     },
@@ -10121,12 +10225,60 @@
       "description": "https://lua-api.factorio.com/stable/types/PersistentWorldAmbientSoundsDefinition.html",
       "type": "object",
       "properties": {
-        "base_ambience": {},
-        "wind": {},
+        "base_ambience": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/PersistentWorldAmbientSoundDefinition"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PersistentWorldAmbientSoundDefinition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "wind": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/PersistentWorldAmbientSoundDefinition"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PersistentWorldAmbientSoundDefinition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "crossfade": {
           "$ref": "#/definitions/PersistentWorldAmbientSoundsDefinitionCrossfade"
         },
-        "semi_persistent": {}
+        "semi_persistent": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SemiPersistentWorldAmbientSoundDefinition"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SemiPersistentWorldAmbientSoundDefinition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       }
     },
     "PersistentWorldAmbientSoundsDefinitionCrossfade": {
@@ -10186,7 +10338,23 @@
           "$ref": "#/definitions/MapPosition"
         },
         "positions": {},
-        "connection_category": {},
+        "connection_category": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/string"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "max_underground_distance": {
           "$ref": "#/definitions/uint8"
         },
@@ -10585,7 +10753,23 @@
         "max_y_offset": {
           "$ref": "#/definitions/float"
         },
-        "stateless_visualisations": {}
+        "stateless_visualisations": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/PlumeEffect"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PlumeEffect"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       }
     },
     "PodAnimationProcessionLayer": {
@@ -13105,7 +13289,34 @@
       "type": "object",
       "properties": {
         "type": {},
-        "name": {}
+        "name": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualSignalID"
+            },
+            {
+              "$ref": "#/definitions/ItemID"
+            },
+            {
+              "$ref": "#/definitions/FluidID"
+            },
+            {
+              "$ref": "#/definitions/RecipeID"
+            },
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "$ref": "#/definitions/SpaceLocationID"
+            },
+            {
+              "$ref": "#/definitions/AsteroidChunkID"
+            },
+            {
+              "$ref": "#/definitions/QualityID"
+            }
+          ]
+        }
       },
       "required": ["type", "name"]
     },
@@ -13551,7 +13762,16 @@
                 }
               ]
             },
-            "asteroid": {}
+            "asteroid": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/EntityID"
+                },
+                {
+                  "$ref": "#/definitions/AsteroidChunkID"
+                }
+              ]
+            }
           },
           "required": ["asteroid"]
         }
@@ -13706,7 +13926,23 @@
       "description": "https://lua-api.factorio.com/stable/types/SpiderEngineSpecification.html",
       "type": "object",
       "properties": {
-        "legs": {},
+        "legs": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SpiderLegSpecification"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SpiderLegSpecification"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "walking_group_overlap": {
           "$ref": "#/definitions/float"
         }
@@ -14445,7 +14681,23 @@
             }
           ]
         },
-        "nested_visualisations": {},
+        "nested_visualisations": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/StatelessVisualisation"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StatelessVisualisation"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "can_lay_on_the_ground": {
           "$ref": "#/definitions/bool"
         }
@@ -14940,8 +15192,40 @@
               "type": "string",
               "const": "table_style"
             },
-            "horizontal_spacing": {},
-            "vertical_spacing": {},
+            "horizontal_spacing": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/int32"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SpacingItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "vertical_spacing": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/int32"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SpacingItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "cell_padding": {
               "$ref": "#/definitions/int16"
             },
@@ -15007,7 +15291,23 @@
                 }
               ]
             },
-            "column_widths": {},
+            "column_widths": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ColumnWidthItem"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ColumnWidth"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "hovered_row_color": {
               "$ref": "#/definitions/Color"
             },
@@ -16907,7 +17207,23 @@
         "probability": {
           "$ref": "#/definitions/float"
         },
-        "action_delivery": {},
+        "action_delivery": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/TriggerDelivery"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TriggerDelivery"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "force": {
           "$ref": "#/definitions/ForceCondition"
         }
@@ -17006,7 +17322,23 @@
       "description": "https://lua-api.factorio.com/stable/types/TurretGraphicsSet.html",
       "type": "object",
       "properties": {
-        "base_visualisation": {}
+        "base_visualisation": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/TurretBaseVisualisation"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TurretBaseVisualisation"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       }
     },
     "TurretSpecialEffect": {
@@ -17507,8 +17839,26 @@
         "number_of_sublayers": {
           "$ref": "#/definitions/uint8"
         },
-        "sublayer_starting_offset": {},
-        "sublayer_offset": {},
+        "sublayer_starting_offset": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RandomRange"
+            },
+            {
+              "$ref": "#/definitions/ProbabilityTable"
+            }
+          ]
+        },
+        "sublayer_offset": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RandomRange"
+            },
+            {
+              "$ref": "#/definitions/ProbabilityTable"
+            }
+          ]
+        },
         "sample_length": {
           "$ref": "#/definitions/RandomRange"
         }
@@ -17531,7 +17881,16 @@
         "sequence_length": {
           "$ref": "#/definitions/RandomRange"
         },
-        "number_of_repetitions": {},
+        "number_of_repetitions": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RandomRange"
+            },
+            {
+              "$ref": "#/definitions/ProbabilityTable"
+            }
+          ]
+        },
         "start_pause": {
           "$ref": "#/definitions/RandomRange"
         },
@@ -18728,7 +19087,23 @@
         {
           "type": "object",
           "properties": {
-            "ammo_type": {},
+            "ammo_type": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AmmoType"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AmmoType"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "magazine_size": {
               "$ref": "#/definitions/float"
             },
@@ -19576,7 +19951,16 @@
             "arm_retract_sound": {
               "$ref": "#/definitions/Sound"
             },
-            "energy_source": {},
+            "energy_source": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ElectricEnergySource"
+                },
+                {
+                  "$ref": "#/definitions/VoidEnergySource"
+                }
+              ]
+            },
             "circuit_wire_max_distance": {
               "$ref": "#/definitions/double"
             },
@@ -19679,7 +20063,16 @@
             "energy_usage": {
               "$ref": "#/definitions/Energy"
             },
-            "energy_source": {},
+            "energy_source": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ElectricEnergySource"
+                },
+                {
+                  "$ref": "#/definitions/VoidEnergySource"
+                }
+              ]
+            },
             "supply_area_distance": {
               "$ref": "#/definitions/double"
             },
@@ -20039,7 +20432,16 @@
             "rotation_speed": {
               "$ref": "#/definitions/double"
             },
-            "energy_source": {},
+            "energy_source": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/BurnerEnergySource"
+                },
+                {
+                  "$ref": "#/definitions/VoidEnergySource"
+                }
+              ]
+            },
             "turret_animation": {
               "$ref": "#/definitions/RotatedAnimation"
             },
@@ -20709,7 +21111,16 @@
         {
           "type": "object",
           "properties": {
-            "energy_source": {},
+            "energy_source": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ElectricEnergySource"
+                },
+                {
+                  "$ref": "#/definitions/VoidEnergySource"
+                }
+              ]
+            },
             "active_energy_usage": {
               "$ref": "#/definitions/Energy"
             },
@@ -21584,11 +21995,43 @@
         {
           "type": "object",
           "properties": {
-            "dont_build": {},
+            "dont_build": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/EntityID"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "amount": {
               "$ref": "#/definitions/uint32"
             },
-            "research_with": {}
+            "research_with": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ItemID"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["dont_build"]
         }
@@ -21637,8 +22080,40 @@
         {
           "type": "object",
           "properties": {
-            "dont_research": {},
-            "research_with": {}
+            "dont_research": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ItemID"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "research_with": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ItemID"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["dont_research", "research_with"]
         }
@@ -21653,8 +22128,40 @@
         {
           "type": "object",
           "properties": {
-            "excluded": {},
-            "included": {},
+            "excluded": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/EntityID"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "included": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/EntityID"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "last_hour_only": {
               "$ref": "#/definitions/bool"
             },
@@ -21910,7 +22417,16 @@
         {
           "type": "object",
           "properties": {
-            "energy_source": {}
+            "energy_source": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ElectricEnergySource"
+                },
+                {
+                  "$ref": "#/definitions/VoidEnergySource"
+                }
+              ]
+            }
           },
           "required": ["energy_source"]
         }
@@ -22255,8 +22771,40 @@
             "selectable_in_game": {
               "$ref": "#/definitions/bool"
             },
-            "placeable_by": {},
-            "remains_when_mined": {},
+            "placeable_by": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ItemToPlace"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemToPlace"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "remains_when_mined": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/EntityID"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "additional_pastable_entities": {
               "oneOf": [
                 {
@@ -22294,7 +22842,23 @@
             "ambient_sounds_group": {
               "$ref": "#/definitions/EntityID"
             },
-            "ambient_sounds": {},
+            "ambient_sounds": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/WorldAmbientSoundDefinition"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorldAmbientSoundDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon_draw_specification": {
               "$ref": "#/definitions/IconDrawSpecification"
             },
@@ -22334,7 +22898,23 @@
             "repair_speed_modifier": {
               "$ref": "#/definitions/float"
             },
-            "dying_explosion": {},
+            "dying_explosion": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ExplosionDefinition"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ExplosionDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "dying_trigger_effect": {
               "$ref": "#/definitions/TriggerEffect"
             },
@@ -22369,7 +22949,23 @@
                 }
               ]
             },
-            "attack_reaction": {},
+            "attack_reaction": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/AttackReactionItem"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AttackReactionItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "repair_sound": {
               "$ref": "#/definitions/Sound"
             },
@@ -22388,7 +22984,23 @@
             "integration_patch_render_layer": {
               "$ref": "#/definitions/RenderLayer"
             },
-            "corpse": {},
+            "corpse": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/EntityID"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "integration_patch": {
               "$ref": "#/definitions/Sprite4Way"
             },
@@ -24286,7 +24898,23 @@
             "damage_type": {
               "$ref": "#/definitions/DamageTypeID"
             },
-            "damage_dealer": {},
+            "damage_dealer": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/EntityID"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "amount": {
               "$ref": "#/definitions/uint32"
             },
@@ -24399,7 +25027,16 @@
             "energy_usage_per_tick": {
               "$ref": "#/definitions/Energy"
             },
-            "energy_source": {},
+            "energy_source": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ElectricEnergySource"
+                },
+                {
+                  "$ref": "#/definitions/VoidEnergySource"
+                }
+              ]
+            },
             "light": {
               "$ref": "#/definitions/LightDefinition"
             },
@@ -24762,7 +25399,22 @@
             "belt_length": {
               "$ref": "#/definitions/double"
             },
-            "energy_source": {},
+            "energy_source": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ElectricEnergySource"
+                },
+                {
+                  "$ref": "#/definitions/HeatEnergySource"
+                },
+                {
+                  "$ref": "#/definitions/FluidEnergySource"
+                },
+                {
+                  "$ref": "#/definitions/VoidEnergySource"
+                }
+              ]
+            },
             "energy_per_item": {
               "$ref": "#/definitions/Energy"
             },
@@ -24809,7 +25461,16 @@
             "reversing_power_modifier": {
               "$ref": "#/definitions/double"
             },
-            "energy_source": {},
+            "energy_source": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/BurnerEnergySource"
+                },
+                {
+                  "$ref": "#/definitions/VoidEnergySource"
+                }
+              ]
+            },
             "front_light": {
               "$ref": "#/definitions/LightDefinition"
             },
@@ -25154,7 +25815,23 @@
         {
           "type": "object",
           "properties": {
-            "module": {},
+            "module": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ItemID"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "amount": {
               "$ref": "#/definitions/uint32"
             },
@@ -25796,7 +26473,23 @@
                 }
               ]
             },
-            "procession_style": {}
+            "procession_style": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/uint32"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/uint32"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["timeline", "usage", "procession_style"]
         }
@@ -25856,7 +26549,16 @@
         {
           "type": "object",
           "properties": {
-            "energy_source": {},
+            "energy_source": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ElectricEnergySource"
+                },
+                {
+                  "$ref": "#/definitions/VoidEnergySource"
+                }
+              ]
+            },
             "energy_usage_per_tick": {
               "$ref": "#/definitions/Energy"
             },
@@ -27023,7 +27725,16 @@
         {
           "type": "object",
           "properties": {
-            "energy_source": {},
+            "energy_source": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ElectricEnergySource"
+                },
+                {
+                  "$ref": "#/definitions/VoidEnergySource"
+                }
+              ]
+            },
             "energy_usage": {
               "$ref": "#/definitions/Energy"
             },
@@ -28362,7 +29073,23 @@
         "speed_smoothing_window_size": {
           "$ref": "#/definitions/uint32"
         },
-        "variations": {},
+        "variations": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SoundDefinition"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SoundDefinition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "filename": {
           "$ref": "#/definitions/FileName"
         },
@@ -28387,7 +29114,23 @@
         "max_speed": {
           "$ref": "#/definitions/float"
         },
-        "modifiers": {}
+        "modifiers": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SoundModifier"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SoundModifier"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["type", "name"]
     },
@@ -28897,7 +29640,16 @@
         {
           "type": "object",
           "properties": {
-            "energy_source": {},
+            "energy_source": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/BurnerEnergySource"
+                },
+                {
+                  "$ref": "#/definitions/VoidEnergySource"
+                }
+              ]
+            },
             "inventory_size": {
               "$ref": "#/definitions/ItemStackIndex"
             },
@@ -29363,7 +30115,17 @@
             "unit": {
               "$ref": "#/definitions/TechnologyUnit"
             },
-            "max_level": {},
+            "max_level": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/uint32"
+                },
+                {
+                  "type": "string",
+                  "const": "infinite"
+                }
+              ]
+            },
             "prerequisites": {
               "oneOf": [
                 {
@@ -29638,7 +30400,23 @@
             "weight": {
               "$ref": "#/definitions/Weight"
             },
-            "dying_explosion": {},
+            "dying_explosion": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ExplosionDefinition"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ExplosionDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "absorptions_per_second": {},
             "default_cover_tile": {
               "$ref": "#/definitions/TileID"
@@ -29699,12 +30477,60 @@
             "autoplace": {
               "$ref": "#/definitions/AutoplaceSpecification"
             },
-            "placeable_by": {},
-            "bound_decoratives": {},
+            "placeable_by": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ItemToPlace"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemToPlace"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "bound_decoratives": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/DecorativeID"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DecorativeID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "ambient_sounds_group": {
               "$ref": "#/definitions/TileID"
             },
-            "ambient_sounds": {}
+            "ambient_sounds": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/WorldAmbientSoundDefinition"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorldAmbientSoundDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["collision_mask", "layer", "variants", "map_color"]
         }
@@ -30346,7 +31172,23 @@
               "$ref": "#/definitions/bool"
             },
             "spawn_decoration": {},
-            "folded_state_corpse": {},
+            "folded_state_corpse": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/EntityID"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "can_retarget_while_starting_attack": {
               "$ref": "#/definitions/bool"
             },
@@ -33833,7 +34675,16 @@
             "weight": {
               "$ref": "#/definitions/double"
             },
-            "braking_power or braking_force": {},
+            "braking_power or braking_force": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Energy"
+                },
+                {
+                  "$ref": "#/definitions/double"
+                }
+              ]
+            },
             "friction or friction_force": {
               "$ref": "#/definitions/double"
             },
