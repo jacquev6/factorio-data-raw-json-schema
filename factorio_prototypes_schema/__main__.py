@@ -136,7 +136,7 @@ def main(factorio_location: str, load_types: str | None) -> None:
             "character": "CharacterPrototype",
             "copy-paste-tool": "ItemPrototype",
             "deconstruction-item": "ItemPrototype",
-            "fluid": "ItemPrototype",
+            "fluid": "Prototype",
             "furnace": "CraftingMachinePrototype",
             "gun": "ItemPrototype",
             "item": "ItemPrototype",
@@ -280,8 +280,7 @@ def extract_type(factorio_location: str, type_name: str) -> FactorioSchema.TypeD
 def extract_all_prototypes(factorio_location: str) -> Iterable[FactorioSchema.TypeDefinition]:
     yield extract_prototype(factorio_location, "PrototypeBase")
     yield extract_prototype(factorio_location, "Prototype")
-    # yield extract_prototype(factorio_location, "ItemPrototype")
-    yield FactorioSchema.StructTypeDefinition("ItemPrototype", base="Prototype", properties=[])
+    yield extract_prototype(factorio_location, "ItemPrototype")
     yield FactorioSchema.StructTypeDefinition(
         "RecipePrototype",
         base="Prototype",
@@ -349,6 +348,23 @@ def extract_struct_properties(type_name: str, soup: bs4.BeautifulSoup) -> Iterab
         for div_soup in (tag(el) for el in tag(main_soup).find_all("div", recursive=False)):
             for h3_soup in (tag(el) for el in div_soup.find_all("h3", recursive=False)):
                 property_name = tag(h3_soup.contents[0]).contents[0].text.strip()
+
+                if (type_name, property_name) in [
+                    ("ItemPrototype", "close_sound"),
+                    ("ItemPrototype", "drop_sound"),
+                    ("ItemPrototype", "flags"),
+                    ("ItemPrototype", "icons"),
+                    ("ItemPrototype", "inventory_move_sound"),
+                    ("ItemPrototype", "layers"),
+                    ("ItemPrototype", "open_sound"),
+                    ("ItemPrototype", "pick_sound"),
+                    ("ItemPrototype", "pictures"),
+                    ("ItemPrototype", "random_tint_color"),
+                    ("ItemPrototype", "rocket_launch_products"),
+                    ("ItemPrototype", "spoil_to_trigger_result"),
+                ]:
+                    continue
+
                 try:
                     try:
                         type_soup = tag(tag(tag(h3_soup.contents[0]).contents[1]).contents[1])

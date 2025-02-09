@@ -60,7 +60,7 @@
     "fluid": {
       "type": "object",
       "additionalProperties": {
-        "$ref": "#/definitions/ItemPrototype"
+        "$ref": "#/definitions/Prototype"
       }
     },
     "furnace": {
@@ -17823,6 +17823,96 @@
       "allOf": [
         {
           "$ref": "#/definitions/Prototype"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stack_size": {
+              "$ref": "#/definitions/ItemCountType"
+            },
+            "icon": {
+              "$ref": "#/definitions/FileName"
+            },
+            "icon_size": {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            "dark_background_icons": {
+              "$ref": "#/definitions/IconData"
+            },
+            "dark_background_icon": {
+              "$ref": "#/definitions/FileName"
+            },
+            "dark_background_icon_size": {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            "place_result": {
+              "$ref": "#/definitions/EntityID"
+            },
+            "place_as_equipment_result": {
+              "$ref": "#/definitions/EquipmentID"
+            },
+            "fuel_category": {
+              "$ref": "#/definitions/FuelCategoryID"
+            },
+            "burnt_result": {
+              "$ref": "#/definitions/ItemID"
+            },
+            "spoil_result": {
+              "$ref": "#/definitions/ItemID"
+            },
+            "plant_result": {
+              "$ref": "#/definitions/EntityID"
+            },
+            "spoil_ticks": {
+              "$ref": "#/definitions/uint32"
+            },
+            "fuel_value": {
+              "$ref": "#/definitions/Energy"
+            },
+            "fuel_acceleration_multiplier": {
+              "$ref": "#/definitions/double"
+            },
+            "fuel_top_speed_multiplier": {
+              "$ref": "#/definitions/double"
+            },
+            "fuel_emissions_multiplier": {
+              "$ref": "#/definitions/double"
+            },
+            "fuel_acceleration_multiplier_quality_bonus": {
+              "$ref": "#/definitions/double"
+            },
+            "fuel_top_speed_multiplier_quality_bonus": {
+              "$ref": "#/definitions/double"
+            },
+            "weight": {
+              "$ref": "#/definitions/Weight"
+            },
+            "ingredient_to_weight_coefficient": {
+              "$ref": "#/definitions/double"
+            },
+            "fuel_glow_color": {
+              "$ref": "#/definitions/Color"
+            },
+            "default_import_location": {
+              "$ref": "#/definitions/SpaceLocationID"
+            },
+            "color_hint": {
+              "$ref": "#/definitions/ColorHintSpecification"
+            },
+            "has_random_tint": {
+              "$ref": "#/definitions/bool"
+            },
+            "destroyed_by_dropping_trigger": {
+              "$ref": "#/definitions/Trigger"
+            },
+            "send_to_orbit_mode": {
+              "$ref": "#/definitions/SendToOrbitMode"
+            },
+            "spoil_level": {
+              "$ref": "#/definitions/uint8"
+            }
+          },
+          "required": ["stack_size"]
         }
       ]
     },
