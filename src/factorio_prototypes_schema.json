@@ -318,7 +318,20 @@
         "shadow_direction": {
           "$ref": "#/definitions/Vector3D"
         },
-        "parts": {}
+        "parts": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CranePart"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["speed", "origin", "shadow_direction", "parts"]
     },
@@ -491,7 +504,20 @@
         "source_type": {
           "$ref": "#/definitions/AmmoSourceType"
         },
-        "target_filter": {}
+        "target_filter": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       }
     },
     "AndTipTrigger": {
@@ -499,7 +525,20 @@
       "type": "object",
       "properties": {
         "type": {},
-        "triggers": {}
+        "triggers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TipTrigger"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["type", "triggers"]
     },
@@ -524,9 +563,48 @@
         {
           "type": "object",
           "properties": {
-            "layers": {},
-            "stripes": {},
-            "filenames": {},
+            "layers": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Animation"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "stripes": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Stripe"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "filenames": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/FileName"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "slice": {
               "$ref": "#/definitions/uint32"
             },
@@ -636,7 +714,20 @@
             "variation_count": {
               "$ref": "#/definitions/uint32"
             },
-            "filenames": {},
+            "filenames": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/FileName"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "lines_per_file": {
               "$ref": "#/definitions/uint32"
             }
@@ -1055,7 +1146,20 @@
         "use_shooter_direction": {
           "$ref": "#/definitions/bool"
         },
-        "ammo_categories": {},
+        "ammo_categories": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AmmoCategoryID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "ammo_category": {
           "$ref": "#/definitions/AmmoCategoryID"
         }
@@ -1079,7 +1183,20 @@
       "description": "https://lua-api.factorio.com/stable/types/BaseModifier.html",
       "type": "object",
       "properties": {
-        "icons": {},
+        "icons": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconData"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "icon": {
           "$ref": "#/definitions/FileName"
         },
@@ -1245,14 +1362,40 @@
         "no_modules_tint": {
           "$ref": "#/definitions/Color"
         },
-        "animation_list": {},
+        "animation_list": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AnimationElement"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "frozen_patch": {
           "$ref": "#/definitions/Sprite"
         },
         "light": {
           "$ref": "#/definitions/LightDefinition"
         },
-        "module_visualisations": {},
+        "module_visualisations": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BeaconModuleVisualizations"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "module_tint_mode": {}
       }
     },
@@ -1705,7 +1848,20 @@
             "burnt_inventory_size": {
               "$ref": "#/definitions/ItemStackIndex"
             },
-            "smoke": {},
+            "smoke": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SmokeSource"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "light_flicker": {
               "$ref": "#/definitions/LightFlickeringDefinition"
             },
@@ -1715,7 +1871,20 @@
             "burner_usage": {
               "$ref": "#/definitions/BurnerUsageID"
             },
-            "fuel_categories": {},
+            "fuel_categories": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/FuelCategoryID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "initial_fuel": {
               "$ref": "#/definitions/ItemID"
             },
@@ -1994,7 +2163,20 @@
         "illumination_graphic_index": {
           "$ref": "#/definitions/uint32"
         },
-        "receiving_cargo_units": {}
+        "receiving_cargo_units": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       }
     },
     "CargoLandingPadLimitModifier": {
@@ -2022,8 +2204,34 @@
         "prefer_packed_cargo_units": {
           "$ref": "#/definitions/bool"
         },
-        "hatch_definitions": {},
-        "giga_hatch_definitions": {}
+        "hatch_definitions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CargoHatchDefinition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "giga_hatch_definitions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GigaCargoHatchDefinition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       }
     },
     "ChainTriggerDelivery": {
@@ -2126,15 +2334,54 @@
         "landing": {
           "$ref": "#/definitions/RotatedAnimation"
         },
-        "armors": {},
-        "smoke_in_air": {},
+        "armors": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ItemID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "smoke_in_air": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SmokeSource"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "smoke_cycles_per_tick": {
           "$ref": "#/definitions/float"
         },
         "extra_smoke_cycles_per_tile": {
           "$ref": "#/definitions/float"
         },
-        "mining_with_tool_particles_animation_positions": {}
+        "mining_with_tool_particles_animation_positions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/float"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["idle_with_gun", "running_with_gun", "mining_with_tool"]
     },
@@ -3462,7 +3709,20 @@
         "explosion_linear_distance_step": {
           "$ref": "#/definitions/float"
         },
-        "particle_effects": {},
+        "particle_effects": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateParticleTriggerEffectItem"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "explosion": {
           "$ref": "#/definitions/ExplosionDefinition"
         }
@@ -3498,7 +3758,20 @@
             "offset_deviation": {
               "$ref": "#/definitions/BoundingBox"
             },
-            "offsets": {}
+            "offsets": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Vector"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["type", "asteroid_name"]
         }
@@ -3568,7 +3841,20 @@
             "tile_collision_mask": {
               "$ref": "#/definitions/CollisionMaskConnector"
             },
-            "offsets": {},
+            "offsets": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Vector"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "as_enemy": {
               "$ref": "#/definitions/bool"
             },
@@ -3676,7 +3962,20 @@
             "tile_collision_mask": {
               "$ref": "#/definitions/CollisionMaskConnector"
             },
-            "offsets": {},
+            "offsets": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Vector"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "initial_height_deviation": {
               "$ref": "#/definitions/float"
             },
@@ -3807,7 +4106,20 @@
             "offset_deviation": {
               "$ref": "#/definitions/BoundingBox"
             },
-            "offsets": {},
+            "offsets": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Vector"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "initial_height": {
               "$ref": "#/definitions/float"
             },
@@ -4166,68 +4478,68 @@
       "description": "https://lua-api.factorio.com/stable/types/Direction.html",
       "anyOf": [
         {
-          "type": "string",
-          "const": "0"
+          "type": "integer",
+          "const": 0
         },
         {
-          "type": "string",
-          "const": "1"
+          "type": "integer",
+          "const": 1
         },
         {
-          "type": "string",
-          "const": "2"
+          "type": "integer",
+          "const": 2
         },
         {
-          "type": "string",
-          "const": "3"
+          "type": "integer",
+          "const": 3
         },
         {
-          "type": "string",
-          "const": "4"
+          "type": "integer",
+          "const": 4
         },
         {
-          "type": "string",
-          "const": "5"
+          "type": "integer",
+          "const": 5
         },
         {
-          "type": "string",
-          "const": "6"
+          "type": "integer",
+          "const": 6
         },
         {
-          "type": "string",
-          "const": "7"
+          "type": "integer",
+          "const": 7
         },
         {
-          "type": "string",
-          "const": "8"
+          "type": "integer",
+          "const": 8
         },
         {
-          "type": "string",
-          "const": "9"
+          "type": "integer",
+          "const": 9
         },
         {
-          "type": "string",
-          "const": "10"
+          "type": "integer",
+          "const": 10
         },
         {
-          "type": "string",
-          "const": "11"
+          "type": "integer",
+          "const": 11
         },
         {
-          "type": "string",
-          "const": "12"
+          "type": "integer",
+          "const": 12
         },
         {
-          "type": "string",
-          "const": "13"
+          "type": "integer",
+          "const": 13
         },
         {
-          "type": "string",
-          "const": "14"
+          "type": "integer",
+          "const": 14
         },
         {
-          "type": "string",
-          "const": "15"
+          "type": "integer",
+          "const": 15
         }
       ]
     },
@@ -5214,7 +5526,20 @@
         "volume": {
           "$ref": "#/definitions/FluidAmount"
         },
-        "pipe_connections": {},
+        "pipe_connections": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PipeConnectionDefinition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "filter": {
           "$ref": "#/definitions/FluidID"
         },
@@ -5262,7 +5587,20 @@
         "always_draw_covers": {
           "$ref": "#/definitions/bool"
         },
-        "enable_working_visualisations": {}
+        "enable_working_visualisations": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/string"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["volume", "pipe_connections"]
     },
@@ -5287,7 +5625,20 @@
             "fluid_box": {
               "$ref": "#/definitions/FluidBox"
             },
-            "smoke": {},
+            "smoke": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SmokeSource"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "light_flicker": {
               "$ref": "#/definitions/LightFlickeringDefinition"
             },
@@ -5453,7 +5804,20 @@
       "description": "https://lua-api.factorio.com/stable/types/FootprintParticle.html",
       "type": "object",
       "properties": {
-        "tiles": {},
+        "tiles": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TileID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "particle_name": {
           "$ref": "#/definitions/ParticleID"
         },
@@ -5472,8 +5836,34 @@
         {
           "type": "object",
           "properties": {
-            "tiles": {},
-            "actions": {},
+            "tiles": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TileID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "actions": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CreateParticleTriggerEffectItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "use_as_default": {
               "$ref": "#/definitions/bool"
             }
@@ -5602,7 +5992,20 @@
         "fusion_effect_uv_map": {
           "$ref": "#/definitions/Sprite"
         },
-        "fluid_input_graphics": {}
+        "fluid_input_graphics": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FusionGeneratorFluidInputGraphics"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       }
     },
     "FusionGeneratorFluidInputGraphics": {
@@ -5693,7 +6096,20 @@
         "fusion_effect_uv_map": {
           "$ref": "#/definitions/Sprite"
         },
-        "connections_graphics": {},
+        "connections_graphics": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FusionReactorConnectionGraphics"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "direction_to_connections_graphics": {},
         "plasma_category": {
           "$ref": "#/definitions/NeighbourConnectableConnectionCategory"
@@ -5826,8 +6242,34 @@
         "world_uv_modulo": {
           "$ref": "#/definitions/int32"
         },
-        "overlay_layers": {},
-        "distortion_layers": {}
+        "overlay_layers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GhostShimmerOverlayData"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "distortion_layers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GhostShimmerDistortionData"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": [
         "tint",
@@ -5928,7 +6370,20 @@
         "hatch_render_layer_front": {
           "$ref": "#/definitions/RenderLayer"
         },
-        "covered_hatches": {},
+        "covered_hatches": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/uint32"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "opening_sound": {
           "$ref": "#/definitions/InterruptibleSound"
         },
@@ -6058,7 +6513,20 @@
             "background_color": {
               "$ref": "#/definitions/Color"
             },
-            "line_colors": {},
+            "line_colors": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Color"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "horizontal_label_style": {
               "$ref": "#/definitions/LabelStyleSpecification"
             },
@@ -6182,7 +6650,20 @@
         "heat_glow": {
           "$ref": "#/definitions/Sprite4Way"
         },
-        "connections": {}
+        "connections": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HeatConnection"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["max_temperature", "specific_heat", "max_transfer"]
     },
@@ -6242,7 +6723,20 @@
             "heat_glow": {
               "$ref": "#/definitions/Sprite4Way"
             },
-            "connections": {}
+            "connections": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/HeatConnection"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["type", "max_temperature", "specific_heat", "max_transfer"]
         }
@@ -6853,7 +7347,20 @@
         "attractor_hit_animation": {
           "$ref": "#/definitions/Animation"
         },
-        "ground_streamers": {},
+        "ground_streamers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Animation"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "light": {
           "$ref": "#/definitions/LightDefinition"
         }
@@ -6886,9 +7393,48 @@
         "search_radius": {
           "$ref": "#/definitions/double"
         },
-        "lightning_types": {},
-        "priority_rules": {},
-        "exemption_rules": {}
+        "lightning_types": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "priority_rules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LightningPriorityRule"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "exemption_rules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LightningRuleBase"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": [
         "lightnings_per_chunk_per_tick",
@@ -7839,7 +8385,20 @@
         "match_speed_to_activity": {
           "$ref": "#/definitions/bool"
         },
-        "play_for_working_visualisations": {},
+        "play_for_working_visualisations": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/string"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "volume_smoothing_window_size": {
           "$ref": "#/definitions/uint32"
         }
@@ -7999,7 +8558,20 @@
         "autoplace_controls": {},
         "autoplace_settings": {},
         "property_expression_names": {},
-        "starting_points": {},
+        "starting_points": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MapPosition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "seed": {
           "$ref": "#/definitions/uint32"
         },
@@ -8217,7 +8789,20 @@
         "include_in_show_counts": {
           "$ref": "#/definitions/bool"
         },
-        "results": {},
+        "results": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProductPrototype"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "result": {
           "$ref": "#/definitions/ItemID"
         },
@@ -8589,7 +9174,20 @@
         "neighbour_search_distance": {
           "$ref": "#/definitions/float"
         },
-        "connections": {}
+        "connections": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NeighbourConnectableConnectionDefinition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["connections"]
     },
@@ -8609,7 +9207,20 @@
         "category": {
           "$ref": "#/definitions/NeighbourConnectableConnectionCategory"
         },
-        "neighbour_category": {}
+        "neighbour_category": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NeighbourConnectableConnectionCategory"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["location", "category"]
     },
@@ -8638,7 +9249,20 @@
       "description": "https://lua-api.factorio.com/stable/types/NoiseFunction.html",
       "type": "object",
       "properties": {
-        "parameters": {},
+        "parameters": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/string"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "expression": {
           "$ref": "#/definitions/NoiseExpression"
         },
@@ -8700,7 +9324,20 @@
       "type": "object",
       "properties": {
         "type": {},
-        "triggers": {}
+        "triggers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TipTrigger"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["type", "triggers"]
     },
@@ -8857,8 +9494,34 @@
         "start_to_goal_cost_multiplier_to_terminate_path_find": {
           "$ref": "#/definitions/double"
         },
-        "overload_levels": {},
-        "overload_multipliers": {},
+        "overload_levels": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/uint32"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "overload_multipliers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/double"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "negative_path_cache_delay_interval": {
           "$ref": "#/definitions/uint32"
         }
@@ -8950,7 +9613,20 @@
       "properties": {
         "flow_direction": {},
         "connection_type": {},
-        "enable_working_visualisations": {},
+        "enable_working_visualisations": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/string"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "direction": {
           "$ref": "#/definitions/Direction"
         },
@@ -9713,8 +10389,34 @@
       "description": "https://lua-api.factorio.com/stable/types/ProcessionSet.html",
       "type": "object",
       "properties": {
-        "arrival": {},
-        "departure": {}
+        "arrival": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProcessionID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "departure": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProcessionID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["arrival", "departure"]
     },
@@ -9737,8 +10439,34 @@
         "intermezzo_max_duration": {
           "$ref": "#/definitions/MapTick"
         },
-        "layers": {},
-        "audio_events": {}
+        "layers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProcessionLayer"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "audio_events": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProcessionAudioEvent"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["duration", "layers", "audio_events"]
     },
@@ -9852,7 +10580,20 @@
             "projectile_orientation_offset": {
               "$ref": "#/definitions/RealOrientation"
             },
-            "projectile_creation_offsets": {}
+            "projectile_creation_offsets": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Vector"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["type"]
         }
@@ -9944,10 +10685,62 @@
       "description": "https://lua-api.factorio.com/stable/types/PumpConnectorGraphics.html",
       "type": "object",
       "properties": {
-        "north": {},
-        "east": {},
-        "south": {},
-        "west": {}
+        "north": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PumpConnectorGraphicsAnimation"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "east": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PumpConnectorGraphicsAnimation"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "south": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PumpConnectorGraphicsAnimation"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "west": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PumpConnectorGraphicsAnimation"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["north", "east", "south", "west"]
     },
@@ -10339,12 +11132,51 @@
         "lights": {
           "$ref": "#/definitions/RailSignalLights"
         },
-        "circuit_connector": {},
+        "circuit_connector": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CircuitConnectorDefinition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "circuit_connector_render_layer": {
           "$ref": "#/definitions/RenderLayer"
         },
-        "structure_align_to_animation_index": {},
-        "selection_box_shift": {}
+        "structure_align_to_animation_index": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/uint8"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "selection_box_shift": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Vector"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["structure", "signal_color_to_structure_frame_index", "lights"]
     },
@@ -10364,8 +11196,34 @@
         "hide_if_not_connected_to_rails": {
           "$ref": "#/definitions/bool"
         },
-        "shifts": {},
-        "align_to_frame_index": {}
+        "shifts": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MapPosition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "align_to_frame_index": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/uint8"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["sprites"]
     },
@@ -10869,11 +11727,37 @@
         {
           "type": "object",
           "properties": {
-            "layers": {},
+            "layers": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/RotatedAnimation"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "direction_count": {
               "$ref": "#/definitions/uint32"
             },
-            "filenames": {},
+            "filenames": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/FileName"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "lines_per_file": {
               "$ref": "#/definitions/uint32"
             },
@@ -10898,7 +11782,20 @@
             "apply_projection": {
               "$ref": "#/definitions/bool"
             },
-            "stripes": {}
+            "stripes": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Stripe"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           }
         }
       ]
@@ -10918,11 +11815,37 @@
         {
           "type": "object",
           "properties": {
-            "layers": {},
+            "layers": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/RotatedSprite"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "direction_count": {
               "$ref": "#/definitions/uint16"
             },
-            "filenames": {},
+            "filenames": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/FileName"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "lines_per_file": {
               "$ref": "#/definitions/uint64"
             },
@@ -10953,7 +11876,20 @@
             "allow_low_quality_rotation": {
               "$ref": "#/definitions/bool"
             },
-            "frames": {}
+            "frames": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/RotatedSpriteFrame"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           }
         }
       ]
@@ -11089,7 +12025,20 @@
       "description": "https://lua-api.factorio.com/stable/types/SegmentEngineSpecification.html",
       "type": "object",
       "properties": {
-        "segments": {}
+        "segments": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SegmentSpecification"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["segments"]
     },
@@ -11122,9 +12071,48 @@
         "mode": {
           "$ref": "#/definitions/SelectionModeFlags"
         },
-        "entity_filters": {},
-        "entity_type_filters": {},
-        "tile_filters": {},
+        "entity_filters": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "entity_type_filters": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/string"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "tile_filters": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TileID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "started_sound": {
           "$ref": "#/definitions/Sound"
         },
@@ -11196,7 +12184,20 @@
       "type": "object",
       "properties": {
         "type": {},
-        "triggers": {}
+        "triggers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TipTrigger"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["type", "triggers"]
     },
@@ -11317,10 +12318,62 @@
       "description": "https://lua-api.factorio.com/stable/types/ShiftAnimationWaypoints.html",
       "type": "object",
       "properties": {
-        "north": {},
-        "east": {},
-        "south": {},
-        "west": {}
+        "north": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Vector"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "east": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Vector"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "south": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Vector"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "west": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Vector"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["north", "east", "south", "west"]
     },
@@ -11429,7 +12482,20 @@
         "update": {
           "$ref": "#/definitions/string"
         },
-        "mods": {},
+        "mods": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/string"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "init_update_count": {
           "$ref": "#/definitions/uint32"
         },
@@ -11629,7 +12695,20 @@
         "audible_distance_modifier": {
           "$ref": "#/definitions/float"
         },
-        "play_for_working_visualisations": {}
+        "play_for_working_visualisations": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/string"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       }
     },
     "SoundDefinition": {
@@ -12100,7 +13179,20 @@
         {
           "type": "object",
           "properties": {
-            "layers": {},
+            "layers": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sprite"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "dice": {
               "$ref": "#/definitions/SpriteSizeType"
             },
@@ -12118,7 +13210,20 @@
       "description": "https://lua-api.factorio.com/stable/types/Sprite16Way.html",
       "type": "object",
       "properties": {
-        "sheets": {},
+        "sheets": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SpriteNWaySheet"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "sheet": {
           "$ref": "#/definitions/SpriteNWaySheet"
         },
@@ -12303,7 +13408,20 @@
         {
           "type": "object",
           "properties": {
-            "layers": {},
+            "layers": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SpriteSheet"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "variation_count": {
               "$ref": "#/definitions/uint32"
             },
@@ -12313,7 +13431,20 @@
             "line_length": {
               "$ref": "#/definitions/uint32"
             },
-            "filenames": {},
+            "filenames": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/FileName"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "lines_per_file": {
               "$ref": "#/definitions/uint32"
             },
@@ -12602,7 +13733,20 @@
         "render_layer": {
           "$ref": "#/definitions/RenderLayer"
         },
-        "positions": {},
+        "positions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Vector"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "nested_visualisations": {},
         "can_lay_on_the_ground": {
           "$ref": "#/definitions/bool"
@@ -13133,7 +14277,20 @@
             "background_graphical_set": {
               "$ref": "#/definitions/ElementImageSet"
             },
-            "column_alignments": {},
+            "column_alignments": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ColumnAlignment"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "column_widths": {},
             "hovered_row_color": {
               "$ref": "#/definitions/Color"
@@ -13329,7 +14486,20 @@
         "time": {
           "$ref": "#/definitions/double"
         },
-        "ingredients": {}
+        "ingredients": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResearchIngredient"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["time", "ingredients"]
     },
@@ -13337,7 +14507,20 @@
       "description": "https://lua-api.factorio.com/stable/types/TerritorySettings.html",
       "type": "object",
       "properties": {
-        "units": {},
+        "units": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "territory_index_expression": {
           "$ref": "#/definitions/string"
         },
@@ -13539,7 +14722,20 @@
             "probability": {
               "$ref": "#/definitions/double"
             },
-            "weights": {}
+            "weights": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/double"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["size"]
         }
@@ -14028,17 +15224,82 @@
         "offset_background_layer_by_tile_layer": {
           "$ref": "#/definitions/bool"
         },
-        "inner_corner_weights": {},
-        "outer_corner_weights": {},
-        "side_weights": {},
+        "inner_corner_weights": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/float"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "outer_corner_weights": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/float"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "side_weights": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/float"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "side_variations_in_group": {
           "$ref": "#/definitions/uint8"
         },
-        "double_side_weights": {},
+        "double_side_weights": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/float"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "double_side_variations_in_group": {
           "$ref": "#/definitions/uint8"
         },
-        "u_transition_weights": {}
+        "u_transition_weights": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/float"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       }
     },
     "TileTransitionsBetweenTransitions": {
@@ -14070,7 +15331,20 @@
         {
           "type": "object",
           "properties": {
-            "to_tiles": {},
+            "to_tiles": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TileID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "transition_group": {
               "$ref": "#/definitions/uint8"
             }
@@ -14083,7 +15357,20 @@
       "description": "https://lua-api.factorio.com/stable/types/TileTransitionsVariants.html",
       "type": "object",
       "properties": {
-        "main": {},
+        "main": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TileMainPictures"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "material_texture_width_in_tiles": {
           "$ref": "#/definitions/uint8"
         },
@@ -14093,7 +15380,20 @@
         "material_background": {
           "$ref": "#/definitions/MaterialTextureParameters"
         },
-        "light": {},
+        "light": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TileLightPictures"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "material_light": {
           "$ref": "#/definitions/MaterialTextureParameters"
         },
@@ -14535,7 +15835,20 @@
         "alternate": {
           "$ref": "#/definitions/bool"
         },
-        "belt_reader": {}
+        "belt_reader": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BeltReaderLayer"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["animation_set"]
     },
@@ -14908,7 +16221,20 @@
         "secondary_draw_order": {
           "$ref": "#/definitions/int8"
         },
-        "enabled_states": {},
+        "enabled_states": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TurretState"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "draw_when_has_energy": {
           "$ref": "#/definitions/bool"
         },
@@ -15040,12 +16366,90 @@
       "description": "https://lua-api.factorio.com/stable/types/UnitAlternativeFrameSequence.html",
       "type": "object",
       "properties": {
-        "warmup_frame_sequence": {},
-        "warmup2_frame_sequence": {},
-        "attacking_frame_sequence": {},
-        "cooldown_frame_sequence": {},
-        "prepared_frame_sequence": {},
-        "back_to_walk_frame_sequence": {},
+        "warmup_frame_sequence": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/uint16"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "warmup2_frame_sequence": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/uint16"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "attacking_frame_sequence": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/uint16"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "cooldown_frame_sequence": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/uint16"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "prepared_frame_sequence": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/uint16"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "back_to_walk_frame_sequence": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/uint16"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "warmup_animation_speed": {
           "$ref": "#/definitions/float"
         },
@@ -15303,7 +16707,20 @@
         "name": {
           "$ref": "#/definitions/string"
         },
-        "variants": {},
+        "variants": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Sound"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "composition_mode": {
           "$ref": "#/definitions/VariableAmbientSoundCompositionMode"
         },
@@ -15417,15 +16834,54 @@
         "next_state": {
           "$ref": "#/definitions/string"
         },
-        "next_states": {},
+        "next_states": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VariableAmbientSoundNextStateItem"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "next_state_trigger": {
           "$ref": "#/definitions/VariableAmbientSoundNextStateTrigger"
         },
-        "next_state_layers_finished_layers": {},
+        "next_state_layers_finished_layers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/string"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "state_duration_seconds": {
           "$ref": "#/definitions/uint32"
         },
-        "layers_properties": {},
+        "layers_properties": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VariableAmbientSoundLayerStateProperties"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "start_pause": {
           "$ref": "#/definitions/RandomRange"
         },
@@ -15463,11 +16919,37 @@
       "description": "https://lua-api.factorio.com/stable/types/VariableAmbientSoundVariableSound.html",
       "type": "object",
       "properties": {
-        "layers": {},
+        "layers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VariableAmbientSoundLayer"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "intermezzo": {
           "$ref": "#/definitions/Sound"
         },
-        "states": {},
+        "states": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VariableAmbientSoundState"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "length_seconds": {
           "$ref": "#/definitions/uint32"
         },
@@ -15637,7 +17119,20 @@
         "dark_threshold": {},
         "reflection_threshold": {},
         "specular_threshold": {},
-        "textures": {},
+        "textures": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EffectTexture"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "near_zoom": {
           "$ref": "#/definitions/float"
         },
@@ -15866,7 +17361,20 @@
         "animation": {
           "$ref": "#/definitions/Animation"
         },
-        "draw_in_states": {},
+        "draw_in_states": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/string"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "draw_when_state_filter_matches": {
           "$ref": "#/definitions/bool"
         },
@@ -15915,7 +17423,20 @@
         "recipe_not_set_tint": {
           "$ref": "#/definitions/GlobalRecipeTints"
         },
-        "states": {},
+        "states": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VisualState"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "working_visualisations": {},
         "shift_animation_waypoints": {
           "$ref": "#/definitions/ShiftAnimationWaypoints"
@@ -16042,7 +17563,20 @@
         {
           "type": "object",
           "properties": {
-            "icons": {},
+            "icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon": {
               "$ref": "#/definitions/FileName"
             },
@@ -16174,8 +17708,34 @@
             "grappler_extending_sound_source": {
               "$ref": "#/definitions/string"
             },
-            "planting_procedure_points": {},
-            "harvesting_procedure_points": {},
+            "planting_procedure_points": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Vector3D"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "harvesting_procedure_points": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Vector3D"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "circuit_wire_max_distance": {
               "$ref": "#/definitions/double"
             },
@@ -16265,7 +17825,20 @@
             "bonus_gui_order": {
               "$ref": "#/definitions/Order"
             },
-            "icons": {},
+            "icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon": {
               "$ref": "#/definitions/FileName"
             },
@@ -16340,7 +17913,20 @@
         "name": {
           "$ref": "#/definitions/string"
         },
-        "layers": {},
+        "layers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Animation"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "filename": {
           "$ref": "#/definitions/FileName"
         },
@@ -16449,8 +18035,34 @@
         "frame_sequence": {
           "$ref": "#/definitions/AnimationFrameSequence"
         },
-        "stripes": {},
-        "filenames": {},
+        "stripes": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Stripe"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "filenames": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FileName"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "slice": {
           "$ref": "#/definitions/uint32"
         },
@@ -16518,7 +18130,20 @@
             "equipment_grid": {
               "$ref": "#/definitions/EquipmentGridID"
             },
-            "resistances": {},
+            "resistances": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resistance"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "inventory_size_bonus": {
               "$ref": "#/definitions/ItemStackIndex"
             },
@@ -16754,8 +18379,34 @@
             "circuit_connector": {
               "$ref": "#/definitions/CircuitConnectorDefinition"
             },
-            "cannon_barrel_recoil_shiftings": {},
-            "cannon_barrel_recoil_shiftings_load_correction_matrix": {},
+            "cannon_barrel_recoil_shiftings": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Vector3D"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "cannon_barrel_recoil_shiftings_load_correction_matrix": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Vector3D"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "cannon_barrel_light_direction": {
               "$ref": "#/definitions/Vector3D"
             }
@@ -16824,8 +18475,34 @@
             "cannon_parking_speed": {
               "$ref": "#/definitions/float"
             },
-            "cannon_barrel_recoil_shiftings": {},
-            "cannon_barrel_recoil_shiftings_load_correction_matrix": {},
+            "cannon_barrel_recoil_shiftings": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Vector3D"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "cannon_barrel_recoil_shiftings_load_correction_matrix": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Vector3D"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "cannon_barrel_light_direction": {
               "$ref": "#/definitions/Vector3D"
             }
@@ -16908,7 +18585,20 @@
             "graphics_set": {
               "$ref": "#/definitions/AsteroidGraphicsSet"
             },
-            "icons": {},
+            "icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon": {
               "$ref": "#/definitions/FileName"
             },
@@ -17030,7 +18720,20 @@
               "$ref": "#/definitions/double"
             },
             "circuit_connector": {},
-            "arm_color_gradient": {}
+            "arm_color_gradient": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Color"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": [
             "graphics_set",
@@ -17134,8 +18837,34 @@
             "allowed_effects": {
               "$ref": "#/definitions/EffectTypeLimitation"
             },
-            "allowed_module_categories": {},
-            "profile": {},
+            "allowed_module_categories": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ModuleCategoryID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "profile": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/double"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "beacon_counter": {}
           },
           "required": [
@@ -17478,7 +19207,20 @@
             "track_particle_triggers": {
               "$ref": "#/definitions/FootstepTriggerEffectList"
             },
-            "guns": {}
+            "guns": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": [
             "effectivity",
@@ -17508,7 +19250,20 @@
             "inventory_size_bonus": {
               "$ref": "#/definitions/ItemStackIndex"
             },
-            "hatch_definitions": {}
+            "hatch_definitions": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CargoHatchDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["inventory_size_bonus"]
         }
@@ -17768,12 +19523,90 @@
             "damage_hit_tint": {
               "$ref": "#/definitions/Color"
             },
-            "mining_with_tool_particles_animation_positions": {},
-            "running_sound_animation_positions": {},
-            "moving_sound_animation_positions": {},
-            "animations": {},
-            "crafting_categories": {},
-            "mining_categories": {},
+            "mining_with_tool_particles_animation_positions": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/float"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "running_sound_animation_positions": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/float"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "moving_sound_animation_positions": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/float"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "animations": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CharacterArmorAnimation"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "crafting_categories": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/RecipeCategoryID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "mining_categories": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ResourceCategoryID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "light": {
               "$ref": "#/definitions/LightDefinition"
             },
@@ -17810,15 +19643,54 @@
             "synced_footstep_particle_triggers": {
               "$ref": "#/definitions/FootstepTriggerEffectList"
             },
-            "footprint_particles": {},
+            "footprint_particles": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/FootprintParticle"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "left_footprint_offset": {
               "$ref": "#/definitions/Vector"
             },
             "right_footprint_offset": {
               "$ref": "#/definitions/Vector"
             },
-            "right_footprint_frames": {},
-            "left_footprint_frames": {}
+            "right_footprint_frames": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/float"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "left_footprint_frames": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/float"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": [
             "mining_speed",
@@ -18296,11 +20168,37 @@
             "crafting_speed": {
               "$ref": "#/definitions/double"
             },
-            "crafting_categories": {},
+            "crafting_categories": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/RecipeCategoryID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "energy_source": {
               "$ref": "#/definitions/EnergySource"
             },
-            "fluid_boxes": {},
+            "fluid_boxes": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/FluidBox"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "effect_receiver": {
               "$ref": "#/definitions/EffectReceiver"
             },
@@ -18310,7 +20208,20 @@
             "allowed_effects": {
               "$ref": "#/definitions/EffectTypeLimitation"
             },
-            "allowed_module_categories": {},
+            "allowed_module_categories": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ModuleCategoryID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "show_recipe_icon": {
               "$ref": "#/definitions/bool"
             },
@@ -18547,7 +20458,20 @@
             "stateless_visualisation": {
               "$ref": "#/definitions/StatelessVisualisations"
             },
-            "stateless_visualisation_variations": {},
+            "stateless_visualisation_variations": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/StatelessVisualisations"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "collision_box": {
               "$ref": "#/definitions/BoundingBox"
             },
@@ -19003,7 +20927,20 @@
             "supply_area_distance": {
               "$ref": "#/definitions/double"
             },
-            "connection_points": {},
+            "connection_points": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WireConnectionPoint"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "radius_visualisation_picture": {
               "$ref": "#/definitions/Sprite"
             },
@@ -19123,7 +21060,20 @@
             "time_to_capture": {
               "$ref": "#/definitions/uint32"
             },
-            "result_units": {},
+            "result_units": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/UnitSpawnDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "dying_sound": {
               "$ref": "#/definitions/Sound"
             },
@@ -19220,7 +21170,20 @@
         {
           "type": "object",
           "properties": {
-            "icons": {},
+            "icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon": {
               "$ref": "#/definitions/FileName"
             },
@@ -19252,11 +21215,37 @@
             "flags": {
               "$ref": "#/definitions/EntityPrototypeFlags"
             },
-            "tile_buildability_rules": {},
+            "tile_buildability_rules": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TileBuildabilityRule"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "minable": {
               "$ref": "#/definitions/MinableProperties"
             },
-            "surface_conditions": {},
+            "surface_conditions": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SurfaceCondition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "deconstruction_alternative": {
               "$ref": "#/definitions/EntityID"
             },
@@ -19337,7 +21326,20 @@
             },
             "placeable_by": {},
             "remains_when_mined": {},
-            "additional_pastable_entities": {},
+            "additional_pastable_entities": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "tile_width": {},
             "tile_height": {},
             "diagonal_tile_grid_size": {
@@ -19365,7 +21367,20 @@
             "icon_draw_specification": {
               "$ref": "#/definitions/IconDrawSpecification"
             },
-            "icons_positioning": {}
+            "icons_positioning": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconSequencePositioning"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           }
         }
       ]
@@ -19395,8 +21410,34 @@
             "damaged_trigger_effect": {
               "$ref": "#/definitions/TriggerEffect"
             },
-            "loot": {},
-            "resistances": {},
+            "loot": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/LootItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "resistances": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resistance"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "attack_reaction": {},
             "repair_sound": {
               "$ref": "#/definitions/Sound"
@@ -19503,7 +21544,20 @@
         {
           "type": "object",
           "properties": {
-            "equipment_categories": {},
+            "equipment_categories": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EquipmentCategoryID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "width": {
               "$ref": "#/definitions/uint32"
             },
@@ -19533,7 +21587,20 @@
             "shape": {
               "$ref": "#/definitions/EquipmentShape"
             },
-            "categories": {},
+            "categories": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EquipmentCategoryID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "energy_source": {
               "$ref": "#/definitions/ElectricEnergySource"
             },
@@ -19707,7 +21774,20 @@
             "spawn_entity": {
               "$ref": "#/definitions/EntityID"
             },
-            "smoke": {},
+            "smoke": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SmokeSource"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "maximum_spread_count": {
               "$ref": "#/definitions/uint16"
             },
@@ -19829,7 +21909,20 @@
         {
           "type": "object",
           "properties": {
-            "icons": {},
+            "icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon": {
               "$ref": "#/definitions/FileName"
             },
@@ -19938,7 +22031,20 @@
             "shadow": {
               "$ref": "#/definitions/Animation"
             },
-            "smoke_sources": {},
+            "smoke_sources": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SmokeSource"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "progress_to_create_smoke": {
               "$ref": "#/definitions/float"
             },
@@ -20360,7 +22466,20 @@
             },
             "fluid_usage_per_tick": {},
             "maximum_temperature": {},
-            "smoke": {},
+            "smoke": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SmokeSource"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "burns_fluid": {
               "$ref": "#/definitions/bool"
             },
@@ -20404,8 +22523,34 @@
         "mining_speed": {
           "$ref": "#/definitions/double"
         },
-        "crafting_categories": {},
-        "mining_categories": {}
+        "crafting_categories": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RecipeCategoryID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "mining_categories": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResourceCategoryID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": [
         "type",
@@ -20429,7 +22574,20 @@
             "amount": {
               "$ref": "#/definitions/uint32"
             },
-            "entities": {}
+            "entities": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           }
         }
       ]
@@ -20748,7 +22906,20 @@
         {
           "type": "object",
           "properties": {
-            "icons": {},
+            "icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon": {
               "$ref": "#/definitions/FileName"
             },
@@ -20774,14 +22945,40 @@
             "stack_size": {
               "$ref": "#/definitions/ItemCountType"
             },
-            "icons": {},
+            "icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon": {
               "$ref": "#/definitions/FileName"
             },
             "icon_size": {
               "$ref": "#/definitions/SpriteSizeType"
             },
-            "dark_background_icons": {},
+            "dark_background_icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "dark_background_icon": {
               "$ref": "#/definitions/FileName"
             },
@@ -20873,7 +23070,20 @@
             "destroyed_by_dropping_trigger": {
               "$ref": "#/definitions/Trigger"
             },
-            "rocket_launch_products": {},
+            "rocket_launch_products": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemProductPrototype"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "send_to_orbit_mode": {
               "$ref": "#/definitions/SendToOrbitMode"
             },
@@ -20930,14 +23140,40 @@
         {
           "type": "object",
           "properties": {
-            "icon_tintable_masks": {},
+            "icon_tintable_masks": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon_tintable_mask": {
               "$ref": "#/definitions/FileName"
             },
             "icon_tintable_mask_size": {
               "$ref": "#/definitions/SpriteSizeType"
             },
-            "icon_tintables": {},
+            "icon_tintables": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon_tintable": {
               "$ref": "#/definitions/FileName"
             },
@@ -20960,9 +23196,48 @@
             "inventory_size": {
               "$ref": "#/definitions/ItemStackIndex"
             },
-            "item_filters": {},
-            "item_group_filters": {},
-            "item_subgroup_filters": {},
+            "item_filters": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "item_group_filters": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemGroupID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "item_subgroup_filters": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemSubGroupID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "filter_mode": {},
             "filter_message_key": {
               "$ref": "#/definitions/string"
@@ -21053,7 +23328,20 @@
             "frozen_patch": {
               "$ref": "#/definitions/Sprite"
             },
-            "inputs": {},
+            "inputs": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "researching_speed": {
               "$ref": "#/definitions/double"
             },
@@ -21072,7 +23360,20 @@
             "allowed_effects": {
               "$ref": "#/definitions/EffectTypeLimitation"
             },
-            "allowed_module_categories": {},
+            "allowed_module_categories": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ModuleCategoryID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "light": {
               "$ref": "#/definitions/LightDefinition"
             },
@@ -21136,7 +23437,20 @@
             "always_on": {
               "$ref": "#/definitions/bool"
             },
-            "signal_to_color_mapping": {},
+            "signal_to_color_mapping": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SignalColorMapping"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "glow_render_mode": {},
             "default_red_signal": {
               "$ref": "#/definitions/SignalIDConnector"
@@ -21439,7 +23753,20 @@
             "draw_circuit_wires": {
               "$ref": "#/definitions/bool"
             },
-            "circuit_connector": {}
+            "circuit_connector": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CircuitConnectorDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["filter_count"]
         }
@@ -21642,7 +23969,20 @@
             "energy_source": {
               "$ref": "#/definitions/EnergySource"
             },
-            "resource_categories": {},
+            "resource_categories": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ResourceCategoryID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "output_fluid_box": {
               "$ref": "#/definitions/FluidBox"
             },
@@ -21670,7 +24010,20 @@
             "allowed_effects": {
               "$ref": "#/definitions/EffectTypeLimitation"
             },
-            "allowed_module_categories": {},
+            "allowed_module_categories": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ModuleCategoryID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "radius_visualisation_picture": {
               "$ref": "#/definitions/Sprite"
             },
@@ -21857,7 +24210,20 @@
         {
           "type": "object",
           "properties": {
-            "parameters": {},
+            "parameters": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/string"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "expression": {
               "$ref": "#/definitions/NoiseExpression"
             },
@@ -22038,7 +24404,20 @@
             "particle": {
               "$ref": "#/definitions/ParticleID"
             },
-            "smoke": {},
+            "smoke": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SmokeSource"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "time_to_live_deviation": {
               "$ref": "#/definitions/float"
             },
@@ -22483,7 +24862,20 @@
             "light": {
               "$ref": "#/definitions/LightDefinition"
             },
-            "smoke": {},
+            "smoke": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SmokeSource"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "hit_collision_mask": {},
             "turning_speed_increases_exponentially_with_projectile_speed": {
               "$ref": "#/definitions/bool"
@@ -22630,7 +25022,20 @@
             "next_probability": {
               "$ref": "#/definitions/double"
             },
-            "icons": {},
+            "icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon": {
               "$ref": "#/definitions/FileName"
             },
@@ -22743,7 +25148,20 @@
         {
           "type": "object",
           "properties": {
-            "rails": {},
+            "rails": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "support": {
               "$ref": "#/definitions/EntityID"
             },
@@ -22782,8 +25200,34 @@
             "forced_fence_segment_count": {
               "$ref": "#/definitions/uint8"
             },
-            "ending_shifts": {},
-            "deconstruction_marker_positions": {},
+            "ending_shifts": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Vector"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "deconstruction_marker_positions": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Vector"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "removes_soft_decoratives": {
               "$ref": "#/definitions/bool"
             }
@@ -22911,7 +25355,20 @@
             "collision_mask_allow_on_deep_oil_ocean": {
               "$ref": "#/definitions/CollisionMaskConnector"
             },
-            "elevated_selection_boxes": {}
+            "elevated_selection_boxes": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/BoundingBox"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["graphics_set"]
         }
@@ -23019,15 +25476,54 @@
               "$ref": "#/definitions/RecipeCategoryID"
             },
             "crafting_machine_tint": {},
-            "icons": {},
+            "icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon": {
               "$ref": "#/definitions/FileName"
             },
             "icon_size": {
               "$ref": "#/definitions/SpriteSizeType"
             },
-            "ingredients": {},
-            "results": {},
+            "ingredients": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IngredientPrototype"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "results": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ProductPrototype"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "main_product": {
               "$ref": "#/definitions/string"
             },
@@ -23100,7 +25596,20 @@
             "allow_quality_message": {
               "$ref": "#/definitions/LocalisedString"
             },
-            "surface_conditions": {},
+            "surface_conditions": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SurfaceCondition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "hide_from_signal_gui": {
               "$ref": "#/definitions/bool"
             },
@@ -23119,8 +25628,34 @@
             "allow_quality": {
               "$ref": "#/definitions/bool"
             },
-            "allowed_module_categories": {},
-            "alternative_unlock_methods": {}
+            "allowed_module_categories": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ModuleCategoryID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "alternative_unlock_methods": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TechnologyID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           }
         }
       ]
@@ -23215,7 +25750,20 @@
             "stages": {
               "$ref": "#/definitions/AnimationVariations"
             },
-            "stage_counts": {},
+            "stage_counts": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/uint32"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "infinite": {
               "$ref": "#/definitions/bool"
             },
@@ -23353,7 +25901,20 @@
             "robots_shrink_when_entering_and_exiting": {
               "$ref": "#/definitions/bool"
             },
-            "charging_offsets": {},
+            "charging_offsets": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Vector"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "spawn_minimum": {
               "$ref": "#/definitions/Energy"
             },
@@ -23518,7 +26079,20 @@
             "robots_shrink_when_entering_and_exiting": {
               "$ref": "#/definitions/bool"
             },
-            "charging_offsets": {},
+            "charging_offsets": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Vector"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "logistics_connection_distance": {
               "$ref": "#/definitions/float"
             }
@@ -24055,8 +26629,34 @@
             "backward_padding": {
               "$ref": "#/definitions/double"
             },
-            "update_effects": {},
-            "update_effects_while_enraged": {}
+            "update_effects": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TriggerEffectWithCooldown"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "update_effects_while_enraged": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TriggerEffectWithCooldown"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["animation"]
         }
@@ -24125,7 +26725,20 @@
             "hurt_roar": {
               "$ref": "#/definitions/Sound"
             },
-            "hurt_thresholds": {}
+            "hurt_thresholds": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/float"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": [
             "vision_distance",
@@ -24243,12 +26856,38 @@
           "type": "object",
           "properties": {
             "action": {},
-            "icons": {},
+            "icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon": {},
             "icon_size": {
               "$ref": "#/definitions/SpriteSizeType"
             },
-            "small_icons": {},
+            "small_icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "small_icon": {},
             "small_icon_size": {
               "$ref": "#/definitions/SpriteSizeType"
@@ -24313,7 +26952,20 @@
             "lower_pictures": {
               "$ref": "#/definitions/SpriteVariations"
             },
-            "stateless_visualisation_variations": {}
+            "stateless_visualisation_variations": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/StatelessVisualisations"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           }
         }
       ]
@@ -24362,7 +27014,20 @@
             "lower_pictures": {
               "$ref": "#/definitions/SpriteVariations"
             },
-            "stateless_visualisation_variations": {},
+            "stateless_visualisation_variations": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/StatelessVisualisations"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "force_visibility": {
               "$ref": "#/definitions/ForceCondition"
             }
@@ -24622,8 +27287,34 @@
             "length": {
               "$ref": "#/definitions/uint32"
             },
-            "asteroid_spawn_definitions": {},
-            "icons": {},
+            "asteroid_spawn_definitions": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SpaceConnectionAsteroidSpawnDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon": {
               "$ref": "#/definitions/FileName"
             },
@@ -24689,21 +27380,60 @@
             "planet_procession_set": {
               "$ref": "#/definitions/ProcessionSet"
             },
-            "icons": {},
+            "icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon": {
               "$ref": "#/definitions/FileName"
             },
             "icon_size": {
               "$ref": "#/definitions/SpriteSizeType"
             },
-            "starmap_icons": {},
+            "starmap_icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "starmap_icon": {
               "$ref": "#/definitions/FileName"
             },
             "starmap_icon_size": {
               "$ref": "#/definitions/SpriteSizeType"
             },
-            "asteroid_spawn_definitions": {}
+            "asteroid_spawn_definitions": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SpaceLocationAsteroidSpawnDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["gravity_pull", "distance", "orientation"]
         }
@@ -24783,8 +27513,34 @@
             "create_electric_network": {
               "$ref": "#/definitions/bool"
             },
-            "tiles": {},
-            "initial_items": {}
+            "tiles": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SpacePlatformTileDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "initial_items": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemProductPrototype"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           }
         }
       ]
@@ -24876,8 +27632,34 @@
             "walking_sound_speed_modifier": {
               "$ref": "#/definitions/float"
             },
-            "upper_leg_dying_trigger_effects": {},
-            "lower_leg_dying_trigger_effects": {}
+            "upper_leg_dying_trigger_effects": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SpiderLegTriggerEffect"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "lower_leg_dying_trigger_effects": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SpiderLegTriggerEffect"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": [
             "knee_height",
@@ -24996,7 +27778,20 @@
             "trash_inventory_size": {
               "$ref": "#/definitions/ItemStackIndex"
             },
-            "guns": {}
+            "guns": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": [
             "energy_source",
@@ -25057,7 +27852,20 @@
         "name": {
           "$ref": "#/definitions/string"
         },
-        "layers": {},
+        "layers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Sprite"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "filename": {
           "$ref": "#/definitions/FileName"
         },
@@ -25241,7 +28049,20 @@
             "selection_box_type": {
               "$ref": "#/definitions/CursorBoxType"
             },
-            "update_effects": {}
+            "update_effects": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TriggerEffectWithCooldown"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["duration_in_ticks"]
         }
@@ -25347,7 +28168,20 @@
         {
           "type": "object",
           "properties": {
-            "icons": {},
+            "icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon": {
               "$ref": "#/definitions/FileName"
             },
@@ -25379,8 +28213,34 @@
               "$ref": "#/definitions/TechnologyUnit"
             },
             "max_level": {},
-            "prerequisites": {},
-            "effects": {}
+            "prerequisites": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TechnologyID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "effects": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Modifier"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           }
         }
       ]
@@ -25496,7 +28356,20 @@
             "map_color": {
               "$ref": "#/definitions/Color"
             },
-            "icons": {},
+            "icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon": {
               "$ref": "#/definitions/FileName"
             },
@@ -25549,7 +28422,20 @@
             "decorative_removal_probability": {
               "$ref": "#/definitions/float"
             },
-            "allowed_neighbors": {},
+            "allowed_neighbors": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TileID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "needs_correction": {
               "$ref": "#/definitions/bool"
             },
@@ -25613,8 +28499,34 @@
             "effect_is_opaque": {
               "$ref": "#/definitions/bool"
             },
-            "transitions": {},
-            "transitions_between_transitions": {},
+            "transitions": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TileTransitionsToTiles"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "transitions_between_transitions": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TileTransitionsBetweenTransitions"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "autoplace": {
               "$ref": "#/definitions/AutoplaceSpecification"
             },
@@ -25668,11 +28580,37 @@
             "starting_status": {
               "$ref": "#/definitions/TipStatus"
             },
-            "dependencies": {},
+            "dependencies": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/string"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "player_input_method_filter": {
               "$ref": "#/definitions/PlayerInputMethodFilter"
             },
-            "icons": {},
+            "icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon": {
               "$ref": "#/definitions/FileName"
             },
@@ -25844,7 +28782,20 @@
             "draw_circuit_wires": {
               "$ref": "#/definitions/bool"
             },
-            "circuit_connector": {},
+            "circuit_connector": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CircuitConnectorDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "related_underground_belt": {
               "$ref": "#/definitions/EntityID"
             }
@@ -25861,16 +28812,68 @@
         {
           "type": "object",
           "properties": {
-            "variation_weights": {},
+            "variation_weights": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/float"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "darkness_of_burnt_tree": {
               "$ref": "#/definitions/float"
             },
             "pictures": {
               "$ref": "#/definitions/SpriteVariations"
             },
-            "variations": {},
-            "colors": {},
-            "stateless_visualisation_variations": {}
+            "variations": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TreeVariation"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "colors": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Color"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "stateless_visualisation_variations": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/StatelessVisualisations"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           }
         }
       ]
@@ -26181,7 +29184,20 @@
             "draw_circuit_wires": {
               "$ref": "#/definitions/bool"
             },
-            "circuit_connector": {}
+            "circuit_connector": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CircuitConnectorDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": [
             "attack_parameters",
@@ -26318,7 +29334,20 @@
             "alternative_attacking_frame_sequence": {
               "$ref": "#/definitions/UnitAlternativeFrameSequence"
             },
-            "running_sound_animation_positions": {}
+            "running_sound_animation_positions": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/float"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": [
             "run_animation",
@@ -26544,7 +29573,20 @@
             "forced_enabled_recipe_slot_background_tint": {
               "$ref": "#/definitions/Color"
             },
-            "rail_segment_colors": {},
+            "rail_segment_colors": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Color"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "player_colors": {},
             "server_command_console_chat_color": {
               "$ref": "#/definitions/Color"
@@ -29678,7 +32720,20 @@
         {
           "type": "object",
           "properties": {
-            "icons": {},
+            "icons": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IconData"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "icon": {
               "$ref": "#/definitions/FileName"
             },

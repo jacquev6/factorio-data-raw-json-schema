@@ -195,6 +195,12 @@ def main(factorio_location: str, load_types: str | None, load_prototypes: str | 
     # types/TriggerEffect.html refers to non-documented type DamageEntityTriggerEffectItem,
     # and types/DamageTriggerEffectItem.html is documented but used nowhere
 
+    # Empty arrays are serialized as {} instead of []
+    # (patched in the generated schema because this must be done everywhere)
+
+    # I'm fed up with documenting every single patch
+    schema["definitions"]["WorkingVisualisations"]["properties"]["working_visualisations"] = {}
+
     # Ad-hoc patches because our extraction tool is weak
     # ==================================================
 
@@ -279,7 +285,7 @@ def extract_type(factorio_location: str, type_name: str, all_type_names: set[str
                     )
                 case "union":
                     return FactorioSchema.UnionTypeDefinition(name=type_name, types=list(extract_union_members(soup)))
-        assert False, f"unsupported kind: {type_kind!r}"
+        assert False, f"unsupported type kind: {type_kind!r}"
     elif (m := re.match(r"^" + type_name + r"\s* builtin\s*(Example code)?$", h2_text)) is not None:
         return FactorioSchema.TypeDefinition(name=type_name, definition=FactorioSchema.builtin_types[type_name])
     else:
@@ -329,7 +335,11 @@ def extract_union_members(soup: bs4.BeautifulSoup) -> Iterable[JsonValue]:
     for span_soup in (tag(el) for el in soup.find_all("span", class_="docs-attribute-name")):
         content_soup = span_soup.contents[0]
         if isinstance(content_soup, bs4.element.Tag) and content_soup.name == "code":
-            yield {"type": "string", "const": content_soup.text.strip().strip('"')}
+            value = content_soup.text.strip()
+            if value.startswith('"') and value.endswith('"'):
+                yield {"type": "string", "const": value.strip('"')}
+            else:
+                yield {"type": "integer", "const": int(value)}
         else:
             yield {"$ref": f"#/definitions/{content_soup.text.strip()}"}
 
@@ -365,8 +375,24 @@ def extract_struct_properties(
                             yield FactorioSchema.Property(
                                 name=property_name, type={"$ref": f"#/definitions/{type_kind}"}, required=not optional
                             )
+                        elif (
+                            type_kind.startswith("array[")
+                            and type_kind.endswith("]")
+                            and type_kind[6:-1] in known_types
+                        ):
+                            yield FactorioSchema.Property(
+                                name=property_name,
+                                type={
+                                    "oneOf": [
+                                        {"type": "array", "items": {"$ref": f"#/definitions/{type_kind[6:-1]}"}},
+                                        # Empty arrays are serialized as {} instead of []
+                                        {"type": "object", "additionalProperties": False},
+                                    ]
+                                },
+                                required=not optional,
+                            )
                         else:
-                            assert False, f"unsupported kind: {type_kind!r}"
+                            assert False, f"unsupported struct property kind: {type_kind!r}"
                     else:
                         assert False, f"failed to parse property header: {h3_text!r}"
                 except AssertionError as exc:
