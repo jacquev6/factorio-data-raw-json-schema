@@ -403,7 +403,9 @@ export type EntityPrototype = Prototype & {
   selection_priority?: Uint8
   build_grid_size?: Uint8
   remove_decoratives?: 'automatic' | 'true' | 'false'
-  emissions_per_second?: unknown
+  emissions_per_second?: {
+    [k: string]: Double
+  }
   shooting_cursor_size?: Double
   created_smoke?: CreateTrivialSmokeEffectItem
   working_sound?: WorkingSound
@@ -2248,6 +2250,30 @@ export type AttenuationType =
   | 'cosine'
   | 'S-curve'
 /**
+ * https://lua-api.factorio.com/stable/types/MapGenSize.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "MapGenSize".
+ */
+export type MapGenSize =
+  | Float
+  | 'none'
+  | 'very-low'
+  | 'very-small'
+  | 'very-poor'
+  | 'low'
+  | 'small'
+  | 'poor'
+  | 'normal'
+  | 'medium'
+  | 'regular'
+  | 'high'
+  | 'big'
+  | 'good'
+  | 'very-high'
+  | 'very-big'
+  | 'very-good'
+/**
  * https://lua-api.factorio.com/stable/types/BeaconDistributionModifier.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -3159,30 +3185,6 @@ export type LabelStyleSpecification = BaseStyleSpecification & {
  * via the `definition` "RichTextSetting".
  */
 export type RichTextSetting = 'enabled' | 'disabled' | 'highlight'
-/**
- * https://lua-api.factorio.com/stable/types/MapGenSize.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "MapGenSize".
- */
-export type MapGenSize =
-  | Float
-  | 'none'
-  | 'very-low'
-  | 'very-small'
-  | 'very-poor'
-  | 'low'
-  | 'small'
-  | 'poor'
-  | 'normal'
-  | 'medium'
-  | 'regular'
-  | 'high'
-  | 'big'
-  | 'good'
-  | 'very-high'
-  | 'very-big'
-  | 'very-good'
 /**
  * https://lua-api.factorio.com/stable/types/NeighbourConnectableConnectionCategory.html
  *
@@ -5419,7 +5421,9 @@ export type CharacterCorpsePrototype = EntityPrototype & {
   render_layer?: RenderLayer
   pictures?: AnimationVariations
   picture?: Animation
-  armor_picture_mapping?: unknown
+  armor_picture_mapping?: {
+    [k: string]: Int32
+  }
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/CliffPrototype.html
@@ -5950,7 +5954,9 @@ export type EnemySpawnerPrototype = EntityWithOwnerPrototype & {
   time_to_capture?: Uint32
   result_units: UnitSpawnDefinition[] | {}
   dying_sound?: Sound
-  absorptions_per_second?: unknown
+  absorptions_per_second?: {
+    [k: string]: EnemySpawnerAbsorption
+  }
   min_darkness_to_spawn?: Float
   max_darkness_to_spawn?: Float
   spawn_decorations_on_expansion?: Bool
@@ -6825,8 +6831,12 @@ export type MovementBonusEquipmentPrototype = EquipmentPrototype & {
  */
 export type NamedNoiseExpression = Prototype & {
   expression: NoiseExpression
-  local_expressions?: unknown
-  local_functions?: unknown
+  local_expressions?: {
+    [k: string]: NoiseExpression
+  }
+  local_functions?: {
+    [k: string]: NoiseFunction
+  }
   intended_property?: String
 }
 /**
@@ -6838,8 +6848,12 @@ export type NamedNoiseExpression = Prototype & {
 export type NamedNoiseFunction = Prototype & {
   parameters: String[] | {}
   expression: NoiseExpression
-  local_expressions?: unknown
-  local_functions?: unknown
+  local_expressions?: {
+    [k: string]: NoiseExpression
+  }
+  local_functions?: {
+    [k: string]: NoiseFunction
+  }
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/NightVisionEquipmentPrototype.html
@@ -6960,7 +6974,9 @@ export type PlanetPrototype = SpaceLocationPrototype & {
   player_effects?: Trigger
   ticks_between_player_effects?: MapTick
   map_gen_settings?: PlanetPrototypeMapGenSettings
-  surface_properties?: unknown
+  surface_properties?: {
+    [k: string]: Double
+  }
   lightning_properties?: LightningProperties
 }
 /**
@@ -7001,7 +7017,9 @@ export type SpaceLocationPrototype = Prototype & {
  */
 export type PlantPrototype = TreePrototype & {
   growth_ticks: MapTick
-  harvest_emissions?: unknown
+  harvest_emissions?: {
+    [k: string]: Double
+  }
   agricultural_tower_tint?: RecipeTints
 }
 /**
@@ -7827,7 +7845,9 @@ export type SpiderUnitPrototype = EntityWithOwnerPrototype & {
   torso_bob_speed?: Float
   torso_rotation_speed?: Float
   graphics_set?: SpiderTorsoGraphicsSet
-  absorptions_to_join_attack?: unknown
+  absorptions_to_join_attack?: {
+    [k: string]: Float
+  }
   spawning_time_modifier?: Double
   radar_range?: Uint32
   attack_parameters: AttackParameters
@@ -7946,7 +7966,9 @@ export type SurfacePropertyPrototype = Prototype & {
  * via the `definition` "SurfacePrototype".
  */
 export type SurfacePrototype = Prototype & {
-  surface_properties?: unknown
+  surface_properties?: {
+    [k: string]: Double
+  }
   icon?: FileName
   icon_size?: SpriteSizeType
 }
@@ -8050,7 +8072,9 @@ export type TilePrototype = Prototype & {
   max_health?: Float
   weight?: Weight
   dying_explosion?: ExplosionDefinition | ExplosionDefinition[] | {}
-  absorptions_per_second?: unknown
+  absorptions_per_second?: {
+    [k: string]: Double
+  }
   default_cover_tile?: TileID
   frozen_variant?: TileID
   thawed_variant?: TileID
@@ -8213,7 +8237,9 @@ export type UnitPrototype = EntityWithOwnerPrototype & {
   affected_by_tiles?: Bool
   render_layer?: RenderLayer
   light?: LightDefinition
-  absorptions_to_join_attack?: unknown
+  absorptions_to_join_attack?: {
+    [k: string]: Float
+  }
   spawning_time_modifier?: Double
   walking_sound?: Sound
   alternative_attacking_frame_sequence?: UnitAlternativeFrameSequence
@@ -8303,8 +8329,12 @@ export type UtilityConstants = PrototypeBase & {
   server_command_console_chat_color: Color
   script_command_console_chat_color: Color
   default_alert_icon_scale: Float
-  default_alert_icon_shift_by_type?: unknown
-  default_alert_icon_scale_by_type?: unknown
+  default_alert_icon_shift_by_type?: {
+    [k: string]: Vector
+  }
+  default_alert_icon_scale_by_type?: {
+    [k: string]: Float
+  }
   bonus_gui_ordering: unknown
   daytime_color_lookup: DaytimeColorLookupTable
   zoom_to_world_daytime_color_lookup: DaytimeColorLookupTable
@@ -8333,7 +8363,9 @@ export type UtilityConstants = PrototypeBase & {
   train_temporary_stop_wait_time: Uint32
   train_time_wait_condition_default: Uint32
   train_inactivity_wait_condition_default: Uint32
-  default_trigger_target_mask_by_type?: unknown
+  default_trigger_target_mask_by_type?: {
+    [k: string]: TriggerTargetMask
+  }
   unit_group_pathfind_resolution: Int8
   unit_group_max_pursue_distance: Double
   dynamic_recipe_overload_factor: Double
@@ -8351,7 +8383,9 @@ export type UtilityConstants = PrototypeBase & {
   tree_shadow_speed: Float
   missing_preview_sprite_location: FileName
   main_menu_background_image_location: FileName
-  main_menu_simulations?: unknown
+  main_menu_simulations?: {
+    [k: string]: SimulationDefinition
+  }
   main_menu_background_vignette_intensity: Float
   main_menu_background_vignette_sharpness: Float
   default_scorch_mark_color: Color
@@ -8392,7 +8426,9 @@ export type UtilityConstants = PrototypeBase & {
   ejected_item_direction_variation: Double
   ejected_item_friction: Double
   train_visualization: TrainVisualizationConstants
-  default_collision_masks: unknown
+  default_collision_masks: {
+    [k: string]: CollisionMaskConnector
+  }
   show_chunk_components_collision_mask: CollisionMaskConnector
   building_collision_mask: CollisionMaskConnector
   water_collision_mask: CollisionMaskConnector
@@ -9654,8 +9690,12 @@ export interface AutoplaceSpecification {
   tile_restriction?: unknown
   probability_expression: NoiseExpression
   richness_expression?: NoiseExpression
-  local_expressions?: unknown
-  local_functions?: unknown
+  local_expressions?: {
+    [k: string]: NoiseExpression
+  }
+  local_functions?: {
+    [k: string]: NoiseFunction
+  }
 }
 /**
  * https://lua-api.factorio.com/stable/types/NoiseExpression.html
@@ -9665,6 +9705,22 @@ export interface AutoplaceSpecification {
  */
 export interface NoiseExpression {
   [k: string]: unknown
+}
+/**
+ * https://lua-api.factorio.com/stable/types/NoiseFunction.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "NoiseFunction".
+ */
+export interface NoiseFunction {
+  parameters: String[] | {}
+  expression: NoiseExpression
+  local_expressions?: {
+    [k: string]: NoiseExpression
+  }
+  local_functions?: {
+    [k: string]: NoiseFunction
+  }
 }
 /**
  * https://lua-api.factorio.com/stable/types/WaterReflectionDefinition.html
@@ -9771,7 +9827,9 @@ export interface Sprite4Way {
  * via the `definition` "BaseEnergySource".
  */
 export interface BaseEnergySource {
-  emissions_per_minute?: unknown
+  emissions_per_minute?: {
+    [k: string]: Double
+  }
   render_no_power_icon?: Bool
   render_no_network_icon?: Bool
 }
@@ -10901,7 +10959,20 @@ export interface Attenuation {
  */
 export interface AutoplaceSettings {
   treat_missing_as_default?: Bool
-  settings?: unknown
+  settings?: {
+    [k: string]: FrequencySizeRichness
+  }
+}
+/**
+ * https://lua-api.factorio.com/stable/types/FrequencySizeRichness.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "FrequencySizeRichness".
+ */
+export interface FrequencySizeRichness {
+  frequency?: MapGenSize
+  size?: MapGenSize
+  richness?: MapGenSize
 }
 /**
  * https://lua-api.factorio.com/stable/types/BeaconGraphicsSet.html
@@ -11181,8 +11252,12 @@ export interface ChartUtilityConstants {
   chart_deconstruct_tint: Color
   chart_deconstruct_active_color: Color
   chart_player_circle_size: Float
-  default_friendly_color_by_type?: unknown
-  default_color_by_type?: unknown
+  default_friendly_color_by_type?: {
+    [k: string]: Color
+  }
+  default_color_by_type?: {
+    [k: string]: Color
+  }
   explosion_visualization_duration: Uint32
   train_path_color: Color
   train_preview_path_outline_color: Color
@@ -11639,17 +11714,6 @@ export interface FogMaskShapeDefinition {
   falloff?: Float
 }
 /**
- * https://lua-api.factorio.com/stable/types/FrequencySizeRichness.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "FrequencySizeRichness".
- */
-export interface FrequencySizeRichness {
-  frequency?: MapGenSize
-  size?: MapGenSize
-  richness?: MapGenSize
-}
-/**
  * https://lua-api.factorio.com/stable/types/FusionGeneratorDirectionGraphicsSet.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -11713,7 +11777,9 @@ export interface FusionReactorGraphicsSet {
   use_fuel_glow_color?: Bool
   fusion_effect_uv_map?: Sprite
   connections_graphics?: FusionReactorConnectionGraphics[] | {}
-  direction_to_connections_graphics?: unknown
+  direction_to_connections_graphics?: {
+    [k: string]: Uint8[] | {}
+  }
   plasma_category: NeighbourConnectableConnectionCategory
 }
 /**
@@ -11936,9 +12002,15 @@ export interface MapGenPreset {
  */
 export interface MapGenSettings {
   default_enable_all_autoplace_controls?: Bool
-  autoplace_controls?: unknown
-  autoplace_settings?: unknown
-  property_expression_names?: unknown
+  autoplace_controls?: {
+    [k: string]: FrequencySizeRichness
+  }
+  autoplace_settings?: {
+    [k: string]: AutoplaceSettings
+  }
+  property_expression_names?: {
+    [k: string]: String | Bool | Double
+  }
   starting_points?: MapPosition[] | {}
   seed?: Uint32
   width?: Uint32
@@ -12083,18 +12155,6 @@ export interface NeighbourConnectableConnectionDefinition {
   location: unknown
   category: NeighbourConnectableConnectionCategory
   neighbour_category?: NeighbourConnectableConnectionCategory[] | {}
-}
-/**
- * https://lua-api.factorio.com/stable/types/NoiseFunction.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "NoiseFunction".
- */
-export interface NoiseFunction {
-  parameters: String[] | {}
-  expression: NoiseExpression
-  local_expressions?: unknown
-  local_functions?: unknown
 }
 /**
  * https://lua-api.factorio.com/stable/types/OffshorePumpGraphicsSet.html
@@ -12296,9 +12356,15 @@ export interface PipePictures {
 export interface PlanetPrototypeMapGenSettings {
   cliff_settings?: CliffPlacementSettings
   territory_settings?: TerritorySettings
-  autoplace_controls?: unknown
-  autoplace_settings?: unknown
-  property_expression_names?: unknown
+  autoplace_controls?: {
+    [k: string]: FrequencySizeRichness
+  }
+  autoplace_settings?: {
+    [k: string]: AutoplaceSettings
+  }
+  property_expression_names?: {
+    [k: string]: String | Bool | Double
+  }
   moisture_climate_control?: Bool
   aux_climate_control?: Bool
 }
@@ -12927,7 +12993,9 @@ export interface SendItemToOrbitTechnologyTrigger {
  * via the `definition` "Settings".
  */
 export interface Settings {
-  startup: unknown
+  startup: {
+    [k: string]: ModSetting
+  }
 }
 /**
  * https://lua-api.factorio.com/stable/types/SoundAccent.html

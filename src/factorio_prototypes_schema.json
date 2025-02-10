@@ -1156,7 +1156,25 @@
         "treat_missing_as_default": {
           "$ref": "#/definitions/bool"
         },
-        "settings": {}
+        "settings": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/FrequencySizeRichness"
+          },
+          "propertyNames": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/EntityID"
+              },
+              {
+                "$ref": "#/definitions/TileID"
+              },
+              {
+                "$ref": "#/definitions/DecorativeID"
+              }
+            ]
+          }
+        }
       }
     },
     "AutoplaceSpecification": {
@@ -1201,8 +1219,24 @@
         "richness_expression": {
           "$ref": "#/definitions/NoiseExpression"
         },
-        "local_expressions": {},
-        "local_functions": {}
+        "local_expressions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/NoiseExpression"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/string"
+          }
+        },
+        "local_functions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/NoiseFunction"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/string"
+          }
+        }
       },
       "required": ["probability_expression"]
     },
@@ -1320,7 +1354,15 @@
       "description": "https://lua-api.factorio.com/stable/types/BaseEnergySource.html",
       "type": "object",
       "properties": {
-        "emissions_per_minute": {},
+        "emissions_per_minute": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/double"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/AirbornePollutantID"
+          }
+        },
         "render_no_power_icon": {
           "$ref": "#/definitions/bool"
         },
@@ -3030,8 +3072,24 @@
         "chart_player_circle_size": {
           "$ref": "#/definitions/float"
         },
-        "default_friendly_color_by_type": {},
-        "default_color_by_type": {},
+        "default_friendly_color_by_type": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Color"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/string"
+          }
+        },
+        "default_color_by_type": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Color"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/string"
+          }
+        },
         "explosion_visualization_duration": {
           "$ref": "#/definitions/uint32"
         },
@@ -6594,7 +6652,26 @@
             }
           ]
         },
-        "direction_to_connections_graphics": {},
+        "direction_to_connections_graphics": {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/uint8"
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false
+              }
+            ]
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/DirectionString"
+          }
+        },
         "plasma_category": {
           "$ref": "#/definitions/NeighbourConnectableConnectionCategory"
         }
@@ -9172,9 +9249,56 @@
         "default_enable_all_autoplace_controls": {
           "$ref": "#/definitions/bool"
         },
-        "autoplace_controls": {},
-        "autoplace_settings": {},
-        "property_expression_names": {},
+        "autoplace_controls": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/FrequencySizeRichness"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/AutoplaceControlID"
+          }
+        },
+        "autoplace_settings": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AutoplaceSettings"
+          },
+          "propertyNames": {
+            "oneOf": [
+              {
+                "type": "string",
+                "const": "entity"
+              },
+              {
+                "type": "string",
+                "const": "tile"
+              },
+              {
+                "type": "string",
+                "const": "decorative"
+              }
+            ]
+          }
+        },
+        "property_expression_names": {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/string"
+              },
+              {
+                "$ref": "#/definitions/bool"
+              },
+              {
+                "$ref": "#/definitions/double"
+              }
+            ]
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/string"
+          }
+        },
         "starting_points": {
           "oneOf": [
             {
@@ -9946,8 +10070,24 @@
         "expression": {
           "$ref": "#/definitions/NoiseExpression"
         },
-        "local_expressions": {},
-        "local_functions": {}
+        "local_expressions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/NoiseExpression"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/string"
+          }
+        },
+        "local_functions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/NoiseFunction"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/string"
+          }
+        }
       },
       "required": ["parameters", "expression"]
     },
@@ -10705,9 +10845,56 @@
         "territory_settings": {
           "$ref": "#/definitions/TerritorySettings"
         },
-        "autoplace_controls": {},
-        "autoplace_settings": {},
-        "property_expression_names": {},
+        "autoplace_controls": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/FrequencySizeRichness"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/AutoplaceControlID"
+          }
+        },
+        "autoplace_settings": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AutoplaceSettings"
+          },
+          "propertyNames": {
+            "oneOf": [
+              {
+                "type": "string",
+                "const": "entity"
+              },
+              {
+                "type": "string",
+                "const": "tile"
+              },
+              {
+                "type": "string",
+                "const": "decorative"
+              }
+            ]
+          }
+        },
+        "property_expression_names": {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/string"
+              },
+              {
+                "$ref": "#/definitions/bool"
+              },
+              {
+                "$ref": "#/definitions/double"
+              }
+            ]
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/string"
+          }
+        },
         "moisture_climate_control": {
           "$ref": "#/definitions/bool"
         },
@@ -13197,7 +13384,15 @@
       "description": "https://lua-api.factorio.com/stable/types/Settings.html",
       "type": "object",
       "properties": {
-        "startup": {}
+        "startup": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ModSetting"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/string"
+          }
+        }
       },
       "required": ["startup"]
     },
@@ -20878,7 +21073,15 @@
             "picture": {
               "$ref": "#/definitions/Animation"
             },
-            "armor_picture_mapping": {}
+            "armor_picture_mapping": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/int32"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/ItemID"
+              }
+            }
           },
           "required": ["time_to_live"]
         }
@@ -22707,7 +22910,15 @@
             "dying_sound": {
               "$ref": "#/definitions/Sound"
             },
-            "absorptions_per_second": {},
+            "absorptions_per_second": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/EnemySpawnerAbsorption"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/AirbornePollutantID"
+              }
+            },
             "min_darkness_to_spawn": {
               "$ref": "#/definitions/float"
             },
@@ -22916,7 +23127,15 @@
                 }
               ]
             },
-            "emissions_per_second": {},
+            "emissions_per_second": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/double"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/AirbornePollutantID"
+              }
+            },
             "shooting_cursor_size": {
               "$ref": "#/definitions/double"
             },
@@ -26208,8 +26427,24 @@
             "expression": {
               "$ref": "#/definitions/NoiseExpression"
             },
-            "local_expressions": {},
-            "local_functions": {},
+            "local_expressions": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/NoiseExpression"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/string"
+              }
+            },
+            "local_functions": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/NoiseFunction"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/string"
+              }
+            },
             "intended_property": {
               "$ref": "#/definitions/string"
             }
@@ -26244,8 +26479,24 @@
             "expression": {
               "$ref": "#/definitions/NoiseExpression"
             },
-            "local_expressions": {},
-            "local_functions": {}
+            "local_expressions": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/NoiseExpression"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/string"
+              }
+            },
+            "local_functions": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/NoiseFunction"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/string"
+              }
+            }
           },
           "required": ["parameters", "expression"]
         }
@@ -26587,7 +26838,15 @@
             "map_gen_settings": {
               "$ref": "#/definitions/PlanetPrototypeMapGenSettings"
             },
-            "surface_properties": {},
+            "surface_properties": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/double"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/SurfacePropertyID"
+              }
+            },
             "lightning_properties": {
               "$ref": "#/definitions/LightningProperties"
             }
@@ -26607,7 +26866,15 @@
             "growth_ticks": {
               "$ref": "#/definitions/MapTick"
             },
-            "harvest_emissions": {},
+            "harvest_emissions": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/double"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/AirbornePollutantID"
+              }
+            },
             "agricultural_tower_tint": {
               "$ref": "#/definitions/RecipeTints"
             }
@@ -29897,7 +30164,15 @@
             "graphics_set": {
               "$ref": "#/definitions/SpiderTorsoGraphicsSet"
             },
-            "absorptions_to_join_attack": {},
+            "absorptions_to_join_attack": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/float"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/AirbornePollutantID"
+              }
+            },
             "spawning_time_modifier": {
               "$ref": "#/definitions/double"
             },
@@ -30363,7 +30638,15 @@
         {
           "type": "object",
           "properties": {
-            "surface_properties": {},
+            "surface_properties": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/double"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/SurfacePropertyID"
+              }
+            },
             "icon": {
               "$ref": "#/definitions/FileName"
             },
@@ -30731,7 +31014,15 @@
                 }
               ]
             },
-            "absorptions_per_second": {},
+            "absorptions_per_second": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/double"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/AirbornePollutantID"
+              }
+            },
             "default_cover_tile": {
               "$ref": "#/definitions/TileID"
             },
@@ -31688,7 +31979,15 @@
             "light": {
               "$ref": "#/definitions/LightDefinition"
             },
-            "absorptions_to_join_attack": {},
+            "absorptions_to_join_attack": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/float"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/AirbornePollutantID"
+              }
+            },
             "spawning_time_modifier": {
               "$ref": "#/definitions/double"
             },
@@ -31961,8 +32260,24 @@
             "default_alert_icon_scale": {
               "$ref": "#/definitions/float"
             },
-            "default_alert_icon_shift_by_type": {},
-            "default_alert_icon_scale_by_type": {},
+            "default_alert_icon_shift_by_type": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/Vector"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/string"
+              }
+            },
+            "default_alert_icon_scale_by_type": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/float"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/string"
+              }
+            },
             "bonus_gui_ordering": {},
             "daytime_color_lookup": {
               "$ref": "#/definitions/DaytimeColorLookupTable"
@@ -32041,7 +32356,15 @@
             "train_inactivity_wait_condition_default": {
               "$ref": "#/definitions/uint32"
             },
-            "default_trigger_target_mask_by_type": {},
+            "default_trigger_target_mask_by_type": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/TriggerTargetMask"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/string"
+              }
+            },
             "unit_group_pathfind_resolution": {
               "$ref": "#/definitions/int8"
             },
@@ -32091,7 +32414,15 @@
             "main_menu_background_image_location": {
               "$ref": "#/definitions/FileName"
             },
-            "main_menu_simulations": {},
+            "main_menu_simulations": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/SimulationDefinition"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/string"
+              }
+            },
             "main_menu_background_vignette_intensity": {
               "$ref": "#/definitions/float"
             },
@@ -32210,7 +32541,15 @@
             "train_visualization": {
               "$ref": "#/definitions/TrainVisualizationConstants"
             },
-            "default_collision_masks": {},
+            "default_collision_masks": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/CollisionMaskConnector"
+              },
+              "propertyNames": {
+                "$ref": "#/definitions/string"
+              }
+            },
             "show_chunk_components_collision_mask": {
               "$ref": "#/definitions/CollisionMaskConnector"
             },
