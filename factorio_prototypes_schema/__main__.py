@@ -323,6 +323,8 @@ def extract_all_prototype_names(factorio_location: str) -> Iterable[str]:
 def extract_prototype(
     factorio_location: str, prototype_name: str, known_types: set[str]
 ) -> FactorioSchema.TypeDefinition:
+    # assert prototype_name in ["UtilityConstants"], "ignored"
+
     soup = read_file(factorio_location, "prototypes", prototype_name)
 
     return FactorioSchema.StructTypeDefinition(
@@ -367,23 +369,19 @@ def extract_struct_properties(
                 property_name = str(tag(h3_soup.contents[0]).contents[0].text).strip()
                 try:
                     h3_text = h3_soup.text
-                    if (
-                        m := re.match(r"^" + property_name + r"\s*::\s*(.*?)\s*(optional)?\s*(new|changed)?$", h3_text)
-                    ) is not None:
-                        type_expression = m.group(1)
-                        optional = m.group(2) == "optional"
+                    m = re.match(r"^" + property_name + r"\s*::\s*(.*?)\s*(optional)?\s*(new|changed)?$", h3_text)
+                    assert m is not None, f"failed to parse property header: {h3_text!r}"
+                    type_expression = m.group(1)
+                    optional = m.group(2) == "optional"
 
-                        try:
-                            type_expression_tree = type_expression_parser.parse(type_expression)
-                            property_type = TypeExpressionTransformer(known_types).transform(type_expression_tree)
-                        except lark.exceptions.LarkError:
-                            assert (
-                                False
-                            ), f"Failed to parse type expression for {type_name}.{property_name}: {type_expression!r}"
+                    try:
+                        type_expression_tree = type_expression_parser.parse(type_expression)
+                        property_type = TypeExpressionTransformer(known_types).transform(type_expression_tree)
+                    except lark.exceptions.LarkError:
+                        assert False, f"failed to parse type expression: {type_expression!r}"
 
-                        yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
-                    else:
-                        assert False, f"failed to parse property header: {h3_text!r}"
+                    yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
+
                 except AssertionError as exc:
                     debug(f"Failed to extract property {type_name}.{property_name}: {exc}")
                     yield FactorioSchema.Property(name=property_name, type={}, required="optional" not in h3_soup.text)
