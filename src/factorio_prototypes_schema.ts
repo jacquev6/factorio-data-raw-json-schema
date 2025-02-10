@@ -4131,7 +4131,7 @@ export type SpiderVehicleGraphicsSet = SpiderTorsoGraphicsSet & {
   autopilot_destination_queue_visualisation?: Animation
   autopilot_path_visualisation_line_width?: Float
   autopilot_path_visualisation_on_map_line_width?: Float
-  light_positions?: unknown
+  light_positions?: (Vector[] | {})[] | {}
 }
 /**
  * https://lua-api.factorio.com/stable/types/SpriteSheet.html
@@ -5592,7 +5592,7 @@ export type CorpsePrototype = EntityPrototype & {
   ground_patch_decay?: AnimationVariations
   underwater_patch?: RotatedSprite
   ground_patch_fade_out_duration?: Float
-  direction_shuffle?: unknown
+  direction_shuffle?: (Uint16[] | {})[] | {}
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/CreatePlatformAchievementPrototype.html
@@ -10937,7 +10937,7 @@ export interface BeaconModuleVisualizations {
   art_style: String
   use_for_empty_slots?: Bool
   tier_offset?: Int32
-  slots?: unknown
+  slots?: (BeaconModuleVisualization[] | {})[] | {}
 }
 /**
  * https://lua-api.factorio.com/stable/types/BeaconModuleVisualization.html
@@ -11597,7 +11597,7 @@ export interface EquipmentShape {
   width: Uint32
   height: Uint32
   type: 'full' | 'manual'
-  points?: unknown
+  points?: (Uint32[] | {})[] | {}
 }
 /**
  * https://lua-api.factorio.com/stable/types/FeatureFlags.html
@@ -13509,7 +13509,7 @@ export interface VariableAmbientSoundLayer {
   variants: Sound[] | {}
   composition_mode: VariableAmbientSoundCompositionMode
   control_layer?: String
-  control_layer_sample_mapping?: unknown
+  control_layer_sample_mapping?: (Uint8[] | {})[] | {}
   has_start_sample?: Bool
   has_end_sample?: Bool
   number_of_sublayers?: Uint8

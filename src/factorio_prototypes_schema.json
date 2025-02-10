@@ -1597,7 +1597,31 @@
         "tier_offset": {
           "$ref": "#/definitions/int32"
         },
-        "slots": {}
+        "slots": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/BeaconModuleVisualization"
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["art_style"]
     },
@@ -5765,7 +5789,31 @@
             }
           ]
         },
-        "points": {}
+        "points": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/uint32"
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["width", "height", "type"]
     },
@@ -14083,7 +14131,31 @@
             "autopilot_path_visualisation_on_map_line_width": {
               "$ref": "#/definitions/float"
             },
-            "light_positions": {}
+            "light_positions": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/definitions/Vector"
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           }
         }
       ]
@@ -17829,7 +17901,31 @@
         "control_layer": {
           "$ref": "#/definitions/string"
         },
-        "control_layer_sample_mapping": {},
+        "control_layer_sample_mapping": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/uint8"
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "has_start_sample": {
           "$ref": "#/definitions/bool"
         },
@@ -21500,7 +21596,31 @@
             "ground_patch_fade_out_duration": {
               "$ref": "#/definitions/float"
             },
-            "direction_shuffle": {}
+            "direction_shuffle": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/definitions/uint16"
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           }
         }
       ]

@@ -11,6 +11,7 @@ import sys
 from bs4 import BeautifulSoup
 import bs4
 import click
+import lark
 import tqdm
 
 
@@ -369,41 +370,80 @@ def extract_struct_properties(
                     if (
                         m := re.match(r"^" + property_name + r"\s*::\s*(.*?)\s*(optional)?\s*(new|changed)?$", h3_text)
                     ) is not None:
-                        type_kind = m.group(1)
+                        type_expression = m.group(1)
                         optional = m.group(2) == "optional"
 
-                        options: list[JsonValue] = []
-                        for option_kind in type_kind.split(" or "):
-                            if option_kind in known_types:
-                                options.append({"$ref": f"#/definitions/{option_kind}"})
-                            elif (
-                                option_kind.startswith("array[")
-                                and option_kind.endswith("]")
-                                and option_kind[6:-1] in known_types
-                            ):
-                                options.append(
-                                    {"type": "array", "items": {"$ref": f"#/definitions/{option_kind[6:-1]}"}}
-                                )
-                                # Empty arrays are serialized as {} instead of []
-                                options.append({"type": "object", "additionalProperties": False})
-                            elif option_kind.startswith('"') and option_kind.endswith('"'):
-                                options.append({"type": "string", "const": option_kind.strip('"')})
-                            else:
-                                assert (
-                                    False
-                                ), f"unsupported option in struct property kind: {type_kind!r} -> {option_kind!r}"
+                        try:
+                            type_expression_tree = type_expression_parser.parse(type_expression)
+                            property_type = TypeExpressionTransformer(known_types).transform(type_expression_tree)
+                        except lark.exceptions.LarkError:
+                            assert (
+                                False
+                            ), f"Failed to parse type expression for {type_name}.{property_name}: {type_expression!r}"
 
-                        if len(options) == 1:
-                            yield FactorioSchema.Property(name=property_name, type=options[0], required=not optional)
-                        else:
-                            yield FactorioSchema.Property(
-                                name=property_name, type={"oneOf": options}, required=not optional
-                            )
+                        yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
                     else:
                         assert False, f"failed to parse property header: {h3_text!r}"
                 except AssertionError as exc:
                     debug(f"Failed to extract property {type_name}.{property_name}: {exc}")
                     yield FactorioSchema.Property(name=property_name, type={}, required="optional" not in h3_soup.text)
+
+
+type_expression_parser = lark.Lark(
+    """
+    type_expression : named_type | literal_string | array_type | union_type
+
+    named_type : CNAME
+    literal_string : ESCAPED_STRING
+    array_type : "array" "[" type_expression "]"
+    union_type : type_expression "or" type_expression
+
+    %import common.ESCAPED_STRING
+    %import common.CNAME
+    %import common.WS
+    %ignore WS
+    """,
+    start="type_expression",
+)
+
+
+class TypeExpressionTransformer(lark.Transformer[lark.Token, JsonValue]):
+    def __init__(self, known_types: set[str]) -> None:
+        self.known_types = known_types
+
+    def type_expression(self, items: list[JsonValue]) -> JsonValue:
+        return items[0]
+
+    def named_type(self, items: list[JsonValue]) -> JsonValue:
+        type_name = items[0]
+        if type_name in self.known_types:
+            return {"$ref": f"#/definitions/{type_name}"}
+        else:
+            assert False, f"unknown type: {type_name!r}"
+
+    def literal_string(self, items: list[str]) -> JsonValue:
+        value = items[0]
+        assert value.startswith('"') and value.endswith('"')
+        return {"type": "string", "const": value.strip('"')}
+
+    def array_type(self, items: list[JsonValue]) -> JsonValue:
+        return {
+            "oneOf": [
+                {"type": "array", "items": items[0]},
+                # Empty arrays are serialized as {} instead of []
+                {"type": "object", "additionalProperties": False},
+            ]
+        }
+
+    def union_type(self, items: list[JsonValue]) -> JsonValue:
+        members: list[JsonValue] = []
+        for item in items:
+            if isinstance(item, dict) and item.get("oneOf") is not None:
+                assert isinstance(item["oneOf"], list)
+                members.extend(item["oneOf"])
+            else:
+                members.append(item)
+        return {"oneOf": members}
 
 
 def tag(tag: bs4.element.PageElement | None) -> bs4.element.Tag:
