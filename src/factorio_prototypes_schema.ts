@@ -305,7 +305,16 @@ export type AssemblingMachinePrototype = CraftingMachinePrototype & {
   default_working_signal?: SignalIDConnector
   enable_logistic_control_behavior?: Bool
   ingredient_count?: Uint8
-  circuit_connector?: unknown
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  circuit_connector?: [
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+  ]
   fluid_boxes_off_when_no_fluid_recipe?: Bool
   disabled_when_recipe_not_researched?: Bool
 }
@@ -3850,7 +3859,11 @@ export type NestedTriggerEffectItem = TriggerEffectItem & {
  * via the `definition` "PersistentWorldAmbientSoundsDefinitionCrossfade".
  */
 export type PersistentWorldAmbientSoundsDefinitionCrossfade = Fade & {
-  order: unknown
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  order: ['wind' | 'base_ambience', 'wind' | 'base_ambience']
 }
 /**
  * https://lua-api.factorio.com/stable/types/PlaySoundTriggerEffectItem.html
@@ -4892,10 +4905,36 @@ export type CombinatorPrototype = EntityWithOwnerPrototype & {
   activity_led_sprites?: Sprite4Way
   input_connection_bounding_box: BoundingBox
   output_connection_bounding_box: BoundingBox
-  activity_led_light_offsets: unknown
-  screen_light_offsets: unknown
-  input_connection_points: unknown
-  output_connection_points: unknown
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  activity_led_light_offsets: [Vector, Vector, Vector, Vector]
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  screen_light_offsets: [Vector, Vector, Vector, Vector]
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  input_connection_points: [
+    WireConnectionPoint,
+    WireConnectionPoint,
+    WireConnectionPoint,
+    WireConnectionPoint,
+  ]
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  output_connection_points: [
+    WireConnectionPoint,
+    WireConnectionPoint,
+    WireConnectionPoint,
+    WireConnectionPoint,
+  ]
   activity_led_light?: LightDefinition
   screen_light?: LightDefinition
   activity_led_hold_time?: Uint8
@@ -5129,7 +5168,16 @@ export type AsteroidCollectorPrototype = EntityWithOwnerPrototype & {
   draw_circuit_wires?: Bool
   radius_visualisation_picture?: Sprite
   collection_radius: Double
-  circuit_connector?: unknown
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  circuit_connector?: [
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+  ]
   arm_color_gradient?: Color[] | {}
 }
 /**
@@ -5491,8 +5539,21 @@ export type CompleteObjectiveAchievementPrototype = AchievementPrototypeWithCond
 export type ConstantCombinatorPrototype = EntityWithOwnerPrototype & {
   sprites?: Sprite4Way
   activity_led_sprites?: Sprite4Way
-  activity_led_light_offsets: unknown
-  circuit_wire_connection_points: unknown
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  activity_led_light_offsets: [Vector, Vector, Vector, Vector]
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  circuit_wire_connection_points: [
+    WireConnectionPoint,
+    WireConnectionPoint,
+    WireConnectionPoint,
+    WireConnectionPoint,
+  ]
   activity_led_light?: LightDefinition
   circuit_wire_max_distance?: Double
   draw_copper_wires?: Bool
@@ -5788,7 +5849,16 @@ export type DisplayPanelPrototype = EntityWithOwnerPrototype & {
   circuit_wire_max_distance?: Double
   draw_copper_wires?: Bool
   draw_circuit_wires?: Bool
-  circuit_connector?: unknown
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  circuit_connector?: [
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+  ]
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/DontBuildEntityAchievementPrototype.html
@@ -5945,7 +6015,11 @@ export type EnemySpawnerPrototype = EntityWithOwnerPrototype & {
   max_count_of_owned_defensive_units?: Uint32
   max_friends_around_to_spawn: Uint32
   max_defensive_friends_around_to_spawn?: Uint32
-  spawning_cooldown: unknown
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  spawning_cooldown: [Double, Double]
   spawning_radius: Double
   spawning_spacing: Double
   max_richness_for_spawn_shift: Double
@@ -6444,7 +6518,16 @@ export type InserterPrototype = EntityWithOwnerPrototype & {
   draw_inserter_arrow?: Bool
   chases_belt_items?: Bool
   stack_size_bonus?: Uint8
-  circuit_connector?: unknown
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  circuit_connector?: [
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+  ]
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/InventoryBonusEquipmentPrototype.html
@@ -6792,7 +6875,16 @@ export type MiningDrillPrototype = EntityWithOwnerPrototype & {
   drilling_sound_animation_start_frame?: Uint16
   drilling_sound_animation_end_frame?: Uint16
   monitor_visualization_tint?: Color
-  circuit_connector?: unknown
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  circuit_connector?: [
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+  ]
   filter_count?: Uint8
 }
 /**
@@ -6887,7 +6979,16 @@ export type OffshorePumpPrototype = EntityWithOwnerPrototype & {
   circuit_wire_max_distance?: Double
   draw_copper_wires?: Bool
   draw_circuit_wires?: Bool
-  circuit_connector?: unknown
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  circuit_connector?: [
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+  ]
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/ParticlePrototype.html
@@ -7186,7 +7287,16 @@ export type PumpPrototype = EntityWithOwnerPrototype & {
   circuit_wire_max_distance?: Double
   draw_copper_wires?: Bool
   draw_circuit_wires?: Bool
-  circuit_connector?: unknown
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  circuit_connector?: [
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+  ]
   fluid_wagon_connector_graphics?: unknown
 }
 /**
@@ -7946,7 +8056,16 @@ export type StorageTankPrototype = EntityWithOwnerPrototype & {
   circuit_wire_max_distance?: Double
   draw_copper_wires?: Bool
   draw_circuit_wires?: Bool
-  circuit_connector?: unknown
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  circuit_connector?: [
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+  ]
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/SurfacePropertyPrototype.html
@@ -8148,7 +8267,16 @@ export type TrainStopPrototype = EntityWithOwnerPrototype & {
   light1?: TrainStopLight
   light2?: TrainStopLight
   drawing_boxes?: unknown
-  circuit_connector?: unknown
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  circuit_connector?: [
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+    CircuitConnectorDefinition,
+  ]
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/TransportBeltPrototype.html
@@ -9615,12 +9743,16 @@ export interface WorkingSound {
  */
 export interface SpriteSource {
   filename?: FileName
-  size?: unknown
+  size?: SpriteSizeType | [SpriteSizeType, SpriteSizeType]
   width?: SpriteSizeType
   height?: SpriteSizeType
   x?: SpriteSizeType
   y?: SpriteSizeType
-  position?: unknown
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  position?: [SpriteSizeType, SpriteSizeType]
   load_in_minimal_mode?: Bool
   premul_alpha?: Bool
   allow_forced_downscale?: Bool
@@ -9937,7 +10069,11 @@ export interface PipeConnectionDefinition {
   enable_working_visualisations?: String[] | {}
   direction?: Direction
   position?: MapPosition
-  positions?: unknown
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  positions?: [MapPosition, MapPosition, MapPosition, MapPosition]
   connection_category?: String | String[] | {}
   max_underground_distance?: Uint8
   max_distance_tint?: Color
@@ -10121,6 +10257,65 @@ export interface SignalIDConnector {
     | SpaceLocationID
     | AsteroidChunkID
     | QualityID
+}
+/**
+ * https://lua-api.factorio.com/stable/types/CircuitConnectorDefinition.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "CircuitConnectorDefinition".
+ */
+export interface CircuitConnectorDefinition {
+  sprites?: CircuitConnectorSprites
+  points?: WireConnectionPoint
+}
+/**
+ * https://lua-api.factorio.com/stable/types/CircuitConnectorSprites.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "CircuitConnectorSprites".
+ */
+export interface CircuitConnectorSprites {
+  led_red: Sprite
+  led_green: Sprite
+  led_blue: Sprite
+  led_light: LightDefinition
+  connector_main?: Sprite
+  connector_shadow?: Sprite
+  wire_pins?: Sprite
+  wire_pins_shadow?: Sprite
+  led_blue_off?: Sprite
+  blue_led_light_offset?: Vector
+  red_green_led_light_offset?: Vector
+}
+/**
+ * https://lua-api.factorio.com/stable/types/LightDefinition.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "LightDefinition".
+ */
+export interface LightDefinition {
+  [k: string]: unknown
+}
+/**
+ * https://lua-api.factorio.com/stable/types/WireConnectionPoint.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "WireConnectionPoint".
+ */
+export interface WireConnectionPoint {
+  wire: WirePosition
+  shadow: WirePosition
+}
+/**
+ * https://lua-api.factorio.com/stable/types/WirePosition.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "WirePosition".
+ */
+export interface WirePosition {
+  copper?: Vector
+  red?: Vector
+  green?: Vector
 }
 /**
  * https://lua-api.factorio.com/stable/types/SelectionModeData.html
@@ -10342,15 +10537,6 @@ export interface CharacterArmorAnimation {
   mining_with_tool_particles_animation_positions?: Float[] | {}
 }
 /**
- * https://lua-api.factorio.com/stable/types/LightDefinition.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "LightDefinition".
- */
-export interface LightDefinition {
-  [k: string]: unknown
-}
-/**
  * https://lua-api.factorio.com/stable/types/FootstepTriggerEffectList.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -10495,8 +10681,8 @@ export interface BaseStyleSpecification {
   vertically_stretchable?: StretchRule
   horizontally_squashable?: StretchRule
   vertically_squashable?: StretchRule
-  natural_size?: unknown
-  size?: unknown
+  natural_size?: Uint32 | [Uint32, Uint32]
+  size?: Uint32 | [Uint32, Uint32]
   width?: Uint32
   minimal_width?: Uint32
   maximal_width?: Uint32
@@ -11271,56 +11457,6 @@ export interface ChartUtilityConstants {
   custom_tag_scale?: Float
   custom_tag_max_scale?: Float
   custom_tag_selected_overlay_tint?: Color
-}
-/**
- * https://lua-api.factorio.com/stable/types/CircuitConnectorDefinition.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "CircuitConnectorDefinition".
- */
-export interface CircuitConnectorDefinition {
-  sprites?: CircuitConnectorSprites
-  points?: WireConnectionPoint
-}
-/**
- * https://lua-api.factorio.com/stable/types/CircuitConnectorSprites.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "CircuitConnectorSprites".
- */
-export interface CircuitConnectorSprites {
-  led_red: Sprite
-  led_green: Sprite
-  led_blue: Sprite
-  led_light: LightDefinition
-  connector_main?: Sprite
-  connector_shadow?: Sprite
-  wire_pins?: Sprite
-  wire_pins_shadow?: Sprite
-  led_blue_off?: Sprite
-  blue_led_light_offset?: Vector
-  red_green_led_light_offset?: Vector
-}
-/**
- * https://lua-api.factorio.com/stable/types/WireConnectionPoint.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "WireConnectionPoint".
- */
-export interface WireConnectionPoint {
-  wire: WirePosition
-  shadow: WirePosition
-}
-/**
- * https://lua-api.factorio.com/stable/types/WirePosition.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "WirePosition".
- */
-export interface WirePosition {
-  copper?: Vector
-  red?: Vector
-  green?: Vector
 }
 /**
  * https://lua-api.factorio.com/stable/types/CliffPlacementSettings.html
@@ -12687,10 +12823,10 @@ export interface WaterTileEffectParameters {
   foam_color_multiplier: Float
   tick_scale: Float
   animation_speed: Float
-  animation_scale: unknown
-  dark_threshold: unknown
-  reflection_threshold: unknown
-  specular_threshold: unknown
+  animation_scale: Float | [Float, Float]
+  dark_threshold: Float | [Float, Float]
+  reflection_threshold: Float | [Float, Float]
+  specular_threshold: Float | [Float, Float]
   textures: EffectTexture[] | {}
   near_zoom?: Float
   far_zoom?: Float
@@ -12763,9 +12899,22 @@ export interface RailFenceGraphicsSet {
  * via the `definition` "RailFencePictureSet".
  */
 export interface RailFencePictureSet {
-  ends: unknown
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  ends: [RailFenceDirectionSet, RailFenceDirectionSet, RailFenceDirectionSet, RailFenceDirectionSet]
   fence: RailFenceDirectionSet
-  ends_upper?: unknown
+  /**
+   * @minItems 4
+   * @maxItems 4
+   */
+  ends_upper?: [
+    RailFenceDirectionSet,
+    RailFenceDirectionSet,
+    RailFenceDirectionSet,
+    RailFenceDirectionSet,
+  ]
   fence_upper?: RailFenceDirectionSet
 }
 /**
@@ -13747,12 +13896,16 @@ export interface AnimationPrototype {
   filename?: FileName
   priority?: SpritePriority
   flags?: SpriteFlags
-  size?: unknown
+  size?: SpriteSizeType | [SpriteSizeType, SpriteSizeType]
   width?: SpriteSizeType
   height?: SpriteSizeType
   x?: SpriteSizeType
   y?: SpriteSizeType
-  position?: unknown
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  position?: [SpriteSizeType, SpriteSizeType]
   shift?: Vector
   rotate_shift?: Bool
   apply_special_effect?: Bool
@@ -13997,12 +14150,16 @@ export interface SpritePrototype {
   dice_y?: SpriteSizeType
   priority?: SpritePriority
   flags?: SpriteFlags
-  size?: unknown
+  size?: SpriteSizeType | [SpriteSizeType, SpriteSizeType]
   width?: SpriteSizeType
   height?: SpriteSizeType
   x?: SpriteSizeType
   y?: SpriteSizeType
-  position?: unknown
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  position?: [SpriteSizeType, SpriteSizeType]
   shift?: Vector
   rotate_shift?: Bool
   apply_special_effect?: Bool

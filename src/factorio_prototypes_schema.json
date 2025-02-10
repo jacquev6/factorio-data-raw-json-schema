@@ -1431,8 +1431,46 @@
         "vertically_squashable": {
           "$ref": "#/definitions/StretchRule"
         },
-        "natural_size": {},
-        "size": {},
+        "natural_size": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/uint32"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/uint32"
+                },
+                {
+                  "$ref": "#/definitions/uint32"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          ]
+        },
+        "size": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/uint32"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/uint32"
+                },
+                {
+                  "$ref": "#/definitions/uint32"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          ]
+        },
         "width": {
           "$ref": "#/definitions/uint32"
         },
@@ -10478,7 +10516,37 @@
         {
           "type": "object",
           "properties": {
-            "order": {}
+            "order": {
+              "type": "array",
+              "items": [
+                {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "const": "wind"
+                    },
+                    {
+                      "type": "string",
+                      "const": "base_ambience"
+                    }
+                  ]
+                },
+                {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "const": "wind"
+                    },
+                    {
+                      "type": "string",
+                      "const": "base_ambience"
+                    }
+                  ]
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            }
           },
           "required": ["order"]
         }
@@ -10525,7 +10593,25 @@
         "position": {
           "$ref": "#/definitions/MapPosition"
         },
-        "positions": {},
+        "positions": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/MapPosition"
+            },
+            {
+              "$ref": "#/definitions/MapPosition"
+            },
+            {
+              "$ref": "#/definitions/MapPosition"
+            },
+            {
+              "$ref": "#/definitions/MapPosition"
+            }
+          ],
+          "minItems": 4,
+          "maxItems": 4
+        },
         "connection_category": {
           "oneOf": [
             {
@@ -11908,11 +11994,47 @@
       "description": "https://lua-api.factorio.com/stable/types/RailFencePictureSet.html",
       "type": "object",
       "properties": {
-        "ends": {},
+        "ends": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/RailFenceDirectionSet"
+            },
+            {
+              "$ref": "#/definitions/RailFenceDirectionSet"
+            },
+            {
+              "$ref": "#/definitions/RailFenceDirectionSet"
+            },
+            {
+              "$ref": "#/definitions/RailFenceDirectionSet"
+            }
+          ],
+          "minItems": 4,
+          "maxItems": 4
+        },
         "fence": {
           "$ref": "#/definitions/RailFenceDirectionSet"
         },
-        "ends_upper": {},
+        "ends_upper": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/RailFenceDirectionSet"
+            },
+            {
+              "$ref": "#/definitions/RailFenceDirectionSet"
+            },
+            {
+              "$ref": "#/definitions/RailFenceDirectionSet"
+            },
+            {
+              "$ref": "#/definitions/RailFenceDirectionSet"
+            }
+          ],
+          "minItems": 4,
+          "maxItems": 4
+        },
         "fence_upper": {
           "$ref": "#/definitions/RailFenceDirectionSet"
         }
@@ -14674,7 +14796,26 @@
         "filename": {
           "$ref": "#/definitions/FileName"
         },
-        "size": {},
+        "size": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/SpriteSizeType"
+                },
+                {
+                  "$ref": "#/definitions/SpriteSizeType"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          ]
+        },
         "width": {
           "$ref": "#/definitions/SpriteSizeType"
         },
@@ -14687,7 +14828,19 @@
         "y": {
           "$ref": "#/definitions/SpriteSizeType"
         },
-        "position": {},
+        "position": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
         "load_in_minimal_mode": {
           "$ref": "#/definitions/bool"
         },
@@ -18547,10 +18700,86 @@
         "animation_speed": {
           "$ref": "#/definitions/float"
         },
-        "animation_scale": {},
-        "dark_threshold": {},
-        "reflection_threshold": {},
-        "specular_threshold": {},
+        "animation_scale": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/float"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/float"
+                },
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          ]
+        },
+        "dark_threshold": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/float"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/float"
+                },
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          ]
+        },
+        "reflection_threshold": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/float"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/float"
+                },
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          ]
+        },
+        "specular_threshold": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/float"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/float"
+                },
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          ]
+        },
         "textures": {
           "oneOf": [
             {
@@ -19477,7 +19706,26 @@
         "flags": {
           "$ref": "#/definitions/SpriteFlags"
         },
-        "size": {},
+        "size": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/SpriteSizeType"
+                },
+                {
+                  "$ref": "#/definitions/SpriteSizeType"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          ]
+        },
         "width": {
           "$ref": "#/definitions/SpriteSizeType"
         },
@@ -19490,7 +19738,19 @@
         "y": {
           "$ref": "#/definitions/SpriteSizeType"
         },
-        "position": {},
+        "position": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
         "shift": {
           "$ref": "#/definitions/Vector"
         },
@@ -20103,7 +20363,25 @@
             "ingredient_count": {
               "$ref": "#/definitions/uint8"
             },
-            "circuit_connector": {},
+            "circuit_connector": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                }
+              ],
+              "minItems": 4,
+              "maxItems": 4
+            },
             "fluid_boxes_off_when_no_fluid_recipe": {
               "$ref": "#/definitions/bool"
             },
@@ -20275,7 +20553,25 @@
             "collection_radius": {
               "$ref": "#/definitions/double"
             },
-            "circuit_connector": {},
+            "circuit_connector": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                }
+              ],
+              "minItems": 4,
+              "maxItems": 4
+            },
             "arm_color_gradient": {
               "oneOf": [
                 {
@@ -21480,10 +21776,82 @@
             "output_connection_bounding_box": {
               "$ref": "#/definitions/BoundingBox"
             },
-            "activity_led_light_offsets": {},
-            "screen_light_offsets": {},
-            "input_connection_points": {},
-            "output_connection_points": {},
+            "activity_led_light_offsets": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/Vector"
+                },
+                {
+                  "$ref": "#/definitions/Vector"
+                },
+                {
+                  "$ref": "#/definitions/Vector"
+                },
+                {
+                  "$ref": "#/definitions/Vector"
+                }
+              ],
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "screen_light_offsets": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/Vector"
+                },
+                {
+                  "$ref": "#/definitions/Vector"
+                },
+                {
+                  "$ref": "#/definitions/Vector"
+                },
+                {
+                  "$ref": "#/definitions/Vector"
+                }
+              ],
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "input_connection_points": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/WireConnectionPoint"
+                },
+                {
+                  "$ref": "#/definitions/WireConnectionPoint"
+                },
+                {
+                  "$ref": "#/definitions/WireConnectionPoint"
+                },
+                {
+                  "$ref": "#/definitions/WireConnectionPoint"
+                }
+              ],
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "output_connection_points": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/WireConnectionPoint"
+                },
+                {
+                  "$ref": "#/definitions/WireConnectionPoint"
+                },
+                {
+                  "$ref": "#/definitions/WireConnectionPoint"
+                },
+                {
+                  "$ref": "#/definitions/WireConnectionPoint"
+                }
+              ],
+              "minItems": 4,
+              "maxItems": 4
+            },
             "activity_led_light": {
               "$ref": "#/definitions/LightDefinition"
             },
@@ -21547,8 +21915,44 @@
             "activity_led_sprites": {
               "$ref": "#/definitions/Sprite4Way"
             },
-            "activity_led_light_offsets": {},
-            "circuit_wire_connection_points": {},
+            "activity_led_light_offsets": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/Vector"
+                },
+                {
+                  "$ref": "#/definitions/Vector"
+                },
+                {
+                  "$ref": "#/definitions/Vector"
+                },
+                {
+                  "$ref": "#/definitions/Vector"
+                }
+              ],
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "circuit_wire_connection_points": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/WireConnectionPoint"
+                },
+                {
+                  "$ref": "#/definitions/WireConnectionPoint"
+                },
+                {
+                  "$ref": "#/definitions/WireConnectionPoint"
+                },
+                {
+                  "$ref": "#/definitions/WireConnectionPoint"
+                }
+              ],
+              "minItems": 4,
+              "maxItems": 4
+            },
             "activity_led_light": {
               "$ref": "#/definitions/LightDefinition"
             },
@@ -22365,7 +22769,25 @@
             "draw_circuit_wires": {
               "$ref": "#/definitions/bool"
             },
-            "circuit_connector": {}
+            "circuit_connector": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                }
+              ],
+              "minItems": 4,
+              "maxItems": 4
+            }
           }
         }
       ]
@@ -22874,7 +23296,19 @@
             "max_defensive_friends_around_to_spawn": {
               "$ref": "#/definitions/uint32"
             },
-            "spawning_cooldown": {},
+            "spawning_cooldown": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/double"
+                },
+                {
+                  "$ref": "#/definitions/double"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            },
             "spawning_radius": {
               "$ref": "#/definitions/double"
             },
@@ -24919,7 +25353,25 @@
             "stack_size_bonus": {
               "$ref": "#/definitions/uint8"
             },
-            "circuit_connector": {}
+            "circuit_connector": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                }
+              ],
+              "minItems": 4,
+              "maxItems": 4
+            }
           },
           "required": [
             "extension_speed",
@@ -26249,7 +26701,25 @@
             "monitor_visualization_tint": {
               "$ref": "#/definitions/Color"
             },
-            "circuit_connector": {},
+            "circuit_connector": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                }
+              ],
+              "minItems": 4,
+              "maxItems": 4
+            },
             "filter_count": {
               "$ref": "#/definitions/uint8"
             }
@@ -26576,7 +27046,25 @@
             "draw_circuit_wires": {
               "$ref": "#/definitions/bool"
             },
-            "circuit_connector": {}
+            "circuit_connector": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                }
+              ],
+              "minItems": 4,
+              "maxItems": 4
+            }
           },
           "required": [
             "fluid_box",
@@ -27331,7 +27819,25 @@
             "draw_circuit_wires": {
               "$ref": "#/definitions/bool"
             },
-            "circuit_connector": {},
+            "circuit_connector": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                }
+              ],
+              "minItems": 4,
+              "maxItems": 4
+            },
             "fluid_wagon_connector_graphics": {}
           },
           "required": ["fluid_box", "energy_source", "energy_usage", "pumping_speed"]
@@ -30372,7 +30878,26 @@
         "flags": {
           "$ref": "#/definitions/SpriteFlags"
         },
-        "size": {},
+        "size": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/SpriteSizeType"
+                },
+                {
+                  "$ref": "#/definitions/SpriteSizeType"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          ]
+        },
         "width": {
           "$ref": "#/definitions/SpriteSizeType"
         },
@@ -30385,7 +30910,19 @@
         "y": {
           "$ref": "#/definitions/SpriteSizeType"
         },
-        "position": {},
+        "position": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
         "shift": {
           "$ref": "#/definitions/Vector"
         },
@@ -30592,7 +31129,25 @@
             "draw_circuit_wires": {
               "$ref": "#/definitions/bool"
             },
-            "circuit_connector": {}
+            "circuit_connector": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                }
+              ],
+              "minItems": 4,
+              "maxItems": 4
+            }
           },
           "required": ["fluid_box", "window_bounding_box", "flow_length_in_ticks"]
         }
@@ -31337,7 +31892,25 @@
               "$ref": "#/definitions/TrainStopLight"
             },
             "drawing_boxes": {},
-            "circuit_connector": {}
+            "circuit_connector": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                },
+                {
+                  "$ref": "#/definitions/CircuitConnectorDefinition"
+                }
+              ],
+              "minItems": 4,
+              "maxItems": 4
+            }
           },
           "required": ["animation_ticks_per_frame"]
         }
