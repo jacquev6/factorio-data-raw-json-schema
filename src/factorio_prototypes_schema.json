@@ -601,11 +601,60 @@
       "description": "https://lua-api.factorio.com/stable/types/AnimatedVector.html",
       "type": "object",
       "properties": {
-        "rotations": {},
+        "rotations": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "frames": {
+                    "oneOf": [
+                      {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/definitions/Vector"
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      }
+                    ]
+                  },
+                  "render_layer": {
+                    "$ref": "#/definitions/RenderLayer"
+                  }
+                },
+                "required": ["frames"]
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "render_layer": {
           "$ref": "#/definitions/RenderLayer"
         },
-        "direction_shift": {}
+        "direction_shift": {
+          "type": "object",
+          "properties": {
+            "north": {
+              "$ref": "#/definitions/Vector"
+            },
+            "east": {
+              "$ref": "#/definitions/Vector"
+            },
+            "south": {
+              "$ref": "#/definitions/Vector"
+            },
+            "west": {
+              "$ref": "#/definitions/Vector"
+            }
+          }
+        }
       },
       "required": ["rotations"]
     },
@@ -3935,7 +3984,97 @@
         "alt_effect": {
           "$ref": "#/definitions/CoverGraphicEffectData"
         },
-        "frames": {}
+        "frames": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "timestamp": {
+                    "$ref": "#/definitions/MapTick"
+                  },
+                  "opacity": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "opacity_t": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "rotation": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "rotation_t": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "effect_scale_min": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "effect_scale_min_t": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "effect_scale_max": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "effect_scale_max_t": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "alt_effect_scale_min": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "alt_effect_scale_min_t": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "alt_effect_scale_max": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "alt_effect_scale_max_t": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "effect_shift": {
+                    "$ref": "#/definitions/Vector"
+                  },
+                  "effect_shift_t": {
+                    "$ref": "#/definitions/Vector"
+                  },
+                  "effect_shift_rate": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "effect_shift_rate_t": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "alt_effect_shift": {
+                    "$ref": "#/definitions/Vector"
+                  },
+                  "alt_effect_shift_t": {
+                    "$ref": "#/definitions/Vector"
+                  },
+                  "alt_effect_shift_rate": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "alt_effect_shift_rate_t": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "offset": {
+                    "$ref": "#/definitions/Vector"
+                  },
+                  "offset_t": {
+                    "$ref": "#/definitions/Vector"
+                  },
+                  "offset_rate": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "offset_rate_t": {
+                    "$ref": "#/definitions/double"
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["type", "frames"]
     },
@@ -4154,7 +4293,29 @@
         "segment_probability": {
           "$ref": "#/definitions/float"
         },
-        "segments": {}
+        "segments": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "orientation": {
+                    "$ref": "#/definitions/float"
+                  },
+                  "offset": {
+                    "$ref": "#/definitions/Vector"
+                  }
+                },
+                "required": ["orientation", "offset"]
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["segments"]
     },
@@ -6137,7 +6298,23 @@
         "secondary_draw_order": {
           "$ref": "#/definitions/int8"
         },
-        "secondary_draw_orders": {},
+        "secondary_draw_orders": {
+          "type": "object",
+          "properties": {
+            "north": {
+              "$ref": "#/definitions/int8"
+            },
+            "east": {
+              "$ref": "#/definitions/int8"
+            },
+            "south": {
+              "$ref": "#/definitions/int8"
+            },
+            "west": {
+              "$ref": "#/definitions/int8"
+            }
+          }
+        },
         "always_draw_covers": {
           "$ref": "#/definitions/bool"
         },
@@ -7966,7 +8143,35 @@
       "description": "https://lua-api.factorio.com/stable/types/LightningGraphicsSet.html",
       "type": "object",
       "properties": {
-        "shader_configuration": {},
+        "shader_configuration": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "color": {
+                    "$ref": "#/definitions/Color"
+                  },
+                  "distortion": {
+                    "$ref": "#/definitions/float"
+                  },
+                  "thickness": {
+                    "$ref": "#/definitions/float"
+                  },
+                  "power": {
+                    "$ref": "#/definitions/float"
+                  }
+                },
+                "required": ["color", "distortion", "thickness", "power"]
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "bolt_half_width": {
           "$ref": "#/definitions/float"
         },
@@ -9189,7 +9394,26 @@
         "basic_settings": {
           "$ref": "#/definitions/MapGenSettings"
         },
-        "advanced_settings": {}
+        "advanced_settings": {
+          "type": "object",
+          "properties": {
+            "asteroids": {
+              "$ref": "#/definitions/MapGenPresetAsteroidSettings"
+            },
+            "pollution": {
+              "$ref": "#/definitions/MapGenPresetPollutionSettings"
+            },
+            "enemy_evolution": {
+              "$ref": "#/definitions/MapGenPresetEnemyEvolutionSettings"
+            },
+            "enemy_expansion": {
+              "$ref": "#/definitions/MapGenPresetEnemyExpansionSettings"
+            },
+            "difficulty_settings": {
+              "$ref": "#/definitions/MapGenPresetDifficultySettings"
+            }
+          }
+        }
       },
       "required": ["order"]
     },
@@ -10042,7 +10266,18 @@
       "description": "https://lua-api.factorio.com/stable/types/NeighbourConnectableConnectionDefinition.html",
       "type": "object",
       "properties": {
-        "location": {},
+        "location": {
+          "type": "object",
+          "properties": {
+            "position": {
+              "$ref": "#/definitions/MapPosition"
+            },
+            "direction": {
+              "$ref": "#/definitions/MapPosition"
+            }
+          },
+          "required": ["position", "direction"]
+        },
         "category": {
           "$ref": "#/definitions/NeighbourConnectableConnectionCategory"
         },
@@ -11104,7 +11339,29 @@
         "graphic": {
           "$ref": "#/definitions/ProcessionGraphic"
         },
-        "frames": {}
+        "frames": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "timestamp": {
+                    "$ref": "#/definitions/MapTick"
+                  },
+                  "frame": {
+                    "$ref": "#/definitions/float"
+                  }
+                },
+                "required": ["timestamp", "frame"]
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["type", "frames"]
     },
@@ -11125,7 +11382,31 @@
         "distance_traveled_contribution": {
           "$ref": "#/definitions/float"
         },
-        "frames": {}
+        "frames": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "timestamp": {
+                    "$ref": "#/definitions/MapTick"
+                  },
+                  "distance": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "distance_t": {
+                    "$ref": "#/definitions/double"
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["type", "frames"]
     },
@@ -11149,7 +11430,43 @@
         "distance_traveled_contribution": {
           "$ref": "#/definitions/float"
         },
-        "frames": {}
+        "frames": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "timestamp": {
+                    "$ref": "#/definitions/MapTick"
+                  },
+                  "tilt": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "tilt_t": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "offset": {
+                    "$ref": "#/definitions/Vector"
+                  },
+                  "offset_t": {
+                    "$ref": "#/definitions/Vector"
+                  },
+                  "offset_rate": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "offset_rate_t": {
+                    "$ref": "#/definitions/double"
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["type", "frames"]
     },
@@ -11164,7 +11481,43 @@
         "lut": {
           "$ref": "#/definitions/ColorLookupTable"
         },
-        "frames": {}
+        "frames": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "timestamp": {
+                    "$ref": "#/definitions/MapTick"
+                  },
+                  "cutscene_opacity": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "cutscene_opacity_t": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "outside_opacity": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "outside_opacity_t": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "lut_blend": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "lut_blend_t": {
+                    "$ref": "#/definitions/double"
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["type", "lut", "frames"]
     },
@@ -11606,7 +11959,32 @@
             "color": {
               "$ref": "#/definitions/Color"
             },
-            "other_colors": {},
+            "other_colors": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "less_than": {
+                        "$ref": "#/definitions/double"
+                      },
+                      "color": {
+                        "$ref": "#/definitions/Color"
+                      },
+                      "bar": {
+                        "$ref": "#/definitions/ElementImageSet"
+                      }
+                    },
+                    "required": ["less_than"]
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "bar": {
               "$ref": "#/definitions/ElementImageSet"
             },
@@ -12087,8 +12465,40 @@
         "secondary_render_layers": {
           "$ref": "#/definitions/RailRenderLayers"
         },
-        "slice_origin": {},
-        "fog_mask": {}
+        "slice_origin": {
+          "type": "object",
+          "properties": {
+            "north": {
+              "$ref": "#/definitions/Vector"
+            },
+            "east": {
+              "$ref": "#/definitions/Vector"
+            },
+            "south": {
+              "$ref": "#/definitions/Vector"
+            },
+            "west": {
+              "$ref": "#/definitions/Vector"
+            }
+          }
+        },
+        "fog_mask": {
+          "type": "object",
+          "properties": {
+            "north": {
+              "$ref": "#/definitions/FogMaskShapeDefinition"
+            },
+            "east": {
+              "$ref": "#/definitions/FogMaskShapeDefinition"
+            },
+            "south": {
+              "$ref": "#/definitions/FogMaskShapeDefinition"
+            },
+            "west": {
+              "$ref": "#/definitions/FogMaskShapeDefinition"
+            }
+          }
+        }
       },
       "required": [
         "north",
@@ -13817,7 +14227,65 @@
         "animation_driven_by_curve": {
           "$ref": "#/definitions/bool"
         },
-        "frames": {}
+        "frames": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "timestamp": {
+                    "$ref": "#/definitions/MapTick"
+                  },
+                  "opacity": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "opacity_t": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "tint": {
+                    "$ref": "#/definitions/Color"
+                  },
+                  "tint_t": {
+                    "$ref": "#/definitions/Color"
+                  },
+                  "rotation": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "rotation_t": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "scale": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "scale_t": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "shift": {
+                    "$ref": "#/definitions/Vector"
+                  },
+                  "shift_t": {
+                    "$ref": "#/definitions/Vector"
+                  },
+                  "shift_rate": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "shift_rate_t": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "frame": {
+                    "$ref": "#/definitions/float"
+                  }
+                },
+                "required": ["frame"]
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["type", "graphic", "frames"]
     },
@@ -15178,8 +15646,54 @@
             "projectile_creation_parameters": {
               "$ref": "#/definitions/CircularProjectileCreationSpecification"
             },
-            "gun_center_shift": {},
-            "fluids": {}
+            "gun_center_shift": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Vector"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "north": {
+                      "$ref": "#/definitions/Vector"
+                    },
+                    "east": {
+                      "$ref": "#/definitions/Vector"
+                    },
+                    "south": {
+                      "$ref": "#/definitions/Vector"
+                    },
+                    "west": {
+                      "$ref": "#/definitions/Vector"
+                    }
+                  },
+                  "required": ["north"]
+                }
+              ]
+            },
+            "fluids": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "$ref": "#/definitions/FluidID"
+                      },
+                      "damage_modifier": {
+                        "$ref": "#/definitions/double"
+                      }
+                    },
+                    "required": ["type"]
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["type"]
         }
@@ -16886,7 +17400,43 @@
         "render_layer": {
           "$ref": "#/definitions/RenderLayer"
         },
-        "frames": {}
+        "frames": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "timestamp": {
+                    "$ref": "#/definitions/MapTick"
+                  },
+                  "opacity": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "opacity_t": {
+                    "$ref": "#/definitions/double"
+                  },
+                  "tint_upper": {
+                    "$ref": "#/definitions/Color"
+                  },
+                  "tint_upper_t": {
+                    "$ref": "#/definitions/Color"
+                  },
+                  "tint_lower": {
+                    "$ref": "#/definitions/Color"
+                  },
+                  "tint_lower_t": {
+                    "$ref": "#/definitions/Color"
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
       },
       "required": ["type", "frames"]
     },
@@ -20458,7 +21008,38 @@
             "inventory_size_quality_increase": {
               "$ref": "#/definitions/ItemStackIndex"
             },
-            "graphics_set": {},
+            "graphics_set": {
+              "type": "object",
+              "properties": {
+                "animation": {
+                  "$ref": "#/definitions/Animation4Way"
+                },
+                "status_lamp_picture_on": {
+                  "$ref": "#/definitions/RotatedSprite"
+                },
+                "status_lamp_picture_full": {
+                  "$ref": "#/definitions/RotatedSprite"
+                },
+                "status_lamp_picture_off": {
+                  "$ref": "#/definitions/RotatedSprite"
+                },
+                "below_arm_pictures": {
+                  "$ref": "#/definitions/RotatedSprite"
+                },
+                "below_ground_pictures": {
+                  "$ref": "#/definitions/RotatedSprite"
+                },
+                "arm_head_animation": {
+                  "$ref": "#/definitions/RotatedAnimation"
+                },
+                "arm_head_top_animation": {
+                  "$ref": "#/definitions/RotatedAnimation"
+                },
+                "arm_link": {
+                  "$ref": "#/definitions/RotatedSprite"
+                }
+              }
+            },
             "passive_energy_usage": {
               "$ref": "#/definitions/Energy"
             },
@@ -20845,7 +21426,24 @@
         {
           "type": "object",
           "properties": {
-            "pictures": {},
+            "pictures": {
+              "type": "object",
+              "properties": {
+                "north": {
+                  "$ref": "#/definitions/BoilerPictures"
+                },
+                "east": {
+                  "$ref": "#/definitions/BoilerPictures"
+                },
+                "south": {
+                  "$ref": "#/definitions/BoilerPictures"
+                },
+                "west": {
+                  "$ref": "#/definitions/BoilerPictures"
+                }
+              },
+              "required": ["north", "east", "south", "west"]
+            },
             "energy_source": {
               "$ref": "#/definitions/EnergySource"
             },
@@ -21650,7 +22248,93 @@
         {
           "type": "object",
           "properties": {
-            "orientations": {},
+            "orientations": {
+              "type": "object",
+              "properties": {
+                "west_to_east": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "north_to_south": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "east_to_west": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "south_to_north": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "west_to_north": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "north_to_east": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "east_to_south": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "south_to_west": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "west_to_south": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "north_to_west": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "east_to_north": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "south_to_east": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "west_to_none": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "none_to_east": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "north_to_none": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "none_to_south": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "east_to_none": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "none_to_west": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "south_to_none": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                },
+                "none_to_north": {
+                  "$ref": "#/definitions/OrientedCliffPrototype"
+                }
+              },
+              "required": [
+                "west_to_east",
+                "north_to_south",
+                "east_to_west",
+                "south_to_north",
+                "west_to_north",
+                "north_to_east",
+                "east_to_south",
+                "south_to_west",
+                "west_to_south",
+                "north_to_west",
+                "east_to_north",
+                "south_to_east",
+                "west_to_none",
+                "none_to_east",
+                "north_to_none",
+                "none_to_south",
+                "east_to_none",
+                "none_to_west",
+                "south_to_none",
+                "none_to_north"
+              ]
+            },
             "grid_size": {
               "$ref": "#/definitions/Vector"
             },
@@ -24295,7 +24979,29 @@
             "flame_alpha_deviation": {
               "$ref": "#/definitions/float"
             },
-            "burnt_patch_alpha_variations": {}
+            "burnt_patch_alpha_variations": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "tile": {
+                        "$ref": "#/definitions/TileID"
+                      },
+                      "alpha": {
+                        "$ref": "#/definitions/float"
+                      }
+                    },
+                    "required": ["tile", "alpha"]
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
           },
           "required": ["damage_per_tick", "spread_delay", "spread_delay_deviation"]
         }
@@ -25514,7 +26220,38 @@
             "plant_result": {
               "$ref": "#/definitions/EntityID"
             },
-            "place_as_tile": {},
+            "place_as_tile": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/TileID"
+                },
+                "condition": {
+                  "$ref": "#/definitions/CollisionMaskConnector"
+                },
+                "invert": {
+                  "$ref": "#/definitions/bool"
+                },
+                "condition_size": {
+                  "$ref": "#/definitions/uint32"
+                },
+                "tile_condition": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/TileID"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "required": ["result", "condition", "condition_size"]
+            },
             "pictures": {
               "$ref": "#/definitions/SpriteVariations"
             },
@@ -26210,7 +26947,29 @@
         {
           "type": "object",
           "properties": {
-            "structure": {},
+            "structure": {
+              "type": "object",
+              "properties": {
+                "direction_in": {
+                  "$ref": "#/definitions/Sprite4Way"
+                },
+                "direction_out": {
+                  "$ref": "#/definitions/Sprite4Way"
+                },
+                "back_patch": {
+                  "$ref": "#/definitions/Sprite4Way"
+                },
+                "front_patch": {
+                  "$ref": "#/definitions/Sprite4Way"
+                },
+                "direction_in_side_loading": {
+                  "$ref": "#/definitions/Sprite4Way"
+                },
+                "direction_out_side_loading": {
+                  "$ref": "#/definitions/Sprite4Way"
+                }
+              }
+            },
             "structure_render_layer": {
               "$ref": "#/definitions/RenderLayer"
             },
@@ -26527,7 +27286,18 @@
         "pollution": {
           "$ref": "#/definitions/PollutionSettings"
         },
-        "steering": {},
+        "steering": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "$ref": "#/definitions/StateSteeringSettings"
+            },
+            "moving": {
+              "$ref": "#/definitions/StateSteeringSettings"
+            }
+          },
+          "required": ["default", "moving"]
+        },
         "enemy_evolution": {
           "$ref": "#/definitions/EnemyEvolutionSettings"
         },
@@ -26767,7 +27537,23 @@
             "art_style": {
               "$ref": "#/definitions/string"
             },
-            "beacon_tint": {}
+            "beacon_tint": {
+              "type": "object",
+              "properties": {
+                "primary": {
+                  "$ref": "#/definitions/Color"
+                },
+                "secondary": {
+                  "$ref": "#/definitions/Color"
+                },
+                "tertiary": {
+                  "$ref": "#/definitions/Color"
+                },
+                "quaternary": {
+                  "$ref": "#/definitions/Color"
+                }
+              }
+            }
           },
           "required": ["category", "tier", "effect"]
         }
@@ -27609,7 +28395,40 @@
             "maximum_polyphony": {
               "$ref": "#/definitions/uint32"
             },
-            "instruments": {},
+            "instruments": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "$ref": "#/definitions/string"
+                      },
+                      "notes": {
+                        "oneOf": [
+                          {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/definitions/ProgrammableSpeakerNote"
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "additionalProperties": false
+                          }
+                        ]
+                      }
+                    },
+                    "required": ["name", "notes"]
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "audible_distance_modifier": {
               "$ref": "#/definitions/float"
             },
@@ -27838,7 +28657,18 @@
               "minItems": 4,
               "maxItems": 4
             },
-            "fluid_wagon_connector_graphics": {}
+            "fluid_wagon_connector_graphics": {
+              "type": "object",
+              "properties": {
+                "load_animations": {
+                  "$ref": "#/definitions/PumpConnectorGraphics"
+                },
+                "unload_animations": {
+                  "$ref": "#/definitions/PumpConnectorGraphics"
+                }
+              },
+              "required": ["load_animations", "unload_animations"]
+            }
           },
           "required": ["fluid_box", "energy_source", "energy_usage", "pumping_speed"]
         }
@@ -28188,7 +29018,24 @@
         {
           "type": "object",
           "properties": {
-            "graphics_set": {},
+            "graphics_set": {
+              "type": "object",
+              "properties": {
+                "underwater_structure": {
+                  "$ref": "#/definitions/RotatedSprite"
+                },
+                "structure": {
+                  "$ref": "#/definitions/RotatedSprite"
+                },
+                "render_layer": {
+                  "$ref": "#/definitions/RenderLayer"
+                },
+                "underwater_layer_offset": {
+                  "$ref": "#/definitions/int8"
+                }
+              },
+              "required": ["structure"]
+            },
             "support_range": {
               "$ref": "#/definitions/float"
             },
@@ -30597,7 +31444,47 @@
             "movement_based_position_selection_distance": {
               "$ref": "#/definitions/double"
             },
-            "graphics_set": {},
+            "graphics_set": {
+              "type": "object",
+              "properties": {
+                "joint_turn_offset": {
+                  "$ref": "#/definitions/float"
+                },
+                "joint_render_layer": {
+                  "$ref": "#/definitions/RenderLayer"
+                },
+                "joint": {
+                  "$ref": "#/definitions/RotatedSprite"
+                },
+                "joint_shadow": {
+                  "$ref": "#/definitions/RotatedSprite"
+                },
+                "upper_part": {
+                  "$ref": "#/definitions/SpiderLegPart"
+                },
+                "lower_part": {
+                  "$ref": "#/definitions/SpiderLegPart"
+                },
+                "upper_part_shadow": {
+                  "$ref": "#/definitions/SpiderLegPart"
+                },
+                "lower_part_shadow": {
+                  "$ref": "#/definitions/SpiderLegPart"
+                },
+                "upper_part_water_reflection": {
+                  "$ref": "#/definitions/SpiderLegPart"
+                },
+                "lower_part_water_reflection": {
+                  "$ref": "#/definitions/SpiderLegPart"
+                },
+                "foot": {
+                  "$ref": "#/definitions/RotatedSprite"
+                },
+                "foot_shadow": {
+                  "$ref": "#/definitions/RotatedSprite"
+                }
+              }
+            },
             "walking_sound_volume_modifier": {
               "$ref": "#/definitions/float"
             },
@@ -31110,7 +31997,29 @@
             "window_bounding_box": {
               "$ref": "#/definitions/BoundingBox"
             },
-            "pictures": {},
+            "pictures": {
+              "type": "object",
+              "properties": {
+                "picture": {
+                  "$ref": "#/definitions/Sprite4Way"
+                },
+                "frozen_patch": {
+                  "$ref": "#/definitions/Sprite4Way"
+                },
+                "window_background": {
+                  "$ref": "#/definitions/Sprite"
+                },
+                "fluid_background": {
+                  "$ref": "#/definitions/Sprite"
+                },
+                "flow_sprite": {
+                  "$ref": "#/definitions/Sprite"
+                },
+                "gas_flow": {
+                  "$ref": "#/definitions/Animation"
+                }
+              }
+            },
             "flow_length_in_ticks": {
               "$ref": "#/definitions/uint32"
             },
@@ -31492,7 +32401,30 @@
             "driving_sound": {
               "$ref": "#/definitions/Sound"
             },
-            "build_sound": {},
+            "build_sound": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Sound"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "small": {
+                      "$ref": "#/definitions/Sound"
+                    },
+                    "medium": {
+                      "$ref": "#/definitions/Sound"
+                    },
+                    "large": {
+                      "$ref": "#/definitions/Sound"
+                    },
+                    "animated": {
+                      "$ref": "#/definitions/Sound"
+                    }
+                  }
+                }
+              ]
+            },
             "mined_sound": {
               "$ref": "#/definitions/Sound"
             },
@@ -31891,7 +32823,24 @@
             "light2": {
               "$ref": "#/definitions/TrainStopLight"
             },
-            "drawing_boxes": {},
+            "drawing_boxes": {
+              "type": "object",
+              "properties": {
+                "north": {
+                  "$ref": "#/definitions/BoundingBox"
+                },
+                "east": {
+                  "$ref": "#/definitions/BoundingBox"
+                },
+                "south": {
+                  "$ref": "#/definitions/BoundingBox"
+                },
+                "west": {
+                  "$ref": "#/definitions/BoundingBox"
+                }
+              },
+              "required": ["north", "east", "south", "west"]
+            },
             "circuit_connector": {
               "type": "array",
               "items": [
@@ -32465,7 +33414,35 @@
             "max_distance": {
               "$ref": "#/definitions/uint8"
             },
-            "structure": {},
+            "structure": {
+              "type": "object",
+              "properties": {
+                "direction_in": {
+                  "$ref": "#/definitions/Sprite4Way"
+                },
+                "direction_out": {
+                  "$ref": "#/definitions/Sprite4Way"
+                },
+                "back_patch": {
+                  "$ref": "#/definitions/Sprite4Way"
+                },
+                "front_patch": {
+                  "$ref": "#/definitions/Sprite4Way"
+                },
+                "direction_in_side_loading": {
+                  "$ref": "#/definitions/Sprite4Way"
+                },
+                "direction_out_side_loading": {
+                  "$ref": "#/definitions/Sprite4Way"
+                },
+                "frozen_patch_in": {
+                  "$ref": "#/definitions/Sprite4Way"
+                },
+                "frozen_patch_out": {
+                  "$ref": "#/definitions/Sprite4Way"
+                }
+              }
+            },
             "underground_sprite": {
               "$ref": "#/definitions/Sprite"
             },
@@ -32823,7 +33800,32 @@
                 }
               ]
             },
-            "player_colors": {},
+            "player_colors": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "$ref": "#/definitions/string"
+                      },
+                      "player_color": {
+                        "$ref": "#/definitions/Color"
+                      },
+                      "chat_color": {
+                        "$ref": "#/definitions/Color"
+                      }
+                    },
+                    "required": ["name", "player_color", "chat_color"]
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "server_command_console_chat_color": {
               "$ref": "#/definitions/Color"
             },
@@ -32851,7 +33853,61 @@
                 "$ref": "#/definitions/string"
               }
             },
-            "bonus_gui_ordering": {},
+            "bonus_gui_ordering": {
+              "type": "object",
+              "properties": {
+                "artillery_range": {
+                  "$ref": "#/definitions/Order"
+                },
+                "worker_robots": {
+                  "$ref": "#/definitions/Order"
+                },
+                "character": {
+                  "$ref": "#/definitions/Order"
+                },
+                "follower_robots": {
+                  "$ref": "#/definitions/Order"
+                },
+                "research_speed": {
+                  "$ref": "#/definitions/Order"
+                },
+                "beacon_distribution": {
+                  "$ref": "#/definitions/Order"
+                },
+                "inserter": {
+                  "$ref": "#/definitions/Order"
+                },
+                "stack_inserter": {
+                  "$ref": "#/definitions/Order"
+                },
+                "bulk_inserter": {
+                  "$ref": "#/definitions/Order"
+                },
+                "turret_attack": {
+                  "$ref": "#/definitions/Order"
+                },
+                "mining_productivity": {
+                  "$ref": "#/definitions/Order"
+                },
+                "train_braking_force": {
+                  "$ref": "#/definitions/Order"
+                }
+              },
+              "required": [
+                "artillery_range",
+                "worker_robots",
+                "character",
+                "follower_robots",
+                "research_speed",
+                "beacon_distribution",
+                "inserter",
+                "stack_inserter",
+                "bulk_inserter",
+                "turret_attack",
+                "mining_productivity",
+                "train_braking_force"
+              ]
+            },
             "daytime_color_lookup": {
               "$ref": "#/definitions/DaytimeColorLookupTable"
             },
@@ -32861,7 +33917,77 @@
             "frozen_color_lookup": {
               "$ref": "#/definitions/ColorLookupTable"
             },
-            "map_editor": {},
+            "map_editor": {
+              "type": "object",
+              "properties": {
+                "clone_editor_copy_source_color": {
+                  "$ref": "#/definitions/Color"
+                },
+                "clone_editor_copy_destination_allowed_color": {
+                  "$ref": "#/definitions/Color"
+                },
+                "clone_editor_copy_destination_not_allowed_color": {
+                  "$ref": "#/definitions/Color"
+                },
+                "clone_editor_brush_source_color": {
+                  "$ref": "#/definitions/Color"
+                },
+                "clone_editor_brush_destination_color": {
+                  "$ref": "#/definitions/Color"
+                },
+                "clone_editor_brush_cursor_preview_tint": {
+                  "$ref": "#/definitions/Color"
+                },
+                "clone_editor_brush_world_preview_tint": {
+                  "$ref": "#/definitions/Color"
+                },
+                "script_editor_select_area_color": {
+                  "$ref": "#/definitions/Color"
+                },
+                "script_editor_drag_area_color": {
+                  "$ref": "#/definitions/Color"
+                },
+                "force_editor_select_area_color": {
+                  "$ref": "#/definitions/Color"
+                },
+                "cliff_editor_remove_cliffs_color": {
+                  "$ref": "#/definitions/Color"
+                },
+                "tile_editor_selection_preview_tint": {
+                  "$ref": "#/definitions/Color"
+                },
+                "tile_editor_area_selection_color": {
+                  "$ref": "#/definitions/Color"
+                },
+                "decorative_editor_selection_preview_tint": {
+                  "$ref": "#/definitions/Color"
+                },
+                "tile_editor_selection_preview_radius": {
+                  "$ref": "#/definitions/uint8"
+                },
+                "decorative_editor_selection_preview_radius": {
+                  "$ref": "#/definitions/uint8"
+                }
+              },
+              "required": [
+                "clone_editor_copy_source_color",
+                "clone_editor_copy_destination_allowed_color",
+                "clone_editor_copy_destination_not_allowed_color",
+                "clone_editor_brush_source_color",
+                "clone_editor_brush_destination_color",
+                "clone_editor_brush_cursor_preview_tint",
+                "clone_editor_brush_world_preview_tint",
+                "script_editor_select_area_color",
+                "script_editor_drag_area_color",
+                "force_editor_select_area_color",
+                "cliff_editor_remove_cliffs_color",
+                "tile_editor_selection_preview_tint",
+                "tile_editor_area_selection_color",
+                "decorative_editor_selection_preview_tint",
+                "tile_editor_selection_preview_radius",
+                "decorative_editor_selection_preview_radius"
+              ]
+            },
             "drop_item_radius": {
               "$ref": "#/definitions/float"
             },
@@ -32889,7 +34015,29 @@
             "spawner_evolution_factor_health_modifier": {
               "$ref": "#/definitions/float"
             },
-            "item_health_bar_colors": {},
+            "item_health_bar_colors": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "threshold": {
+                        "$ref": "#/definitions/float"
+                      },
+                      "color": {
+                        "$ref": "#/definitions/Color"
+                      }
+                    },
+                    "required": ["threshold", "color"]
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "item_ammo_magazine_left_bar_color": {
               "$ref": "#/definitions/Color"
             },
@@ -32953,7 +34101,24 @@
             "maximum_recipe_overload_multiplier": {
               "$ref": "#/definitions/uint32"
             },
-            "entity_renderer_search_box_limits": {},
+            "entity_renderer_search_box_limits": {
+              "type": "object",
+              "properties": {
+                "left": {
+                  "$ref": "#/definitions/uint8"
+                },
+                "top": {
+                  "$ref": "#/definitions/uint8"
+                },
+                "right": {
+                  "$ref": "#/definitions/uint8"
+                },
+                "bottom": {
+                  "$ref": "#/definitions/uint8"
+                }
+              },
+              "required": ["left", "top", "right", "bottom"]
+            },
             "light_renderer_search_distance_limit": {
               "$ref": "#/definitions/uint8"
             },
@@ -33005,7 +34170,54 @@
             "default_scorch_mark_color": {
               "$ref": "#/definitions/Color"
             },
-            "color_filters": {},
+            "color_filters": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "$ref": "#/definitions/string"
+                      },
+                      "localised_name": {
+                        "$ref": "#/definitions/LocalisedString"
+                      },
+                      "matrix": {
+                        "oneOf": [
+                          {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "type": "array",
+                                  "items": {
+                                    "$ref": "#/definitions/float"
+                                  }
+                                },
+                                {
+                                  "type": "object",
+                                  "additionalProperties": false
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "additionalProperties": false
+                          }
+                        ]
+                      }
+                    },
+                    "required": ["name", "localised_name", "matrix"]
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
             "minimap_slot_hovered_tint": {
               "$ref": "#/definitions/Color"
             },
@@ -33168,7 +34380,61 @@
             "flying_text_ttl": {
               "$ref": "#/definitions/uint32"
             },
-            "train_path_finding": {},
+            "train_path_finding": {
+              "type": "object",
+              "properties": {
+                "train_stop_penalty": {
+                  "$ref": "#/definitions/uint32"
+                },
+                "stopped_manually_controlled_train_penalty": {
+                  "$ref": "#/definitions/uint32"
+                },
+                "stopped_manually_controlled_train_without_passenger_penalty": {
+                  "$ref": "#/definitions/uint32"
+                },
+                "signal_reserved_by_circuit_network_penalty": {
+                  "$ref": "#/definitions/uint32"
+                },
+                "train_in_station_penalty": {
+                  "$ref": "#/definitions/uint32"
+                },
+                "train_in_station_with_no_other_valid_stops_in_schedule": {
+                  "$ref": "#/definitions/uint32"
+                },
+                "train_arriving_to_station_penalty": {
+                  "$ref": "#/definitions/uint32"
+                },
+                "train_arriving_to_signal_penalty": {
+                  "$ref": "#/definitions/uint32"
+                },
+                "train_waiting_at_signal_penalty": {
+                  "$ref": "#/definitions/uint32"
+                },
+                "train_waiting_at_signal_tick_multiplier_penalty": {
+                  "$ref": "#/definitions/float"
+                },
+                "train_with_no_path_penalty": {
+                  "$ref": "#/definitions/uint32"
+                },
+                "train_auto_without_schedule_penalty": {
+                  "$ref": "#/definitions/uint32"
+                }
+              },
+              "required": [
+                "train_stop_penalty",
+                "stopped_manually_controlled_train_penalty",
+                "stopped_manually_controlled_train_without_passenger_penalty",
+                "signal_reserved_by_circuit_network_penalty",
+                "train_in_station_penalty",
+                "train_in_station_with_no_other_valid_stops_in_schedule",
+                "train_arriving_to_station_penalty",
+                "train_arriving_to_signal_penalty",
+                "train_waiting_at_signal_penalty",
+                "train_waiting_at_signal_tick_multiplier_penalty",
+                "train_with_no_path_penalty",
+                "train_auto_without_schedule_penalty"
+              ]
+            },
             "max_belt_stack_size": {
               "$ref": "#/definitions/uint8"
             },
@@ -33648,8 +34914,196 @@
         {
           "type": "object",
           "properties": {
-            "cursor_box": {},
-            "platform_entity_build_animations": {},
+            "cursor_box": {
+              "type": "object",
+              "properties": {
+                "regular": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/BoxSpecification"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "multiplayer_selection": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/BoxSpecification"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "not_allowed": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/BoxSpecification"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "copy": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/BoxSpecification"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "electricity": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/BoxSpecification"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "logistics": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/BoxSpecification"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "pair": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/BoxSpecification"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "train_visualization": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/BoxSpecification"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "blueprint_snap_rectangle": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/BoxSpecification"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "rts_selected": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/BoxSpecification"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "rts_to_be_selected": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/BoxSpecification"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "regular",
+                "multiplayer_selection",
+                "not_allowed",
+                "copy",
+                "electricity",
+                "logistics",
+                "pair",
+                "train_visualization",
+                "blueprint_snap_rectangle",
+                "rts_selected",
+                "rts_to_be_selected"
+              ]
+            },
+            "platform_entity_build_animations": {
+              "type": "object",
+              "properties": {
+                "back_left": {
+                  "$ref": "#/definitions/EntityBuildAnimationPiece"
+                },
+                "back_right": {
+                  "$ref": "#/definitions/EntityBuildAnimationPiece"
+                },
+                "front_left": {
+                  "$ref": "#/definitions/EntityBuildAnimationPiece"
+                },
+                "front_right": {
+                  "$ref": "#/definitions/EntityBuildAnimationPiece"
+                }
+              },
+              "required": ["back_left", "back_right", "front_left", "front_right"]
+            },
             "bookmark": {
               "$ref": "#/definitions/Sprite"
             },
@@ -36040,7 +37494,44 @@
         {
           "type": "object",
           "properties": {
-            "pictures": {},
+            "pictures": {
+              "type": "object",
+              "properties": {
+                "single": {
+                  "$ref": "#/definitions/SpriteVariations"
+                },
+                "straight_vertical": {
+                  "$ref": "#/definitions/SpriteVariations"
+                },
+                "straight_horizontal": {
+                  "$ref": "#/definitions/SpriteVariations"
+                },
+                "corner_right_down": {
+                  "$ref": "#/definitions/SpriteVariations"
+                },
+                "corner_left_down": {
+                  "$ref": "#/definitions/SpriteVariations"
+                },
+                "t_up": {
+                  "$ref": "#/definitions/SpriteVariations"
+                },
+                "ending_right": {
+                  "$ref": "#/definitions/SpriteVariations"
+                },
+                "ending_left": {
+                  "$ref": "#/definitions/SpriteVariations"
+                },
+                "filling": {
+                  "$ref": "#/definitions/SpriteVariations"
+                },
+                "water_connection_patch": {
+                  "$ref": "#/definitions/Sprite4Way"
+                },
+                "gate_connection_patch": {
+                  "$ref": "#/definitions/Sprite4Way"
+                }
+              }
+            },
             "visual_merge_group": {
               "$ref": "#/definitions/uint32"
             },

@@ -38,7 +38,13 @@ export type ItemPrototype = Prototype & {
   burnt_result?: ItemID
   spoil_result?: ItemID
   plant_result?: EntityID
-  place_as_tile?: unknown
+  place_as_tile?: {
+    result: TileID
+    condition: CollisionMaskConnector
+    invert?: Bool
+    condition_size: Uint32
+    tile_condition?: TileID[] | {}
+  }
   pictures?: SpriteVariations
   flags?: ItemPrototypeFlags
   spoil_ticks?: Uint32
@@ -187,6 +193,13 @@ export type FuelCategoryID = String
  * via the `definition` "ItemID".
  */
 export type ItemID = String
+/**
+ * https://lua-api.factorio.com/stable/types/TileID.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "TileID".
+ */
+export type TileID = String
 /**
  * https://lua-api.factorio.com/stable/types/Energy.html
  *
@@ -967,13 +980,6 @@ export type CursorBoxType =
   | 'spidertron-remote-selected'
   | 'spidertron-remote-to-be-selected'
 /**
- * https://lua-api.factorio.com/stable/types/TileID.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "TileID".
- */
-export type TileID = String
-/**
  * https://lua-api.factorio.com/stable/types/MouseCursorID.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -1140,8 +1146,20 @@ export type StreamAttackParameters = BaseAttackParameters & {
   fluid_consumption?: FluidAmount
   gun_barrel_length?: Float
   projectile_creation_parameters?: CircularProjectileCreationSpecification
-  gun_center_shift?: unknown
-  fluids?: unknown
+  gun_center_shift?:
+    | Vector
+    | {
+        north: Vector
+        east?: Vector
+        south?: Vector
+        west?: Vector
+      }
+  fluids?:
+    | {
+        type: FluidID
+        damage_modifier?: Double
+      }[]
+    | {}
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/CharacterPrototype.html
@@ -1286,7 +1304,12 @@ export type ModulePrototype = ItemPrototype & {
   effect: Effect
   requires_beacon_alt_mode?: Bool
   art_style?: String
-  beacon_tint?: unknown
+  beacon_tint?: {
+    primary?: Color
+    secondary?: Color
+    tertiary?: Color
+    quaternary?: Color
+  }
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/RailPlannerPrototype.html
@@ -3960,7 +3983,13 @@ export type ProgressBarStyleSpecification = BaseStyleSpecification & {
   type: 'progressbar_style'
   bar_width?: Uint32
   color?: Color
-  other_colors?: unknown
+  other_colors?:
+    | {
+        less_than: Double
+        color?: Color
+        bar?: ElementImageSet
+      }[]
+    | {}
   bar?: ElementImageSet
   bar_background?: ElementImageSet
   font?: String
@@ -5138,7 +5167,17 @@ export type AsteroidCollectorPrototype = EntityWithOwnerPrototype & {
   arm_inventory_size_quality_increase?: ItemStackIndex
   inventory_size?: ItemStackIndex
   inventory_size_quality_increase?: ItemStackIndex
-  graphics_set: unknown
+  graphics_set: {
+    animation?: Animation4Way
+    status_lamp_picture_on?: RotatedSprite
+    status_lamp_picture_full?: RotatedSprite
+    status_lamp_picture_off?: RotatedSprite
+    below_arm_pictures?: RotatedSprite
+    below_ground_pictures?: RotatedSprite
+    arm_head_animation?: RotatedAnimation
+    arm_head_top_animation?: RotatedAnimation
+    arm_link?: RotatedSprite
+  }
   passive_energy_usage: Energy
   arm_energy_usage: Energy
   arm_slow_energy_usage: Energy
@@ -5262,7 +5301,12 @@ export type BeltImmunityEquipmentPrototype = EquipmentPrototype & {
  * via the `definition` "BoilerPrototype".
  */
 export type BoilerPrototype = EntityWithOwnerPrototype & {
-  pictures?: unknown
+  pictures?: {
+    north: BoilerPictures
+    east: BoilerPictures
+    south: BoilerPictures
+    west: BoilerPictures
+  }
   energy_source: EnergySource
   fluid_box: FluidBox
   output_fluid_box: FluidBox
@@ -5480,7 +5524,28 @@ export type CharacterCorpsePrototype = EntityPrototype & {
  * via the `definition` "CliffPrototype".
  */
 export type CliffPrototype = EntityPrototype & {
-  orientations: unknown
+  orientations: {
+    west_to_east: OrientedCliffPrototype
+    north_to_south: OrientedCliffPrototype
+    east_to_west: OrientedCliffPrototype
+    south_to_north: OrientedCliffPrototype
+    west_to_north: OrientedCliffPrototype
+    north_to_east: OrientedCliffPrototype
+    east_to_south: OrientedCliffPrototype
+    south_to_west: OrientedCliffPrototype
+    west_to_south: OrientedCliffPrototype
+    north_to_west: OrientedCliffPrototype
+    east_to_north: OrientedCliffPrototype
+    south_to_east: OrientedCliffPrototype
+    west_to_none: OrientedCliffPrototype
+    none_to_east: OrientedCliffPrototype
+    north_to_none: OrientedCliffPrototype
+    none_to_south: OrientedCliffPrototype
+    east_to_none: OrientedCliffPrototype
+    none_to_west: OrientedCliffPrototype
+    south_to_none: OrientedCliffPrototype
+    none_to_north: OrientedCliffPrototype
+  }
   grid_size: Vector
   grid_offset: Vector
   cliff_explosive?: ItemID
@@ -6191,7 +6256,12 @@ export type FireFlamePrototype = EntityPrototype & {
   particle_alpha_deviation?: Float
   flame_alpha?: Float
   flame_alpha_deviation?: Float
-  burnt_patch_alpha_variations?: unknown
+  burnt_patch_alpha_variations?:
+    | {
+        tile: TileID
+        alpha: Float
+      }[]
+    | {}
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/FishPrototype.html
@@ -6742,7 +6812,14 @@ export type LightningPrototype = EntityPrototype & {
  * via the `definition` "LinkedBeltPrototype".
  */
 export type LinkedBeltPrototype = TransportBeltConnectablePrototype & {
-  structure?: unknown
+  structure?: {
+    direction_in?: Sprite4Way
+    direction_out?: Sprite4Way
+    back_patch?: Sprite4Way
+    front_patch?: Sprite4Way
+    direction_in_side_loading?: Sprite4Way
+    direction_out_side_loading?: Sprite4Way
+  }
   structure_render_layer?: RenderLayer
   allow_clone_connection?: Bool
   allow_blueprint_connection?: Bool
@@ -7232,7 +7309,12 @@ export type ProgrammableSpeakerPrototype = EntityWithOwnerPrototype & {
   energy_usage_per_tick: Energy
   sprite?: Sprite
   maximum_polyphony: Uint32
-  instruments: unknown
+  instruments:
+    | {
+        name: String
+        notes: ProgrammableSpeakerNote[] | {}
+      }[]
+    | {}
   audible_distance_modifier?: Float
   circuit_wire_max_distance?: Double
   draw_copper_wires?: Bool
@@ -7297,7 +7379,10 @@ export type PumpPrototype = EntityWithOwnerPrototype & {
     CircuitConnectorDefinition,
     CircuitConnectorDefinition,
   ]
-  fluid_wagon_connector_graphics?: unknown
+  fluid_wagon_connector_graphics?: {
+    load_animations: PumpConnectorGraphics
+    unload_animations: PumpConnectorGraphics
+  }
 }
 /**
  * https://lua-api.factorio.com/stable/prototypes/QualityPrototype.html
@@ -7405,7 +7490,12 @@ export type RailSignalPrototype = RailSignalBasePrototype
  * via the `definition` "RailSupportPrototype".
  */
 export type RailSupportPrototype = EntityWithOwnerPrototype & {
-  graphics_set: unknown
+  graphics_set: {
+    underwater_structure?: RotatedSprite
+    structure: RotatedSprite
+    render_layer?: RenderLayer
+    underwater_layer_offset?: Int8
+  }
   support_range?: Float
   not_buildable_if_no_rails?: Bool
   snap_to_spots_distance?: Float
@@ -7937,7 +8027,20 @@ export type SpiderLegPrototype = EntityWithOwnerPrototype & {
   minimal_step_size: Double
   base_position_selection_distance: Double
   movement_based_position_selection_distance: Double
-  graphics_set?: unknown
+  graphics_set?: {
+    joint_turn_offset?: Float
+    joint_render_layer?: RenderLayer
+    joint?: RotatedSprite
+    joint_shadow?: RotatedSprite
+    upper_part?: SpiderLegPart
+    lower_part?: SpiderLegPart
+    upper_part_shadow?: SpiderLegPart
+    lower_part_shadow?: SpiderLegPart
+    upper_part_water_reflection?: SpiderLegPart
+    lower_part_water_reflection?: SpiderLegPart
+    foot?: RotatedSprite
+    foot_shadow?: RotatedSprite
+  }
   walking_sound_volume_modifier?: Float
   walking_sound_speed_modifier?: Float
   upper_leg_dying_trigger_effects?: SpiderLegTriggerEffect[] | {}
@@ -8049,7 +8152,14 @@ export type StickerPrototype = EntityPrototype & {
 export type StorageTankPrototype = EntityWithOwnerPrototype & {
   fluid_box: FluidBox
   window_bounding_box: BoundingBox
-  pictures?: unknown
+  pictures?: {
+    picture?: Sprite4Way
+    frozen_patch?: Sprite4Way
+    window_background?: Sprite
+    fluid_background?: Sprite
+    flow_sprite?: Sprite
+    gas_flow?: Animation
+  }
   flow_length_in_ticks: Uint32
   two_direction_only?: Bool
   show_fluid_icon?: Bool
@@ -8173,7 +8283,14 @@ export type TilePrototype = Prototype & {
   walking_sound?: Sound
   landing_steps_sound?: Sound
   driving_sound?: Sound
-  build_sound?: unknown
+  build_sound?:
+    | Sound
+    | {
+        small?: Sound
+        medium?: Sound
+        large?: Sound
+        animated?: Sound
+      }
   mined_sound?: Sound
   walking_speed_modifier?: Double
   vehicle_friction_modifier?: Double
@@ -8266,7 +8383,12 @@ export type TrainStopPrototype = EntityWithOwnerPrototype & {
   chart_name?: Bool
   light1?: TrainStopLight
   light2?: TrainStopLight
-  drawing_boxes?: unknown
+  drawing_boxes?: {
+    north: BoundingBox
+    east: BoundingBox
+    south: BoundingBox
+    west: BoundingBox
+  }
   /**
    * @minItems 4
    * @maxItems 4
@@ -8332,7 +8454,16 @@ export type TutorialDefinition = PrototypeBase & {
  */
 export type UndergroundBeltPrototype = TransportBeltConnectablePrototype & {
   max_distance: Uint8
-  structure?: unknown
+  structure?: {
+    direction_in?: Sprite4Way
+    direction_out?: Sprite4Way
+    back_patch?: Sprite4Way
+    front_patch?: Sprite4Way
+    direction_in_side_loading?: Sprite4Way
+    direction_out_side_loading?: Sprite4Way
+    frozen_patch_in?: Sprite4Way
+    frozen_patch_out?: Sprite4Way
+  }
   underground_sprite?: Sprite
   underground_remove_belts_sprite?: Sprite
   max_distance_underground_remove_belts_sprite?: Sprite
@@ -8453,7 +8584,13 @@ export type UtilityConstants = PrototypeBase & {
   disabled_recipe_slot_background_tint: Color
   forced_enabled_recipe_slot_background_tint: Color
   rail_segment_colors: Color[] | {}
-  player_colors: unknown
+  player_colors:
+    | {
+        name: String
+        player_color: Color
+        chat_color: Color
+      }[]
+    | {}
   server_command_console_chat_color: Color
   script_command_console_chat_color: Color
   default_alert_icon_scale: Float
@@ -8463,11 +8600,41 @@ export type UtilityConstants = PrototypeBase & {
   default_alert_icon_scale_by_type?: {
     [k: string]: Float
   }
-  bonus_gui_ordering: unknown
+  bonus_gui_ordering: {
+    artillery_range: Order
+    worker_robots: Order
+    character: Order
+    follower_robots: Order
+    research_speed: Order
+    beacon_distribution: Order
+    inserter: Order
+    stack_inserter: Order
+    bulk_inserter: Order
+    turret_attack: Order
+    mining_productivity: Order
+    train_braking_force: Order
+  }
   daytime_color_lookup: DaytimeColorLookupTable
   zoom_to_world_daytime_color_lookup: DaytimeColorLookupTable
   frozen_color_lookup: ColorLookupTable
-  map_editor: unknown
+  map_editor: {
+    clone_editor_copy_source_color: Color
+    clone_editor_copy_destination_allowed_color: Color
+    clone_editor_copy_destination_not_allowed_color: Color
+    clone_editor_brush_source_color: Color
+    clone_editor_brush_destination_color: Color
+    clone_editor_brush_cursor_preview_tint: Color
+    clone_editor_brush_world_preview_tint: Color
+    script_editor_select_area_color: Color
+    script_editor_drag_area_color: Color
+    force_editor_select_area_color: Color
+    cliff_editor_remove_cliffs_color: Color
+    tile_editor_selection_preview_tint: Color
+    tile_editor_area_selection_color: Color
+    decorative_editor_selection_preview_tint: Color
+    tile_editor_selection_preview_radius: Uint8
+    decorative_editor_selection_preview_radius: Uint8
+  }
   drop_item_radius: Float
   checkerboard_white: Color
   checkerboard_black: Color
@@ -8477,7 +8644,12 @@ export type UtilityConstants = PrototypeBase & {
   item_outline_sharpness: Float
   item_default_random_tint_strength: Color
   spawner_evolution_factor_health_modifier: Float
-  item_health_bar_colors: unknown
+  item_health_bar_colors:
+    | {
+        threshold: Float
+        color: Color
+      }[]
+    | {}
   item_ammo_magazine_left_bar_color: Color
   item_tool_durability_bar_color: Color
   filter_outline_color: Color
@@ -8499,7 +8671,12 @@ export type UtilityConstants = PrototypeBase & {
   dynamic_recipe_overload_factor: Double
   minimum_recipe_overload_multiplier: Uint32
   maximum_recipe_overload_multiplier: Uint32
-  entity_renderer_search_box_limits: unknown
+  entity_renderer_search_box_limits: {
+    left: Uint8
+    top: Uint8
+    right: Uint8
+    bottom: Uint8
+  }
   light_renderer_search_distance_limit: Uint8
   tree_leaf_distortion_strength_far: Vector
   tree_leaf_distortion_distortion_far: Vector
@@ -8517,7 +8694,13 @@ export type UtilityConstants = PrototypeBase & {
   main_menu_background_vignette_intensity: Float
   main_menu_background_vignette_sharpness: Float
   default_scorch_mark_color: Color
-  color_filters?: unknown
+  color_filters?:
+    | {
+        name: String
+        localised_name: LocalisedString
+        matrix: (Float[] | {})[] | {}
+      }[]
+    | {}
   minimap_slot_hovered_tint: Color
   minimap_slot_clicked_tint: Color
   clear_cursor_volume_modifier: Float
@@ -8572,7 +8755,20 @@ export type UtilityConstants = PrototypeBase & {
   module_inventory_width: Uint32
   tooltip_monitor_edge_border: Int32
   flying_text_ttl: Uint32
-  train_path_finding: unknown
+  train_path_finding: {
+    train_stop_penalty: Uint32
+    stopped_manually_controlled_train_penalty: Uint32
+    stopped_manually_controlled_train_without_passenger_penalty: Uint32
+    signal_reserved_by_circuit_network_penalty: Uint32
+    train_in_station_penalty: Uint32
+    train_in_station_with_no_other_valid_stops_in_schedule: Uint32
+    train_arriving_to_station_penalty: Uint32
+    train_arriving_to_signal_penalty: Uint32
+    train_waiting_at_signal_penalty: Uint32
+    train_waiting_at_signal_tick_multiplier_penalty: Float
+    train_with_no_path_penalty: Uint32
+    train_auto_without_schedule_penalty: Uint32
+  }
   max_belt_stack_size: Uint8
   inserter_hand_stack_items_per_sprite: ItemCountType
   inserter_hand_stack_max_sprites: ItemCountType
@@ -8663,8 +8859,25 @@ export type UtilitySounds = PrototypeBase & {
  * via the `definition` "UtilitySprites".
  */
 export type UtilitySprites = PrototypeBase & {
-  cursor_box: unknown
-  platform_entity_build_animations?: unknown
+  cursor_box: {
+    regular: BoxSpecification[] | {}
+    multiplayer_selection: BoxSpecification[] | {}
+    not_allowed: BoxSpecification[] | {}
+    copy: BoxSpecification[] | {}
+    electricity: BoxSpecification[] | {}
+    logistics: BoxSpecification[] | {}
+    pair: BoxSpecification[] | {}
+    train_visualization: BoxSpecification[] | {}
+    blueprint_snap_rectangle: BoxSpecification[] | {}
+    rts_selected: BoxSpecification[] | {}
+    rts_to_be_selected: BoxSpecification[] | {}
+  }
+  platform_entity_build_animations?: {
+    back_left: EntityBuildAnimationPiece
+    back_right: EntityBuildAnimationPiece
+    front_left: EntityBuildAnimationPiece
+    front_right: EntityBuildAnimationPiece
+  }
   bookmark: Sprite
   center: Sprite
   check_mark: Sprite
@@ -9263,7 +9476,19 @@ export type VirtualSignalPrototype = Prototype & {
  * via the `definition` "WallPrototype".
  */
 export type WallPrototype = EntityWithOwnerPrototype & {
-  pictures?: unknown
+  pictures?: {
+    single?: SpriteVariations
+    straight_vertical?: SpriteVariations
+    straight_horizontal?: SpriteVariations
+    corner_right_down?: SpriteVariations
+    corner_left_down?: SpriteVariations
+    t_up?: SpriteVariations
+    ending_right?: SpriteVariations
+    ending_left?: SpriteVariations
+    filling?: SpriteVariations
+    water_connection_patch?: Sprite4Way
+    gate_connection_patch?: Sprite4Way
+  }
   visual_merge_group?: Uint32
   circuit_wire_max_distance?: Double
   draw_copper_wires?: Bool
@@ -9470,6 +9695,18 @@ export interface Vector {
   [k: string]: unknown
 }
 /**
+ * https://lua-api.factorio.com/stable/types/CollisionMaskConnector.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "CollisionMaskConnector".
+ */
+export interface CollisionMaskConnector {
+  layers: unknown
+  not_colliding_with_itself?: Bool
+  consider_tile_transitions?: Bool
+  colliding_with_tiles_only?: Bool
+}
+/**
  * https://lua-api.factorio.com/stable/types/SpriteVariations.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -9593,18 +9830,6 @@ export interface InterruptibleSound {
   stopped_sound?: Sound
   minimal_sound_duration_for_stopped_sound?: Uint16
   fade_ticks?: Uint32
-}
-/**
- * https://lua-api.factorio.com/stable/types/CollisionMaskConnector.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "CollisionMaskConnector".
- */
-export interface CollisionMaskConnector {
-  layers: unknown
-  not_colliding_with_itself?: Bool
-  consider_tile_transitions?: Bool
-  colliding_with_tiles_only?: Bool
 }
 /**
  * https://lua-api.factorio.com/stable/types/TriggerTargetMask.html
@@ -10053,7 +10278,12 @@ export interface FluidBox {
   max_pipeline_extent?: Uint32
   production_type?: unknown
   secondary_draw_order?: Int8
-  secondary_draw_orders?: unknown
+  secondary_draw_orders?: {
+    north?: Int8
+    east?: Int8
+    south?: Int8
+    west?: Int8
+  }
   always_draw_covers?: Bool
   enable_working_visualisations?: String[] | {}
 }
@@ -11002,9 +11232,19 @@ export interface PlanTrainPathTipTrigger {
  * via the `definition` "AnimatedVector".
  */
 export interface AnimatedVector {
-  rotations: unknown
+  rotations:
+    | {
+        frames: Vector[] | {}
+        render_layer?: RenderLayer
+      }[]
+    | {}
   render_layer?: RenderLayer
-  direction_shift?: unknown
+  direction_shift?: {
+    north?: Vector
+    east?: Vector
+    south?: Vector
+    west?: Vector
+  }
 }
 /**
  * https://lua-api.factorio.com/stable/types/AnimationElement.html
@@ -11610,7 +11850,35 @@ export interface CoverGraphicProcessionLayer {
   world_size?: Vector
   effect?: CoverGraphicEffectData
   alt_effect?: CoverGraphicEffectData
-  frames: unknown
+  frames:
+    | {
+        timestamp?: MapTick
+        opacity?: Double
+        opacity_t?: Double
+        rotation?: Double
+        rotation_t?: Double
+        effect_scale_min?: Double
+        effect_scale_min_t?: Double
+        effect_scale_max?: Double
+        effect_scale_max_t?: Double
+        alt_effect_scale_min?: Double
+        alt_effect_scale_min_t?: Double
+        alt_effect_scale_max?: Double
+        alt_effect_scale_max_t?: Double
+        effect_shift?: Vector
+        effect_shift_t?: Vector
+        effect_shift_rate?: Double
+        effect_shift_rate_t?: Double
+        alt_effect_shift?: Vector
+        alt_effect_shift_t?: Vector
+        alt_effect_shift_rate?: Double
+        alt_effect_shift_rate_t?: Double
+        offset?: Vector
+        offset_t?: Vector
+        offset_rate?: Double
+        offset_rate_t?: Double
+      }[]
+    | {}
 }
 /**
  * https://lua-api.factorio.com/stable/types/ProcessionGraphic.html
@@ -11664,7 +11932,12 @@ export interface ItemIDFilter {
 export interface CraterPlacementDefinition {
   minimum_segments_to_place?: Uint32
   segment_probability?: Float
-  segments: unknown
+  segments:
+    | {
+        orientation: Float
+        offset: Vector
+      }[]
+    | {}
 }
 /**
  * https://lua-api.factorio.com/stable/types/CreateSpacePlatformTechnologyTrigger.html
@@ -12038,7 +12311,14 @@ export interface HeatBuffer {
  * via the `definition` "LightningGraphicsSet".
  */
 export interface LightningGraphicsSet {
-  shader_configuration?: unknown
+  shader_configuration?:
+    | {
+        color: Color
+        distortion: Float
+        thickness: Float
+        power: Float
+      }[]
+    | {}
   bolt_half_width?: Float
   bolt_midpoint_variance?: Float
   max_bolt_offset?: Float
@@ -12128,7 +12408,13 @@ export interface MapGenPreset {
   order: Order
   default?: Bool
   basic_settings?: MapGenSettings
-  advanced_settings?: unknown
+  advanced_settings?: {
+    asteroids?: MapGenPresetAsteroidSettings
+    pollution?: MapGenPresetPollutionSettings
+    enemy_evolution?: MapGenPresetEnemyEvolutionSettings
+    enemy_expansion?: MapGenPresetEnemyExpansionSettings
+    difficulty_settings?: MapGenPresetDifficultySettings
+  }
 }
 /**
  * https://lua-api.factorio.com/stable/types/MapGenSettings.html
@@ -12180,13 +12466,18 @@ export interface MapGenPresetAsteroidSettings {
   max_ray_portals_expanded_per_tick?: Uint32
 }
 /**
- * https://lua-api.factorio.com/stable/types/MapGenPresetDifficultySettings.html
+ * https://lua-api.factorio.com/stable/types/MapGenPresetPollutionSettings.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "MapGenPresetDifficultySettings".
+ * via the `definition` "MapGenPresetPollutionSettings".
  */
-export interface MapGenPresetDifficultySettings {
-  technology_price_multiplier?: Double
+export interface MapGenPresetPollutionSettings {
+  enabled?: Bool
+  diffusion_ratio?: Double
+  ageing?: Double
+  min_pollution_to_damage_trees?: Double
+  enemy_attack_pollution_consumption_modifier?: Double
+  pollution_restored_per_tree_damage?: Double
 }
 /**
  * https://lua-api.factorio.com/stable/types/MapGenPresetEnemyEvolutionSettings.html
@@ -12215,18 +12506,13 @@ export interface MapGenPresetEnemyExpansionSettings {
   max_expansion_cooldown?: Uint32
 }
 /**
- * https://lua-api.factorio.com/stable/types/MapGenPresetPollutionSettings.html
+ * https://lua-api.factorio.com/stable/types/MapGenPresetDifficultySettings.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "MapGenPresetPollutionSettings".
+ * via the `definition` "MapGenPresetDifficultySettings".
  */
-export interface MapGenPresetPollutionSettings {
-  enabled?: Bool
-  diffusion_ratio?: Double
-  ageing?: Double
-  min_pollution_to_damage_trees?: Double
-  enemy_attack_pollution_consumption_modifier?: Double
-  pollution_restored_per_tree_damage?: Double
+export interface MapGenPresetDifficultySettings {
+  technology_price_multiplier?: Double
 }
 /**
  * https://lua-api.factorio.com/stable/types/MaterialTextureParameters.html
@@ -12288,7 +12574,10 @@ export interface NeighbourConnectable {
  * via the `definition` "NeighbourConnectableConnectionDefinition".
  */
 export interface NeighbourConnectableConnectionDefinition {
-  location: unknown
+  location: {
+    position: MapPosition
+    direction: MapPosition
+  }
   category: NeighbourConnectableConnectionCategory
   neighbour_category?: NeighbourConnectableConnectionCategory[] | {}
 }
@@ -12576,7 +12865,12 @@ export interface PlumesSpecification {
 export interface PodAnimationProcessionLayer {
   type: 'pod-animation'
   graphic?: ProcessionGraphic
-  frames: unknown
+  frames:
+    | {
+        timestamp: MapTick
+        frame: Float
+      }[]
+    | {}
 }
 /**
  * https://lua-api.factorio.com/stable/types/PodDistanceTraveledProcessionLayer.html
@@ -12589,7 +12883,13 @@ export interface PodDistanceTraveledProcessionLayer {
   reference_group?: ProcessionLayerInheritanceGroupID
   contribute_to_distance_traveled?: Bool
   distance_traveled_contribution?: Float
-  frames: unknown
+  frames:
+    | {
+        timestamp?: MapTick
+        distance?: Double
+        distance_t?: Double
+      }[]
+    | {}
 }
 /**
  * https://lua-api.factorio.com/stable/types/PodMovementProcessionLayer.html
@@ -12603,7 +12903,17 @@ export interface PodMovementProcessionLayer {
   inherit_from?: ProcessionLayerInheritanceGroupID
   contribute_to_distance_traveled?: Bool
   distance_traveled_contribution?: Float
-  frames: unknown
+  frames:
+    | {
+        timestamp?: MapTick
+        tilt?: Double
+        tilt_t?: Double
+        offset?: Vector
+        offset_t?: Vector
+        offset_rate?: Double
+        offset_rate_t?: Double
+      }[]
+    | {}
 }
 /**
  * https://lua-api.factorio.com/stable/types/PodOpacityProcessionLayer.html
@@ -12614,7 +12924,17 @@ export interface PodMovementProcessionLayer {
 export interface PodOpacityProcessionLayer {
   type: 'pod-opacity'
   lut: ColorLookupTable
-  frames: unknown
+  frames:
+    | {
+        timestamp?: MapTick
+        cutscene_opacity?: Double
+        cutscene_opacity_t?: Double
+        outside_opacity?: Double
+        outside_opacity_t?: Double
+        lut_blend?: Double
+        lut_blend_t?: Double
+      }[]
+    | {}
 }
 /**
  * https://lua-api.factorio.com/stable/types/PollutionSettings.html
@@ -12736,7 +13056,24 @@ export interface SingleGraphicProcessionLayer {
   is_passenger_only?: Bool
   clip_with_hatches?: Bool
   animation_driven_by_curve?: Bool
-  frames: unknown
+  frames:
+    | {
+        timestamp?: MapTick
+        opacity?: Double
+        opacity_t?: Double
+        tint?: Color
+        tint_t?: Color
+        rotation?: Double
+        rotation_t?: Double
+        scale?: Double
+        scale_t?: Double
+        shift?: Vector
+        shift_t?: Vector
+        shift_rate?: Double
+        shift_rate_t?: Double
+        frame: Float
+      }[]
+    | {}
 }
 /**
  * https://lua-api.factorio.com/stable/types/TintProcessionLayer.html
@@ -12747,7 +13084,17 @@ export interface SingleGraphicProcessionLayer {
 export interface TintProcessionLayer {
   type: 'tint'
   render_layer?: RenderLayer
-  frames: unknown
+  frames:
+    | {
+        timestamp?: MapTick
+        opacity?: Double
+        opacity_t?: Double
+        tint_upper?: Color
+        tint_upper_t?: Color
+        tint_lower?: Color
+        tint_lower_t?: Color
+      }[]
+    | {}
 }
 /**
  * https://lua-api.factorio.com/stable/types/ProcessionSet.html
@@ -12938,8 +13285,18 @@ export interface RailPictureSet {
   segment_visualisation_endings?: RotatedAnimation
   render_layers: RailRenderLayers
   secondary_render_layers?: RailRenderLayers
-  slice_origin?: unknown
-  fog_mask?: unknown
+  slice_origin?: {
+    north?: Vector
+    east?: Vector
+    south?: Vector
+    west?: Vector
+  }
+  fog_mask?: {
+    north?: FogMaskShapeDefinition
+    east?: FogMaskShapeDefinition
+    south?: FogMaskShapeDefinition
+    west?: FogMaskShapeDefinition
+  }
 }
 /**
  * https://lua-api.factorio.com/stable/types/RailPieceLayers.html
@@ -14061,7 +14418,10 @@ export interface MapSettings {
   type: 'map-settings'
   name: String
   pollution: PollutionSettings
-  steering: unknown
+  steering: {
+    default: StateSteeringSettings
+    moving: StateSteeringSettings
+  }
   enemy_evolution: EnemyEvolutionSettings
   enemy_expansion: EnemyExpansionSettings
   unit_group: UnitGroupSettings
