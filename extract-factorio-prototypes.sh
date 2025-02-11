@@ -29,7 +29,7 @@ fi
     --skip-magic-trailing-comma \
     --line-length 120
 
-  python -m factorio_prototypes_schema $FACTORIO_LOCATION >src/factorio_prototypes_schema.tmp.json
+  python -m factorio_prototypes_schema.extract $FACTORIO_LOCATION >src/factorio_prototypes_schema.tmp.json
 )
 npx prettier --write src/factorio_prototypes_schema.tmp.json
 mv src/factorio_prototypes_schema.tmp.json src/factorio_prototypes_schema.json
