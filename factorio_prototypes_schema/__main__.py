@@ -11,8 +11,10 @@ import sys
 from bs4 import BeautifulSoup
 import bs4
 import click
+import joblib
 import lark
 import tqdm
+import tqdm_joblib  # type: ignore
 
 
 JsonValue = None | bool | int | float | str | list["JsonValue"] | dict[str, "JsonValue"]
@@ -218,12 +220,18 @@ def main(factorio_location: str, load_types: str | None, load_prototypes: str | 
 
 def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDefinition]:
     all_type_names = set(extract_all_type_names(factorio_location))
-    for type_name in tqdm.tqdm(sorted(all_type_names)):
+
+    def extract_one(type_name: str) -> FactorioSchema.TypeDefinition:
         try:
-            yield extract_type(factorio_location, type_name, all_type_names)
+            return extract_type(factorio_location, type_name, all_type_names)
         except AssertionError as exc:
             debug(f"Failed to extract type {type_name!r}: {exc}")
-            yield FactorioSchema.TypeDefinition(name=type_name, definition={})
+            return FactorioSchema.TypeDefinition(name=type_name, definition={})
+
+    with tqdm_joblib.tqdm_joblib(tqdm.tqdm(desc="Extracting types", total=len(all_type_names))):
+        return joblib.Parallel(n_jobs=-1)(
+            joblib.delayed(extract_one)(type_name) for type_name in sorted(all_type_names)
+        )
 
 
 def load_all_types(factorio_location: str, load_types: str) -> Iterable[FactorioSchema.TypeDefinition]:
@@ -286,12 +294,19 @@ def extract_type(factorio_location: str, type_name: str, all_type_names: set[str
 
 
 def extract_all_prototypes(factorio_location: str, known_types: set[str]) -> Iterable[FactorioSchema.TypeDefinition]:
-    for prototype_name in tqdm.tqdm(sorted(set(extract_all_prototype_names(factorio_location)))):
+    all_prototype_names = sorted(set(extract_all_prototype_names(factorio_location)))
+
+    def extract_one(prototype_name: str) -> FactorioSchema.TypeDefinition:
         try:
-            yield extract_prototype(factorio_location, prototype_name, known_types)
+            return extract_prototype(factorio_location, prototype_name, known_types)
         except AssertionError as exc:
             debug(f"Failed to extract prototype {prototype_name!r}: {exc}")
-            yield FactorioSchema.TypeDefinition(name=prototype_name, definition={})
+            return FactorioSchema.TypeDefinition(name=prototype_name, definition={})
+
+    with tqdm_joblib.tqdm_joblib(tqdm.tqdm(desc="Extracting prototypes", total=len(all_prototype_names))):
+        return joblib.Parallel(n_jobs=-1)(
+            joblib.delayed(extract_one)(prototype_name) for prototype_name in all_prototype_names
+        )
 
 
 def load_all_prototypes(factorio_location: str, load_prototypes: str) -> Iterable[FactorioSchema.TypeDefinition]:
