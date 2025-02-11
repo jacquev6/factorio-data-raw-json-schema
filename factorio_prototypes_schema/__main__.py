@@ -185,13 +185,6 @@ def main(factorio_location: str, load_types: str | None, load_prototypes: str | 
 
     # types/TriggerEffect.html documents DamageTileTriggerEffectItem as having type="damage-tile",
     # but DamageTileTriggerEffectItem.html documents it as having type="damage"
-    if (
-        schema["definitions"].get("TriggerEffect", {}).get("anyOf", [{}])[0].get("$ref", {})
-        == "#/definitions/DamageEntityTriggerEffectItem"
-    ):
-        schema["definitions"]["TriggerEffect"]["anyOf"][0]["$ref"] = "#/definitions/DamageTriggerEffectItem"
-    else:
-        debug("Failed to patch TriggerEffect")
 
     # types/TriggerEffect.html refers to non-documented type DamageEntityTriggerEffectItem,
     # and types/DamageTriggerEffectItem.html is documented but used nowhere
@@ -201,25 +194,10 @@ def main(factorio_location: str, load_types: str | None, load_prototypes: str | 
 
     # I'm fed up with documenting every single patch
     schema["definitions"]["WorkingVisualisations"]["properties"]["working_visualisations"] = {}
+    schema["definitions"]["CharacterPrototype"]["allOf"][1]["properties"]["synced_footstep_particle_triggers"] = {}
 
     # Ad-hoc patches because our extraction tool is weak
     # ==================================================
-
-    # LocalisedString is a union of string and list[LocalisedString]
-    if schema["definitions"].get("LocalisedString", {}).get("anyOf", []) == [{"$ref": "#/definitions/string"}]:
-        schema["definitions"]["LocalisedString"]["anyOf"].append(
-            {"type": "array", "item": {"$ref": "#/definitions/LocalisedString"}}
-        )
-    else:
-        debug("Failed to patch LocalisedString")
-
-    # IconSequencePositioning.inventory_index comes from "defines"
-    if schema["definitions"].get("IconSequencePositioning", {}).get("properties", {}).get("inventory_index", {}) == {
-        "$ref": "#/definitions/defines.inventory"
-    }:
-        del schema["definitions"]["IconSequencePositioning"]["properties"]["inventory_index"]
-    else:
-        debug("Failed to patch IconSequencePositioning")
 
     # RandomRange can be {min: double, max: double}
     if schema["definitions"].get("RandomRange", {}).get("anyOf", [{}])[0] == {"$ref": "#/definitions/{"}:
@@ -273,21 +251,33 @@ def extract_type(factorio_location: str, type_name: str, all_type_names: set[str
 
     h2_text = tag(soup.find("h2")).text
     if (m := re.match(r"^" + type_name + r"\s*::\s*(.*?)\s*(Example code)?$", h2_text)) is not None:
-        type_kind = m.group(1)
-        if type_kind in all_type_names:
-            return FactorioSchema.UnionTypeDefinition(name=type_name, types=[{"$ref": f"#/definitions/{type_kind}"}])
-        else:
-            match type_kind:
-                case "struct" | "struct - abstract":
-                    properties_div_soup = soup.find("div", id="attributes-body-main")
-                    return FactorioSchema.StructTypeDefinition(
+        match m.group(1):
+            case "struct" | "struct - abstract":
+                properties_div_soup = soup.find("div", id="attributes-body-main")
+                return FactorioSchema.StructTypeDefinition(
+                    name=type_name,
+                    base=extract_struct_base(soup),
+                    properties=list(extract_struct_properties(type_name, properties_div_soup, all_type_names)),
+                )
+            case "union":
+                return FactorioSchema.UnionTypeDefinition(name=type_name, types=list(extract_union_members(soup)))
+            case type_expression:
+                try:
+                    type_expression_tree = type_expression_parser.parse(type_expression)
+                    return FactorioSchema.TypeDefinition(
                         name=type_name,
-                        base=extract_struct_base(soup),
-                        properties=list(extract_struct_properties(type_name, properties_div_soup, all_type_names)),
+                        definition=TypeExpressionTransformer(
+                            set(),
+                            {
+                                name: FactorioSchema.TypeDefinition(
+                                    name=name, definition={"anyOf": [{"$ref": f"#/definitions/{name}"}]}
+                                )
+                                for name in all_type_names
+                            },
+                        ).transform(type_expression_tree),
                     )
-                case "union":
-                    return FactorioSchema.UnionTypeDefinition(name=type_name, types=list(extract_union_members(soup)))
-        assert False, f"unsupported type kind: {type_kind!r}"
+                except lark.exceptions.LarkError:
+                    assert False, f"failed to parse type expression: {type_expression!r}"
     elif (m := re.match(r"^" + type_name + r"\s* builtin\s*(Example code)?$", h2_text)) is not None:
         return FactorioSchema.TypeDefinition(name=type_name, definition=FactorioSchema.builtin_types[type_name])
     else:
