@@ -251,33 +251,34 @@ def extract_type(factorio_location: str, type_name: str, all_type_names: set[str
 
     h2_text = tag(soup.find("h2")).text
     if (m := re.match(r"^" + type_name + r"\s*::\s*(.*?)\s*(Example code)?$", h2_text)) is not None:
-        match m.group(1):
-            case "struct" | "struct - abstract":
-                properties_div_soup = soup.find("div", id="attributes-body-main")
-                return FactorioSchema.StructTypeDefinition(
-                    name=type_name,
-                    base=extract_struct_base(soup),
-                    properties=list(extract_struct_properties(type_name, properties_div_soup, all_type_names)),
-                )
-            case "union":
-                return FactorioSchema.UnionTypeDefinition(name=type_name, types=list(extract_union_members(soup)))
-            case type_expression:
-                try:
-                    type_expression_tree = type_expression_parser.parse(type_expression)
-                    return FactorioSchema.TypeDefinition(
-                        name=type_name,
-                        definition=TypeExpressionTransformer(
-                            set(),
-                            {
-                                name: FactorioSchema.TypeDefinition(
-                                    name=name, definition={"anyOf": [{"$ref": f"#/definitions/{name}"}]}
-                                )
-                                for name in all_type_names
-                            },
-                        ).transform(type_expression_tree),
-                    )
-                except lark.exceptions.LarkError:
-                    assert False, f"failed to parse type expression: {type_expression!r}"
+        local_types = {
+            name: FactorioSchema.TypeDefinition(name=name, definition={"anyOf": [{"$ref": f"#/definitions/{name}"}]})
+            for name in all_type_names
+        }
+
+        type_expression = m.group(1).replace(" - abstract", "")
+        if "struct" in type_expression:
+            properties_div_soup = soup.find("div", id="attributes-body-main")
+            local_types["struct"] = FactorioSchema.StructTypeDefinition(
+                name=type_name,
+                base=extract_struct_base(soup),
+                properties=list(extract_struct_properties(type_name, properties_div_soup, all_type_names)),
+            )
+            assert type_expression == "struct", f"failed to match type expression: {type_expression!r}"
+
+        if "union" in type_expression:
+            local_types["union"] = FactorioSchema.UnionTypeDefinition(
+                name=type_name, types=list(extract_union_members(soup))
+            )
+            assert type_expression == "union", f"failed to match type expression: {type_expression!r}"
+
+        try:
+            type_expression_tree = type_expression_parser.parse(type_expression)
+            return FactorioSchema.TypeDefinition(
+                name=type_name, definition=TypeExpressionTransformer(set(), local_types).transform(type_expression_tree)
+            )
+        except lark.exceptions.LarkError:
+            assert False, f"failed to parse type expression: {type_expression!r}"
     elif (m := re.match(r"^" + type_name + r"\s* builtin\s*(Example code)?$", h2_text)) is not None:
         return FactorioSchema.TypeDefinition(name=type_name, definition=FactorioSchema.builtin_types[type_name])
     else:

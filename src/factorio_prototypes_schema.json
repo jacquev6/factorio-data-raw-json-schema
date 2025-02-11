@@ -10449,7 +10449,22 @@
       ]
     },
     "Mods": {
-      "description": "https://lua-api.factorio.com/stable/types/Mods.html"
+      "description": "https://lua-api.factorio.com/stable/types/Mods.html",
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "$ref": "#/definitions/string"
+          }
+        ]
+      },
+      "propertyNames": {
+        "anyOf": [
+          {
+            "$ref": "#/definitions/string"
+          }
+        ]
+      }
     },
     "ModuleCategoryID": {
       "description": "https://lua-api.factorio.com/stable/types/ModuleCategoryID.html",

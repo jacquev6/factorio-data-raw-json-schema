@@ -12665,7 +12665,7 @@ export interface ModSetting {
  * via the `definition` "Mods".
  */
 export interface Mods {
-  [k: string]: unknown
+  [k: string]: String
 }
 /**
  * https://lua-api.factorio.com/stable/types/NeighbourConnectable.html
