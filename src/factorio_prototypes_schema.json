@@ -1261,7 +1261,37 @@
         "placement_density": {
           "$ref": "#/definitions/uint32"
         },
-        "tile_restriction": {},
+        "tile_restriction": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/TileID"
+                  },
+                  {
+                    "type": "array",
+                    "items": [
+                      {
+                        "$ref": "#/definitions/TileID"
+                      },
+                      {
+                        "$ref": "#/definitions/TileID"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  }
+                ]
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "probability_expression": {
           "$ref": "#/definitions/NoiseExpression"
         },
@@ -1574,7 +1604,14 @@
         "left_margin": {
           "$ref": "#/definitions/int16"
         },
-        "effect": {},
+        "effect": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "compilatron-hologram"
+            }
+          ]
+        },
         "effect_opacity": {
           "$ref": "#/definitions/float"
         },
@@ -3698,7 +3735,16 @@
       "description": "https://lua-api.factorio.com/stable/types/CollisionMaskConnector.html",
       "type": "object",
       "properties": {
-        "layers": {},
+        "layers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean",
+            "const": true
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/CollisionLayerID"
+          }
+        },
         "not_colliding_with_itself": {
           "$ref": "#/definitions/bool"
         },
@@ -3736,7 +3782,58 @@
         "column": {
           "$ref": "#/definitions/uint32"
         },
-        "alignment": {}
+        "alignment": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "center"
+            },
+            {
+              "type": "string",
+              "const": "left"
+            },
+            {
+              "type": "string",
+              "const": "right"
+            },
+            {
+              "type": "string",
+              "const": "top-left"
+            },
+            {
+              "type": "string",
+              "const": "middle-left"
+            },
+            {
+              "type": "string",
+              "const": "bottom-left"
+            },
+            {
+              "type": "string",
+              "const": "top-center"
+            },
+            {
+              "type": "string",
+              "const": "middle-center"
+            },
+            {
+              "type": "string",
+              "const": "bottom-center"
+            },
+            {
+              "type": "string",
+              "const": "top-right"
+            },
+            {
+              "type": "string",
+              "const": "middle-right"
+            },
+            {
+              "type": "string",
+              "const": "bottom-right"
+            }
+          ]
+        }
       },
       "required": ["column", "alignment"]
     },
@@ -4128,7 +4225,22 @@
             "item": {
               "$ref": "#/definitions/ItemID"
             },
-            "event_type": {},
+            "event_type": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "crafting-of-single-item-ordered"
+                },
+                {
+                  "type": "string",
+                  "const": "crafting-of-multiple-items-ordered"
+                },
+                {
+                  "type": "string",
+                  "const": "crafting-finished"
+                }
+              ]
+            },
             "consecutive": {
               "$ref": "#/definitions/bool"
             }
@@ -6294,7 +6406,26 @@
         "max_pipeline_extent": {
           "$ref": "#/definitions/uint32"
         },
-        "production_type": {},
+        "production_type": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "none"
+            },
+            {
+              "type": "string",
+              "const": "input"
+            },
+            {
+              "type": "string",
+              "const": "input-output"
+            },
+            {
+              "type": "string",
+              "const": "output"
+            }
+          ]
+        },
         "secondary_draw_order": {
           "$ref": "#/definitions/int8"
         },
@@ -6906,7 +7037,18 @@
         "duration": {
           "$ref": "#/definitions/uint32"
         },
-        "play_for": {}
+        "play_for": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "character_actions"
+            },
+            {
+              "type": "string",
+              "const": "everything"
+            }
+          ]
+        }
       }
     },
     "GameViewSettings": {
@@ -10807,7 +10949,22 @@
             }
           ]
         },
-        "connection_type": {},
+        "connection_type": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "normal"
+            },
+            {
+              "type": "string",
+              "const": "underground"
+            },
+            {
+              "type": "string",
+              "const": "linked"
+            }
+          ]
+        },
         "enable_working_visualisations": {
           "oneOf": [
             {
@@ -14063,7 +14220,42 @@
       "description": "https://lua-api.factorio.com/stable/types/SignalIDConnector.html",
       "type": "object",
       "properties": {
-        "type": {},
+        "type": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "virtual"
+            },
+            {
+              "type": "string",
+              "const": "item"
+            },
+            {
+              "type": "string",
+              "const": "fluid"
+            },
+            {
+              "type": "string",
+              "const": "recipe"
+            },
+            {
+              "type": "string",
+              "const": "entity"
+            },
+            {
+              "type": "string",
+              "const": "space-location"
+            },
+            {
+              "type": "string",
+              "const": "asteroid-chunk"
+            },
+            {
+              "type": "string",
+              "const": "quality"
+            }
+          ]
+        },
         "name": {
           "oneOf": [
             {
@@ -15431,7 +15623,22 @@
               "type": "string",
               "const": "stack-transfer"
             },
-            "transfer": {}
+            "transfer": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "stack"
+                },
+                {
+                  "type": "string",
+                  "const": "inventory"
+                },
+                {
+                  "type": "string",
+                  "const": "whole-inventory"
+                }
+              ]
+            }
           },
           "required": ["type"]
         }
@@ -27203,7 +27410,30 @@
         {
           "type": "object",
           "properties": {
-            "logistic_mode": {},
+            "logistic_mode": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "active-provider"
+                },
+                {
+                  "type": "string",
+                  "const": "passive-provider"
+                },
+                {
+                  "type": "string",
+                  "const": "requester"
+                },
+                {
+                  "type": "string",
+                  "const": "storage"
+                },
+                {
+                  "type": "string",
+                  "const": "buffer"
+                }
+              ]
+            },
             "max_logistic_slots": {
               "$ref": "#/definitions/uint16"
             },

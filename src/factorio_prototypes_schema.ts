@@ -1733,7 +1733,10 @@ export type MapTick = Uint64
 export type CraftItemTipTrigger = CountBasedTipTrigger & {
   type: 'craft-item'
   item?: ItemID
-  event_type: unknown
+  event_type:
+    | 'crafting-of-single-item-ordered'
+    | 'crafting-of-multiple-items-ordered'
+    | 'crafting-finished'
   consecutive?: Bool
 }
 /**
@@ -1779,7 +1782,7 @@ export type ModuleTransferTipTrigger = CountBasedTipTrigger & {
  */
 export type StackTransferTipTrigger = CountBasedTipTrigger & {
   type: 'stack-transfer'
-  transfer?: unknown
+  transfer?: 'stack' | 'inventory' | 'whole-inventory'
 }
 /**
  * https://lua-api.factorio.com/stable/types/EntityTransferTipTrigger.html
@@ -6513,7 +6516,7 @@ export type InfinityContainerPrototype = LogisticContainerPrototype & {
  * via the `definition` "LogisticContainerPrototype".
  */
 export type LogisticContainerPrototype = ContainerPrototype & {
-  logistic_mode: unknown
+  logistic_mode: 'active-provider' | 'passive-provider' | 'requester' | 'storage' | 'buffer'
   max_logistic_slots?: Uint16
   trash_inventory_size?: ItemStackIndex
   render_not_in_network_icon?: Bool
@@ -9701,7 +9704,9 @@ export interface Vector {
  * via the `definition` "CollisionMaskConnector".
  */
 export interface CollisionMaskConnector {
-  layers: unknown
+  layers: {
+    [k: string]: true
+  }
   not_colliding_with_itself?: Bool
   consider_tile_transitions?: Bool
   colliding_with_tiles_only?: Bool
@@ -10044,7 +10049,7 @@ export interface AutoplaceSpecification {
   force?: 'enemy' | 'player' | 'neutral' | String
   order?: Order
   placement_density?: Uint32
-  tile_restriction?: unknown
+  tile_restriction?: (TileID | [TileID, TileID])[] | {}
   probability_expression: NoiseExpression
   richness_expression?: NoiseExpression
   local_expressions?: {
@@ -10276,7 +10281,7 @@ export interface FluidBox {
   minimum_temperature?: Float
   maximum_temperature?: Float
   max_pipeline_extent?: Uint32
-  production_type?: unknown
+  production_type?: 'none' | 'input' | 'input-output' | 'output'
   secondary_draw_order?: Int8
   secondary_draw_orders?: {
     north?: Int8
@@ -10295,7 +10300,7 @@ export interface FluidBox {
  */
 export interface PipeConnectionDefinition {
   flow_direction?: 'input-output' | 'input' | 'output'
-  connection_type?: unknown
+  connection_type?: 'normal' | 'underground' | 'linked'
   enable_working_visualisations?: String[] | {}
   direction?: Direction
   position?: MapPosition
@@ -10477,7 +10482,15 @@ export interface ProductionHealthEffect {
  * via the `definition` "SignalIDConnector".
  */
 export interface SignalIDConnector {
-  type: unknown
+  type:
+    | 'virtual'
+    | 'item'
+    | 'fluid'
+    | 'recipe'
+    | 'entity'
+    | 'space-location'
+    | 'asteroid-chunk'
+    | 'quality'
   name:
     | VirtualSignalID
     | ItemID
@@ -10931,7 +10944,7 @@ export interface BaseStyleSpecification {
   right_margin?: Int16
   bottom_margin?: Int16
   left_margin?: Int16
-  effect?: unknown
+  effect?: 'compilatron-hologram'
   effect_opacity?: Float
   tooltip?: LocalisedString
 }
@@ -11768,7 +11781,19 @@ export interface ColorLookupTable {
  */
 export interface ColumnAlignment {
   column: Uint32
-  alignment: unknown
+  alignment:
+    | 'center'
+    | 'left'
+    | 'right'
+    | 'top-left'
+    | 'middle-left'
+    | 'bottom-left'
+    | 'top-center'
+    | 'middle-center'
+    | 'bottom-center'
+    | 'top-right'
+    | 'middle-right'
+    | 'bottom-right'
 }
 /**
  * https://lua-api.factorio.com/stable/types/ColumnWidthItem.html
@@ -12201,7 +12226,7 @@ export interface GameControllerVibrationData {
   low_frequency_vibration_intensity?: Float
   high_frequency_vibration_intensity?: Float
   duration?: Uint32
-  play_for?: unknown
+  play_for?: 'character_actions' | 'everything'
 }
 /**
  * https://lua-api.factorio.com/stable/types/GhostShimmerConfig.html

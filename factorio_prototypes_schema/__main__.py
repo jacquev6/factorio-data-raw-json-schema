@@ -291,7 +291,7 @@ def extract_type(factorio_location: str, type_name: str, all_type_names: set[str
     elif (m := re.match(r"^" + type_name + r"\s* builtin\s*(Example code)?$", h2_text)) is not None:
         return FactorioSchema.TypeDefinition(name=type_name, definition=FactorioSchema.builtin_types[type_name])
     else:
-        assert False, f"failed to parse type header: {h2_text!r}"
+        assert False, f"failed to regex-match type header: {h2_text!r}"
 
 
 def extract_all_prototypes(factorio_location: str, known_types: set[str]) -> Iterable[FactorioSchema.TypeDefinition]:
@@ -336,17 +336,18 @@ def extract_prototype(
     )
 
 
-def extract_union_members(soup: bs4.BeautifulSoup) -> Iterable[JsonValue]:
-    for span_soup in (tag(el) for el in soup.find_all("span", class_="docs-attribute-name")):
-        content_soup = span_soup.contents[0]
-        if isinstance(content_soup, bs4.element.Tag) and content_soup.name == "code":
-            value = content_soup.text.strip()
-            if value.startswith('"') and value.endswith('"'):
-                yield {"type": "string", "const": value.strip('"')}
+def extract_union_members(soup: bs4.element.PageElement | None) -> Iterable[JsonValue]:
+    if soup is not None:
+        for span_soup in (tag(el) for el in tag(soup).find_all("span", class_="docs-attribute-name")):
+            content_soup = span_soup.contents[0]
+            if isinstance(content_soup, bs4.element.Tag) and content_soup.name == "code":
+                value = content_soup.text.strip()
+                if value.startswith('"') and value.endswith('"'):
+                    yield {"type": "string", "const": value.strip('"')}
+                else:
+                    yield {"type": "integer", "const": int(value)}
             else:
-                yield {"type": "integer", "const": int(value)}
-        else:
-            yield {"$ref": f"#/definitions/{content_soup.text.strip()}"}
+                yield {"$ref": f"#/definitions/{content_soup.text.strip()}"}
 
 
 def extract_struct_base(soup: bs4.BeautifulSoup) -> str | None:
@@ -375,34 +376,66 @@ def extract_struct_properties(
                     local_type_header_text = tag(local_type_div_soup.find("h4")).text
                     if (m := re.match(r"^(.*?)\s*::\s*(.*?)\s*$", local_type_header_text)) is not None:
                         local_type_name = m.group(1)
-                        local_type_kind = m.group(2)
-                        assert local_type_kind == "struct", f"unsupported local type kind: {local_type_kind!r}"
-                        local_type_properties = list(
-                            extract_struct_properties(
-                                f"{type_name}.{local_type_name}",
-                                tag(local_type_div_soup.find("h2", string="Properties")).next_sibling,
-                                global_types,
-                            )
-                        )
-                        local_types[local_type_name] = FactorioSchema.StructTypeDefinition(
-                            local_type_name, base=None, properties=local_type_properties
-                        )
+                        match m.group(2):
+                            case "struct":
+                                local_type_properties = list(
+                                    extract_struct_properties(
+                                        f"{type_name}.{local_type_name}",
+                                        tag(local_type_div_soup.find("h2", string="Properties")).next_sibling,
+                                        global_types,
+                                    )
+                                )
+                                local_types[local_type_name] = FactorioSchema.StructTypeDefinition(
+                                    local_type_name, base=None, properties=local_type_properties
+                                )
+                            case "union":
+                                local_types[local_type_name] = FactorioSchema.UnionTypeDefinition(
+                                    name=local_type_name,
+                                    types=list(
+                                        extract_union_members(
+                                            tag(local_type_div_soup.find("h4", string="Union members")).next_sibling
+                                        )
+                                    ),
+                                )
+                            case local_type_expression:
+                                try:
+                                    local_type_expression_tree = type_expression_parser.parse(local_type_expression)
+                                    local_types[local_type_name] = FactorioSchema.TypeDefinition(
+                                        name=local_type_name,
+                                        definition=TypeExpressionTransformer(global_types, local_types).transform(
+                                            local_type_expression_tree
+                                        ),
+                                    )
+                                except lark.exceptions.LarkError:
+                                    assert False, f"failed to parse local type expression: {local_type_expression!r}"
                     else:
-                        assert False, f"failed to parse local type header: {local_type_header_text!r}"
+                        assert False, f"failed to regex-match local type header: {local_type_header_text!r}"
 
                 property_header_text = property_header_soup.text
                 m = re.match(
                     r"^" + property_name + r"\s*::\s*(.*?)\s*(optional)?\s*(new|changed)?$", property_header_text
                 )
-                assert m is not None, f"failed to parse property header: {property_header_text!r}"
-                type_expression = m.group(1)
+                assert m is not None, f"failed to regex-match property header: {property_header_text!r}"
                 optional = m.group(2) == "optional"
 
-                try:
-                    type_expression_tree = type_expression_parser.parse(type_expression)
-                    property_type = TypeExpressionTransformer(global_types, local_types).transform(type_expression_tree)
-                except lark.exceptions.LarkError:
-                    assert False, f"failed to parse type expression: {type_expression!r}"
+                match m.group(1):
+                    case "union":
+                        property_type = FactorioSchema.UnionTypeDefinition(
+                            name="property",
+                            types=list(
+                                extract_union_members(
+                                    tag(property_div_soup.find("h4", string="Union members")).next_sibling
+                                )
+                            ),
+                        ).definition
+                    case type_expression:
+                        try:
+                            type_expression_tree = type_expression_parser.parse(type_expression)
+                            property_type = TypeExpressionTransformer(global_types, local_types).transform(
+                                type_expression_tree
+                            )
+                        except lark.exceptions.LarkError:
+                            assert False, f"failed to parse type expression: {type_expression!r}"
 
                 yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
 
@@ -434,7 +467,7 @@ type_expression_parser = lark.Lark(
 )
 
 
-class TypeExpressionTransformer(lark.Transformer[lark.Token, JsonValue]):
+class TypeExpressionTransformer(lark.Transformer[lark.Token, dict[str, JsonValue]]):
     def __init__(self, global_types: set[str], local_types: dict[str, FactorioSchema.TypeDefinition]) -> None:
         self.global_types = global_types
         self.local_types = local_types
@@ -444,7 +477,9 @@ class TypeExpressionTransformer(lark.Transformer[lark.Token, JsonValue]):
 
     def named_type(self, items: list[str]) -> JsonValue:
         type_name = items[0]
-        if type_name in self.global_types:
+        if type_name == "true":
+            return {"type": "boolean", "const": True}
+        elif type_name in self.global_types:
             return {"$ref": f"#/definitions/{type_name}"}
         elif type_name in self.local_types:
             return self.local_types[type_name].definition
