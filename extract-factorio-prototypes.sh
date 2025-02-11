@@ -5,25 +5,6 @@ set -o nounset
 set -o pipefail
 
 
-load_type_options=""
-load_prototypes_options=""
-while [ $# -gt 0 ]
-do
-  case "$1" in
-    --skip-types)
-      load_type_options="--load-types src/factorio_prototypes_schema.json"
-      shift
-      ;;
-    --skip-prototypes)
-      load_prototypes_options="--load-prototypes src/factorio_prototypes_schema.json"
-      shift
-      ;;
-    *)
-      break
-      ;;
-  esac
-done
-
 # Generate a JSON schema for the Factorio prototypes
 if ! diff .venv/requirements.txt factorio_prototypes_schema/requirements.txt 2>/dev/null >/dev/null
 then
@@ -48,7 +29,7 @@ fi
     --skip-magic-trailing-comma \
     --line-length 120
 
-  python -m factorio_prototypes_schema $FACTORIO_LOCATION $load_type_options $load_prototypes_options >src/factorio_prototypes_schema.tmp.json
+  python -m factorio_prototypes_schema $FACTORIO_LOCATION >src/factorio_prototypes_schema.tmp.json
 )
 npx prettier --write src/factorio_prototypes_schema.tmp.json
 mv src/factorio_prototypes_schema.tmp.json src/factorio_prototypes_schema.json

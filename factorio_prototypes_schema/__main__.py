@@ -121,18 +121,9 @@ class FactorioSchema:
 
 @click.command()
 @click.argument("factorio_location")
-@click.option("--load-types")
-@click.option("--load-prototypes")
-def main(factorio_location: str, load_types: str | None, load_prototypes: str | None) -> None:
-    if load_types is None:
-        types = list(extract_all_types(factorio_location))
-    else:
-        types = list(load_all_types(factorio_location, load_types))
-
-    if load_prototypes is None:
-        prototypes = list(extract_all_prototypes(factorio_location, {type.name for type in types}))
-    else:
-        prototypes = list(load_all_prototypes(factorio_location, load_prototypes))
+def main(factorio_location: str) -> None:
+    types = list(extract_all_types(factorio_location))
+    prototypes = list(extract_all_prototypes(factorio_location, {type.name for type in types}))
 
     schema: Any = FactorioSchema(
         properties={
@@ -234,15 +225,6 @@ def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDef
         )
 
 
-def load_all_types(factorio_location: str, load_types: str) -> Iterable[FactorioSchema.TypeDefinition]:
-    with open(load_types) as f:
-        previous_schema = json.load(f)
-    for type_name in sorted(set(extract_all_type_names(factorio_location))):
-        definition = previous_schema["definitions"].get(type_name)
-        if definition is not None:
-            yield FactorioSchema.TypeDefinition(name=type_name, definition=definition)
-
-
 def extract_all_type_names(factorio_location: str) -> Iterable[str]:
     for a in read_file(factorio_location, "types").find_all("a"):
         link = tag(a).get("href")
@@ -307,15 +289,6 @@ def extract_all_prototypes(factorio_location: str, known_types: set[str]) -> Ite
         return joblib.Parallel(n_jobs=-1)(
             joblib.delayed(extract_one)(prototype_name) for prototype_name in all_prototype_names
         )
-
-
-def load_all_prototypes(factorio_location: str, load_prototypes: str) -> Iterable[FactorioSchema.TypeDefinition]:
-    with open(load_prototypes) as f:
-        previous_schema = json.load(f)
-    for prototype_name in sorted(set(extract_all_prototype_names(factorio_location))):
-        definition = previous_schema["definitions"].get(prototype_name)
-        if definition is not None:
-            yield FactorioSchema.TypeDefinition(name=prototype_name, definition=definition)
 
 
 def extract_all_prototype_names(factorio_location: str) -> Iterable[str]:
