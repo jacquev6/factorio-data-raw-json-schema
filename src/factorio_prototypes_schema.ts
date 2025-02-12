@@ -166,6 +166,33 @@ export type SpriteSizeType = Int16
  */
 export type Int16 = number
 /**
+ * https://lua-api.factorio.com/stable/types/Color.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "Color".
+ */
+export type Color =
+  | {
+      r?: Float
+      g?: Float
+      b?: Float
+      a?: Float
+    }
+  | [Float, Float, Float]
+  | [Float, Float, Float, Float]
+/**
+ * https://lua-api.factorio.com/stable/types/Vector.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "Vector".
+ */
+export type Vector =
+  | {
+      x: Double
+      y: Double
+    }
+  | [Double, Double]
+/**
  * https://lua-api.factorio.com/stable/types/double.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -208,6 +235,208 @@ export type ItemID = String
  */
 export type TileID = String
 /**
+ * https://lua-api.factorio.com/stable/types/SpriteVariations.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "SpriteVariations".
+ */
+export type SpriteVariations =
+  | {
+      sheet: SpriteSheet
+    }
+  | SpriteSheet
+  | Sprite[]
+  | {}
+/**
+ * https://lua-api.factorio.com/stable/types/SpriteSheet.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "SpriteSheet".
+ */
+export type SpriteSheet = SpriteParameters & {
+  layers?: SpriteSheet[] | {}
+  variation_count?: Uint32
+  repeat_count?: Uint32
+  line_length?: Uint32
+  filenames?: FileName[] | {}
+  lines_per_file?: Uint32
+  dice?: SpriteSizeType
+  dice_x?: SpriteSizeType
+  dice_y?: SpriteSizeType
+}
+/**
+ * https://lua-api.factorio.com/stable/types/SpriteParameters.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "SpriteParameters".
+ */
+export type SpriteParameters = SpriteSource & {
+  priority?: SpritePriority
+  flags?: SpriteFlags
+  shift?: Vector
+  rotate_shift?: Bool
+  apply_special_effect?: Bool
+  scale?: Double
+  draw_as_shadow?: Bool
+  draw_as_glow?: Bool
+  draw_as_light?: Bool
+  mipmap_count?: Uint8
+  apply_runtime_tint?: Bool
+  tint_as_overlay?: Bool
+  invert_colors?: Bool
+  tint?: Color
+  blend_mode?: BlendMode
+  generate_sdf?: Bool
+  surface?: SpriteUsageSurfaceHint
+  usage?: SpriteUsageHint
+}
+/**
+ * https://lua-api.factorio.com/stable/types/SpritePriority.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "SpritePriority".
+ */
+export type SpritePriority =
+  | 'extra-high-no-scale'
+  | 'extra-high'
+  | 'high'
+  | 'medium'
+  | 'low'
+  | 'very-low'
+  | 'no-atlas'
+/**
+ * https://lua-api.factorio.com/stable/types/SpriteFlags.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "SpriteFlags".
+ */
+export type SpriteFlags =
+  | (
+      | 'no-crop'
+      | 'not-compressed'
+      | 'always-compressed'
+      | 'mipmap'
+      | 'linear-minification'
+      | 'linear-magnification'
+      | 'linear-mip-level'
+      | 'alpha-mask'
+      | 'no-scale'
+      | 'mask'
+      | 'icon'
+      | 'gui'
+      | 'gui-icon'
+      | 'light'
+      | 'terrain'
+      | 'terrain-effect-map'
+      | 'reflection-effect-map'
+      | 'shadow'
+      | 'smoke'
+      | 'decal'
+      | 'low-object'
+      | 'corpse-decay'
+      | 'trilinear-filtering'
+      | 'group=none'
+      | 'group=terrain'
+      | 'group=shadow'
+      | 'group=smoke'
+      | 'group=decal'
+      | 'group=low-object'
+      | 'group=gui'
+      | 'group=icon'
+      | 'group=icon-background'
+      | 'group=effect-texture'
+    )[]
+  | {}
+/**
+ * https://lua-api.factorio.com/stable/types/uint8.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "uint8".
+ */
+export type Uint8 = number
+/**
+ * https://lua-api.factorio.com/stable/types/BlendMode.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "BlendMode".
+ */
+export type BlendMode =
+  | 'normal'
+  | 'additive'
+  | 'additive-soft'
+  | 'multiplicative'
+  | 'multiplicative-with-alpha'
+  | 'overwrite'
+/**
+ * https://lua-api.factorio.com/stable/types/SpriteUsageSurfaceHint.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "SpriteUsageSurfaceHint".
+ */
+export type SpriteUsageSurfaceHint =
+  | 'any'
+  | 'nauvis'
+  | 'vulcanus'
+  | 'gleba'
+  | 'fulgora'
+  | 'aquilo'
+  | 'space'
+/**
+ * https://lua-api.factorio.com/stable/types/SpriteUsageHint.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "SpriteUsageHint".
+ */
+export type SpriteUsageHint =
+  | 'any'
+  | 'mining'
+  | 'tile-artifical'
+  | 'corpse-decay'
+  | 'enemy'
+  | 'player'
+  | 'train'
+  | 'vehicle'
+  | 'explosion'
+  | 'rail'
+  | 'elevated-rail'
+  | 'air'
+  | 'remnant'
+  | 'decorative'
+/**
+ * https://lua-api.factorio.com/stable/types/Sprite.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "Sprite".
+ */
+export type Sprite = SpriteParameters & {
+  layers?: Sprite[] | {}
+  dice?: SpriteSizeType
+  dice_x?: SpriteSizeType
+  dice_y?: SpriteSizeType
+}
+/**
+ * https://lua-api.factorio.com/stable/types/ItemPrototypeFlags.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "ItemPrototypeFlags".
+ */
+export type ItemPrototypeFlags =
+  | (
+      | 'draw-logistic-overlay'
+      | 'excluded-from-trash-unrequested'
+      | 'always-show'
+      | 'hide-from-bonus-gui'
+      | 'hide-from-fuel-tooltip'
+      | 'not-stackable'
+      | 'primary-place-result'
+      | 'mod-openable'
+      | 'only-in-cursor'
+      | 'spawnable'
+      | 'spoil-result'
+      | 'ignore-spoil-time-modifier'
+    )[]
+  | {}
+/**
  * https://lua-api.factorio.com/stable/types/Energy.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -222,6 +451,229 @@ export type Energy = String
  */
 export type Weight = Double
 /**
+ * https://lua-api.factorio.com/stable/types/Trigger.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "Trigger".
+ */
+export type Trigger =
+  | (DirectTriggerItem | AreaTriggerItem | LineTriggerItem | ClusterTriggerItem)
+  | (DirectTriggerItem | AreaTriggerItem | LineTriggerItem | ClusterTriggerItem)[]
+  | {}
+/**
+ * https://lua-api.factorio.com/stable/types/DirectTriggerItem.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "DirectTriggerItem".
+ */
+export type DirectTriggerItem = TriggerItem & {
+  type: 'direct'
+  filter_enabled?: Bool
+}
+/**
+ * https://lua-api.factorio.com/stable/types/EntityPrototypeFlags.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "EntityPrototypeFlags".
+ */
+export type EntityPrototypeFlags =
+  | (
+      | 'not-rotatable'
+      | 'placeable-neutral'
+      | 'placeable-player'
+      | 'placeable-enemy'
+      | 'placeable-off-grid'
+      | 'player-creation'
+      | 'building-direction-8-way'
+      | 'filter-directions'
+      | 'get-by-unit-number'
+      | 'breaths-air'
+      | 'not-repairable'
+      | 'not-on-map'
+      | 'not-deconstructable'
+      | 'not-blueprintable'
+      | 'hide-alt-info'
+      | 'no-gap-fill-while-building'
+      | 'not-flammable'
+      | 'no-automated-item-removal'
+      | 'no-automated-item-insertion'
+      | 'no-copy-paste'
+      | 'not-selectable-in-game'
+      | 'not-upgradable'
+      | 'not-in-kill-statistics'
+      | 'building-direction-16-way'
+      | 'snap-to-rail-support-spot'
+      | 'not-in-made-in'
+    )[]
+  | {}
+/**
+ * https://lua-api.factorio.com/stable/types/TriggerTargetMask.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "TriggerTargetMask".
+ */
+export type TriggerTargetMask = String[] | {}
+/**
+ * https://lua-api.factorio.com/stable/types/TriggerDelivery.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "TriggerDelivery".
+ */
+export type TriggerDelivery =
+  | InstantTriggerDelivery
+  | ProjectileTriggerDelivery
+  | BeamTriggerDelivery
+  | StreamTriggerDelivery
+  | ArtilleryTriggerDelivery
+  | ChainTriggerDelivery
+  | DelayedTriggerDelivery
+/**
+ * https://lua-api.factorio.com/stable/types/InstantTriggerDelivery.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "InstantTriggerDelivery".
+ */
+export type InstantTriggerDelivery = TriggerDeliveryItem & {
+  type: 'instant'
+}
+/**
+ * https://lua-api.factorio.com/stable/types/ProjectileTriggerDelivery.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "ProjectileTriggerDelivery".
+ */
+export type ProjectileTriggerDelivery = TriggerDeliveryItem & {
+  type: 'projectile'
+  projectile: EntityID
+  starting_speed: Float
+  starting_speed_deviation?: Float
+  direction_deviation?: Float
+  range_deviation?: Float
+  max_range?: Double
+  min_range?: Double
+}
+/**
+ * https://lua-api.factorio.com/stable/types/BeamTriggerDelivery.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "BeamTriggerDelivery".
+ */
+export type BeamTriggerDelivery = TriggerDeliveryItem & {
+  type: 'beam'
+  beam: EntityID
+  add_to_shooter?: Bool
+  max_length?: Uint32
+  duration?: Uint32
+  source_offset?: Vector
+  destroy_with_source_or_target?: Bool
+}
+/**
+ * https://lua-api.factorio.com/stable/types/StreamTriggerDelivery.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "StreamTriggerDelivery".
+ */
+export type StreamTriggerDelivery = TriggerDeliveryItem & {
+  type: 'stream'
+  stream: EntityID
+  source_offset?: Vector
+}
+/**
+ * https://lua-api.factorio.com/stable/types/ArtilleryTriggerDelivery.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "ArtilleryTriggerDelivery".
+ */
+export type ArtilleryTriggerDelivery = TriggerDeliveryItem & {
+  type: 'artillery'
+  projectile: EntityID
+  starting_speed: Float
+  starting_speed_deviation?: Float
+  direction_deviation?: Float
+  range_deviation?: Float
+  trigger_fired_artillery?: Bool
+}
+/**
+ * https://lua-api.factorio.com/stable/types/ChainTriggerDelivery.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "ChainTriggerDelivery".
+ */
+export type ChainTriggerDelivery = TriggerDeliveryItem & {
+  type: 'chain'
+  chain: ActiveTriggerID
+}
+/**
+ * https://lua-api.factorio.com/stable/types/ActiveTriggerID.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "ActiveTriggerID".
+ */
+export type ActiveTriggerID = String
+/**
+ * https://lua-api.factorio.com/stable/types/DelayedTriggerDelivery.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "DelayedTriggerDelivery".
+ */
+export type DelayedTriggerDelivery = TriggerDeliveryItem & {
+  type: 'delayed'
+  delayed_trigger: ActiveTriggerID
+}
+/**
+ * https://lua-api.factorio.com/stable/types/ForceCondition.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "ForceCondition".
+ */
+export type ForceCondition =
+  | 'all'
+  | 'enemy'
+  | 'ally'
+  | 'friend'
+  | 'not-friend'
+  | 'same'
+  | 'not-same'
+/**
+ * https://lua-api.factorio.com/stable/types/AreaTriggerItem.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "AreaTriggerItem".
+ */
+export type AreaTriggerItem = TriggerItem & {
+  type: 'area'
+  radius: Double
+  trigger_from_target?: Bool
+  target_entities?: Bool
+  target_enemies?: Bool
+  show_in_tooltip?: Bool
+  collision_mode?: 'distance-from-collision-box' | 'distance-from-center'
+}
+/**
+ * https://lua-api.factorio.com/stable/types/LineTriggerItem.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "LineTriggerItem".
+ */
+export type LineTriggerItem = TriggerItem & {
+  type: 'line'
+  range: Double
+  width: Double
+  range_effects?: TriggerEffect
+}
+/**
+ * https://lua-api.factorio.com/stable/types/ClusterTriggerItem.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "ClusterTriggerItem".
+ */
+export type ClusterTriggerItem = TriggerItem & {
+  type: 'cluster'
+  cluster_count: Uint32
+  distance: Float
+  distance_deviation?: Float
+}
+/**
  * https://lua-api.factorio.com/stable/types/uint16.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -235,13 +687,6 @@ export type Uint16 = number
  * via the `definition` "SendToOrbitMode".
  */
 export type SendToOrbitMode = 'not-sendable' | 'manual' | 'automated'
-/**
- * https://lua-api.factorio.com/stable/types/uint8.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "uint8".
- */
-export type Uint8 = number
 /**
  * https://lua-api.factorio.com/stable/types/AmmoSourceType.html
  *
@@ -308,6 +753,38 @@ export type DamageTypeID = String
  * via the `definition` "ItemStackIndex".
  */
 export type ItemStackIndex = Uint16 | 'dynamic'
+/**
+ * https://lua-api.factorio.com/stable/types/BoundingBox.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "BoundingBox".
+ */
+export type BoundingBox =
+  | {
+      left_top: MapPosition
+      right_bottom: MapPosition
+      orientation?: RealOrientation
+    }
+  | [MapPosition, MapPosition]
+/**
+ * https://lua-api.factorio.com/stable/types/MapPosition.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "MapPosition".
+ */
+export type MapPosition =
+  | {
+      x: Double
+      y: Double
+    }
+  | [Double, Double]
+/**
+ * https://lua-api.factorio.com/stable/types/RealOrientation.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "RealOrientation".
+ */
+export type RealOrientation = Float
 /**
  * https://lua-api.factorio.com/stable/prototypes/AssemblingMachinePrototype.html
  *
@@ -475,12 +952,17 @@ export type EntityPrototype = Prototype & {
   icons_positioning?: IconSequencePositioning[] | {}
 }
 /**
- * https://lua-api.factorio.com/stable/types/TriggerTargetMask.html
+ * https://lua-api.factorio.com/stable/types/SimpleBoundingBox.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "TriggerTargetMask".
+ * via the `definition` "SimpleBoundingBox".
  */
-export type TriggerTargetMask = String[] | {}
+export type SimpleBoundingBox =
+  | {
+      left_top: MapPosition
+      right_bottom: MapPosition
+    }
+  | [MapPosition, MapPosition]
 /**
  * https://lua-api.factorio.com/stable/types/ProductPrototype.html
  *
@@ -541,6 +1023,20 @@ export type CreateTrivialSmokeEffectItem = TriggerEffectItem & {
   speed_from_center_deviation?: Float
 }
 /**
+ * https://lua-api.factorio.com/stable/types/DamageTypeFilters.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "DamageTypeFilters".
+ */
+export type DamageTypeFilters =
+  | {
+      types: DamageTypeID | DamageTypeID[] | {}
+      whitelist?: Bool
+    }
+  | DamageTypeID
+  | DamageTypeID[]
+  | {}
+/**
  * https://lua-api.factorio.com/stable/types/TrivialSmokeID.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -548,112 +1044,122 @@ export type CreateTrivialSmokeEffectItem = TriggerEffectItem & {
  */
 export type TrivialSmokeID = String
 /**
- * https://lua-api.factorio.com/stable/types/Sprite.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "Sprite".
- */
-export type Sprite = SpriteParameters & {
-  layers?: Sprite[] | {}
-  dice?: SpriteSizeType
-  dice_x?: SpriteSizeType
-  dice_y?: SpriteSizeType
-}
-/**
- * https://lua-api.factorio.com/stable/types/SpriteParameters.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "SpriteParameters".
- */
-export type SpriteParameters = SpriteSource & {
-  priority?: SpritePriority
-  flags?: SpriteFlags
-  shift?: Vector
-  rotate_shift?: Bool
-  apply_special_effect?: Bool
-  scale?: Double
-  draw_as_shadow?: Bool
-  draw_as_glow?: Bool
-  draw_as_light?: Bool
-  mipmap_count?: Uint8
-  apply_runtime_tint?: Bool
-  tint_as_overlay?: Bool
-  invert_colors?: Bool
-  tint?: Color
-  blend_mode?: BlendMode
-  generate_sdf?: Bool
-  surface?: SpriteUsageSurfaceHint
-  usage?: SpriteUsageHint
-}
-/**
- * https://lua-api.factorio.com/stable/types/SpritePriority.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "SpritePriority".
- */
-export type SpritePriority =
-  | 'extra-high-no-scale'
-  | 'extra-high'
-  | 'high'
-  | 'medium'
-  | 'low'
-  | 'very-low'
-  | 'no-atlas'
-/**
- * https://lua-api.factorio.com/stable/types/BlendMode.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "BlendMode".
- */
-export type BlendMode =
-  | 'normal'
-  | 'additive'
-  | 'additive-soft'
-  | 'multiplicative'
-  | 'multiplicative-with-alpha'
-  | 'overwrite'
-/**
- * https://lua-api.factorio.com/stable/types/SpriteUsageSurfaceHint.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "SpriteUsageSurfaceHint".
- */
-export type SpriteUsageSurfaceHint =
-  | 'any'
-  | 'nauvis'
-  | 'vulcanus'
-  | 'gleba'
-  | 'fulgora'
-  | 'aquilo'
-  | 'space'
-/**
- * https://lua-api.factorio.com/stable/types/SpriteUsageHint.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "SpriteUsageHint".
- */
-export type SpriteUsageHint =
-  | 'any'
-  | 'mining'
-  | 'tile-artifical'
-  | 'corpse-decay'
-  | 'enemy'
-  | 'player'
-  | 'train'
-  | 'vehicle'
-  | 'explosion'
-  | 'rail'
-  | 'elevated-rail'
-  | 'air'
-  | 'remnant'
-  | 'decorative'
-/**
  * https://lua-api.factorio.com/stable/types/StatelessVisualisations.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
  * via the `definition` "StatelessVisualisations".
  */
 export type StatelessVisualisations = StatelessVisualisation | StatelessVisualisation[] | {}
+/**
+ * https://lua-api.factorio.com/stable/types/AnimationVariations.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "AnimationVariations".
+ */
+export type AnimationVariations =
+  | {
+      sheet?: AnimationSheet
+      sheets?: AnimationSheet[] | {}
+    }
+  | Animation
+  | Animation[]
+  | {}
+/**
+ * https://lua-api.factorio.com/stable/types/AnimationSheet.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "AnimationSheet".
+ */
+export type AnimationSheet = AnimationParameters & {
+  variation_count: Uint32
+  filenames?: FileName[] | {}
+  lines_per_file?: Uint32
+}
+/**
+ * https://lua-api.factorio.com/stable/types/AnimationParameters.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "AnimationParameters".
+ */
+export type AnimationParameters = SpriteParameters & {
+  run_mode?: AnimationRunMode
+  frame_count?: Uint32
+  line_length?: Uint32
+  animation_speed?: Float
+  max_advance?: Float
+  repeat_count?: Uint8
+  dice?: Uint8
+  dice_x?: Uint8
+  dice_y?: Uint8
+  frame_sequence?: AnimationFrameSequence
+}
+/**
+ * https://lua-api.factorio.com/stable/types/AnimationRunMode.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "AnimationRunMode".
+ */
+export type AnimationRunMode = 'forward' | 'backward' | 'forward-then-backward'
+/**
+ * https://lua-api.factorio.com/stable/types/AnimationFrameSequence.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "AnimationFrameSequence".
+ */
+export type AnimationFrameSequence = Uint16[] | {}
+/**
+ * https://lua-api.factorio.com/stable/types/Animation.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "Animation".
+ */
+export type Animation = AnimationParameters & {
+  layers?: Animation[] | {}
+  stripes?: Stripe[] | {}
+  filenames?: FileName[] | {}
+  slice?: Uint32
+  lines_per_file?: Uint32
+}
+/**
+ * https://lua-api.factorio.com/stable/types/LightDefinition.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "LightDefinition".
+ */
+export type LightDefinition =
+  | {
+      type?: 'basic' | 'oriented'
+      picture?: Sprite
+      rotation_shift?: RealOrientation
+      intensity: Float
+      size: Float
+      source_orientation_offset?: RealOrientation
+      add_perspective?: Bool
+      flicker_interval?: Uint8
+      flicker_min_modifier?: Float
+      flicker_max_modifier?: Float
+      offset_flicker?: Bool
+      shift?: Vector
+      color?: Color
+      minimum_darkness?: Float
+    }
+  | {
+      type?: 'basic' | 'oriented'
+      picture?: Sprite
+      rotation_shift?: RealOrientation
+      intensity: Float
+      size: Float
+      source_orientation_offset?: RealOrientation
+      add_perspective?: Bool
+      flicker_interval?: Uint8
+      flicker_min_modifier?: Float
+      flicker_max_modifier?: Float
+      offset_flicker?: Bool
+      shift?: Vector
+      color?: Color
+      minimum_darkness?: Float
+    }[]
+  | {}
 /**
  * https://lua-api.factorio.com/stable/types/RangedValue.html
  *
@@ -747,6 +1253,18 @@ export type RenderLayer =
  */
 export type Int32 = number
 /**
+ * https://lua-api.factorio.com/stable/types/TilePosition.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "TilePosition".
+ */
+export type TilePosition =
+  | {
+      x: Int32
+      y: Int32
+    }
+  | [Int32, Int32]
+/**
  * https://lua-api.factorio.com/stable/types/AutoplaceControlID.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -760,6 +1278,34 @@ export type AutoplaceControlID = String
  * via the `definition` "NoiseExpression".
  */
 export type NoiseExpression = String | Bool | Double
+/**
+ * https://lua-api.factorio.com/stable/types/WorldAmbientSoundDefinition.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "WorldAmbientSoundDefinition".
+ */
+export type WorldAmbientSoundDefinition =
+  | {
+      sound?: Sound
+      radius?: Double
+      min_entity_count?: Uint32
+      max_entity_count?: Uint32
+      entity_to_sound_ratio?: Float
+      average_pause_seconds?: Double
+    }
+  | Sound
+/**
+ * https://lua-api.factorio.com/stable/types/ExplosionDefinition.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "ExplosionDefinition".
+ */
+export type ExplosionDefinition =
+  | EntityID
+  | {
+      name: EntityID
+      offset?: Vector
+    }
 /**
  * https://lua-api.factorio.com/stable/types/RecipeCategoryID.html
  *
@@ -909,6 +1455,16 @@ export type VoidEnergySource = BaseEnergySource & {
  */
 export type EffectValue = Float
 /**
+ * https://lua-api.factorio.com/stable/types/EffectTypeLimitation.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "EffectTypeLimitation".
+ */
+export type EffectTypeLimitation =
+  | ('speed' | 'productivity' | 'consumption' | 'pollution' | 'quality')
+  | ('speed' | 'productivity' | 'consumption' | 'pollution' | 'quality')[]
+  | {}
+/**
  * https://lua-api.factorio.com/stable/types/ModuleCategoryID.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -1015,6 +1571,72 @@ export type CursorBoxType =
   | 'spidertron-remote-selected'
   | 'spidertron-remote-to-be-selected'
 /**
+ * https://lua-api.factorio.com/stable/types/SelectionModeFlags.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "SelectionModeFlags".
+ */
+export type SelectionModeFlags =
+  | (
+      | 'blueprint'
+      | 'deconstruct'
+      | 'cancel-deconstruct'
+      | 'items'
+      | 'trees'
+      | 'buildable-type'
+      | 'nothing'
+      | 'items-to-place'
+      | 'any-entity'
+      | 'any-tile'
+      | 'same-force'
+      | 'not-same-force'
+      | 'friend'
+      | 'enemy'
+      | 'upgrade'
+      | 'cancel-upgrade'
+      | 'downgrade'
+      | 'entity-with-health'
+      | 'is-military-target'
+      | 'entity-with-owner'
+      | 'avoid-rolling-stock'
+      | 'avoid-vehicle'
+      | 'controllable'
+      | 'controllable-add'
+      | 'controllable-remove'
+      | 'entity-ghost'
+      | 'tile-ghost'
+    )
+  | (
+      | 'blueprint'
+      | 'deconstruct'
+      | 'cancel-deconstruct'
+      | 'items'
+      | 'trees'
+      | 'buildable-type'
+      | 'nothing'
+      | 'items-to-place'
+      | 'any-entity'
+      | 'any-tile'
+      | 'same-force'
+      | 'not-same-force'
+      | 'friend'
+      | 'enemy'
+      | 'upgrade'
+      | 'cancel-upgrade'
+      | 'downgrade'
+      | 'entity-with-health'
+      | 'is-military-target'
+      | 'entity-with-owner'
+      | 'avoid-rolling-stock'
+      | 'avoid-vehicle'
+      | 'controllable'
+      | 'controllable-add'
+      | 'controllable-remove'
+      | 'entity-ghost'
+      | 'tile-ghost'
+    )[]
+  | {}
+/**
  * https://lua-api.factorio.com/stable/types/MouseCursorID.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -1108,6 +1730,17 @@ export type RangeMode =
   | 'bounding-box-to-bounding-box'
   | 'center-to-bounding-box'
 /**
+ * https://lua-api.factorio.com/stable/types/LayeredSound.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "LayeredSound".
+ */
+export type LayeredSound =
+  | {
+      layers: Sound[] | {}
+    }
+  | Sound
+/**
  * https://lua-api.factorio.com/stable/types/RotatedAnimation.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -1127,45 +1760,6 @@ export type RotatedAnimation = AnimationParameters & {
   apply_projection?: Bool
   stripes?: Stripe[] | {}
 }
-/**
- * https://lua-api.factorio.com/stable/types/AnimationParameters.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "AnimationParameters".
- */
-export type AnimationParameters = SpriteParameters & {
-  run_mode?: AnimationRunMode
-  frame_count?: Uint32
-  line_length?: Uint32
-  animation_speed?: Float
-  max_advance?: Float
-  repeat_count?: Uint8
-  dice?: Uint8
-  dice_x?: Uint8
-  dice_y?: Uint8
-  frame_sequence?: AnimationFrameSequence
-}
-/**
- * https://lua-api.factorio.com/stable/types/AnimationRunMode.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "AnimationRunMode".
- */
-export type AnimationRunMode = 'forward' | 'backward' | 'forward-then-backward'
-/**
- * https://lua-api.factorio.com/stable/types/AnimationFrameSequence.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "AnimationFrameSequence".
- */
-export type AnimationFrameSequence = Uint16[] | {}
-/**
- * https://lua-api.factorio.com/stable/types/RealOrientation.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "RealOrientation".
- */
-export type RealOrientation = Float
 /**
  * https://lua-api.factorio.com/stable/types/CircularProjectileCreationSpecification.html
  *
@@ -1555,19 +2149,6 @@ export type RocketSiloPrototype = AssemblingMachinePrototype & {
   launch_to_space_platforms?: Bool
 }
 /**
- * https://lua-api.factorio.com/stable/types/Animation.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "Animation".
- */
-export type Animation = AnimationParameters & {
-  layers?: Animation[] | {}
-  stripes?: Stripe[] | {}
-  filenames?: FileName[] | {}
-  slice?: Uint32
-  lines_per_file?: Uint32
-}
-/**
  * https://lua-api.factorio.com/stable/prototypes/SpacePlatformStarterPackPrototype.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -1621,13 +2202,6 @@ export type ActivatePasteTipTrigger = CountBasedTipTrigger & {
   type: 'activate-paste'
 }
 /**
- * https://lua-api.factorio.com/stable/types/ActiveTriggerID.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "ActiveTriggerID".
- */
-export type ActiveTriggerID = String
-/**
  * https://lua-api.factorio.com/stable/types/ActivityBarStyleSpecification.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -1663,6 +2237,128 @@ export type VerticalAlign = 'top' | 'center' | 'bottom'
  * via the `definition` "StretchRule".
  */
 export type StretchRule = 'on' | 'off' | 'auto' | 'stretch_and_expand'
+/**
+ * https://lua-api.factorio.com/stable/types/ElementImageSet.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "ElementImageSet".
+ */
+export type ElementImageSet =
+  | {
+      base?: ElementImageSetLayer
+      shadow?: ElementImageSetLayer
+      glow?: ElementImageSetLayer
+    }
+  | ElementImageSetLayer
+/**
+ * https://lua-api.factorio.com/stable/types/ElementImageSetLayer.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "ElementImageSetLayer".
+ */
+export type ElementImageSetLayer =
+  | {
+      draw_type?: 'inner' | 'outer'
+      type?: 'none' | 'composition'
+      tint?: Color
+      center?: Sprite
+      left?: Sprite
+      left_top?: Sprite
+      left_bottom?: Sprite
+      right?: Sprite
+      right_top?: Sprite
+      right_bottom?: Sprite
+      top?: Sprite
+      bottom?: Sprite
+      corner_size?: Uint16 | [Uint16, Uint16]
+      filename?: FileName
+      position?: MapPosition
+      load_in_minimal_mode?: Bool
+      top_width?: SpriteSizeType
+      bottom_width?: SpriteSizeType
+      left_height?: SpriteSizeType
+      right_height?: SpriteSizeType
+      center_width?: SpriteSizeType
+      center_height?: SpriteSizeType
+      scale?: Double
+      top_border?: Int32
+      right_border?: Int32
+      bottom_border?: Int32
+      left_border?: Int32
+      border?: Int32
+      stretch_monolith_image_to_size?: Bool
+      left_tiling?: Bool
+      right_tiling?: Bool
+      top_tiling?: Bool
+      bottom_tiling?: Bool
+      center_tiling_vertical?: Bool
+      center_tiling_horizontal?: Bool
+      overall_tiling_horizontal_size?: Uint16
+      overall_tiling_horizontal_spacing?: Uint16
+      overall_tiling_horizontal_padding?: Uint16
+      overall_tiling_vertical_size?: Uint16
+      overall_tiling_vertical_spacing?: Uint16
+      overall_tiling_vertical_padding?: Uint16
+      custom_horizontal_tiling_sizes?: Uint32[] | {}
+      opacity?: Double
+      background_blur?: Bool
+      background_blur_sigma?: Float
+      top_outer_border_shift?: Int32
+      bottom_outer_border_shift?: Int32
+      right_outer_border_shift?: Int32
+      left_outer_border_shift?: Int32
+    }
+  | Sprite
+/**
+ * https://lua-api.factorio.com/stable/types/Fade.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "Fade".
+ */
+export type Fade =
+  | (Attenuation & {
+      from?: ControlPoint
+      to?: ControlPoint
+    })
+  | AttenuationType
+/**
+ * https://lua-api.factorio.com/stable/types/AttenuationType.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "AttenuationType".
+ */
+export type AttenuationType =
+  | 'none'
+  | 'linear'
+  | 'logarithmic'
+  | 'exponential'
+  | 'cosine'
+  | 'S-curve'
+/**
+ * https://lua-api.factorio.com/stable/types/ControlPoint.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "ControlPoint".
+ */
+export type ControlPoint =
+  | {
+      control: Float
+      volume_percentage: Float
+    }
+  | [Float, Float]
+/**
+ * https://lua-api.factorio.com/stable/types/Vector3D.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "Vector3D".
+ */
+export type Vector3D =
+  | {
+      x: Float
+      y: Float
+      z: Float
+    }
+  | [Float, Float, Float]
 /**
  * https://lua-api.factorio.com/stable/types/RotatedSprite.html
  *
@@ -2179,146 +2875,6 @@ export type KillTipTrigger = CountBasedTipTrigger & {
   damage_type?: DamageTypeID
 }
 /**
- * https://lua-api.factorio.com/stable/types/AnimationSheet.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "AnimationSheet".
- */
-export type AnimationSheet = AnimationParameters & {
-  variation_count: Uint32
-  filenames?: FileName[] | {}
-  lines_per_file?: Uint32
-}
-/**
- * https://lua-api.factorio.com/stable/types/AreaTriggerItem.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "AreaTriggerItem".
- */
-export type AreaTriggerItem = TriggerItem & {
-  type: 'area'
-  radius: Double
-  trigger_from_target?: Bool
-  target_entities?: Bool
-  target_enemies?: Bool
-  show_in_tooltip?: Bool
-  collision_mode?: 'distance-from-collision-box' | 'distance-from-center'
-}
-/**
- * https://lua-api.factorio.com/stable/types/TriggerDelivery.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "TriggerDelivery".
- */
-export type TriggerDelivery =
-  | InstantTriggerDelivery
-  | ProjectileTriggerDelivery
-  | BeamTriggerDelivery
-  | StreamTriggerDelivery
-  | ArtilleryTriggerDelivery
-  | ChainTriggerDelivery
-  | DelayedTriggerDelivery
-/**
- * https://lua-api.factorio.com/stable/types/InstantTriggerDelivery.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "InstantTriggerDelivery".
- */
-export type InstantTriggerDelivery = TriggerDeliveryItem & {
-  type: 'instant'
-}
-/**
- * https://lua-api.factorio.com/stable/types/ProjectileTriggerDelivery.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "ProjectileTriggerDelivery".
- */
-export type ProjectileTriggerDelivery = TriggerDeliveryItem & {
-  type: 'projectile'
-  projectile: EntityID
-  starting_speed: Float
-  starting_speed_deviation?: Float
-  direction_deviation?: Float
-  range_deviation?: Float
-  max_range?: Double
-  min_range?: Double
-}
-/**
- * https://lua-api.factorio.com/stable/types/BeamTriggerDelivery.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "BeamTriggerDelivery".
- */
-export type BeamTriggerDelivery = TriggerDeliveryItem & {
-  type: 'beam'
-  beam: EntityID
-  add_to_shooter?: Bool
-  max_length?: Uint32
-  duration?: Uint32
-  source_offset?: Vector
-  destroy_with_source_or_target?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/StreamTriggerDelivery.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "StreamTriggerDelivery".
- */
-export type StreamTriggerDelivery = TriggerDeliveryItem & {
-  type: 'stream'
-  stream: EntityID
-  source_offset?: Vector
-}
-/**
- * https://lua-api.factorio.com/stable/types/ArtilleryTriggerDelivery.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "ArtilleryTriggerDelivery".
- */
-export type ArtilleryTriggerDelivery = TriggerDeliveryItem & {
-  type: 'artillery'
-  projectile: EntityID
-  starting_speed: Float
-  starting_speed_deviation?: Float
-  direction_deviation?: Float
-  range_deviation?: Float
-  trigger_fired_artillery?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/ChainTriggerDelivery.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "ChainTriggerDelivery".
- */
-export type ChainTriggerDelivery = TriggerDeliveryItem & {
-  type: 'chain'
-  chain: ActiveTriggerID
-}
-/**
- * https://lua-api.factorio.com/stable/types/DelayedTriggerDelivery.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "DelayedTriggerDelivery".
- */
-export type DelayedTriggerDelivery = TriggerDeliveryItem & {
-  type: 'delayed'
-  delayed_trigger: ActiveTriggerID
-}
-/**
- * https://lua-api.factorio.com/stable/types/ForceCondition.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "ForceCondition".
- */
-export type ForceCondition =
-  | 'all'
-  | 'enemy'
-  | 'ally'
-  | 'friend'
-  | 'not-friend'
-  | 'same'
-  | 'not-same'
-/**
  * https://lua-api.factorio.com/stable/types/ArtilleryRangeModifier.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -2338,19 +2894,6 @@ export type ArtilleryRangeModifier = SimpleModifier & {
 export type SimpleModifier = BaseModifier & {
   modifier: Double
 }
-/**
- * https://lua-api.factorio.com/stable/types/AttenuationType.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "AttenuationType".
- */
-export type AttenuationType =
-  | 'none'
-  | 'linear'
-  | 'logarithmic'
-  | 'exponential'
-  | 'cosine'
-  | 'S-curve'
 /**
  * https://lua-api.factorio.com/stable/types/MapGenSize.html
  *
@@ -2412,6 +2955,26 @@ export type BeltStackSizeBonusModifier = SimpleModifier & {
 export type BoolModifier = BaseModifier & {
   modifier: Bool
 }
+/**
+ * https://lua-api.factorio.com/stable/types/EntityIDFilter.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "EntityIDFilter".
+ */
+export type EntityIDFilter =
+  | {
+      name: EntityID
+      quality?: QualityID
+      comparator?: ComparatorString
+    }
+  | EntityID
+/**
+ * https://lua-api.factorio.com/stable/types/ComparatorString.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "ComparatorString".
+ */
+export type ComparatorString = '=' | '>' | '<' | '≥' | '>=' | '≤' | '<=' | '≠' | '!='
 /**
  * https://lua-api.factorio.com/stable/types/BulkInserterCapacityBonusModifier.html
  *
@@ -2498,6 +3061,18 @@ export type EmptyWidgetStyleSpecification = BaseStyleSpecification & {
   type: 'empty_widget_style'
   graphical_set?: ElementImageSet
 }
+/**
+ * https://lua-api.factorio.com/stable/types/LayeredSprite.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "LayeredSprite".
+ */
+export type LayeredSprite =
+  | (Sprite & {
+      render_layer: RenderLayer
+    })
+  | LayeredSprite[]
+  | {}
 /**
  * https://lua-api.factorio.com/stable/types/LayeredSpriteVariations.html
  *
@@ -2716,18 +3291,6 @@ export type CloudEffectStyle =
  */
 export type EffectTexture = SpriteSource
 /**
- * https://lua-api.factorio.com/stable/types/ClusterTriggerItem.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "ClusterTriggerItem".
- */
-export type ClusterTriggerItem = TriggerItem & {
-  type: 'cluster'
-  cluster_count: Uint32
-  distance: Float
-  distance_deviation?: Float
-}
-/**
  * https://lua-api.factorio.com/stable/types/CollisionLayerID.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -2750,13 +3313,6 @@ export type ColorLookupTable = FileName | 'identity'
 export type ColumnWidth = ColumnWidthItem & {
   column: Uint32
 }
-/**
- * https://lua-api.factorio.com/stable/types/ComparatorString.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "ComparatorString".
- */
-export type ComparatorString = '=' | '>' | '<' | '≥' | '>=' | '≤' | '<=' | '≠' | '!='
 /**
  * https://lua-api.factorio.com/stable/types/ConsumingType.html
  *
@@ -2791,6 +3347,19 @@ export type ProcessionGraphicType =
   | 'pod-catalogue'
   | 'location-catalogue'
   | 'hatch-location-catalogue-index'
+/**
+ * https://lua-api.factorio.com/stable/types/ItemIDFilter.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "ItemIDFilter".
+ */
+export type ItemIDFilter =
+  | {
+      name: ItemID
+      quality?: QualityID
+      comparator?: ComparatorString
+    }
+  | ItemID
 /**
  * https://lua-api.factorio.com/stable/types/CreateAsteroidChunkEffectItem.html
  *
@@ -2979,16 +3548,6 @@ export type DestroyDecorativesTriggerEffectItem = TriggerEffectItem & {
   include_decals?: Bool
   invoke_decorative_trigger?: Bool
   decoratives_with_trigger_only?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/DirectTriggerItem.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "DirectTriggerItem".
- */
-export type DirectTriggerItem = TriggerItem & {
-  type: 'direct'
-  filter_enabled?: Bool
 }
 /**
  * https://lua-api.factorio.com/stable/types/DirectionString.html
@@ -3318,6 +3877,20 @@ export type GiveItemModifier = BaseModifier & {
   count?: ItemCountType
 }
 /**
+ * https://lua-api.factorio.com/stable/types/Vector4f.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "Vector4f".
+ */
+export type Vector4F =
+  | {
+      x: Float
+      y: Float
+      z: Float
+      w: Float
+    }
+  | [Float, Float, Float, Float]
+/**
  * https://lua-api.factorio.com/stable/types/GlowStyleSpecification.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -3449,18 +4022,6 @@ export type LightningPriorityRule = LightningRuleBase & {
 export type LineStyleSpecification = BaseStyleSpecification & {
   type: 'line_style'
   border?: BorderImageSet
-}
-/**
- * https://lua-api.factorio.com/stable/types/LineTriggerItem.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "LineTriggerItem".
- */
-export type LineTriggerItem = TriggerItem & {
-  type: 'line'
-  range: Double
-  width: Double
-  range_effects?: TriggerEffect
 }
 /**
  * https://lua-api.factorio.com/stable/types/LinkedGameControl.html
@@ -3956,6 +4517,17 @@ export type NestedTriggerEffectItem = TriggerEffectItem & {
   action: Trigger
 }
 /**
+ * https://lua-api.factorio.com/stable/types/PersistentWorldAmbientSoundDefinition.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "PersistentWorldAmbientSoundDefinition".
+ */
+export type PersistentWorldAmbientSoundDefinition =
+  | {
+      sound: Sound
+    }
+  | Sound
+/**
  * https://lua-api.factorio.com/stable/types/PersistentWorldAmbientSoundsDefinitionCrossfade.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -3968,6 +4540,19 @@ export type PersistentWorldAmbientSoundsDefinitionCrossfade = Fade & {
    */
   order: ['wind' | 'base_ambience', 'wind' | 'base_ambience']
 }
+/**
+ * https://lua-api.factorio.com/stable/types/SemiPersistentWorldAmbientSoundDefinition.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "SemiPersistentWorldAmbientSoundDefinition".
+ */
+export type SemiPersistentWorldAmbientSoundDefinition =
+  | {
+      sound: Sound
+      delay_mean_seconds?: Float
+      delay_variance_seconds?: Float
+    }
+  | Sound
 /**
  * https://lua-api.factorio.com/stable/types/PlaySoundTriggerEffectItem.html
  *
@@ -4166,6 +4751,24 @@ export type RandomRange = Uint8
  */
 export type ResearchIngredient = [ItemID, Uint16]
 /**
+ * https://lua-api.factorio.com/stable/types/RotatedAnimation8Way.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "RotatedAnimation8Way".
+ */
+export type RotatedAnimation8Way =
+  | {
+      north: RotatedAnimation
+      north_east?: RotatedAnimation
+      east?: RotatedAnimation
+      south_east?: RotatedAnimation
+      south?: RotatedAnimation
+      south_west?: RotatedAnimation
+      west?: RotatedAnimation
+      north_west?: RotatedAnimation
+    }
+  | RotatedAnimation
+/**
  * https://lua-api.factorio.com/stable/types/RotatedAnimationVariations.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -4216,6 +4819,25 @@ export type SignalColorMapping = SignalIDConnector & {
   color: Color
 }
 /**
+ * https://lua-api.factorio.com/stable/types/SoundDefinition.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "SoundDefinition".
+ */
+export type SoundDefinition =
+  | {
+      filename: FileName
+      volume?: Float
+      min_volume?: Float
+      max_volume?: Float
+      preload?: Bool
+      speed?: Float
+      min_speed?: Float
+      max_speed?: Float
+      modifiers?: SoundModifier | SoundModifier[] | {}
+    }
+  | FileName
+/**
  * https://lua-api.factorio.com/stable/types/SoundModifierType.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -4247,6 +4869,19 @@ export type SoundType =
   | 'explosion'
   | 'enemy'
 /**
+ * https://lua-api.factorio.com/stable/types/SpaceConnectionAsteroidSpawnDefinition.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "SpaceConnectionAsteroidSpawnDefinition".
+ */
+export type SpaceConnectionAsteroidSpawnDefinition =
+  | {
+      type?: 'entity' | 'asteroid-chunk'
+      asteroid: EntityID | AsteroidChunkID
+      spawn_points: SpaceConnectionAsteroidSpawnPoint[] | {}
+    }
+  | [EntityID, SpaceConnectionAsteroidSpawnPoint[] | {}]
+/**
  * https://lua-api.factorio.com/stable/types/SpaceConnectionAsteroidSpawnPoint.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -4272,6 +4907,18 @@ export type SpaceLocationAsteroidSpawnDefinition = AsteroidSpawnPoint & {
   type?: 'entity' | 'asteroid-chunk'
   asteroid: EntityID | AsteroidChunkID
 }
+/**
+ * https://lua-api.factorio.com/stable/types/SpawnPoint.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "SpawnPoint".
+ */
+export type SpawnPoint =
+  | {
+      evolution_factor: Double
+      spawn_weight: Double
+    }
+  | [Double, Double]
 /**
  * https://lua-api.factorio.com/stable/types/SpeechBubbleStyleSpecification.html
  *
@@ -4304,23 +4951,6 @@ export type SpiderVehicleGraphicsSet = SpiderTorsoGraphicsSet & {
   autopilot_path_visualisation_line_width?: Float
   autopilot_path_visualisation_on_map_line_width?: Float
   light_positions?: (Vector[] | {})[] | {}
-}
-/**
- * https://lua-api.factorio.com/stable/types/SpriteSheet.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "SpriteSheet".
- */
-export type SpriteSheet = SpriteParameters & {
-  layers?: SpriteSheet[] | {}
-  variation_count?: Uint32
-  repeat_count?: Uint32
-  line_length?: Uint32
-  filenames?: FileName[] | {}
-  lines_per_file?: Uint32
-  dice?: SpriteSizeType
-  dice_x?: SpriteSizeType
-  dice_y?: SpriteSizeType
 }
 /**
  * https://lua-api.factorio.com/stable/types/StyleSpecification.html
@@ -4553,6 +5183,19 @@ export type ThrusterGraphicsSet = WorkingVisualisations & {
   flame_effect_offset?: Float
 }
 /**
+ * https://lua-api.factorio.com/stable/types/ThrusterPerformancePoint.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "ThrusterPerformancePoint".
+ */
+export type ThrusterPerformancePoint =
+  | {
+      fluid_volume: Double
+      fluid_usage: FluidAmount
+      effectivity: Double
+    }
+  | [Double, Double, Double]
+/**
  * https://lua-api.factorio.com/stable/types/TileLightPictures.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -4762,6 +5405,37 @@ export type TurretState =
   | 'ending-attack'
   | 'rotate-for-folding'
   | 'folding'
+/**
+ * https://lua-api.factorio.com/stable/types/TurretSpecialEffectCenter.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "TurretSpecialEffectCenter".
+ */
+export type TurretSpecialEffectCenter =
+  | {
+      default?: Vector
+      north?: Vector
+      north_east?: Vector
+      east?: Vector
+      south_east?: Vector
+      south?: Vector
+      south_west?: Vector
+      west?: Vector
+      north_west?: Vector
+    }
+  | Vector
+/**
+ * https://lua-api.factorio.com/stable/types/UnitSpawnDefinition.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "UnitSpawnDefinition".
+ */
+export type UnitSpawnDefinition =
+  | {
+      unit: EntityID
+      spawn_points: SpawnPoint[] | {}
+    }
+  | [EntityID, SpawnPoint[] | {}]
 /**
  * https://lua-api.factorio.com/stable/types/VariableAmbientSoundCompositionMode.html
  *
@@ -9806,24 +10480,6 @@ export interface IconData {
   draw_background?: Bool
 }
 /**
- * https://lua-api.factorio.com/stable/types/Color.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "Color".
- */
-export interface Color {
-  [k: string]: unknown
-}
-/**
- * https://lua-api.factorio.com/stable/types/Vector.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "Vector".
- */
-export interface Vector {
-  [k: string]: unknown
-}
-/**
  * https://lua-api.factorio.com/stable/types/CollisionMaskConnector.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -9838,22 +10494,26 @@ export interface CollisionMaskConnector {
   colliding_with_tiles_only?: Bool
 }
 /**
- * https://lua-api.factorio.com/stable/types/SpriteVariations.html
+ * https://lua-api.factorio.com/stable/types/SpriteSource.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "SpriteVariations".
+ * via the `definition` "SpriteSource".
  */
-export interface SpriteVariations {
-  [k: string]: unknown
-}
-/**
- * https://lua-api.factorio.com/stable/types/ItemPrototypeFlags.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "ItemPrototypeFlags".
- */
-export interface ItemPrototypeFlags {
-  [k: string]: unknown
+export interface SpriteSource {
+  filename?: FileName
+  size?: SpriteSizeType | [SpriteSizeType, SpriteSizeType]
+  width?: SpriteSizeType
+  height?: SpriteSizeType
+  x?: SpriteSizeType
+  y?: SpriteSizeType
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  position?: [SpriteSizeType, SpriteSizeType]
+  load_in_minimal_mode?: Bool
+  premul_alpha?: Bool
+  allow_forced_downscale?: Bool
 }
 /**
  * https://lua-api.factorio.com/stable/types/Sound.html
@@ -9885,12 +10545,38 @@ export interface SpoilToTriggerResult {
   items_per_trigger: ItemCountType
 }
 /**
- * https://lua-api.factorio.com/stable/types/Trigger.html
+ * https://lua-api.factorio.com/stable/types/TriggerItem.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "Trigger".
+ * via the `definition` "TriggerItem".
  */
-export interface Trigger {
+export interface TriggerItem {
+  entity_flags?: EntityPrototypeFlags
+  collision_mask?: CollisionMaskConnector
+  ignore_collision_condition?: Bool
+  trigger_target_mask?: TriggerTargetMask
+  repeat_count?: Uint32
+  probability?: Float
+  action_delivery?: TriggerDelivery | TriggerDelivery[] | {}
+  force?: ForceCondition
+}
+/**
+ * https://lua-api.factorio.com/stable/types/TriggerDeliveryItem.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "TriggerDeliveryItem".
+ */
+export interface TriggerDeliveryItem {
+  source_effects?: TriggerEffect
+  target_effects?: TriggerEffect
+}
+/**
+ * https://lua-api.factorio.com/stable/types/TriggerEffect.html
+ *
+ * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
+ * via the `definition` "TriggerEffect".
+ */
+export interface TriggerEffect {
   [k: string]: unknown
 }
 /**
@@ -9941,15 +10627,6 @@ export interface Resistance {
   percent?: Float
 }
 /**
- * https://lua-api.factorio.com/stable/types/BoundingBox.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "BoundingBox".
- */
-export interface BoundingBox {
-  [k: string]: unknown
-}
-/**
  * https://lua-api.factorio.com/stable/types/InterruptibleSound.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -9963,15 +10640,6 @@ export interface InterruptibleSound {
   fade_ticks?: Uint32
 }
 /**
- * https://lua-api.factorio.com/stable/types/EntityPrototypeFlags.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "EntityPrototypeFlags".
- */
-export interface EntityPrototypeFlags {
-  [k: string]: unknown
-}
-/**
  * https://lua-api.factorio.com/stable/types/TileBuildabilityRule.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -9982,15 +10650,6 @@ export interface TileBuildabilityRule {
   required_tiles?: CollisionMaskConnector
   colliding_tiles?: CollisionMaskConnector
   remove_on_collision?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/SimpleBoundingBox.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "SimpleBoundingBox".
- */
-export interface SimpleBoundingBox {
-  [k: string]: unknown
 }
 /**
  * https://lua-api.factorio.com/stable/types/MinableProperties.html
@@ -10065,52 +10724,12 @@ export interface TriggerEffectItem {
   damage_type_filters?: DamageTypeFilters
 }
 /**
- * https://lua-api.factorio.com/stable/types/DamageTypeFilters.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "DamageTypeFilters".
- */
-export interface DamageTypeFilters {
-  [k: string]: unknown
-}
-/**
  * https://lua-api.factorio.com/stable/types/WorkingSound.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
  * via the `definition` "WorkingSound".
  */
 export interface WorkingSound {
-  [k: string]: unknown
-}
-/**
- * https://lua-api.factorio.com/stable/types/SpriteSource.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "SpriteSource".
- */
-export interface SpriteSource {
-  filename?: FileName
-  size?: SpriteSizeType | [SpriteSizeType, SpriteSizeType]
-  width?: SpriteSizeType
-  height?: SpriteSizeType
-  x?: SpriteSizeType
-  y?: SpriteSizeType
-  /**
-   * @minItems 2
-   * @maxItems 2
-   */
-  position?: [SpriteSizeType, SpriteSizeType]
-  load_in_minimal_mode?: Bool
-  premul_alpha?: Bool
-  allow_forced_downscale?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/SpriteFlags.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "SpriteFlags".
- */
-export interface SpriteFlags {
   [k: string]: unknown
 }
 /**
@@ -10168,22 +10787,17 @@ export interface StatelessVisualisation {
   can_lay_on_the_ground?: Bool
 }
 /**
- * https://lua-api.factorio.com/stable/types/AnimationVariations.html
+ * https://lua-api.factorio.com/stable/types/Stripe.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "AnimationVariations".
+ * via the `definition` "Stripe".
  */
-export interface AnimationVariations {
-  [k: string]: unknown
-}
-/**
- * https://lua-api.factorio.com/stable/types/LightDefinition.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "LightDefinition".
- */
-export interface LightDefinition {
-  [k: string]: unknown
+export interface Stripe {
+  width_in_frames: Uint32
+  height_in_frames: Uint32
+  filename: FileName
+  x?: Uint32
+  y?: Uint32
 }
 /**
  * https://lua-api.factorio.com/stable/types/ItemToPlace.html
@@ -10194,15 +10808,6 @@ export interface LightDefinition {
 export interface ItemToPlace {
   item: ItemID
   count: ItemCountType
-}
-/**
- * https://lua-api.factorio.com/stable/types/TilePosition.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "TilePosition".
- */
-export interface TilePosition {
-  [k: string]: unknown
 }
 /**
  * https://lua-api.factorio.com/stable/types/AutoplaceSpecification.html
@@ -10254,15 +10859,6 @@ export interface WaterReflectionDefinition {
   rotate?: Bool
 }
 /**
- * https://lua-api.factorio.com/stable/types/WorldAmbientSoundDefinition.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "WorldAmbientSoundDefinition".
- */
-export interface WorldAmbientSoundDefinition {
-  [k: string]: unknown
-}
-/**
  * https://lua-api.factorio.com/stable/types/IconDrawSpecification.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -10288,24 +10884,6 @@ export interface IconSequencePositioning {
   scale?: Float
   separation_multiplier?: Float
   multi_row_initial_height_modifier?: Float
-}
-/**
- * https://lua-api.factorio.com/stable/types/ExplosionDefinition.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "ExplosionDefinition".
- */
-export interface ExplosionDefinition {
-  [k: string]: unknown
-}
-/**
- * https://lua-api.factorio.com/stable/types/TriggerEffect.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "TriggerEffect".
- */
-export interface TriggerEffect {
-  [k: string]: unknown
 }
 /**
  * https://lua-api.factorio.com/stable/types/LootItem.html
@@ -10409,15 +10987,6 @@ export interface HeatConnection {
   direction: Direction
 }
 /**
- * https://lua-api.factorio.com/stable/types/MapPosition.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "MapPosition".
- */
-export interface MapPosition {
-  [k: string]: unknown
-}
-/**
  * https://lua-api.factorio.com/stable/types/FluidBox.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -10497,15 +11066,6 @@ export interface Effect {
   productivity?: EffectValue
   pollution?: EffectValue
   quality?: EffectValue
-}
-/**
- * https://lua-api.factorio.com/stable/types/EffectTypeLimitation.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "EffectTypeLimitation".
- */
-export interface EffectTypeLimitation {
-  [k: string]: unknown
 }
 /**
  * https://lua-api.factorio.com/stable/types/WorkingVisualisations.html
@@ -10731,15 +11291,6 @@ export interface SelectionModeData {
   tile_filter_mode?: 'whitelist' | 'blacklist'
 }
 /**
- * https://lua-api.factorio.com/stable/types/SelectionModeFlags.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "SelectionModeFlags".
- */
-export interface SelectionModeFlags {
-  [k: string]: unknown
-}
-/**
  * https://lua-api.factorio.com/stable/types/ThrowCapsuleAction.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -10782,28 +11333,6 @@ export interface BaseAttackParameters {
   use_shooter_direction?: Bool
   ammo_categories?: AmmoCategoryID[] | {}
   ammo_category?: AmmoCategoryID
-}
-/**
- * https://lua-api.factorio.com/stable/types/LayeredSound.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "LayeredSound".
- */
-export interface LayeredSound {
-  [k: string]: unknown
-}
-/**
- * https://lua-api.factorio.com/stable/types/Stripe.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "Stripe".
- */
-export interface Stripe {
-  width_in_frames: Uint32
-  height_in_frames: Uint32
-  filename: FileName
-  x?: Uint32
-  y?: Uint32
 }
 /**
  * https://lua-api.factorio.com/stable/types/CyclicSound.html
@@ -11071,15 +11600,6 @@ export interface BaseStyleSpecification {
   tooltip?: LocalisedString
 }
 /**
- * https://lua-api.factorio.com/stable/types/ElementImageSet.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "ElementImageSet".
- */
-export interface ElementImageSet {
-  [k: string]: unknown
-}
-/**
  * https://lua-api.factorio.com/stable/types/ActivityMatchingModifiers.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -11104,13 +11624,14 @@ export interface AdvancedVolumeControl {
   darkness_threshold?: Float
 }
 /**
- * https://lua-api.factorio.com/stable/types/Fade.html
+ * https://lua-api.factorio.com/stable/types/Attenuation.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "Fade".
+ * via the `definition` "Attenuation".
  */
-export interface Fade {
-  [k: string]: unknown
+export interface Attenuation {
+  curve_type: AttenuationType
+  tuning_parameter?: Float
 }
 /**
  * https://lua-api.factorio.com/stable/types/Fades.html
@@ -11183,15 +11704,6 @@ export interface AgriculturalCraneSpeedGrappler {
   horizontal_turn_rate?: Double
   extension_speed?: Double
   allow_transpolar_movement?: Bool
-}
-/**
- * https://lua-api.factorio.com/stable/types/Vector3D.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "Vector3D".
- */
-export interface Vector3D {
-  [k: string]: unknown
 }
 /**
  * https://lua-api.factorio.com/stable/types/CranePart.html
@@ -11404,32 +11916,6 @@ export interface AnyPrototype {
   [k: string]: unknown
 }
 /**
- * https://lua-api.factorio.com/stable/types/TriggerItem.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "TriggerItem".
- */
-export interface TriggerItem {
-  entity_flags?: EntityPrototypeFlags
-  collision_mask?: CollisionMaskConnector
-  ignore_collision_condition?: Bool
-  trigger_target_mask?: TriggerTargetMask
-  repeat_count?: Uint32
-  probability?: Float
-  action_delivery?: TriggerDelivery | TriggerDelivery[] | {}
-  force?: ForceCondition
-}
-/**
- * https://lua-api.factorio.com/stable/types/TriggerDeliveryItem.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "TriggerDeliveryItem".
- */
-export interface TriggerDeliveryItem {
-  source_effects?: TriggerEffect
-  target_effects?: TriggerEffect
-}
-/**
  * https://lua-api.factorio.com/stable/types/AsteroidGraphicsSet.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -11492,16 +11978,6 @@ export interface AsteroidSpawnPoint {
   probability: Double
   speed: Double
   angle_when_stopped?: Double
-}
-/**
- * https://lua-api.factorio.com/stable/types/Attenuation.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "Attenuation".
- */
-export interface Attenuation {
-  curve_type: AttenuationType
-  tuning_parameter?: Float
 }
 /**
  * https://lua-api.factorio.com/stable/types/AutoplaceSettings.html
@@ -11674,15 +12150,6 @@ export interface BuildEntityTechnologyTrigger {
   entity: EntityIDFilter
 }
 /**
- * https://lua-api.factorio.com/stable/types/EntityIDFilter.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "EntityIDFilter".
- */
-export interface EntityIDFilter {
-  [k: string]: unknown
-}
-/**
  * https://lua-api.factorio.com/stable/types/CaptureSpawnerTechnologyTrigger.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -11703,15 +12170,6 @@ export interface CargoBayConnectableGraphicsSet {
   animation?: Animation
   animation_render_layer?: RenderLayer
   connections?: CargoBayConnections
-}
-/**
- * https://lua-api.factorio.com/stable/types/LayeredSprite.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "LayeredSprite".
- */
-export interface LayeredSprite {
-  [k: string]: unknown
 }
 /**
  * https://lua-api.factorio.com/stable/types/CargoBayConnections.html
@@ -11926,15 +12384,6 @@ export interface ConnectableEntityGraphics {
   cross: SpriteVariations
 }
 /**
- * https://lua-api.factorio.com/stable/types/ControlPoint.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "ControlPoint".
- */
-export interface ControlPoint {
-  [k: string]: unknown
-}
-/**
  * https://lua-api.factorio.com/stable/types/CoverGraphicEffectData.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -12035,15 +12484,6 @@ export interface CraftItemTechnologyTrigger {
   count?: ItemCountType
 }
 /**
- * https://lua-api.factorio.com/stable/types/ItemIDFilter.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "ItemIDFilter".
- */
-export interface ItemIDFilter {
-  [k: string]: unknown
-}
-/**
  * https://lua-api.factorio.com/stable/types/CraterPlacementDefinition.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -12105,15 +12545,6 @@ export interface DataExtendMethod {
 export interface DifficultySettings {
   technology_price_multiplier?: Double
   spoil_time_modifier?: Double
-}
-/**
- * https://lua-api.factorio.com/stable/types/ElementImageSetLayer.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "ElementImageSetLayer".
- */
-export interface ElementImageSetLayer {
-  [k: string]: unknown
 }
 /**
  * https://lua-api.factorio.com/stable/types/EnemyEvolutionSettings.html
@@ -12385,15 +12816,6 @@ export interface GlobalTintEffectProperties {
   global_scale: Float
   zoom_factor: Float
   zoom_intensity: Float
-}
-/**
- * https://lua-api.factorio.com/stable/types/Vector4f.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "Vector4f".
- */
-export interface Vector4F {
-  [k: string]: unknown
 }
 /**
  * https://lua-api.factorio.com/stable/types/HeatBuffer.html
@@ -12761,15 +13183,6 @@ export interface PathFinderSettings {
   negative_path_cache_delay_interval: Uint32
 }
 /**
- * https://lua-api.factorio.com/stable/types/PersistentWorldAmbientSoundDefinition.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "PersistentWorldAmbientSoundDefinition".
- */
-export interface PersistentWorldAmbientSoundDefinition {
-  [k: string]: unknown
-}
-/**
  * https://lua-api.factorio.com/stable/types/PersistentWorldAmbientSoundsDefinition.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -12786,15 +13199,6 @@ export interface PersistentWorldAmbientSoundsDefinition {
     | SemiPersistentWorldAmbientSoundDefinition
     | SemiPersistentWorldAmbientSoundDefinition[]
     | {}
-}
-/**
- * https://lua-api.factorio.com/stable/types/SemiPersistentWorldAmbientSoundDefinition.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "SemiPersistentWorldAmbientSoundDefinition".
- */
-export interface SemiPersistentWorldAmbientSoundDefinition {
-  [k: string]: unknown
 }
 /**
  * https://lua-api.factorio.com/stable/types/PipePictures.html
@@ -13463,15 +13867,6 @@ export interface RollingStockRotatedSlopedGraphics {
   slope_angle_between_frames?: Double
 }
 /**
- * https://lua-api.factorio.com/stable/types/RotatedAnimation8Way.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "RotatedAnimation8Way".
- */
-export interface RotatedAnimation8Way {
-  [k: string]: unknown
-}
-/**
  * https://lua-api.factorio.com/stable/types/SegmentEngineSpecification.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -13523,15 +13918,6 @@ export interface SoundAccent {
   play_for_working_visualisations?: String[] | {}
 }
 /**
- * https://lua-api.factorio.com/stable/types/SoundDefinition.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "SoundDefinition".
- */
-export interface SoundDefinition {
-  [k: string]: unknown
-}
-/**
  * https://lua-api.factorio.com/stable/types/SoundModifier.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -13540,15 +13926,6 @@ export interface SoundDefinition {
 export interface SoundModifier {
   type: SoundModifierType
   volume_multiplier: Float
-}
-/**
- * https://lua-api.factorio.com/stable/types/SpaceConnectionAsteroidSpawnDefinition.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "SpaceConnectionAsteroidSpawnDefinition".
- */
-export interface SpaceConnectionAsteroidSpawnDefinition {
-  [k: string]: unknown
 }
 /**
  * https://lua-api.factorio.com/stable/types/SpaceDustEffectProperties.html
@@ -13594,15 +13971,6 @@ export interface SpaceTileEffectParameters {
 export interface SpacingItem {
   index: Uint32
   spacing: Int32
-}
-/**
- * https://lua-api.factorio.com/stable/types/SpawnPoint.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "SpawnPoint".
- */
-export interface SpawnPoint {
-  [k: string]: unknown
 }
 /**
  * https://lua-api.factorio.com/stable/types/SpiderEngineSpecification.html
@@ -13709,15 +14077,6 @@ export interface TechnologyUnit {
   count_formula?: MathExpression
   time: Double
   ingredients: ResearchIngredient[] | {}
-}
-/**
- * https://lua-api.factorio.com/stable/types/ThrusterPerformancePoint.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "ThrusterPerformancePoint".
- */
-export interface ThrusterPerformancePoint {
-  [k: string]: unknown
 }
 /**
  * https://lua-api.factorio.com/stable/types/TileBasedParticleTints.html
@@ -14007,15 +14366,6 @@ export interface TurretSpecialEffect {
   attacking_falloff?: Float
 }
 /**
- * https://lua-api.factorio.com/stable/types/TurretSpecialEffectCenter.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "TurretSpecialEffectCenter".
- */
-export interface TurretSpecialEffectCenter {
-  [k: string]: unknown
-}
-/**
  * https://lua-api.factorio.com/stable/types/UnitAISettings.html
  *
  * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
@@ -14069,15 +14419,6 @@ export interface UnitGroupSettings {
   tick_tolerance_when_member_arrives: Uint32
   max_gathering_unit_groups: Uint32
   max_unit_group_size: Uint32
-}
-/**
- * https://lua-api.factorio.com/stable/types/UnitSpawnDefinition.html
- *
- * This interface was referenced by `FactorioDataRaw`'s JSON-Schema
- * via the `definition` "UnitSpawnDefinition".
- */
-export interface UnitSpawnDefinition {
-  [k: string]: unknown
 }
 /**
  * https://lua-api.factorio.com/stable/types/VariableAmbientSoundLayer.html

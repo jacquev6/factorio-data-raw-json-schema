@@ -720,7 +720,46 @@
       ]
     },
     "Animation4Way": {
-      "description": "https://lua-api.factorio.com/stable/types/Animation4Way.html"
+      "description": "https://lua-api.factorio.com/stable/types/Animation4Way.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "north": {
+              "$ref": "#/definitions/Animation"
+            },
+            "north_east": {
+              "$ref": "#/definitions/Animation"
+            },
+            "east": {
+              "$ref": "#/definitions/Animation"
+            },
+            "south_east": {
+              "$ref": "#/definitions/Animation"
+            },
+            "south": {
+              "$ref": "#/definitions/Animation"
+            },
+            "south_west": {
+              "$ref": "#/definitions/Animation"
+            },
+            "west": {
+              "$ref": "#/definitions/Animation"
+            },
+            "north_west": {
+              "$ref": "#/definitions/Animation"
+            }
+          },
+          "required": ["north"]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Animation"
+            }
+          ]
+        }
+      ]
     },
     "AnimationElement": {
       "description": "https://lua-api.factorio.com/stable/types/AnimationElement.html",
@@ -857,7 +896,52 @@
       ]
     },
     "AnimationVariations": {
-      "description": "https://lua-api.factorio.com/stable/types/AnimationVariations.html"
+      "description": "https://lua-api.factorio.com/stable/types/AnimationVariations.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "sheet": {
+              "$ref": "#/definitions/AnimationSheet"
+            },
+            "sheets": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AnimationSheet"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Animation"
+            }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/Animation"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
     },
     "AnyPrototype": {
       "description": "https://lua-api.factorio.com/stable/types/AnyPrototype.html"
@@ -2090,7 +2174,45 @@
       }
     },
     "BoundingBox": {
-      "description": "https://lua-api.factorio.com/stable/types/BoundingBox.html"
+      "description": "https://lua-api.factorio.com/stable/types/BoundingBox.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "left_top": {
+              "$ref": "#/definitions/MapPosition"
+            },
+            "right_bottom": {
+              "$ref": "#/definitions/MapPosition"
+            },
+            "orientation": {
+              "$ref": "#/definitions/RealOrientation"
+            }
+          },
+          "required": ["left_top", "right_bottom"]
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/MapPosition"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/MapPosition"
+                }
+              ]
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
     },
     "BoxSpecification": {
       "description": "https://lua-api.factorio.com/stable/types/BoxSpecification.html",
@@ -3804,7 +3926,89 @@
       "required": ["layers"]
     },
     "Color": {
-      "description": "https://lua-api.factorio.com/stable/types/Color.html"
+      "description": "https://lua-api.factorio.com/stable/types/Color.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "r": {
+              "$ref": "#/definitions/float"
+            },
+            "g": {
+              "$ref": "#/definitions/float"
+            },
+            "b": {
+              "$ref": "#/definitions/float"
+            },
+            "a": {
+              "$ref": "#/definitions/float"
+            }
+          }
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ]
+            }
+          ],
+          "minItems": 3,
+          "maxItems": 3
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ]
+            }
+          ],
+          "minItems": 4,
+          "maxItems": 4
+        }
+      ]
     },
     "ColorHintSpecification": {
       "description": "https://lua-api.factorio.com/stable/types/ColorHintSpecification.html",
@@ -4055,7 +4259,42 @@
       ]
     },
     "ControlPoint": {
-      "description": "https://lua-api.factorio.com/stable/types/ControlPoint.html"
+      "description": "https://lua-api.factorio.com/stable/types/ControlPoint.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "$ref": "#/definitions/float"
+            },
+            "volume_percentage": {
+              "$ref": "#/definitions/float"
+            }
+          },
+          "required": ["control", "volume_percentage"]
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ]
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
     },
     "CountBasedTipTrigger": {
       "description": "https://lua-api.factorio.com/stable/types/CountBasedTipTrigger.html",
@@ -5079,7 +5318,56 @@
       ]
     },
     "DamageTypeFilters": {
-      "description": "https://lua-api.factorio.com/stable/types/DamageTypeFilters.html"
+      "description": "https://lua-api.factorio.com/stable/types/DamageTypeFilters.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "types": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/DamageTypeID"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DamageTypeID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "whitelist": {
+              "$ref": "#/definitions/bool"
+            }
+          },
+          "required": ["types"]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DamageTypeID"
+            }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/DamageTypeID"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
     },
     "DamageTypeID": {
       "description": "https://lua-api.factorio.com/stable/types/DamageTypeID.html",
@@ -5579,7 +5867,64 @@
       ]
     },
     "EffectTypeLimitation": {
-      "description": "https://lua-api.factorio.com/stable/types/EffectTypeLimitation.html"
+      "description": "https://lua-api.factorio.com/stable/types/EffectTypeLimitation.html",
+      "oneOf": [
+        {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "speed"
+            },
+            {
+              "type": "string",
+              "const": "productivity"
+            },
+            {
+              "type": "string",
+              "const": "consumption"
+            },
+            {
+              "type": "string",
+              "const": "pollution"
+            },
+            {
+              "type": "string",
+              "const": "quality"
+            }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "speed"
+              },
+              {
+                "type": "string",
+                "const": "productivity"
+              },
+              {
+                "type": "string",
+                "const": "consumption"
+              },
+              {
+                "type": "string",
+                "const": "pollution"
+              },
+              {
+                "type": "string",
+                "const": "quality"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
     },
     "EffectValue": {
       "description": "https://lua-api.factorio.com/stable/types/EffectValue.html",
@@ -5677,10 +6022,240 @@
       ]
     },
     "ElementImageSet": {
-      "description": "https://lua-api.factorio.com/stable/types/ElementImageSet.html"
+      "description": "https://lua-api.factorio.com/stable/types/ElementImageSet.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "base": {
+              "$ref": "#/definitions/ElementImageSetLayer"
+            },
+            "shadow": {
+              "$ref": "#/definitions/ElementImageSetLayer"
+            },
+            "glow": {
+              "$ref": "#/definitions/ElementImageSetLayer"
+            }
+          }
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ElementImageSetLayer"
+            }
+          ]
+        }
+      ]
     },
     "ElementImageSetLayer": {
-      "description": "https://lua-api.factorio.com/stable/types/ElementImageSetLayer.html"
+      "description": "https://lua-api.factorio.com/stable/types/ElementImageSetLayer.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "draw_type": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "inner"
+                },
+                {
+                  "type": "string",
+                  "const": "outer"
+                }
+              ]
+            },
+            "type": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "none"
+                },
+                {
+                  "type": "string",
+                  "const": "composition"
+                }
+              ]
+            },
+            "tint": {
+              "$ref": "#/definitions/Color"
+            },
+            "center": {
+              "$ref": "#/definitions/Sprite"
+            },
+            "left": {
+              "$ref": "#/definitions/Sprite"
+            },
+            "left_top": {
+              "$ref": "#/definitions/Sprite"
+            },
+            "left_bottom": {
+              "$ref": "#/definitions/Sprite"
+            },
+            "right": {
+              "$ref": "#/definitions/Sprite"
+            },
+            "right_top": {
+              "$ref": "#/definitions/Sprite"
+            },
+            "right_bottom": {
+              "$ref": "#/definitions/Sprite"
+            },
+            "top": {
+              "$ref": "#/definitions/Sprite"
+            },
+            "bottom": {
+              "$ref": "#/definitions/Sprite"
+            },
+            "corner_size": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/uint16"
+                },
+                {
+                  "type": "array",
+                  "items": [
+                    {
+                      "$ref": "#/definitions/uint16"
+                    },
+                    {
+                      "$ref": "#/definitions/uint16"
+                    }
+                  ],
+                  "minItems": 2,
+                  "maxItems": 2
+                }
+              ]
+            },
+            "filename": {
+              "$ref": "#/definitions/FileName"
+            },
+            "position": {
+              "$ref": "#/definitions/MapPosition"
+            },
+            "load_in_minimal_mode": {
+              "$ref": "#/definitions/bool"
+            },
+            "top_width": {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            "bottom_width": {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            "left_height": {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            "right_height": {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            "center_width": {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            "center_height": {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            "scale": {
+              "$ref": "#/definitions/double"
+            },
+            "top_border": {
+              "$ref": "#/definitions/int32"
+            },
+            "right_border": {
+              "$ref": "#/definitions/int32"
+            },
+            "bottom_border": {
+              "$ref": "#/definitions/int32"
+            },
+            "left_border": {
+              "$ref": "#/definitions/int32"
+            },
+            "border": {
+              "$ref": "#/definitions/int32"
+            },
+            "stretch_monolith_image_to_size": {
+              "$ref": "#/definitions/bool"
+            },
+            "left_tiling": {
+              "$ref": "#/definitions/bool"
+            },
+            "right_tiling": {
+              "$ref": "#/definitions/bool"
+            },
+            "top_tiling": {
+              "$ref": "#/definitions/bool"
+            },
+            "bottom_tiling": {
+              "$ref": "#/definitions/bool"
+            },
+            "center_tiling_vertical": {
+              "$ref": "#/definitions/bool"
+            },
+            "center_tiling_horizontal": {
+              "$ref": "#/definitions/bool"
+            },
+            "overall_tiling_horizontal_size": {
+              "$ref": "#/definitions/uint16"
+            },
+            "overall_tiling_horizontal_spacing": {
+              "$ref": "#/definitions/uint16"
+            },
+            "overall_tiling_horizontal_padding": {
+              "$ref": "#/definitions/uint16"
+            },
+            "overall_tiling_vertical_size": {
+              "$ref": "#/definitions/uint16"
+            },
+            "overall_tiling_vertical_spacing": {
+              "$ref": "#/definitions/uint16"
+            },
+            "overall_tiling_vertical_padding": {
+              "$ref": "#/definitions/uint16"
+            },
+            "custom_horizontal_tiling_sizes": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/uint32"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "opacity": {
+              "$ref": "#/definitions/double"
+            },
+            "background_blur": {
+              "$ref": "#/definitions/bool"
+            },
+            "background_blur_sigma": {
+              "$ref": "#/definitions/float"
+            },
+            "top_outer_border_shift": {
+              "$ref": "#/definitions/int32"
+            },
+            "bottom_outer_border_shift": {
+              "$ref": "#/definitions/int32"
+            },
+            "right_outer_border_shift": {
+              "$ref": "#/definitions/int32"
+            },
+            "left_outer_border_shift": {
+              "$ref": "#/definitions/int32"
+            }
+          }
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Sprite"
+            }
+          ]
+        }
+      ]
     },
     "EmptyWidgetStyleSpecification": {
       "description": "https://lua-api.factorio.com/stable/types/EmptyWidgetStyleSpecification.html",
@@ -5893,10 +6468,151 @@
       ]
     },
     "EntityIDFilter": {
-      "description": "https://lua-api.factorio.com/stable/types/EntityIDFilter.html"
+      "description": "https://lua-api.factorio.com/stable/types/EntityIDFilter.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "$ref": "#/definitions/EntityID"
+            },
+            "quality": {
+              "$ref": "#/definitions/QualityID"
+            },
+            "comparator": {
+              "$ref": "#/definitions/ComparatorString"
+            }
+          },
+          "required": ["name"]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            }
+          ]
+        }
+      ]
     },
     "EntityPrototypeFlags": {
-      "description": "https://lua-api.factorio.com/stable/types/EntityPrototypeFlags.html"
+      "description": "https://lua-api.factorio.com/stable/types/EntityPrototypeFlags.html",
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "not-rotatable"
+              },
+              {
+                "type": "string",
+                "const": "placeable-neutral"
+              },
+              {
+                "type": "string",
+                "const": "placeable-player"
+              },
+              {
+                "type": "string",
+                "const": "placeable-enemy"
+              },
+              {
+                "type": "string",
+                "const": "placeable-off-grid"
+              },
+              {
+                "type": "string",
+                "const": "player-creation"
+              },
+              {
+                "type": "string",
+                "const": "building-direction-8-way"
+              },
+              {
+                "type": "string",
+                "const": "filter-directions"
+              },
+              {
+                "type": "string",
+                "const": "get-by-unit-number"
+              },
+              {
+                "type": "string",
+                "const": "breaths-air"
+              },
+              {
+                "type": "string",
+                "const": "not-repairable"
+              },
+              {
+                "type": "string",
+                "const": "not-on-map"
+              },
+              {
+                "type": "string",
+                "const": "not-deconstructable"
+              },
+              {
+                "type": "string",
+                "const": "not-blueprintable"
+              },
+              {
+                "type": "string",
+                "const": "hide-alt-info"
+              },
+              {
+                "type": "string",
+                "const": "no-gap-fill-while-building"
+              },
+              {
+                "type": "string",
+                "const": "not-flammable"
+              },
+              {
+                "type": "string",
+                "const": "no-automated-item-removal"
+              },
+              {
+                "type": "string",
+                "const": "no-automated-item-insertion"
+              },
+              {
+                "type": "string",
+                "const": "no-copy-paste"
+              },
+              {
+                "type": "string",
+                "const": "not-selectable-in-game"
+              },
+              {
+                "type": "string",
+                "const": "not-upgradable"
+              },
+              {
+                "type": "string",
+                "const": "not-in-kill-statistics"
+              },
+              {
+                "type": "string",
+                "const": "building-direction-16-way"
+              },
+              {
+                "type": "string",
+                "const": "snap-to-rail-support-spot"
+              },
+              {
+                "type": "string",
+                "const": "not-in-made-in"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
     },
     "EntityStatus": {
       "description": "https://lua-api.factorio.com/stable/types/EntityStatus.html",
@@ -6276,10 +6992,58 @@
       "required": ["width", "height", "type"]
     },
     "ExplosionDefinition": {
-      "description": "https://lua-api.factorio.com/stable/types/ExplosionDefinition.html"
+      "description": "https://lua-api.factorio.com/stable/types/ExplosionDefinition.html",
+      "oneOf": [
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "$ref": "#/definitions/EntityID"
+            },
+            "offset": {
+              "$ref": "#/definitions/Vector"
+            }
+          },
+          "required": ["name"]
+        }
+      ]
     },
     "Fade": {
-      "description": "https://lua-api.factorio.com/stable/types/Fade.html"
+      "description": "https://lua-api.factorio.com/stable/types/Fade.html",
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Attenuation"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "from": {
+                  "$ref": "#/definitions/ControlPoint"
+                },
+                "to": {
+                  "$ref": "#/definitions/ControlPoint"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/AttenuationType"
+            }
+          ]
+        }
+      ]
     },
     "Fades": {
       "description": "https://lua-api.factorio.com/stable/types/Fades.html",
@@ -8101,7 +8865,31 @@
       ]
     },
     "ItemIDFilter": {
-      "description": "https://lua-api.factorio.com/stable/types/ItemIDFilter.html"
+      "description": "https://lua-api.factorio.com/stable/types/ItemIDFilter.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "$ref": "#/definitions/ItemID"
+            },
+            "quality": {
+              "$ref": "#/definitions/QualityID"
+            },
+            "comparator": {
+              "$ref": "#/definitions/ComparatorString"
+            }
+          },
+          "required": ["name"]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ItemID"
+            }
+          ]
+        }
+      ]
     },
     "ItemIngredientPrototype": {
       "description": "https://lua-api.factorio.com/stable/types/ItemIngredientPrototype.html",
@@ -8165,7 +8953,68 @@
       "required": ["type", "name"]
     },
     "ItemPrototypeFlags": {
-      "description": "https://lua-api.factorio.com/stable/types/ItemPrototypeFlags.html"
+      "description": "https://lua-api.factorio.com/stable/types/ItemPrototypeFlags.html",
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "draw-logistic-overlay"
+              },
+              {
+                "type": "string",
+                "const": "excluded-from-trash-unrequested"
+              },
+              {
+                "type": "string",
+                "const": "always-show"
+              },
+              {
+                "type": "string",
+                "const": "hide-from-bonus-gui"
+              },
+              {
+                "type": "string",
+                "const": "hide-from-fuel-tooltip"
+              },
+              {
+                "type": "string",
+                "const": "not-stackable"
+              },
+              {
+                "type": "string",
+                "const": "primary-place-result"
+              },
+              {
+                "type": "string",
+                "const": "mod-openable"
+              },
+              {
+                "type": "string",
+                "const": "only-in-cursor"
+              },
+              {
+                "type": "string",
+                "const": "spawnable"
+              },
+              {
+                "type": "string",
+                "const": "spoil-result"
+              },
+              {
+                "type": "string",
+                "const": "ignore-spoil-time-modifier"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
     },
     "ItemStackIndex": {
       "description": "https://lua-api.factorio.com/stable/types/ItemStackIndex.html",
@@ -8329,10 +9178,71 @@
       ]
     },
     "LayeredSound": {
-      "description": "https://lua-api.factorio.com/stable/types/LayeredSound.html"
+      "description": "https://lua-api.factorio.com/stable/types/LayeredSound.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "layers": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Sound"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "required": ["layers"]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Sound"
+            }
+          ]
+        }
+      ]
     },
     "LayeredSprite": {
-      "description": "https://lua-api.factorio.com/stable/types/LayeredSprite.html"
+      "description": "https://lua-api.factorio.com/stable/types/LayeredSprite.html",
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Sprite"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "render_layer": {
+                  "$ref": "#/definitions/RenderLayer"
+                }
+              },
+              "required": ["render_layer"]
+            }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/LayeredSprite"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
     },
     "LayeredSpriteVariations": {
       "description": "https://lua-api.factorio.com/stable/types/LayeredSpriteVariations.html",
@@ -8354,7 +9264,130 @@
       ]
     },
     "LightDefinition": {
-      "description": "https://lua-api.factorio.com/stable/types/LightDefinition.html"
+      "description": "https://lua-api.factorio.com/stable/types/LightDefinition.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "basic"
+                },
+                {
+                  "type": "string",
+                  "const": "oriented"
+                }
+              ]
+            },
+            "picture": {
+              "$ref": "#/definitions/Sprite"
+            },
+            "rotation_shift": {
+              "$ref": "#/definitions/RealOrientation"
+            },
+            "intensity": {
+              "$ref": "#/definitions/float"
+            },
+            "size": {
+              "$ref": "#/definitions/float"
+            },
+            "source_orientation_offset": {
+              "$ref": "#/definitions/RealOrientation"
+            },
+            "add_perspective": {
+              "$ref": "#/definitions/bool"
+            },
+            "flicker_interval": {
+              "$ref": "#/definitions/uint8"
+            },
+            "flicker_min_modifier": {
+              "$ref": "#/definitions/float"
+            },
+            "flicker_max_modifier": {
+              "$ref": "#/definitions/float"
+            },
+            "offset_flicker": {
+              "$ref": "#/definitions/bool"
+            },
+            "shift": {
+              "$ref": "#/definitions/Vector"
+            },
+            "color": {
+              "$ref": "#/definitions/Color"
+            },
+            "minimum_darkness": {
+              "$ref": "#/definitions/float"
+            }
+          },
+          "required": ["intensity", "size"]
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "const": "basic"
+                  },
+                  {
+                    "type": "string",
+                    "const": "oriented"
+                  }
+                ]
+              },
+              "picture": {
+                "$ref": "#/definitions/Sprite"
+              },
+              "rotation_shift": {
+                "$ref": "#/definitions/RealOrientation"
+              },
+              "intensity": {
+                "$ref": "#/definitions/float"
+              },
+              "size": {
+                "$ref": "#/definitions/float"
+              },
+              "source_orientation_offset": {
+                "$ref": "#/definitions/RealOrientation"
+              },
+              "add_perspective": {
+                "$ref": "#/definitions/bool"
+              },
+              "flicker_interval": {
+                "$ref": "#/definitions/uint8"
+              },
+              "flicker_min_modifier": {
+                "$ref": "#/definitions/float"
+              },
+              "flicker_max_modifier": {
+                "$ref": "#/definitions/float"
+              },
+              "offset_flicker": {
+                "$ref": "#/definitions/bool"
+              },
+              "shift": {
+                "$ref": "#/definitions/Vector"
+              },
+              "color": {
+                "$ref": "#/definitions/Color"
+              },
+              "minimum_darkness": {
+                "$ref": "#/definitions/float"
+              }
+            },
+            "required": ["intensity", "size"]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
     },
     "LightFlickeringDefinition": {
       "description": "https://lua-api.factorio.com/stable/types/LightFlickeringDefinition.html",
@@ -9956,7 +10989,42 @@
       ]
     },
     "MapPosition": {
-      "description": "https://lua-api.factorio.com/stable/types/MapPosition.html"
+      "description": "https://lua-api.factorio.com/stable/types/MapPosition.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "x": {
+              "$ref": "#/definitions/double"
+            },
+            "y": {
+              "$ref": "#/definitions/double"
+            }
+          },
+          "required": ["x", "y"]
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/double"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/double"
+                }
+              ]
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
     },
     "MapTick": {
       "description": "https://lua-api.factorio.com/stable/types/MapTick.html",
@@ -11000,7 +12068,25 @@
       }
     },
     "PersistentWorldAmbientSoundDefinition": {
-      "description": "https://lua-api.factorio.com/stable/types/PersistentWorldAmbientSoundDefinition.html"
+      "description": "https://lua-api.factorio.com/stable/types/PersistentWorldAmbientSoundDefinition.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "sound": {
+              "$ref": "#/definitions/Sound"
+            }
+          },
+          "required": ["sound"]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Sound"
+            }
+          ]
+        }
+      ]
     },
     "PersistentWorldAmbientSoundsDefinition": {
       "description": "https://lua-api.factorio.com/stable/types/PersistentWorldAmbientSoundsDefinition.html",
@@ -13812,7 +14898,46 @@
       ]
     },
     "RotatedAnimation8Way": {
-      "description": "https://lua-api.factorio.com/stable/types/RotatedAnimation8Way.html"
+      "description": "https://lua-api.factorio.com/stable/types/RotatedAnimation8Way.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "north": {
+              "$ref": "#/definitions/RotatedAnimation"
+            },
+            "north_east": {
+              "$ref": "#/definitions/RotatedAnimation"
+            },
+            "east": {
+              "$ref": "#/definitions/RotatedAnimation"
+            },
+            "south_east": {
+              "$ref": "#/definitions/RotatedAnimation"
+            },
+            "south": {
+              "$ref": "#/definitions/RotatedAnimation"
+            },
+            "south_west": {
+              "$ref": "#/definitions/RotatedAnimation"
+            },
+            "west": {
+              "$ref": "#/definitions/RotatedAnimation"
+            },
+            "north_west": {
+              "$ref": "#/definitions/RotatedAnimation"
+            }
+          },
+          "required": ["north"]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/RotatedAnimation"
+            }
+          ]
+        }
+      ]
     },
     "RotatedAnimationVariations": {
       "description": "https://lua-api.factorio.com/stable/types/RotatedAnimationVariations.html",
@@ -14190,10 +15315,267 @@
       "required": ["border_color", "cursor_box_type", "mode"]
     },
     "SelectionModeFlags": {
-      "description": "https://lua-api.factorio.com/stable/types/SelectionModeFlags.html"
+      "description": "https://lua-api.factorio.com/stable/types/SelectionModeFlags.html",
+      "oneOf": [
+        {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "blueprint"
+            },
+            {
+              "type": "string",
+              "const": "deconstruct"
+            },
+            {
+              "type": "string",
+              "const": "cancel-deconstruct"
+            },
+            {
+              "type": "string",
+              "const": "items"
+            },
+            {
+              "type": "string",
+              "const": "trees"
+            },
+            {
+              "type": "string",
+              "const": "buildable-type"
+            },
+            {
+              "type": "string",
+              "const": "nothing"
+            },
+            {
+              "type": "string",
+              "const": "items-to-place"
+            },
+            {
+              "type": "string",
+              "const": "any-entity"
+            },
+            {
+              "type": "string",
+              "const": "any-tile"
+            },
+            {
+              "type": "string",
+              "const": "same-force"
+            },
+            {
+              "type": "string",
+              "const": "not-same-force"
+            },
+            {
+              "type": "string",
+              "const": "friend"
+            },
+            {
+              "type": "string",
+              "const": "enemy"
+            },
+            {
+              "type": "string",
+              "const": "upgrade"
+            },
+            {
+              "type": "string",
+              "const": "cancel-upgrade"
+            },
+            {
+              "type": "string",
+              "const": "downgrade"
+            },
+            {
+              "type": "string",
+              "const": "entity-with-health"
+            },
+            {
+              "type": "string",
+              "const": "is-military-target"
+            },
+            {
+              "type": "string",
+              "const": "entity-with-owner"
+            },
+            {
+              "type": "string",
+              "const": "avoid-rolling-stock"
+            },
+            {
+              "type": "string",
+              "const": "avoid-vehicle"
+            },
+            {
+              "type": "string",
+              "const": "controllable"
+            },
+            {
+              "type": "string",
+              "const": "controllable-add"
+            },
+            {
+              "type": "string",
+              "const": "controllable-remove"
+            },
+            {
+              "type": "string",
+              "const": "entity-ghost"
+            },
+            {
+              "type": "string",
+              "const": "tile-ghost"
+            }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "blueprint"
+              },
+              {
+                "type": "string",
+                "const": "deconstruct"
+              },
+              {
+                "type": "string",
+                "const": "cancel-deconstruct"
+              },
+              {
+                "type": "string",
+                "const": "items"
+              },
+              {
+                "type": "string",
+                "const": "trees"
+              },
+              {
+                "type": "string",
+                "const": "buildable-type"
+              },
+              {
+                "type": "string",
+                "const": "nothing"
+              },
+              {
+                "type": "string",
+                "const": "items-to-place"
+              },
+              {
+                "type": "string",
+                "const": "any-entity"
+              },
+              {
+                "type": "string",
+                "const": "any-tile"
+              },
+              {
+                "type": "string",
+                "const": "same-force"
+              },
+              {
+                "type": "string",
+                "const": "not-same-force"
+              },
+              {
+                "type": "string",
+                "const": "friend"
+              },
+              {
+                "type": "string",
+                "const": "enemy"
+              },
+              {
+                "type": "string",
+                "const": "upgrade"
+              },
+              {
+                "type": "string",
+                "const": "cancel-upgrade"
+              },
+              {
+                "type": "string",
+                "const": "downgrade"
+              },
+              {
+                "type": "string",
+                "const": "entity-with-health"
+              },
+              {
+                "type": "string",
+                "const": "is-military-target"
+              },
+              {
+                "type": "string",
+                "const": "entity-with-owner"
+              },
+              {
+                "type": "string",
+                "const": "avoid-rolling-stock"
+              },
+              {
+                "type": "string",
+                "const": "avoid-vehicle"
+              },
+              {
+                "type": "string",
+                "const": "controllable"
+              },
+              {
+                "type": "string",
+                "const": "controllable-add"
+              },
+              {
+                "type": "string",
+                "const": "controllable-remove"
+              },
+              {
+                "type": "string",
+                "const": "entity-ghost"
+              },
+              {
+                "type": "string",
+                "const": "tile-ghost"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
     },
     "SemiPersistentWorldAmbientSoundDefinition": {
-      "description": "https://lua-api.factorio.com/stable/types/SemiPersistentWorldAmbientSoundDefinition.html"
+      "description": "https://lua-api.factorio.com/stable/types/SemiPersistentWorldAmbientSoundDefinition.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "sound": {
+              "$ref": "#/definitions/Sound"
+            },
+            "delay_mean_seconds": {
+              "$ref": "#/definitions/float"
+            },
+            "delay_variance_seconds": {
+              "$ref": "#/definitions/float"
+            }
+          },
+          "required": ["sound"]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Sound"
+            }
+          ]
+        }
+      ]
     },
     "SendItemToOrbitTechnologyTrigger": {
       "description": "https://lua-api.factorio.com/stable/types/SendItemToOrbitTechnologyTrigger.html",
@@ -14608,7 +15990,42 @@
       "required": ["type", "name"]
     },
     "SimpleBoundingBox": {
-      "description": "https://lua-api.factorio.com/stable/types/SimpleBoundingBox.html"
+      "description": "https://lua-api.factorio.com/stable/types/SimpleBoundingBox.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "left_top": {
+              "$ref": "#/definitions/MapPosition"
+            },
+            "right_bottom": {
+              "$ref": "#/definitions/MapPosition"
+            }
+          },
+          "required": ["left_top", "right_bottom"]
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/MapPosition"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/MapPosition"
+                }
+              ]
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
     },
     "SimpleModifier": {
       "description": "https://lua-api.factorio.com/stable/types/SimpleModifier.html",
@@ -14914,7 +16331,110 @@
       "required": ["name", "frequency"]
     },
     "Sound": {
-      "description": "https://lua-api.factorio.com/stable/types/Sound.html"
+      "description": "https://lua-api.factorio.com/stable/types/Sound.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "category": {
+              "$ref": "#/definitions/SoundType"
+            },
+            "priority": {
+              "$ref": "#/definitions/uint8"
+            },
+            "aggregation": {
+              "$ref": "#/definitions/AggregationSpecification"
+            },
+            "allow_random_repeat": {
+              "$ref": "#/definitions/bool"
+            },
+            "audible_distance_modifier": {
+              "$ref": "#/definitions/double"
+            },
+            "game_controller_vibration_data": {
+              "$ref": "#/definitions/GameControllerVibrationData"
+            },
+            "advanced_volume_control": {
+              "$ref": "#/definitions/AdvancedVolumeControl"
+            },
+            "speed_smoothing_window_size": {
+              "$ref": "#/definitions/uint32"
+            },
+            "variations": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/SoundDefinition"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SoundDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "filename": {
+              "$ref": "#/definitions/FileName"
+            },
+            "volume": {
+              "$ref": "#/definitions/float"
+            },
+            "min_volume": {
+              "$ref": "#/definitions/float"
+            },
+            "max_volume": {
+              "$ref": "#/definitions/float"
+            },
+            "preload": {
+              "$ref": "#/definitions/bool"
+            },
+            "speed": {
+              "$ref": "#/definitions/float"
+            },
+            "min_speed": {
+              "$ref": "#/definitions/float"
+            },
+            "max_speed": {
+              "$ref": "#/definitions/float"
+            },
+            "modifiers": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/SoundModifier"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SoundModifier"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/SoundDefinition"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
     },
     "SoundAccent": {
       "description": "https://lua-api.factorio.com/stable/types/SoundAccent.html",
@@ -14946,7 +16466,63 @@
       }
     },
     "SoundDefinition": {
-      "description": "https://lua-api.factorio.com/stable/types/SoundDefinition.html"
+      "description": "https://lua-api.factorio.com/stable/types/SoundDefinition.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "filename": {
+              "$ref": "#/definitions/FileName"
+            },
+            "volume": {
+              "$ref": "#/definitions/float"
+            },
+            "min_volume": {
+              "$ref": "#/definitions/float"
+            },
+            "max_volume": {
+              "$ref": "#/definitions/float"
+            },
+            "preload": {
+              "$ref": "#/definitions/bool"
+            },
+            "speed": {
+              "$ref": "#/definitions/float"
+            },
+            "min_speed": {
+              "$ref": "#/definitions/float"
+            },
+            "max_speed": {
+              "$ref": "#/definitions/float"
+            },
+            "modifiers": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/SoundModifier"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SoundModifier"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "required": ["filename"]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/FileName"
+            }
+          ]
+        }
+      ]
     },
     "SoundModifier": {
       "description": "https://lua-api.factorio.com/stable/types/SoundModifier.html",
@@ -15040,7 +16616,83 @@
       ]
     },
     "SpaceConnectionAsteroidSpawnDefinition": {
-      "description": "https://lua-api.factorio.com/stable/types/SpaceConnectionAsteroidSpawnDefinition.html"
+      "description": "https://lua-api.factorio.com/stable/types/SpaceConnectionAsteroidSpawnDefinition.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "const": "entity"
+                },
+                {
+                  "type": "string",
+                  "const": "asteroid-chunk"
+                }
+              ]
+            },
+            "asteroid": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/EntityID"
+                },
+                {
+                  "$ref": "#/definitions/AsteroidChunkID"
+                }
+              ]
+            },
+            "spawn_points": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SpaceConnectionAsteroidSpawnPoint"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "required": ["asteroid", "spawn_points"]
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/EntityID"
+                }
+              ]
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/SpaceConnectionAsteroidSpawnPoint"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
     },
     "SpaceConnectionAsteroidSpawnPoint": {
       "description": "https://lua-api.factorio.com/stable/types/SpaceConnectionAsteroidSpawnPoint.html",
@@ -15229,7 +16881,42 @@
       "required": ["index", "spacing"]
     },
     "SpawnPoint": {
-      "description": "https://lua-api.factorio.com/stable/types/SpawnPoint.html"
+      "description": "https://lua-api.factorio.com/stable/types/SpawnPoint.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "evolution_factor": {
+              "$ref": "#/definitions/double"
+            },
+            "spawn_weight": {
+              "$ref": "#/definitions/double"
+            }
+          },
+          "required": ["evolution_factor", "spawn_weight"]
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/double"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/double"
+                }
+              ]
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
     },
     "SpeechBubbleStyleSpecification": {
       "description": "https://lua-api.factorio.com/stable/types/SpeechBubbleStyleSpecification.html",
@@ -15578,10 +17265,198 @@
       }
     },
     "Sprite4Way": {
-      "description": "https://lua-api.factorio.com/stable/types/Sprite4Way.html"
+      "description": "https://lua-api.factorio.com/stable/types/Sprite4Way.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "sheets": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SpriteNWaySheet"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "sheet": {
+              "$ref": "#/definitions/SpriteNWaySheet"
+            },
+            "north": {
+              "$ref": "#/definitions/Sprite"
+            },
+            "east": {
+              "$ref": "#/definitions/Sprite"
+            },
+            "south": {
+              "$ref": "#/definitions/Sprite"
+            },
+            "west": {
+              "$ref": "#/definitions/Sprite"
+            }
+          }
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Sprite"
+            }
+          ]
+        }
+      ]
     },
     "SpriteFlags": {
-      "description": "https://lua-api.factorio.com/stable/types/SpriteFlags.html"
+      "description": "https://lua-api.factorio.com/stable/types/SpriteFlags.html",
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "no-crop"
+              },
+              {
+                "type": "string",
+                "const": "not-compressed"
+              },
+              {
+                "type": "string",
+                "const": "always-compressed"
+              },
+              {
+                "type": "string",
+                "const": "mipmap"
+              },
+              {
+                "type": "string",
+                "const": "linear-minification"
+              },
+              {
+                "type": "string",
+                "const": "linear-magnification"
+              },
+              {
+                "type": "string",
+                "const": "linear-mip-level"
+              },
+              {
+                "type": "string",
+                "const": "alpha-mask"
+              },
+              {
+                "type": "string",
+                "const": "no-scale"
+              },
+              {
+                "type": "string",
+                "const": "mask"
+              },
+              {
+                "type": "string",
+                "const": "icon"
+              },
+              {
+                "type": "string",
+                "const": "gui"
+              },
+              {
+                "type": "string",
+                "const": "gui-icon"
+              },
+              {
+                "type": "string",
+                "const": "light"
+              },
+              {
+                "type": "string",
+                "const": "terrain"
+              },
+              {
+                "type": "string",
+                "const": "terrain-effect-map"
+              },
+              {
+                "type": "string",
+                "const": "reflection-effect-map"
+              },
+              {
+                "type": "string",
+                "const": "shadow"
+              },
+              {
+                "type": "string",
+                "const": "smoke"
+              },
+              {
+                "type": "string",
+                "const": "decal"
+              },
+              {
+                "type": "string",
+                "const": "low-object"
+              },
+              {
+                "type": "string",
+                "const": "corpse-decay"
+              },
+              {
+                "type": "string",
+                "const": "trilinear-filtering"
+              },
+              {
+                "type": "string",
+                "const": "group=none"
+              },
+              {
+                "type": "string",
+                "const": "group=terrain"
+              },
+              {
+                "type": "string",
+                "const": "group=shadow"
+              },
+              {
+                "type": "string",
+                "const": "group=smoke"
+              },
+              {
+                "type": "string",
+                "const": "group=decal"
+              },
+              {
+                "type": "string",
+                "const": "group=low-object"
+              },
+              {
+                "type": "string",
+                "const": "group=gui"
+              },
+              {
+                "type": "string",
+                "const": "group=icon"
+              },
+              {
+                "type": "string",
+                "const": "group=icon-background"
+              },
+              {
+                "type": "string",
+                "const": "group=effect-texture"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
     },
     "SpriteNWaySheet": {
       "description": "https://lua-api.factorio.com/stable/types/SpriteNWaySheet.html",
@@ -15928,7 +17803,39 @@
       ]
     },
     "SpriteVariations": {
-      "description": "https://lua-api.factorio.com/stable/types/SpriteVariations.html"
+      "description": "https://lua-api.factorio.com/stable/types/SpriteVariations.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "sheet": {
+              "$ref": "#/definitions/SpriteSheet"
+            }
+          },
+          "required": ["sheet"]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/SpriteSheet"
+            }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/Sprite"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
     },
     "StackTransferTipTrigger": {
       "description": "https://lua-api.factorio.com/stable/types/StackTransferTipTrigger.html",
@@ -17147,7 +19054,52 @@
       ]
     },
     "ThrusterPerformancePoint": {
-      "description": "https://lua-api.factorio.com/stable/types/ThrusterPerformancePoint.html"
+      "description": "https://lua-api.factorio.com/stable/types/ThrusterPerformancePoint.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "fluid_volume": {
+              "$ref": "#/definitions/double"
+            },
+            "fluid_usage": {
+              "$ref": "#/definitions/FluidAmount"
+            },
+            "effectivity": {
+              "$ref": "#/definitions/double"
+            }
+          },
+          "required": ["fluid_volume", "fluid_usage", "effectivity"]
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/double"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/double"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/double"
+                }
+              ]
+            }
+          ],
+          "minItems": 3,
+          "maxItems": 3
+        }
+      ]
     },
     "TileBasedParticleTints": {
       "description": "https://lua-api.factorio.com/stable/types/TileBasedParticleTints.html",
@@ -17248,7 +19200,42 @@
       ]
     },
     "TilePosition": {
-      "description": "https://lua-api.factorio.com/stable/types/TilePosition.html"
+      "description": "https://lua-api.factorio.com/stable/types/TilePosition.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "x": {
+              "$ref": "#/definitions/int32"
+            },
+            "y": {
+              "$ref": "#/definitions/int32"
+            }
+          },
+          "required": ["x", "y"]
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/int32"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/int32"
+                }
+              ]
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
     },
     "TileRenderLayer": {
       "description": "https://lua-api.factorio.com/stable/types/TileRenderLayer.html",
@@ -18616,7 +20603,48 @@
       "required": ["trunk", "leaves", "leaf_generation", "branch_generation"]
     },
     "Trigger": {
-      "description": "https://lua-api.factorio.com/stable/types/Trigger.html"
+      "description": "https://lua-api.factorio.com/stable/types/Trigger.html",
+      "oneOf": [
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DirectTriggerItem"
+            },
+            {
+              "$ref": "#/definitions/AreaTriggerItem"
+            },
+            {
+              "$ref": "#/definitions/LineTriggerItem"
+            },
+            {
+              "$ref": "#/definitions/ClusterTriggerItem"
+            }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/DirectTriggerItem"
+              },
+              {
+                "$ref": "#/definitions/AreaTriggerItem"
+              },
+              {
+                "$ref": "#/definitions/LineTriggerItem"
+              },
+              {
+                "$ref": "#/definitions/ClusterTriggerItem"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
     },
     "TriggerDelivery": {
       "description": "https://lua-api.factorio.com/stable/types/TriggerDelivery.html",
@@ -18657,7 +20685,162 @@
       }
     },
     "TriggerEffect": {
-      "description": "https://lua-api.factorio.com/stable/types/TriggerEffect.html"
+      "description": "https://lua-api.factorio.com/stable/types/TriggerEffect.html",
+      "oneOf": [
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DamageEntityTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/DamageTileTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/CreateEntityTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/CreateExplosionTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/CreateFireTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/CreateSmokeTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/CreateTrivialSmokeEffectItem"
+            },
+            {
+              "$ref": "#/definitions/CreateAsteroidChunkEffectItem"
+            },
+            {
+              "$ref": "#/definitions/CreateParticleTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/CreateStickerTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/CreateDecorativesTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/NestedTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/PlaySoundTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/PushBackTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/DestroyCliffsTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/ShowExplosionOnChartTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/InsertItemTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/ScriptTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/SetTileTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/InvokeTileEffectTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/DestroyDecorativesTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/CameraEffectTriggerEffectItem"
+            },
+            {
+              "$ref": "#/definitions/ActivateImpactTriggerEffectItem"
+            }
+          ]
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/DamageEntityTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/DamageTileTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/CreateEntityTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/CreateExplosionTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/CreateFireTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/CreateSmokeTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/CreateTrivialSmokeEffectItem"
+              },
+              {
+                "$ref": "#/definitions/CreateAsteroidChunkEffectItem"
+              },
+              {
+                "$ref": "#/definitions/CreateParticleTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/CreateStickerTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/CreateDecorativesTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/NestedTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/PlaySoundTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/PushBackTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/DestroyCliffsTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/ShowExplosionOnChartTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/InsertItemTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/ScriptTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/SetTileTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/InvokeTileEffectTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/DestroyDecorativesTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/CameraEffectTriggerEffectItem"
+              },
+              {
+                "$ref": "#/definitions/ActivateImpactTriggerEffectItem"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
     },
     "TriggerEffectItem": {
       "description": "https://lua-api.factorio.com/stable/types/TriggerEffectItem.html",
@@ -18910,7 +21093,48 @@
       "required": ["type"]
     },
     "TurretSpecialEffectCenter": {
-      "description": "https://lua-api.factorio.com/stable/types/TurretSpecialEffectCenter.html"
+      "description": "https://lua-api.factorio.com/stable/types/TurretSpecialEffectCenter.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "default": {
+              "$ref": "#/definitions/Vector"
+            },
+            "north": {
+              "$ref": "#/definitions/Vector"
+            },
+            "north_east": {
+              "$ref": "#/definitions/Vector"
+            },
+            "east": {
+              "$ref": "#/definitions/Vector"
+            },
+            "south_east": {
+              "$ref": "#/definitions/Vector"
+            },
+            "south": {
+              "$ref": "#/definitions/Vector"
+            },
+            "south_west": {
+              "$ref": "#/definitions/Vector"
+            },
+            "west": {
+              "$ref": "#/definitions/Vector"
+            },
+            "north_west": {
+              "$ref": "#/definitions/Vector"
+            }
+          }
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Vector"
+            }
+          ]
+        }
+      ]
     },
     "TurretState": {
       "description": "https://lua-api.factorio.com/stable/types/TurretState.html",
@@ -19155,7 +21379,64 @@
       ]
     },
     "UnitSpawnDefinition": {
-      "description": "https://lua-api.factorio.com/stable/types/UnitSpawnDefinition.html"
+      "description": "https://lua-api.factorio.com/stable/types/UnitSpawnDefinition.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "unit": {
+              "$ref": "#/definitions/EntityID"
+            },
+            "spawn_points": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/SpawnPoint"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "required": ["unit", "spawn_points"]
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/EntityID"
+                }
+              ]
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/SpawnPoint"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
     },
     "UnlockQualityModifier": {
       "description": "https://lua-api.factorio.com/stable/types/UnlockQualityModifier.html",
@@ -19668,13 +21949,148 @@
       "required": ["layers", "states", "length_seconds"]
     },
     "Vector": {
-      "description": "https://lua-api.factorio.com/stable/types/Vector.html"
+      "description": "https://lua-api.factorio.com/stable/types/Vector.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "x": {
+              "$ref": "#/definitions/double"
+            },
+            "y": {
+              "$ref": "#/definitions/double"
+            }
+          },
+          "required": ["x", "y"]
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/double"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/double"
+                }
+              ]
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
     },
     "Vector3D": {
-      "description": "https://lua-api.factorio.com/stable/types/Vector3D.html"
+      "description": "https://lua-api.factorio.com/stable/types/Vector3D.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "x": {
+              "$ref": "#/definitions/float"
+            },
+            "y": {
+              "$ref": "#/definitions/float"
+            },
+            "z": {
+              "$ref": "#/definitions/float"
+            }
+          },
+          "required": ["x", "y", "z"]
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ]
+            }
+          ],
+          "minItems": 3,
+          "maxItems": 3
+        }
+      ]
     },
     "Vector4f": {
-      "description": "https://lua-api.factorio.com/stable/types/Vector4f.html"
+      "description": "https://lua-api.factorio.com/stable/types/Vector4f.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "x": {
+              "$ref": "#/definitions/float"
+            },
+            "y": {
+              "$ref": "#/definitions/float"
+            },
+            "z": {
+              "$ref": "#/definitions/float"
+            },
+            "w": {
+              "$ref": "#/definitions/float"
+            }
+          },
+          "required": ["x", "y", "z", "w"]
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/float"
+                }
+              ]
+            }
+          ],
+          "minItems": 4,
+          "maxItems": 4
+        }
+      ]
     },
     "VehicleLogisticsModifier": {
       "description": "https://lua-api.factorio.com/stable/types/VehicleLogisticsModifier.html",
@@ -20073,7 +22489,86 @@
       ]
     },
     "WorkingSound": {
-      "description": "https://lua-api.factorio.com/stable/types/WorkingSound.html"
+      "description": "https://lua-api.factorio.com/stable/types/WorkingSound.html",
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "$ref": "#/definitions/MainSound"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "main_sounds": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/definitions/MainSound"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/MainSound"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "apparent_volume": {
+                  "$ref": "#/definitions/float"
+                },
+                "max_sounds_per_type": {
+                  "$ref": "#/definitions/uint8"
+                },
+                "extra_sounds_ignore_limit": {
+                  "$ref": "#/definitions/bool"
+                },
+                "persistent": {
+                  "$ref": "#/definitions/bool"
+                },
+                "use_doppler_shift": {
+                  "$ref": "#/definitions/bool"
+                },
+                "idle_sound": {
+                  "$ref": "#/definitions/Sound"
+                },
+                "activate_sound": {
+                  "$ref": "#/definitions/Sound"
+                },
+                "deactivate_sound": {
+                  "$ref": "#/definitions/Sound"
+                },
+                "sound_accents": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/definitions/SoundAccent"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/SoundAccent"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Sound"
+            }
+          ]
+        }
+      ]
     },
     "WorkingVisualisation": {
       "description": "https://lua-api.factorio.com/stable/types/WorkingVisualisation.html",
@@ -20336,7 +22831,39 @@
       }
     },
     "WorldAmbientSoundDefinition": {
-      "description": "https://lua-api.factorio.com/stable/types/WorldAmbientSoundDefinition.html"
+      "description": "https://lua-api.factorio.com/stable/types/WorldAmbientSoundDefinition.html",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "sound": {
+              "$ref": "#/definitions/Sound"
+            },
+            "radius": {
+              "$ref": "#/definitions/double"
+            },
+            "min_entity_count": {
+              "$ref": "#/definitions/uint32"
+            },
+            "max_entity_count": {
+              "$ref": "#/definitions/uint32"
+            },
+            "entity_to_sound_ratio": {
+              "$ref": "#/definitions/float"
+            },
+            "average_pause_seconds": {
+              "$ref": "#/definitions/double"
+            }
+          }
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Sound"
+            }
+          ]
+        }
+      ]
     },
     "bool": {
       "description": "https://lua-api.factorio.com/stable/types/bool.html",

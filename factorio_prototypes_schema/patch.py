@@ -41,6 +41,17 @@ def main() -> None:
     # I'm fed up with documenting every single patch
     schema["definitions"]["WorkingVisualisations"]["properties"]["working_visualisations"] = {}
     schema["definitions"]["CharacterPrototype"]["allOf"][1]["properties"]["synced_footstep_particle_triggers"] = {}
+    schema["definitions"]["TriggerEffect"] = {
+        "description": "https://lua-api.factorio.com/stable/types/TriggerEffect.html"
+    }
+    schema["definitions"]["Animation4Way"] = {
+        "description": "https://lua-api.factorio.com/stable/types/Animation4Way.html"
+    }
+    schema["definitions"]["Sound"] = {"description": "https://lua-api.factorio.com/stable/types/Sound.html"}
+    schema["definitions"]["Sprite4Way"] = {"description": "https://lua-api.factorio.com/stable/types/Sprite4Way.html"}
+    schema["definitions"]["WorkingSound"] = {
+        "description": "https://lua-api.factorio.com/stable/types/WorkingSound.html"
+    }
 
     # Ad-hoc patches because our extraction tool is weak
     # ==================================================

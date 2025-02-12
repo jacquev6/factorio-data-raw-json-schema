@@ -166,7 +166,8 @@ def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDef
         try:
             return extract_type(factorio_location, type_name, all_type_names)
         except AssertionError as exc:
-            debug(f"Failed to extract type {type_name!r}: {exc}")
+            if str(exc) != "ignored":
+                debug(f"Failed to extract type {type_name!r}: {exc}")
             return FactorioSchema.TypeDefinition(name=type_name, definition={})
 
     with tqdm_joblib.tqdm_joblib(desc="Extracting types", total=len(all_type_names)):
@@ -204,13 +205,11 @@ def extract_type(factorio_location: str, type_name: str, all_type_names: set[str
                 base=extract_struct_base(soup),
                 properties=list(extract_struct_properties(type_name, properties_div_soup, all_type_names)),
             )
-            assert type_expression == "struct", f"failed to match type expression: {type_expression!r}"
 
         if "union" in type_expression:
             local_types["union"] = FactorioSchema.UnionTypeDefinition(
                 name=type_name, types=list(extract_union_members(soup))
             )
-            assert type_expression == "union", f"failed to match type expression: {type_expression!r}"
 
         try:
             type_expression_tree = type_expression_parser.parse(type_expression)
