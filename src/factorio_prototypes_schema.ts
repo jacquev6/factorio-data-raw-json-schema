@@ -10877,7 +10877,7 @@ export interface IconDrawSpecification {
  * via the `definition` "IconSequencePositioning".
  */
 export interface IconSequencePositioning {
-  inventory_index: unknown
+  inventory_index: number
   max_icons_per_row?: Uint8
   max_icon_rows?: Uint8
   shift?: Vector

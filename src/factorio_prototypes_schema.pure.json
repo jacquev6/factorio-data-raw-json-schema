@@ -8669,7 +8669,9 @@
       "description": "https://lua-api.factorio.com/stable/types/IconSequencePositioning.html",
       "type": "object",
       "properties": {
-        "inventory_index": {},
+        "inventory_index": {
+          "type": "integer"
+        },
         "max_icons_per_row": {
           "$ref": "#/definitions/uint8"
         },

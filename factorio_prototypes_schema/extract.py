@@ -376,7 +376,7 @@ def extract_struct_properties(
 
 type_expression_parser = lark.Lark(
     """
-    type_expression : named_type | literal_string | array_type | union_type | dictionary_type | tuple_type
+    type_expression : named_type | literal_string | array_type | union_type | dictionary_type | tuple_type | adhoc_type
 
     named_type : CNAME
     literal_string : ESCAPED_STRING
@@ -384,6 +384,7 @@ type_expression_parser = lark.Lark(
     union_type : type_expression "or" type_expression
     dictionary_type : "dictionary" "[" type_expression "→" type_expression "]"
     tuple_type : "{" type_expression ("," type_expression)* "}"
+    adhoc_type : "defines.inventory"
 
     %import common.ESCAPED_STRING
     %import common.CNAME
@@ -443,6 +444,9 @@ class TypeExpressionTransformer(lark.Transformer[lark.Token, dict[str, JsonValue
 
     def tuple_type(self, items: list[JsonValue]) -> JsonValue:
         return {"type": "array", "items": items, "minItems": len(items), "maxItems": len(items)}
+
+    def adhoc_type(self, items: list[str]) -> JsonValue:
+        return {"type": "integer"}
 
 
 def tag(tag: bs4.element.PageElement | None) -> bs4.element.Tag:
