@@ -13,7 +13,6 @@ import bs4
 import click
 import joblib
 import lark
-import tqdm
 import tqdm_joblib  # type: ignore
 
 
@@ -170,7 +169,7 @@ def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDef
             debug(f"Failed to extract type {type_name!r}: {exc}")
             return FactorioSchema.TypeDefinition(name=type_name, definition={})
 
-    with tqdm_joblib.tqdm_joblib(tqdm.tqdm(desc="Extracting types", total=len(all_type_names))):
+    with tqdm_joblib.tqdm_joblib(desc="Extracting types", total=len(all_type_names)):
         return joblib.Parallel(n_jobs=-1)(
             joblib.delayed(extract_one)(type_name) for type_name in sorted(all_type_names)
         )
@@ -236,7 +235,7 @@ def extract_all_prototypes(factorio_location: str, known_types: set[str]) -> Ite
             debug(f"Failed to extract prototype {prototype_name!r}: {exc}")
             return FactorioSchema.TypeDefinition(name=prototype_name, definition={})
 
-    with tqdm_joblib.tqdm_joblib(tqdm.tqdm(desc="Extracting prototypes", total=len(all_prototype_names))):
+    with tqdm_joblib.tqdm_joblib(desc="Extracting prototypes", total=len(all_prototype_names)):
         return joblib.Parallel(n_jobs=-1)(
             joblib.delayed(extract_one)(prototype_name) for prototype_name in all_prototype_names
         )
