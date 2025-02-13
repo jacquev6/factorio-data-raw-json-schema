@@ -1,0 +1,11 @@
+beautifulsoup4
+black
+check-jsonschema
+click
+joblib
+joblib-stubs
+lark
+mypy
+tqdm
+tqdm-joblib
+types-tqdm
