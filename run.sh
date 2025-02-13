@@ -28,8 +28,8 @@ fi
     --skip-magic-trailing-comma \
     --line-length 120
 
-  python -m factorio_data_raw_json_schema.extract $FACTORIO_LOCATION \
-  | python -m factorio_data_raw_json_schema.patch \
+  python -m factorio_data_raw_json_schema extract $FACTORIO_LOCATION \
+  | python -m factorio_data_raw_json_schema patch \
   >factorio-data-raw-json-schema.json
 
   check-jsonschema --verbose --schemafile factorio-data-raw-json-schema.json game-definitions/*/script-output/data-raw-dump.json

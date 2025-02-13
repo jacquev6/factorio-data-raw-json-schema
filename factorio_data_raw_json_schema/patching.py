@@ -1,5 +1,4 @@
 from typing import Any
-import json
 import sys
 
 
@@ -7,9 +6,7 @@ def debug(*arg: Any, **kwds: Any) -> None:
     print(*arg, **kwds, file=sys.stderr)
 
 
-def main() -> None:
-    schema = json.load(sys.stdin)
-
+def patch(schema: Any) -> None:
     # Ad-hoc patches because the doc doesn't match the actual data
     # ============================================================
 
@@ -69,9 +66,3 @@ def main() -> None:
         schema["definitions"]["SpriteSource"]["required"].remove("filename")
     else:
         debug("Failed to patch SpriteSource")
-
-    json.dump(schema, sys.stdout, indent=2)
-
-
-if __name__ == "__main__":
-    main()

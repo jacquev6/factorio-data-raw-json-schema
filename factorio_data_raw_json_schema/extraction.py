@@ -3,14 +3,12 @@
 from __future__ import annotations
 
 from typing import Any, Iterable
-import json
 import os
 import re
 import sys
 
 from bs4 import BeautifulSoup
 import bs4
-import click
 import joblib
 import lark
 import tqdm_joblib  # type: ignore
@@ -118,9 +116,7 @@ class FactorioSchema:
         return FactorioSchema.TypeDefinition(name=name, definition={"anyOf": types})
 
 
-@click.command()
-@click.argument("factorio_location")
-def main(factorio_location: str) -> None:
+def extract(factorio_location: str) -> JsonValue:
     types = list(extract_all_types(factorio_location))
     prototypes = list(extract_all_prototypes(factorio_location, {type.name for type in types}))
 
@@ -156,7 +152,7 @@ def main(factorio_location: str) -> None:
         prototypes=prototypes,
     ).to_json_value()
 
-    json.dump(schema, sys.stdout, indent=2)
+    return schema
 
 
 def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDefinition]:
@@ -462,7 +458,3 @@ def tag(tag: bs4.element.PageElement | None) -> bs4.element.Tag:
 def read_file(factorio_location: str, *stem: str) -> BeautifulSoup:
     with open(os.path.join(factorio_location, "doc-html", *stem[:-1], stem[-1] + ".html")) as f:
         return BeautifulSoup(f.read(), "html.parser")
-
-
-if __name__ == "__main__":
-    main()
