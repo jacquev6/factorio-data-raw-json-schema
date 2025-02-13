@@ -1,6 +1,2 @@
-# JavaScript
-/node_modules/
-
-# Python
 /.venv/
 *.pyc
