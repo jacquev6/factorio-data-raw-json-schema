@@ -21,17 +21,17 @@ Some awesome examples (not by me):
 
 These tools need to know the items and recipes in the game, and can obtain them using `data-raw-dump.json`.
 
-But this file is huge and complex, and uses dynamic typing (*i.e.* many properties can have multiple types), making it difficult to process without static typing. Part of the difficulty comes from the fact that the base game does not use the full flexibility of its modding system. So if a tool handles `data-raw-dump.json` for the base game, there is no guaranty it will work with all mods.
+But this file is huge and complex, and uses dynamic typing (*i.e.* many objects can have multiple types), making it difficult to process without static typing. Part of the difficulty comes from the fact that the base game does not use the full flexibility of its modding system. So if a tool handles `data-raw-dump.json` for the base game, there is no guaranty it will work with all mods.
 
-With the JSON schemas provided by this repository, one can generate static types in the language they write their tools in.
+With the JSON schemas provided by this repository, one can generate static types for the language they write their tools in.
 For example, Python users can use [datamodel-codegen](https://koxudaxi.github.io/datamodel-code-generator/) to generate [Pydantic](https://docs.pydantic.dev/latest/) models or plain [dataclasses](https://docs.python.org/3/library/dataclasses.html). TypeScript users can use [json-schema-to-typescript](https://www.npmjs.com/package/json-schema-to-typescript).
 
-Then, its just a matter of validating the input file (using a JSON schema validation library) and using the data with full support for IDE autocompletion and static validation of your code.
+Then, it's "just" a matter of validating the input file (using a JSON schema validation library) and using the data with full support for IDE autocompletion and static validation of your code. If the typing system of your language is strong enough, you'll *know* that you've handled all corner cases.
 
 Using the schema
 ================
 
-Just download it from GitHub.
+Just [download it](https://raw.githubusercontent.com/jacquev6/factorio-data-raw-json-schema/refs/heads/main/factorio_prototypes_schema.json) from GitHub.
 
 How
 ===
