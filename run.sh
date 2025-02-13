@@ -20,15 +20,17 @@ fi
   . .venv/bin/activate
 
   mypy \
-    factorio_prototypes_schema \
+    factorio_data_raw_json_schema \
     --strict
 
   black \
-    factorio_prototypes_schema \
+    factorio_data_raw_json_schema \
     --skip-magic-trailing-comma \
     --line-length 120
 
-  python -m factorio_prototypes_schema.extract $FACTORIO_LOCATION >factorio_prototypes_schema.pure.json
-  python -m factorio_prototypes_schema.patch <factorio_prototypes_schema.pure.json >factorio_prototypes_schema.json
-  check-jsonschema --verbose --schemafile factorio_prototypes_schema.json game-definitions/*/script-output/data-raw-dump.json
+  python -m factorio_data_raw_json_schema.extract $FACTORIO_LOCATION \
+  | python -m factorio_data_raw_json_schema.patch \
+  >factorio-data-raw-json-schema.json
+
+  check-jsonschema --verbose --schemafile factorio-data-raw-json-schema.json game-definitions/*/script-output/data-raw-dump.json
 )
