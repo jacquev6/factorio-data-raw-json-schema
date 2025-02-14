@@ -6,6 +6,9 @@ joblib
 joblib-stubs
 lark
 mypy
+requests
+requests-cache
+requests-file
 tqdm
 tqdm-joblib
 types-tqdm

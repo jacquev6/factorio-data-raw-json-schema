@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import Any, Iterable
-import os
 import re
 import sys
 
@@ -12,6 +11,8 @@ import bs4
 import joblib
 import lark
 import tqdm_joblib  # type: ignore
+
+from .crawling import Crawler
 
 
 JsonValue = None | bool | int | float | str | list["JsonValue"] | dict[str, "JsonValue"]
@@ -116,9 +117,9 @@ class FactorioSchema:
         return FactorioSchema.TypeDefinition(name=name, definition={"anyOf": types})
 
 
-def extract(factorio_location: str) -> JsonValue:
-    types = list(extract_all_types(factorio_location))
-    prototypes = list(extract_all_prototypes(factorio_location, {type.name for type in types}))
+def extract(crawler: Crawler) -> JsonValue:
+    types = list(extract_all_types(crawler))
+    prototypes = list(extract_all_prototypes(crawler, {type.name for type in types}))
 
     schema: JsonValue = FactorioSchema(
         properties={
@@ -155,12 +156,12 @@ def extract(factorio_location: str) -> JsonValue:
     return schema
 
 
-def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDefinition]:
-    all_type_names = set(extract_all_type_names(factorio_location))
+def extract_all_types(crawler: Crawler) -> Iterable[FactorioSchema.TypeDefinition]:
+    all_type_names = set(extract_all_type_names(crawler))
 
     def extract_one(type_name: str) -> FactorioSchema.TypeDefinition:
         try:
-            return extract_type(factorio_location, type_name, all_type_names)
+            return extract_type(crawler, type_name, all_type_names)
         except AssertionError as exc:
             if str(exc) != "ignored":
                 debug(f"Failed to extract type {type_name!r}: {exc}")
@@ -172,8 +173,8 @@ def extract_all_types(factorio_location: str) -> Iterable[FactorioSchema.TypeDef
         )
 
 
-def extract_all_type_names(factorio_location: str) -> Iterable[str]:
-    for a in read_file(factorio_location, "types").find_all("a"):
+def extract_all_type_names(crawler: Crawler) -> Iterable[str]:
+    for a in read_file(crawler, "types").find_all("a"):
         link = tag(a).get("href")
         if link is not None and str(link).startswith("types/"):
             type = str(link).split("#")[0].split("/")[-1]
@@ -181,10 +182,10 @@ def extract_all_type_names(factorio_location: str) -> Iterable[str]:
             yield type[:-5]
 
 
-def extract_type(factorio_location: str, type_name: str, all_type_names: set[str]) -> FactorioSchema.TypeDefinition:
+def extract_type(crawler: Crawler, type_name: str, all_type_names: set[str]) -> FactorioSchema.TypeDefinition:
     assert type_name not in ["Data", "DataExtendMethod", "AnyPrototype"], "ignored"
 
-    soup = read_file(factorio_location, "types", type_name)
+    soup = read_file(crawler, "types", type_name)
 
     h2_text = tag(soup.find("h2")).text
     if (m := re.match(r"^" + type_name + r"\s*::\s*(.*?)\s*(Example code)?$", h2_text)) is not None:
@@ -220,12 +221,12 @@ def extract_type(factorio_location: str, type_name: str, all_type_names: set[str
         assert False, f"failed to regex-match type header: {h2_text!r}"
 
 
-def extract_all_prototypes(factorio_location: str, known_types: set[str]) -> Iterable[FactorioSchema.TypeDefinition]:
-    all_prototype_names = sorted(set(extract_all_prototype_names(factorio_location)))
+def extract_all_prototypes(crawler: Crawler, known_types: set[str]) -> Iterable[FactorioSchema.TypeDefinition]:
+    all_prototype_names = sorted(set(extract_all_prototype_names(crawler)))
 
     def extract_one(prototype_name: str) -> FactorioSchema.TypeDefinition:
         try:
-            return extract_prototype(factorio_location, prototype_name, known_types)
+            return extract_prototype(crawler, prototype_name, known_types)
         except AssertionError as exc:
             debug(f"Failed to extract prototype {prototype_name!r}: {exc}")
             return FactorioSchema.TypeDefinition(name=prototype_name, definition={})
@@ -236,8 +237,8 @@ def extract_all_prototypes(factorio_location: str, known_types: set[str]) -> Ite
         )
 
 
-def extract_all_prototype_names(factorio_location: str) -> Iterable[str]:
-    for a in read_file(factorio_location, "prototypes").find_all("a"):
+def extract_all_prototype_names(crawler: Crawler) -> Iterable[str]:
+    for a in read_file(crawler, "prototypes").find_all("a"):
         link = tag(a).get("href")
         if link is not None and str(link).startswith("prototypes/"):
             prototype = str(link).split("#")[0].split("/")[-1]
@@ -245,12 +246,10 @@ def extract_all_prototype_names(factorio_location: str) -> Iterable[str]:
             yield prototype[:-5]
 
 
-def extract_prototype(
-    factorio_location: str, prototype_name: str, known_types: set[str]
-) -> FactorioSchema.TypeDefinition:
+def extract_prototype(crawler: Crawler, prototype_name: str, known_types: set[str]) -> FactorioSchema.TypeDefinition:
     # assert prototype_name in ["WallPrototype"], "ignored"
 
-    soup = read_file(factorio_location, "prototypes", prototype_name)
+    soup = read_file(crawler, "prototypes", prototype_name)
     properties_div_soup = soup.find("div", id="attributes-body-main")
 
     return FactorioSchema.StructTypeDefinition(
@@ -455,6 +454,5 @@ def tag(tag: bs4.element.PageElement | None) -> bs4.element.Tag:
     return tag
 
 
-def read_file(factorio_location: str, *stem: str) -> BeautifulSoup:
-    with open(os.path.join(factorio_location, "doc-html", *stem[:-1], stem[-1] + ".html")) as f:
-        return BeautifulSoup(f.read(), "html.parser")
+def read_file(crawler: Crawler, *stem: str) -> BeautifulSoup:
+    return crawler.get(*stem)

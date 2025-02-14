@@ -28,8 +28,9 @@ fi
     --skip-magic-trailing-comma \
     --line-length 120
 
-  python -m factorio_data_raw_json_schema extract $FACTORIO_LOCATION \
-  >factorio-data-raw-json-schema.json
+  python -m factorio_data_raw_json_schema extract \
+    --doc-root https://lua-api.factorio.com/2.0.28/ \
+    factorio-data-raw-json-schema.json
 
   check-jsonschema --verbose --schemafile factorio-data-raw-json-schema.json game-definitions/*/script-output/data-raw-dump.json
 )
