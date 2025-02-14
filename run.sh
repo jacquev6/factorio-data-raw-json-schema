@@ -32,5 +32,8 @@ fi
     --doc-root https://lua-api.factorio.com/2.0.28/ \
     factorio-data-raw-json-schema.json
 
-  check-jsonschema --verbose --schemafile factorio-data-raw-json-schema.json game-definitions/*/script-output/data-raw-dump.json
+  if ! git diff --stat --exit-code factorio-data-raw-json-schema.json
+  then
+    check-jsonschema --verbose --schemafile factorio-data-raw-json-schema.json game-definitions/*/script-output/data-raw-dump.json
+  fi
 )

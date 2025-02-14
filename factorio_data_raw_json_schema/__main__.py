@@ -29,7 +29,7 @@ def main() -> None:
 )
 def extract(doc_root: str, output: TextIO, do_patch: bool) -> None:
     crawler = crawling.Crawler(doc_root)
-    schema = extraction.extract(crawler)
+    schema = extraction.extract(crawler).to_json_value()
     if do_patch:
         patching.patch(schema)
     json.dump(schema, output, indent=2)

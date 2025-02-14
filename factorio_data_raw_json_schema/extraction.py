@@ -1,127 +1,37 @@
 #!/usr/bin/env python3
 
-from __future__ import annotations
 
-from typing import Any, Iterable
+from typing import Iterable
 import re
-import sys
 
-from bs4 import BeautifulSoup
 import bs4
 import joblib
 import lark
 import tqdm_joblib  # type: ignore
 
 from .crawling import Crawler
+from .schema import Schema, JsonValue
 
 
-JsonValue = None | bool | int | float | str | list["JsonValue"] | dict[str, "JsonValue"]
+def extract(crawler: Crawler) -> Schema:
+    extractor = _Extractor(crawler)
 
-
-def debug(*arg: Any, **kwds: Any) -> None:
-    print(*arg, **kwds, file=sys.stderr)
-
-
-def json_value(value: JsonValue) -> JsonValue:
-    """
-    Statically assert that a value is a JsonValue and erase its concrete type.
-    Helps with type checking where invariant (as opposed to covariant or contravariant) containers are involved (e.g. list and dict).
-    """
-    return value
-
-
-class FactorioSchema:
-    builtin_types: dict[str, dict[str, JsonValue]] = {
-        "string": {"type": "string"},
-        "float": {"type": "number"},
-        "double": {"type": "number"},
-        "bool": {"type": "boolean"},
-        "uint8": {"type": "integer", "minimum": 0, "maximum": 255},
-        "uint16": {"type": "integer", "minimum": 0, "maximum": 65535},
-        "uint32": {"type": "integer", "minimum": 0, "maximum": 4294967295},
-        "uint64": {"type": "integer", "minimum": 0, "maximum": 18446744073709551615},
-        "int8": {"type": "integer", "minimum": -128, "maximum": 127},
-        "int16": {"type": "integer", "minimum": -32768, "maximum": 32767},
-        "int32": {"type": "integer", "minimum": -2147483648, "maximum": 2147483647},
-        "int64": {"type": "integer", "minimum": -9223372036854775808, "maximum": 9223372036854775807},
-    }
-
-    def __init__(
-        self, *, properties: dict[str, str], types: list[TypeDefinition], prototypes: list[TypeDefinition]
-    ) -> None:
-        self.properties = properties
-        self.types = types
-        self.prototypes = prototypes
-
-    def to_json_value(self) -> JsonValue:
-        return {
-            "$schema": "https://json-schema.org/draft/2019-09/schema",
-            "title": "Factorio Data.raw",
-            "type": "object",
-            "properties": {
-                k: {"type": "object", "additionalProperties": {"$ref": f"#/definitions/{v}"}}
-                for k, v in self.properties.items()
-            },
-            "definitions": (
-                {
-                    d.name: json_value(
-                        {"description": json_value(f"https://lua-api.factorio.com/stable/types/{d.name}.html")}
-                        | d.definition
-                    )
-                    for d in self.types
-                }
-                | {
-                    d.name: json_value(
-                        {"description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{d.name}.html")}
-                        | d.definition
-                    )
-                    for d in self.prototypes
-                }
-            ),
-        }
-
-    class TypeDefinition:
-        def __init__(self, *, name: str, definition: dict[str, JsonValue]) -> None:
-            self.name = name
-            self.definition = definition
-
-    class Property:
-        # @todo Give a more specific type to 'type'
-        def __init__(self, *, name: str, type: JsonValue, required: bool = False) -> None:
-            self.name = name
-            self.type = type
-            self.required = required
-
-    @staticmethod
-    def StructTypeDefinition(
-        name: str, *, base: str | None = None, properties: list[FactorioSchema.Property]
-    ) -> TypeDefinition:
-        required = [json_value(p.name) for p in properties if p.required]
-        self_definition = {"type": "object", "properties": json_value({p.name: p.type for p in properties})} | (
-            {"required": json_value(required)} if required else {}
+    with tqdm_joblib.tqdm_joblib(total=2) as progress:
+        extractor.extract_all_type_names()
+        progress.total += len(extractor.all_type_names)
+        progress.update(1)
+        extractor.extract_all_prototype_names()
+        progress.total += len(extractor.all_prototype_names)
+        progress.update(1)
+        extractor.types = joblib.Parallel(n_jobs=-1)(
+            joblib.delayed(extractor.extract_type)(type_name) for type_name in sorted(extractor.all_type_names)
         )
-        if base is None:
-            if len(properties) > 0:
-                definition = self_definition
-            else:
-                definition = {"type": "object"}
-        else:
-            if len(properties) == 0:
-                definition = {"allOf": [{"$ref": f"#/definitions/{base}"}]}  # @todo Consider removing the "allOf"
-            else:
-                definition = {"allOf": [{"$ref": f"#/definitions/{base}"}, self_definition]}
-        return FactorioSchema.TypeDefinition(name=name, definition=definition)
+        extractor.prototypes = joblib.Parallel(n_jobs=-1)(
+            joblib.delayed(extractor.extract_prototype)(prototype_name)
+            for prototype_name in sorted(extractor.all_prototype_names)
+        )
 
-    @staticmethod
-    def UnionTypeDefinition(*, name: str, types: list[JsonValue]) -> TypeDefinition:
-        return FactorioSchema.TypeDefinition(name=name, definition={"anyOf": types})
-
-
-def extract(crawler: Crawler) -> JsonValue:
-    types = list(extract_all_types(crawler))
-    prototypes = list(extract_all_prototypes(crawler, {type.name for type in types}))
-
-    schema: JsonValue = FactorioSchema(
+    return Schema(
         properties={
             # @todo Extract
             "ammo": "AmmoItemPrototype",
@@ -149,114 +59,91 @@ def extract(crawler: Crawler) -> JsonValue:
             "tool": "ToolPrototype",
             "upgrade-item": "UpgradeItemPrototype",
         },
-        types=types,
-        prototypes=prototypes,
-    ).to_json_value()
-
-    return schema
-
-
-def extract_all_types(crawler: Crawler) -> Iterable[FactorioSchema.TypeDefinition]:
-    all_type_names = set(extract_all_type_names(crawler))
-
-    def extract_one(type_name: str) -> FactorioSchema.TypeDefinition:
-        try:
-            return extract_type(crawler, type_name, all_type_names)
-        except AssertionError as exc:
-            if str(exc) != "ignored":
-                debug(f"Failed to extract type {type_name!r}: {exc}")
-            return FactorioSchema.TypeDefinition(name=type_name, definition={})
-
-    with tqdm_joblib.tqdm_joblib(desc="Extracting types", total=len(all_type_names)):
-        return joblib.Parallel(n_jobs=-1)(
-            joblib.delayed(extract_one)(type_name) for type_name in sorted(all_type_names)
-        )
-
-
-def extract_all_type_names(crawler: Crawler) -> Iterable[str]:
-    for a in read_file(crawler, "types").find_all("a"):
-        link = tag(a).get("href")
-        if link is not None and str(link).startswith("types/"):
-            type = str(link).split("#")[0].split("/")[-1]
-            assert type.endswith(".html")
-            yield type[:-5]
-
-
-def extract_type(crawler: Crawler, type_name: str, all_type_names: set[str]) -> FactorioSchema.TypeDefinition:
-    assert type_name not in ["Data", "DataExtendMethod", "AnyPrototype"], "ignored"
-
-    soup = read_file(crawler, "types", type_name)
-
-    h2_text = tag(soup.find("h2")).text
-    if (m := re.match(r"^" + type_name + r"\s*::\s*(.*?)\s*(Example code)?$", h2_text)) is not None:
-        local_types = {
-            name: FactorioSchema.TypeDefinition(name=name, definition={"anyOf": [{"$ref": f"#/definitions/{name}"}]})
-            for name in all_type_names
-        }
-
-        type_expression = m.group(1).replace(" - abstract", "")
-        if "struct" in type_expression:
-            properties_div_soup = soup.find("div", id="attributes-body-main")
-            local_types["struct"] = FactorioSchema.StructTypeDefinition(
-                name=type_name,
-                base=extract_struct_base(soup),
-                properties=list(extract_struct_properties(type_name, properties_div_soup, all_type_names)),
-            )
-
-        if "union" in type_expression:
-            local_types["union"] = FactorioSchema.UnionTypeDefinition(
-                name=type_name, types=list(extract_union_members(soup))
-            )
-
-        try:
-            type_expression_tree = type_expression_parser.parse(type_expression)
-            return FactorioSchema.TypeDefinition(
-                name=type_name, definition=TypeExpressionTransformer(set(), local_types).transform(type_expression_tree)
-            )
-        except lark.exceptions.LarkError:
-            assert False, f"failed to parse type expression: {type_expression!r}"
-    elif (m := re.match(r"^" + type_name + r"\s* builtin\s*(Example code)?$", h2_text)) is not None:
-        return FactorioSchema.TypeDefinition(name=type_name, definition=FactorioSchema.builtin_types[type_name])
-    else:
-        assert False, f"failed to regex-match type header: {h2_text!r}"
-
-
-def extract_all_prototypes(crawler: Crawler, known_types: set[str]) -> Iterable[FactorioSchema.TypeDefinition]:
-    all_prototype_names = sorted(set(extract_all_prototype_names(crawler)))
-
-    def extract_one(prototype_name: str) -> FactorioSchema.TypeDefinition:
-        try:
-            return extract_prototype(crawler, prototype_name, known_types)
-        except AssertionError as exc:
-            debug(f"Failed to extract prototype {prototype_name!r}: {exc}")
-            return FactorioSchema.TypeDefinition(name=prototype_name, definition={})
-
-    with tqdm_joblib.tqdm_joblib(desc="Extracting prototypes", total=len(all_prototype_names)):
-        return joblib.Parallel(n_jobs=-1)(
-            joblib.delayed(extract_one)(prototype_name) for prototype_name in all_prototype_names
-        )
-
-
-def extract_all_prototype_names(crawler: Crawler) -> Iterable[str]:
-    for a in read_file(crawler, "prototypes").find_all("a"):
-        link = tag(a).get("href")
-        if link is not None and str(link).startswith("prototypes/"):
-            prototype = str(link).split("#")[0].split("/")[-1]
-            assert prototype.endswith(".html")
-            yield prototype[:-5]
-
-
-def extract_prototype(crawler: Crawler, prototype_name: str, known_types: set[str]) -> FactorioSchema.TypeDefinition:
-    # assert prototype_name in ["WallPrototype"], "ignored"
-
-    soup = read_file(crawler, "prototypes", prototype_name)
-    properties_div_soup = soup.find("div", id="attributes-body-main")
-
-    return FactorioSchema.StructTypeDefinition(
-        prototype_name,
-        base=extract_struct_base(soup),
-        properties=list(extract_struct_properties(prototype_name, properties_div_soup, known_types)),
+        types=extractor.types,
+        prototypes=extractor.prototypes,
     )
+
+
+class _Extractor:
+    def __init__(self, crawler: Crawler) -> None:
+        self.crawler = crawler
+        self.all_type_names: set[str] = set()
+        self.all_prototype_names: set[str] = set()
+        self.types: list[Schema.TypeDefinition] = []
+        self.prototypes: list[Schema.TypeDefinition] = []
+
+    def extract_all_type_names(self) -> None:
+        def gen() -> Iterable[str]:
+            for a in self.crawler.get("types").find_all("a"):
+                link = tag(a).get("href")
+                if link is not None and str(link).startswith("types/"):
+                    type = str(link).split("#")[0].split("/")[-1]
+                    assert type.endswith(".html")
+                    yield type[:-5]
+
+        self.all_type_names = set(gen())
+
+    def extract_all_prototype_names(self) -> None:
+        def gen() -> Iterable[str]:
+            for a in self.crawler.get("prototypes").find_all("a"):
+                link = tag(a).get("href")
+                if link is not None and str(link).startswith("prototypes/"):
+                    prototype = str(link).split("#")[0].split("/")[-1]
+                    assert prototype.endswith(".html")
+                    yield prototype[:-5]
+
+        self.all_prototype_names = set(gen())
+
+    def extract_type(self, type_name: str) -> Schema.TypeDefinition:
+        if type_name in ["Data", "DataExtendMethod", "AnyPrototype"]:
+            # @todo Add diagnostic
+            return Schema.TypeDefinition(name=type_name, definition={})
+
+        soup = self.crawler.get("types", type_name)
+
+        h2_text = tag(soup.find("h2")).text
+        if (m := re.match(r"^" + type_name + r"\s*::\s*(.*?)\s*(Example code)?$", h2_text)) is not None:
+            local_types = {
+                name: Schema.TypeDefinition(name=name, definition={"anyOf": [{"$ref": f"#/definitions/{name}"}]})
+                for name in self.all_type_names
+            }
+
+            type_expression = m.group(1).replace(" - abstract", "")
+            if "struct" in type_expression:
+                properties_div_soup = soup.find("div", id="attributes-body-main")
+                local_types["struct"] = Schema.StructTypeDefinition(
+                    name=type_name,
+                    base=extract_struct_base(soup),
+                    properties=list(extract_struct_properties(type_name, properties_div_soup, self.all_type_names)),
+                )
+
+            if "union" in type_expression:
+                local_types["union"] = Schema.UnionTypeDefinition(
+                    name=type_name, types=list(extract_union_members(soup))
+                )
+
+            try:
+                type_expression_tree = type_expression_parser.parse(type_expression)
+                return Schema.TypeDefinition(
+                    name=type_name,
+                    definition=TypeExpressionTransformer(set(), local_types).transform(type_expression_tree),
+                )
+            except lark.exceptions.LarkError:
+                assert False, f"failed to parse type expression: {type_expression!r}"
+        elif (m := re.match(r"^" + type_name + r"\s* builtin\s*(Example code)?$", h2_text)) is not None:
+            return Schema.TypeDefinition(name=type_name, definition=Schema.builtin_types[type_name])
+        else:
+            assert False, f"failed to regex-match type header: {h2_text!r}"
+
+    def extract_prototype(self, prototype_name: str) -> Schema.TypeDefinition:
+        soup = self.crawler.get("prototypes", prototype_name)
+        properties_div_soup = soup.find("div", id="attributes-body-main")
+
+        return Schema.StructTypeDefinition(
+            prototype_name,
+            base=extract_struct_base(soup),
+            properties=list(extract_struct_properties(prototype_name, properties_div_soup, self.all_type_names)),
+        )
 
 
 def extract_union_members(soup: bs4.element.PageElement | None) -> Iterable[JsonValue]:
@@ -287,7 +174,7 @@ def extract_struct_base(soup: bs4.BeautifulSoup) -> str | None:
 
 def extract_struct_properties(
     type_name: str, properties_div_soup: bs4.element.PageElement | None, global_types: set[str]
-) -> Iterable[FactorioSchema.Property]:
+) -> Iterable[Schema.Property]:
     if properties_div_soup is not None:
         for property_div_soup in (tag(el) for el in tag(properties_div_soup).find_all("div", recursive=False)):
             try:
@@ -308,11 +195,11 @@ def extract_struct_properties(
                                         global_types,
                                     )
                                 )
-                                local_types[local_type_name] = FactorioSchema.StructTypeDefinition(
+                                local_types[local_type_name] = Schema.StructTypeDefinition(
                                     local_type_name, base=None, properties=local_type_properties
                                 )
                             case "union":
-                                local_types[local_type_name] = FactorioSchema.UnionTypeDefinition(
+                                local_types[local_type_name] = Schema.UnionTypeDefinition(
                                     name=local_type_name,
                                     types=list(
                                         extract_union_members(
@@ -323,7 +210,7 @@ def extract_struct_properties(
                             case local_type_expression:
                                 try:
                                     local_type_expression_tree = type_expression_parser.parse(local_type_expression)
-                                    local_types[local_type_name] = FactorioSchema.TypeDefinition(
+                                    local_types[local_type_name] = Schema.TypeDefinition(
                                         name=local_type_name,
                                         definition=TypeExpressionTransformer(global_types, local_types).transform(
                                             local_type_expression_tree
@@ -343,7 +230,7 @@ def extract_struct_properties(
 
                 match m.group(1):
                     case "union":
-                        property_type = FactorioSchema.UnionTypeDefinition(
+                        property_type = Schema.UnionTypeDefinition(
                             name="property",
                             types=list(
                                 extract_union_members(
@@ -360,13 +247,12 @@ def extract_struct_properties(
                         except lark.exceptions.LarkError:
                             assert False, f"failed to parse type expression: {type_expression!r}"
 
-                yield FactorioSchema.Property(name=property_name, type=property_type, required=not optional)
+                yield Schema.Property(name=property_name, type=property_type, required=not optional)
 
             except AssertionError as exc:
-                debug(f"Failed to extract property {type_name}.{property_name}: {exc}")
-                yield FactorioSchema.Property(
-                    name=property_name, type={}, required="optional" not in property_header_soup.text
-                )
+                # debug(f"Failed to extract property {type_name}.{property_name}: {exc}")
+                # @todo Add diagnostic
+                yield Schema.Property(name=property_name, type={}, required="optional" not in property_header_soup.text)
 
 
 type_expression_parser = lark.Lark(
@@ -392,7 +278,7 @@ type_expression_parser = lark.Lark(
 
 
 class TypeExpressionTransformer(lark.Transformer[lark.Token, dict[str, JsonValue]]):
-    def __init__(self, global_types: set[str], local_types: dict[str, FactorioSchema.TypeDefinition]) -> None:
+    def __init__(self, global_types: set[str], local_types: dict[str, Schema.TypeDefinition]) -> None:
         self.global_types = global_types
         self.local_types = local_types
 
@@ -452,7 +338,3 @@ def tag(tag: bs4.element.PageElement | None) -> bs4.element.Tag:
     """
     assert isinstance(tag, bs4.element.Tag), f"{tag!r} is not a Tag"
     return tag
-
-
-def read_file(crawler: Crawler, *stem: str) -> BeautifulSoup:
-    return crawler.get(*stem)
