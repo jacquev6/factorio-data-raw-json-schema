@@ -7,7 +7,7 @@ import re
 import bs4
 import joblib
 import lark
-import tqdm_joblib  # type: ignore
+import tqdm
 
 from .crawling import Crawler
 from .schema import Schema, JsonValue
@@ -16,20 +16,17 @@ from .schema import Schema, JsonValue
 def extract(crawler: Crawler) -> Schema:
     extractor = _Extractor(crawler)
 
-    with tqdm_joblib.tqdm_joblib(total=2) as progress:
+    with tqdm.tqdm(total=2) as progress:
         extractor.extract_all_type_names()
         progress.total += len(extractor.all_type_names)
         progress.update(1)
         extractor.extract_all_prototype_names()
         progress.total += len(extractor.all_prototype_names)
         progress.update(1)
-        extractor.types = joblib.Parallel(n_jobs=-1)(
-            joblib.delayed(extractor.extract_type)(type_name) for type_name in sorted(extractor.all_type_names)
-        )
-        extractor.prototypes = joblib.Parallel(n_jobs=-1)(
-            joblib.delayed(extractor.extract_prototype)(prototype_name)
-            for prototype_name in sorted(extractor.all_prototype_names)
-        )
+        for _ in extractor.extract_all_types():
+            progress.update(1)
+        for _ in extractor.extract_all_prototypes():
+            progress.update(1)
 
     return Schema(
         properties={
@@ -94,7 +91,22 @@ class _Extractor:
 
         self.all_prototype_names = set(gen())
 
-    def extract_type(self, type_name: str) -> Schema.TypeDefinition:
+    def extract_all_types(self) -> Iterable[None]:
+        for type in joblib.Parallel(n_jobs=-1, return_as="generator")(
+            joblib.delayed(self._extract_type)(type_name) for type_name in sorted(self.all_type_names)
+        ):
+            self.types.append(type)
+            yield None
+
+    def extract_all_prototypes(self) -> Iterable[None]:
+        for prototype in joblib.Parallel(n_jobs=-1, return_as="generator")(
+            joblib.delayed(self._extract_prototype)(prototype_name)
+            for prototype_name in sorted(self.all_prototype_names)
+        ):
+            self.prototypes.append(prototype)
+            yield None
+
+    def _extract_type(self, type_name: str) -> Schema.TypeDefinition:
         if type_name in ["Data", "DataExtendMethod", "AnyPrototype"]:
             # @todo Add diagnostic
             return Schema.TypeDefinition(name=type_name, definition={})
@@ -135,7 +147,7 @@ class _Extractor:
         else:
             assert False, f"failed to regex-match type header: {h2_text!r}"
 
-    def extract_prototype(self, prototype_name: str) -> Schema.TypeDefinition:
+    def _extract_prototype(self, prototype_name: str) -> Schema.TypeDefinition:
         soup = self.crawler.get("prototypes", prototype_name)
         properties_div_soup = soup.find("div", id="attributes-body-main")
 
