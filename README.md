@@ -33,6 +33,14 @@ Using the schema
 
 Just [download it](https://raw.githubusercontent.com/jacquev6/factorio-data-raw-json-schema/refs/heads/main/factorio-data-raw-json-schema.json) from GitHub.
 
+Quirks
+======
+
+`data-raw-dump.json` does not strictly conform to the doc. For example, some empty arrays are serialized as `{}`, which in JSON means "empty object".
+The schemas in this repository account for these quirks.
+
+@todo Report all known quirks to Factorio developers (when we are sure we have identified them all)
+
 How
 ===
 
