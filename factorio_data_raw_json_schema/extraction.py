@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-
-
 from typing import Iterable
 import re
 
@@ -28,37 +25,7 @@ def extract(crawler: Crawler) -> Schema:
         for _ in extractor.extract_all_prototypes():
             progress.update(1)
 
-    return Schema(
-        properties={
-            # @todo Extract
-            "ammo": "AmmoItemPrototype",
-            "armor": "ArmorPrototype",
-            "assembling-machine": "AssemblingMachinePrototype",
-            "blueprint": "BlueprintItemPrototype",
-            "blueprint-book": "BlueprintBookPrototype",
-            "capsule": "CapsulePrototype",
-            "character": "CharacterPrototype",
-            "copy-paste-tool": "CopyPasteToolPrototype",
-            "deconstruction-item": "DeconstructionItemPrototype",
-            "fluid": "FluidPrototype",
-            "furnace": "FurnacePrototype",
-            "gun": "GunPrototype",
-            "item": "ItemPrototype",
-            "item-with-entity-data": "ItemWithEntityDataPrototype",
-            "module": "ModulePrototype",
-            "rail-planner": "RailPlannerPrototype",
-            "recipe": "RecipePrototype",
-            "repair-tool": "RepairToolPrototype",
-            "rocket-silo": "RocketSiloPrototype",
-            "selection-tool": "SelectionToolPrototype",
-            "space-platform-starter-pack": "SpacePlatformStarterPackPrototype",
-            "spidertron-remote": "SpidertronRemotePrototype",
-            "tool": "ToolPrototype",
-            "upgrade-item": "UpgradeItemPrototype",
-        },
-        types=extractor.types,
-        prototypes=extractor.prototypes,
-    )
+    return extractor.make_schema()
 
 
 class _Extractor:
@@ -108,7 +75,6 @@ class _Extractor:
 
     def _extract_type(self, type_name: str) -> Schema.TypeDefinition:
         if type_name in ["Data", "DataExtendMethod", "AnyPrototype"]:
-            # @todo Add diagnostic
             return Schema.TypeDefinition(name=type_name, definition={})
 
         soup = self.crawler.get("types", type_name)
@@ -155,6 +121,39 @@ class _Extractor:
             prototype_name,
             base=extract_struct_base(soup),
             properties=list(extract_struct_properties(prototype_name, properties_div_soup, self.all_type_names)),
+        )
+
+    def make_schema(self) -> Schema:
+        return Schema(
+            properties={
+                # @todo Extract
+                "ammo": "AmmoItemPrototype",
+                "armor": "ArmorPrototype",
+                "assembling-machine": "AssemblingMachinePrototype",
+                "blueprint": "BlueprintItemPrototype",
+                "blueprint-book": "BlueprintBookPrototype",
+                "capsule": "CapsulePrototype",
+                "character": "CharacterPrototype",
+                "copy-paste-tool": "CopyPasteToolPrototype",
+                "deconstruction-item": "DeconstructionItemPrototype",
+                "fluid": "FluidPrototype",
+                "furnace": "FurnacePrototype",
+                "gun": "GunPrototype",
+                "item": "ItemPrototype",
+                "item-with-entity-data": "ItemWithEntityDataPrototype",
+                "module": "ModulePrototype",
+                "rail-planner": "RailPlannerPrototype",
+                "recipe": "RecipePrototype",
+                "repair-tool": "RepairToolPrototype",
+                "rocket-silo": "RocketSiloPrototype",
+                "selection-tool": "SelectionToolPrototype",
+                "space-platform-starter-pack": "SpacePlatformStarterPackPrototype",
+                "spidertron-remote": "SpidertronRemotePrototype",
+                "tool": "ToolPrototype",
+                "upgrade-item": "UpgradeItemPrototype",
+            },
+            types=self.types,
+            prototypes=self.prototypes,
         )
 
 
