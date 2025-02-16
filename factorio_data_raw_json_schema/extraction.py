@@ -93,6 +93,7 @@ class _Extractor:
                     name=type_name,
                     base=extract_struct_base(soup),
                     properties=list(extract_struct_properties(type_name, properties_div_soup, self.all_type_names)),
+                    additional_properties=False,
                 )
 
             if "union" in type_expression:
@@ -125,8 +126,20 @@ class _Extractor:
                 extract_struct_properties(prototype_name, overridden_properties_soup, self.all_type_names)
             )
 
+        additional_properties: JsonValue = False
+        custom_properties_div_soup = soup.find("div", id="custom_properties")
+        if custom_properties_div_soup is not None:
+            custom_properties_text = tag(tag(tag(custom_properties_div_soup).parent).find("h3")).text
+            assert custom_properties_text.startswith("Custom properties  \xa0::\xa0string → ")
+            custom_properties_type_name = custom_properties_text[32:]
+            # print(f"Custom props: {custom_properties_type_name}", file=sys.stderr)
+            additional_properties = {"$ref": f"#/definitions/{custom_properties_type_name}"}
+
         return extract_prototype_key(soup), Schema.StructTypeDefinition(
-            prototype_name, base=extract_struct_base(soup), properties=properties
+            prototype_name,
+            base=extract_struct_base(soup),
+            properties=properties,
+            additional_properties=additional_properties,
         )
 
     def make_schema(self) -> Schema:
@@ -198,7 +211,10 @@ def extract_struct_properties(
                                 )
                             )
                             local_types[local_type_name] = Schema.StructTypeDefinition(
-                                local_type_name, base=None, properties=local_type_properties
+                                local_type_name,
+                                base=None,
+                                properties=local_type_properties,
+                                additional_properties=False,
                             )
                         case "union":
                             local_types[local_type_name] = Schema.UnionTypeDefinition(

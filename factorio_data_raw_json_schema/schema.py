@@ -69,6 +69,7 @@ class Schema:
             definition = {
                 "description": json_value(f"https://lua-api.factorio.com/stable/types/{prototype_name}.html"),
                 "properties": properties,
+                "additionalProperties": prototypes_by_name[prototype_name].additional_properties,
             }
             if any(required.values()):
                 definition["required"] = [json_value(v) for v in sorted(k for k, v in required.items() if v)]
@@ -102,10 +103,13 @@ class Schema:
             self.required = required
 
     class StructTypeDefinition(TypeDefinition):
-        def __init__(self, name: str, *, base: str | None, properties: list[Schema.Property]) -> None:
+        def __init__(
+            self, name: str, *, base: str | None, properties: list[Schema.Property], additional_properties: JsonValue
+        ) -> None:
             super().__init__(name=name, definition=self.__make_definition(base, properties))
             self.base = base
             self.properties = properties
+            self.additional_properties = additional_properties
 
         @staticmethod
         def __make_definition(base: str | None, properties: list[Schema.Property]) -> dict[str, JsonValue]:

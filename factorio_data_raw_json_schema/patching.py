@@ -29,6 +29,9 @@ def patch(schema: Any) -> None:
     def add_to_list(path: str, value: Any) -> None:
         patch(path, lambda x: x + [value])
 
+    def add_to_dict(path: str, key: str, value: JsonValue) -> None:
+        patch(path, lambda x: {**x, key: value})
+
     def replace_value(path: str, old_value: JsonValue, new_value: JsonValue) -> None:
         def fn(x: JsonValue) -> JsonValue:
             assert x == old_value
@@ -66,6 +69,19 @@ def patch(schema: Any) -> None:
         "definitions.DontBuildEntityAchievementPrototype.properties.objective_condition.anyOf",
         {"type": "string", "const": "late-research"},
     )
+    add_to_dict("definitions.ToolPrototype.properties", "factoriopedia_durability_description_key", {})
+    add_to_dict("definitions.CargoPodPrototype.properties", "impact_trigger", {})
+    add_to_dict("definitions.ElectricPolePrototype.properties", "track_coverage_during_drag_building", {})
+    add_to_dict("definitions.RoboportPrototype.properties", "default_roboport_count_output_signal", {})
+    add_to_dict("definitions.UtilityConstants.properties", "factoriopedia_recycling_recipe_categories", {})
+    add_to_dict("definitions.UtilityConstants.properties", "feedback_screenshot_file_name", {})
+    add_to_dict("definitions.UtilityConstants.properties", "feedback_screenshot_subfolder_name", {})
+    add_to_dict("definitions.UtilityConstants.properties", "gui_move_switch_vibration", {})
+    add_to_dict("definitions.UtilityConstants.properties", "space_platform_acceleration_expression", {})
+    add_to_dict("definitions.UtilityConstants.properties", "starmap_orbit_clicked_color", {})
+    add_to_dict("definitions.UtilityConstants.properties", "starmap_orbit_default_color", {})
+    add_to_dict("definitions.UtilityConstants.properties", "starmap_orbit_disabled_color", {})
+    add_to_dict("definitions.UtilityConstants.properties", "starmap_orbit_hovered_color", {})
 
     # Patches to investigate and document
     remove_all_constraints("AgriculturalCraneProperties")
@@ -85,5 +101,7 @@ def patch(schema: Any) -> None:
     remove_all_constraints("Sound")
     remove_all_constraints("Sprite")
     remove_all_constraints("SpriteVariations")
+    # Removing next line requires handling overridden properties in types (https://lua-api.factorio.com/2.0.28/types/DoubleSliderStyleSpecification.html#type)
+    remove_all_constraints("StyleSpecification")
     remove_all_constraints("Trigger")
     remove_all_constraints("WorkingVisualisations")

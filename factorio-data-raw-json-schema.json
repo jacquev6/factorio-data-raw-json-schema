@@ -19531,102 +19531,7 @@
       ]
     },
     "StyleSpecification": {
-      "description": "https://lua-api.factorio.com/stable/types/StyleSpecification.html",
-      "anyOf": [
-        {
-          "$ref": "#/definitions/ActivityBarStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/ButtonStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/CameraStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/CheckBoxStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/DropDownStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/FlowStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/FrameStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/GraphStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/HorizontalFlowStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/LineStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/ImageStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/LabelStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/ListBoxStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/ProgressBarStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/RadioButtonStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/HorizontalScrollBarStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/VerticalScrollBarStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/ScrollPaneStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/SliderStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/SwitchStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/TableStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/TabStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/TextBoxStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/VerticalFlowStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/TabbedPaneStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/EmptyWidgetStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/MinimapStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/TechnologySlotStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/GlowStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/SpeechBubbleStyleSpecification"
-        },
-        {
-          "$ref": "#/definitions/DoubleSliderStyleSpecification"
-        }
-      ]
+      "description": "https://lua-api.factorio.com/stable/types/StyleSpecification.html"
     },
     "StyleWithClickableGraphicalSetSpecification": {
       "description": "https://lua-api.factorio.com/stable/types/StyleWithClickableGraphicalSetSpecification.html",
@@ -24805,6 +24710,7 @@
           "$ref": "#/definitions/SignalIDConnector"
         }
       },
+      "additionalProperties": false,
       "required": [
         "energy_source",
         "name",
@@ -24877,6 +24783,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -24963,6 +24870,7 @@
           "$ref": "#/definitions/AttackParameters"
         }
       },
+      "additionalProperties": false,
       "required": [
         "attack_parameters",
         "automatic",
@@ -25558,6 +25466,7 @@
           "$ref": "#/definitions/CircuitConnectorDefinition"
         }
       },
+      "additionalProperties": false,
       "required": [
         "crane",
         "crane_energy_usage",
@@ -25624,6 +25533,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "affects_evolution",
         "affects_water_tint",
@@ -25659,6 +25569,7 @@
           "$ref": "#/definitions/VariableAmbientSoundVariableSound"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "track_type",
@@ -25728,6 +25639,7 @@
           "$ref": "#/definitions/SpriteSizeType"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -25992,6 +25904,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "ammo_category",
         "ammo_type",
@@ -26788,6 +26701,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "attack_parameters",
         "automated_ammo_count",
@@ -26999,6 +26913,7 @@
           "$ref": "#/definitions/uint32"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -27640,6 +27555,7 @@
           "$ref": "#/definitions/Sprite4Way"
         }
       },
+      "additionalProperties": false,
       "required": [
         "active_energy_usage",
         "activity_led_light_offsets",
@@ -27935,6 +27851,7 @@
           "$ref": "#/definitions/Sound"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "stack_size",
@@ -28292,6 +28209,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "arrow_picture",
         "name",
@@ -28694,6 +28612,7 @@
           "$ref": "#/definitions/AmmoCategoryID"
         }
       },
+      "additionalProperties": false,
       "required": [
         "life_time",
         "map_color",
@@ -29067,6 +28986,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "map_color",
         "name",
@@ -29652,6 +29572,7 @@
           "$ref": "#/definitions/Vector3D"
         }
       },
+      "additionalProperties": false,
       "required": [
         "ammo_stack_limit",
         "cannon_base_shift",
@@ -30366,6 +30287,7 @@
           "$ref": "#/definitions/Vector3D"
         }
       },
+      "additionalProperties": false,
       "required": [
         "air_resistance",
         "ammo_stack_limit",
@@ -31021,6 +30943,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "crafting_categories",
         "crafting_speed",
@@ -31102,6 +31025,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -31759,6 +31683,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "arm_energy_usage",
         "arm_slow_energy_usage",
@@ -32257,6 +32182,7 @@
           "$ref": "#/definitions/AsteroidGraphicsSet"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -32328,6 +32254,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "category",
         "name",
@@ -32409,6 +32336,7 @@
           "$ref": "#/definitions/Color"
         }
       },
+      "additionalProperties": false,
       "required": [
         "categories",
         "energy_source",
@@ -32982,6 +32910,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "distribution_effectivity",
         "energy_source",
@@ -33355,6 +33284,7 @@
           "$ref": "#/definitions/BeamGraphicsSet"
         }
       },
+      "additionalProperties": false,
       "required": [
         "damage_interval",
         "graphics_set",
@@ -33441,6 +33371,7 @@
           "$ref": "#/definitions/Energy"
         }
       },
+      "additionalProperties": false,
       "required": [
         "categories",
         "energy_consumption",
@@ -33752,6 +33683,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "inventory_size",
         "name",
@@ -34016,6 +33948,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "alt_select",
         "name",
@@ -34564,6 +34497,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "burning_cooldown",
         "energy_consumption",
@@ -34652,6 +34586,7 @@
           "$ref": "#/definitions/MapTick"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "to_build",
@@ -35160,6 +35095,7 @@
           "$ref": "#/definitions/PerceivedPerformance"
         }
       },
+      "additionalProperties": false,
       "required": [
         "burner",
         "energy_source",
@@ -35229,6 +35165,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "accepted_fuel_key",
         "burned_in_key",
@@ -35471,6 +35408,7 @@
           "$ref": "#/definitions/Color"
         }
       },
+      "additionalProperties": false,
       "required": [
         "capsule_action",
         "name",
@@ -35995,6 +35933,7 @@
           "$ref": "#/definitions/Animation"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "speed",
@@ -36637,6 +36576,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "consumption",
         "effectivity",
@@ -37154,6 +37094,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "inventory_size_bonus",
         "name",
@@ -37683,6 +37624,7 @@
           "$ref": "#/definitions/Color"
         }
       },
+      "additionalProperties": false,
       "required": [
         "cargo_station_parameters",
         "inventory_size",
@@ -38190,8 +38132,10 @@
         },
         "spawned_container": {
           "$ref": "#/definitions/EntityID"
-        }
+        },
+        "impact_trigger": {}
       },
+      "additionalProperties": false,
       "required": [
         "inventory_size",
         "name",
@@ -38826,6 +38770,7 @@
           "$ref": "#/definitions/ItemStackIndex"
         }
       },
+      "additionalProperties": false,
       "required": [
         "air_resistance",
         "connection_distance",
@@ -38906,6 +38851,7 @@
           "$ref": "#/definitions/uint32"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -38980,6 +38926,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -39348,6 +39295,7 @@
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "time_to_live",
@@ -40057,6 +40005,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "animations",
         "build_distance",
@@ -40524,6 +40473,7 @@
           "$ref": "#/definitions/CraterPlacementDefinition"
         }
       },
+      "additionalProperties": false,
       "required": [
         "grid_offset",
         "grid_size",
@@ -40572,6 +40522,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -40646,6 +40597,7 @@
           "$ref": "#/definitions/uint32"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -41189,6 +41141,7 @@
           "$ref": "#/definitions/LightDefinition"
         }
       },
+      "additionalProperties": false,
       "required": [
         "attack_parameters",
         "name",
@@ -41282,6 +41235,7 @@
           "$ref": "#/definitions/MapTick"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "objective_condition",
@@ -41825,6 +41779,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "activity_led_light_offsets",
         "circuit_wire_connection_points",
@@ -41907,6 +41862,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "limited_to_one_game",
         "name",
@@ -42466,6 +42422,7 @@
           "$ref": "#/definitions/LightDefinition"
         }
       },
+      "additionalProperties": false,
       "required": [
         "construction_vector",
         "max_payload_size",
@@ -42995,6 +42952,7 @@
           "$ref": "#/definitions/EntityStatus"
         }
       },
+      "additionalProperties": false,
       "required": [
         "inventory_size",
         "name",
@@ -43261,6 +43219,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "alt_select",
         "name",
@@ -43729,6 +43688,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -43803,6 +43763,7 @@
           "$ref": "#/definitions/uint32"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -44339,6 +44300,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "pictures",
@@ -44876,6 +44838,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "pictures",
@@ -44922,6 +44885,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -45027,6 +44991,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "key_sequence",
         "name",
@@ -45073,6 +45038,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -45699,6 +45665,7 @@
           "$ref": "#/definitions/Sprite4Way"
         }
       },
+      "additionalProperties": false,
       "required": [
         "active_energy_usage",
         "activity_led_light_offsets",
@@ -45781,6 +45748,7 @@
           "$ref": "#/definitions/uint32"
         }
       },
+      "additionalProperties": false,
       "required": [
         "amount",
         "name",
@@ -46129,6 +46097,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -46397,6 +46366,7 @@
           "$ref": "#/definitions/ItemStackIndex"
         }
       },
+      "additionalProperties": false,
       "required": [
         "alt_select",
         "name",
@@ -46501,6 +46471,7 @@
           "$ref": "#/definitions/AutoplaceSpecification"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "pictures",
@@ -46562,6 +46533,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "action",
         "delay",
@@ -46638,6 +46610,7 @@
           "$ref": "#/definitions/uint32"
         }
       },
+      "additionalProperties": false,
       "required": [
         "amount",
         "name",
@@ -46655,6 +46628,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -46680,6 +46654,7 @@
           "$ref": "#/definitions/TriggerEffectItem"
         }
       },
+      "additionalProperties": false,
       "required": [
         "deliver_category",
         "impact_category",
@@ -46760,6 +46735,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -46837,6 +46813,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -47366,6 +47343,7 @@
           "maxItems": 4
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -47498,6 +47476,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "dont_build",
         "name",
@@ -47590,6 +47569,7 @@
           "$ref": "#/definitions/uint32"
         }
       },
+      "additionalProperties": false,
       "required": [
         "amount",
         "name",
@@ -47685,6 +47665,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -47814,6 +47795,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "dont_research",
         "name",
@@ -47951,6 +47933,7 @@
           "$ref": "#/definitions/Energy"
         }
       },
+      "additionalProperties": false,
       "required": [
         "excluded",
         "name",
@@ -48043,6 +48026,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "adjust_speed_based_off_zoom",
         "enable_flash_light",
@@ -48599,6 +48583,7 @@
           "$ref": "#/definitions/Animation4Way"
         }
       },
+      "additionalProperties": false,
       "required": [
         "energy_source",
         "name",
@@ -49128,8 +49113,10 @@
         },
         "auto_connect_up_to_n_wires": {
           "$ref": "#/definitions/uint8"
-        }
+        },
+        "track_coverage_during_drag_building": {}
       },
+      "additionalProperties": false,
       "required": [
         "connection_points",
         "name",
@@ -49920,6 +49907,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "attack_parameters",
         "call_for_help_radius",
@@ -50461,6 +50449,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "pictures",
@@ -50998,6 +50987,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "pictures",
@@ -51535,6 +51525,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "pictures",
@@ -52072,6 +52063,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "pictures",
@@ -52659,6 +52651,7 @@
           "$ref": "#/definitions/EntityID"
         }
       },
+      "additionalProperties": false,
       "required": [
         "call_for_help_radius",
         "graphics_set",
@@ -52755,6 +52748,7 @@
           "$ref": "#/definitions/Energy"
         }
       },
+      "additionalProperties": false,
       "required": [
         "categories",
         "energy_per_shield",
@@ -53129,6 +53123,7 @@
           "$ref": "#/definitions/Sound"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -53215,6 +53210,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "alternative_armor",
         "armor",
@@ -53263,6 +53259,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -53343,6 +53340,7 @@
           "$ref": "#/definitions/Color"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "sprite",
@@ -53412,6 +53410,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "equipment_categories",
         "height",
@@ -53852,6 +53851,7 @@
           "$ref": "#/definitions/float"
         }
       },
+      "additionalProperties": false,
       "required": [
         "animations",
         "name",
@@ -54372,6 +54372,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "damage_per_tick",
         "name",
@@ -54855,6 +54856,7 @@
           "$ref": "#/definitions/SpriteVariations"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -54950,6 +54952,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "base_color",
         "default_temperature",
@@ -55398,6 +55401,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "particle_horizontal_speed",
@@ -56235,6 +56239,7 @@
           "$ref": "#/definitions/Sprite"
         }
       },
+      "additionalProperties": false,
       "required": [
         "activation_buffer_ratio",
         "attack_parameters",
@@ -56879,6 +56884,7 @@
           "$ref": "#/definitions/uint8"
         }
       },
+      "additionalProperties": false,
       "required": [
         "air_resistance",
         "capacity",
@@ -56921,6 +56927,7 @@
           "$ref": "#/definitions/Color"
         }
       },
+      "additionalProperties": false,
       "required": [
         "from",
         "name",
@@ -56971,6 +56978,7 @@
           "$ref": "#/definitions/LocalisedString"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -57571,6 +57579,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "crafting_categories",
         "crafting_speed",
@@ -58081,6 +58090,7 @@
           "$ref": "#/definitions/PerceivedPerformance"
         }
       },
+      "additionalProperties": false,
       "required": [
         "energy_source",
         "input_fluid_box",
@@ -58604,6 +58614,7 @@
           "$ref": "#/definitions/PerceivedPerformance"
         }
       },
+      "additionalProperties": false,
       "required": [
         "burner",
         "energy_source",
@@ -59145,6 +59156,7 @@
           "$ref": "#/definitions/CollisionMaskConnector"
         }
       },
+      "additionalProperties": false,
       "required": [
         "activation_distance",
         "name",
@@ -59234,6 +59246,7 @@
           "$ref": "#/definitions/BurnerEnergySource"
         }
       },
+      "additionalProperties": false,
       "required": [
         "categories",
         "energy_source",
@@ -59781,6 +59794,7 @@
           "$ref": "#/definitions/Energy"
         }
       },
+      "additionalProperties": false,
       "required": [
         "energy_source",
         "fluid_box",
@@ -59844,6 +59858,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "inventory_size",
         "item_pickup_distance",
@@ -59937,6 +59952,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -59987,6 +60003,9 @@
         "default_sprite_priority": {
           "$ref": "#/definitions/SpritePriority"
         }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/StyleSpecification"
       },
       "required": [
         "name",
@@ -60222,6 +60241,7 @@
           "$ref": "#/definitions/AttackParameters"
         }
       },
+      "additionalProperties": false,
       "required": [
         "attack_parameters",
         "name",
@@ -60760,6 +60780,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "pictures",
@@ -61269,6 +61290,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "heat_buffer",
         "name",
@@ -61768,6 +61790,7 @@
           "$ref": "#/definitions/float"
         }
       },
+      "additionalProperties": false,
       "required": [
         "heat_buffer",
         "name",
@@ -62116,6 +62139,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -62132,6 +62156,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -62728,6 +62753,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "erase_contents_when_mined",
         "inventory_size",
@@ -63244,6 +63270,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "fluid_box",
         "horizontal_window_bounding_box",
@@ -63863,6 +63890,7 @@
           "maxItems": 4
         }
       },
+      "additionalProperties": false,
       "required": [
         "energy_source",
         "extension_speed",
@@ -63951,6 +63979,7 @@
           "$ref": "#/definitions/ItemStackIndex"
         }
       },
+      "additionalProperties": false,
       "required": [
         "categories",
         "inventory_size_bonus",
@@ -64302,6 +64331,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -64370,6 +64400,7 @@
           "$ref": "#/definitions/Order"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -64601,6 +64632,7 @@
           "$ref": "#/definitions/uint8"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "stack_size",
@@ -64952,6 +64984,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -65000,6 +65033,7 @@
           "$ref": "#/definitions/ItemGroupID"
         }
       },
+      "additionalProperties": false,
       "required": [
         "group",
         "name",
@@ -65272,6 +65306,7 @@
           "$ref": "#/definitions/SpriteSizeType"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "stack_size",
@@ -65571,6 +65606,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "inventory_size",
         "name",
@@ -65810,6 +65846,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "stack_size",
@@ -66048,6 +66085,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "stack_size",
@@ -66177,6 +66215,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -66730,6 +66769,7 @@
           "$ref": "#/definitions/ItemStackIndex"
         }
       },
+      "additionalProperties": false,
       "required": [
         "energy_source",
         "energy_usage",
@@ -67309,6 +67349,7 @@
           "$ref": "#/definitions/SignalIDConnector"
         }
       },
+      "additionalProperties": false,
       "required": [
         "energy_source",
         "energy_usage_per_tick",
@@ -67827,6 +67868,7 @@
           "$ref": "#/definitions/CollisionMaskConnector"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "trigger_radius",
@@ -68335,6 +68377,7 @@
           "$ref": "#/definitions/Animation4Way"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "speed",
@@ -68873,6 +68916,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "pictures",
@@ -69410,6 +69454,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "pictures",
@@ -69912,6 +69957,7 @@
           "$ref": "#/definitions/ElectricEnergySource"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -70289,6 +70335,7 @@
           "$ref": "#/definitions/uint16"
         }
       },
+      "additionalProperties": false,
       "required": [
         "effect_duration",
         "name",
@@ -70820,6 +70867,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "speed",
@@ -71357,6 +71405,7 @@
           "$ref": "#/definitions/CircuitConnectorDefinition"
         }
       },
+      "additionalProperties": false,
       "required": [
         "inventory_size",
         "name",
@@ -71925,6 +71974,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "filter_count",
         "name",
@@ -72494,6 +72544,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "filter_count",
         "name",
@@ -73153,6 +73204,7 @@
           "$ref": "#/definitions/float"
         }
       },
+      "additionalProperties": false,
       "required": [
         "air_resistance",
         "connection_distance",
@@ -73737,6 +73789,7 @@
           "$ref": "#/definitions/Sound"
         }
       },
+      "additionalProperties": false,
       "required": [
         "inventory_size",
         "logistic_mode",
@@ -74285,6 +74338,7 @@
           "$ref": "#/definitions/RotatedAnimation"
         }
       },
+      "additionalProperties": false,
       "required": [
         "max_payload_size",
         "name",
@@ -74302,6 +74356,9 @@
         "name": {
           "$ref": "#/definitions/string"
         }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/MapGenPreset"
       },
       "required": [
         "name",
@@ -74358,6 +74415,7 @@
           "$ref": "#/definitions/AsteroidSettings"
         }
       },
+      "additionalProperties": false,
       "required": [
         "asteroids",
         "difficulty_settings",
@@ -74859,6 +74917,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -75476,6 +75535,7 @@
           "$ref": "#/definitions/uint8"
         }
       },
+      "additionalProperties": false,
       "required": [
         "energy_source",
         "energy_usage",
@@ -75527,6 +75587,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -75790,6 +75851,7 @@
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "category",
         "effect",
@@ -75892,6 +75954,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "module",
         "name",
@@ -75950,6 +76013,7 @@
           "$ref": "#/definitions/int16"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -76036,6 +76100,7 @@
           "$ref": "#/definitions/double"
         }
       },
+      "additionalProperties": false,
       "required": [
         "categories",
         "energy_consumption",
@@ -76111,6 +76176,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "expression",
         "name",
@@ -76192,6 +76258,7 @@
           }
         }
       },
+      "additionalProperties": false,
       "required": [
         "expression",
         "name",
@@ -76289,6 +76356,7 @@
           "$ref": "#/definitions/Sound"
         }
       },
+      "additionalProperties": false,
       "required": [
         "categories",
         "color_lookup",
@@ -76836,6 +76904,7 @@
           "maxItems": 4
         }
       },
+      "additionalProperties": false,
       "required": [
         "energy_source",
         "energy_usage",
@@ -76931,6 +77000,7 @@
           "$ref": "#/definitions/uint16"
         }
       },
+      "additionalProperties": false,
       "required": [
         "life_time",
         "name",
@@ -77326,6 +77396,7 @@
           "$ref": "#/definitions/float"
         }
       },
+      "additionalProperties": false,
       "required": [
         "height",
         "horizontal_speed",
@@ -77829,6 +77900,7 @@
           "$ref": "#/definitions/PipePictures"
         }
       },
+      "additionalProperties": false,
       "required": [
         "fluid_box",
         "horizontal_window_bounding_box",
@@ -78336,6 +78408,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "fluid_box",
         "name",
@@ -78423,6 +78496,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "armor",
         "limit_equip_quality",
@@ -78606,6 +78680,7 @@
           "$ref": "#/definitions/LightningProperties"
         }
       },
+      "additionalProperties": false,
       "required": [
         "distance",
         "gravity_pull",
@@ -79163,6 +79238,7 @@
           "$ref": "#/definitions/RecipeTints"
         }
       },
+      "additionalProperties": false,
       "required": [
         "growth_ticks",
         "name",
@@ -79244,6 +79320,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "minimum_damage",
         "name",
@@ -79732,6 +79809,7 @@
           "$ref": "#/definitions/double"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -80257,6 +80335,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "circuit_wire_connection_point",
         "left_wire_connection_point",
@@ -80312,6 +80391,7 @@
           "$ref": "#/definitions/TransitionApplication"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -80400,6 +80480,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "procession_style",
@@ -80486,6 +80567,7 @@
           "$ref": "#/definitions/FluidID"
         }
       },
+      "additionalProperties": false,
       "required": [
         "amount",
         "limited_to_one_game",
@@ -80568,6 +80650,7 @@
           "$ref": "#/definitions/FluidID"
         }
       },
+      "additionalProperties": false,
       "required": [
         "amount",
         "name",
@@ -81126,6 +81209,7 @@
           "$ref": "#/definitions/CircuitConnectorDefinition"
         }
       },
+      "additionalProperties": false,
       "required": [
         "energy_source",
         "energy_usage_per_tick",
@@ -81545,6 +81629,7 @@
           "$ref": "#/definitions/RotatedAnimationVariations"
         }
       },
+      "additionalProperties": false,
       "required": [
         "acceleration",
         "name",
@@ -82108,6 +82193,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "energy_source",
         "energy_usage",
@@ -82201,6 +82287,7 @@
           "$ref": "#/definitions/float"
         }
       },
+      "additionalProperties": false,
       "required": [
         "color",
         "level",
@@ -82743,6 +82830,7 @@
           "$ref": "#/definitions/float"
         }
       },
+      "additionalProperties": false,
       "required": [
         "energy_per_nearby_scan",
         "energy_per_sector",
@@ -83268,6 +83356,7 @@
           "$ref": "#/definitions/uint8"
         }
       },
+      "additionalProperties": false,
       "required": [
         "elevated_picture_set",
         "ground_picture_set",
@@ -83521,6 +83610,7 @@
           "$ref": "#/definitions/double"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "rails",
@@ -84065,6 +84155,7 @@
           "$ref": "#/definitions/CollisionMaskConnector"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "pictures",
@@ -84541,6 +84632,7 @@
           "$ref": "#/definitions/BoundingBox"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "pictures",
@@ -85062,6 +85154,7 @@
           "$ref": "#/definitions/uint8"
         }
       },
+      "additionalProperties": false,
       "required": [
         "elevated_picture_set",
         "ground_picture_set",
@@ -85597,6 +85690,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "graphics_set",
         "name",
@@ -86153,6 +86247,7 @@
           "$ref": "#/definitions/SignalIDConnector"
         }
       },
+      "additionalProperties": false,
       "required": [
         "consumption",
         "energy_source",
@@ -86201,6 +86296,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -86432,6 +86528,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -86451,6 +86548,7 @@
           "$ref": "#/definitions/double"
         }
       },
+      "additionalProperties": false,
       "required": [
         "movement_speed",
         "name",
@@ -86698,6 +86796,7 @@
           "$ref": "#/definitions/float"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "speed",
@@ -86777,6 +86876,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -86854,6 +86954,7 @@
           "$ref": "#/definitions/uint32"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "science_pack",
@@ -86900,6 +87001,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -87330,6 +87432,7 @@
           "$ref": "#/definitions/Color"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "stage_counts",
@@ -87491,6 +87594,7 @@
           "$ref": "#/definitions/Energy"
         }
       },
+      "additionalProperties": false,
       "required": [
         "categories",
         "charge_approach_distance",
@@ -88145,8 +88249,10 @@
         },
         "logistics_connection_distance": {
           "$ref": "#/definitions/float"
-        }
+        },
+        "default_roboport_count_output_signal": {}
       },
+      "additionalProperties": false,
       "required": [
         "charge_approach_distance",
         "charging_energy",
@@ -88972,6 +89078,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "active_energy_usage",
         "cargo_station_parameters",
@@ -89451,6 +89558,7 @@
           "$ref": "#/definitions/ItemStackIndex"
         }
       },
+      "additionalProperties": false,
       "required": [
         "cargo_pod_entity",
         "effects_fade_in_end_distance",
@@ -89815,6 +89923,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -90353,6 +90462,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "animation",
         "name",
@@ -90960,6 +91070,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "acceleration_rate",
         "animation",
@@ -91232,6 +91343,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "alt_select",
         "name",
@@ -91864,6 +91976,7 @@
           "$ref": "#/definitions/Sprite4Way"
         }
       },
+      "additionalProperties": false,
       "required": [
         "active_energy_usage",
         "activity_led_light_offsets",
@@ -91949,6 +92062,7 @@
           "$ref": "#/definitions/uint32"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -92117,6 +92231,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "action",
         "name",
@@ -92639,6 +92754,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -93169,6 +93285,7 @@
           "$ref": "#/definitions/ForceCondition"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -93699,6 +93816,7 @@
           "$ref": "#/definitions/ForceCondition"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -94127,6 +94245,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -94210,6 +94329,7 @@
           "$ref": "#/definitions/Energy"
         }
       },
+      "additionalProperties": false,
       "required": [
         "categories",
         "energy_source",
@@ -94713,6 +94833,7 @@
           "$ref": "#/definitions/SpriteVariations"
         }
       },
+      "additionalProperties": false,
       "required": [
         "energy_source",
         "name",
@@ -94821,6 +94942,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -94901,6 +95023,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "distance",
         "name",
@@ -94992,6 +95115,7 @@
           "$ref": "#/definitions/SpriteSizeType"
         }
       },
+      "additionalProperties": false,
       "required": [
         "from",
         "name",
@@ -95138,6 +95262,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "distance",
         "name",
@@ -95669,6 +95794,7 @@
           "$ref": "#/definitions/CargoStationParameters"
         }
       },
+      "additionalProperties": false,
       "required": [
         "cargo_station_parameters",
         "dump_container",
@@ -95940,6 +96066,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "stack_size",
@@ -95960,6 +96087,7 @@
           "$ref": "#/definitions/double"
         }
       },
+      "additionalProperties": false,
       "required": [
         "movement_speed",
         "name",
@@ -96320,6 +96448,7 @@
           "$ref": "#/definitions/uint32"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "style",
@@ -96915,6 +97044,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "base_position_selection_distance",
         "initial_movement_speed",
@@ -97463,6 +97593,7 @@
           "$ref": "#/definitions/UnitAISettings"
         }
       },
+      "additionalProperties": false,
       "required": [
         "attack_parameters",
         "distraction_cooldown",
@@ -98076,6 +98207,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "automatic_weapon_cycling",
         "chain_shooting_cooldown_modifier",
@@ -98347,6 +98479,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "alt_select",
         "name",
@@ -98863,6 +98996,7 @@
           "$ref": "#/definitions/EntityID"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "speed",
@@ -99014,6 +99148,7 @@
           "$ref": "#/definitions/SpriteUsageHint"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -99459,6 +99594,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "duration_in_ticks",
         "name",
@@ -100012,6 +100148,7 @@
           "maxItems": 4
         }
       },
+      "additionalProperties": false,
       "required": [
         "flow_length_in_ticks",
         "fluid_box",
@@ -100551,6 +100688,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "pictures",
@@ -100606,6 +100744,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "default_value",
         "name",
@@ -100667,6 +100806,7 @@
           "$ref": "#/definitions/SpriteSizeType"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -100795,6 +100935,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -101330,6 +101471,7 @@
           "$ref": "#/definitions/uint32"
         }
       },
+      "additionalProperties": false,
       "required": [
         "inventory_size",
         "name",
@@ -101835,6 +101977,7 @@
           "$ref": "#/definitions/PlumesSpecification"
         }
       },
+      "additionalProperties": false,
       "required": [
         "fuel_fluid_box",
         "max_performance",
@@ -101880,6 +102023,7 @@
           "$ref": "#/definitions/PuddleTileEffectParameters"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "shader",
@@ -102228,6 +102372,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -102587,6 +102732,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "collision_mask",
         "layer",
@@ -102700,6 +102846,7 @@
           "$ref": "#/definitions/SpriteSizeType"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -102719,6 +102866,7 @@
           "$ref": "#/definitions/Order"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "order",
@@ -102961,8 +103109,10 @@
         },
         "infinite": {
           "$ref": "#/definitions/bool"
-        }
+        },
+        "factoriopedia_durability_description_key": {}
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "stack_size",
@@ -103038,6 +103188,7 @@
           "$ref": "#/definitions/double"
         }
       },
+      "additionalProperties": false,
       "required": [
         "minimum_distance",
         "name",
@@ -103613,6 +103764,7 @@
           "maxItems": 4
         }
       },
+      "additionalProperties": false,
       "required": [
         "animation_ticks_per_frame",
         "name",
@@ -104138,6 +104290,7 @@
           "$ref": "#/definitions/EntityID"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "speed",
@@ -104678,6 +104831,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -104694,6 +104848,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -104784,6 +104939,7 @@
           "$ref": "#/definitions/RenderLayer"
         }
       },
+      "additionalProperties": false,
       "required": [
         "animation",
         "duration",
@@ -105564,6 +105720,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "attack_parameters",
         "call_for_help_radius",
@@ -105613,6 +105770,7 @@
           "$ref": "#/definitions/string"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "scenario",
@@ -106156,6 +106314,7 @@
           "$ref": "#/definitions/Color"
         }
       },
+      "additionalProperties": false,
       "required": [
         "max_distance",
         "name",
@@ -106735,6 +106894,7 @@
           ]
         }
       },
+      "additionalProperties": false,
       "required": [
         "attack_parameters",
         "distance_per_frame",
@@ -107003,6 +107163,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "alt_select",
         "name",
@@ -107089,6 +107250,7 @@
           "$ref": "#/definitions/EntityID"
         }
       },
+      "additionalProperties": false,
       "required": [
         "entity",
         "name",
@@ -107173,6 +107335,7 @@
           "$ref": "#/definitions/bool"
         }
       },
+      "additionalProperties": false,
       "required": [
         "limit_quality",
         "name",
@@ -108051,8 +108214,18 @@
         },
         "time_to_show_full_health_bar": {
           "$ref": "#/definitions/MapTick"
-        }
+        },
+        "factoriopedia_recycling_recipe_categories": {},
+        "feedback_screenshot_file_name": {},
+        "feedback_screenshot_subfolder_name": {},
+        "gui_move_switch_vibration": {},
+        "space_platform_acceleration_expression": {},
+        "starmap_orbit_clicked_color": {},
+        "starmap_orbit_default_color": {},
+        "starmap_orbit_disabled_color": {},
+        "starmap_orbit_hovered_color": {}
       },
+      "additionalProperties": false,
       "required": [
         "agricultural_range_visualization_color",
         "artillery_range_visualization_color",
@@ -108452,6 +108625,7 @@
           "$ref": "#/definitions/Sound"
         }
       },
+      "additionalProperties": false,
       "required": [
         "achievement_unlocked",
         "alert_destroyed",
@@ -110488,6 +110662,7 @@
           "$ref": "#/definitions/Sprite"
         }
       },
+      "additionalProperties": false,
       "required": [
         "achievement_label",
         "achievement_label_completed",
@@ -111084,6 +111259,7 @@
           "$ref": "#/definitions/SpriteSizeType"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
@@ -111659,6 +111835,7 @@
           "$ref": "#/definitions/Sprite"
         }
       },
+      "additionalProperties": false,
       "required": [
         "name",
         "type"
