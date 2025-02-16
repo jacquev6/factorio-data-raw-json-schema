@@ -34,7 +34,7 @@ class _Extractor:
         self.all_type_names: set[str] = set()
         self.all_prototype_names: set[str] = set()
         self.types: list[Schema.TypeDefinition] = []
-        self.prototypes: list[tuple[str | None, Schema.TypeDefinition]] = []
+        self.prototypes: list[tuple[str | None, Schema.StructTypeDefinition]] = []
 
     def extract_all_type_names(self) -> None:
         def gen() -> Iterable[str]:
@@ -113,14 +113,20 @@ class _Extractor:
         else:
             assert False, f"failed to regex-match type header: {h2_text!r}"
 
-    def _extract_prototype(self, prototype_name: str) -> tuple[str | None, Schema.TypeDefinition]:
+    def _extract_prototype(self, prototype_name: str) -> tuple[str | None, Schema.StructTypeDefinition]:
         soup = self.crawler.get("prototypes", prototype_name)
-        properties_div_soup = soup.find("div", id="attributes-body-main")
+        properties = list(
+            extract_struct_properties(prototype_name, soup.find("div", id="attributes-body-main"), self.all_type_names)
+        )
+
+        overridden_properties_soup = soup.find("div", id="attributes-body-overridden")
+        if overridden_properties_soup is not None:
+            properties.extend(
+                extract_struct_properties(prototype_name, overridden_properties_soup, self.all_type_names)
+            )
 
         return extract_prototype_key(soup), Schema.StructTypeDefinition(
-            prototype_name,
-            base=extract_struct_base(soup),
-            properties=list(extract_struct_properties(prototype_name, properties_div_soup, self.all_type_names)),
+            prototype_name, base=extract_struct_base(soup), properties=properties
         )
 
     def make_schema(self) -> Schema:
@@ -176,7 +182,7 @@ def extract_struct_properties(
             property_header_soup = tag(property_div_soup.find("h3", recursive=False))
             property_names = str(tag(property_header_soup.contents[0]).contents[0]).strip().split(" or ")
 
-            local_types = {}
+            local_types: dict[str, Schema.TypeDefinition] = {}
             for local_type_div_soup in (tag(el) for el in property_div_soup.find_all("div", class_="inline-type")):
                 local_type_header_text = tag(local_type_div_soup.find("h4")).text
                 if (m := re.match(r"^(.*?)\s*::\s*(.*?)\s*$", local_type_header_text)) is not None:
@@ -241,7 +247,9 @@ def extract_struct_properties(
                             type_expression_tree
                         )
                     except lark.exceptions.LarkError:
-                        assert False, f"failed to parse type expression: {type_expression!r}"
+                        assert (
+                            False
+                        ), f"failed to parse type expression for {type_name}.{property_names[0]}: {type_expression!r}"
 
             for property_name in property_names:
                 # @todo When there are multiple property names, and the property is not optional, enforce that at least one property name is present
@@ -251,11 +259,12 @@ def extract_struct_properties(
 
 
 type_expression_parser = lark.Lark(
-    """
-    type_expression : named_type | literal_string | array_type | union_type | dictionary_type | tuple_type | adhoc_type
+    r"""
+    type_expression : named_type | literal_string | literal_integer | array_type | union_type | dictionary_type | tuple_type | adhoc_type
 
     named_type : CNAME
     literal_string : ESCAPED_STRING
+    literal_integer : INT
     array_type : "array" "[" type_expression "]"
     union_type : type_expression "or" type_expression
     dictionary_type : "dictionary" "[" type_expression "→" type_expression "]"
@@ -263,6 +272,7 @@ type_expression_parser = lark.Lark(
     adhoc_type : "defines.inventory"
 
     %import common.ESCAPED_STRING
+    %import common.INT
     %import common.CNAME
     %import common.WS
     %ignore WS
@@ -284,6 +294,8 @@ class TypeExpressionTransformer(lark.Transformer[lark.Token, dict[str, JsonValue
         type_name = items[0]
         if type_name == "true":
             return {"type": "boolean", "const": True}
+        elif type_name == "false":
+            return {"type": "boolean", "const": False}
         elif type_name in self.global_types:
             return {"$ref": f"#/definitions/{type_name}"}
         elif type_name in self.local_types:
@@ -295,6 +307,10 @@ class TypeExpressionTransformer(lark.Transformer[lark.Token, dict[str, JsonValue
         value = items[0]
         assert value.startswith('"') and value.endswith('"')
         return {"type": "string", "const": value.strip('"')}
+
+    def literal_integer(self, items: list[str]) -> JsonValue:
+        value = items[0]
+        return {"type": "integer", "const": int(value)}
 
     def array_type(self, items: list[JsonValue]) -> JsonValue:
         return {

@@ -28,7 +28,9 @@ class Schema:
         "int64": {"type": "integer", "minimum": -9223372036854775808, "maximum": 9223372036854775807},
     }
 
-    def __init__(self, *, types: list[TypeDefinition], prototypes: list[tuple[str | None, TypeDefinition]]) -> None:
+    def __init__(
+        self, *, types: list[TypeDefinition], prototypes: list[tuple[str | None, StructTypeDefinition]]
+    ) -> None:
         self.types = types
         self.prototypes = prototypes
 
@@ -73,13 +75,32 @@ class Schema:
             for d in self.types
         }
 
-        prototype_definitions = {
-            d.name: json_value(
-                {"description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{d.name}.html")}
-                | d.definition
-            )
-            for _, d in self.prototypes
-        }
+        prototypes_by_name = {prototype.name: prototype for _, prototype in self.prototypes}
+
+        def make_prototype_definition(prototype_name: str) -> dict[str, JsonValue]:
+            properties: dict[str, JsonValue] = {}
+            required: dict[str, bool] = {}
+
+            def rec(prototype_name: str) -> None:
+                prototype = prototypes_by_name[prototype_name]
+                if prototype.base is not None:
+                    rec(prototype.base)
+                properties.update({p.name: p.type for p in prototype.properties})
+                required.update({p.name: p.required for p in prototype.properties})
+
+            rec(prototype_name)
+
+            definition = {
+                "description": json_value(f"https://lua-api.factorio.com/stable/types/{prototype_name}.html"),
+                "properties": properties,
+            }
+            if any(required.values()):
+                definition["required"] = [json_value(v) for v in sorted(k for k, v in required.items() if v)]
+            return definition
+
+        prototype_definitions: dict[str, JsonValue] = {}
+        for _, prototype in self.prototypes:
+            prototype_definitions[prototype.name] = make_prototype_definition(prototype.name)
 
         return {
             "$schema": "https://json-schema.org/draft/2019-09/schema",
@@ -102,25 +123,28 @@ class Schema:
             # self.type = {}
             self.required = required
 
-    @staticmethod
-    def StructTypeDefinition(
-        name: str, *, base: str | None = None, properties: list[Schema.Property]
-    ) -> TypeDefinition:
-        required = [json_value(p.name) for p in properties if p.required]
-        self_definition = {"type": "object", "properties": json_value({p.name: p.type for p in properties})} | (
-            {"required": json_value(required)} if required else {}
-        )
-        if base is None:
-            if len(properties) > 0:
-                definition = self_definition
+    class StructTypeDefinition(TypeDefinition):
+        def __init__(self, name: str, *, base: str | None, properties: list[Schema.Property]) -> None:
+            super().__init__(name=name, definition=self.__make_definition(base, properties))
+            self.base = base
+            self.properties = properties
+
+        @staticmethod
+        def __make_definition(base: str | None, properties: list[Schema.Property]) -> dict[str, JsonValue]:
+            required = [json_value(p.name) for p in properties if p.required]
+            self_definition = {"type": "object", "properties": json_value({p.name: p.type for p in properties})} | (
+                {"required": json_value(required)} if required else {}
+            )
+            if base is None:
+                if len(properties) > 0:
+                    return self_definition
+                else:
+                    return {"type": "object"}
             else:
-                definition = {"type": "object"}
-        else:
-            if len(properties) == 0:
-                definition = {"allOf": [{"$ref": f"#/definitions/{base}"}]}  # @todo Consider removing the "allOf"
-            else:
-                definition = {"allOf": [{"$ref": f"#/definitions/{base}"}, self_definition]}
-        return Schema.TypeDefinition(name=name, definition=definition)
+                if len(properties) == 0:
+                    return {"allOf": [{"$ref": f"#/definitions/{base}"}]}  # @todo Consider removing the "allOf"
+                else:
+                    return {"allOf": [{"$ref": f"#/definitions/{base}"}, self_definition]}
 
     @staticmethod
     def UnionTypeDefinition(*, name: str, types: list[JsonValue]) -> TypeDefinition:
