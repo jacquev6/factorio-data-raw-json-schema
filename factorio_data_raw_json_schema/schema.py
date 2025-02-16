@@ -75,6 +75,8 @@ class Schema:
             for d in self.types
         }
 
+        # @todo Add "additionalProperties": false to all definitions
+
         prototypes_by_name = {prototype.name: prototype for _, prototype in self.prototypes}
 
         def make_prototype_definition(prototype_name: str) -> dict[str, JsonValue]:
@@ -89,6 +91,7 @@ class Schema:
                 required.update({p.name: p.required for p in prototype.properties})
 
             rec(prototype_name)
+            # @todo Constrain 'type' to equal the leaf prototype key
 
             definition = {
                 "description": json_value(f"https://lua-api.factorio.com/stable/types/{prototype_name}.html"),
