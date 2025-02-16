@@ -14686,6 +14686,19 @@
       "description": "https://lua-api.factorio.com/stable/types/RandomRange.html",
       "anyOf": [
         {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/uint8"
+            },
+            {
+              "$ref": "#/definitions/uint8"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
           "$ref": "#/definitions/uint8"
         }
       ]

@@ -97,7 +97,7 @@ class _Extractor:
 
             if "union" in type_expression:
                 local_types["union"] = Schema.UnionTypeDefinition(
-                    name=type_name, types=list(extract_union_members(soup))
+                    name=type_name, types=list(extract_union_members(soup, self.all_type_names))
                 )
 
             try:
@@ -133,18 +133,20 @@ class _Extractor:
         return Schema(types=self.types, prototypes=self.prototypes)
 
 
-def extract_union_members(soup: bs4.element.PageElement | None) -> Iterable[JsonValue]:
+def extract_union_members(soup: bs4.element.PageElement | None, global_types: set[str]) -> Iterable[JsonValue]:
     if soup is not None:
         for span_soup in (tag(el) for el in tag(soup).find_all("span", class_="docs-attribute-name")):
-            content_soup = span_soup.contents[0]
-            if isinstance(content_soup, bs4.element.Tag) and content_soup.name == "code":
-                value = content_soup.text.strip()
-                if value.startswith('"') and value.endswith('"'):
-                    yield {"type": "string", "const": value.strip('"')}
-                else:
-                    yield {"type": "integer", "const": int(value)}
-            else:
-                yield {"$ref": f"#/definitions/{content_soup.text.strip()}"}
+            yield TypeExpressionTransformer(
+                global_types,
+                {
+                    # I believe 'DamageEntityTriggerEffectItem' is a typo in https://lua-api.factorio.com/2.0.28/types/TriggerEffect.html
+                    # and actually refers to 'DamageTriggerEffectItem'
+                    "DamageEntityTriggerEffectItem": Schema.TypeDefinition(
+                        name="DamageEntityTriggerEffectItem",
+                        definition={"$ref": "#/definitions/DamageTriggerEffectItem"},
+                    )
+                },
+            ).transform(type_expression_parser.parse(str(span_soup.text).strip()))
 
 
 def extract_prototype_key(soup: bs4.BeautifulSoup) -> str | None:
@@ -204,7 +206,8 @@ def extract_struct_properties(
                                 name=local_type_name,
                                 types=list(
                                     extract_union_members(
-                                        tag(local_type_div_soup.find("h4", string="Union members")).next_sibling
+                                        tag(local_type_div_soup.find("h4", string="Union members")).next_sibling,
+                                        global_types,
                                     )
                                 ),
                             )
@@ -236,7 +239,7 @@ def extract_struct_properties(
                         name="property",
                         types=list(
                             extract_union_members(
-                                tag(property_div_soup.find("h4", string="Union members")).next_sibling
+                                tag(property_div_soup.find("h4", string="Union members")).next_sibling, global_types
                             )
                         ),
                     ).definition

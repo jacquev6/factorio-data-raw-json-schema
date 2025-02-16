@@ -14,7 +14,11 @@ def patch(schema: Any) -> None:
     # ============================================================
 
     # Empty arrays are serialized as {} instead of []
-    # (patched in the generated schema because this must be done everywhere)
+    # (patched in 'extraction.py' because this must be done everywhere)
+
+    # I believe 'DamageEntityTriggerEffectItem' is a typo in https://lua-api.factorio.com/2.0.28/types/TriggerEffect.html
+    # and actually refers to 'DamageTriggerEffectItem'
+    # (patched in 'extraction.py' for simplicity)
 
     # types/ItemProductPrototype.html#amount_min is documented as uint16
     # but is some sort of floating point in e.g. 'speed-module-recycling'
@@ -36,12 +40,3 @@ def patch(schema: Any) -> None:
     remove_all_constraints("SpriteVariations")
     remove_all_constraints("TriggerEffect")
     remove_all_constraints("WorkingSound")
-
-    # Ad-hoc patches because our extraction tool is weak
-    # ==================================================
-
-    # RandomRange can be {min: double, max: double}
-    if schema["definitions"].get("RandomRange", {}).get("anyOf", [{}])[0] == {"$ref": "#/definitions/{"}:
-        schema["definitions"]["RandomRange"]["anyOf"] = schema["definitions"]["RandomRange"]["anyOf"][1:]
-    else:
-        debug("Failed to patch RandomRange")
