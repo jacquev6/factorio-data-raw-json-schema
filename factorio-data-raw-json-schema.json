@@ -21,16 +21,16 @@
         "$ref": "#/definitions/AssemblingMachinePrototype"
       }
     },
-    "blueprint": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/BlueprintItemPrototype"
-      }
-    },
     "blueprint-book": {
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/BlueprintBookPrototype"
+      }
+    },
+    "blueprint": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/BlueprintItemPrototype"
       }
     },
     "capsule": {
@@ -18236,8 +18236,7 @@
         "allow_forced_downscale": {
           "$ref": "#/definitions/bool"
         }
-      },
-      "required": []
+      }
     },
     "SpriteUsageHint": {
       "description": "https://lua-api.factorio.com/stable/types/SpriteUsageHint.html",
@@ -23476,10 +23475,7 @@
                 }
               ]
             }
-          },
-          "required": [
-            "objective_condition"
-          ]
+          }
         }
       ]
     },
@@ -27465,7 +27461,6 @@
         "show_character_tab_in_controller_gui",
         "show_infinity_filters_in_controller_gui",
         "placed_corpses_never_expire",
-        "ignore_surface_conditions",
         "ignore_tile_conditions"
       ]
     },
@@ -28422,10 +28417,7 @@
             }
           },
           "required": [
-            "sprite",
-            "shape",
-            "categories",
-            "energy_source"
+            "sprite"
           ]
         }
       ]
@@ -31046,10 +31038,7 @@
             "animation_sound": {
               "$ref": "#/definitions/Sound"
             }
-          },
-          "required": [
-            "logistic_mode"
-          ]
+          }
         }
       ]
     },
@@ -35194,7 +35183,6 @@
             }
           },
           "required": [
-            "gravity_pull",
             "distance",
             "orientation"
           ]
@@ -38610,7 +38598,6 @@
             "asteroid_collector_max_nurbs_control_point_separation",
             "asteroid_collector_static_head_swing_strength_scale",
             "asteroid_collector_static_head_swing_segment_count",
-            "space_platform_default_speed_formula",
             "space_platform_relative_speed_factor",
             "space_platform_starfield_movement_vector",
             "space_platform_max_size",
@@ -41424,7 +41411,7 @@
             "weight": {
               "$ref": "#/definitions/double"
             },
-            "braking_power or braking_force": {
+            "braking_power": {
               "oneOf": [
                 {
                   "$ref": "#/definitions/Energy"
@@ -41434,7 +41421,20 @@
                 }
               ]
             },
-            "friction or friction_force": {
+            "braking_force": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/Energy"
+                },
+                {
+                  "$ref": "#/definitions/double"
+                }
+              ]
+            },
+            "friction": {
+              "$ref": "#/definitions/double"
+            },
+            "friction_force": {
               "$ref": "#/definitions/double"
             },
             "energy_per_hit_point": {
@@ -41479,8 +41479,6 @@
           },
           "required": [
             "weight",
-            "braking_power or braking_force",
-            "friction or friction_force",
             "energy_per_hit_point"
           ]
         }

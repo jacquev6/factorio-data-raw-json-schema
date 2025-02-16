@@ -7,6 +7,17 @@ def debug(*arg: Any, **kwds: Any) -> None:
 
 
 def patch(schema: Any) -> None:
+    def remove_all_constraints(type_name: str) -> None:
+        schema["definitions"][type_name] = {"description": schema["definitions"][type_name]["description"]}
+
+    def make_optional(type_name: str, property_name: str) -> None:
+        definition = schema["definitions"][type_name]
+        if "allOf" in definition:
+            definition = definition["allOf"][1]
+        definition["required"].remove(property_name)
+        if not definition["required"]:
+            del definition["required"]
+
     # Ad-hoc patches because the doc doesn't match the actual data
     # ============================================================
 
@@ -38,17 +49,15 @@ def patch(schema: Any) -> None:
     # I'm fed up with documenting every single patch
     schema["definitions"]["WorkingVisualisations"]["properties"]["working_visualisations"] = {}
     schema["definitions"]["CharacterPrototype"]["allOf"][1]["properties"]["synced_footstep_particle_triggers"] = {}
-    schema["definitions"]["TriggerEffect"] = {
-        "description": "https://lua-api.factorio.com/stable/types/TriggerEffect.html"
-    }
-    schema["definitions"]["Animation4Way"] = {
-        "description": "https://lua-api.factorio.com/stable/types/Animation4Way.html"
-    }
-    schema["definitions"]["Sound"] = {"description": "https://lua-api.factorio.com/stable/types/Sound.html"}
-    schema["definitions"]["Sprite4Way"] = {"description": "https://lua-api.factorio.com/stable/types/Sprite4Way.html"}
-    schema["definitions"]["WorkingSound"] = {
-        "description": "https://lua-api.factorio.com/stable/types/WorkingSound.html"
-    }
+    remove_all_constraints("TriggerEffect")
+    remove_all_constraints("Animation4Way")
+    remove_all_constraints("Sound")
+    remove_all_constraints("Sprite4Way")
+    remove_all_constraints("WorkingSound")
+    make_optional("AchievementPrototypeWithCondition", "objective_condition")
+    make_optional("EditorControllerPrototype", "ignore_surface_conditions")
+    make_optional("SpaceLocationPrototype", "gravity_pull")
+    make_optional("UtilityConstants", "space_platform_default_speed_formula")
 
     # Ad-hoc patches because our extraction tool is weak
     # ==================================================
@@ -62,7 +71,9 @@ def patch(schema: Any) -> None:
     # Property "filename" is mandatory in types/SpriteSource.html
     # but overridden to be optional in types/Sprite.html
     # So, for the moment, we make it optional in SpriteSource
-    if "filename" in schema["definitions"].get("SpriteSource", {}).get("required", []):
-        schema["definitions"]["SpriteSource"]["required"].remove("filename")
-    else:
-        debug("Failed to patch SpriteSource")
+    make_optional("SpriteSource", "filename")
+    # Similar cases
+    make_optional("EquipmentPrototype", "shape")
+    make_optional("EquipmentPrototype", "categories")
+    make_optional("EquipmentPrototype", "energy_source")
+    make_optional("LogisticContainerPrototype", "logistic_mode")

@@ -28,38 +28,65 @@ class Schema:
         "int64": {"type": "integer", "minimum": -9223372036854775808, "maximum": 9223372036854775807},
     }
 
-    def __init__(
-        self, *, properties: dict[str, str], types: list[TypeDefinition], prototypes: list[TypeDefinition]
-    ) -> None:
-        self.properties = properties
+    def __init__(self, *, types: list[TypeDefinition], prototypes: list[tuple[str | None, TypeDefinition]]) -> None:
         self.types = types
         self.prototypes = prototypes
 
     def to_json_value(self) -> JsonValue:
+        properties = {
+            key: json_value({"type": "object", "additionalProperties": {"$ref": f"#/definitions/{prototype.name}"}})
+            for key, prototype in self.prototypes
+            if key is not None
+            and key
+            in [
+                "ammo",
+                "armor",
+                "assembling-machine",
+                "blueprint-book",
+                "blueprint",
+                "capsule",
+                "character",
+                "copy-paste-tool",
+                "deconstruction-item",
+                "fluid",
+                "furnace",
+                "gun",
+                "item-with-entity-data",
+                "item",
+                "module",
+                "rail-planner",
+                "recipe",
+                "repair-tool",
+                "rocket-silo",
+                "selection-tool",
+                "space-platform-starter-pack",
+                "spidertron-remote",
+                "tool",
+                "upgrade-item",
+            ]
+        }
+
+        type_definitions = {
+            d.name: json_value(
+                {"description": json_value(f"https://lua-api.factorio.com/stable/types/{d.name}.html")} | d.definition
+            )
+            for d in self.types
+        }
+
+        prototype_definitions = {
+            d.name: json_value(
+                {"description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{d.name}.html")}
+                | d.definition
+            )
+            for _, d in self.prototypes
+        }
+
         return {
             "$schema": "https://json-schema.org/draft/2019-09/schema",
             "title": "Factorio Data.raw",
             "type": "object",
-            "properties": {
-                k: {"type": "object", "additionalProperties": {"$ref": f"#/definitions/{v}"}}
-                for k, v in self.properties.items()
-            },
-            "definitions": (
-                {
-                    d.name: json_value(
-                        {"description": json_value(f"https://lua-api.factorio.com/stable/types/{d.name}.html")}
-                        | d.definition
-                    )
-                    for d in self.types
-                }
-                | {
-                    d.name: json_value(
-                        {"description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{d.name}.html")}
-                        | d.definition
-                    )
-                    for d in self.prototypes
-                }
-            ),
+            "properties": properties,
+            "definitions": type_definitions | prototype_definitions,
         }
 
     class TypeDefinition:
@@ -72,6 +99,7 @@ class Schema:
         def __init__(self, *, name: str, type: JsonValue, required: bool = False) -> None:
             self.name = name
             self.type = type
+            # self.type = {}
             self.required = required
 
     @staticmethod
