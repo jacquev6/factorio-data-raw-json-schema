@@ -39,33 +39,6 @@ class Schema:
             key: json_value({"type": "object", "additionalProperties": {"$ref": f"#/definitions/{prototype.name}"}})
             for key, prototype in self.prototypes
             if key is not None
-            and key
-            in [
-                "ammo",
-                "armor",
-                "assembling-machine",
-                "blueprint-book",
-                "blueprint",
-                "capsule",
-                "character",
-                "copy-paste-tool",
-                "deconstruction-item",
-                "fluid",
-                "furnace",
-                "gun",
-                "item-with-entity-data",
-                "item",
-                "module",
-                "rail-planner",
-                "recipe",
-                "repair-tool",
-                "rocket-silo",
-                "selection-tool",
-                "space-platform-starter-pack",
-                "spidertron-remote",
-                "tool",
-                "upgrade-item",
-            ]
         }
 
         type_definitions = {
@@ -102,8 +75,9 @@ class Schema:
             return definition
 
         prototype_definitions: dict[str, JsonValue] = {}
-        for _, prototype in self.prototypes:
-            prototype_definitions[prototype.name] = make_prototype_definition(prototype.name)
+        for key, prototype in self.prototypes:
+            if key is not None:
+                prototype_definitions[prototype.name] = make_prototype_definition(prototype.name)
 
         return {
             "$schema": "https://json-schema.org/draft/2019-09/schema",

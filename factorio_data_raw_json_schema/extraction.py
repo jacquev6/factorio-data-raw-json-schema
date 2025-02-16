@@ -327,12 +327,12 @@ class TypeExpressionTransformer(lark.Transformer[lark.Token, dict[str, JsonValue
     def union_type(self, items: list[JsonValue]) -> JsonValue:
         members: list[JsonValue] = []
         for item in items:
-            if isinstance(item, dict) and item.get("oneOf") is not None:
-                assert isinstance(item["oneOf"], list)
-                members.extend(item["oneOf"])
+            if isinstance(item, dict) and item.get("anyOf") is not None:
+                assert isinstance(item["anyOf"], list)
+                members.extend(item["anyOf"])
             else:
                 members.append(item)
-        return {"oneOf": members}
+        return {"anyOf": members}
 
     def dictionary_type(self, items: list[JsonValue]) -> JsonValue:
         return {"type": "object", "additionalProperties": items[1], "propertyNames": items[0]}
