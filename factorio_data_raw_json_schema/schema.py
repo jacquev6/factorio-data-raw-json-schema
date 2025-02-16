@@ -84,6 +84,7 @@ class Schema:
             "title": "Factorio Data.raw",
             "type": "object",
             "properties": properties,
+            "additionalProperties": False,
             "definitions": type_definitions | prototype_definitions,
         }
 

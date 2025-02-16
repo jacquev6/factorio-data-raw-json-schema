@@ -21,6 +21,12 @@
         "$ref": "#/definitions/ActiveDefenseEquipmentPrototype"
       }
     },
+    "agricultural-tower": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/AgriculturalTowerPrototype"
+      }
+    },
     "airborne-pollutant": {
       "type": "object",
       "additionalProperties": {
@@ -111,6 +117,18 @@
         "$ref": "#/definitions/AsteroidChunkPrototype"
       }
     },
+    "asteroid-collector": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/AsteroidCollectorPrototype"
+      }
+    },
+    "asteroid": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/AsteroidPrototype"
+      }
+    },
     "autoplace-control": {
       "type": "object",
       "additionalProperties": {
@@ -183,10 +201,22 @@
         "$ref": "#/definitions/CapsulePrototype"
       }
     },
+    "capture-robot": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/CaptureRobotPrototype"
+      }
+    },
     "car": {
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/CarPrototype"
+      }
+    },
+    "cargo-bay": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/CargoBayPrototype"
       }
     },
     "cargo-landing-pad": {
@@ -789,6 +819,18 @@
         "$ref": "#/definitions/LegacyStraightRailPrototype"
       }
     },
+    "lightning-attractor": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/LightningAttractorPrototype"
+      }
+    },
+    "lightning": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/LightningPrototype"
+      }
+    },
     "linked-belt": {
       "type": "object",
       "additionalProperties": {
@@ -943,6 +985,12 @@
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/PlanetPrototype"
+      }
+    },
+    "plant": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/PlantPrototype"
       }
     },
     "player-damaged-achievement": {
@@ -1137,6 +1185,18 @@
         "$ref": "#/definitions/RocketSiloRocketShadowPrototype"
       }
     },
+    "segment": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/SegmentPrototype"
+      }
+    },
+    "segmented-unit": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/SegmentedUnitPrototype"
+      }
+    },
     "selection-tool": {
       "type": "object",
       "additionalProperties": {
@@ -1219,6 +1279,12 @@
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/SpaceLocationPrototype"
+      }
+    },
+    "space-platform-hub": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/SpacePlatformHubPrototype"
       }
     },
     "space-platform-starter-pack": {
@@ -1315,6 +1381,12 @@
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/TemporaryContainerPrototype"
+      }
+    },
+    "thruster": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ThrusterPrototype"
       }
     },
     "tile-effect": {
@@ -1462,6 +1534,7 @@
       }
     }
   },
+  "additionalProperties": false,
   "definitions": {
     "ActivateEquipmentCapsuleAction": {
       "description": "https://lua-api.factorio.com/stable/types/ActivateEquipmentCapsuleAction.html",
@@ -1652,50 +1725,7 @@
     },
     "AgriculturalCraneProperties": {
       "description": "https://lua-api.factorio.com/stable/types/AgriculturalCraneProperties.html",
-      "type": "object",
-      "properties": {
-        "speed": {
-          "$ref": "#/definitions/AgriculturalCraneSpeed"
-        },
-        "min_arm_extent": {
-          "$ref": "#/definitions/double"
-        },
-        "min_grappler_extent": {
-          "$ref": "#/definitions/double"
-        },
-        "operation_angle": {
-          "$ref": "#/definitions/float"
-        },
-        "telescope_default_extention": {
-          "$ref": "#/definitions/double"
-        },
-        "origin": {
-          "$ref": "#/definitions/Vector3D"
-        },
-        "shadow_direction": {
-          "$ref": "#/definitions/Vector3D"
-        },
-        "parts": {
-          "oneOf": [
-            {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CranePart"
-              }
-            },
-            {
-              "type": "object",
-              "additionalProperties": false
-            }
-          ]
-        }
-      },
-      "required": [
-        "speed",
-        "origin",
-        "shadow_direction",
-        "parts"
-      ]
+      "type": "object"
     },
     "AgriculturalCraneSpeed": {
       "description": "https://lua-api.factorio.com/stable/types/AgriculturalCraneSpeed.html",
@@ -24944,6 +24974,601 @@
         "type"
       ]
     },
+    "AgriculturalTowerPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/AgriculturalTowerPrototype.html",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/string"
+        },
+        "name": {
+          "$ref": "#/definitions/string"
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "localised_name": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "localised_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "factoriopedia_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "subgroup": {
+          "$ref": "#/definitions/ItemSubGroupID"
+        },
+        "hidden": {
+          "$ref": "#/definitions/bool"
+        },
+        "hidden_in_factoriopedia": {
+          "$ref": "#/definitions/bool"
+        },
+        "parameter": {
+          "$ref": "#/definitions/bool"
+        },
+        "factoriopedia_simulation": {
+          "$ref": "#/definitions/SimulationDefinition"
+        },
+        "factoriopedia_alternative": {
+          "$ref": "#/definitions/string"
+        },
+        "icons": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconData"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "icon": {
+          "$ref": "#/definitions/FileName"
+        },
+        "icon_size": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "collision_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "collision_mask": {
+          "$ref": "#/definitions/CollisionMaskConnector"
+        },
+        "map_generator_bounding_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "selection_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "drawing_box_vertical_extension": {
+          "$ref": "#/definitions/double"
+        },
+        "sticker_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "hit_visualization_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "trigger_target_mask": {
+          "$ref": "#/definitions/TriggerTargetMask"
+        },
+        "flags": {
+          "$ref": "#/definitions/EntityPrototypeFlags"
+        },
+        "tile_buildability_rules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TileBuildabilityRule"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "minable": {
+          "$ref": "#/definitions/MinableProperties"
+        },
+        "surface_conditions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SurfaceCondition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "deconstruction_alternative": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "selection_priority": {
+          "$ref": "#/definitions/uint8"
+        },
+        "build_grid_size": {
+          "$ref": "#/definitions/uint8"
+        },
+        "remove_decoratives": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "automatic"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            }
+          ]
+        },
+        "emissions_per_second": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/double"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/AirbornePollutantID"
+          }
+        },
+        "shooting_cursor_size": {
+          "$ref": "#/definitions/double"
+        },
+        "created_smoke": {
+          "$ref": "#/definitions/CreateTrivialSmokeEffectItem"
+        },
+        "working_sound": {
+          "$ref": "#/definitions/WorkingSound"
+        },
+        "created_effect": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "build_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mined_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mining_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "rotated_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "impact_category": {
+          "$ref": "#/definitions/string"
+        },
+        "open_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "close_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "placeable_position_visualization": {
+          "$ref": "#/definitions/Sprite"
+        },
+        "radius_visualisation_specification": {
+          "$ref": "#/definitions/RadiusVisualisationSpecification"
+        },
+        "stateless_visualisation": {
+          "$ref": "#/definitions/StatelessVisualisations"
+        },
+        "build_base_evolution_requirement": {
+          "$ref": "#/definitions/double"
+        },
+        "alert_icon_shift": {
+          "$ref": "#/definitions/Vector"
+        },
+        "alert_icon_scale": {
+          "$ref": "#/definitions/float"
+        },
+        "fast_replaceable_group": {
+          "$ref": "#/definitions/string"
+        },
+        "next_upgrade": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "protected_from_tile_building": {
+          "$ref": "#/definitions/bool"
+        },
+        "heating_energy": {
+          "$ref": "#/definitions/Energy"
+        },
+        "allow_copy_paste": {
+          "$ref": "#/definitions/bool"
+        },
+        "selectable_in_game": {
+          "$ref": "#/definitions/bool"
+        },
+        "placeable_by": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ItemToPlace"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemToPlace"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "remains_when_mined": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "additional_pastable_entities": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "tile_width": {
+          "$ref": "#/definitions/int32"
+        },
+        "tile_height": {
+          "$ref": "#/definitions/int32"
+        },
+        "diagonal_tile_grid_size": {
+          "$ref": "#/definitions/TilePosition"
+        },
+        "autoplace": {
+          "$ref": "#/definitions/AutoplaceSpecification"
+        },
+        "map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "friendly_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "enemy_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "water_reflection": {
+          "$ref": "#/definitions/WaterReflectionDefinition"
+        },
+        "ambient_sounds_group": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "ambient_sounds": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/WorldAmbientSoundDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorldAmbientSoundDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "icon_draw_specification": {
+          "$ref": "#/definitions/IconDrawSpecification"
+        },
+        "icons_positioning": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconSequencePositioning"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "max_health": {
+          "$ref": "#/definitions/float"
+        },
+        "healing_per_tick": {
+          "$ref": "#/definitions/float"
+        },
+        "repair_speed_modifier": {
+          "$ref": "#/definitions/float"
+        },
+        "dying_explosion": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ExplosionDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ExplosionDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "dying_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "damaged_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "loot": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LootItem"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "resistances": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Resistance"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "attack_reaction": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/AttackReactionItem"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AttackReactionItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "repair_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "alert_when_damaged": {
+          "$ref": "#/definitions/bool"
+        },
+        "hide_resistances": {
+          "$ref": "#/definitions/bool"
+        },
+        "create_ghost_on_death": {
+          "$ref": "#/definitions/bool"
+        },
+        "random_corpse_variation": {
+          "$ref": "#/definitions/bool"
+        },
+        "integration_patch_render_layer": {
+          "$ref": "#/definitions/RenderLayer"
+        },
+        "corpse": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "integration_patch": {
+          "$ref": "#/definitions/Sprite4Way"
+        },
+        "overkill_fraction": {
+          "$ref": "#/definitions/float"
+        },
+        "is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "allow_run_time_change_of_is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "quality_indicator_scale": {
+          "$ref": "#/definitions/double"
+        },
+        "graphics_set": {
+          "$ref": "#/definitions/CraftingMachineGraphicsSet"
+        },
+        "crane": {
+          "$ref": "#/definitions/AgriculturalCraneProperties"
+        },
+        "energy_source": {
+          "$ref": "#/definitions/EnergySource"
+        },
+        "input_inventory_size": {
+          "$ref": "#/definitions/ItemStackIndex"
+        },
+        "output_inventory_size": {
+          "$ref": "#/definitions/ItemStackIndex"
+        },
+        "energy_usage": {
+          "$ref": "#/definitions/Energy"
+        },
+        "crane_energy_usage": {
+          "$ref": "#/definitions/Energy"
+        },
+        "random_growth_offset": {
+          "$ref": "#/definitions/double"
+        },
+        "growth_grid_tile_size": {
+          "$ref": "#/definitions/uint32"
+        },
+        "central_orienting_sound": {
+          "$ref": "#/definitions/InterruptibleSound"
+        },
+        "arm_extending_sound": {
+          "$ref": "#/definitions/InterruptibleSound"
+        },
+        "grappler_orienting_sound": {
+          "$ref": "#/definitions/InterruptibleSound"
+        },
+        "grappler_extending_sound": {
+          "$ref": "#/definitions/InterruptibleSound"
+        },
+        "planting_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "harvesting_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "radius_visualisation_picture": {
+          "$ref": "#/definitions/Sprite"
+        },
+        "radius": {
+          "$ref": "#/definitions/double"
+        },
+        "central_orienting_sound_source": {
+          "$ref": "#/definitions/string"
+        },
+        "arm_extending_sound_source": {
+          "$ref": "#/definitions/string"
+        },
+        "grappler_orienting_sound_source": {
+          "$ref": "#/definitions/string"
+        },
+        "grappler_extending_sound_source": {
+          "$ref": "#/definitions/string"
+        },
+        "planting_procedure_points": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Vector3D"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "harvesting_procedure_points": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Vector3D"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "circuit_wire_max_distance": {
+          "$ref": "#/definitions/double"
+        },
+        "draw_copper_wires": {
+          "$ref": "#/definitions/bool"
+        },
+        "draw_circuit_wires": {
+          "$ref": "#/definitions/bool"
+        },
+        "circuit_connector": {
+          "$ref": "#/definitions/CircuitConnectorDefinition"
+        }
+      },
+      "required": [
+        "crane",
+        "crane_energy_usage",
+        "energy_source",
+        "energy_usage",
+        "input_inventory_size",
+        "name",
+        "radius",
+        "type"
+      ]
+    },
     "AirbornePollutantPrototype": {
       "description": "https://lua-api.factorio.com/stable/types/AirbornePollutantPrototype.html",
       "properties": {
@@ -30482,6 +31107,1161 @@
         "type"
       ]
     },
+    "AsteroidCollectorPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/AsteroidCollectorPrototype.html",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/string"
+        },
+        "name": {
+          "$ref": "#/definitions/string"
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "localised_name": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "localised_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "factoriopedia_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "subgroup": {
+          "$ref": "#/definitions/ItemSubGroupID"
+        },
+        "hidden": {
+          "$ref": "#/definitions/bool"
+        },
+        "hidden_in_factoriopedia": {
+          "$ref": "#/definitions/bool"
+        },
+        "parameter": {
+          "$ref": "#/definitions/bool"
+        },
+        "factoriopedia_simulation": {
+          "$ref": "#/definitions/SimulationDefinition"
+        },
+        "factoriopedia_alternative": {
+          "$ref": "#/definitions/string"
+        },
+        "icons": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconData"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "icon": {
+          "$ref": "#/definitions/FileName"
+        },
+        "icon_size": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "collision_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "collision_mask": {
+          "$ref": "#/definitions/CollisionMaskConnector"
+        },
+        "map_generator_bounding_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "selection_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "drawing_box_vertical_extension": {
+          "$ref": "#/definitions/double"
+        },
+        "sticker_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "hit_visualization_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "trigger_target_mask": {
+          "$ref": "#/definitions/TriggerTargetMask"
+        },
+        "flags": {
+          "$ref": "#/definitions/EntityPrototypeFlags"
+        },
+        "tile_buildability_rules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TileBuildabilityRule"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "minable": {
+          "$ref": "#/definitions/MinableProperties"
+        },
+        "surface_conditions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SurfaceCondition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "deconstruction_alternative": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "selection_priority": {
+          "$ref": "#/definitions/uint8"
+        },
+        "build_grid_size": {
+          "$ref": "#/definitions/uint8"
+        },
+        "remove_decoratives": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "automatic"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            }
+          ]
+        },
+        "emissions_per_second": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/double"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/AirbornePollutantID"
+          }
+        },
+        "shooting_cursor_size": {
+          "$ref": "#/definitions/double"
+        },
+        "created_smoke": {
+          "$ref": "#/definitions/CreateTrivialSmokeEffectItem"
+        },
+        "working_sound": {
+          "$ref": "#/definitions/WorkingSound"
+        },
+        "created_effect": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "build_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mined_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mining_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "rotated_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "impact_category": {
+          "$ref": "#/definitions/string"
+        },
+        "open_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "close_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "placeable_position_visualization": {
+          "$ref": "#/definitions/Sprite"
+        },
+        "radius_visualisation_specification": {
+          "$ref": "#/definitions/RadiusVisualisationSpecification"
+        },
+        "stateless_visualisation": {
+          "$ref": "#/definitions/StatelessVisualisations"
+        },
+        "build_base_evolution_requirement": {
+          "$ref": "#/definitions/double"
+        },
+        "alert_icon_shift": {
+          "$ref": "#/definitions/Vector"
+        },
+        "alert_icon_scale": {
+          "$ref": "#/definitions/float"
+        },
+        "fast_replaceable_group": {
+          "$ref": "#/definitions/string"
+        },
+        "next_upgrade": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "protected_from_tile_building": {
+          "$ref": "#/definitions/bool"
+        },
+        "heating_energy": {
+          "$ref": "#/definitions/Energy"
+        },
+        "allow_copy_paste": {
+          "$ref": "#/definitions/bool"
+        },
+        "selectable_in_game": {
+          "$ref": "#/definitions/bool"
+        },
+        "placeable_by": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ItemToPlace"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemToPlace"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "remains_when_mined": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "additional_pastable_entities": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "tile_width": {
+          "$ref": "#/definitions/int32"
+        },
+        "tile_height": {
+          "$ref": "#/definitions/int32"
+        },
+        "diagonal_tile_grid_size": {
+          "$ref": "#/definitions/TilePosition"
+        },
+        "autoplace": {
+          "$ref": "#/definitions/AutoplaceSpecification"
+        },
+        "map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "friendly_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "enemy_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "water_reflection": {
+          "$ref": "#/definitions/WaterReflectionDefinition"
+        },
+        "ambient_sounds_group": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "ambient_sounds": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/WorldAmbientSoundDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorldAmbientSoundDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "icon_draw_specification": {
+          "$ref": "#/definitions/IconDrawSpecification"
+        },
+        "icons_positioning": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconSequencePositioning"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "max_health": {
+          "$ref": "#/definitions/float"
+        },
+        "healing_per_tick": {
+          "$ref": "#/definitions/float"
+        },
+        "repair_speed_modifier": {
+          "$ref": "#/definitions/float"
+        },
+        "dying_explosion": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ExplosionDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ExplosionDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "dying_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "damaged_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "loot": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LootItem"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "resistances": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Resistance"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "attack_reaction": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/AttackReactionItem"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AttackReactionItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "repair_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "alert_when_damaged": {
+          "$ref": "#/definitions/bool"
+        },
+        "hide_resistances": {
+          "$ref": "#/definitions/bool"
+        },
+        "create_ghost_on_death": {
+          "$ref": "#/definitions/bool"
+        },
+        "random_corpse_variation": {
+          "$ref": "#/definitions/bool"
+        },
+        "integration_patch_render_layer": {
+          "$ref": "#/definitions/RenderLayer"
+        },
+        "corpse": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "integration_patch": {
+          "$ref": "#/definitions/Sprite4Way"
+        },
+        "overkill_fraction": {
+          "$ref": "#/definitions/float"
+        },
+        "is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "allow_run_time_change_of_is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "quality_indicator_scale": {
+          "$ref": "#/definitions/double"
+        },
+        "arm_inventory_size": {
+          "$ref": "#/definitions/ItemStackIndex"
+        },
+        "arm_inventory_size_quality_increase": {
+          "$ref": "#/definitions/ItemStackIndex"
+        },
+        "inventory_size": {
+          "$ref": "#/definitions/ItemStackIndex"
+        },
+        "inventory_size_quality_increase": {
+          "$ref": "#/definitions/ItemStackIndex"
+        },
+        "graphics_set": {
+          "type": "object",
+          "properties": {
+            "animation": {
+              "$ref": "#/definitions/Animation4Way"
+            },
+            "status_lamp_picture_on": {
+              "$ref": "#/definitions/RotatedSprite"
+            },
+            "status_lamp_picture_full": {
+              "$ref": "#/definitions/RotatedSprite"
+            },
+            "status_lamp_picture_off": {
+              "$ref": "#/definitions/RotatedSprite"
+            },
+            "below_arm_pictures": {
+              "$ref": "#/definitions/RotatedSprite"
+            },
+            "below_ground_pictures": {
+              "$ref": "#/definitions/RotatedSprite"
+            },
+            "arm_head_animation": {
+              "$ref": "#/definitions/RotatedAnimation"
+            },
+            "arm_head_top_animation": {
+              "$ref": "#/definitions/RotatedAnimation"
+            },
+            "arm_link": {
+              "$ref": "#/definitions/RotatedSprite"
+            }
+          }
+        },
+        "passive_energy_usage": {
+          "$ref": "#/definitions/Energy"
+        },
+        "arm_energy_usage": {
+          "$ref": "#/definitions/Energy"
+        },
+        "arm_slow_energy_usage": {
+          "$ref": "#/definitions/Energy"
+        },
+        "energy_usage_quality_scaling": {
+          "$ref": "#/definitions/float"
+        },
+        "arm_count_base": {
+          "$ref": "#/definitions/uint32"
+        },
+        "arm_count_quality_scaling": {
+          "$ref": "#/definitions/uint32"
+        },
+        "head_collection_radius": {
+          "$ref": "#/definitions/float"
+        },
+        "collection_box_offset": {
+          "$ref": "#/definitions/float"
+        },
+        "deposit_radius": {
+          "$ref": "#/definitions/float"
+        },
+        "arm_speed_base": {
+          "$ref": "#/definitions/float"
+        },
+        "arm_speed_quality_scaling": {
+          "$ref": "#/definitions/float"
+        },
+        "arm_angular_speed_cap_base": {
+          "$ref": "#/definitions/float"
+        },
+        "arm_angular_speed_cap_quality_scaling": {
+          "$ref": "#/definitions/float"
+        },
+        "tether_size": {
+          "$ref": "#/definitions/float"
+        },
+        "unpowered_arm_speed_scale": {
+          "$ref": "#/definitions/float"
+        },
+        "minimal_arm_swing_segment_retraction": {
+          "$ref": "#/definitions/uint32"
+        },
+        "held_items_offset": {
+          "$ref": "#/definitions/float"
+        },
+        "held_items_spread": {
+          "$ref": "#/definitions/float"
+        },
+        "held_items_display_count": {
+          "$ref": "#/definitions/uint8"
+        },
+        "munch_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "deposit_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "arm_extend_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "arm_retract_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "energy_source": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ElectricEnergySource"
+            },
+            {
+              "$ref": "#/definitions/VoidEnergySource"
+            }
+          ]
+        },
+        "circuit_wire_max_distance": {
+          "$ref": "#/definitions/double"
+        },
+        "draw_copper_wires": {
+          "$ref": "#/definitions/bool"
+        },
+        "draw_circuit_wires": {
+          "$ref": "#/definitions/bool"
+        },
+        "radius_visualisation_picture": {
+          "$ref": "#/definitions/Sprite"
+        },
+        "collection_radius": {
+          "$ref": "#/definitions/double"
+        },
+        "circuit_connector": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/CircuitConnectorDefinition"
+            },
+            {
+              "$ref": "#/definitions/CircuitConnectorDefinition"
+            },
+            {
+              "$ref": "#/definitions/CircuitConnectorDefinition"
+            },
+            {
+              "$ref": "#/definitions/CircuitConnectorDefinition"
+            }
+          ],
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "arm_color_gradient": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Color"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "arm_energy_usage",
+        "arm_slow_energy_usage",
+        "collection_radius",
+        "energy_source",
+        "graphics_set",
+        "name",
+        "passive_energy_usage",
+        "type"
+      ]
+    },
+    "AsteroidPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/AsteroidPrototype.html",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/string"
+        },
+        "name": {
+          "$ref": "#/definitions/string"
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "localised_name": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "localised_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "factoriopedia_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "subgroup": {
+          "$ref": "#/definitions/ItemSubGroupID"
+        },
+        "hidden": {
+          "$ref": "#/definitions/bool"
+        },
+        "hidden_in_factoriopedia": {
+          "$ref": "#/definitions/bool"
+        },
+        "parameter": {
+          "$ref": "#/definitions/bool"
+        },
+        "factoriopedia_simulation": {
+          "$ref": "#/definitions/SimulationDefinition"
+        },
+        "factoriopedia_alternative": {
+          "$ref": "#/definitions/string"
+        },
+        "icons": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconData"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "icon": {
+          "$ref": "#/definitions/FileName"
+        },
+        "icon_size": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "collision_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "collision_mask": {
+          "$ref": "#/definitions/CollisionMaskConnector"
+        },
+        "map_generator_bounding_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "selection_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "drawing_box_vertical_extension": {
+          "$ref": "#/definitions/double"
+        },
+        "sticker_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "hit_visualization_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "trigger_target_mask": {
+          "$ref": "#/definitions/TriggerTargetMask"
+        },
+        "flags": {
+          "$ref": "#/definitions/EntityPrototypeFlags"
+        },
+        "tile_buildability_rules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TileBuildabilityRule"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "minable": {
+          "$ref": "#/definitions/MinableProperties"
+        },
+        "surface_conditions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SurfaceCondition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "deconstruction_alternative": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "selection_priority": {
+          "$ref": "#/definitions/uint8"
+        },
+        "build_grid_size": {
+          "$ref": "#/definitions/uint8"
+        },
+        "remove_decoratives": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "automatic"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            }
+          ]
+        },
+        "emissions_per_second": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/double"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/AirbornePollutantID"
+          }
+        },
+        "shooting_cursor_size": {
+          "$ref": "#/definitions/double"
+        },
+        "created_smoke": {
+          "$ref": "#/definitions/CreateTrivialSmokeEffectItem"
+        },
+        "working_sound": {
+          "$ref": "#/definitions/WorkingSound"
+        },
+        "created_effect": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "build_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mined_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mining_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "rotated_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "impact_category": {
+          "$ref": "#/definitions/string"
+        },
+        "open_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "close_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "placeable_position_visualization": {
+          "$ref": "#/definitions/Sprite"
+        },
+        "radius_visualisation_specification": {
+          "$ref": "#/definitions/RadiusVisualisationSpecification"
+        },
+        "stateless_visualisation": {
+          "$ref": "#/definitions/StatelessVisualisations"
+        },
+        "build_base_evolution_requirement": {
+          "$ref": "#/definitions/double"
+        },
+        "alert_icon_shift": {
+          "$ref": "#/definitions/Vector"
+        },
+        "alert_icon_scale": {
+          "$ref": "#/definitions/float"
+        },
+        "fast_replaceable_group": {
+          "$ref": "#/definitions/string"
+        },
+        "next_upgrade": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "protected_from_tile_building": {
+          "$ref": "#/definitions/bool"
+        },
+        "heating_energy": {
+          "$ref": "#/definitions/Energy"
+        },
+        "allow_copy_paste": {
+          "$ref": "#/definitions/bool"
+        },
+        "selectable_in_game": {
+          "$ref": "#/definitions/bool"
+        },
+        "placeable_by": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ItemToPlace"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemToPlace"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "remains_when_mined": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "additional_pastable_entities": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "tile_width": {
+          "$ref": "#/definitions/int32"
+        },
+        "tile_height": {
+          "$ref": "#/definitions/int32"
+        },
+        "diagonal_tile_grid_size": {
+          "$ref": "#/definitions/TilePosition"
+        },
+        "autoplace": {
+          "$ref": "#/definitions/AutoplaceSpecification"
+        },
+        "map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "friendly_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "enemy_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "water_reflection": {
+          "$ref": "#/definitions/WaterReflectionDefinition"
+        },
+        "ambient_sounds_group": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "ambient_sounds": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/WorldAmbientSoundDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorldAmbientSoundDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "icon_draw_specification": {
+          "$ref": "#/definitions/IconDrawSpecification"
+        },
+        "icons_positioning": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconSequencePositioning"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "max_health": {
+          "$ref": "#/definitions/float"
+        },
+        "healing_per_tick": {
+          "$ref": "#/definitions/float"
+        },
+        "repair_speed_modifier": {
+          "$ref": "#/definitions/float"
+        },
+        "dying_explosion": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ExplosionDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ExplosionDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "dying_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "damaged_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "loot": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LootItem"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "resistances": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Resistance"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "attack_reaction": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/AttackReactionItem"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AttackReactionItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "repair_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "alert_when_damaged": {
+          "$ref": "#/definitions/bool"
+        },
+        "hide_resistances": {
+          "$ref": "#/definitions/bool"
+        },
+        "create_ghost_on_death": {
+          "$ref": "#/definitions/bool"
+        },
+        "random_corpse_variation": {
+          "$ref": "#/definitions/bool"
+        },
+        "integration_patch_render_layer": {
+          "$ref": "#/definitions/RenderLayer"
+        },
+        "corpse": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "integration_patch": {
+          "$ref": "#/definitions/Sprite4Way"
+        },
+        "overkill_fraction": {
+          "$ref": "#/definitions/float"
+        },
+        "is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "allow_run_time_change_of_is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "quality_indicator_scale": {
+          "$ref": "#/definitions/double"
+        },
+        "mass": {
+          "$ref": "#/definitions/double"
+        },
+        "graphics_set": {
+          "$ref": "#/definitions/AsteroidGraphicsSet"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
     "AutoplaceControl": {
       "description": "https://lua-api.factorio.com/stable/types/AutoplaceControl.html",
       "properties": {
@@ -33698,6 +35478,529 @@
         "type"
       ]
     },
+    "CaptureRobotPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/CaptureRobotPrototype.html",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/string"
+        },
+        "name": {
+          "$ref": "#/definitions/string"
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "localised_name": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "localised_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "factoriopedia_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "subgroup": {
+          "$ref": "#/definitions/ItemSubGroupID"
+        },
+        "hidden": {
+          "$ref": "#/definitions/bool"
+        },
+        "hidden_in_factoriopedia": {
+          "$ref": "#/definitions/bool"
+        },
+        "parameter": {
+          "$ref": "#/definitions/bool"
+        },
+        "factoriopedia_simulation": {
+          "$ref": "#/definitions/SimulationDefinition"
+        },
+        "factoriopedia_alternative": {
+          "$ref": "#/definitions/string"
+        },
+        "icons": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconData"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "icon": {
+          "$ref": "#/definitions/FileName"
+        },
+        "icon_size": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "collision_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "collision_mask": {
+          "$ref": "#/definitions/CollisionMaskConnector"
+        },
+        "map_generator_bounding_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "selection_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "drawing_box_vertical_extension": {
+          "$ref": "#/definitions/double"
+        },
+        "sticker_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "hit_visualization_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "trigger_target_mask": {
+          "$ref": "#/definitions/TriggerTargetMask"
+        },
+        "flags": {
+          "$ref": "#/definitions/EntityPrototypeFlags"
+        },
+        "tile_buildability_rules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TileBuildabilityRule"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "minable": {
+          "$ref": "#/definitions/MinableProperties"
+        },
+        "surface_conditions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SurfaceCondition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "deconstruction_alternative": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "selection_priority": {
+          "$ref": "#/definitions/uint8"
+        },
+        "build_grid_size": {
+          "$ref": "#/definitions/uint8"
+        },
+        "remove_decoratives": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "automatic"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            }
+          ]
+        },
+        "emissions_per_second": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/double"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/AirbornePollutantID"
+          }
+        },
+        "shooting_cursor_size": {
+          "$ref": "#/definitions/double"
+        },
+        "created_smoke": {
+          "$ref": "#/definitions/CreateTrivialSmokeEffectItem"
+        },
+        "working_sound": {
+          "$ref": "#/definitions/WorkingSound"
+        },
+        "created_effect": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "build_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mined_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mining_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "rotated_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "impact_category": {
+          "$ref": "#/definitions/string"
+        },
+        "open_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "close_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "placeable_position_visualization": {
+          "$ref": "#/definitions/Sprite"
+        },
+        "radius_visualisation_specification": {
+          "$ref": "#/definitions/RadiusVisualisationSpecification"
+        },
+        "stateless_visualisation": {
+          "$ref": "#/definitions/StatelessVisualisations"
+        },
+        "build_base_evolution_requirement": {
+          "$ref": "#/definitions/double"
+        },
+        "alert_icon_shift": {
+          "$ref": "#/definitions/Vector"
+        },
+        "alert_icon_scale": {
+          "$ref": "#/definitions/float"
+        },
+        "fast_replaceable_group": {
+          "$ref": "#/definitions/string"
+        },
+        "next_upgrade": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "protected_from_tile_building": {
+          "$ref": "#/definitions/bool"
+        },
+        "heating_energy": {
+          "$ref": "#/definitions/Energy"
+        },
+        "allow_copy_paste": {
+          "$ref": "#/definitions/bool"
+        },
+        "selectable_in_game": {
+          "$ref": "#/definitions/bool"
+        },
+        "placeable_by": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ItemToPlace"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemToPlace"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "remains_when_mined": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "additional_pastable_entities": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "tile_width": {
+          "$ref": "#/definitions/int32"
+        },
+        "tile_height": {
+          "$ref": "#/definitions/int32"
+        },
+        "diagonal_tile_grid_size": {
+          "$ref": "#/definitions/TilePosition"
+        },
+        "autoplace": {
+          "$ref": "#/definitions/AutoplaceSpecification"
+        },
+        "map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "friendly_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "enemy_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "water_reflection": {
+          "$ref": "#/definitions/WaterReflectionDefinition"
+        },
+        "ambient_sounds_group": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "ambient_sounds": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/WorldAmbientSoundDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorldAmbientSoundDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "icon_draw_specification": {
+          "$ref": "#/definitions/IconDrawSpecification"
+        },
+        "icons_positioning": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconSequencePositioning"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "max_health": {
+          "$ref": "#/definitions/float"
+        },
+        "healing_per_tick": {
+          "$ref": "#/definitions/float"
+        },
+        "repair_speed_modifier": {
+          "$ref": "#/definitions/float"
+        },
+        "dying_explosion": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ExplosionDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ExplosionDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "dying_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "damaged_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "loot": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LootItem"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "resistances": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Resistance"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "attack_reaction": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/AttackReactionItem"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AttackReactionItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "repair_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "alert_when_damaged": {
+          "$ref": "#/definitions/bool"
+        },
+        "hide_resistances": {
+          "$ref": "#/definitions/bool"
+        },
+        "create_ghost_on_death": {
+          "$ref": "#/definitions/bool"
+        },
+        "random_corpse_variation": {
+          "$ref": "#/definitions/bool"
+        },
+        "integration_patch_render_layer": {
+          "$ref": "#/definitions/RenderLayer"
+        },
+        "corpse": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "integration_patch": {
+          "$ref": "#/definitions/Sprite4Way"
+        },
+        "overkill_fraction": {
+          "$ref": "#/definitions/float"
+        },
+        "is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "allow_run_time_change_of_is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "quality_indicator_scale": {
+          "$ref": "#/definitions/double"
+        },
+        "speed": {
+          "$ref": "#/definitions/double"
+        },
+        "max_speed": {
+          "$ref": "#/definitions/double"
+        },
+        "max_energy": {
+          "$ref": "#/definitions/Energy"
+        },
+        "energy_per_move": {
+          "$ref": "#/definitions/Energy"
+        },
+        "energy_per_tick": {
+          "$ref": "#/definitions/Energy"
+        },
+        "min_to_charge": {
+          "$ref": "#/definitions/float"
+        },
+        "max_to_charge": {
+          "$ref": "#/definitions/float"
+        },
+        "speed_multiplier_when_out_of_energy": {
+          "$ref": "#/definitions/float"
+        },
+        "capture_speed": {
+          "$ref": "#/definitions/double"
+        },
+        "search_radius": {
+          "$ref": "#/definitions/double"
+        },
+        "destroy_action": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "capture_animation": {
+          "$ref": "#/definitions/Animation"
+        }
+      },
+      "required": [
+        "name",
+        "speed",
+        "type"
+      ]
+    },
     "CarPrototype": {
       "description": "https://lua-api.factorio.com/stable/types/CarPrototype.html",
       "properties": {
@@ -34344,6 +36647,517 @@
         "rotation_speed",
         "type",
         "weight"
+      ]
+    },
+    "CargoBayPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/CargoBayPrototype.html",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/string"
+        },
+        "name": {
+          "$ref": "#/definitions/string"
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "localised_name": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "localised_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "factoriopedia_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "subgroup": {
+          "$ref": "#/definitions/ItemSubGroupID"
+        },
+        "hidden": {
+          "$ref": "#/definitions/bool"
+        },
+        "hidden_in_factoriopedia": {
+          "$ref": "#/definitions/bool"
+        },
+        "parameter": {
+          "$ref": "#/definitions/bool"
+        },
+        "factoriopedia_simulation": {
+          "$ref": "#/definitions/SimulationDefinition"
+        },
+        "factoriopedia_alternative": {
+          "$ref": "#/definitions/string"
+        },
+        "icons": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconData"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "icon": {
+          "$ref": "#/definitions/FileName"
+        },
+        "icon_size": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "collision_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "collision_mask": {
+          "$ref": "#/definitions/CollisionMaskConnector"
+        },
+        "map_generator_bounding_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "selection_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "drawing_box_vertical_extension": {
+          "$ref": "#/definitions/double"
+        },
+        "sticker_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "hit_visualization_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "trigger_target_mask": {
+          "$ref": "#/definitions/TriggerTargetMask"
+        },
+        "flags": {
+          "$ref": "#/definitions/EntityPrototypeFlags"
+        },
+        "tile_buildability_rules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TileBuildabilityRule"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "minable": {
+          "$ref": "#/definitions/MinableProperties"
+        },
+        "surface_conditions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SurfaceCondition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "deconstruction_alternative": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "selection_priority": {
+          "$ref": "#/definitions/uint8"
+        },
+        "build_grid_size": {
+          "type": "integer",
+          "const": 2
+        },
+        "remove_decoratives": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "automatic"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            }
+          ]
+        },
+        "emissions_per_second": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/double"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/AirbornePollutantID"
+          }
+        },
+        "shooting_cursor_size": {
+          "$ref": "#/definitions/double"
+        },
+        "created_smoke": {
+          "$ref": "#/definitions/CreateTrivialSmokeEffectItem"
+        },
+        "working_sound": {
+          "$ref": "#/definitions/WorkingSound"
+        },
+        "created_effect": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "build_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mined_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mining_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "rotated_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "impact_category": {
+          "$ref": "#/definitions/string"
+        },
+        "open_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "close_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "placeable_position_visualization": {
+          "$ref": "#/definitions/Sprite"
+        },
+        "radius_visualisation_specification": {
+          "$ref": "#/definitions/RadiusVisualisationSpecification"
+        },
+        "stateless_visualisation": {
+          "$ref": "#/definitions/StatelessVisualisations"
+        },
+        "build_base_evolution_requirement": {
+          "$ref": "#/definitions/double"
+        },
+        "alert_icon_shift": {
+          "$ref": "#/definitions/Vector"
+        },
+        "alert_icon_scale": {
+          "$ref": "#/definitions/float"
+        },
+        "fast_replaceable_group": {
+          "$ref": "#/definitions/string"
+        },
+        "next_upgrade": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "protected_from_tile_building": {
+          "$ref": "#/definitions/bool"
+        },
+        "heating_energy": {
+          "$ref": "#/definitions/Energy"
+        },
+        "allow_copy_paste": {
+          "$ref": "#/definitions/bool"
+        },
+        "selectable_in_game": {
+          "$ref": "#/definitions/bool"
+        },
+        "placeable_by": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ItemToPlace"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemToPlace"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "remains_when_mined": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "additional_pastable_entities": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "tile_width": {
+          "$ref": "#/definitions/int32"
+        },
+        "tile_height": {
+          "$ref": "#/definitions/int32"
+        },
+        "diagonal_tile_grid_size": {
+          "$ref": "#/definitions/TilePosition"
+        },
+        "autoplace": {
+          "$ref": "#/definitions/AutoplaceSpecification"
+        },
+        "map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "friendly_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "enemy_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "water_reflection": {
+          "$ref": "#/definitions/WaterReflectionDefinition"
+        },
+        "ambient_sounds_group": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "ambient_sounds": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/WorldAmbientSoundDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorldAmbientSoundDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "icon_draw_specification": {
+          "$ref": "#/definitions/IconDrawSpecification"
+        },
+        "icons_positioning": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconSequencePositioning"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "max_health": {
+          "$ref": "#/definitions/float"
+        },
+        "healing_per_tick": {
+          "$ref": "#/definitions/float"
+        },
+        "repair_speed_modifier": {
+          "$ref": "#/definitions/float"
+        },
+        "dying_explosion": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ExplosionDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ExplosionDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "dying_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "damaged_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "loot": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LootItem"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "resistances": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Resistance"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "attack_reaction": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/AttackReactionItem"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AttackReactionItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "repair_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "alert_when_damaged": {
+          "$ref": "#/definitions/bool"
+        },
+        "hide_resistances": {
+          "$ref": "#/definitions/bool"
+        },
+        "create_ghost_on_death": {
+          "$ref": "#/definitions/bool"
+        },
+        "random_corpse_variation": {
+          "$ref": "#/definitions/bool"
+        },
+        "integration_patch_render_layer": {
+          "$ref": "#/definitions/RenderLayer"
+        },
+        "corpse": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "integration_patch": {
+          "$ref": "#/definitions/Sprite4Way"
+        },
+        "overkill_fraction": {
+          "$ref": "#/definitions/float"
+        },
+        "is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "allow_run_time_change_of_is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "quality_indicator_scale": {
+          "$ref": "#/definitions/double"
+        },
+        "graphics_set": {
+          "$ref": "#/definitions/CargoBayConnectableGraphicsSet"
+        },
+        "platform_graphics_set": {
+          "$ref": "#/definitions/CargoBayConnectableGraphicsSet"
+        },
+        "inventory_size_bonus": {
+          "$ref": "#/definitions/ItemStackIndex"
+        },
+        "hatch_definitions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CargoHatchDefinition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "inventory_size_bonus",
+        "name",
+        "type"
       ]
     },
     "CargoLandingPadPrototype": {
@@ -66602,6 +69416,885 @@
         "type"
       ]
     },
+    "LightningAttractorPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/LightningAttractorPrototype.html",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/string"
+        },
+        "name": {
+          "$ref": "#/definitions/string"
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "localised_name": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "localised_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "factoriopedia_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "subgroup": {
+          "$ref": "#/definitions/ItemSubGroupID"
+        },
+        "hidden": {
+          "$ref": "#/definitions/bool"
+        },
+        "hidden_in_factoriopedia": {
+          "$ref": "#/definitions/bool"
+        },
+        "parameter": {
+          "$ref": "#/definitions/bool"
+        },
+        "factoriopedia_simulation": {
+          "$ref": "#/definitions/SimulationDefinition"
+        },
+        "factoriopedia_alternative": {
+          "$ref": "#/definitions/string"
+        },
+        "icons": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconData"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "icon": {
+          "$ref": "#/definitions/FileName"
+        },
+        "icon_size": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "collision_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "collision_mask": {
+          "$ref": "#/definitions/CollisionMaskConnector"
+        },
+        "map_generator_bounding_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "selection_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "drawing_box_vertical_extension": {
+          "$ref": "#/definitions/double"
+        },
+        "sticker_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "hit_visualization_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "trigger_target_mask": {
+          "$ref": "#/definitions/TriggerTargetMask"
+        },
+        "flags": {
+          "$ref": "#/definitions/EntityPrototypeFlags"
+        },
+        "tile_buildability_rules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TileBuildabilityRule"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "minable": {
+          "$ref": "#/definitions/MinableProperties"
+        },
+        "surface_conditions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SurfaceCondition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "deconstruction_alternative": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "selection_priority": {
+          "$ref": "#/definitions/uint8"
+        },
+        "build_grid_size": {
+          "$ref": "#/definitions/uint8"
+        },
+        "remove_decoratives": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "automatic"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            }
+          ]
+        },
+        "emissions_per_second": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/double"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/AirbornePollutantID"
+          }
+        },
+        "shooting_cursor_size": {
+          "$ref": "#/definitions/double"
+        },
+        "created_smoke": {
+          "$ref": "#/definitions/CreateTrivialSmokeEffectItem"
+        },
+        "working_sound": {
+          "$ref": "#/definitions/WorkingSound"
+        },
+        "created_effect": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "build_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mined_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mining_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "rotated_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "impact_category": {
+          "$ref": "#/definitions/string"
+        },
+        "open_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "close_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "placeable_position_visualization": {
+          "$ref": "#/definitions/Sprite"
+        },
+        "radius_visualisation_specification": {
+          "$ref": "#/definitions/RadiusVisualisationSpecification"
+        },
+        "stateless_visualisation": {
+          "$ref": "#/definitions/StatelessVisualisations"
+        },
+        "build_base_evolution_requirement": {
+          "$ref": "#/definitions/double"
+        },
+        "alert_icon_shift": {
+          "$ref": "#/definitions/Vector"
+        },
+        "alert_icon_scale": {
+          "$ref": "#/definitions/float"
+        },
+        "fast_replaceable_group": {
+          "$ref": "#/definitions/string"
+        },
+        "next_upgrade": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "protected_from_tile_building": {
+          "$ref": "#/definitions/bool"
+        },
+        "heating_energy": {
+          "$ref": "#/definitions/Energy"
+        },
+        "allow_copy_paste": {
+          "$ref": "#/definitions/bool"
+        },
+        "selectable_in_game": {
+          "$ref": "#/definitions/bool"
+        },
+        "placeable_by": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ItemToPlace"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemToPlace"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "remains_when_mined": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "additional_pastable_entities": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "tile_width": {
+          "$ref": "#/definitions/int32"
+        },
+        "tile_height": {
+          "$ref": "#/definitions/int32"
+        },
+        "diagonal_tile_grid_size": {
+          "$ref": "#/definitions/TilePosition"
+        },
+        "autoplace": {
+          "$ref": "#/definitions/AutoplaceSpecification"
+        },
+        "map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "friendly_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "enemy_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "water_reflection": {
+          "$ref": "#/definitions/WaterReflectionDefinition"
+        },
+        "ambient_sounds_group": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "ambient_sounds": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/WorldAmbientSoundDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorldAmbientSoundDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "icon_draw_specification": {
+          "$ref": "#/definitions/IconDrawSpecification"
+        },
+        "icons_positioning": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconSequencePositioning"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "max_health": {
+          "$ref": "#/definitions/float"
+        },
+        "healing_per_tick": {
+          "$ref": "#/definitions/float"
+        },
+        "repair_speed_modifier": {
+          "$ref": "#/definitions/float"
+        },
+        "dying_explosion": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ExplosionDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ExplosionDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "dying_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "damaged_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "loot": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LootItem"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "resistances": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Resistance"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "attack_reaction": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/AttackReactionItem"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AttackReactionItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "repair_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "alert_when_damaged": {
+          "$ref": "#/definitions/bool"
+        },
+        "hide_resistances": {
+          "$ref": "#/definitions/bool"
+        },
+        "create_ghost_on_death": {
+          "$ref": "#/definitions/bool"
+        },
+        "random_corpse_variation": {
+          "$ref": "#/definitions/bool"
+        },
+        "integration_patch_render_layer": {
+          "$ref": "#/definitions/RenderLayer"
+        },
+        "corpse": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "integration_patch": {
+          "$ref": "#/definitions/Sprite4Way"
+        },
+        "overkill_fraction": {
+          "$ref": "#/definitions/float"
+        },
+        "is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "allow_run_time_change_of_is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "quality_indicator_scale": {
+          "$ref": "#/definitions/double"
+        },
+        "chargable_graphics": {
+          "$ref": "#/definitions/ChargableGraphics"
+        },
+        "lightning_strike_offset": {
+          "$ref": "#/definitions/MapPosition"
+        },
+        "efficiency": {
+          "$ref": "#/definitions/double"
+        },
+        "range_elongation": {
+          "$ref": "#/definitions/double"
+        },
+        "energy_source": {
+          "$ref": "#/definitions/ElectricEnergySource"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "LightningPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/LightningPrototype.html",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/string"
+        },
+        "name": {
+          "$ref": "#/definitions/string"
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "localised_name": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "localised_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "factoriopedia_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "subgroup": {
+          "$ref": "#/definitions/ItemSubGroupID"
+        },
+        "hidden": {
+          "$ref": "#/definitions/bool"
+        },
+        "hidden_in_factoriopedia": {
+          "$ref": "#/definitions/bool"
+        },
+        "parameter": {
+          "$ref": "#/definitions/bool"
+        },
+        "factoriopedia_simulation": {
+          "$ref": "#/definitions/SimulationDefinition"
+        },
+        "factoriopedia_alternative": {
+          "$ref": "#/definitions/string"
+        },
+        "icons": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconData"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "icon": {
+          "$ref": "#/definitions/FileName"
+        },
+        "icon_size": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "collision_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "collision_mask": {
+          "$ref": "#/definitions/CollisionMaskConnector"
+        },
+        "map_generator_bounding_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "selection_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "drawing_box_vertical_extension": {
+          "$ref": "#/definitions/double"
+        },
+        "sticker_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "hit_visualization_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "trigger_target_mask": {
+          "$ref": "#/definitions/TriggerTargetMask"
+        },
+        "flags": {
+          "$ref": "#/definitions/EntityPrototypeFlags"
+        },
+        "tile_buildability_rules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TileBuildabilityRule"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "minable": {
+          "$ref": "#/definitions/MinableProperties"
+        },
+        "surface_conditions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SurfaceCondition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "deconstruction_alternative": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "selection_priority": {
+          "$ref": "#/definitions/uint8"
+        },
+        "build_grid_size": {
+          "$ref": "#/definitions/uint8"
+        },
+        "remove_decoratives": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "automatic"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            }
+          ]
+        },
+        "emissions_per_second": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/double"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/AirbornePollutantID"
+          }
+        },
+        "shooting_cursor_size": {
+          "$ref": "#/definitions/double"
+        },
+        "created_smoke": {
+          "$ref": "#/definitions/CreateTrivialSmokeEffectItem"
+        },
+        "working_sound": {
+          "$ref": "#/definitions/WorkingSound"
+        },
+        "created_effect": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "build_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mined_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mining_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "rotated_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "impact_category": {
+          "$ref": "#/definitions/string"
+        },
+        "open_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "close_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "placeable_position_visualization": {
+          "$ref": "#/definitions/Sprite"
+        },
+        "radius_visualisation_specification": {
+          "$ref": "#/definitions/RadiusVisualisationSpecification"
+        },
+        "stateless_visualisation": {
+          "$ref": "#/definitions/StatelessVisualisations"
+        },
+        "build_base_evolution_requirement": {
+          "$ref": "#/definitions/double"
+        },
+        "alert_icon_shift": {
+          "$ref": "#/definitions/Vector"
+        },
+        "alert_icon_scale": {
+          "$ref": "#/definitions/float"
+        },
+        "fast_replaceable_group": {
+          "$ref": "#/definitions/string"
+        },
+        "next_upgrade": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "protected_from_tile_building": {
+          "$ref": "#/definitions/bool"
+        },
+        "heating_energy": {
+          "$ref": "#/definitions/Energy"
+        },
+        "allow_copy_paste": {
+          "$ref": "#/definitions/bool"
+        },
+        "selectable_in_game": {
+          "$ref": "#/definitions/bool"
+        },
+        "placeable_by": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ItemToPlace"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemToPlace"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "remains_when_mined": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "additional_pastable_entities": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "tile_width": {
+          "$ref": "#/definitions/int32"
+        },
+        "tile_height": {
+          "$ref": "#/definitions/int32"
+        },
+        "diagonal_tile_grid_size": {
+          "$ref": "#/definitions/TilePosition"
+        },
+        "autoplace": {
+          "$ref": "#/definitions/AutoplaceSpecification"
+        },
+        "map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "friendly_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "enemy_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "water_reflection": {
+          "$ref": "#/definitions/WaterReflectionDefinition"
+        },
+        "ambient_sounds_group": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "ambient_sounds": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/WorldAmbientSoundDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorldAmbientSoundDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "icon_draw_specification": {
+          "$ref": "#/definitions/IconDrawSpecification"
+        },
+        "icons_positioning": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconSequencePositioning"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "graphics_set": {
+          "$ref": "#/definitions/LightningGraphicsSet"
+        },
+        "sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "attracted_volume_modifier": {
+          "$ref": "#/definitions/float"
+        },
+        "strike_effect": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "source_offset": {
+          "$ref": "#/definitions/Vector"
+        },
+        "source_variance": {
+          "$ref": "#/definitions/Vector"
+        },
+        "damage": {
+          "$ref": "#/definitions/double"
+        },
+        "energy": {
+          "$ref": "#/definitions/Energy"
+        },
+        "time_to_damage": {
+          "$ref": "#/definitions/uint16"
+        },
+        "effect_duration": {
+          "$ref": "#/definitions/uint16"
+        }
+      },
+      "required": [
+        "effect_duration",
+        "name",
+        "type"
+      ]
+    },
     "LinkedBeltPrototype": {
       "description": "https://lua-api.factorio.com/stable/types/LinkedBeltPrototype.html",
       "properties": {
@@ -74918,6 +78611,561 @@
         "gravity_pull",
         "name",
         "orientation",
+        "type"
+      ]
+    },
+    "PlantPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/PlantPrototype.html",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/string"
+        },
+        "name": {
+          "$ref": "#/definitions/string"
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "localised_name": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "localised_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "factoriopedia_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "subgroup": {
+          "$ref": "#/definitions/ItemSubGroupID"
+        },
+        "hidden": {
+          "$ref": "#/definitions/bool"
+        },
+        "hidden_in_factoriopedia": {
+          "$ref": "#/definitions/bool"
+        },
+        "parameter": {
+          "$ref": "#/definitions/bool"
+        },
+        "factoriopedia_simulation": {
+          "$ref": "#/definitions/SimulationDefinition"
+        },
+        "factoriopedia_alternative": {
+          "$ref": "#/definitions/string"
+        },
+        "icons": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconData"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "icon": {
+          "$ref": "#/definitions/FileName"
+        },
+        "icon_size": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "collision_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "collision_mask": {
+          "$ref": "#/definitions/CollisionMaskConnector"
+        },
+        "map_generator_bounding_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "selection_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "drawing_box_vertical_extension": {
+          "$ref": "#/definitions/double"
+        },
+        "sticker_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "hit_visualization_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "trigger_target_mask": {
+          "$ref": "#/definitions/TriggerTargetMask"
+        },
+        "flags": {
+          "$ref": "#/definitions/EntityPrototypeFlags"
+        },
+        "tile_buildability_rules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TileBuildabilityRule"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "minable": {
+          "$ref": "#/definitions/MinableProperties"
+        },
+        "surface_conditions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SurfaceCondition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "deconstruction_alternative": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "selection_priority": {
+          "$ref": "#/definitions/uint8"
+        },
+        "build_grid_size": {
+          "$ref": "#/definitions/uint8"
+        },
+        "remove_decoratives": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "automatic"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            }
+          ]
+        },
+        "emissions_per_second": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/double"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/AirbornePollutantID"
+          }
+        },
+        "shooting_cursor_size": {
+          "$ref": "#/definitions/double"
+        },
+        "created_smoke": {
+          "$ref": "#/definitions/CreateTrivialSmokeEffectItem"
+        },
+        "working_sound": {
+          "$ref": "#/definitions/WorkingSound"
+        },
+        "created_effect": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "build_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mined_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mining_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "rotated_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "impact_category": {
+          "$ref": "#/definitions/string"
+        },
+        "open_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "close_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "placeable_position_visualization": {
+          "$ref": "#/definitions/Sprite"
+        },
+        "radius_visualisation_specification": {
+          "$ref": "#/definitions/RadiusVisualisationSpecification"
+        },
+        "stateless_visualisation": {
+          "$ref": "#/definitions/StatelessVisualisations"
+        },
+        "build_base_evolution_requirement": {
+          "$ref": "#/definitions/double"
+        },
+        "alert_icon_shift": {
+          "$ref": "#/definitions/Vector"
+        },
+        "alert_icon_scale": {
+          "$ref": "#/definitions/float"
+        },
+        "fast_replaceable_group": {
+          "$ref": "#/definitions/string"
+        },
+        "next_upgrade": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "protected_from_tile_building": {
+          "$ref": "#/definitions/bool"
+        },
+        "heating_energy": {
+          "$ref": "#/definitions/Energy"
+        },
+        "allow_copy_paste": {
+          "$ref": "#/definitions/bool"
+        },
+        "selectable_in_game": {
+          "$ref": "#/definitions/bool"
+        },
+        "placeable_by": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ItemToPlace"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemToPlace"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "remains_when_mined": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "additional_pastable_entities": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "tile_width": {
+          "$ref": "#/definitions/int32"
+        },
+        "tile_height": {
+          "$ref": "#/definitions/int32"
+        },
+        "diagonal_tile_grid_size": {
+          "$ref": "#/definitions/TilePosition"
+        },
+        "autoplace": {
+          "$ref": "#/definitions/AutoplaceSpecification"
+        },
+        "map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "friendly_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "enemy_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "water_reflection": {
+          "$ref": "#/definitions/WaterReflectionDefinition"
+        },
+        "ambient_sounds_group": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "ambient_sounds": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/WorldAmbientSoundDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorldAmbientSoundDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "icon_draw_specification": {
+          "$ref": "#/definitions/IconDrawSpecification"
+        },
+        "icons_positioning": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconSequencePositioning"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "max_health": {
+          "$ref": "#/definitions/float"
+        },
+        "healing_per_tick": {
+          "$ref": "#/definitions/float"
+        },
+        "repair_speed_modifier": {
+          "$ref": "#/definitions/float"
+        },
+        "dying_explosion": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ExplosionDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ExplosionDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "dying_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "damaged_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "loot": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LootItem"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "resistances": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Resistance"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "attack_reaction": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/AttackReactionItem"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AttackReactionItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "repair_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "alert_when_damaged": {
+          "$ref": "#/definitions/bool"
+        },
+        "hide_resistances": {
+          "$ref": "#/definitions/bool"
+        },
+        "create_ghost_on_death": {
+          "$ref": "#/definitions/bool"
+        },
+        "random_corpse_variation": {
+          "$ref": "#/definitions/bool"
+        },
+        "integration_patch_render_layer": {
+          "$ref": "#/definitions/RenderLayer"
+        },
+        "corpse": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "integration_patch": {
+          "$ref": "#/definitions/Sprite4Way"
+        },
+        "overkill_fraction": {
+          "$ref": "#/definitions/float"
+        },
+        "variation_weights": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/float"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "darkness_of_burnt_tree": {
+          "$ref": "#/definitions/float"
+        },
+        "pictures": {
+          "$ref": "#/definitions/SpriteVariations"
+        },
+        "variations": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TreeVariation"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "colors": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Color"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "stateless_visualisation_variations": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StatelessVisualisations"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "growth_ticks": {
+          "$ref": "#/definitions/MapTick"
+        },
+        "harvest_emissions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/double"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/AirbornePollutantID"
+          }
+        },
+        "agricultural_tower_tint": {
+          "$ref": "#/definitions/RecipeTints"
+        }
+      },
+      "required": [
+        "growth_ticks",
+        "name",
         "type"
       ]
     },
@@ -85572,6 +89820,1162 @@
         "type"
       ]
     },
+    "SegmentPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/SegmentPrototype.html",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/string"
+        },
+        "name": {
+          "$ref": "#/definitions/string"
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "localised_name": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "localised_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "factoriopedia_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "subgroup": {
+          "$ref": "#/definitions/ItemSubGroupID"
+        },
+        "hidden": {
+          "$ref": "#/definitions/bool"
+        },
+        "hidden_in_factoriopedia": {
+          "$ref": "#/definitions/bool"
+        },
+        "parameter": {
+          "$ref": "#/definitions/bool"
+        },
+        "factoriopedia_simulation": {
+          "$ref": "#/definitions/SimulationDefinition"
+        },
+        "factoriopedia_alternative": {
+          "$ref": "#/definitions/string"
+        },
+        "icons": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconData"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "icon": {
+          "$ref": "#/definitions/FileName"
+        },
+        "icon_size": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "collision_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "collision_mask": {
+          "$ref": "#/definitions/CollisionMaskConnector"
+        },
+        "map_generator_bounding_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "selection_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "drawing_box_vertical_extension": {
+          "$ref": "#/definitions/double"
+        },
+        "sticker_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "hit_visualization_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "trigger_target_mask": {
+          "$ref": "#/definitions/TriggerTargetMask"
+        },
+        "flags": {
+          "$ref": "#/definitions/EntityPrototypeFlags"
+        },
+        "tile_buildability_rules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TileBuildabilityRule"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "minable": {
+          "$ref": "#/definitions/MinableProperties"
+        },
+        "surface_conditions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SurfaceCondition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "deconstruction_alternative": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "selection_priority": {
+          "$ref": "#/definitions/uint8"
+        },
+        "build_grid_size": {
+          "$ref": "#/definitions/uint8"
+        },
+        "remove_decoratives": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "automatic"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            }
+          ]
+        },
+        "emissions_per_second": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/double"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/AirbornePollutantID"
+          }
+        },
+        "shooting_cursor_size": {
+          "$ref": "#/definitions/double"
+        },
+        "created_smoke": {
+          "$ref": "#/definitions/CreateTrivialSmokeEffectItem"
+        },
+        "working_sound": {
+          "$ref": "#/definitions/WorkingSound"
+        },
+        "created_effect": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "build_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mined_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mining_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "rotated_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "impact_category": {
+          "$ref": "#/definitions/string"
+        },
+        "open_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "close_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "placeable_position_visualization": {
+          "$ref": "#/definitions/Sprite"
+        },
+        "radius_visualisation_specification": {
+          "$ref": "#/definitions/RadiusVisualisationSpecification"
+        },
+        "stateless_visualisation": {
+          "$ref": "#/definitions/StatelessVisualisations"
+        },
+        "build_base_evolution_requirement": {
+          "$ref": "#/definitions/double"
+        },
+        "alert_icon_shift": {
+          "$ref": "#/definitions/Vector"
+        },
+        "alert_icon_scale": {
+          "$ref": "#/definitions/float"
+        },
+        "fast_replaceable_group": {
+          "$ref": "#/definitions/string"
+        },
+        "next_upgrade": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "protected_from_tile_building": {
+          "$ref": "#/definitions/bool"
+        },
+        "heating_energy": {
+          "$ref": "#/definitions/Energy"
+        },
+        "allow_copy_paste": {
+          "$ref": "#/definitions/bool"
+        },
+        "selectable_in_game": {
+          "$ref": "#/definitions/bool"
+        },
+        "placeable_by": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ItemToPlace"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemToPlace"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "remains_when_mined": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "additional_pastable_entities": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "tile_width": {
+          "$ref": "#/definitions/int32"
+        },
+        "tile_height": {
+          "$ref": "#/definitions/int32"
+        },
+        "diagonal_tile_grid_size": {
+          "$ref": "#/definitions/TilePosition"
+        },
+        "autoplace": {
+          "$ref": "#/definitions/AutoplaceSpecification"
+        },
+        "map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "friendly_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "enemy_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "water_reflection": {
+          "$ref": "#/definitions/WaterReflectionDefinition"
+        },
+        "ambient_sounds_group": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "ambient_sounds": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/WorldAmbientSoundDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorldAmbientSoundDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "icon_draw_specification": {
+          "$ref": "#/definitions/IconDrawSpecification"
+        },
+        "icons_positioning": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconSequencePositioning"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "max_health": {
+          "$ref": "#/definitions/float"
+        },
+        "healing_per_tick": {
+          "$ref": "#/definitions/float"
+        },
+        "repair_speed_modifier": {
+          "$ref": "#/definitions/float"
+        },
+        "dying_explosion": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ExplosionDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ExplosionDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "dying_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "damaged_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "loot": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LootItem"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "resistances": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Resistance"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "attack_reaction": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/AttackReactionItem"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AttackReactionItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "repair_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "alert_when_damaged": {
+          "$ref": "#/definitions/bool"
+        },
+        "hide_resistances": {
+          "$ref": "#/definitions/bool"
+        },
+        "create_ghost_on_death": {
+          "$ref": "#/definitions/bool"
+        },
+        "random_corpse_variation": {
+          "$ref": "#/definitions/bool"
+        },
+        "integration_patch_render_layer": {
+          "$ref": "#/definitions/RenderLayer"
+        },
+        "corpse": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "integration_patch": {
+          "$ref": "#/definitions/Sprite4Way"
+        },
+        "overkill_fraction": {
+          "$ref": "#/definitions/float"
+        },
+        "is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "allow_run_time_change_of_is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "quality_indicator_scale": {
+          "$ref": "#/definitions/double"
+        },
+        "dying_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "dying_sound_volume_modifier": {
+          "$ref": "#/definitions/float"
+        },
+        "animation": {
+          "$ref": "#/definitions/RotatedAnimation"
+        },
+        "render_layer": {
+          "$ref": "#/definitions/RenderLayer"
+        },
+        "forward_overlap": {
+          "$ref": "#/definitions/uint8"
+        },
+        "backward_overlap": {
+          "$ref": "#/definitions/uint8"
+        },
+        "forward_padding": {
+          "$ref": "#/definitions/double"
+        },
+        "backward_padding": {
+          "$ref": "#/definitions/double"
+        },
+        "update_effects": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TriggerEffectWithCooldown"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "update_effects_while_enraged": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TriggerEffectWithCooldown"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "animation",
+        "name",
+        "type"
+      ]
+    },
+    "SegmentedUnitPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/SegmentedUnitPrototype.html",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/string"
+        },
+        "name": {
+          "$ref": "#/definitions/string"
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "localised_name": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "localised_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "factoriopedia_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "subgroup": {
+          "$ref": "#/definitions/ItemSubGroupID"
+        },
+        "hidden": {
+          "$ref": "#/definitions/bool"
+        },
+        "hidden_in_factoriopedia": {
+          "$ref": "#/definitions/bool"
+        },
+        "parameter": {
+          "$ref": "#/definitions/bool"
+        },
+        "factoriopedia_simulation": {
+          "$ref": "#/definitions/SimulationDefinition"
+        },
+        "factoriopedia_alternative": {
+          "$ref": "#/definitions/string"
+        },
+        "icons": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconData"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "icon": {
+          "$ref": "#/definitions/FileName"
+        },
+        "icon_size": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "collision_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "collision_mask": {
+          "$ref": "#/definitions/CollisionMaskConnector"
+        },
+        "map_generator_bounding_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "selection_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "drawing_box_vertical_extension": {
+          "$ref": "#/definitions/double"
+        },
+        "sticker_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "hit_visualization_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "trigger_target_mask": {
+          "$ref": "#/definitions/TriggerTargetMask"
+        },
+        "flags": {
+          "$ref": "#/definitions/EntityPrototypeFlags"
+        },
+        "tile_buildability_rules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TileBuildabilityRule"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "minable": {
+          "$ref": "#/definitions/MinableProperties"
+        },
+        "surface_conditions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SurfaceCondition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "deconstruction_alternative": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "selection_priority": {
+          "$ref": "#/definitions/uint8"
+        },
+        "build_grid_size": {
+          "$ref": "#/definitions/uint8"
+        },
+        "remove_decoratives": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "automatic"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            }
+          ]
+        },
+        "emissions_per_second": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/double"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/AirbornePollutantID"
+          }
+        },
+        "shooting_cursor_size": {
+          "$ref": "#/definitions/double"
+        },
+        "created_smoke": {
+          "$ref": "#/definitions/CreateTrivialSmokeEffectItem"
+        },
+        "working_sound": {
+          "$ref": "#/definitions/WorkingSound"
+        },
+        "created_effect": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "build_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mined_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mining_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "rotated_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "impact_category": {
+          "$ref": "#/definitions/string"
+        },
+        "open_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "close_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "placeable_position_visualization": {
+          "$ref": "#/definitions/Sprite"
+        },
+        "radius_visualisation_specification": {
+          "$ref": "#/definitions/RadiusVisualisationSpecification"
+        },
+        "stateless_visualisation": {
+          "$ref": "#/definitions/StatelessVisualisations"
+        },
+        "build_base_evolution_requirement": {
+          "$ref": "#/definitions/double"
+        },
+        "alert_icon_shift": {
+          "$ref": "#/definitions/Vector"
+        },
+        "alert_icon_scale": {
+          "$ref": "#/definitions/float"
+        },
+        "fast_replaceable_group": {
+          "$ref": "#/definitions/string"
+        },
+        "next_upgrade": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "protected_from_tile_building": {
+          "$ref": "#/definitions/bool"
+        },
+        "heating_energy": {
+          "$ref": "#/definitions/Energy"
+        },
+        "allow_copy_paste": {
+          "$ref": "#/definitions/bool"
+        },
+        "selectable_in_game": {
+          "$ref": "#/definitions/bool"
+        },
+        "placeable_by": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ItemToPlace"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemToPlace"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "remains_when_mined": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "additional_pastable_entities": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "tile_width": {
+          "$ref": "#/definitions/int32"
+        },
+        "tile_height": {
+          "$ref": "#/definitions/int32"
+        },
+        "diagonal_tile_grid_size": {
+          "$ref": "#/definitions/TilePosition"
+        },
+        "autoplace": {
+          "$ref": "#/definitions/AutoplaceSpecification"
+        },
+        "map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "friendly_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "enemy_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "water_reflection": {
+          "$ref": "#/definitions/WaterReflectionDefinition"
+        },
+        "ambient_sounds_group": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "ambient_sounds": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/WorldAmbientSoundDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorldAmbientSoundDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "icon_draw_specification": {
+          "$ref": "#/definitions/IconDrawSpecification"
+        },
+        "icons_positioning": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconSequencePositioning"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "max_health": {
+          "$ref": "#/definitions/float"
+        },
+        "healing_per_tick": {
+          "$ref": "#/definitions/float"
+        },
+        "repair_speed_modifier": {
+          "$ref": "#/definitions/float"
+        },
+        "dying_explosion": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ExplosionDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ExplosionDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "dying_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "damaged_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "loot": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LootItem"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "resistances": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Resistance"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "attack_reaction": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/AttackReactionItem"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AttackReactionItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "repair_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "alert_when_damaged": {
+          "$ref": "#/definitions/bool"
+        },
+        "hide_resistances": {
+          "$ref": "#/definitions/bool"
+        },
+        "create_ghost_on_death": {
+          "$ref": "#/definitions/bool"
+        },
+        "random_corpse_variation": {
+          "$ref": "#/definitions/bool"
+        },
+        "integration_patch_render_layer": {
+          "$ref": "#/definitions/RenderLayer"
+        },
+        "corpse": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "integration_patch": {
+          "$ref": "#/definitions/Sprite4Way"
+        },
+        "overkill_fraction": {
+          "$ref": "#/definitions/float"
+        },
+        "is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "allow_run_time_change_of_is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "quality_indicator_scale": {
+          "$ref": "#/definitions/double"
+        },
+        "dying_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "dying_sound_volume_modifier": {
+          "$ref": "#/definitions/float"
+        },
+        "animation": {
+          "$ref": "#/definitions/RotatedAnimation"
+        },
+        "render_layer": {
+          "$ref": "#/definitions/RenderLayer"
+        },
+        "forward_overlap": {
+          "$ref": "#/definitions/uint8"
+        },
+        "backward_overlap": {
+          "$ref": "#/definitions/uint8"
+        },
+        "forward_padding": {
+          "$ref": "#/definitions/double"
+        },
+        "backward_padding": {
+          "$ref": "#/definitions/double"
+        },
+        "update_effects": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TriggerEffectWithCooldown"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "update_effects_while_enraged": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TriggerEffectWithCooldown"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "vision_distance": {
+          "$ref": "#/definitions/double"
+        },
+        "attack_parameters": {
+          "$ref": "#/definitions/AttackParameters"
+        },
+        "revenge_attack_parameters": {
+          "$ref": "#/definitions/AttackParameters"
+        },
+        "territory_radius": {
+          "$ref": "#/definitions/uint32"
+        },
+        "enraged_duration": {
+          "$ref": "#/definitions/uint32"
+        },
+        "patrolling_speed": {
+          "$ref": "#/definitions/double"
+        },
+        "investigating_speed": {
+          "$ref": "#/definitions/double"
+        },
+        "attacking_speed": {
+          "$ref": "#/definitions/double"
+        },
+        "enraged_speed": {
+          "$ref": "#/definitions/double"
+        },
+        "acceleration_rate": {
+          "$ref": "#/definitions/double"
+        },
+        "turn_radius": {
+          "$ref": "#/definitions/double"
+        },
+        "patrolling_turn_radius": {
+          "$ref": "#/definitions/double"
+        },
+        "turn_smoothing": {
+          "$ref": "#/definitions/double"
+        },
+        "ticks_per_scan": {
+          "$ref": "#/definitions/uint32"
+        },
+        "segment_engine": {
+          "$ref": "#/definitions/SegmentEngineSpecification"
+        },
+        "roar": {
+          "$ref": "#/definitions/Sound"
+        },
+        "roar_probability": {
+          "$ref": "#/definitions/float"
+        },
+        "hurt_roar": {
+          "$ref": "#/definitions/Sound"
+        },
+        "hurt_thresholds": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/float"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "acceleration_rate",
+        "animation",
+        "attacking_speed",
+        "enraged_duration",
+        "enraged_speed",
+        "investigating_speed",
+        "name",
+        "patrolling_speed",
+        "segment_engine",
+        "territory_radius",
+        "turn_radius",
+        "type",
+        "vision_distance"
+      ]
+    },
     "SelectionToolPrototype": {
       "description": "https://lua-api.factorio.com/stable/types/SelectionToolPrototype.html",
       "properties": {
@@ -89738,6 +95142,538 @@
         "distance",
         "name",
         "orientation",
+        "type"
+      ]
+    },
+    "SpacePlatformHubPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/SpacePlatformHubPrototype.html",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/string"
+        },
+        "name": {
+          "$ref": "#/definitions/string"
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "localised_name": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "localised_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "factoriopedia_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "subgroup": {
+          "$ref": "#/definitions/ItemSubGroupID"
+        },
+        "hidden": {
+          "$ref": "#/definitions/bool"
+        },
+        "hidden_in_factoriopedia": {
+          "$ref": "#/definitions/bool"
+        },
+        "parameter": {
+          "$ref": "#/definitions/bool"
+        },
+        "factoriopedia_simulation": {
+          "$ref": "#/definitions/SimulationDefinition"
+        },
+        "factoriopedia_alternative": {
+          "$ref": "#/definitions/string"
+        },
+        "icons": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconData"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "icon": {
+          "$ref": "#/definitions/FileName"
+        },
+        "icon_size": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "collision_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "collision_mask": {
+          "$ref": "#/definitions/CollisionMaskConnector"
+        },
+        "map_generator_bounding_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "selection_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "drawing_box_vertical_extension": {
+          "$ref": "#/definitions/double"
+        },
+        "sticker_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "hit_visualization_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "trigger_target_mask": {
+          "$ref": "#/definitions/TriggerTargetMask"
+        },
+        "flags": {
+          "$ref": "#/definitions/EntityPrototypeFlags"
+        },
+        "tile_buildability_rules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TileBuildabilityRule"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "minable": {
+          "$ref": "#/definitions/MinableProperties"
+        },
+        "surface_conditions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SurfaceCondition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "deconstruction_alternative": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "selection_priority": {
+          "$ref": "#/definitions/uint8"
+        },
+        "build_grid_size": {
+          "type": "integer",
+          "const": 256
+        },
+        "remove_decoratives": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "automatic"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            }
+          ]
+        },
+        "emissions_per_second": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/double"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/AirbornePollutantID"
+          }
+        },
+        "shooting_cursor_size": {
+          "$ref": "#/definitions/double"
+        },
+        "created_smoke": {
+          "$ref": "#/definitions/CreateTrivialSmokeEffectItem"
+        },
+        "working_sound": {
+          "$ref": "#/definitions/WorkingSound"
+        },
+        "created_effect": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "build_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mined_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mining_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "rotated_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "impact_category": {
+          "$ref": "#/definitions/string"
+        },
+        "open_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "close_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "placeable_position_visualization": {
+          "$ref": "#/definitions/Sprite"
+        },
+        "radius_visualisation_specification": {
+          "$ref": "#/definitions/RadiusVisualisationSpecification"
+        },
+        "stateless_visualisation": {
+          "$ref": "#/definitions/StatelessVisualisations"
+        },
+        "build_base_evolution_requirement": {
+          "$ref": "#/definitions/double"
+        },
+        "alert_icon_shift": {
+          "$ref": "#/definitions/Vector"
+        },
+        "alert_icon_scale": {
+          "$ref": "#/definitions/float"
+        },
+        "fast_replaceable_group": {
+          "$ref": "#/definitions/string"
+        },
+        "next_upgrade": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "protected_from_tile_building": {
+          "$ref": "#/definitions/bool"
+        },
+        "heating_energy": {
+          "$ref": "#/definitions/Energy"
+        },
+        "allow_copy_paste": {
+          "$ref": "#/definitions/bool"
+        },
+        "selectable_in_game": {
+          "$ref": "#/definitions/bool"
+        },
+        "placeable_by": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ItemToPlace"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemToPlace"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "remains_when_mined": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "additional_pastable_entities": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "tile_width": {
+          "$ref": "#/definitions/int32"
+        },
+        "tile_height": {
+          "$ref": "#/definitions/int32"
+        },
+        "diagonal_tile_grid_size": {
+          "$ref": "#/definitions/TilePosition"
+        },
+        "autoplace": {
+          "$ref": "#/definitions/AutoplaceSpecification"
+        },
+        "map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "friendly_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "enemy_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "water_reflection": {
+          "$ref": "#/definitions/WaterReflectionDefinition"
+        },
+        "ambient_sounds_group": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "ambient_sounds": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/WorldAmbientSoundDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorldAmbientSoundDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "icon_draw_specification": {
+          "$ref": "#/definitions/IconDrawSpecification"
+        },
+        "icons_positioning": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconSequencePositioning"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "max_health": {
+          "$ref": "#/definitions/float"
+        },
+        "healing_per_tick": {
+          "$ref": "#/definitions/float"
+        },
+        "repair_speed_modifier": {
+          "$ref": "#/definitions/float"
+        },
+        "dying_explosion": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ExplosionDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ExplosionDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "dying_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "damaged_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "loot": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LootItem"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "resistances": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Resistance"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "attack_reaction": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/AttackReactionItem"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AttackReactionItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "repair_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "alert_when_damaged": {
+          "$ref": "#/definitions/bool"
+        },
+        "hide_resistances": {
+          "$ref": "#/definitions/bool"
+        },
+        "create_ghost_on_death": {
+          "$ref": "#/definitions/bool"
+        },
+        "random_corpse_variation": {
+          "$ref": "#/definitions/bool"
+        },
+        "integration_patch_render_layer": {
+          "$ref": "#/definitions/RenderLayer"
+        },
+        "corpse": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "integration_patch": {
+          "$ref": "#/definitions/Sprite4Way"
+        },
+        "overkill_fraction": {
+          "$ref": "#/definitions/float"
+        },
+        "is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "allow_run_time_change_of_is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "quality_indicator_scale": {
+          "$ref": "#/definitions/double"
+        },
+        "graphics_set": {
+          "$ref": "#/definitions/CargoBayConnectableGraphicsSet"
+        },
+        "inventory_size": {
+          "$ref": "#/definitions/ItemStackIndex"
+        },
+        "dump_container": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "persistent_ambient_sounds": {
+          "$ref": "#/definitions/PersistentWorldAmbientSoundsDefinition"
+        },
+        "surface_render_parameters": {
+          "$ref": "#/definitions/SurfaceRenderParameters"
+        },
+        "circuit_wire_max_distance": {
+          "$ref": "#/definitions/double"
+        },
+        "draw_copper_wires": {
+          "$ref": "#/definitions/bool"
+        },
+        "draw_circuit_wires": {
+          "$ref": "#/definitions/bool"
+        },
+        "circuit_connector": {
+          "$ref": "#/definitions/CircuitConnectorDefinition"
+        },
+        "default_speed_signal": {
+          "$ref": "#/definitions/SignalIDConnector"
+        },
+        "default_damage_taken_signal": {
+          "$ref": "#/definitions/SignalIDConnector"
+        },
+        "platform_repair_speed_modifier": {
+          "$ref": "#/definitions/float"
+        },
+        "weight": {
+          "$ref": "#/definitions/Weight"
+        },
+        "cargo_station_parameters": {
+          "$ref": "#/definitions/CargoStationParameters"
+        }
+      },
+      "required": [
+        "cargo_station_parameters",
+        "dump_container",
+        "inventory_size",
+        "name",
         "type"
       ]
     },
@@ -95397,6 +101333,514 @@
       "required": [
         "inventory_size",
         "name",
+        "type"
+      ]
+    },
+    "ThrusterPrototype": {
+      "description": "https://lua-api.factorio.com/stable/types/ThrusterPrototype.html",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/string"
+        },
+        "name": {
+          "$ref": "#/definitions/string"
+        },
+        "order": {
+          "$ref": "#/definitions/Order"
+        },
+        "localised_name": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "localised_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "factoriopedia_description": {
+          "$ref": "#/definitions/LocalisedString"
+        },
+        "subgroup": {
+          "$ref": "#/definitions/ItemSubGroupID"
+        },
+        "hidden": {
+          "$ref": "#/definitions/bool"
+        },
+        "hidden_in_factoriopedia": {
+          "$ref": "#/definitions/bool"
+        },
+        "parameter": {
+          "$ref": "#/definitions/bool"
+        },
+        "factoriopedia_simulation": {
+          "$ref": "#/definitions/SimulationDefinition"
+        },
+        "factoriopedia_alternative": {
+          "$ref": "#/definitions/string"
+        },
+        "icons": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconData"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "icon": {
+          "$ref": "#/definitions/FileName"
+        },
+        "icon_size": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "collision_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "collision_mask": {
+          "$ref": "#/definitions/CollisionMaskConnector"
+        },
+        "map_generator_bounding_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "selection_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "drawing_box_vertical_extension": {
+          "$ref": "#/definitions/double"
+        },
+        "sticker_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "hit_visualization_box": {
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "trigger_target_mask": {
+          "$ref": "#/definitions/TriggerTargetMask"
+        },
+        "flags": {
+          "$ref": "#/definitions/EntityPrototypeFlags"
+        },
+        "tile_buildability_rules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TileBuildabilityRule"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "minable": {
+          "$ref": "#/definitions/MinableProperties"
+        },
+        "surface_conditions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SurfaceCondition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "deconstruction_alternative": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "selection_priority": {
+          "$ref": "#/definitions/uint8"
+        },
+        "build_grid_size": {
+          "$ref": "#/definitions/uint8"
+        },
+        "remove_decoratives": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "automatic"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            }
+          ]
+        },
+        "emissions_per_second": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/double"
+          },
+          "propertyNames": {
+            "$ref": "#/definitions/AirbornePollutantID"
+          }
+        },
+        "shooting_cursor_size": {
+          "$ref": "#/definitions/double"
+        },
+        "created_smoke": {
+          "$ref": "#/definitions/CreateTrivialSmokeEffectItem"
+        },
+        "working_sound": {
+          "$ref": "#/definitions/WorkingSound"
+        },
+        "created_effect": {
+          "$ref": "#/definitions/Trigger"
+        },
+        "build_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mined_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "mining_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "rotated_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "impact_category": {
+          "$ref": "#/definitions/string"
+        },
+        "open_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "close_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "placeable_position_visualization": {
+          "$ref": "#/definitions/Sprite"
+        },
+        "radius_visualisation_specification": {
+          "$ref": "#/definitions/RadiusVisualisationSpecification"
+        },
+        "stateless_visualisation": {
+          "$ref": "#/definitions/StatelessVisualisations"
+        },
+        "build_base_evolution_requirement": {
+          "$ref": "#/definitions/double"
+        },
+        "alert_icon_shift": {
+          "$ref": "#/definitions/Vector"
+        },
+        "alert_icon_scale": {
+          "$ref": "#/definitions/float"
+        },
+        "fast_replaceable_group": {
+          "$ref": "#/definitions/string"
+        },
+        "next_upgrade": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "protected_from_tile_building": {
+          "$ref": "#/definitions/bool"
+        },
+        "heating_energy": {
+          "$ref": "#/definitions/Energy"
+        },
+        "allow_copy_paste": {
+          "$ref": "#/definitions/bool"
+        },
+        "selectable_in_game": {
+          "$ref": "#/definitions/bool"
+        },
+        "placeable_by": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ItemToPlace"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ItemToPlace"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "remains_when_mined": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "additional_pastable_entities": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityID"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "tile_width": {
+          "$ref": "#/definitions/int32"
+        },
+        "tile_height": {
+          "$ref": "#/definitions/int32"
+        },
+        "diagonal_tile_grid_size": {
+          "$ref": "#/definitions/TilePosition"
+        },
+        "autoplace": {
+          "$ref": "#/definitions/AutoplaceSpecification"
+        },
+        "map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "friendly_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "enemy_map_color": {
+          "$ref": "#/definitions/Color"
+        },
+        "water_reflection": {
+          "$ref": "#/definitions/WaterReflectionDefinition"
+        },
+        "ambient_sounds_group": {
+          "$ref": "#/definitions/EntityID"
+        },
+        "ambient_sounds": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/WorldAmbientSoundDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorldAmbientSoundDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "icon_draw_specification": {
+          "$ref": "#/definitions/IconDrawSpecification"
+        },
+        "icons_positioning": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IconSequencePositioning"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "max_health": {
+          "$ref": "#/definitions/float"
+        },
+        "healing_per_tick": {
+          "$ref": "#/definitions/float"
+        },
+        "repair_speed_modifier": {
+          "$ref": "#/definitions/float"
+        },
+        "dying_explosion": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ExplosionDefinition"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ExplosionDefinition"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "dying_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "damaged_trigger_effect": {
+          "$ref": "#/definitions/TriggerEffect"
+        },
+        "loot": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LootItem"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "resistances": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Resistance"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "attack_reaction": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/AttackReactionItem"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AttackReactionItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "repair_sound": {
+          "$ref": "#/definitions/Sound"
+        },
+        "alert_when_damaged": {
+          "$ref": "#/definitions/bool"
+        },
+        "hide_resistances": {
+          "$ref": "#/definitions/bool"
+        },
+        "create_ghost_on_death": {
+          "$ref": "#/definitions/bool"
+        },
+        "random_corpse_variation": {
+          "$ref": "#/definitions/bool"
+        },
+        "integration_patch_render_layer": {
+          "$ref": "#/definitions/RenderLayer"
+        },
+        "corpse": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/EntityID"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EntityID"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "integration_patch": {
+          "$ref": "#/definitions/Sprite4Way"
+        },
+        "overkill_fraction": {
+          "$ref": "#/definitions/float"
+        },
+        "is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "allow_run_time_change_of_is_military_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "quality_indicator_scale": {
+          "$ref": "#/definitions/double"
+        },
+        "min_performance": {
+          "$ref": "#/definitions/ThrusterPerformancePoint"
+        },
+        "max_performance": {
+          "$ref": "#/definitions/ThrusterPerformancePoint"
+        },
+        "fuel_fluid_box": {
+          "$ref": "#/definitions/FluidBox"
+        },
+        "oxidizer_fluid_box": {
+          "$ref": "#/definitions/FluidBox"
+        },
+        "graphics_set": {
+          "$ref": "#/definitions/ThrusterGraphicsSet"
+        },
+        "plumes": {
+          "$ref": "#/definitions/PlumesSpecification"
+        }
+      },
+      "required": [
+        "fuel_fluid_box",
+        "max_performance",
+        "min_performance",
+        "name",
+        "oxidizer_fluid_box",
         "type"
       ]
     },

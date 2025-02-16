@@ -68,6 +68,7 @@ def patch(schema: Any) -> None:
     )
 
     # Patches to investigate and document
+    remove_all_constraints("AgriculturalCraneProperties")
     remove_all_constraints("Animation")
     remove_all_constraints("AttackParameters")
     remove_all_constraints("BoundingBox")

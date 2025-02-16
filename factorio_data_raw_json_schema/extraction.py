@@ -157,11 +157,10 @@ def extract_prototype_key(soup: bs4.BeautifulSoup) -> str | None:
         parts = text.split(" ")
         assert len(parts) >= 2, parts
         key = parts[1]
-        if key in [""]:
-            return None
-        else:
-            assert key.startswith("'") and key.endswith("'"), key
-            return key[1:-1]
+        if key == "":  # Space Age icon
+            key = parts[2]
+        assert key.startswith("'") and key.endswith("'"), key
+        return key[1:-1]
 
 
 def extract_struct_base(soup: bs4.BeautifulSoup) -> str | None:
