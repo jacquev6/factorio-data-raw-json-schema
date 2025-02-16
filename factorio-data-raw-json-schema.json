@@ -4614,46 +4614,7 @@
       ]
     },
     "CraftingMachineGraphicsSet": {
-      "description": "https://lua-api.factorio.com/stable/types/CraftingMachineGraphicsSet.html",
-      "allOf": [
-        {
-          "$ref": "#/definitions/WorkingVisualisations"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "frozen_patch": {
-              "$ref": "#/definitions/Sprite4Way"
-            },
-            "circuit_connector_layer": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/RenderLayer"
-                },
-                {
-                  "$ref": "#/definitions/CircuitConnectorLayer"
-                }
-              ]
-            },
-            "circuit_connector_secondary_draw_order": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/int8"
-                },
-                {
-                  "$ref": "#/definitions/CircuitConnectorSecondaryDrawOrder"
-                }
-              ]
-            },
-            "animation_progress": {
-              "$ref": "#/definitions/float"
-            },
-            "reset_animation_when_frozen": {
-              "$ref": "#/definitions/bool"
-            }
-          }
-        }
-      ]
+      "description": "https://lua-api.factorio.com/stable/types/CraftingMachineGraphicsSet.html"
     },
     "CranePart": {
       "description": "https://lua-api.factorio.com/stable/types/CranePart.html",
@@ -7802,23 +7763,7 @@
       ]
     },
     "FootstepTriggerEffectList": {
-      "description": "https://lua-api.factorio.com/stable/types/FootstepTriggerEffectList.html",
-      "oneOf": [
-        {
-          "type": "array",
-          "items": {
-            "anyOf": [
-              {
-                "$ref": "#/definitions/FootstepTriggerEffectItem"
-              }
-            ]
-          }
-        },
-        {
-          "type": "object",
-          "additionalProperties": false
-        }
-      ]
+      "description": "https://lua-api.factorio.com/stable/types/FootstepTriggerEffectList.html"
     },
     "ForceCondition": {
       "description": "https://lua-api.factorio.com/stable/types/ForceCondition.html",
@@ -23104,7 +23049,20 @@
             }
           ]
         },
-        "working_visualisations": {},
+        "working_visualisations": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WorkingVisualisation"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
         "shift_animation_waypoints": {
           "$ref": "#/definitions/ShiftAnimationWaypoints"
         },
@@ -38525,7 +38483,9 @@
         "footstep_particle_triggers": {
           "$ref": "#/definitions/FootstepTriggerEffectList"
         },
-        "synced_footstep_particle_triggers": {},
+        "synced_footstep_particle_triggers": {
+          "$ref": "#/definitions/FootstepTriggerEffectList"
+        },
         "footprint_particles": {
           "oneOf": [
             {
