@@ -1,13 +1,12 @@
 from __future__ import annotations
 
-from typing import Any, Literal, TypeAlias
+from typing import Literal
 import dataclasses
 
 from . import patching
 
 
-JsonValue = None | bool | int | float | str | list[Any] | dict[str, Any]
-JsonList = list[JsonValue]
+JsonValue = None | bool | int | float | str | list["JsonValue"] | dict[str, "JsonValue"]
 JsonDict = dict[str, JsonValue]
 
 
@@ -152,7 +151,7 @@ class Schema:
                 "maxItems": len(self.members),
             }
 
-    TypeExpression: TypeAlias = (
+    TypeExpression = (
         BuiltinTypeExpression
         | LiteralBoolTypeExpression
         | LiteralStringTypeExpression
