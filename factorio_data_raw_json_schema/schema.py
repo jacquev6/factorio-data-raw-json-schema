@@ -4,6 +4,8 @@ from typing import Any, Literal, TypeAlias
 
 import pydantic
 
+from . import patching
+
 
 class PydanticBase(pydantic.BaseModel):
     model_config = pydantic.ConfigDict(extra="forbid", frozen=True)
@@ -94,13 +96,7 @@ class Schema:
 
         @property
         def json_definition(self) -> JsonDict:
-            return {
-                "oneOf": [
-                    {"type": "array", "items": self.content.json_definition},
-                    # Empty arrays are serialized as {} instead of []
-                    {"type": "object", "additionalProperties": False},
-                ]
-            }
+            return patching.array_to_json_definition(self)
 
     class DictionaryTypeExpression(PydanticBase):
         kind: Literal["dictionary"] = "dictionary"

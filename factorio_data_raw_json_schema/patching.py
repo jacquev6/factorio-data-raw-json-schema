@@ -1,11 +1,24 @@
 from typing import Any
 import sys
 
-from .schema import JsonValue
+from .schema import Schema, JsonValue, JsonDict
 
 
-def debug(*arg: Any, **kwds: Any) -> None:
-    print(*arg, **kwds, file=sys.stderr)
+# I believe 'DamageEntityTriggerEffectItem' is a typo in https://lua-api.factorio.com/2.0.28/types/TriggerEffect.html
+# and actually refers to 'DamageTriggerEffectItem'
+local_types_for_union: dict[str, Schema.TypeExpression] = {
+    "DamageEntityTriggerEffectItem": Schema.RefTypeExpression(ref="DamageTriggerEffectItem")
+}
+
+
+# Empty arrays are serialized as {} instead of []
+def array_to_json_definition(self: Schema.ArrayTypeExpression) -> JsonDict:
+    return {
+        "oneOf": [
+            {"type": "array", "items": self.content.json_definition},
+            {"type": "object", "additionalProperties": False},
+        ]
+    }
 
 
 def patch(schema: Any) -> None:
@@ -41,13 +54,6 @@ def patch(schema: Any) -> None:
 
     # Ad-hoc patches because the doc doesn't match the actual data
     # ============================================================
-
-    # Empty arrays are serialized as {} instead of []
-    # (patched in 'extraction.py' because this must be done everywhere)
-
-    # I believe 'DamageEntityTriggerEffectItem' is a typo in https://lua-api.factorio.com/2.0.28/types/TriggerEffect.html
-    # and actually refers to 'DamageTriggerEffectItem'
-    # (patched in 'extraction.py' for simplicity)
 
     # types/ItemProductPrototype.html#amount_min is documented as uint16
     # but is some sort of floating point in e.g. 'speed-module-recycling'

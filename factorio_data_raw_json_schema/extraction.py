@@ -6,6 +6,7 @@ import joblib
 import lark
 import tqdm
 
+from . import patching
 from .crawling import Crawler
 from .schema import Schema
 
@@ -29,7 +30,6 @@ def extract(crawler: Crawler) -> Schema:
 
 
 class _Extractor:
-
     def __init__(self, crawler: Crawler) -> None:
         self.crawler = crawler
         self.all_type_names: set[str] = set()
@@ -150,14 +150,7 @@ def extract_union_members(
     soup: bs4.element.PageElement | None, global_types: set[str]
 ) -> Iterable[Schema.TypeExpression]:
     if soup is not None:
-        transformer = TypeExpressionTransformer(
-            global_types,
-            {
-                # I believe 'DamageEntityTriggerEffectItem' is a typo in https://lua-api.factorio.com/2.0.28/types/TriggerEffect.html
-                # and actually refers to 'DamageTriggerEffectItem'
-                "DamageEntityTriggerEffectItem": Schema.RefTypeExpression(ref="DamageTriggerEffectItem")
-            },
-        )
+        transformer = TypeExpressionTransformer(global_types, patching.local_types_for_union)
 
         for span_soup in (tag(el) for el in tag(soup).find_all("span", class_="docs-attribute-name")):
             yield transformer.transform(type_expression_parser.parse(str(span_soup.text).strip()))
