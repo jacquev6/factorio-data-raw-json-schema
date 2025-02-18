@@ -1,14 +1,9 @@
 from __future__ import annotations
 
 from typing import Any, Literal, TypeAlias
-
-import pydantic
+import dataclasses
 
 from . import patching
-
-
-class PydanticBase(pydantic.BaseModel):
-    model_config = pydantic.ConfigDict(extra="forbid", frozen=True)
 
 
 JsonValue = None | bool | int | float | str | list[Any] | dict[str, Any]
@@ -25,7 +20,8 @@ def json_value(value: JsonValue) -> JsonValue:
 
 
 class Schema:
-    class BuiltinTypeExpression(PydanticBase):
+    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    class BuiltinTypeExpression:
         kind: Literal["builtin"] = "builtin"
         json_definition: JsonDict
 
@@ -50,7 +46,8 @@ class Schema:
         ),
     }
 
-    class LiteralBoolTypeExpression(PydanticBase):
+    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    class LiteralBoolTypeExpression:
         kind: Literal["literal_bool"] = "literal_bool"
         value: bool
 
@@ -58,7 +55,8 @@ class Schema:
         def json_definition(self) -> JsonDict:
             return {"type": "boolean", "const": self.value}
 
-    class LiteralStringTypeExpression(PydanticBase):
+    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    class LiteralStringTypeExpression:
         kind: Literal["literal_string"] = "literal_string"
         value: str
 
@@ -66,7 +64,8 @@ class Schema:
         def json_definition(self) -> JsonDict:
             return {"type": "string", "const": self.value}
 
-    class LiteralIntegerTypeExpression(PydanticBase):
+    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    class LiteralIntegerTypeExpression:
         kind: Literal["literal_integer"] = "literal_integer"
         value: int
 
@@ -74,7 +73,8 @@ class Schema:
         def json_definition(self) -> JsonDict:
             return {"type": "integer", "const": self.value}
 
-    class RefTypeExpression(PydanticBase):
+    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    class RefTypeExpression:
         kind: Literal["ref"] = "ref"
         ref: str
 
@@ -82,7 +82,8 @@ class Schema:
         def json_definition(self) -> JsonDict:
             return {"$ref": f"#/definitions/{self.ref}"}
 
-    class UnionTypeExpression(PydanticBase):
+    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    class UnionTypeExpression:
         kind: Literal["union"] = "union"
         members: list[Schema.TypeExpression]
 
@@ -90,7 +91,8 @@ class Schema:
         def json_definition(self) -> JsonDict:
             return {"anyOf": [member.json_definition for member in self.members]}
 
-    class ArrayTypeExpression(PydanticBase):
+    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    class ArrayTypeExpression:
         kind: Literal["array"] = "array"
         content: Schema.TypeExpression
 
@@ -98,7 +100,8 @@ class Schema:
         def json_definition(self) -> JsonDict:
             return patching.array_to_json_definition(self)
 
-    class DictionaryTypeExpression(PydanticBase):
+    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    class DictionaryTypeExpression:
         kind: Literal["dictionary"] = "dictionary"
         keys: Schema.TypeExpression
         values: Schema.TypeExpression
@@ -111,7 +114,8 @@ class Schema:
                 "propertyNames": self.keys.json_definition,
             }
 
-    class StructTypeExpression(PydanticBase):
+    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    class StructTypeExpression:
         kind: Literal["struct"] = "struct"
         base: str | None
         properties: list[Schema.Property]
@@ -134,7 +138,8 @@ class Schema:
                 else:
                     return {"allOf": [{"$ref": f"#/definitions/{self.base}"}, self_definition]}
 
-    class TupleTypeExpression(PydanticBase):
+    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    class TupleTypeExpression:
         kind: Literal["tuple"] = "tuple"
         members: list[Schema.TypeExpression]
 
@@ -160,16 +165,19 @@ class Schema:
         | TupleTypeExpression
     )
 
-    class Property(PydanticBase):
+    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    class Property:
         names: list[str]
         type: Schema.TypeExpression
         required: bool = False
 
-    class Type(PydanticBase):
+    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    class Type:
         name: str
         definition: Schema.TypeExpression
 
-    class Prototype(PydanticBase):
+    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    class Prototype:
         name: str
         key: str | None
         base: str | None

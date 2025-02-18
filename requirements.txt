@@ -6,7 +6,6 @@ joblib
 joblib-stubs
 lark
 mypy
-pydantic
 requests
 requests-cache
 requests-file
