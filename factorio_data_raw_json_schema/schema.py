@@ -224,6 +224,7 @@ class Schema:
 
     def make_prototype_definition(self, prototype_name: str) -> JsonDict:
         prototypes_by_name = {prototype.name: prototype for prototype in self.prototypes}
+        prototype = prototypes_by_name[prototype_name]
 
         properties: JsonDict = {}
         required: dict[str, bool] = {}
@@ -238,14 +239,14 @@ class Schema:
             required.update({name: p.required for p in all_properties for name in p.names if len(p.names) == 1})
 
         rec(prototype_name)
-        # @todo Constrain 'type' to equal the leaf prototype key
+
+        properties["type"] = {"type": "string", "const": prototype.key}
 
         definition = {
             "description": json_value(f"https://lua-api.factorio.com/stable/types/{prototype_name}.html"),
             "properties": properties,
         }
 
-        prototype = prototypes_by_name[prototype_name]
         if prototype.custom_properties is None:
             definition["additionalProperties"] = False
         else:
