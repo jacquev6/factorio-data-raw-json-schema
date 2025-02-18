@@ -2262,9 +2262,6 @@
         }
       ]
     },
-    "AnyPrototype": {
-      "description": "https://lua-api.factorio.com/stable/types/AnyPrototype.html"
-    },
     "ApplyStarterPackTipTrigger": {
       "description": "https://lua-api.factorio.com/stable/types/ApplyStarterPackTipTrigger.html",
       "allOf": [
@@ -6772,12 +6769,6 @@
         }
       ]
     },
-    "Data": {
-      "description": "https://lua-api.factorio.com/stable/types/Data.html"
-    },
-    "DataExtendMethod": {
-      "description": "https://lua-api.factorio.com/stable/types/DataExtendMethod.html"
-    },
     "DaytimeColorLookupTable": {
       "description": "https://lua-api.factorio.com/stable/types/DaytimeColorLookupTable.html",
       "oneOf": [
@@ -10153,7 +10144,9 @@
       "type": "object",
       "properties": {
         "inventory_index": {
-          "type": "integer"
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
         },
         "max_icons_per_row": {
           "$ref": "#/definitions/uint8"
@@ -41224,10 +41217,6 @@
             {
               "type": "string",
               "const": "rocket-launched"
-            },
-            {
-              "type": "string",
-              "const": "late-research"
             }
           ]
         },
@@ -47558,10 +47547,6 @@
             {
               "type": "string",
               "const": "rocket-launched"
-            },
-            {
-              "type": "string",
-              "const": "late-research"
             }
           ]
         },
@@ -47651,10 +47636,6 @@
             {
               "type": "string",
               "const": "rocket-launched"
-            },
-            {
-              "type": "string",
-              "const": "late-research"
             }
           ]
         },
@@ -47745,10 +47726,6 @@
             {
               "type": "string",
               "const": "rocket-launched"
-            },
-            {
-              "type": "string",
-              "const": "late-research"
             }
           ]
         },
@@ -47877,10 +47854,6 @@
             {
               "type": "string",
               "const": "rocket-launched"
-            },
-            {
-              "type": "string",
-              "const": "late-research"
             }
           ]
         },
