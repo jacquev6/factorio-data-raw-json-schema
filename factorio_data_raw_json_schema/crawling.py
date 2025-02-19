@@ -38,4 +38,4 @@ class Crawler:
         response = self.session.get(url)
         response.raise_for_status()
         response.encoding = "utf-8"
-        return BeautifulSoup(response.text, "html.parser")
+        return BeautifulSoup(response.text, "lxml")

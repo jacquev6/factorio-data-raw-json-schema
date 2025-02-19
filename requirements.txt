@@ -5,6 +5,7 @@ click
 joblib
 joblib-stubs
 lark
+lxml
 mypy
 py-spy
 requests
