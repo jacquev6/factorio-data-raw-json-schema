@@ -27,9 +27,12 @@ def main() -> None:
     help='Apply ad-hoc patches to the schema (see "Quirks" section in the README).',
     show_default=True,
 )
-def extract(doc_root: str, output: TextIO, do_patch: bool) -> None:
+@click.option(
+    "--workers", type=int, default=-1, help="Number of worker threads to use. Default is the number of CPU cores."
+)
+def extract(doc_root: str, output: TextIO, do_patch: bool, workers: int) -> None:
     crawler = crawling.Crawler(doc_root)
-    schema = extraction.extract(crawler).to_json_value()
+    schema = extraction.extract(crawler=crawler, workers=workers).to_json_value()
     if do_patch:
         patching.patch(schema)
     json.dump(schema, output, indent=2)

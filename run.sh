@@ -5,6 +5,23 @@ set -o nounset
 set -o pipefail
 
 
+runner=""
+extract_options=""
+while [ $# -gt 0 ]
+do
+  case "$1" in
+    --py-spy)
+      runner="py-spy record -o py-spy.svg --subprocesses --"
+      extract_options="--workers 1"
+      shift
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+
 if ! diff .venv/requirements.txt requirements.txt 2>/dev/null >/dev/null
 then
   rm -rf .venv
@@ -28,8 +45,9 @@ fi
     --skip-magic-trailing-comma \
     --line-length 120
 
-  python -m factorio_data_raw_json_schema extract \
+  $runner python -m factorio_data_raw_json_schema extract \
     --doc-root https://lua-api.factorio.com/2.0.28/ \
+    $extract_options \
     factorio-data-raw-json-schema.json
 
   if ! git diff --stat --exit-code factorio-data-raw-json-schema.json

@@ -6,6 +6,7 @@ joblib
 joblib-stubs
 lark
 mypy
+py-spy
 requests
 requests-cache
 requests-file

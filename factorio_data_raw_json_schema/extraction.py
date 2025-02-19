@@ -11,8 +11,8 @@ from .crawling import Crawler
 from .schema import Schema
 
 
-def extract(crawler: Crawler) -> Schema:
-    extractor = _Extractor(crawler)
+def extract(*, crawler: Crawler, workers: int) -> Schema:
+    extractor = _Extractor(crawler=crawler, workers=workers)
 
     with tqdm.tqdm(total=2) as progress:
         extractor.extract_all_type_names()
@@ -30,8 +30,9 @@ def extract(crawler: Crawler) -> Schema:
 
 
 class _Extractor:
-    def __init__(self, crawler: Crawler) -> None:
+    def __init__(self, *, crawler: Crawler, workers: int) -> None:
         self.crawler = crawler
+        self._workers = workers
         self.all_type_names: set[str] = set()
         self.all_prototype_names: set[str] = set()
         self.types: list[Schema.Type] = []
@@ -60,14 +61,14 @@ class _Extractor:
         self.all_prototype_names = set(gen())
 
     def extract_all_types(self) -> Iterable[None]:
-        for type in joblib.Parallel(n_jobs=-1, return_as="generator")(
+        for type in joblib.Parallel(n_jobs=self._workers, return_as="generator")(
             joblib.delayed(self._extract_type)(type_name) for type_name in sorted(self.all_type_names)
         ):
             self.types.append(type)
             yield None
 
     def extract_all_prototypes(self) -> Iterable[None]:
-        for prototype in joblib.Parallel(n_jobs=-1, return_as="generator")(
+        for prototype in joblib.Parallel(n_jobs=self._workers, return_as="generator")(
             joblib.delayed(self._extract_prototype)(prototype_name)
             for prototype_name in sorted(self.all_prototype_names)
         ):
