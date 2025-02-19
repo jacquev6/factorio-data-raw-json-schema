@@ -38,4 +38,7 @@ class Crawler:
         response = self.session.get(url)
         response.raise_for_status()
         response.encoding = "utf-8"
+        # @todo Maybe use a SoupStrainer for faster parsing
+        # (https://www.crummy.com/software/BeautifulSoup/bs4/doc/#parsing-only-part-of-a-document)
+        # (py-spy shows that most time is spent in parsing)
         return BeautifulSoup(response.text, "lxml")
