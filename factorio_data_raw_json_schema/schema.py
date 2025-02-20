@@ -166,10 +166,7 @@ class Schema:
 
             rec(self)
 
-            definition: JsonDict = {
-                # @todo Add "type": "object" (unless added somewhere else)
-                "properties": properties
-            }
+            definition: JsonDict = {"type": "object", "properties": properties}
 
             if self.custom_properties is None:
                 definition["additionalProperties"] = False

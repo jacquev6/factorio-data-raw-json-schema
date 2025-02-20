@@ -24203,6 +24203,7 @@
     },
     "AccumulatorPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/AccumulatorPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -24713,6 +24714,7 @@
     },
     "AchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/AchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -24786,6 +24788,7 @@
     },
     "ActiveDefenseEquipmentPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ActiveDefenseEquipmentPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -24880,6 +24883,7 @@
     },
     "AgriculturalTowerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/AgriculturalTowerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -25477,6 +25481,7 @@
     },
     "AirbornePollutantPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/AirbornePollutantPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -25543,6 +25548,7 @@
     },
     "AmbientSound": {
       "description": "https://lua-api.factorio.com/stable/prototypes/AmbientSound.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -25576,6 +25582,7 @@
     },
     "AmmoCategory": {
       "description": "https://lua-api.factorio.com/stable/prototypes/AmmoCategory.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -25646,6 +25653,7 @@
     },
     "AmmoItemPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/AmmoItemPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -25915,6 +25923,7 @@
     },
     "AmmoTurretPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/AmmoTurretPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -26716,6 +26725,7 @@
     },
     "AnimationPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/AnimationPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -26922,6 +26932,7 @@
     },
     "ArithmeticCombinatorPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ArithmeticCombinatorPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -27573,6 +27584,7 @@
     },
     "ArmorPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ArmorPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -27863,6 +27875,7 @@
     },
     "ArrowPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ArrowPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -28222,6 +28235,7 @@
     },
     "ArtilleryFlarePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ArtilleryFlarePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -28627,6 +28641,7 @@
     },
     "ArtilleryProjectilePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ArtilleryProjectilePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -29002,6 +29017,7 @@
     },
     "ArtilleryTurretPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ArtilleryTurretPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -29593,6 +29609,7 @@
     },
     "ArtilleryWagonPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ArtilleryWagonPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -30315,6 +30332,7 @@
     },
     "AssemblingMachinePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/AssemblingMachinePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -30964,6 +30982,7 @@
     },
     "AsteroidChunkPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/AsteroidChunkPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -31043,6 +31062,7 @@
     },
     "AsteroidCollectorPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/AsteroidCollectorPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -31708,6 +31728,7 @@
     },
     "AsteroidPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/AsteroidPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -32202,6 +32223,7 @@
     },
     "AutoplaceControl": {
       "description": "https://lua-api.factorio.com/stable/prototypes/AutoplaceControl.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -32276,6 +32298,7 @@
     },
     "BatteryEquipmentPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/BatteryEquipmentPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -32362,6 +32385,7 @@
     },
     "BeaconPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/BeaconPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -32938,6 +32962,7 @@
     },
     "BeamPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/BeamPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -33311,6 +33336,7 @@
     },
     "BeltImmunityEquipmentPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/BeltImmunityEquipmentPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -33401,6 +33427,7 @@
     },
     "BlueprintBookPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/BlueprintBookPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -33711,6 +33738,7 @@
     },
     "BlueprintItemPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/BlueprintItemPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -33978,6 +34006,7 @@
     },
     "BoilerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/BoilerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -34530,6 +34559,7 @@
     },
     "BuildEntityAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/BuildEntityAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -34616,6 +34646,7 @@
     },
     "BurnerGeneratorPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/BurnerGeneratorPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -35128,6 +35159,7 @@
     },
     "BurnerUsagePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/BurnerUsagePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -35201,6 +35233,7 @@
     },
     "CapsulePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CapsulePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -35442,6 +35475,7 @@
     },
     "CaptureRobotPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CaptureRobotPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -35967,6 +36001,7 @@
     },
     "CarPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CarPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -36617,6 +36652,7 @@
     },
     "CargoBayPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CargoBayPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -37130,6 +37166,7 @@
     },
     "CargoLandingPadPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CargoLandingPadPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -37662,6 +37699,7 @@
     },
     "CargoPodPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CargoPodPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -38174,6 +38212,7 @@
     },
     "CargoWagonPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CargoWagonPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -38816,6 +38855,7 @@
     },
     "ChainActiveTriggerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ChainActiveTriggerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -38890,6 +38930,7 @@
     },
     "ChangedSurfaceAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ChangedSurfaceAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -38966,6 +39007,7 @@
     },
     "CharacterCorpsePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CharacterCorpsePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -39337,6 +39379,7 @@
     },
     "CharacterPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CharacterPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -40068,6 +40111,7 @@
     },
     "CliffPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CliffPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -40519,6 +40563,7 @@
     },
     "CollisionLayerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CollisionLayerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -40566,6 +40611,7 @@
     },
     "CombatRobotCountAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CombatRobotCountAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -40642,6 +40688,7 @@
     },
     "CombatRobotPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CombatRobotPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -41190,6 +41237,7 @@
     },
     "CompleteObjectiveAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CompleteObjectiveAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -41279,6 +41327,7 @@
     },
     "ConstantCombinatorPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ConstantCombinatorPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -41825,6 +41874,7 @@
     },
     "ConstructWithRobotsAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ConstructWithRobotsAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -41908,6 +41958,7 @@
     },
     "ConstructionRobotPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ConstructionRobotPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -42471,6 +42522,7 @@
     },
     "ContainerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ContainerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -43000,6 +43052,7 @@
     },
     "CopyPasteToolPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CopyPasteToolPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -43270,6 +43323,7 @@
     },
     "CorpsePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CorpsePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -43737,6 +43791,7 @@
     },
     "CreatePlatformAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CreatePlatformAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -43813,6 +43868,7 @@
     },
     "CurvedRailAPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CurvedRailAPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -44352,6 +44408,7 @@
     },
     "CurvedRailBPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CurvedRailBPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -44891,6 +44948,7 @@
     },
     "CustomEventPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CustomEventPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -44938,6 +44996,7 @@
     },
     "CustomInputPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/CustomInputPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -45046,6 +45105,7 @@
     },
     "DamageType": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DamageType.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -45093,6 +45153,7 @@
     },
     "DeciderCombinatorPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DeciderCombinatorPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -45729,6 +45790,7 @@
     },
     "DeconstructWithRobotsAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DeconstructWithRobotsAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -45806,6 +45868,7 @@
     },
     "DeconstructibleTileProxyPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DeconstructibleTileProxyPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -46155,6 +46218,7 @@
     },
     "DeconstructionItemPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DeconstructionItemPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -46428,6 +46492,7 @@
     },
     "DecorativePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DecorativePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -46532,6 +46597,7 @@
     },
     "DelayedActiveTriggerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DelayedActiveTriggerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -46596,6 +46662,7 @@
     },
     "DeliverByRobotsAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DeliverByRobotsAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -46673,6 +46740,7 @@
     },
     "DeliverCategory": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DeliverCategory.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -46690,6 +46758,7 @@
     },
     "DeliverImpactCombination": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DeliverImpactCombination.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -46719,6 +46788,7 @@
     },
     "DepleteResourceAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DepleteResourceAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -46798,6 +46868,7 @@
     },
     "DestroyCliffAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DestroyCliffAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -46877,6 +46948,7 @@
     },
     "DisplayPanelPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DisplayPanelPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -47408,6 +47480,7 @@
     },
     "DontBuildEntityAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DontBuildEntityAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -47544,6 +47617,7 @@
     },
     "DontCraftManuallyAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DontCraftManuallyAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -47634,6 +47708,7 @@
     },
     "DontKillManuallyAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DontKillManuallyAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -47725,6 +47800,7 @@
     },
     "DontResearchBeforeResearchingAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DontResearchBeforeResearchingAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -47854,6 +47930,7 @@
     },
     "DontUseEntityInEnergyProductionAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/DontUseEntityInEnergyProductionAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -47988,6 +48065,7 @@
     },
     "EditorControllerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/EditorControllerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -48104,6 +48182,7 @@
     },
     "ElectricEnergyInterfacePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ElectricEnergyInterfacePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -48639,6 +48718,7 @@
     },
     "ElectricPolePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ElectricPolePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -49174,6 +49254,7 @@
     },
     "ElectricTurretPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ElectricTurretPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -49969,6 +50050,7 @@
     },
     "ElevatedCurvedRailAPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ElevatedCurvedRailAPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -50508,6 +50590,7 @@
     },
     "ElevatedCurvedRailBPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ElevatedCurvedRailBPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -51047,6 +51130,7 @@
     },
     "ElevatedHalfDiagonalRailPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ElevatedHalfDiagonalRailPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -51586,6 +51670,7 @@
     },
     "ElevatedStraightRailPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ElevatedStraightRailPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -52125,6 +52210,7 @@
     },
     "EnemySpawnerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/EnemySpawnerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -52723,6 +52809,7 @@
     },
     "EnergyShieldEquipmentPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/EnergyShieldEquipmentPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -52817,6 +52904,7 @@
     },
     "EntityGhostPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/EntityGhostPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -53187,6 +53275,7 @@
     },
     "EquipArmorAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/EquipArmorAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -53278,6 +53367,7 @@
     },
     "EquipmentCategory": {
       "description": "https://lua-api.factorio.com/stable/prototypes/EquipmentCategory.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -53325,6 +53415,7 @@
     },
     "EquipmentGhostPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/EquipmentGhostPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -53408,6 +53499,7 @@
     },
     "EquipmentGridPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/EquipmentGridPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -53481,6 +53573,7 @@
     },
     "ExplosionPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ExplosionPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -53921,6 +54014,7 @@
     },
     "FireFlamePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/FireFlamePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -54445,6 +54539,7 @@
     },
     "FishPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/FishPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -54927,6 +55022,7 @@
     },
     "FluidPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/FluidPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -55027,6 +55123,7 @@
     },
     "FluidStreamPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/FluidStreamPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -55478,6 +55575,7 @@
     },
     "FluidTurretPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/FluidTurretPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -56322,6 +56420,7 @@
     },
     "FluidWagonPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/FluidWagonPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -56967,6 +57066,7 @@
     },
     "FontPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/FontPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -57004,6 +57104,7 @@
     },
     "FuelCategory": {
       "description": "https://lua-api.factorio.com/stable/prototypes/FuelCategory.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -57054,6 +57155,7 @@
     },
     "FurnacePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/FurnacePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -57662,6 +57764,7 @@
     },
     "FusionGeneratorPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/FusionGeneratorPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -58172,6 +58275,7 @@
     },
     "FusionReactorPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/FusionReactorPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -58700,6 +58804,7 @@
     },
     "GatePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/GatePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -59239,6 +59344,7 @@
     },
     "GeneratorEquipmentPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/GeneratorEquipmentPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -59332,6 +59438,7 @@
     },
     "GeneratorPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/GeneratorPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -59880,6 +59987,7 @@
     },
     "GodControllerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/GodControllerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -59945,6 +60053,7 @@
     },
     "GroupAttackAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/GroupAttackAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -60035,6 +60144,7 @@
     },
     "GuiStyle": {
       "description": "https://lua-api.factorio.com/stable/prototypes/GuiStyle.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -60090,6 +60200,7 @@
     },
     "GunPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/GunPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -60328,6 +60439,7 @@
     },
     "HalfDiagonalRailPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/HalfDiagonalRailPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -60867,6 +60979,7 @@
     },
     "HeatInterfacePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/HeatInterfacePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -61378,6 +61491,7 @@
     },
     "HeatPipePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/HeatPipePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -61879,6 +61993,7 @@
     },
     "HighlightBoxEntityPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/HighlightBoxEntityPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -62228,6 +62343,7 @@
     },
     "ImpactCategory": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ImpactCategory.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -62245,6 +62361,7 @@
     },
     "InfinityContainerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/InfinityContainerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -62845,6 +62962,7 @@
     },
     "InfinityPipePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/InfinityPipePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -63364,6 +63482,7 @@
     },
     "InserterPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/InserterPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -63987,6 +64106,7 @@
     },
     "InventoryBonusEquipmentPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/InventoryBonusEquipmentPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -64076,6 +64196,7 @@
     },
     "ItemEntityPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ItemEntityPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -64425,6 +64546,7 @@
     },
     "ItemGroup": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ItemGroup.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -64495,6 +64617,7 @@
     },
     "ItemPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ItemPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -64729,6 +64852,7 @@
     },
     "ItemRequestProxyPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ItemRequestProxyPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -65081,6 +65205,7 @@
     },
     "ItemSubGroup": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ItemSubGroup.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -65132,6 +65257,7 @@
     },
     "ItemWithEntityDataPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ItemWithEntityDataPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -65406,6 +65532,7 @@
     },
     "ItemWithInventoryPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ItemWithInventoryPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -65708,6 +65835,7 @@
     },
     "ItemWithLabelPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ItemWithLabelPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -65948,6 +66076,7 @@
     },
     "ItemWithTagsPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ItemWithTagsPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -66188,6 +66317,7 @@
     },
     "KillAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/KillAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -66318,6 +66448,7 @@
     },
     "LabPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/LabPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -66876,6 +67007,7 @@
     },
     "LampPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/LampPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -67456,6 +67588,7 @@
     },
     "LandMinePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/LandMinePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -67975,6 +68108,7 @@
     },
     "LaneSplitterPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/LaneSplitterPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -68486,6 +68620,7 @@
     },
     "LegacyCurvedRailPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/LegacyCurvedRailPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -69025,6 +69160,7 @@
     },
     "LegacyStraightRailPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/LegacyStraightRailPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -69564,6 +69700,7 @@
     },
     "LightningAttractorPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/LightningAttractorPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -70067,6 +70204,7 @@
     },
     "LightningPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/LightningPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -70447,6 +70585,7 @@
     },
     "LinkedBeltPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/LinkedBeltPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -70980,6 +71119,7 @@
     },
     "LinkedContainerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/LinkedContainerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -71519,6 +71659,7 @@
     },
     "Loader1x1Prototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/Loader1x1Prototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -72090,6 +72231,7 @@
     },
     "Loader1x2Prototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/Loader1x2Prototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -72661,6 +72803,7 @@
     },
     "LocomotivePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/LocomotivePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -73330,6 +73473,7 @@
     },
     "LogisticContainerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/LogisticContainerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -73908,6 +74052,7 @@
     },
     "LogisticRobotPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/LogisticRobotPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -74458,6 +74603,7 @@
     },
     "MapGenPresets": {
       "description": "https://lua-api.factorio.com/stable/prototypes/MapGenPresets.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -74477,6 +74623,7 @@
     },
     "MapSettings": {
       "description": "https://lua-api.factorio.com/stable/prototypes/MapSettings.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -74542,6 +74689,7 @@
     },
     "MarketPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/MarketPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -75036,6 +75184,7 @@
     },
     "MiningDrillPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/MiningDrillPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -75661,6 +75810,7 @@
     },
     "ModuleCategory": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ModuleCategory.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -75708,6 +75858,7 @@
     },
     "ModulePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ModulePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -75977,6 +76128,7 @@
     },
     "ModuleTransferAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ModuleTransferAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -76078,6 +76230,7 @@
     },
     "MouseCursor": {
       "description": "https://lua-api.factorio.com/stable/prototypes/MouseCursor.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -76136,6 +76289,7 @@
     },
     "MovementBonusEquipmentPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/MovementBonusEquipmentPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -76230,6 +76384,7 @@
     },
     "NamedNoiseExpression": {
       "description": "https://lua-api.factorio.com/stable/prototypes/NamedNoiseExpression.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -76302,6 +76457,7 @@
     },
     "NamedNoiseFunction": {
       "description": "https://lua-api.factorio.com/stable/prototypes/NamedNoiseFunction.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -76386,6 +76542,7 @@
     },
     "NightVisionEquipmentPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/NightVisionEquipmentPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -76489,6 +76646,7 @@
     },
     "OffshorePumpPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/OffshorePumpPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -77037,6 +77195,7 @@
     },
     "ParticlePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ParticlePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -77130,6 +77289,7 @@
     },
     "ParticleSourcePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ParticleSourcePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -77531,6 +77691,7 @@
     },
     "PipePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/PipePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -78034,6 +78195,7 @@
     },
     "PipeToGroundPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/PipeToGroundPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -78541,6 +78703,7 @@
     },
     "PlaceEquipmentAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/PlaceEquipmentAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -78632,6 +78795,7 @@
     },
     "PlanetPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/PlanetPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -78817,6 +78981,7 @@
     },
     "PlantPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/PlantPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -79374,6 +79539,7 @@
     },
     "PlayerDamagedAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/PlayerDamagedAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -79458,6 +79624,7 @@
     },
     "PlayerPortPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/PlayerPortPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -79946,6 +80113,7 @@
     },
     "PowerSwitchPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/PowerSwitchPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -80477,6 +80645,7 @@
     },
     "ProcessionLayerInheritanceGroup": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ProcessionLayerInheritanceGroup.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -80530,6 +80699,7 @@
     },
     "ProcessionPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ProcessionPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -80623,6 +80793,7 @@
     },
     "ProduceAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ProduceAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -80710,6 +80881,7 @@
     },
     "ProducePerHourAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ProducePerHourAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -80793,6 +80965,7 @@
     },
     "ProgrammableSpeakerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ProgrammableSpeakerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -81356,6 +81529,7 @@
     },
     "ProjectilePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ProjectilePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -81774,6 +81948,7 @@
     },
     "PumpPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/PumpPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -82342,6 +82517,7 @@
     },
     "QualityPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/QualityPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -82435,6 +82611,7 @@
     },
     "RadarPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/RadarPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -82983,6 +83160,7 @@
     },
     "RailChainSignalPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/RailChainSignalPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -83506,6 +83684,7 @@
     },
     "RailPlannerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/RailPlannerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -83761,6 +83940,7 @@
     },
     "RailRampPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/RailRampPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -84306,6 +84486,7 @@
     },
     "RailRemnantsPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/RailRemnantsPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -84785,6 +84966,7 @@
     },
     "RailSignalPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/RailSignalPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -85308,6 +85490,7 @@
     },
     "RailSupportPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/RailSupportPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -85844,6 +86027,7 @@
     },
     "ReactorPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ReactorPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -86404,6 +86588,7 @@
     },
     "RecipeCategory": {
       "description": "https://lua-api.factorio.com/stable/prototypes/RecipeCategory.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -86451,6 +86636,7 @@
     },
     "RecipePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/RecipePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -86684,6 +86870,7 @@
     },
     "RemoteControllerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/RemoteControllerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -86705,6 +86892,7 @@
     },
     "RepairToolPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/RepairToolPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -86955,6 +87143,7 @@
     },
     "ResearchAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ResearchAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -87034,6 +87223,7 @@
     },
     "ResearchWithSciencePackAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ResearchWithSciencePackAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -87114,6 +87304,7 @@
     },
     "ResourceCategory": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ResourceCategory.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -87161,6 +87352,7 @@
     },
     "ResourceEntityPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ResourceEntityPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -87594,6 +87786,7 @@
     },
     "RoboportEquipmentPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/RoboportEquipmentPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -87764,6 +87957,7 @@
     },
     "RoboportPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/RoboportPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -88426,6 +88620,7 @@
     },
     "RocketSiloPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/RocketSiloPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -89260,6 +89455,7 @@
     },
     "RocketSiloRocketPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/RocketSiloRocketPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -89740,6 +89936,7 @@
     },
     "RocketSiloRocketShadowPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/RocketSiloRocketShadowPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -90089,6 +90286,7 @@
     },
     "SegmentPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SegmentPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -90630,6 +90828,7 @@
     },
     "SegmentedUnitPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SegmentedUnitPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -91249,6 +91448,7 @@
     },
     "SelectionToolPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SelectionToolPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -91515,6 +91715,7 @@
     },
     "SelectorCombinatorPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SelectorCombinatorPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -92154,6 +92355,7 @@
     },
     "ShootAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ShootAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -92233,6 +92435,7 @@
     },
     "ShortcutPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ShortcutPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -92404,6 +92607,7 @@
     },
     "SimpleEntityPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SimpleEntityPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -92927,6 +93131,7 @@
     },
     "SimpleEntityWithForcePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SimpleEntityWithForcePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -93459,6 +93664,7 @@
     },
     "SimpleEntityWithOwnerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SimpleEntityWithOwnerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -93991,6 +94197,7 @@
     },
     "SmokeWithTriggerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SmokeWithTriggerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -94421,6 +94628,7 @@
     },
     "SolarPanelEquipmentPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SolarPanelEquipmentPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -94511,6 +94719,7 @@
     },
     "SolarPanelPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SolarPanelPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -95013,6 +95222,7 @@
     },
     "SoundPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SoundPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -95120,6 +95330,7 @@
     },
     "SpaceConnectionDistanceTraveledAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SpaceConnectionDistanceTraveledAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -95205,6 +95416,7 @@
     },
     "SpaceConnectionPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SpaceConnectionPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -95297,6 +95509,7 @@
     },
     "SpaceLocationPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SpaceLocationPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -95445,6 +95658,7 @@
     },
     "SpacePlatformHubPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SpacePlatformHubPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -95979,6 +96193,7 @@
     },
     "SpacePlatformStarterPackPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SpacePlatformStarterPackPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -96250,6 +96465,7 @@
     },
     "SpectatorControllerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SpectatorControllerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -96271,6 +96487,7 @@
     },
     "SpeechBubblePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SpeechBubblePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -96633,6 +96850,7 @@
     },
     "SpiderLegPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SpiderLegPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -97237,6 +97455,7 @@
     },
     "SpiderUnitPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SpiderUnitPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -97784,6 +98003,7 @@
     },
     "SpiderVehiclePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SpiderVehiclePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -98403,6 +98623,7 @@
     },
     "SpidertronRemotePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SpidertronRemotePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -98670,6 +98891,7 @@
     },
     "SplitterPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SplitterPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -99186,6 +99408,7 @@
     },
     "SpritePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SpritePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -99337,6 +99560,7 @@
     },
     "StickerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/StickerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -99785,6 +100009,7 @@
     },
     "StorageTankPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/StorageTankPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -100342,6 +100567,7 @@
     },
     "StraightRailPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/StraightRailPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -100881,6 +101107,7 @@
     },
     "SurfacePropertyPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SurfacePropertyPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -100938,6 +101165,7 @@
     },
     "SurfacePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/SurfacePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -101000,6 +101228,7 @@
     },
     "TechnologyPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/TechnologyPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -101130,6 +101359,7 @@
     },
     "TemporaryContainerPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/TemporaryContainerPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -101668,6 +101898,7 @@
     },
     "ThrusterPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ThrusterPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -102178,6 +102409,7 @@
     },
     "TileEffectDefinition": {
       "description": "https://lua-api.factorio.com/stable/prototypes/TileEffectDefinition.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -102221,6 +102453,7 @@
     },
     "TileGhostPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/TileGhostPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -102570,6 +102803,7 @@
     },
     "TilePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/TilePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -102935,6 +103169,7 @@
     },
     "TipsAndTricksItem": {
       "description": "https://lua-api.factorio.com/stable/prototypes/TipsAndTricksItem.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -103046,6 +103281,7 @@
     },
     "TipsAndTricksItemCategory": {
       "description": "https://lua-api.factorio.com/stable/prototypes/TipsAndTricksItemCategory.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -103067,6 +103303,7 @@
     },
     "ToolPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/ToolPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -103314,6 +103551,7 @@
     },
     "TrainPathAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/TrainPathAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -103391,6 +103629,7 @@
     },
     "TrainStopPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/TrainStopPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -103968,6 +104207,7 @@
     },
     "TransportBeltPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/TransportBeltPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -104495,6 +104735,7 @@
     },
     "TreePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/TreePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -105036,6 +105277,7 @@
     },
     "TriggerTargetType": {
       "description": "https://lua-api.factorio.com/stable/prototypes/TriggerTargetType.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -105053,6 +105295,7 @@
     },
     "TrivialSmokePrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/TrivialSmokePrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -105147,6 +105390,7 @@
     },
     "TurretPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/TurretPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -105931,6 +106175,7 @@
     },
     "TutorialDefinition": {
       "description": "https://lua-api.factorio.com/stable/prototypes/TutorialDefinition.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -105979,6 +106224,7 @@
     },
     "UndergroundBeltPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/UndergroundBeltPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -106525,6 +106771,7 @@
     },
     "UnitPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/UnitPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -107110,6 +107357,7 @@
     },
     "UpgradeItemPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/UpgradeItemPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -107377,6 +107625,7 @@
     },
     "UseEntityInEnergyProductionAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/UseEntityInEnergyProductionAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -107463,6 +107712,7 @@
     },
     "UseItemAchievementPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/UseItemAchievementPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -107550,6 +107800,7 @@
     },
     "UtilityConstants": {
       "description": "https://lua-api.factorio.com/stable/prototypes/UtilityConstants.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -108601,6 +108852,7 @@
     },
     "UtilitySounds": {
       "description": "https://lua-api.factorio.com/stable/prototypes/UtilitySounds.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -108904,6 +109156,7 @@
     },
     "UtilitySprites": {
       "description": "https://lua-api.factorio.com/stable/prototypes/UtilitySprites.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -111409,6 +111662,7 @@
     },
     "VirtualSignalPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/VirtualSignalPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -111476,6 +111730,7 @@
     },
     "WallPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/WallPrototype.html",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
