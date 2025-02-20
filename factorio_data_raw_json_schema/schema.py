@@ -24,6 +24,9 @@ class Schema:
         kind: Literal["builtin"] = "builtin"
         json_definition: JsonDict
 
+        def make_json_definition(self, referable_types: dict[str, Schema.TypeExpression]) -> JsonDict:
+            return self.json_definition
+
     builtin_types: dict[str, BuiltinTypeExpression] = {
         "string": BuiltinTypeExpression(json_definition={"type": "string"}),
         "float": BuiltinTypeExpression(json_definition={"type": "number"}),
@@ -50,8 +53,7 @@ class Schema:
         kind: Literal["literal_bool"] = "literal_bool"
         value: bool
 
-        @property
-        def json_definition(self) -> JsonDict:
+        def make_json_definition(self, referable_types: dict[str, Schema.TypeExpression]) -> JsonDict:
             return {"type": "boolean", "const": self.value}
 
     @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
@@ -59,8 +61,7 @@ class Schema:
         kind: Literal["literal_string"] = "literal_string"
         value: str
 
-        @property
-        def json_definition(self) -> JsonDict:
+        def make_json_definition(self, referable_types: dict[str, Schema.TypeExpression]) -> JsonDict:
             return {"type": "string", "const": self.value}
 
     @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
@@ -68,8 +69,7 @@ class Schema:
         kind: Literal["literal_integer"] = "literal_integer"
         value: int
 
-        @property
-        def json_definition(self) -> JsonDict:
+        def make_json_definition(self, referable_types: dict[str, Schema.TypeExpression]) -> JsonDict:
             return {"type": "integer", "const": self.value}
 
     @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
@@ -77,8 +77,7 @@ class Schema:
         kind: Literal["ref"] = "ref"
         ref: str
 
-        @property
-        def json_definition(self) -> JsonDict:
+        def make_json_definition(self, referable_types: dict[str, Schema.TypeExpression]) -> JsonDict:
             return {"$ref": f"#/definitions/{self.ref}"}
 
     @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
@@ -86,18 +85,16 @@ class Schema:
         kind: Literal["union"] = "union"
         members: list[Schema.TypeExpression]
 
-        @property
-        def json_definition(self) -> JsonDict:
-            return {"anyOf": [member.json_definition for member in self.members]}
+        def make_json_definition(self, referable_types: dict[str, Schema.TypeExpression]) -> JsonDict:
+            return {"anyOf": [member.make_json_definition(referable_types) for member in self.members]}
 
     @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
     class ArrayTypeExpression:
         kind: Literal["array"] = "array"
         content: Schema.TypeExpression
 
-        @property
-        def json_definition(self) -> JsonDict:
-            return patching.array_to_json_definition(self)
+        def make_json_definition(self, referable_types: dict[str, Schema.TypeExpression]) -> JsonDict:
+            return patching.array_to_json_definition(self, referable_types)
 
     @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
     class DictionaryTypeExpression:
@@ -105,13 +102,18 @@ class Schema:
         keys: Schema.TypeExpression
         values: Schema.TypeExpression
 
-        @property
-        def json_definition(self) -> JsonDict:
+        def make_json_definition(self, referable_types: dict[str, Schema.TypeExpression]) -> JsonDict:
             return {
                 "type": "object",
-                "additionalProperties": self.values.json_definition,
-                "propertyNames": self.keys.json_definition,
+                "additionalProperties": self.values.make_json_definition(referable_types),
+                "propertyNames": self.keys.make_json_definition(referable_types),
             }
+
+    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    class Property:
+        names: list[str]
+        type: Schema.TypeExpression
+        required: bool = False
 
     @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
     class StructTypeExpression:
@@ -119,12 +121,13 @@ class Schema:
         base: str | None
         properties: list[Schema.Property]
 
-        @property
-        def json_definition(self) -> JsonDict:
+        def make_json_definition(self, referable_types: dict[str, Schema.TypeExpression]) -> JsonDict:
             required = [json_value(name) for p in self.properties if p.required for name in p.names]
             self_definition = {
                 "type": "object",
-                "properties": json_value({name: p.type.json_definition for p in self.properties for name in p.names}),
+                "properties": json_value(
+                    {name: p.type.make_json_definition(referable_types) for p in self.properties for name in p.names}
+                ),
             } | ({"required": json_value(required)} if required else {})
             if self.base is None:
                 if len(self.properties) > 0:
@@ -138,15 +141,55 @@ class Schema:
                     return {"allOf": [{"$ref": f"#/definitions/{self.base}"}, self_definition]}
 
     @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    class StructTypeExpression2:
+        kind: Literal["struct"] = "struct"
+        base: str | None
+        properties: list[Schema.Property]
+        overridden_properties: list[Schema.Property]
+        custom_properties: Schema.TypeExpression | None
+
+        def make_json_definition(self, referable_types: dict[str, Schema.TypeExpression]) -> JsonDict:
+            properties: JsonDict = {}
+            required: dict[str, bool] = {}
+
+            def rec(prototype: Schema.StructTypeExpression2) -> None:
+                if prototype.base is not None:
+                    base = referable_types[prototype.base]
+                    assert isinstance(base, Schema.StructTypeExpression2)
+                    rec(base)
+                all_properties = prototype.properties + prototype.overridden_properties
+                properties.update(
+                    {name: p.type.make_json_definition(referable_types) for p in all_properties for name in p.names}
+                )
+                # @todo When there are multiple property names, and the property is required, enforce that at least one property name is present
+                required.update({name: p.required for p in all_properties for name in p.names if len(p.names) == 1})
+
+            rec(self)
+
+            definition: JsonDict = {
+                # @todo Add "type": "object" (unless added somewhere else)
+                "properties": properties
+            }
+
+            if self.custom_properties is None:
+                definition["additionalProperties"] = False
+            else:
+                definition["additionalProperties"] = self.custom_properties.make_json_definition(referable_types)
+
+            if any(required.values()):
+                definition["required"] = [json_value(v) for v in sorted(k for k, v in required.items() if v)]
+
+            return definition
+
+    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
     class TupleTypeExpression:
         kind: Literal["tuple"] = "tuple"
         members: list[Schema.TypeExpression]
 
-        @property
-        def json_definition(self) -> JsonDict:
+        def make_json_definition(self, referable_types: dict[str, Schema.TypeExpression]) -> JsonDict:
             return {
                 "type": "array",
-                "items": [member.json_definition for member in self.members],
+                "items": [member.make_json_definition(referable_types) for member in self.members],
                 "minItems": len(self.members),
                 "maxItems": len(self.members),
             }
@@ -161,14 +204,9 @@ class Schema:
         | ArrayTypeExpression
         | DictionaryTypeExpression
         | StructTypeExpression
+        | StructTypeExpression2
         | TupleTypeExpression
     )
-
-    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
-    class Property:
-        names: list[str]
-        type: Schema.TypeExpression
-        required: bool = False
 
     @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
     class Type:
@@ -185,6 +223,29 @@ class Schema:
         overridden_properties: list[Schema.Property]
         custom_properties: Schema.TypeExpression | None
 
+        def make_definition(self) -> Schema.TypeExpression:
+            type_property = (
+                None
+                if self.key is None
+                else Schema.Property(
+                    names=["type"], type=Schema.LiteralStringTypeExpression(value=self.key), required=True
+                )
+            )
+
+            return Schema.StructTypeExpression2(
+                base=self.base,
+                properties=self.properties + list(filter(None, [type_property])),
+                overridden_properties=self.overridden_properties,
+                custom_properties=self.custom_properties,
+            )
+
+        def make_json_definition(self, referable_types: dict[str, Schema.TypeExpression]) -> JsonDict:
+            definition: JsonDict = {
+                "description": f"https://lua-api.factorio.com/stable/types/{self.name}.html"  # @todo Fix URL (s/types/prototypes/)
+            }
+            definition.update(self.make_definition().make_json_definition(referable_types))
+            return definition
+
     def __init__(self, *, types: list[Type], prototypes: list[Prototype]) -> None:
         self.types = types
         self.prototypes = prototypes
@@ -198,20 +259,25 @@ class Schema:
             if prototype.key is not None
         }
 
-        type_definitions = {
+        referable_types = {prototype.name: prototype.make_definition() for prototype in self.prototypes} | {
+            type.name: type.definition for type in self.types
+        }
+
+        type_definitions: JsonDict = {
             type.name: json_value(
                 {"description": json_value(f"https://lua-api.factorio.com/stable/types/{type.name}.html")}
-                | type.definition.json_definition
+                | type.definition.make_json_definition(referable_types)
             )
             for type in self.types
         }
 
         # @todo Add "additionalProperties": false to all definitions
 
-        prototype_definitions: JsonDict = {}
-        for prototype in self.prototypes:
-            if prototype.key is not None:
-                prototype_definitions[prototype.name] = self.make_prototype_definition(prototype.name)
+        prototype_definitions: JsonDict = {
+            prototype.name: prototype.make_json_definition(referable_types)
+            for prototype in self.prototypes
+            if prototype.key is not None
+        }
 
         return {
             "$schema": "https://json-schema.org/draft/2019-09/schema",
@@ -221,38 +287,3 @@ class Schema:
             "additionalProperties": False,
             "definitions": type_definitions | prototype_definitions,
         }
-
-    def make_prototype_definition(self, prototype_name: str) -> JsonDict:
-        prototypes_by_name = {prototype.name: prototype for prototype in self.prototypes}
-        prototype = prototypes_by_name[prototype_name]
-
-        properties: JsonDict = {}
-        required: dict[str, bool] = {}
-
-        def rec(prototype_name: str) -> None:
-            prototype = prototypes_by_name[prototype_name]
-            if prototype.base is not None:
-                rec(prototype.base)
-            all_properties = prototype.properties + prototype.overridden_properties
-            properties.update({name: p.type.json_definition for p in all_properties for name in p.names})
-            # @todo When there are multiple property names, and the property is required, enforce that at least one property name is present
-            required.update({name: p.required for p in all_properties for name in p.names if len(p.names) == 1})
-
-        rec(prototype_name)
-
-        properties["type"] = {"type": "string", "const": prototype.key}
-
-        definition = {
-            "description": json_value(f"https://lua-api.factorio.com/stable/types/{prototype_name}.html"),
-            "properties": properties,
-        }
-
-        if prototype.custom_properties is None:
-            definition["additionalProperties"] = False
-        else:
-            definition["additionalProperties"] = prototype.custom_properties.json_definition
-
-        if any(required.values()):
-            definition["required"] = [json_value(v) for v in sorted(k for k, v in required.items() if v)]
-
-        return definition

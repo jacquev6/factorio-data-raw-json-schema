@@ -12,10 +12,12 @@ local_types_for_union: dict[str, Schema.TypeExpression] = {
 
 
 # Empty arrays are serialized as {} instead of []
-def array_to_json_definition(self: Schema.ArrayTypeExpression) -> JsonDict:
+def array_to_json_definition(
+    self: Schema.ArrayTypeExpression, referable_types: dict[str, Schema.TypeExpression]
+) -> JsonDict:
     return {
         "oneOf": [
-            {"type": "array", "items": self.content.json_definition},
+            {"type": "array", "items": self.content.make_json_definition(referable_types)},
             {"type": "object", "additionalProperties": False},
         ]
     }
