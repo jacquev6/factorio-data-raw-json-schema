@@ -271,10 +271,7 @@ class Schema:
 
         prototype_definitions: JsonDict = {
             prototype.name: (
-                {
-                    # @todo Fix URL (s/types/prototypes/)
-                    "description": json_value(f"https://lua-api.factorio.com/stable/types/{prototype.name}.html")
-                }
+                {"description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{prototype.name}.html")}
                 | prototype.make_json_definition(referable_types)
             )
             for prototype in self.prototypes
