@@ -240,11 +240,7 @@ class Schema:
             )
 
         def make_json_definition(self, referable_types: dict[str, Schema.TypeExpression]) -> JsonDict:
-            definition: JsonDict = {
-                "description": f"https://lua-api.factorio.com/stable/types/{self.name}.html"  # @todo Fix URL (s/types/prototypes/)
-            }
-            definition.update(self.make_definition().make_json_definition(referable_types))
-            return definition
+            return self.make_definition().make_json_definition(referable_types)
 
     def __init__(self, *, types: list[Type], prototypes: list[Prototype]) -> None:
         self.types = types
@@ -274,7 +270,13 @@ class Schema:
         # @todo Add "additionalProperties": false to all definitions
 
         prototype_definitions: JsonDict = {
-            prototype.name: prototype.make_json_definition(referable_types)
+            prototype.name: (
+                {
+                    # @todo Fix URL (s/types/prototypes/)
+                    "description": json_value(f"https://lua-api.factorio.com/stable/types/{prototype.name}.html")
+                }
+                | prototype.make_json_definition(referable_types)
+            )
             for prototype in self.prototypes
             if prototype.key is not None
         }
