@@ -1,32 +1,67 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/LineTriggerItem.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/TriggerItem.json"
+  "type": "object",
+  "properties": {
+    "entity_flags": {
+      "$ref": "../split-schema/EntityPrototypeFlags.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "line"
+    "collision_mask": {
+      "$ref": "../split-schema/CollisionMaskConnector.json"
+    },
+    "ignore_collision_condition": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "trigger_target_mask": {
+      "$ref": "../split-schema/TriggerTargetMask.json"
+    },
+    "repeat_count": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "probability": {
+      "$ref": "../split-schema/float.json"
+    },
+    "action_delivery": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/TriggerDelivery.json"
         },
-        "range": {
-          "$ref": "../split-schema/double.json"
-        },
-        "width": {
-          "$ref": "../split-schema/double.json"
-        },
-        "range_effects": {
-          "$ref": "../split-schema/TriggerEffect.json"
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/TriggerDelivery.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
         }
-      },
-      "required": [
-        "type",
-        "range",
-        "width"
       ]
+    },
+    "force": {
+      "$ref": "../split-schema/ForceCondition.json"
+    },
+    "type": {
+      "type": "string",
+      "const": "line"
+    },
+    "range": {
+      "$ref": "../split-schema/double.json"
+    },
+    "width": {
+      "$ref": "../split-schema/double.json"
+    },
+    "range_effects": {
+      "$ref": "../split-schema/TriggerEffect.json"
     }
+  },
+  "required": [
+    "type",
+    "range",
+    "width"
   ]
 }

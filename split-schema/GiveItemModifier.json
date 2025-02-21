@@ -1,34 +1,50 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/GiveItemModifier.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/BaseModifier.json"
-    },
-    {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "give-item"
+  "type": "object",
+  "properties": {
+    "icons": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/IconData.json"
+          }
         },
-        "use_icon_overlay_constant": {
-          "$ref": "../split-schema/bool.json"
-        },
-        "item": {
-          "$ref": "../split-schema/ItemID.json"
-        },
-        "quality": {
-          "$ref": "../split-schema/QualityID.json"
-        },
-        "count": {
-          "$ref": "../split-schema/ItemCountType.json"
+        {
+          "type": "object",
+          "additionalProperties": false
         }
-      },
-      "required": [
-        "type",
-        "item"
       ]
+    },
+    "icon": {
+      "$ref": "../split-schema/FileName.json"
+    },
+    "icon_size": {
+      "$ref": "../split-schema/SpriteSizeType.json"
+    },
+    "hidden": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "type": {
+      "type": "string",
+      "const": "give-item"
+    },
+    "use_icon_overlay_constant": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "item": {
+      "$ref": "../split-schema/ItemID.json"
+    },
+    "quality": {
+      "$ref": "../split-schema/QualityID.json"
+    },
+    "count": {
+      "$ref": "../split-schema/ItemCountType.json"
     }
+  },
+  "required": [
+    "type",
+    "item"
   ]
 }

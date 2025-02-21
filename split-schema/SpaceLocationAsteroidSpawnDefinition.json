@@ -1,39 +1,43 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/SpaceLocationAsteroidSpawnDefinition.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/AsteroidSpawnPoint.json"
+  "type": "object",
+  "properties": {
+    "probability": {
+      "$ref": "../split-schema/double.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "type": {
-          "anyOf": [
-            {
-              "type": "string",
-              "const": "entity"
-            },
-            {
-              "type": "string",
-              "const": "asteroid-chunk"
-            }
-          ]
+    "speed": {
+      "$ref": "../split-schema/double.json"
+    },
+    "angle_when_stopped": {
+      "$ref": "../split-schema/double.json"
+    },
+    "type": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "entity"
         },
-        "asteroid": {
-          "anyOf": [
-            {
-              "$ref": "../split-schema/EntityID.json"
-            },
-            {
-              "$ref": "../split-schema/AsteroidChunkID.json"
-            }
-          ]
+        {
+          "type": "string",
+          "const": "asteroid-chunk"
         }
-      },
-      "required": [
-        "asteroid"
+      ]
+    },
+    "asteroid": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/EntityID.json"
+        },
+        {
+          "$ref": "../split-schema/AsteroidChunkID.json"
+        }
       ]
     }
+  },
+  "required": [
+    "probability",
+    "speed",
+    "asteroid"
   ]
 }

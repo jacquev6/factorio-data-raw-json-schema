@@ -1,37 +1,33 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/StackTransferTipTrigger.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/CountBasedTipTrigger.json"
+  "type": "object",
+  "properties": {
+    "count": {
+      "$ref": "../split-schema/uint32.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "type": {
+    "type": {
+      "type": "string",
+      "const": "stack-transfer"
+    },
+    "transfer": {
+      "anyOf": [
+        {
           "type": "string",
-          "const": "stack-transfer"
+          "const": "stack"
         },
-        "transfer": {
-          "anyOf": [
-            {
-              "type": "string",
-              "const": "stack"
-            },
-            {
-              "type": "string",
-              "const": "inventory"
-            },
-            {
-              "type": "string",
-              "const": "whole-inventory"
-            }
-          ]
+        {
+          "type": "string",
+          "const": "inventory"
+        },
+        {
+          "type": "string",
+          "const": "whole-inventory"
         }
-      },
-      "required": [
-        "type"
       ]
     }
+  },
+  "required": [
+    "type"
   ]
 }

@@ -3,21 +3,23 @@
   "description": "https://lua-api.factorio.com/stable/types/Fade.html",
   "anyOf": [
     {
-      "allOf": [
-        {
-          "$ref": "../split-schema/Attenuation.json"
+      "type": "object",
+      "properties": {
+        "curve_type": {
+          "$ref": "../split-schema/AttenuationType.json"
         },
-        {
-          "type": "object",
-          "properties": {
-            "from": {
-              "$ref": "../split-schema/ControlPoint.json"
-            },
-            "to": {
-              "$ref": "../split-schema/ControlPoint.json"
-            }
-          }
+        "tuning_parameter": {
+          "$ref": "../split-schema/float.json"
+        },
+        "from": {
+          "$ref": "../split-schema/ControlPoint.json"
+        },
+        "to": {
+          "$ref": "../split-schema/ControlPoint.json"
         }
+      },
+      "required": [
+        "curve_type"
       ]
     },
     {

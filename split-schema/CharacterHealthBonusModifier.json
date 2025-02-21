@@ -1,24 +1,44 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/CharacterHealthBonusModifier.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/SimpleModifier.json"
-    },
-    {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "character-health-bonus"
+  "type": "object",
+  "properties": {
+    "icons": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/IconData.json"
+          }
         },
-        "use_icon_overlay_constant": {
-          "$ref": "../split-schema/bool.json"
+        {
+          "type": "object",
+          "additionalProperties": false
         }
-      },
-      "required": [
-        "type"
       ]
+    },
+    "icon": {
+      "$ref": "../split-schema/FileName.json"
+    },
+    "icon_size": {
+      "$ref": "../split-schema/SpriteSizeType.json"
+    },
+    "hidden": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "modifier": {
+      "$ref": "../split-schema/double.json"
+    },
+    "type": {
+      "type": "string",
+      "const": "character-health-bonus"
+    },
+    "use_icon_overlay_constant": {
+      "$ref": "../split-schema/bool.json"
     }
+  },
+  "required": [
+    "modifier",
+    "type"
   ]
 }

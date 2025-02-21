@@ -1,20 +1,22 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/ColumnWidth.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/ColumnWidthItem.json"
+  "type": "object",
+  "properties": {
+    "minimal_width": {
+      "$ref": "../split-schema/int32.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "column": {
-          "$ref": "../split-schema/uint32.json"
-        }
-      },
-      "required": [
-        "column"
-      ]
+    "maximal_width": {
+      "$ref": "../split-schema/int32.json"
+    },
+    "width": {
+      "$ref": "../split-schema/int32.json"
+    },
+    "column": {
+      "$ref": "../split-schema/uint32.json"
     }
+  },
+  "required": [
+    "column"
   ]
 }

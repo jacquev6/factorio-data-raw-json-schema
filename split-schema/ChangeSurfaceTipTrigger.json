@@ -1,25 +1,21 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/ChangeSurfaceTipTrigger.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/CountBasedTipTrigger.json"
+  "type": "object",
+  "properties": {
+    "count": {
+      "$ref": "../split-schema/uint32.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "change-surface"
-        },
-        "surface": {
-          "$ref": "../split-schema/string.json"
-        }
-      },
-      "required": [
-        "type",
-        "surface"
-      ]
+    "type": {
+      "type": "string",
+      "const": "change-surface"
+    },
+    "surface": {
+      "$ref": "../split-schema/string.json"
     }
+  },
+  "required": [
+    "type",
+    "surface"
   ]
 }

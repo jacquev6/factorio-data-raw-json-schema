@@ -1,49 +1,84 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/AreaTriggerItem.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/TriggerItem.json"
+  "type": "object",
+  "properties": {
+    "entity_flags": {
+      "$ref": "../split-schema/EntityPrototypeFlags.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "area"
+    "collision_mask": {
+      "$ref": "../split-schema/CollisionMaskConnector.json"
+    },
+    "ignore_collision_condition": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "trigger_target_mask": {
+      "$ref": "../split-schema/TriggerTargetMask.json"
+    },
+    "repeat_count": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "probability": {
+      "$ref": "../split-schema/float.json"
+    },
+    "action_delivery": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/TriggerDelivery.json"
         },
-        "radius": {
-          "$ref": "../split-schema/double.json"
-        },
-        "trigger_from_target": {
-          "$ref": "../split-schema/bool.json"
-        },
-        "target_entities": {
-          "$ref": "../split-schema/bool.json"
-        },
-        "target_enemies": {
-          "$ref": "../split-schema/bool.json"
-        },
-        "show_in_tooltip": {
-          "$ref": "../split-schema/bool.json"
-        },
-        "collision_mode": {
-          "anyOf": [
+        {
+          "oneOf": [
             {
-              "type": "string",
-              "const": "distance-from-collision-box"
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/TriggerDelivery.json"
+              }
             },
             {
-              "type": "string",
-              "const": "distance-from-center"
+              "type": "object",
+              "additionalProperties": false
             }
           ]
         }
-      },
-      "required": [
-        "type",
-        "radius"
+      ]
+    },
+    "force": {
+      "$ref": "../split-schema/ForceCondition.json"
+    },
+    "type": {
+      "type": "string",
+      "const": "area"
+    },
+    "radius": {
+      "$ref": "../split-schema/double.json"
+    },
+    "trigger_from_target": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "target_entities": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "target_enemies": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_in_tooltip": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "collision_mode": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "distance-from-collision-box"
+        },
+        {
+          "type": "string",
+          "const": "distance-from-center"
+        }
       ]
     }
+  },
+  "required": [
+    "type",
+    "radius"
   ]
 }

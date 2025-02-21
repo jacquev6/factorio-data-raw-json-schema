@@ -1,116 +1,326 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/TechnologySlotStyleSpecification.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/ButtonStyleSpecification.json"
+  "type": "object",
+  "properties": {
+    "parent": {
+      "$ref": "../split-schema/string.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "highlighted_graphical_set": {
-          "$ref": "../split-schema/ElementImageSet.json"
-        },
-        "default_background_shadow": {
-          "$ref": "../split-schema/ElementImageSet.json"
-        },
-        "level_band": {
-          "$ref": "../split-schema/ElementImageSet.json"
-        },
-        "hovered_level_band": {
-          "$ref": "../split-schema/ElementImageSet.json"
-        },
-        "level_offset_x": {
-          "$ref": "../split-schema/int32.json"
-        },
-        "level_offset_y": {
-          "$ref": "../split-schema/int32.json"
-        },
-        "level_band_width": {
+    "horizontal_align": {
+      "$ref": "../split-schema/HorizontalAlign.json"
+    },
+    "vertical_align": {
+      "$ref": "../split-schema/VerticalAlign.json"
+    },
+    "ignored_by_search": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "never_hide_by_search": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "horizontally_stretchable": {
+      "$ref": "../split-schema/StretchRule.json"
+    },
+    "vertically_stretchable": {
+      "$ref": "../split-schema/StretchRule.json"
+    },
+    "horizontally_squashable": {
+      "$ref": "../split-schema/StretchRule.json"
+    },
+    "vertically_squashable": {
+      "$ref": "../split-schema/StretchRule.json"
+    },
+    "natural_size": {
+      "anyOf": [
+        {
           "$ref": "../split-schema/uint32.json"
         },
-        "level_band_height": {
-          "$ref": "../split-schema/uint32.json"
-        },
-        "level_font": {
-          "$ref": "../split-schema/string.json"
-        },
-        "level_range_font": {
-          "$ref": "../split-schema/string.json"
-        },
-        "level_font_color": {
-          "$ref": "../split-schema/Color.json"
-        },
-        "hovered_level_font_color": {
-          "$ref": "../split-schema/Color.json"
-        },
-        "level_range_font_color": {
-          "$ref": "../split-schema/Color.json"
-        },
-        "hovered_level_range_font_color": {
-          "$ref": "../split-schema/Color.json"
-        },
-        "level_range_band": {
-          "$ref": "../split-schema/ElementImageSet.json"
-        },
-        "hovered_level_range_band": {
-          "$ref": "../split-schema/ElementImageSet.json"
-        },
-        "level_range_offset_x": {
-          "$ref": "../split-schema/int32.json"
-        },
-        "level_range_offset_y": {
-          "$ref": "../split-schema/int32.json"
-        },
-        "ingredients_height": {
-          "$ref": "../split-schema/uint32.json"
-        },
-        "default_ingredients_background": {
-          "$ref": "../split-schema/ElementImageSet.json"
-        },
-        "hovered_ingredients_background": {
-          "$ref": "../split-schema/ElementImageSet.json"
-        },
-        "clicked_ingredients_background": {
-          "$ref": "../split-schema/ElementImageSet.json"
-        },
-        "disabled_ingredients_background": {
-          "$ref": "../split-schema/ElementImageSet.json"
-        },
-        "highlighted_ingredients_background": {
-          "$ref": "../split-schema/ElementImageSet.json"
-        },
-        "ingredients_padding": {
-          "$ref": "../split-schema/uint32.json"
-        },
-        "ingredient_icon_size": {
-          "$ref": "../split-schema/uint32.json"
-        },
-        "ingredient_icon_overlap": {
-          "$ref": "../split-schema/uint32.json"
-        },
-        "clicked_overlay": {
-          "$ref": "../split-schema/ElementImageSet.json"
-        },
-        "progress_bar_background": {
-          "$ref": "../split-schema/ElementImageSet.json"
-        },
-        "progress_bar": {
-          "$ref": "../split-schema/ElementImageSet.json"
-        },
-        "progress_bar_shadow": {
-          "$ref": "../split-schema/ElementImageSet.json"
-        },
-        "progress_bar_height": {
-          "$ref": "../split-schema/uint32.json"
-        },
-        "progress_bar_color": {
-          "$ref": "../split-schema/Color.json"
-        },
-        "drag_handle_style": {
-          "$ref": "../split-schema/EmptyWidgetStyleSpecification.json"
+        {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "../split-schema/uint32.json"
+            },
+            {
+              "$ref": "../split-schema/uint32.json"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
         }
-      }
+      ]
+    },
+    "size": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/uint32.json"
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "../split-schema/uint32.json"
+            },
+            {
+              "$ref": "../split-schema/uint32.json"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
+    },
+    "width": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "minimal_width": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "maximal_width": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "natural_width": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "height": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "minimal_height": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "maximal_height": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "natural_height": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "padding": {
+      "$ref": "../split-schema/int16.json"
+    },
+    "top_padding": {
+      "$ref": "../split-schema/int16.json"
+    },
+    "right_padding": {
+      "$ref": "../split-schema/int16.json"
+    },
+    "bottom_padding": {
+      "$ref": "../split-schema/int16.json"
+    },
+    "left_padding": {
+      "$ref": "../split-schema/int16.json"
+    },
+    "margin": {
+      "$ref": "../split-schema/int16.json"
+    },
+    "top_margin": {
+      "$ref": "../split-schema/int16.json"
+    },
+    "right_margin": {
+      "$ref": "../split-schema/int16.json"
+    },
+    "bottom_margin": {
+      "$ref": "../split-schema/int16.json"
+    },
+    "left_margin": {
+      "$ref": "../split-schema/int16.json"
+    },
+    "effect": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "compilatron-hologram"
+        }
+      ]
+    },
+    "effect_opacity": {
+      "$ref": "../split-schema/float.json"
+    },
+    "tooltip": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "default_graphical_set": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "hovered_graphical_set": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "clicked_graphical_set": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "disabled_graphical_set": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "selected_graphical_set": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "selected_hovered_graphical_set": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "game_controller_selected_hovered_graphical_set": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "selected_clicked_graphical_set": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "left_click_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "type": {
+      "type": "string",
+      "const": "button_style"
+    },
+    "font": {
+      "$ref": "../split-schema/string.json"
+    },
+    "default_font_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "hovered_font_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "clicked_font_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "disabled_font_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "selected_font_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "selected_hovered_font_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "selected_clicked_font_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "strikethrough_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "pie_progress_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "clicked_vertical_offset": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "draw_shadow_under_picture": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "draw_grayscale_picture": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "invert_colors_of_picture_when_hovered_or_toggled": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "invert_colors_of_picture_when_disabled": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "icon_horizontal_align": {
+      "$ref": "../split-schema/HorizontalAlign.json"
+    },
+    "highlighted_graphical_set": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "default_background_shadow": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "level_band": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "hovered_level_band": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "level_offset_x": {
+      "$ref": "../split-schema/int32.json"
+    },
+    "level_offset_y": {
+      "$ref": "../split-schema/int32.json"
+    },
+    "level_band_width": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "level_band_height": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "level_font": {
+      "$ref": "../split-schema/string.json"
+    },
+    "level_range_font": {
+      "$ref": "../split-schema/string.json"
+    },
+    "level_font_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "hovered_level_font_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "level_range_font_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "hovered_level_range_font_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "level_range_band": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "hovered_level_range_band": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "level_range_offset_x": {
+      "$ref": "../split-schema/int32.json"
+    },
+    "level_range_offset_y": {
+      "$ref": "../split-schema/int32.json"
+    },
+    "ingredients_height": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "default_ingredients_background": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "hovered_ingredients_background": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "clicked_ingredients_background": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "disabled_ingredients_background": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "highlighted_ingredients_background": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "ingredients_padding": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "ingredient_icon_size": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "ingredient_icon_overlap": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "clicked_overlay": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "progress_bar_background": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "progress_bar": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "progress_bar_shadow": {
+      "$ref": "../split-schema/ElementImageSet.json"
+    },
+    "progress_bar_height": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "progress_bar_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "drag_handle_style": {
+      "$ref": "../split-schema/EmptyWidgetStyleSpecification.json"
     }
+  },
+  "required": [
+    "type"
   ]
 }

@@ -53,24 +53,44 @@ def patch(schema: Any) -> None:
     # Ad-hoc patches because the doc doesn't match the actual data
     # ============================================================
 
-    # types/ItemProductPrototype.html#amount_min is documented as uint16
-    # but is some sort of floating point in e.g. 'speed-module-recycling'
+    # https://lua-api.factorio.com/2.0.28/types/ItemProductPrototype.html#amount_min is documented as uint16
+    # @todo Identify counter-example(s)
     replace_in_value("definitions.ItemProductPrototype.properties.amount.$ref", "uint16", "double")
 
+    # https://lua-api.factorio.com/2.0.28/prototypes/UtilitySprites.html#cursor_box documents these two attributes as required
+    # @todo Identify counter-example(s)
     remove_from_list("definitions.UtilitySprites.properties.cursor_box.required", "rts_selected")
     remove_from_list("definitions.UtilitySprites.properties.cursor_box.required", "rts_to_be_selected")
+
+    # https://lua-api.factorio.com/2.0.28/prototypes/UtilityConstants.html#space_platform_default_speed_formula is documented as required
+    # @todo Identify counter-example(s)
     remove_from_list("definitions.UtilityConstants.required", "space_platform_default_speed_formula")
+
+    # https://lua-api.factorio.com/2.0.28/prototypes/SpaceLocationPrototype.html#gravity_pull is documented as required
+    # @todo Identify counter-example(s)
     remove_from_list("definitions.SpaceLocationPrototype.required", "gravity_pull")
+
+    # https://lua-api.factorio.com/2.0.28/prototypes/EditorControllerPrototype.html#ignore_surface_conditions is documented as required
+    # @todo Identify counter-example(s)
     remove_from_list("definitions.EditorControllerPrototype.required", "ignore_surface_conditions")
+
+    # https://lua-api.factorio.com/2.0.28/prototypes/AchievementPrototypeWithCondition.html#objective_condition is documented as required
+    # @todo Identify counter-example(s)
     remove_from_list("definitions.DontResearchBeforeResearchingAchievementPrototype.required", "objective_condition")
     remove_from_list("definitions.DontUseEntityInEnergyProductionAchievementPrototype.required", "objective_condition")
     remove_from_list("definitions.DontKillManuallyAchievementPrototype.required", "objective_condition")
 
+    # https://lua-api.factorio.com/2.0.28/prototypes/ShortcutPrototype.html#action doesn't mention "redo" as a possible value
     add_to_list("definitions.ShortcutPrototype.properties.action.anyOf", {"type": "string", "const": "redo"})
+
+    # https://lua-api.factorio.com/2.0.28/prototypes/AchievementPrototypeWithCondition.html#objective_condition doesn't mention "late-research" as a possible value
+    # and is not overridden in https://lua-api.factorio.com/2.0.28/prototypes/DontBuildEntityAchievementPrototype.html
     add_to_list(
         "definitions.DontBuildEntityAchievementPrototype.properties.objective_condition.anyOf",
         {"type": "string", "const": "late-research"},
     )
+
+    # Undocumented properties
     add_to_dict("definitions.ToolPrototype.properties", "factoriopedia_durability_description_key", {})
     add_to_dict("definitions.CargoPodPrototype.properties", "impact_trigger", {})
     add_to_dict("definitions.ElectricPolePrototype.properties", "track_coverage_during_drag_building", {})
@@ -105,5 +125,10 @@ def patch(schema: Any) -> None:
     remove_all_constraints("SpriteVariations")
     # Removing next line requires handling overridden properties in types (https://lua-api.factorio.com/2.0.28/types/DoubleSliderStyleSpecification.html#type)
     remove_all_constraints("StyleSpecification")
+    remove_all_constraints("ThrusterGraphicsSet")
     remove_all_constraints("Trigger")
-    remove_all_constraints("WorkingVisualisations")
+    remove_all_constraints("CargoBayConnectableGraphicsSet")
+    remove_all_constraints("LayeredSpriteVariations")
+
+    # Preemptive: this type uses "Fade" as a base, but "Fade" is not a struct. Deal with that later.
+    remove_all_constraints("PersistentWorldAmbientSoundsDefinitionCrossfade")

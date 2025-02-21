@@ -1,21 +1,29 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/VoidEnergySource.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/BaseEnergySource.json"
-    },
-    {
+  "type": "object",
+  "properties": {
+    "emissions_per_minute": {
       "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "void"
-        }
+      "additionalProperties": {
+        "$ref": "../split-schema/double.json"
       },
-      "required": [
-        "type"
-      ]
+      "propertyNames": {
+        "$ref": "../split-schema/AirbornePollutantID.json"
+      }
+    },
+    "render_no_power_icon": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "render_no_network_icon": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "type": {
+      "type": "string",
+      "const": "void"
     }
+  },
+  "required": [
+    "type"
   ]
 }

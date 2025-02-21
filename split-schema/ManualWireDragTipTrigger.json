@@ -1,46 +1,42 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/ManualWireDragTipTrigger.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/CountBasedTipTrigger.json"
+  "type": "object",
+  "properties": {
+    "count": {
+      "$ref": "../split-schema/uint32.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "type": {
+    "type": {
+      "type": "string",
+      "const": "manual-wire-drag"
+    },
+    "source": {
+      "$ref": "../split-schema/EntityID.json"
+    },
+    "target": {
+      "$ref": "../split-schema/EntityID.json"
+    },
+    "match_type_only": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "wire_type": {
+      "anyOf": [
+        {
           "type": "string",
-          "const": "manual-wire-drag"
+          "const": "red"
         },
-        "source": {
-          "$ref": "../split-schema/EntityID.json"
+        {
+          "type": "string",
+          "const": "green"
         },
-        "target": {
-          "$ref": "../split-schema/EntityID.json"
-        },
-        "match_type_only": {
-          "$ref": "../split-schema/bool.json"
-        },
-        "wire_type": {
-          "anyOf": [
-            {
-              "type": "string",
-              "const": "red"
-            },
-            {
-              "type": "string",
-              "const": "green"
-            },
-            {
-              "type": "string",
-              "const": "copper"
-            }
-          ]
+        {
+          "type": "string",
+          "const": "copper"
         }
-      },
-      "required": [
-        "type"
       ]
     }
+  },
+  "required": [
+    "type"
   ]
 }

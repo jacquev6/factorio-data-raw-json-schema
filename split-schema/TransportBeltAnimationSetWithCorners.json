@@ -1,62 +1,153 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/TransportBeltAnimationSetWithCorners.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/TransportBeltAnimationSet.json"
+  "type": "object",
+  "properties": {
+    "animation_set": {
+      "$ref": "../split-schema/RotatedAnimation.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "east_to_north_index": {
-          "$ref": "../split-schema/uint8.json"
+    "east_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "west_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "north_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "south_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "starting_south_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "ending_south_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "starting_west_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "ending_west_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "starting_north_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "ending_north_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "starting_east_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "ending_east_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "frozen_patch": {
+      "$ref": "../split-schema/RotatedSprite.json"
+    },
+    "east_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "west_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "north_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "south_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "starting_south_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "ending_south_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "starting_west_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "ending_west_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "starting_north_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "ending_north_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "starting_east_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "ending_east_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "alternate": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "belt_reader": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/BeltReaderLayer.json"
+          }
         },
-        "north_to_east_index": {
-          "$ref": "../split-schema/uint8.json"
-        },
-        "west_to_north_index": {
-          "$ref": "../split-schema/uint8.json"
-        },
-        "north_to_west_index": {
-          "$ref": "../split-schema/uint8.json"
-        },
-        "south_to_east_index": {
-          "$ref": "../split-schema/uint8.json"
-        },
-        "east_to_south_index": {
-          "$ref": "../split-schema/uint8.json"
-        },
-        "south_to_west_index": {
-          "$ref": "../split-schema/uint8.json"
-        },
-        "west_to_south_index": {
-          "$ref": "../split-schema/uint8.json"
-        },
-        "east_to_north_index_frozen": {
-          "$ref": "../split-schema/uint8.json"
-        },
-        "north_to_east_index_frozen": {
-          "$ref": "../split-schema/uint8.json"
-        },
-        "west_to_north_index_frozen": {
-          "$ref": "../split-schema/uint8.json"
-        },
-        "north_to_west_index_frozen": {
-          "$ref": "../split-schema/uint8.json"
-        },
-        "south_to_east_index_frozen": {
-          "$ref": "../split-schema/uint8.json"
-        },
-        "east_to_south_index_frozen": {
-          "$ref": "../split-schema/uint8.json"
-        },
-        "south_to_west_index_frozen": {
-          "$ref": "../split-schema/uint8.json"
-        },
-        "west_to_south_index_frozen": {
-          "$ref": "../split-schema/uint8.json"
+        {
+          "type": "object",
+          "additionalProperties": false
         }
-      }
+      ]
+    },
+    "east_to_north_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "north_to_east_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "west_to_north_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "north_to_west_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "south_to_east_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "east_to_south_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "south_to_west_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "west_to_south_index": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "east_to_north_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "north_to_east_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "west_to_north_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "north_to_west_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "south_to_east_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "east_to_south_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "south_to_west_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "west_to_south_index_frozen": {
+      "$ref": "../split-schema/uint8.json"
     }
+  },
+  "required": [
+    "animation_set"
   ]
 }

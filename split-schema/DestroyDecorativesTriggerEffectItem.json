@@ -1,43 +1,54 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/DestroyDecorativesTriggerEffectItem.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/TriggerEffectItem.json"
+  "type": "object",
+  "properties": {
+    "repeat_count": {
+      "$ref": "../split-schema/uint16.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "destroy-decoratives"
-        },
-        "radius": {
-          "$ref": "../split-schema/float.json"
-        },
-        "from_render_layer": {
-          "$ref": "../split-schema/RenderLayer.json"
-        },
-        "to_render_layer": {
-          "$ref": "../split-schema/RenderLayer.json"
-        },
-        "include_soft_decoratives": {
-          "$ref": "../split-schema/bool.json"
-        },
-        "include_decals": {
-          "$ref": "../split-schema/bool.json"
-        },
-        "invoke_decorative_trigger": {
-          "$ref": "../split-schema/bool.json"
-        },
-        "decoratives_with_trigger_only": {
-          "$ref": "../split-schema/bool.json"
-        }
-      },
-      "required": [
-        "type",
-        "radius"
-      ]
+    "repeat_count_deviation": {
+      "$ref": "../split-schema/uint16.json"
+    },
+    "probability": {
+      "$ref": "../split-schema/float.json"
+    },
+    "affects_target": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_in_tooltip": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "damage_type_filters": {
+      "$ref": "../split-schema/DamageTypeFilters.json"
+    },
+    "type": {
+      "type": "string",
+      "const": "destroy-decoratives"
+    },
+    "radius": {
+      "$ref": "../split-schema/float.json"
+    },
+    "from_render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "to_render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "include_soft_decoratives": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "include_decals": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "invoke_decorative_trigger": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "decoratives_with_trigger_only": {
+      "$ref": "../split-schema/bool.json"
     }
+  },
+  "required": [
+    "type",
+    "radius"
   ]
 }

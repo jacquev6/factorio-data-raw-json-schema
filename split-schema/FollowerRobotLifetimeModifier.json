@@ -1,27 +1,47 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/FollowerRobotLifetimeModifier.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/SimpleModifier.json"
-    },
-    {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "follower-robot-lifetime"
+  "type": "object",
+  "properties": {
+    "icons": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/IconData.json"
+          }
         },
-        "infer_icon": {
-          "$ref": "../split-schema/bool.json"
-        },
-        "use_icon_overlay_constant": {
-          "$ref": "../split-schema/bool.json"
+        {
+          "type": "object",
+          "additionalProperties": false
         }
-      },
-      "required": [
-        "type"
       ]
+    },
+    "icon": {
+      "$ref": "../split-schema/FileName.json"
+    },
+    "icon_size": {
+      "$ref": "../split-schema/SpriteSizeType.json"
+    },
+    "hidden": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "modifier": {
+      "$ref": "../split-schema/double.json"
+    },
+    "type": {
+      "type": "string",
+      "const": "follower-robot-lifetime"
+    },
+    "infer_icon": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "use_icon_overlay_constant": {
+      "$ref": "../split-schema/bool.json"
     }
+  },
+  "required": [
+    "modifier",
+    "type"
   ]
 }

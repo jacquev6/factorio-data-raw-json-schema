@@ -1,35 +1,5 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/ThrusterGraphicsSet.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/WorkingVisualisations.json"
-    },
-    {
-      "type": "object",
-      "properties": {
-        "flame": {
-          "$ref": "../split-schema/Sprite.json"
-        },
-        "flame_effect": {
-          "$ref": "../split-schema/EffectTexture.json"
-        },
-        "flame_position": {
-          "$ref": "../split-schema/Vector.json"
-        },
-        "flame_effect_height": {
-          "$ref": "../split-schema/float.json"
-        },
-        "flame_effect_width": {
-          "$ref": "../split-schema/float.json"
-        },
-        "flame_half_height": {
-          "$ref": "../split-schema/float.json"
-        },
-        "flame_effect_offset": {
-          "$ref": "../split-schema/float.json"
-        }
-      }
-    }
-  ]
+  "type": "object"
 }

@@ -1,42 +1,53 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/CreateAsteroidChunkEffectItem.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/TriggerEffectItem.json"
+  "type": "object",
+  "properties": {
+    "repeat_count": {
+      "$ref": "../split-schema/uint16.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "create-asteroid-chunk"
+    "repeat_count_deviation": {
+      "$ref": "../split-schema/uint16.json"
+    },
+    "probability": {
+      "$ref": "../split-schema/float.json"
+    },
+    "affects_target": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_in_tooltip": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "damage_type_filters": {
+      "$ref": "../split-schema/DamageTypeFilters.json"
+    },
+    "type": {
+      "type": "string",
+      "const": "create-asteroid-chunk"
+    },
+    "asteroid_name": {
+      "$ref": "../split-schema/AsteroidChunkID.json"
+    },
+    "offset_deviation": {
+      "$ref": "../split-schema/BoundingBox.json"
+    },
+    "offsets": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/Vector.json"
+          }
         },
-        "asteroid_name": {
-          "$ref": "../split-schema/AsteroidChunkID.json"
-        },
-        "offset_deviation": {
-          "$ref": "../split-schema/BoundingBox.json"
-        },
-        "offsets": {
-          "oneOf": [
-            {
-              "type": "array",
-              "items": {
-                "$ref": "../split-schema/Vector.json"
-              }
-            },
-            {
-              "type": "object",
-              "additionalProperties": false
-            }
-          ]
+        {
+          "type": "object",
+          "additionalProperties": false
         }
-      },
-      "required": [
-        "type",
-        "asteroid_name"
       ]
     }
+  },
+  "required": [
+    "type",
+    "asteroid_name"
   ]
 }

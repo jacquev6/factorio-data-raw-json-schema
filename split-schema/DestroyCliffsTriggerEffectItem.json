@@ -1,31 +1,42 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/DestroyCliffsTriggerEffectItem.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/TriggerEffectItem.json"
+  "type": "object",
+  "properties": {
+    "repeat_count": {
+      "$ref": "../split-schema/uint16.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "destroy-cliffs"
-        },
-        "radius": {
-          "$ref": "../split-schema/float.json"
-        },
-        "explosion_at_trigger": {
-          "$ref": "../split-schema/EntityID.json"
-        },
-        "explosion_at_cliff": {
-          "$ref": "../split-schema/EntityID.json"
-        }
-      },
-      "required": [
-        "type",
-        "radius"
-      ]
+    "repeat_count_deviation": {
+      "$ref": "../split-schema/uint16.json"
+    },
+    "probability": {
+      "$ref": "../split-schema/float.json"
+    },
+    "affects_target": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_in_tooltip": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "damage_type_filters": {
+      "$ref": "../split-schema/DamageTypeFilters.json"
+    },
+    "type": {
+      "type": "string",
+      "const": "destroy-cliffs"
+    },
+    "radius": {
+      "$ref": "../split-schema/float.json"
+    },
+    "explosion_at_trigger": {
+      "$ref": "../split-schema/EntityID.json"
+    },
+    "explosion_at_cliff": {
+      "$ref": "../split-schema/EntityID.json"
     }
+  },
+  "required": [
+    "type",
+    "radius"
   ]
 }

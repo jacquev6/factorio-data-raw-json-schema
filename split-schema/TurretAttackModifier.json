@@ -1,35 +1,51 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/TurretAttackModifier.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/BaseModifier.json"
-    },
-    {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "turret-attack"
+  "type": "object",
+  "properties": {
+    "icons": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/IconData.json"
+          }
         },
-        "infer_icon": {
-          "$ref": "../split-schema/bool.json"
-        },
-        "use_icon_overlay_constant": {
-          "$ref": "../split-schema/bool.json"
-        },
-        "turret_id": {
-          "$ref": "../split-schema/EntityID.json"
-        },
-        "modifier": {
-          "$ref": "../split-schema/double.json"
+        {
+          "type": "object",
+          "additionalProperties": false
         }
-      },
-      "required": [
-        "type",
-        "turret_id",
-        "modifier"
       ]
+    },
+    "icon": {
+      "$ref": "../split-schema/FileName.json"
+    },
+    "icon_size": {
+      "$ref": "../split-schema/SpriteSizeType.json"
+    },
+    "hidden": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "type": {
+      "type": "string",
+      "const": "turret-attack"
+    },
+    "infer_icon": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "use_icon_overlay_constant": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "turret_id": {
+      "$ref": "../split-schema/EntityID.json"
+    },
+    "modifier": {
+      "$ref": "../split-schema/double.json"
     }
+  },
+  "required": [
+    "type",
+    "turret_id",
+    "modifier"
   ]
 }

@@ -1,40 +1,39 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/BeamTriggerDelivery.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/TriggerDeliveryItem.json"
+  "type": "object",
+  "properties": {
+    "source_effects": {
+      "$ref": "../split-schema/TriggerEffect.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "beam"
-        },
-        "beam": {
-          "$ref": "../split-schema/EntityID.json"
-        },
-        "add_to_shooter": {
-          "$ref": "../split-schema/bool.json"
-        },
-        "max_length": {
-          "$ref": "../split-schema/uint32.json"
-        },
-        "duration": {
-          "$ref": "../split-schema/uint32.json"
-        },
-        "source_offset": {
-          "$ref": "../split-schema/Vector.json"
-        },
-        "destroy_with_source_or_target": {
-          "$ref": "../split-schema/bool.json"
-        }
-      },
-      "required": [
-        "type",
-        "beam"
-      ]
+    "target_effects": {
+      "$ref": "../split-schema/TriggerEffect.json"
+    },
+    "type": {
+      "type": "string",
+      "const": "beam"
+    },
+    "beam": {
+      "$ref": "../split-schema/EntityID.json"
+    },
+    "add_to_shooter": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "max_length": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "duration": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "source_offset": {
+      "$ref": "../split-schema/Vector.json"
+    },
+    "destroy_with_source_or_target": {
+      "$ref": "../split-schema/bool.json"
     }
+  },
+  "required": [
+    "type",
+    "beam"
   ]
 }

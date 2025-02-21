@@ -3,21 +3,149 @@
   "description": "https://lua-api.factorio.com/stable/types/LayeredSprite.html",
   "anyOf": [
     {
-      "allOf": [
-        {
-          "$ref": "../split-schema/Sprite.json"
+      "type": "object",
+      "properties": {
+        "filename": {
+          "$ref": "../split-schema/FileName.json"
         },
-        {
-          "type": "object",
-          "properties": {
-            "render_layer": {
-              "$ref": "../split-schema/RenderLayer.json"
+        "size": {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/SpriteSizeType.json"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "../split-schema/SpriteSizeType.json"
+                },
+                {
+                  "$ref": "../split-schema/SpriteSizeType.json"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
             }
-          },
-          "required": [
-            "render_layer"
           ]
+        },
+        "width": {
+          "$ref": "../split-schema/SpriteSizeType.json"
+        },
+        "height": {
+          "$ref": "../split-schema/SpriteSizeType.json"
+        },
+        "x": {
+          "$ref": "../split-schema/SpriteSizeType.json"
+        },
+        "y": {
+          "$ref": "../split-schema/SpriteSizeType.json"
+        },
+        "position": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "../split-schema/SpriteSizeType.json"
+            },
+            {
+              "$ref": "../split-schema/SpriteSizeType.json"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "load_in_minimal_mode": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "premul_alpha": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "allow_forced_downscale": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "priority": {
+          "$ref": "../split-schema/SpritePriority.json"
+        },
+        "flags": {
+          "$ref": "../split-schema/SpriteFlags.json"
+        },
+        "shift": {
+          "$ref": "../split-schema/Vector.json"
+        },
+        "rotate_shift": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "apply_special_effect": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "scale": {
+          "$ref": "../split-schema/double.json"
+        },
+        "draw_as_shadow": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "draw_as_glow": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "draw_as_light": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "mipmap_count": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "apply_runtime_tint": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "tint_as_overlay": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "invert_colors": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "tint": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "blend_mode": {
+          "$ref": "../split-schema/BlendMode.json"
+        },
+        "generate_sdf": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "surface": {
+          "$ref": "../split-schema/SpriteUsageSurfaceHint.json"
+        },
+        "usage": {
+          "$ref": "../split-schema/SpriteUsageHint.json"
+        },
+        "layers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/Sprite.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "dice": {
+          "$ref": "../split-schema/SpriteSizeType.json"
+        },
+        "dice_x": {
+          "$ref": "../split-schema/SpriteSizeType.json"
+        },
+        "dice_y": {
+          "$ref": "../split-schema/SpriteSizeType.json"
+        },
+        "render_layer": {
+          "$ref": "../split-schema/RenderLayer.json"
         }
+      },
+      "required": [
+        "filename",
+        "render_layer"
       ]
     },
     {

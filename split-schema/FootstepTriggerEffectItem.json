@@ -1,48 +1,146 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/FootstepTriggerEffectItem.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/CreateParticleTriggerEffectItem.json"
+  "type": "object",
+  "properties": {
+    "repeat_count": {
+      "$ref": "../split-schema/uint16.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "tiles": {
-          "oneOf": [
-            {
-              "type": "array",
-              "items": {
-                "$ref": "../split-schema/TileID.json"
-              }
-            },
-            {
-              "type": "object",
-              "additionalProperties": false
-            }
-          ]
+    "repeat_count_deviation": {
+      "$ref": "../split-schema/uint16.json"
+    },
+    "probability": {
+      "$ref": "../split-schema/float.json"
+    },
+    "affects_target": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_in_tooltip": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "damage_type_filters": {
+      "$ref": "../split-schema/DamageTypeFilters.json"
+    },
+    "type": {
+      "type": "string",
+      "const": "create-particle"
+    },
+    "particle_name": {
+      "$ref": "../split-schema/ParticleID.json"
+    },
+    "initial_height": {
+      "$ref": "../split-schema/float.json"
+    },
+    "offset_deviation": {
+      "$ref": "../split-schema/SimpleBoundingBox.json"
+    },
+    "tile_collision_mask": {
+      "$ref": "../split-schema/CollisionMaskConnector.json"
+    },
+    "offsets": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/Vector.json"
+          }
         },
-        "actions": {
-          "oneOf": [
-            {
-              "type": "array",
-              "items": {
-                "$ref": "../split-schema/CreateParticleTriggerEffectItem.json"
-              }
-            },
-            {
-              "type": "object",
-              "additionalProperties": false
-            }
-          ]
-        },
-        "use_as_default": {
-          "$ref": "../split-schema/bool.json"
+        {
+          "type": "object",
+          "additionalProperties": false
         }
-      },
-      "required": [
-        "tiles"
       ]
+    },
+    "initial_height_deviation": {
+      "$ref": "../split-schema/float.json"
+    },
+    "initial_vertical_speed": {
+      "$ref": "../split-schema/float.json"
+    },
+    "initial_vertical_speed_deviation": {
+      "$ref": "../split-schema/float.json"
+    },
+    "speed_from_center": {
+      "$ref": "../split-schema/float.json"
+    },
+    "speed_from_center_deviation": {
+      "$ref": "../split-schema/float.json"
+    },
+    "frame_speed": {
+      "$ref": "../split-schema/float.json"
+    },
+    "frame_speed_deviation": {
+      "$ref": "../split-schema/float.json"
+    },
+    "movement_multiplier": {
+      "$ref": "../split-schema/float.json"
+    },
+    "tail_length": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "tail_length_deviation": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "tail_width": {
+      "$ref": "../split-schema/float.json"
+    },
+    "rotate_offsets": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "only_when_visible": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "apply_tile_tint": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "primary"
+        },
+        {
+          "type": "string",
+          "const": "secondary"
+        }
+      ]
+    },
+    "tint": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "tiles": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/TileID.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "actions": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/CreateParticleTriggerEffectItem.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "use_as_default": {
+      "$ref": "../split-schema/bool.json"
     }
+  },
+  "required": [
+    "type",
+    "particle_name",
+    "initial_height",
+    "tiles"
   ]
 }

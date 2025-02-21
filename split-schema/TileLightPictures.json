@@ -1,20 +1,32 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/TileLightPictures.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/TileSpriteLayout.json"
+  "type": "object",
+  "properties": {
+    "picture": {
+      "$ref": "../split-schema/FileName.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "size": {
-          "$ref": "../split-schema/uint32.json"
-        }
-      },
-      "required": [
-        "size"
-      ]
+    "scale": {
+      "$ref": "../split-schema/float.json"
+    },
+    "x": {
+      "$ref": "../split-schema/SpriteSizeType.json"
+    },
+    "y": {
+      "$ref": "../split-schema/SpriteSizeType.json"
+    },
+    "line_length": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "count": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "size": {
+      "$ref": "../split-schema/uint32.json"
     }
+  },
+  "required": [
+    "picture",
+    "size"
   ]
 }

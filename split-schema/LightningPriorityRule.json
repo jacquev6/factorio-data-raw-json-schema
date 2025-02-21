@@ -1,20 +1,38 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/LightningPriorityRule.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/LightningRuleBase.json"
-    },
-    {
-      "type": "object",
-      "properties": {
-        "priority_bonus": {
-          "$ref": "../split-schema/int32.json"
+  "type": "object",
+  "properties": {
+    "type": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "impact-soundset"
+        },
+        {
+          "type": "string",
+          "const": "prototype"
+        },
+        {
+          "type": "string",
+          "const": "id"
+        },
+        {
+          "type": "string",
+          "const": "countAsRockForFilteredDeconstruction"
         }
-      },
-      "required": [
-        "priority_bonus"
       ]
+    },
+    "string": {
+      "$ref": "../split-schema/string.json"
+    },
+    "priority_bonus": {
+      "$ref": "../split-schema/int32.json"
     }
+  },
+  "required": [
+    "type",
+    "string",
+    "priority_bonus"
   ]
 }

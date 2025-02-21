@@ -1,4 +1,4 @@
-from typing import Iterable
+from typing import Iterable, Literal
 import re
 
 import bs4
@@ -91,6 +91,8 @@ class _Extractor:
                 local_types["struct"] = Schema.StructTypeExpression(
                     base=extract_struct_base(soup),
                     properties=list(extract_struct_properties(type_name, properties_div_soup, self.all_type_names)),
+                    overridden_properties=[],
+                    custom_properties=None,
                 )
 
             if "union" in type_expression:
@@ -127,7 +129,7 @@ class _Extractor:
 
         custom_properties_div_soup = soup.find("div", id="custom_properties")
         if custom_properties_div_soup is None:
-            custom_properties = None
+            custom_properties: Schema.TypeExpression | Literal[False] = False
         else:
             custom_properties_text = tag(tag(tag(custom_properties_div_soup).parent).find("h3")).text
             assert custom_properties_text.startswith("Custom properties  \xa0::\xa0string → ")
@@ -206,7 +208,10 @@ def extract_struct_properties(
                                 )
                             )
                             local_types[local_type_name] = Schema.StructTypeExpression(
-                                base=None, properties=local_type_properties
+                                base=None,
+                                properties=local_type_properties,
+                                overridden_properties=[],
+                                custom_properties=None,
                             )
                         case "union":
                             local_types[local_type_name] = Schema.UnionTypeExpression(

@@ -1,20 +1,24 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/SpaceConnectionAsteroidSpawnPoint.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/AsteroidSpawnPoint.json"
+  "type": "object",
+  "properties": {
+    "probability": {
+      "$ref": "../split-schema/double.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "distance": {
-          "$ref": "../split-schema/double.json"
-        }
-      },
-      "required": [
-        "distance"
-      ]
+    "speed": {
+      "$ref": "../split-schema/double.json"
+    },
+    "angle_when_stopped": {
+      "$ref": "../split-schema/double.json"
+    },
+    "distance": {
+      "$ref": "../split-schema/double.json"
     }
+  },
+  "required": [
+    "probability",
+    "speed",
+    "distance"
   ]
 }

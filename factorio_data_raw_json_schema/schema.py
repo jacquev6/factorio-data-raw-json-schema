@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import sys
 from typing import Callable, Literal
 import dataclasses
 
@@ -120,45 +121,24 @@ class Schema:
         kind: Literal["struct"] = "struct"
         base: str | None
         properties: list[Schema.Property]
-
-        def make_json_definition(self, schema: Schema) -> JsonDict:
-            required = [json_value(name) for p in self.properties if p.required for name in p.names]
-            self_definition = {
-                "type": "object",
-                "properties": json_value(
-                    {name: p.type.make_json_definition(schema) for p in self.properties for name in p.names}
-                ),
-            } | ({"required": json_value(required)} if required else {})
-            if self.base is None:
-                if len(self.properties) > 0:
-                    return self_definition
-                else:
-                    return {"type": "object"}
-            else:
-                if len(self.properties) == 0:
-                    return {
-                        "allOf": [{"$ref": schema.make_reference(True, self.base)}]
-                    }  # @todo Consider removing the "allOf"
-                else:
-                    return {"allOf": [{"$ref": schema.make_reference(True, self.base)}, self_definition]}
-
-    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
-    class StructTypeExpression2:
-        kind: Literal["struct"] = "struct"
-        base: str | None
-        properties: list[Schema.Property]
         overridden_properties: list[Schema.Property]
-        custom_properties: Schema.TypeExpression | None
+        custom_properties: Schema.TypeExpression | Literal[False] | None
 
         def make_json_definition(self, schema: Schema) -> JsonDict:
             properties: JsonDict = {}
             required: dict[str, bool] = {}
 
-            def rec(prototype: Schema.StructTypeExpression2) -> None:
+            def rec(prototype: Schema.StructTypeExpression) -> None:
                 if prototype.base is not None:
                     base = schema.referable_types[prototype.base]
-                    assert isinstance(base, Schema.StructTypeExpression2)
-                    rec(base)
+                    if isinstance(base, Schema.StructTypeExpression):
+                        rec(base)
+                    else:
+                        if prototype.base not in ["Fade"]:
+                            print(
+                                f"{prototype.base} is used as a base but is not a struct; it's a {base.kind}",
+                                file=sys.stderr,
+                            )
                 all_properties = prototype.properties + prototype.overridden_properties
                 properties.update(
                     {name: p.type.make_json_definition(schema) for p in all_properties for name in p.names}
@@ -171,6 +151,8 @@ class Schema:
             definition: JsonDict = {"type": "object", "properties": properties}
 
             if self.custom_properties is None:
+                pass
+            elif self.custom_properties is False:
                 definition["additionalProperties"] = False
             else:
                 definition["additionalProperties"] = self.custom_properties.make_json_definition(schema)
@@ -207,7 +189,6 @@ class Schema:
         | ArrayTypeExpression
         | DictionaryTypeExpression
         | StructTypeExpression
-        | StructTypeExpression2
         | TupleTypeExpression
     )
 
@@ -224,7 +205,7 @@ class Schema:
 
         properties: list[Schema.Property]
         overridden_properties: list[Schema.Property]
-        custom_properties: Schema.TypeExpression | None
+        custom_properties: Schema.TypeExpression | Literal[False] | None
 
         def make_definition(self) -> Schema.TypeExpression:
             type_property = (
@@ -235,7 +216,7 @@ class Schema:
                 )
             )
 
-            return Schema.StructTypeExpression2(
+            return Schema.StructTypeExpression(
                 base=self.base,
                 properties=self.properties + list(filter(None, [type_property])),
                 overridden_properties=self.overridden_properties,

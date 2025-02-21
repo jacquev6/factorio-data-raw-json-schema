@@ -1,30 +1,26 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/SetFilterTipTrigger.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/CountBasedTipTrigger.json"
+  "type": "object",
+  "properties": {
+    "count": {
+      "$ref": "../split-schema/uint32.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "set-filter"
-        },
-        "entity": {
-          "$ref": "../split-schema/EntityID.json"
-        },
-        "match_type_only": {
-          "$ref": "../split-schema/bool.json"
-        },
-        "consecutive": {
-          "$ref": "../split-schema/bool.json"
-        }
-      },
-      "required": [
-        "type"
-      ]
+    "type": {
+      "type": "string",
+      "const": "set-filter"
+    },
+    "entity": {
+      "$ref": "../split-schema/EntityID.json"
+    },
+    "match_type_only": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "consecutive": {
+      "$ref": "../split-schema/bool.json"
     }
+  },
+  "required": [
+    "type"
   ]
 }

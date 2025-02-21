@@ -1,44 +1,40 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/CraftItemTipTrigger.html",
-  "allOf": [
-    {
-      "$ref": "../split-schema/CountBasedTipTrigger.json"
+  "type": "object",
+  "properties": {
+    "count": {
+      "$ref": "../split-schema/uint32.json"
     },
-    {
-      "type": "object",
-      "properties": {
-        "type": {
+    "type": {
+      "type": "string",
+      "const": "craft-item"
+    },
+    "item": {
+      "$ref": "../split-schema/ItemID.json"
+    },
+    "event_type": {
+      "anyOf": [
+        {
           "type": "string",
-          "const": "craft-item"
+          "const": "crafting-of-single-item-ordered"
         },
-        "item": {
-          "$ref": "../split-schema/ItemID.json"
+        {
+          "type": "string",
+          "const": "crafting-of-multiple-items-ordered"
         },
-        "event_type": {
-          "anyOf": [
-            {
-              "type": "string",
-              "const": "crafting-of-single-item-ordered"
-            },
-            {
-              "type": "string",
-              "const": "crafting-of-multiple-items-ordered"
-            },
-            {
-              "type": "string",
-              "const": "crafting-finished"
-            }
-          ]
-        },
-        "consecutive": {
-          "$ref": "../split-schema/bool.json"
+        {
+          "type": "string",
+          "const": "crafting-finished"
         }
-      },
-      "required": [
-        "type",
-        "event_type"
       ]
+    },
+    "consecutive": {
+      "$ref": "../split-schema/bool.json"
     }
+  },
+  "required": [
+    "type",
+    "event_type"
   ]
 }
