@@ -249,16 +249,22 @@ class Schema:
         self.types = types
         self.prototypes = prototypes
 
+    def make_reference(self, deep: bool, name: str) -> str:
+        self.references_needed.add(name)
+        return self.do_make_reference(deep, name)
+
     def to_json(self, *, make_reference: Callable[[bool, str], str] | None = None) -> JsonDict:
         if make_reference is None:
-            self.make_reference: Callable[[bool, str], str] = lambda deep, name: f"#/definitions/{name}"
+            self.do_make_reference: Callable[[bool, str], str] = lambda deep, name: f"#/definitions/{name}"
         else:
-            self.make_reference = make_reference
+            self.do_make_reference = make_reference
 
         self.referable_types = {prototype.name: prototype.make_definition() for prototype in self.prototypes} | {
             type.name: type.definition for type in self.types
         }
 
+        references_needed_by: dict[str, set[str]] = {}
+        self.references_needed = references_needed_by["root"] = set()
         properties = {
             prototype.key: json_value(
                 {"type": "object", "additionalProperties": {"$ref": self.make_reference(False, prototype.name)}}
@@ -267,24 +273,30 @@ class Schema:
             if prototype.key is not None
         }
 
-        type_definitions: JsonDict = {
-            type.name: json_value(
-                {"description": json_value(f"https://lua-api.factorio.com/stable/types/{type.name}.html")}
-                | type.definition.make_json_definition(self)
-            )
-            for type in self.types
-        }
+        definitions: JsonDict = {}
+
+        for type in self.types:
+            self.references_needed = references_needed_by[type.name] = set()
+            definitions[type.name] = {
+                "description": json_value(f"https://lua-api.factorio.com/stable/types/{type.name}.html")
+            } | type.definition.make_json_definition(self)
 
         # @todo Add "additionalProperties": false to all definitions
 
-        prototype_definitions: JsonDict = {
-            prototype.name: (
-                {"description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{prototype.name}.html")}
-                | prototype.make_json_definition(self)
-            )
-            for prototype in self.prototypes
-            if prototype.key is not None
-        }
+        for prototype in self.prototypes:
+            if prototype.key is not None:
+                self.references_needed = references_needed_by[prototype.name] = set()
+                definitions[prototype.name] = {
+                    "description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{prototype.name}.html")
+                } | prototype.make_json_definition(self)
+
+        references_needed: set[str] = set()
+        to_explore = references_needed_by["root"]
+        while to_explore:
+            name = to_explore.pop()
+            if name not in references_needed:
+                references_needed.add(name)
+                to_explore |= references_needed_by.get(name, set())
 
         return {
             "$schema": "https://json-schema.org/draft/2019-09/schema",
@@ -292,5 +304,5 @@ class Schema:
             "type": "object",
             "properties": properties,
             "additionalProperties": False,
-            "definitions": type_definitions | prototype_definitions,
+            "definitions": {name: definition for name, definition in definitions.items() if name in references_needed},
         }

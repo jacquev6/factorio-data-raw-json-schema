@@ -8511,42 +8511,6 @@
         }
       ]
     },
-    "FeatureFlags": {
-      "description": "https://lua-api.factorio.com/stable/types/FeatureFlags.html",
-      "type": "object",
-      "properties": {
-        "quality": {
-          "$ref": "#/definitions/bool"
-        },
-        "rail_bridges": {
-          "$ref": "#/definitions/bool"
-        },
-        "space_travel": {
-          "$ref": "#/definitions/bool"
-        },
-        "spoiling": {
-          "$ref": "#/definitions/bool"
-        },
-        "freezing": {
-          "$ref": "#/definitions/bool"
-        },
-        "segmented_units": {
-          "$ref": "#/definitions/bool"
-        },
-        "expansion_shaders": {
-          "$ref": "#/definitions/bool"
-        }
-      },
-      "required": [
-        "quality",
-        "rail_bridges",
-        "space_travel",
-        "spoiling",
-        "freezing",
-        "segmented_units",
-        "expansion_shaders"
-      ]
-    },
     "FileName": {
       "description": "https://lua-api.factorio.com/stable/types/FileName.html",
       "anyOf": [
@@ -12869,34 +12833,6 @@
         }
       ]
     },
-    "ModSetting": {
-      "description": "https://lua-api.factorio.com/stable/types/ModSetting.html",
-      "type": "object",
-      "properties": {
-        "value": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/int32"
-            },
-            {
-              "$ref": "#/definitions/double"
-            },
-            {
-              "$ref": "#/definitions/bool"
-            },
-            {
-              "$ref": "#/definitions/string"
-            },
-            {
-              "$ref": "#/definitions/Color"
-            }
-          ]
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "Modifier": {
       "description": "https://lua-api.factorio.com/stable/types/Modifier.html",
       "anyOf": [
@@ -13045,24 +12981,6 @@
           "$ref": "#/definitions/BeltStackSizeBonusModifier"
         }
       ]
-    },
-    "Mods": {
-      "description": "https://lua-api.factorio.com/stable/types/Mods.html",
-      "type": "object",
-      "additionalProperties": {
-        "anyOf": [
-          {
-            "$ref": "#/definitions/string"
-          }
-        ]
-      },
-      "propertyNames": {
-        "anyOf": [
-          {
-            "$ref": "#/definitions/string"
-          }
-        ]
-      }
     },
     "ModuleCategoryID": {
       "description": "https://lua-api.factorio.com/stable/types/ModuleCategoryID.html",
@@ -14870,14 +14788,6 @@
       "anyOf": [
         {
           "$ref": "#/definitions/string"
-        }
-      ]
-    },
-    "ProcessionLayerWithTime": {
-      "description": "https://lua-api.factorio.com/stable/types/ProcessionLayerWithTime.html",
-      "anyOf": [
-        {
-          "$ref": "#/definitions/ProcessionLayer"
         }
       ]
     },
@@ -17141,24 +17051,6 @@
             "radius"
           ]
         }
-      ]
-    },
-    "Settings": {
-      "description": "https://lua-api.factorio.com/stable/types/Settings.html",
-      "type": "object",
-      "properties": {
-        "startup": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ModSetting"
-          },
-          "propertyNames": {
-            "$ref": "#/definitions/string"
-          }
-        }
-      },
-      "required": [
-        "startup"
       ]
     },
     "ShiftAnimationWaypoints": {
@@ -24160,12 +24052,6 @@
       "type": "integer",
       "minimum": -2147483648,
       "maximum": 2147483647
-    },
-    "int64": {
-      "description": "https://lua-api.factorio.com/stable/types/int64.html",
-      "type": "integer",
-      "minimum": -9223372036854775808,
-      "maximum": 9223372036854775807
     },
     "int8": {
       "description": "https://lua-api.factorio.com/stable/types/int8.html",
