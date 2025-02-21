@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/prototypes/TipsAndTricksItemCategory.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "tips-and-tricks-item-category"
+    },
+    "name": {
+      "$ref": "../split-schema/string.json"
+    },
+    "order": {
+      "$ref": "../split-schema/Order.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "order",
+    "type"
+  ]
+}

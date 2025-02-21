@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/AndTipTrigger.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "and"
+    },
+    "triggers": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/TipTrigger.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "type",
+    "triggers"
+  ]
+}

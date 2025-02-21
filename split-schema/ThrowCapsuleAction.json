@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ThrowCapsuleAction.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "throw"
+    },
+    "attack_parameters": {
+      "$ref": "../split-schema/AttackParameters.json"
+    },
+    "uses_stack": {
+      "$ref": "../split-schema/bool.json"
+    }
+  },
+  "required": [
+    "type",
+    "attack_parameters"
+  ]
+}

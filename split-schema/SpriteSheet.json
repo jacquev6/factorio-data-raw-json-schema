@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/SpriteSheet.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/SpriteParameters.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "layers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/SpriteSheet.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "variation_count": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "repeat_count": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "line_length": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "filenames": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/FileName.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "lines_per_file": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "dice": {
+          "$ref": "../split-schema/SpriteSizeType.json"
+        },
+        "dice_x": {
+          "$ref": "../split-schema/SpriteSizeType.json"
+        },
+        "dice_y": {
+          "$ref": "../split-schema/SpriteSizeType.json"
+        }
+      }
+    }
+  ]
+}

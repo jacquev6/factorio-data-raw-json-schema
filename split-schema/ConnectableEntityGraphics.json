@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ConnectableEntityGraphics.html",
+  "type": "object",
+  "properties": {
+    "single": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "straight_vertical": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "straight_horizontal": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "corner_right_down": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "corner_left_down": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "corner_right_up": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "corner_left_up": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "t_up": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "t_right": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "t_down": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "t_left": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "ending_up": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "ending_right": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "ending_down": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "ending_left": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "cross": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    }
+  },
+  "required": [
+    "single",
+    "straight_vertical",
+    "straight_horizontal",
+    "corner_right_down",
+    "corner_left_down",
+    "corner_right_up",
+    "corner_left_up",
+    "t_up",
+    "t_right",
+    "t_down",
+    "t_left",
+    "ending_up",
+    "ending_right",
+    "ending_down",
+    "ending_left",
+    "cross"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/SimpleBoundingBox.html",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "left_top": {
+          "$ref": "../split-schema/MapPosition.json"
+        },
+        "right_bottom": {
+          "$ref": "../split-schema/MapPosition.json"
+        }
+      },
+      "required": [
+        "left_top",
+        "right_bottom"
+      ]
+    },
+    {
+      "type": "array",
+      "items": [
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/MapPosition.json"
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/MapPosition.json"
+            }
+          ]
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    }
+  ]
+}

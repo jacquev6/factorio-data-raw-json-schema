@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/SingleGraphicProcessionLayer.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "single-graphic"
+    },
+    "graphic": {
+      "$ref": "../split-schema/ProcessionGraphic.json"
+    },
+    "render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "secondary_draw_order": {
+      "$ref": "../split-schema/int8.json"
+    },
+    "relative_to": {
+      "$ref": "../split-schema/EffectRelativeTo.json"
+    },
+    "compensated_pivot": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "rotates_with_pod": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "shift_rotates_with_pod": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "is_passenger_only": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "clip_with_hatches": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "animation_driven_by_curve": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "frames": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "timestamp": {
+                "$ref": "../split-schema/MapTick.json"
+              },
+              "opacity": {
+                "$ref": "../split-schema/double.json"
+              },
+              "opacity_t": {
+                "$ref": "../split-schema/double.json"
+              },
+              "tint": {
+                "$ref": "../split-schema/Color.json"
+              },
+              "tint_t": {
+                "$ref": "../split-schema/Color.json"
+              },
+              "rotation": {
+                "$ref": "../split-schema/double.json"
+              },
+              "rotation_t": {
+                "$ref": "../split-schema/double.json"
+              },
+              "scale": {
+                "$ref": "../split-schema/double.json"
+              },
+              "scale_t": {
+                "$ref": "../split-schema/double.json"
+              },
+              "shift": {
+                "$ref": "../split-schema/Vector.json"
+              },
+              "shift_t": {
+                "$ref": "../split-schema/Vector.json"
+              },
+              "shift_rate": {
+                "$ref": "../split-schema/double.json"
+              },
+              "shift_rate_t": {
+                "$ref": "../split-schema/double.json"
+              },
+              "frame": {
+                "$ref": "../split-schema/float.json"
+              }
+            },
+            "required": [
+              "frame"
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "type",
+    "graphic",
+    "frames"
+  ]
+}

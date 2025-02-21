@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ColumnWidthItem.html",
+  "type": "object",
+  "properties": {
+    "minimal_width": {
+      "$ref": "../split-schema/int32.json"
+    },
+    "maximal_width": {
+      "$ref": "../split-schema/int32.json"
+    },
+    "width": {
+      "$ref": "../split-schema/int32.json"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TriggerDelivery.html",
+  "anyOf": [
+    {
+      "$ref": "../split-schema/InstantTriggerDelivery.json"
+    },
+    {
+      "$ref": "../split-schema/ProjectileTriggerDelivery.json"
+    },
+    {
+      "$ref": "../split-schema/BeamTriggerDelivery.json"
+    },
+    {
+      "$ref": "../split-schema/StreamTriggerDelivery.json"
+    },
+    {
+      "$ref": "../split-schema/ArtilleryTriggerDelivery.json"
+    },
+    {
+      "$ref": "../split-schema/ChainTriggerDelivery.json"
+    },
+    {
+      "$ref": "../split-schema/DelayedTriggerDelivery.json"
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ChartUtilityConstants.html",
+  "type": "object",
+  "properties": {
+    "copper_wire_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "electric_power_pole_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "enabled_switch_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "disabled_switch_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "electric_line_width": {
+      "$ref": "../split-schema/float.json"
+    },
+    "electric_line_minimum_absolute_width": {
+      "$ref": "../split-schema/float.json"
+    },
+    "red_wire_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "green_wire_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "circuit_network_member_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "turret_range_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "artillery_range_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "default_friendly_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "default_enemy_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "default_enemy_territory_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "rail_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "elevated_rail_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "rail_ramp_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "entity_ghost_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "tile_ghost_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "vehicle_outer_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "vehicle_outer_color_selected": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "vehicle_inner_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "vehicle_wagon_connection_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "resource_outline_selection_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "chart_train_stop_text_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "chart_train_stop_disabled_text_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "chart_train_stop_full_text_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "red_signal_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "green_signal_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "blue_signal_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "yellow_signal_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "chart_deconstruct_tint": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "chart_deconstruct_active_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "chart_player_circle_size": {
+      "$ref": "../split-schema/float.json"
+    },
+    "default_friendly_color_by_type": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "../split-schema/Color.json"
+      },
+      "propertyNames": {
+        "$ref": "../split-schema/string.json"
+      }
+    },
+    "default_color_by_type": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "../split-schema/Color.json"
+      },
+      "propertyNames": {
+        "$ref": "../split-schema/string.json"
+      }
+    },
+    "explosion_visualization_duration": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "train_path_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "train_preview_path_outline_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "train_current_path_outline_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "chart_logistic_robot_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "chart_construction_robot_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "chart_mobile_construction_robot_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "chart_personal_construction_robot_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "chart_delivery_to_me_logistic_robot_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "zoom_threshold_to_draw_spider_path": {
+      "$ref": "../split-schema/double.json"
+    },
+    "custom_tag_scale": {
+      "$ref": "../split-schema/float.json"
+    },
+    "custom_tag_max_scale": {
+      "$ref": "../split-schema/float.json"
+    },
+    "custom_tag_selected_overlay_tint": {
+      "$ref": "../split-schema/Color.json"
+    }
+  },
+  "required": [
+    "copper_wire_color",
+    "electric_power_pole_color",
+    "enabled_switch_color",
+    "disabled_switch_color",
+    "electric_line_width",
+    "electric_line_minimum_absolute_width",
+    "red_wire_color",
+    "green_wire_color",
+    "circuit_network_member_color",
+    "turret_range_color",
+    "artillery_range_color",
+    "default_friendly_color",
+    "default_enemy_color",
+    "default_enemy_territory_color",
+    "rail_color",
+    "elevated_rail_color",
+    "rail_ramp_color",
+    "entity_ghost_color",
+    "tile_ghost_color",
+    "vehicle_outer_color",
+    "vehicle_outer_color_selected",
+    "vehicle_inner_color",
+    "vehicle_wagon_connection_color",
+    "resource_outline_selection_color",
+    "chart_train_stop_text_color",
+    "chart_train_stop_disabled_text_color",
+    "chart_train_stop_full_text_color",
+    "red_signal_color",
+    "green_signal_color",
+    "blue_signal_color",
+    "yellow_signal_color",
+    "chart_deconstruct_tint",
+    "chart_deconstruct_active_color",
+    "chart_player_circle_size",
+    "explosion_visualization_duration",
+    "train_path_color",
+    "train_preview_path_outline_color",
+    "train_current_path_outline_color",
+    "chart_logistic_robot_color",
+    "chart_construction_robot_color",
+    "chart_mobile_construction_robot_color",
+    "chart_personal_construction_robot_color",
+    "chart_delivery_to_me_logistic_robot_color",
+    "zoom_threshold_to_draw_spider_path"
+  ]
+}

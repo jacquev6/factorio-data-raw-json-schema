@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/RailFenceDirectionSet.html",
+  "type": "object",
+  "properties": {
+    "north": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "northeast": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "east": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "southeast": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "south": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "southwest": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "west": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "northwest": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    }
+  }
+}

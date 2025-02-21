@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/PersistentWorldAmbientSoundsDefinitionCrossfade.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/Fade.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "order": {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "wind"
+                },
+                {
+                  "type": "string",
+                  "const": "base_ambience"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "wind"
+                },
+                {
+                  "type": "string",
+                  "const": "base_ambience"
+                }
+              ]
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "required": [
+        "order"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CircuitConnectorSecondaryDrawOrder.html",
+  "type": "object",
+  "properties": {
+    "north": {
+      "$ref": "../split-schema/int8.json"
+    },
+    "east": {
+      "$ref": "../split-schema/int8.json"
+    },
+    "south": {
+      "$ref": "../split-schema/int8.json"
+    },
+    "west": {
+      "$ref": "../split-schema/int8.json"
+    }
+  }
+}

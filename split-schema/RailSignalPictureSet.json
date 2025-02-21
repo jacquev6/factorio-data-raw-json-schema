@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/RailSignalPictureSet.html",
+  "type": "object",
+  "properties": {
+    "structure": {
+      "$ref": "../split-schema/RotatedAnimation.json"
+    },
+    "structure_render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "signal_color_to_structure_frame_index": {
+      "$ref": "../split-schema/RailSignalColorToFrameIndex.json"
+    },
+    "rail_piece": {
+      "$ref": "../split-schema/RailSignalStaticSpriteLayer.json"
+    },
+    "upper_rail_piece": {
+      "$ref": "../split-schema/RailSignalStaticSpriteLayer.json"
+    },
+    "lights": {
+      "$ref": "../split-schema/RailSignalLights.json"
+    },
+    "circuit_connector": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/CircuitConnectorDefinition.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "circuit_connector_render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "structure_align_to_animation_index": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/uint8.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "selection_box_shift": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/Vector.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "structure",
+    "signal_color_to_structure_frame_index",
+    "lights"
+  ]
+}

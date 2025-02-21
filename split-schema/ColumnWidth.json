@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ColumnWidth.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/ColumnWidthItem.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "column": {
+          "$ref": "../split-schema/uint32.json"
+        }
+      },
+      "required": [
+        "column"
+      ]
+    }
+  ]
+}

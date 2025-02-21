@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/WaterTileEffectParameters.html",
+  "type": "object",
+  "properties": {
+    "specular_lightness": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "foam_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "foam_color_multiplier": {
+      "$ref": "../split-schema/float.json"
+    },
+    "tick_scale": {
+      "$ref": "../split-schema/float.json"
+    },
+    "animation_speed": {
+      "$ref": "../split-schema/float.json"
+    },
+    "animation_scale": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/float.json"
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "../split-schema/float.json"
+            },
+            {
+              "$ref": "../split-schema/float.json"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
+    },
+    "dark_threshold": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/float.json"
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "../split-schema/float.json"
+            },
+            {
+              "$ref": "../split-schema/float.json"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
+    },
+    "reflection_threshold": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/float.json"
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "../split-schema/float.json"
+            },
+            {
+              "$ref": "../split-schema/float.json"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
+    },
+    "specular_threshold": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/float.json"
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "../split-schema/float.json"
+            },
+            {
+              "$ref": "../split-schema/float.json"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
+    },
+    "textures": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/EffectTexture.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "near_zoom": {
+      "$ref": "../split-schema/float.json"
+    },
+    "far_zoom": {
+      "$ref": "../split-schema/float.json"
+    },
+    "shader_variation": {
+      "$ref": "../split-schema/EffectVariation.json"
+    },
+    "texture_variations_rows": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "texture_variations_columns": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "secondary_texture_variations_rows": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "secondary_texture_variations_columns": {
+      "$ref": "../split-schema/uint8.json"
+    }
+  },
+  "required": [
+    "specular_lightness",
+    "foam_color",
+    "foam_color_multiplier",
+    "tick_scale",
+    "animation_speed",
+    "animation_scale",
+    "dark_threshold",
+    "reflection_threshold",
+    "specular_threshold",
+    "textures"
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/MapGenSettings.html",
+  "type": "object",
+  "properties": {
+    "default_enable_all_autoplace_controls": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "autoplace_controls": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "../split-schema/FrequencySizeRichness.json"
+      },
+      "propertyNames": {
+        "$ref": "../split-schema/AutoplaceControlID.json"
+      }
+    },
+    "autoplace_settings": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "../split-schema/AutoplaceSettings.json"
+      },
+      "propertyNames": {
+        "anyOf": [
+          {
+            "type": "string",
+            "const": "entity"
+          },
+          {
+            "type": "string",
+            "const": "tile"
+          },
+          {
+            "type": "string",
+            "const": "decorative"
+          }
+        ]
+      }
+    },
+    "property_expression_names": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "$ref": "../split-schema/string.json"
+          },
+          {
+            "$ref": "../split-schema/bool.json"
+          },
+          {
+            "$ref": "../split-schema/double.json"
+          }
+        ]
+      },
+      "propertyNames": {
+        "$ref": "../split-schema/string.json"
+      }
+    },
+    "starting_points": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/MapPosition.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "seed": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "width": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "height": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "starting_area": {
+      "$ref": "../split-schema/MapGenSize.json"
+    },
+    "peaceful_mode": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "no_enemies_mode": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "cliff_settings": {
+      "$ref": "../split-schema/CliffPlacementSettings.json"
+    },
+    "territory_settings": {
+      "$ref": "../split-schema/TerritorySettings.json"
+    }
+  }
+}

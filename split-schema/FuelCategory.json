@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/prototypes/FuelCategory.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "fuel-category"
+    },
+    "name": {
+      "$ref": "../split-schema/string.json"
+    },
+    "order": {
+      "$ref": "../split-schema/Order.json"
+    },
+    "localised_name": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "localised_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "factoriopedia_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "subgroup": {
+      "$ref": "../split-schema/ItemSubGroupID.json"
+    },
+    "hidden": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "hidden_in_factoriopedia": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "parameter": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "factoriopedia_simulation": {
+      "$ref": "../split-schema/SimulationDefinition.json"
+    },
+    "factoriopedia_alternative": {
+      "$ref": "../split-schema/string.json"
+    },
+    "fuel_value_type": {
+      "$ref": "../split-schema/LocalisedString.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "type"
+  ]
+}

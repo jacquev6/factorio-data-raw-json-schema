@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/UnitGroupSettings.html",
+  "type": "object",
+  "properties": {
+    "min_group_gathering_time": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "max_group_gathering_time": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "max_wait_time_for_late_members": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "max_group_radius": {
+      "$ref": "../split-schema/double.json"
+    },
+    "min_group_radius": {
+      "$ref": "../split-schema/double.json"
+    },
+    "max_member_speedup_when_behind": {
+      "$ref": "../split-schema/double.json"
+    },
+    "max_member_slowdown_when_ahead": {
+      "$ref": "../split-schema/double.json"
+    },
+    "max_group_slowdown_factor": {
+      "$ref": "../split-schema/double.json"
+    },
+    "max_group_member_fallback_factor": {
+      "$ref": "../split-schema/double.json"
+    },
+    "member_disown_distance": {
+      "$ref": "../split-schema/double.json"
+    },
+    "tick_tolerance_when_member_arrives": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "max_gathering_unit_groups": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "max_unit_group_size": {
+      "$ref": "../split-schema/uint32.json"
+    }
+  },
+  "required": [
+    "min_group_gathering_time",
+    "max_group_gathering_time",
+    "max_wait_time_for_late_members",
+    "max_group_radius",
+    "min_group_radius",
+    "max_member_speedup_when_behind",
+    "max_member_slowdown_when_ahead",
+    "max_group_slowdown_factor",
+    "max_group_member_fallback_factor",
+    "member_disown_distance",
+    "tick_tolerance_when_member_arrives",
+    "max_gathering_unit_groups",
+    "max_unit_group_size"
+  ]
+}

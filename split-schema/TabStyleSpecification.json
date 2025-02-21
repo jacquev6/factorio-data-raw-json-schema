@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TabStyleSpecification.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/StyleWithClickableGraphicalSetSpecification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "tab_style"
+        },
+        "font": {
+          "$ref": "../split-schema/string.json"
+        },
+        "badge_font": {
+          "$ref": "../split-schema/string.json"
+        },
+        "badge_horizontal_spacing": {
+          "$ref": "../split-schema/int16.json"
+        },
+        "default_font_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "selected_font_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "disabled_font_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "default_badge_font_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "selected_badge_font_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "disabled_badge_font_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "override_graphics_on_edges": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "increase_height_when_selected": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "left_edge_selected_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "right_edge_selected_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "default_badge_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "selected_badge_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "hover_badge_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "press_badge_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "disabled_badge_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "draw_grayscale_picture": {
+          "$ref": "../split-schema/bool.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

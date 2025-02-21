@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/LightningGraphicsSet.html",
+  "type": "object",
+  "properties": {
+    "shader_configuration": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "color": {
+                "$ref": "../split-schema/Color.json"
+              },
+              "distortion": {
+                "$ref": "../split-schema/float.json"
+              },
+              "thickness": {
+                "$ref": "../split-schema/float.json"
+              },
+              "power": {
+                "$ref": "../split-schema/float.json"
+              }
+            },
+            "required": [
+              "color",
+              "distortion",
+              "thickness",
+              "power"
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "bolt_half_width": {
+      "$ref": "../split-schema/float.json"
+    },
+    "bolt_midpoint_variance": {
+      "$ref": "../split-schema/float.json"
+    },
+    "max_bolt_offset": {
+      "$ref": "../split-schema/float.json"
+    },
+    "max_fork_probability": {
+      "$ref": "../split-schema/float.json"
+    },
+    "min_relative_fork_length": {
+      "$ref": "../split-schema/float.json"
+    },
+    "max_relative_fork_length": {
+      "$ref": "../split-schema/float.json"
+    },
+    "fork_orientation_variance": {
+      "$ref": "../split-schema/float.json"
+    },
+    "fork_intensity_multiplier": {
+      "$ref": "../split-schema/float.json"
+    },
+    "relative_cloud_fork_length": {
+      "$ref": "../split-schema/float.json"
+    },
+    "cloud_fork_orientation_variance": {
+      "$ref": "../split-schema/float.json"
+    },
+    "min_ground_streamer_distance": {
+      "$ref": "../split-schema/float.json"
+    },
+    "max_ground_streamer_distance": {
+      "$ref": "../split-schema/float.json"
+    },
+    "ground_streamer_variance": {
+      "$ref": "../split-schema/float.json"
+    },
+    "cloud_forks": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "cloud_detail_level": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "bolt_detail_level": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "cloud_background": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "explosion": {
+      "$ref": "../split-schema/AnimationVariations.json"
+    },
+    "attractor_hit_animation": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "ground_streamers": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/Animation.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "light": {
+      "$ref": "../split-schema/LightDefinition.json"
+    }
+  }
+}

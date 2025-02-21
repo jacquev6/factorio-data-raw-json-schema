@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TechnologySlotStyleSpecification.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/ButtonStyleSpecification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "highlighted_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "default_background_shadow": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "level_band": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "hovered_level_band": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "level_offset_x": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "level_offset_y": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "level_band_width": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "level_band_height": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "level_font": {
+          "$ref": "../split-schema/string.json"
+        },
+        "level_range_font": {
+          "$ref": "../split-schema/string.json"
+        },
+        "level_font_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "hovered_level_font_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "level_range_font_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "hovered_level_range_font_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "level_range_band": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "hovered_level_range_band": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "level_range_offset_x": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "level_range_offset_y": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "ingredients_height": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "default_ingredients_background": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "hovered_ingredients_background": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "clicked_ingredients_background": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "disabled_ingredients_background": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "highlighted_ingredients_background": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "ingredients_padding": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "ingredient_icon_size": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "ingredient_icon_overlap": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "clicked_overlay": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "progress_bar_background": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "progress_bar": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "progress_bar_shadow": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "progress_bar_height": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "progress_bar_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "drag_handle_style": {
+          "$ref": "../split-schema/EmptyWidgetStyleSpecification.json"
+        }
+      }
+    }
+  ]
+}

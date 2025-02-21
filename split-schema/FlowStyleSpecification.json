@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/FlowStyleSpecification.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/BaseStyleSpecification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "flow_style"
+        },
+        "max_on_row": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "horizontal_spacing": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "vertical_spacing": {
+          "$ref": "../split-schema/int32.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

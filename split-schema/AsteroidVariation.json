@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/AsteroidVariation.html",
+  "type": "object",
+  "properties": {
+    "color_texture": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "normal_map": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "roughness_map": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "shadow_shift": {
+      "$ref": "../split-schema/Vector.json"
+    }
+  },
+  "required": [
+    "color_texture",
+    "normal_map",
+    "roughness_map"
+  ]
+}

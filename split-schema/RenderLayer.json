@@ -1,0 +1,290 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/RenderLayer.html",
+  "anyOf": [
+    {
+      "type": "string",
+      "const": "zero"
+    },
+    {
+      "type": "string",
+      "const": "background-transitions"
+    },
+    {
+      "type": "string",
+      "const": "under-tiles"
+    },
+    {
+      "type": "string",
+      "const": "decals"
+    },
+    {
+      "type": "string",
+      "const": "above-tiles"
+    },
+    {
+      "type": "string",
+      "const": "ground-layer-1"
+    },
+    {
+      "type": "string",
+      "const": "ground-layer-2"
+    },
+    {
+      "type": "string",
+      "const": "ground-layer-3"
+    },
+    {
+      "type": "string",
+      "const": "ground-layer-4"
+    },
+    {
+      "type": "string",
+      "const": "ground-layer-5"
+    },
+    {
+      "type": "string",
+      "const": "lower-radius-visualization"
+    },
+    {
+      "type": "string",
+      "const": "radius-visualization"
+    },
+    {
+      "type": "string",
+      "const": "transport-belt-integration"
+    },
+    {
+      "type": "string",
+      "const": "resource"
+    },
+    {
+      "type": "string",
+      "const": "building-smoke"
+    },
+    {
+      "type": "string",
+      "const": "rail-stone-path-lower"
+    },
+    {
+      "type": "string",
+      "const": "rail-stone-path"
+    },
+    {
+      "type": "string",
+      "const": "rail-tie"
+    },
+    {
+      "type": "string",
+      "const": "decorative"
+    },
+    {
+      "type": "string",
+      "const": "ground-patch"
+    },
+    {
+      "type": "string",
+      "const": "ground-patch-higher"
+    },
+    {
+      "type": "string",
+      "const": "ground-patch-higher2"
+    },
+    {
+      "type": "string",
+      "const": "rail-chain-signal-metal"
+    },
+    {
+      "type": "string",
+      "const": "rail-screw"
+    },
+    {
+      "type": "string",
+      "const": "rail-metal"
+    },
+    {
+      "type": "string",
+      "const": "remnants"
+    },
+    {
+      "type": "string",
+      "const": "floor"
+    },
+    {
+      "type": "string",
+      "const": "transport-belt"
+    },
+    {
+      "type": "string",
+      "const": "transport-belt-endings"
+    },
+    {
+      "type": "string",
+      "const": "floor-mechanics-under-corpse"
+    },
+    {
+      "type": "string",
+      "const": "corpse"
+    },
+    {
+      "type": "string",
+      "const": "floor-mechanics"
+    },
+    {
+      "type": "string",
+      "const": "item"
+    },
+    {
+      "type": "string",
+      "const": "transport-belt-reader"
+    },
+    {
+      "type": "string",
+      "const": "lower-object"
+    },
+    {
+      "type": "string",
+      "const": "transport-belt-circuit-connector"
+    },
+    {
+      "type": "string",
+      "const": "lower-object-above-shadow"
+    },
+    {
+      "type": "string",
+      "const": "lower-object-overlay"
+    },
+    {
+      "type": "string",
+      "const": "object-under"
+    },
+    {
+      "type": "string",
+      "const": "object"
+    },
+    {
+      "type": "string",
+      "const": "cargo-hatch"
+    },
+    {
+      "type": "string",
+      "const": "higher-object-under"
+    },
+    {
+      "type": "string",
+      "const": "higher-object-above"
+    },
+    {
+      "type": "string",
+      "const": "train-stop-top"
+    },
+    {
+      "type": "string",
+      "const": "item-in-inserter-hand"
+    },
+    {
+      "type": "string",
+      "const": "above-inserters"
+    },
+    {
+      "type": "string",
+      "const": "wires"
+    },
+    {
+      "type": "string",
+      "const": "under-elevated"
+    },
+    {
+      "type": "string",
+      "const": "elevated-rail-stone-path-lower"
+    },
+    {
+      "type": "string",
+      "const": "elevated-rail-stone-path"
+    },
+    {
+      "type": "string",
+      "const": "elevated-rail-tie"
+    },
+    {
+      "type": "string",
+      "const": "elevated-rail-screw"
+    },
+    {
+      "type": "string",
+      "const": "elevated-rail-metal"
+    },
+    {
+      "type": "string",
+      "const": "elevated-lower-object"
+    },
+    {
+      "type": "string",
+      "const": "elevated-object"
+    },
+    {
+      "type": "string",
+      "const": "elevated-higher-object"
+    },
+    {
+      "type": "string",
+      "const": "fluid-visualization"
+    },
+    {
+      "type": "string",
+      "const": "wires-above"
+    },
+    {
+      "type": "string",
+      "const": "entity-info-icon"
+    },
+    {
+      "type": "string",
+      "const": "entity-info-icon-above"
+    },
+    {
+      "type": "string",
+      "const": "explosion"
+    },
+    {
+      "type": "string",
+      "const": "projectile"
+    },
+    {
+      "type": "string",
+      "const": "smoke"
+    },
+    {
+      "type": "string",
+      "const": "air-object"
+    },
+    {
+      "type": "string",
+      "const": "air-entity-info-icon"
+    },
+    {
+      "type": "string",
+      "const": "light-effect"
+    },
+    {
+      "type": "string",
+      "const": "selection-box"
+    },
+    {
+      "type": "string",
+      "const": "higher-selection-box"
+    },
+    {
+      "type": "string",
+      "const": "collision-selection-box"
+    },
+    {
+      "type": "string",
+      "const": "arrow"
+    },
+    {
+      "type": "string",
+      "const": "cursor"
+    }
+  ]
+}

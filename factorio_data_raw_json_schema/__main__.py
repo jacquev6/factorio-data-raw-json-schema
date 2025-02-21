@@ -1,5 +1,8 @@
-from typing import TextIO
+import os
+import shutil
+from typing import Any, Callable, TextIO
 import json
+import typing
 
 import click
 
@@ -22,6 +25,9 @@ def main() -> None:
 )
 @click.argument("output", type=click.File("w"), default="-")
 @click.option(
+    "--split/--no-split", default=False, help="Split the schema into multiple files, one per type.", show_default=True
+)
+@click.option(
     "--do-patch/--skip-patch",
     default=True,
     help='Apply ad-hoc patches to the schema (see "Quirks" section in the README).',
@@ -30,11 +36,28 @@ def main() -> None:
 @click.option(
     "--workers", type=int, default=-1, help="Number of worker threads to use. Default is the number of CPU cores."
 )
-def extract(doc_root: str, output: TextIO, do_patch: bool, workers: int) -> None:
+def extract(doc_root: str, output: click.utils.LazyFile, split: bool, do_patch: bool, workers: int) -> None:
     crawler = crawling.Crawler(doc_root)
-    schema = extraction.extract(crawler=crawler, workers=workers).to_json_value()
+
+    if split:
+        definitions_dir = os.path.splitext(output.name)[0]
+        shutil.rmtree(definitions_dir, ignore_errors=True)
+        os.makedirs(definitions_dir, exist_ok=True)
+        make_reference: Callable[[bool, str], str] | None = (
+            lambda deep, name: f"{'../' if deep else ''}{definitions_dir}/{name}.json"
+        )
+    else:
+        make_reference = None
+
+    schema = extraction.extract(crawler=crawler, workers=workers).to_json(make_reference=make_reference)
     if do_patch:
         patching.patch(schema)
+    if split:
+        assert make_reference is not None
+        definitions = typing.cast(dict[str, dict[str, Any]], schema.pop("definitions"))
+        for name, value in definitions.items():
+            with open(make_reference(False, name), "w") as f:
+                json.dump({"$schema": schema["$schema"]} | value, f, indent=2)
     json.dump(schema, output, indent=2)
 
 

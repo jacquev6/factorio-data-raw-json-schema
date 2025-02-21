@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TreeVariation.html",
+  "type": "object",
+  "properties": {
+    "trunk": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "leaves": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "leaf_generation": {
+      "$ref": "../split-schema/CreateParticleTriggerEffectItem.json"
+    },
+    "branch_generation": {
+      "$ref": "../split-schema/CreateParticleTriggerEffectItem.json"
+    },
+    "shadow": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "disable_shadow_distortion_beginning_at_frame": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "normal": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "overlay": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "underwater": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "underwater_layer_offset": {
+      "$ref": "../split-schema/int8.json"
+    },
+    "water_reflection": {
+      "$ref": "../split-schema/WaterReflectionDefinition.json"
+    }
+  },
+  "required": [
+    "trunk",
+    "leaves",
+    "leaf_generation",
+    "branch_generation"
+  ]
+}

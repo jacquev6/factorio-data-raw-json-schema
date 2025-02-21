@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/StatusColors.html",
+  "type": "object",
+  "properties": {
+    "idle": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "no_minable_resources": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "full_output": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "insufficient_input": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "disabled": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "no_power": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "working": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "low_power": {
+      "$ref": "../split-schema/Color.json"
+    }
+  }
+}

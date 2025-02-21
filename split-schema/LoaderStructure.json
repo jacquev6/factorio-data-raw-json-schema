@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/LoaderStructure.html",
+  "type": "object",
+  "properties": {
+    "direction_in": {
+      "$ref": "../split-schema/Sprite4Way.json"
+    },
+    "direction_out": {
+      "$ref": "../split-schema/Sprite4Way.json"
+    },
+    "back_patch": {
+      "$ref": "../split-schema/Sprite4Way.json"
+    },
+    "front_patch": {
+      "$ref": "../split-schema/Sprite4Way.json"
+    },
+    "frozen_patch_in": {
+      "$ref": "../split-schema/Sprite4Way.json"
+    },
+    "frozen_patch_out": {
+      "$ref": "../split-schema/Sprite4Way.json"
+    }
+  }
+}

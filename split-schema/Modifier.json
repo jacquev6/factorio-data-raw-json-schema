@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/Modifier.html",
+  "anyOf": [
+    {
+      "$ref": "../split-schema/InserterStackSizeBonusModifier.json"
+    },
+    {
+      "$ref": "../split-schema/BulkInserterCapacityBonusModifier.json"
+    },
+    {
+      "$ref": "../split-schema/LaboratorySpeedModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CharacterLogisticTrashSlotsModifier.json"
+    },
+    {
+      "$ref": "../split-schema/MaximumFollowingRobotsCountModifier.json"
+    },
+    {
+      "$ref": "../split-schema/WorkerRobotSpeedModifier.json"
+    },
+    {
+      "$ref": "../split-schema/WorkerRobotStorageModifier.json"
+    },
+    {
+      "$ref": "../split-schema/TurretAttackModifier.json"
+    },
+    {
+      "$ref": "../split-schema/AmmoDamageModifier.json"
+    },
+    {
+      "$ref": "../split-schema/GiveItemModifier.json"
+    },
+    {
+      "$ref": "../split-schema/GunSpeedModifier.json"
+    },
+    {
+      "$ref": "../split-schema/UnlockRecipeModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CharacterCraftingSpeedModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CharacterMiningSpeedModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CharacterRunningSpeedModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CharacterBuildDistanceModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CharacterItemDropDistanceModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CharacterReachDistanceModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CharacterResourceReachDistanceModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CharacterItemPickupDistanceModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CharacterLootPickupDistanceModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CharacterInventorySlotsBonusModifier.json"
+    },
+    {
+      "$ref": "../split-schema/DeconstructionTimeToLiveModifier.json"
+    },
+    {
+      "$ref": "../split-schema/MaxFailedAttemptsPerTickPerConstructionQueueModifier.json"
+    },
+    {
+      "$ref": "../split-schema/MaxSuccessfulAttemptsPerTickPerConstructionQueueModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CharacterHealthBonusModifier.json"
+    },
+    {
+      "$ref": "../split-schema/MiningDrillProductivityBonusModifier.json"
+    },
+    {
+      "$ref": "../split-schema/TrainBrakingForceBonusModifier.json"
+    },
+    {
+      "$ref": "../split-schema/WorkerRobotBatteryModifier.json"
+    },
+    {
+      "$ref": "../split-schema/LaboratoryProductivityModifier.json"
+    },
+    {
+      "$ref": "../split-schema/FollowerRobotLifetimeModifier.json"
+    },
+    {
+      "$ref": "../split-schema/ArtilleryRangeModifier.json"
+    },
+    {
+      "$ref": "../split-schema/NothingModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CharacterLogisticRequestsModifier.json"
+    },
+    {
+      "$ref": "../split-schema/VehicleLogisticsModifier.json"
+    },
+    {
+      "$ref": "../split-schema/UnlockSpaceLocationModifier.json"
+    },
+    {
+      "$ref": "../split-schema/UnlockQualityModifier.json"
+    },
+    {
+      "$ref": "../split-schema/SpacePlatformsModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CircuitNetworkModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CargoLandingPadLimitModifier.json"
+    },
+    {
+      "$ref": "../split-schema/ChangeRecipeProductivityModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CliffDeconstructionEnabledModifier.json"
+    },
+    {
+      "$ref": "../split-schema/MiningWithFluidModifier.json"
+    },
+    {
+      "$ref": "../split-schema/RailSupportOnDeepOilOceanModifier.json"
+    },
+    {
+      "$ref": "../split-schema/RailPlannerAllowElevatedRailsModifier.json"
+    },
+    {
+      "$ref": "../split-schema/BeaconDistributionModifier.json"
+    },
+    {
+      "$ref": "../split-schema/CreateGhostOnEntityDeathModifier.json"
+    },
+    {
+      "$ref": "../split-schema/BeltStackSizeBonusModifier.json"
+    }
+  ]
+}

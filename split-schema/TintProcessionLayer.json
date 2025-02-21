@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TintProcessionLayer.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "tint"
+    },
+    "render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "frames": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "timestamp": {
+                "$ref": "../split-schema/MapTick.json"
+              },
+              "opacity": {
+                "$ref": "../split-schema/double.json"
+              },
+              "opacity_t": {
+                "$ref": "../split-schema/double.json"
+              },
+              "tint_upper": {
+                "$ref": "../split-schema/Color.json"
+              },
+              "tint_upper_t": {
+                "$ref": "../split-schema/Color.json"
+              },
+              "tint_lower": {
+                "$ref": "../split-schema/Color.json"
+              },
+              "tint_lower_t": {
+                "$ref": "../split-schema/Color.json"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "type",
+    "frames"
+  ]
+}

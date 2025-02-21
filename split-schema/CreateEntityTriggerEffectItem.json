@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CreateEntityTriggerEffectItem.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/TriggerEffectItem.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "create-entity"
+        },
+        "entity_name": {
+          "$ref": "../split-schema/EntityID.json"
+        },
+        "offset_deviation": {
+          "$ref": "../split-schema/BoundingBox.json"
+        },
+        "trigger_created_entity": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "check_buildability": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "tile_collision_mask": {
+          "$ref": "../split-schema/CollisionMaskConnector.json"
+        },
+        "offsets": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/Vector.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "as_enemy": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "ignore_no_enemies_mode": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "find_non_colliding_position": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "non_colliding_search_radius": {
+          "$ref": "../split-schema/double.json"
+        },
+        "non_colliding_search_precision": {
+          "$ref": "../split-schema/double.json"
+        },
+        "non_colliding_fail_result": {
+          "$ref": "../split-schema/Trigger.json"
+        },
+        "protected": {
+          "$ref": "../split-schema/bool.json"
+        }
+      },
+      "required": [
+        "type",
+        "entity_name"
+      ]
+    }
+  ]
+}

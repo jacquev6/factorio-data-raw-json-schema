@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/EquipmentShape.html",
+  "type": "object",
+  "properties": {
+    "width": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "height": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "type": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "full"
+        },
+        {
+          "type": "string",
+          "const": "manual"
+        }
+      ]
+    },
+    "points": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "../split-schema/uint32.json"
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "width",
+    "height",
+    "type"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/SetLogisticRequestTipTrigger.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/CountBasedTipTrigger.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "set-logistic-request"
+        },
+        "logistic_chest_only": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "entity": {
+          "$ref": "../split-schema/EntityID.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

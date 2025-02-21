@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/prototypes/AutoplaceControl.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "autoplace-control"
+    },
+    "name": {
+      "$ref": "../split-schema/string.json"
+    },
+    "order": {
+      "$ref": "../split-schema/Order.json"
+    },
+    "localised_name": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "localised_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "factoriopedia_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "subgroup": {
+      "$ref": "../split-schema/ItemSubGroupID.json"
+    },
+    "hidden": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "hidden_in_factoriopedia": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "parameter": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "factoriopedia_simulation": {
+      "$ref": "../split-schema/SimulationDefinition.json"
+    },
+    "factoriopedia_alternative": {
+      "$ref": "../split-schema/string.json"
+    },
+    "category": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "resource"
+        },
+        {
+          "type": "string",
+          "const": "terrain"
+        },
+        {
+          "type": "string",
+          "const": "cliff"
+        },
+        {
+          "type": "string",
+          "const": "enemy"
+        }
+      ]
+    },
+    "richness": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "can_be_disabled": {
+      "$ref": "../split-schema/bool.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "category",
+    "name",
+    "type"
+  ]
+}

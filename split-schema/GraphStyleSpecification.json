@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/GraphStyleSpecification.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/BaseStyleSpecification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "graph_style"
+        },
+        "background_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "line_colors": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/Color.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "horizontal_label_style": {
+          "$ref": "../split-schema/LabelStyleSpecification.json"
+        },
+        "vertical_label_style": {
+          "$ref": "../split-schema/LabelStyleSpecification.json"
+        },
+        "minimal_horizontal_label_spacing": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "minimal_vertical_label_spacing": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "horizontal_labels_margin": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "vertical_labels_margin": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "graph_top_margin": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "graph_right_margin": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "data_line_highlight_distance": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "selection_dot_radius": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "grid_lines_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "guide_lines_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "font": {
+          "$ref": "../split-schema/string.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

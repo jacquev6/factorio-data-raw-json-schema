@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/EnemySpawnerAbsorption.html",
+  "type": "object",
+  "properties": {
+    "absolute": {
+      "$ref": "../split-schema/double.json"
+    },
+    "proportional": {
+      "$ref": "../split-schema/double.json"
+    }
+  },
+  "required": [
+    "absolute",
+    "proportional"
+  ]
+}

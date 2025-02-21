@@ -1,0 +1,304 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/prototypes/ItemWithInventoryPrototype.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "item-with-inventory"
+    },
+    "name": {
+      "$ref": "../split-schema/string.json"
+    },
+    "order": {
+      "$ref": "../split-schema/Order.json"
+    },
+    "localised_name": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "localised_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "factoriopedia_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "subgroup": {
+      "$ref": "../split-schema/ItemSubGroupID.json"
+    },
+    "hidden": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "hidden_in_factoriopedia": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "parameter": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "factoriopedia_simulation": {
+      "$ref": "../split-schema/SimulationDefinition.json"
+    },
+    "factoriopedia_alternative": {
+      "$ref": "../split-schema/string.json"
+    },
+    "stack_size": {
+      "type": "integer",
+      "const": 1
+    },
+    "icons": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/IconData.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "icon": {
+      "$ref": "../split-schema/FileName.json"
+    },
+    "icon_size": {
+      "$ref": "../split-schema/SpriteSizeType.json"
+    },
+    "dark_background_icons": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/IconData.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "dark_background_icon": {
+      "$ref": "../split-schema/FileName.json"
+    },
+    "dark_background_icon_size": {
+      "$ref": "../split-schema/SpriteSizeType.json"
+    },
+    "place_result": {
+      "$ref": "../split-schema/EntityID.json"
+    },
+    "place_as_equipment_result": {
+      "$ref": "../split-schema/EquipmentID.json"
+    },
+    "fuel_category": {
+      "$ref": "../split-schema/FuelCategoryID.json"
+    },
+    "burnt_result": {
+      "$ref": "../split-schema/ItemID.json"
+    },
+    "spoil_result": {
+      "$ref": "../split-schema/ItemID.json"
+    },
+    "plant_result": {
+      "$ref": "../split-schema/EntityID.json"
+    },
+    "place_as_tile": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "../split-schema/TileID.json"
+        },
+        "condition": {
+          "$ref": "../split-schema/CollisionMaskConnector.json"
+        },
+        "invert": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "condition_size": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "tile_condition": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/TileID.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "result",
+        "condition",
+        "condition_size"
+      ]
+    },
+    "pictures": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "flags": {
+      "$ref": "../split-schema/ItemPrototypeFlags.json"
+    },
+    "spoil_ticks": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "fuel_value": {
+      "$ref": "../split-schema/Energy.json"
+    },
+    "fuel_acceleration_multiplier": {
+      "$ref": "../split-schema/double.json"
+    },
+    "fuel_top_speed_multiplier": {
+      "$ref": "../split-schema/double.json"
+    },
+    "fuel_emissions_multiplier": {
+      "$ref": "../split-schema/double.json"
+    },
+    "fuel_acceleration_multiplier_quality_bonus": {
+      "$ref": "../split-schema/double.json"
+    },
+    "fuel_top_speed_multiplier_quality_bonus": {
+      "$ref": "../split-schema/double.json"
+    },
+    "weight": {
+      "$ref": "../split-schema/Weight.json"
+    },
+    "ingredient_to_weight_coefficient": {
+      "$ref": "../split-schema/double.json"
+    },
+    "fuel_glow_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "open_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "close_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "pick_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "drop_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "inventory_move_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "default_import_location": {
+      "$ref": "../split-schema/SpaceLocationID.json"
+    },
+    "color_hint": {
+      "$ref": "../split-schema/ColorHintSpecification.json"
+    },
+    "has_random_tint": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "spoil_to_trigger_result": {
+      "$ref": "../split-schema/SpoilToTriggerResult.json"
+    },
+    "destroyed_by_dropping_trigger": {
+      "$ref": "../split-schema/Trigger.json"
+    },
+    "rocket_launch_products": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/ItemProductPrototype.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "send_to_orbit_mode": {
+      "$ref": "../split-schema/SendToOrbitMode.json"
+    },
+    "random_tint_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "spoil_level": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "default_label_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "draw_label_for_cursor_render": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "inventory_size": {
+      "$ref": "../split-schema/ItemStackIndex.json"
+    },
+    "item_filters": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/ItemID.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "item_group_filters": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/ItemGroupID.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "item_subgroup_filters": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/ItemSubGroupID.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "filter_mode": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "blacklist"
+        },
+        {
+          "type": "string",
+          "const": "whitelist"
+        }
+      ]
+    },
+    "filter_message_key": {
+      "$ref": "../split-schema/string.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "inventory_size",
+    "name",
+    "stack_size",
+    "type"
+  ]
+}

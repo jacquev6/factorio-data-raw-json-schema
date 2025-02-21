@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/AmbientSoundType.html",
+  "anyOf": [
+    {
+      "type": "string",
+      "const": "menu-track"
+    },
+    {
+      "type": "string",
+      "const": "main-track"
+    },
+    {
+      "type": "string",
+      "const": "hero-track"
+    },
+    {
+      "type": "string",
+      "const": "interlude"
+    }
+  ]
+}

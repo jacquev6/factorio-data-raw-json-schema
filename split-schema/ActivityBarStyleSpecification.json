@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ActivityBarStyleSpecification.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/BaseStyleSpecification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "activity_bar_style"
+        },
+        "speed": {
+          "$ref": "../split-schema/float.json"
+        },
+        "bar_width": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "bar_background": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "bar": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "bar_size_ratio": {
+          "$ref": "../split-schema/float.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

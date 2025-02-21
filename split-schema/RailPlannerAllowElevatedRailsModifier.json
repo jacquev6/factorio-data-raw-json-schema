@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/RailPlannerAllowElevatedRailsModifier.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/BoolModifier.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "rail-planner-allow-elevated-rails"
+        },
+        "use_icon_overlay_constant": {
+          "$ref": "../split-schema/bool.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

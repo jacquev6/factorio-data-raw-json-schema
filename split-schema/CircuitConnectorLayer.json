@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CircuitConnectorLayer.html",
+  "type": "object",
+  "properties": {
+    "north": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "east": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "south": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "west": {
+      "$ref": "../split-schema/RenderLayer.json"
+    }
+  }
+}

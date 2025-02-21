@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/BorderImageSet.html",
+  "type": "object",
+  "properties": {
+    "scale": {
+      "$ref": "../split-schema/double.json"
+    },
+    "border_width": {
+      "$ref": "../split-schema/int32.json"
+    },
+    "vertical_line": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "horizontal_line": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "top_right_corner": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "bottom_right_corner": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "bottom_left_corner": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "top_left_coner": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "top_t": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "right_t": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "bottom_t": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "left_t": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "cross": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "top_end": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "right_end": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "bottom_end": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "left_end": {
+      "$ref": "../split-schema/Sprite.json"
+    }
+  }
+}

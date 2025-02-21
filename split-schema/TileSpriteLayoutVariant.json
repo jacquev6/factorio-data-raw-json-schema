@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TileSpriteLayoutVariant.html",
+  "type": "object",
+  "properties": {
+    "spritesheet": {
+      "$ref": "../split-schema/FileName.json"
+    },
+    "scale": {
+      "$ref": "../split-schema/float.json"
+    },
+    "x": {
+      "$ref": "../split-schema/SpriteSizeType.json"
+    },
+    "y": {
+      "$ref": "../split-schema/SpriteSizeType.json"
+    },
+    "tile_height": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "line_length": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "count": {
+      "$ref": "../split-schema/uint8.json"
+    }
+  }
+}

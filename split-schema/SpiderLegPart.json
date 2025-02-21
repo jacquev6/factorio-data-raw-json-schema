@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/SpiderLegPart.html",
+  "type": "object",
+  "properties": {
+    "top_end": {
+      "$ref": "../split-schema/RotatedSprite.json"
+    },
+    "middle": {
+      "$ref": "../split-schema/RotatedSprite.json"
+    },
+    "bottom_end": {
+      "$ref": "../split-schema/RotatedSprite.json"
+    },
+    "middle_offset_from_top": {
+      "$ref": "../split-schema/float.json"
+    },
+    "middle_offset_from_bottom": {
+      "$ref": "../split-schema/float.json"
+    },
+    "top_end_length": {
+      "$ref": "../split-schema/float.json"
+    },
+    "bottom_end_length": {
+      "$ref": "../split-schema/float.json"
+    },
+    "top_end_offset": {
+      "$ref": "../split-schema/float.json"
+    },
+    "bottom_end_offset": {
+      "$ref": "../split-schema/float.json"
+    },
+    "render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    }
+  }
+}

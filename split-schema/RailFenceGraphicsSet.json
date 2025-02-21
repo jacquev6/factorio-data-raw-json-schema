@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/RailFenceGraphicsSet.html",
+  "type": "object",
+  "properties": {
+    "segment_count": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "back_fence_render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "front_fence_render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "back_fence_render_layer_secondary": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "front_fence_render_layer_secondary": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "side_A": {
+      "$ref": "../split-schema/RailFencePictureSet.json"
+    },
+    "side_B": {
+      "$ref": "../split-schema/RailFencePictureSet.json"
+    }
+  },
+  "required": [
+    "segment_count",
+    "side_A",
+    "side_B"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/AttenuationType.html",
+  "anyOf": [
+    {
+      "type": "string",
+      "const": "none"
+    },
+    {
+      "type": "string",
+      "const": "linear"
+    },
+    {
+      "type": "string",
+      "const": "logarithmic"
+    },
+    {
+      "type": "string",
+      "const": "exponential"
+    },
+    {
+      "type": "string",
+      "const": "cosine"
+    },
+    {
+      "type": "string",
+      "const": "S-curve"
+    }
+  ]
+}

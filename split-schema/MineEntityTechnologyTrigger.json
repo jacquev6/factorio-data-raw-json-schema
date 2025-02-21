@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/MineEntityTechnologyTrigger.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "mine-entity"
+    },
+    "entity": {
+      "$ref": "../split-schema/EntityID.json"
+    }
+  },
+  "required": [
+    "type",
+    "entity"
+  ]
+}

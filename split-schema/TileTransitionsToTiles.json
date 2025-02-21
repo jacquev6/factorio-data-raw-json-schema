@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TileTransitionsToTiles.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/TileTransitions.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "to_tiles": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/TileID.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "transition_group": {
+          "$ref": "../split-schema/uint8.json"
+        }
+      },
+      "required": [
+        "to_tiles",
+        "transition_group"
+      ]
+    }
+  ]
+}

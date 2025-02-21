@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/RollingStockRotatedSlopedGraphics.html",
+  "type": "object",
+  "properties": {
+    "rotated": {
+      "$ref": "../split-schema/RotatedSprite.json"
+    },
+    "sloped": {
+      "$ref": "../split-schema/RotatedSprite.json"
+    },
+    "slope_back_equals_front": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "slope_angle_between_frames": {
+      "$ref": "../split-schema/double.json"
+    }
+  },
+  "required": [
+    "rotated"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/Fade.html",
+  "anyOf": [
+    {
+      "allOf": [
+        {
+          "$ref": "../split-schema/Attenuation.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "from": {
+              "$ref": "../split-schema/ControlPoint.json"
+            },
+            "to": {
+              "$ref": "../split-schema/ControlPoint.json"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "$ref": "../split-schema/AttenuationType.json"
+    }
+  ]
+}

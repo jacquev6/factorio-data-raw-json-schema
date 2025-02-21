@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/Attenuation.html",
+  "type": "object",
+  "properties": {
+    "curve_type": {
+      "$ref": "../split-schema/AttenuationType.json"
+    },
+    "tuning_parameter": {
+      "$ref": "../split-schema/float.json"
+    }
+  },
+  "required": [
+    "curve_type"
+  ]
+}

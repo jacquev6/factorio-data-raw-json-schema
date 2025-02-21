@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/SpoilToTriggerResult.html",
+  "type": "object",
+  "properties": {
+    "trigger": {
+      "$ref": "../split-schema/Trigger.json"
+    },
+    "items_per_trigger": {
+      "$ref": "../split-schema/ItemCountType.json"
+    }
+  },
+  "required": [
+    "trigger",
+    "items_per_trigger"
+  ]
+}

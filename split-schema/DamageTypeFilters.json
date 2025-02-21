@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/DamageTypeFilters.html",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "types": {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/DamageTypeID.json"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "../split-schema/DamageTypeID.json"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "whitelist": {
+          "$ref": "../split-schema/bool.json"
+        }
+      },
+      "required": [
+        "types"
+      ]
+    },
+    {
+      "$ref": "../split-schema/DamageTypeID.json"
+    },
+    {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "../split-schema/DamageTypeID.json"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  ]
+}

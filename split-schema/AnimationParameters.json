@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/AnimationParameters.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/SpriteParameters.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "run_mode": {
+          "$ref": "../split-schema/AnimationRunMode.json"
+        },
+        "frame_count": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "line_length": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "animation_speed": {
+          "$ref": "../split-schema/float.json"
+        },
+        "max_advance": {
+          "$ref": "../split-schema/float.json"
+        },
+        "repeat_count": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "dice": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "dice_x": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "dice_y": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "frame_sequence": {
+          "$ref": "../split-schema/AnimationFrameSequence.json"
+        }
+      }
+    }
+  ]
+}

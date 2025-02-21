@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/StateSteeringSettings.html",
+  "type": "object",
+  "properties": {
+    "radius": {
+      "$ref": "../split-schema/double.json"
+    },
+    "separation_factor": {
+      "$ref": "../split-schema/double.json"
+    },
+    "separation_force": {
+      "$ref": "../split-schema/double.json"
+    },
+    "force_unit_fuzzy_goto_behavior": {
+      "$ref": "../split-schema/bool.json"
+    }
+  },
+  "required": [
+    "radius",
+    "separation_factor",
+    "separation_force",
+    "force_unit_fuzzy_goto_behavior"
+  ]
+}

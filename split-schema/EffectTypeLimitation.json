@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/EffectTypeLimitation.html",
+  "anyOf": [
+    {
+      "type": "string",
+      "const": "speed"
+    },
+    {
+      "type": "string",
+      "const": "productivity"
+    },
+    {
+      "type": "string",
+      "const": "consumption"
+    },
+    {
+      "type": "string",
+      "const": "pollution"
+    },
+    {
+      "type": "string",
+      "const": "quality"
+    },
+    {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "speed"
+              },
+              {
+                "type": "string",
+                "const": "productivity"
+              },
+              {
+                "type": "string",
+                "const": "consumption"
+              },
+              {
+                "type": "string",
+                "const": "pollution"
+              },
+              {
+                "type": "string",
+                "const": "quality"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  ]
+}

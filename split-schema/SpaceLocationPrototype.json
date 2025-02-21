@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/prototypes/SpaceLocationPrototype.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "space-location"
+    },
+    "name": {
+      "$ref": "../split-schema/string.json"
+    },
+    "order": {
+      "$ref": "../split-schema/Order.json"
+    },
+    "localised_name": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "localised_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "factoriopedia_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "subgroup": {
+      "$ref": "../split-schema/ItemSubGroupID.json"
+    },
+    "hidden": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "hidden_in_factoriopedia": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "parameter": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "factoriopedia_simulation": {
+      "$ref": "../split-schema/SimulationDefinition.json"
+    },
+    "factoriopedia_alternative": {
+      "$ref": "../split-schema/string.json"
+    },
+    "gravity_pull": {
+      "$ref": "../split-schema/double.json"
+    },
+    "distance": {
+      "$ref": "../split-schema/double.json"
+    },
+    "orientation": {
+      "$ref": "../split-schema/RealOrientation.json"
+    },
+    "magnitude": {
+      "$ref": "../split-schema/double.json"
+    },
+    "parked_platforms_orientation": {
+      "$ref": "../split-schema/RealOrientation.json"
+    },
+    "label_orientation": {
+      "$ref": "../split-schema/RealOrientation.json"
+    },
+    "draw_orbit": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "solar_power_in_space": {
+      "$ref": "../split-schema/double.json"
+    },
+    "asteroid_spawn_influence": {
+      "$ref": "../split-schema/double.json"
+    },
+    "fly_condition": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "auto_save_on_first_trip": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "procession_graphic_catalogue": {
+      "$ref": "../split-schema/ProcessionGraphicCatalogue.json"
+    },
+    "procession_audio_catalogue": {
+      "$ref": "../split-schema/ProcessionAudioCatalogue.json"
+    },
+    "platform_procession_set": {
+      "$ref": "../split-schema/ProcessionSet.json"
+    },
+    "planet_procession_set": {
+      "$ref": "../split-schema/ProcessionSet.json"
+    },
+    "icons": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/IconData.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "icon": {
+      "$ref": "../split-schema/FileName.json"
+    },
+    "icon_size": {
+      "$ref": "../split-schema/SpriteSizeType.json"
+    },
+    "starmap_icons": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/IconData.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "starmap_icon": {
+      "$ref": "../split-schema/FileName.json"
+    },
+    "starmap_icon_size": {
+      "$ref": "../split-schema/SpriteSizeType.json"
+    },
+    "asteroid_spawn_definitions": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/SpaceLocationAsteroidSpawnDefinition.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "distance",
+    "name",
+    "orientation",
+    "type"
+  ]
+}

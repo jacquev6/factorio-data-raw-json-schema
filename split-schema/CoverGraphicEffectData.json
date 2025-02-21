@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CoverGraphicEffectData.html",
+  "type": "object",
+  "properties": {
+    "style": {
+      "$ref": "../split-schema/CloudEffectStyle.json"
+    },
+    "relative_to": {
+      "$ref": "../split-schema/EffectRelativeTo.json"
+    },
+    "distance_traveled_strength": {
+      "$ref": "../split-schema/Vector.json"
+    },
+    "pod_movement_strength": {
+      "$ref": "../split-schema/Vector.json"
+    }
+  }
+}

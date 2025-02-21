@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/PushBackTriggerEffectItem.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/TriggerEffectItem.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "push-back"
+        },
+        "distance": {
+          "$ref": "../split-schema/float.json"
+        }
+      },
+      "required": [
+        "type",
+        "distance"
+      ]
+    }
+  ]
+}

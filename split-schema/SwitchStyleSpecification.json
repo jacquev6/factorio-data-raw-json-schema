@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/SwitchStyleSpecification.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/BaseStyleSpecification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "switch_style"
+        },
+        "left_button_position": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "middle_button_position": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "right_button_position": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "default_background": {
+          "$ref": "../split-schema/Sprite.json"
+        },
+        "hover_background": {
+          "$ref": "../split-schema/Sprite.json"
+        },
+        "disabled_background": {
+          "$ref": "../split-schema/Sprite.json"
+        },
+        "button": {
+          "$ref": "../split-schema/ButtonStyleSpecification.json"
+        },
+        "active_label": {
+          "$ref": "../split-schema/LabelStyleSpecification.json"
+        },
+        "inactive_label": {
+          "$ref": "../split-schema/LabelStyleSpecification.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

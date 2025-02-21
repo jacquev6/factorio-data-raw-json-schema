@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CargoHatchDefinition.html",
+  "type": "object",
+  "properties": {
+    "hatch_graphics": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "hatch_render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "entering_render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "offset": {
+      "$ref": "../split-schema/Vector.json"
+    },
+    "pod_shadow_offset": {
+      "$ref": "../split-schema/Vector.json"
+    },
+    "sky_slice_height": {
+      "$ref": "../split-schema/float.json"
+    },
+    "slice_height": {
+      "$ref": "../split-schema/float.json"
+    },
+    "travel_height": {
+      "$ref": "../split-schema/float.json"
+    },
+    "busy_timeout_ticks": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "hatch_opening_ticks": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "opening_sound": {
+      "$ref": "../split-schema/InterruptibleSound.json"
+    },
+    "closing_sound": {
+      "$ref": "../split-schema/InterruptibleSound.json"
+    },
+    "cargo_unit_entity_to_spawn": {
+      "$ref": "../split-schema/EntityID.json"
+    },
+    "illumination_graphic_index": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "receiving_cargo_units": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/EntityID.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

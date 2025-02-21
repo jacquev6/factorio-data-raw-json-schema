@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/GlowStyleSpecification.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/BaseStyleSpecification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "glow_style"
+        },
+        "image_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

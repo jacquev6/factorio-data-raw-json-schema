@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ThrusterPerformancePoint.html",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "fluid_volume": {
+          "$ref": "../split-schema/double.json"
+        },
+        "fluid_usage": {
+          "$ref": "../split-schema/FluidAmount.json"
+        },
+        "effectivity": {
+          "$ref": "../split-schema/double.json"
+        }
+      },
+      "required": [
+        "fluid_volume",
+        "fluid_usage",
+        "effectivity"
+      ]
+    },
+    {
+      "type": "array",
+      "items": [
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/double.json"
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/double.json"
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/double.json"
+            }
+          ]
+        }
+      ],
+      "minItems": 3,
+      "maxItems": 3
+    }
+  ]
+}

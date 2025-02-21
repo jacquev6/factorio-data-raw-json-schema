@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/BeamAnimationSet.html",
+  "type": "object",
+  "properties": {
+    "start": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "ending": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "head": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "tail": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "body": {
+      "$ref": "../split-schema/AnimationVariations.json"
+    },
+    "render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    }
+  }
+}

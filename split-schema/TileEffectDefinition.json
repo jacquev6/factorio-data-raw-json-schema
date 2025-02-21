@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/prototypes/TileEffectDefinition.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "tile-effect"
+    },
+    "name": {
+      "$ref": "../split-schema/string.json"
+    },
+    "shader": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "water"
+        },
+        {
+          "type": "string",
+          "const": "space"
+        },
+        {
+          "type": "string",
+          "const": "puddle"
+        }
+      ]
+    },
+    "water": {
+      "$ref": "../split-schema/WaterTileEffectParameters.json"
+    },
+    "space": {
+      "$ref": "../split-schema/SpaceTileEffectParameters.json"
+    },
+    "puddle": {
+      "$ref": "../split-schema/PuddleTileEffectParameters.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "shader",
+    "type"
+  ]
+}

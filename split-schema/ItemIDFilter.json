@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ItemIDFilter.html",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "../split-schema/ItemID.json"
+        },
+        "quality": {
+          "$ref": "../split-schema/QualityID.json"
+        },
+        "comparator": {
+          "$ref": "../split-schema/ComparatorString.json"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "$ref": "../split-schema/ItemID.json"
+    }
+  ]
+}

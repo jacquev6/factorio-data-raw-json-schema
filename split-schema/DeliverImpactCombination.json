@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/prototypes/DeliverImpactCombination.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "deliver-impact-combination"
+    },
+    "name": {
+      "$ref": "../split-schema/string.json"
+    },
+    "impact_category": {
+      "$ref": "../split-schema/string.json"
+    },
+    "deliver_category": {
+      "$ref": "../split-schema/string.json"
+    },
+    "trigger_effect_item": {
+      "$ref": "../split-schema/TriggerEffectItem.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "deliver_category",
+    "impact_category",
+    "name",
+    "trigger_effect_item",
+    "type"
+  ]
+}

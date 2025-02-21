@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ActivityMatchingModifiers.html",
+  "type": "object",
+  "properties": {
+    "multiplier": {
+      "$ref": "../split-schema/float.json"
+    },
+    "minimum": {
+      "$ref": "../split-schema/float.json"
+    },
+    "maximum": {
+      "$ref": "../split-schema/float.json"
+    },
+    "offset": {
+      "$ref": "../split-schema/float.json"
+    },
+    "inverted": {
+      "$ref": "../split-schema/bool.json"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TurretState.html",
+  "anyOf": [
+    {
+      "type": "string",
+      "const": "folded"
+    },
+    {
+      "type": "string",
+      "const": "preparing"
+    },
+    {
+      "type": "string",
+      "const": "prepared"
+    },
+    {
+      "type": "string",
+      "const": "starting-attack"
+    },
+    {
+      "type": "string",
+      "const": "attacking"
+    },
+    {
+      "type": "string",
+      "const": "ending-attack"
+    },
+    {
+      "type": "string",
+      "const": "rotate-for-folding"
+    },
+    {
+      "type": "string",
+      "const": "folding"
+    }
+  ]
+}

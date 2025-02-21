@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/StatelessVisualisation.html",
+  "type": "object",
+  "properties": {
+    "animation": {
+      "$ref": "../split-schema/AnimationVariations.json"
+    },
+    "shadow": {
+      "$ref": "../split-schema/AnimationVariations.json"
+    },
+    "light": {
+      "$ref": "../split-schema/LightDefinition.json"
+    },
+    "count": {
+      "$ref": "../split-schema/uint16.json"
+    },
+    "min_count": {
+      "$ref": "../split-schema/uint16.json"
+    },
+    "max_count": {
+      "$ref": "../split-schema/uint16.json"
+    },
+    "period": {
+      "$ref": "../split-schema/uint16.json"
+    },
+    "particle_tick_offset": {
+      "$ref": "../split-schema/float.json"
+    },
+    "probability": {
+      "$ref": "../split-schema/float.json"
+    },
+    "offset_x": {
+      "$ref": "../split-schema/RangedValue.json"
+    },
+    "offset_y": {
+      "$ref": "../split-schema/RangedValue.json"
+    },
+    "offset_z": {
+      "$ref": "../split-schema/RangedValue.json"
+    },
+    "speed_x": {
+      "$ref": "../split-schema/RangedValue.json"
+    },
+    "speed_y": {
+      "$ref": "../split-schema/RangedValue.json"
+    },
+    "speed_z": {
+      "$ref": "../split-schema/RangedValue.json"
+    },
+    "acceleration_x": {
+      "$ref": "../split-schema/float.json"
+    },
+    "acceleration_y": {
+      "$ref": "../split-schema/float.json"
+    },
+    "acceleration_z": {
+      "$ref": "../split-schema/float.json"
+    },
+    "movement_slowdown_factor_x": {
+      "$ref": "../split-schema/float.json"
+    },
+    "movement_slowdown_factor_y": {
+      "$ref": "../split-schema/float.json"
+    },
+    "movement_slowdown_factor_z": {
+      "$ref": "../split-schema/float.json"
+    },
+    "scale": {
+      "$ref": "../split-schema/RangedValue.json"
+    },
+    "begin_scale": {
+      "$ref": "../split-schema/float.json"
+    },
+    "end_scale": {
+      "$ref": "../split-schema/float.json"
+    },
+    "fade_in_progress_duration": {
+      "$ref": "../split-schema/float.json"
+    },
+    "fade_out_progress_duration": {
+      "$ref": "../split-schema/float.json"
+    },
+    "spread_progress_duration": {
+      "$ref": "../split-schema/float.json"
+    },
+    "adjust_animation_speed_by_base_scale": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "affected_by_wind": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "positions": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/Vector.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "nested_visualisations": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/StatelessVisualisation.json"
+        },
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/StatelessVisualisation.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
+    },
+    "can_lay_on_the_ground": {
+      "$ref": "../split-schema/bool.json"
+    }
+  }
+}

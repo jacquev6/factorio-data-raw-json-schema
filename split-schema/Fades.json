@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/Fades.html",
+  "type": "object",
+  "properties": {
+    "fade_in": {
+      "$ref": "../split-schema/Fade.json"
+    },
+    "fade_out": {
+      "$ref": "../split-schema/Fade.json"
+    }
+  }
+}

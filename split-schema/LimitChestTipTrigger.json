@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/LimitChestTipTrigger.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/CountBasedTipTrigger.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "limit-chest"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

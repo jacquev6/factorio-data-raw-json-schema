@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TileTransitionsBetweenTransitions.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/TileTransitions.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "transition_group1": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "transition_group2": {
+          "$ref": "../split-schema/uint8.json"
+        }
+      },
+      "required": [
+        "transition_group1",
+        "transition_group2"
+      ]
+    }
+  ]
+}

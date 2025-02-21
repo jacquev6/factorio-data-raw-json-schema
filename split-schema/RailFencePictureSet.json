@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/RailFencePictureSet.html",
+  "type": "object",
+  "properties": {
+    "ends": {
+      "type": "array",
+      "items": [
+        {
+          "$ref": "../split-schema/RailFenceDirectionSet.json"
+        },
+        {
+          "$ref": "../split-schema/RailFenceDirectionSet.json"
+        },
+        {
+          "$ref": "../split-schema/RailFenceDirectionSet.json"
+        },
+        {
+          "$ref": "../split-schema/RailFenceDirectionSet.json"
+        }
+      ],
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "fence": {
+      "$ref": "../split-schema/RailFenceDirectionSet.json"
+    },
+    "ends_upper": {
+      "type": "array",
+      "items": [
+        {
+          "$ref": "../split-schema/RailFenceDirectionSet.json"
+        },
+        {
+          "$ref": "../split-schema/RailFenceDirectionSet.json"
+        },
+        {
+          "$ref": "../split-schema/RailFenceDirectionSet.json"
+        },
+        {
+          "$ref": "../split-schema/RailFenceDirectionSet.json"
+        }
+      ],
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "fence_upper": {
+      "$ref": "../split-schema/RailFenceDirectionSet.json"
+    }
+  },
+  "required": [
+    "ends",
+    "fence"
+  ]
+}

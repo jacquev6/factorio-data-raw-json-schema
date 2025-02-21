@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/StreamAttackParameters.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/BaseAttackParameters.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "stream"
+        },
+        "fluid_consumption": {
+          "$ref": "../split-schema/FluidAmount.json"
+        },
+        "gun_barrel_length": {
+          "$ref": "../split-schema/float.json"
+        },
+        "projectile_creation_parameters": {
+          "$ref": "../split-schema/CircularProjectileCreationSpecification.json"
+        },
+        "gun_center_shift": {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/Vector.json"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "north": {
+                  "$ref": "../split-schema/Vector.json"
+                },
+                "east": {
+                  "$ref": "../split-schema/Vector.json"
+                },
+                "south": {
+                  "$ref": "../split-schema/Vector.json"
+                },
+                "west": {
+                  "$ref": "../split-schema/Vector.json"
+                }
+              },
+              "required": [
+                "north"
+              ]
+            }
+          ]
+        },
+        "fluids": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "$ref": "../split-schema/FluidID.json"
+                  },
+                  "damage_modifier": {
+                    "$ref": "../split-schema/double.json"
+                  }
+                },
+                "required": [
+                  "type"
+                ]
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

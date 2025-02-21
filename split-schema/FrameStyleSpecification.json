@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/FrameStyleSpecification.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/BaseStyleSpecification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "frame_style"
+        },
+        "graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "horizontal_flow_style": {
+          "$ref": "../split-schema/HorizontalFlowStyleSpecification.json"
+        },
+        "vertical_flow_style": {
+          "$ref": "../split-schema/VerticalFlowStyleSpecification.json"
+        },
+        "header_flow_style": {
+          "$ref": "../split-schema/HorizontalFlowStyleSpecification.json"
+        },
+        "header_filler_style": {
+          "$ref": "../split-schema/EmptyWidgetStyleSpecification.json"
+        },
+        "title_style": {
+          "$ref": "../split-schema/LabelStyleSpecification.json"
+        },
+        "use_header_filler": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "drag_by_title": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "header_background": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "background_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "border": {
+          "$ref": "../split-schema/BorderImageSet.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CursorBoxType.html",
+  "anyOf": [
+    {
+      "type": "string",
+      "const": "entity"
+    },
+    {
+      "type": "string",
+      "const": "multiplayer-entity"
+    },
+    {
+      "type": "string",
+      "const": "electricity"
+    },
+    {
+      "type": "string",
+      "const": "copy"
+    },
+    {
+      "type": "string",
+      "const": "not-allowed"
+    },
+    {
+      "type": "string",
+      "const": "pair"
+    },
+    {
+      "type": "string",
+      "const": "logistics"
+    },
+    {
+      "type": "string",
+      "const": "train-visualization"
+    },
+    {
+      "type": "string",
+      "const": "blueprint-snap-rectangle"
+    },
+    {
+      "type": "string",
+      "const": "spidertron-remote-selected"
+    },
+    {
+      "type": "string",
+      "const": "spidertron-remote-to-be-selected"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/prototypes/ParticlePrototype.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "optimized-particle"
+    },
+    "name": {
+      "$ref": "../split-schema/string.json"
+    },
+    "order": {
+      "$ref": "../split-schema/Order.json"
+    },
+    "localised_name": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "localised_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "factoriopedia_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "subgroup": {
+      "$ref": "../split-schema/ItemSubGroupID.json"
+    },
+    "hidden": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "hidden_in_factoriopedia": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "parameter": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "factoriopedia_simulation": {
+      "$ref": "../split-schema/SimulationDefinition.json"
+    },
+    "factoriopedia_alternative": {
+      "$ref": "../split-schema/string.json"
+    },
+    "pictures": {
+      "$ref": "../split-schema/AnimationVariations.json"
+    },
+    "life_time": {
+      "$ref": "../split-schema/uint16.json"
+    },
+    "shadows": {
+      "$ref": "../split-schema/AnimationVariations.json"
+    },
+    "draw_shadow_when_on_ground": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "regular_trigger_effect": {
+      "$ref": "../split-schema/TriggerEffect.json"
+    },
+    "ended_in_water_trigger_effect": {
+      "$ref": "../split-schema/TriggerEffect.json"
+    },
+    "ended_on_ground_trigger_effect": {
+      "$ref": "../split-schema/TriggerEffect.json"
+    },
+    "render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "render_layer_when_on_ground": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "regular_trigger_effect_frequency": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "movement_modifier_when_on_ground": {
+      "$ref": "../split-schema/float.json"
+    },
+    "movement_modifier": {
+      "$ref": "../split-schema/float.json"
+    },
+    "vertical_acceleration": {
+      "$ref": "../split-schema/float.json"
+    },
+    "mining_particle_frame_speed": {
+      "$ref": "../split-schema/float.json"
+    },
+    "fade_away_duration": {
+      "$ref": "../split-schema/uint16.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "life_time",
+    "name",
+    "type"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/VariableAmbientSoundVariableSound.html",
+  "type": "object",
+  "properties": {
+    "layers": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/VariableAmbientSoundLayer.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "intermezzo": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "states": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/VariableAmbientSoundState.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "length_seconds": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "alignment_samples": {
+      "$ref": "../split-schema/uint32.json"
+    }
+  },
+  "required": [
+    "layers",
+    "states",
+    "length_seconds"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/AnimationVariations.html",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "sheet": {
+          "$ref": "../split-schema/AnimationSheet.json"
+        },
+        "sheets": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/AnimationSheet.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "$ref": "../split-schema/Animation.json"
+    },
+    {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "../split-schema/Animation.json"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  ]
+}

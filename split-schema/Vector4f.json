@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/Vector4f.html",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "x": {
+          "$ref": "../split-schema/float.json"
+        },
+        "y": {
+          "$ref": "../split-schema/float.json"
+        },
+        "z": {
+          "$ref": "../split-schema/float.json"
+        },
+        "w": {
+          "$ref": "../split-schema/float.json"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "z",
+        "w"
+      ]
+    },
+    {
+      "type": "array",
+      "items": [
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/float.json"
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/float.json"
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/float.json"
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/float.json"
+            }
+          ]
+        }
+      ],
+      "minItems": 4,
+      "maxItems": 4
+    }
+  ]
+}

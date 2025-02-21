@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TechnologyTrigger.html",
+  "anyOf": [
+    {
+      "$ref": "../split-schema/MineEntityTechnologyTrigger.json"
+    },
+    {
+      "$ref": "../split-schema/CraftItemTechnologyTrigger.json"
+    },
+    {
+      "$ref": "../split-schema/CraftFluidTechnologyTrigger.json"
+    },
+    {
+      "$ref": "../split-schema/SendItemToOrbitTechnologyTrigger.json"
+    },
+    {
+      "$ref": "../split-schema/CaptureSpawnerTechnologyTrigger.json"
+    },
+    {
+      "$ref": "../split-schema/BuildEntityTechnologyTrigger.json"
+    },
+    {
+      "$ref": "../split-schema/CreateSpacePlatformTechnologyTrigger.json"
+    }
+  ]
+}

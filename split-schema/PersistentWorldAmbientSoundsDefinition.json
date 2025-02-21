@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/PersistentWorldAmbientSoundsDefinition.html",
+  "type": "object",
+  "properties": {
+    "base_ambience": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/PersistentWorldAmbientSoundDefinition.json"
+        },
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/PersistentWorldAmbientSoundDefinition.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
+    },
+    "wind": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/PersistentWorldAmbientSoundDefinition.json"
+        },
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/PersistentWorldAmbientSoundDefinition.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
+    },
+    "crossfade": {
+      "$ref": "../split-schema/PersistentWorldAmbientSoundsDefinitionCrossfade.json"
+    },
+    "semi_persistent": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/SemiPersistentWorldAmbientSoundDefinition.json"
+        },
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/SemiPersistentWorldAmbientSoundDefinition.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

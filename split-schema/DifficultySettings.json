@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/DifficultySettings.html",
+  "type": "object",
+  "properties": {
+    "technology_price_multiplier": {
+      "$ref": "../split-schema/double.json"
+    },
+    "spoil_time_modifier": {
+      "$ref": "../split-schema/double.json"
+    }
+  }
+}

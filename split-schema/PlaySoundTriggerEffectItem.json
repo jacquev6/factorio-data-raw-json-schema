@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/PlaySoundTriggerEffectItem.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/TriggerEffectItem.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "play-sound"
+        },
+        "sound": {
+          "$ref": "../split-schema/Sound.json"
+        },
+        "min_distance": {
+          "$ref": "../split-schema/float.json"
+        },
+        "max_distance": {
+          "$ref": "../split-schema/float.json"
+        },
+        "volume_modifier": {
+          "$ref": "../split-schema/float.json"
+        },
+        "audible_distance_modifier": {
+          "$ref": "../split-schema/float.json"
+        },
+        "play_on_target_position": {
+          "$ref": "../split-schema/bool.json"
+        }
+      },
+      "required": [
+        "type",
+        "sound"
+      ]
+    }
+  ]
+}

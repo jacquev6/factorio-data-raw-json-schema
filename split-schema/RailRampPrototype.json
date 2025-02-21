@@ -1,0 +1,547 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/prototypes/RailRampPrototype.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "rail-ramp"
+    },
+    "name": {
+      "$ref": "../split-schema/string.json"
+    },
+    "order": {
+      "$ref": "../split-schema/Order.json"
+    },
+    "localised_name": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "localised_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "factoriopedia_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "subgroup": {
+      "$ref": "../split-schema/ItemSubGroupID.json"
+    },
+    "hidden": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "hidden_in_factoriopedia": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "parameter": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "factoriopedia_simulation": {
+      "$ref": "../split-schema/SimulationDefinition.json"
+    },
+    "factoriopedia_alternative": {
+      "$ref": "../split-schema/string.json"
+    },
+    "icons": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/IconData.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "icon": {
+      "$ref": "../split-schema/FileName.json"
+    },
+    "icon_size": {
+      "$ref": "../split-schema/SpriteSizeType.json"
+    },
+    "collision_box": {
+      "$ref": "../split-schema/BoundingBox.json"
+    },
+    "collision_mask": {
+      "$ref": "../split-schema/CollisionMaskConnector.json"
+    },
+    "map_generator_bounding_box": {
+      "$ref": "../split-schema/BoundingBox.json"
+    },
+    "selection_box": {
+      "$ref": "../split-schema/BoundingBox.json"
+    },
+    "drawing_box_vertical_extension": {
+      "$ref": "../split-schema/double.json"
+    },
+    "sticker_box": {
+      "$ref": "../split-schema/BoundingBox.json"
+    },
+    "hit_visualization_box": {
+      "$ref": "../split-schema/BoundingBox.json"
+    },
+    "trigger_target_mask": {
+      "$ref": "../split-schema/TriggerTargetMask.json"
+    },
+    "flags": {
+      "$ref": "../split-schema/EntityPrototypeFlags.json"
+    },
+    "tile_buildability_rules": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/TileBuildabilityRule.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "minable": {
+      "$ref": "../split-schema/MinableProperties.json"
+    },
+    "surface_conditions": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/SurfaceCondition.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "deconstruction_alternative": {
+      "$ref": "../split-schema/EntityID.json"
+    },
+    "selection_priority": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "build_grid_size": {
+      "type": "integer",
+      "const": 2
+    },
+    "remove_decoratives": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "automatic"
+        },
+        {
+          "type": "string",
+          "const": "true"
+        },
+        {
+          "type": "string",
+          "const": "false"
+        }
+      ]
+    },
+    "emissions_per_second": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "../split-schema/double.json"
+      },
+      "propertyNames": {
+        "$ref": "../split-schema/AirbornePollutantID.json"
+      }
+    },
+    "shooting_cursor_size": {
+      "$ref": "../split-schema/double.json"
+    },
+    "created_smoke": {
+      "$ref": "../split-schema/CreateTrivialSmokeEffectItem.json"
+    },
+    "working_sound": {
+      "$ref": "../split-schema/WorkingSound.json"
+    },
+    "created_effect": {
+      "$ref": "../split-schema/Trigger.json"
+    },
+    "build_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "mined_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "mining_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "rotated_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "impact_category": {
+      "$ref": "../split-schema/string.json"
+    },
+    "open_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "close_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "placeable_position_visualization": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "radius_visualisation_specification": {
+      "$ref": "../split-schema/RadiusVisualisationSpecification.json"
+    },
+    "stateless_visualisation": {
+      "$ref": "../split-schema/StatelessVisualisations.json"
+    },
+    "build_base_evolution_requirement": {
+      "$ref": "../split-schema/double.json"
+    },
+    "alert_icon_shift": {
+      "$ref": "../split-schema/Vector.json"
+    },
+    "alert_icon_scale": {
+      "$ref": "../split-schema/float.json"
+    },
+    "fast_replaceable_group": {
+      "$ref": "../split-schema/string.json"
+    },
+    "next_upgrade": {
+      "$ref": "../split-schema/EntityID.json"
+    },
+    "protected_from_tile_building": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "heating_energy": {
+      "$ref": "../split-schema/Energy.json"
+    },
+    "allow_copy_paste": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "selectable_in_game": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "placeable_by": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/ItemToPlace.json"
+        },
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/ItemToPlace.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
+    },
+    "remains_when_mined": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/EntityID.json"
+        },
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/EntityID.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
+    },
+    "additional_pastable_entities": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/EntityID.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "tile_width": {
+      "$ref": "../split-schema/int32.json"
+    },
+    "tile_height": {
+      "$ref": "../split-schema/int32.json"
+    },
+    "diagonal_tile_grid_size": {
+      "$ref": "../split-schema/TilePosition.json"
+    },
+    "autoplace": {
+      "$ref": "../split-schema/AutoplaceSpecification.json"
+    },
+    "map_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "friendly_map_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "enemy_map_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "water_reflection": {
+      "$ref": "../split-schema/WaterReflectionDefinition.json"
+    },
+    "ambient_sounds_group": {
+      "$ref": "../split-schema/EntityID.json"
+    },
+    "ambient_sounds": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/WorldAmbientSoundDefinition.json"
+        },
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/WorldAmbientSoundDefinition.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
+    },
+    "icon_draw_specification": {
+      "$ref": "../split-schema/IconDrawSpecification.json"
+    },
+    "icons_positioning": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/IconSequencePositioning.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "max_health": {
+      "$ref": "../split-schema/float.json"
+    },
+    "healing_per_tick": {
+      "$ref": "../split-schema/float.json"
+    },
+    "repair_speed_modifier": {
+      "$ref": "../split-schema/float.json"
+    },
+    "dying_explosion": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/ExplosionDefinition.json"
+        },
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/ExplosionDefinition.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
+    },
+    "dying_trigger_effect": {
+      "$ref": "../split-schema/TriggerEffect.json"
+    },
+    "damaged_trigger_effect": {
+      "$ref": "../split-schema/TriggerEffect.json"
+    },
+    "loot": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/LootItem.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "resistances": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/Resistance.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "attack_reaction": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/AttackReactionItem.json"
+        },
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/AttackReactionItem.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
+    },
+    "repair_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "alert_when_damaged": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "hide_resistances": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "create_ghost_on_death": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "random_corpse_variation": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "integration_patch_render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "corpse": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/EntityID.json"
+        },
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/EntityID.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
+    },
+    "integration_patch": {
+      "$ref": "../split-schema/Sprite4Way.json"
+    },
+    "overkill_fraction": {
+      "$ref": "../split-schema/float.json"
+    },
+    "is_military_target": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "allow_run_time_change_of_is_military_target": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "quality_indicator_scale": {
+      "$ref": "../split-schema/double.json"
+    },
+    "walking_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "pictures": {
+      "$ref": "../split-schema/RailPictureSet.json"
+    },
+    "fence_pictures": {
+      "$ref": "../split-schema/RailFenceGraphicsSet.json"
+    },
+    "extra_planner_penalty": {
+      "$ref": "../split-schema/double.json"
+    },
+    "extra_planner_goal_penalty": {
+      "$ref": "../split-schema/double.json"
+    },
+    "forced_fence_segment_count": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "ending_shifts": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/Vector.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "deconstruction_marker_positions": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/Vector.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "removes_soft_decoratives": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "support_range": {
+      "$ref": "../split-schema/float.json"
+    },
+    "collision_mask_allow_on_deep_oil_ocean": {
+      "$ref": "../split-schema/CollisionMaskConnector.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "pictures",
+    "type"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TrainVisualizationConstants.html",
+  "type": "object",
+  "properties": {
+    "not_last_box_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "last_box_color": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "box_width": {
+      "$ref": "../split-schema/float.json"
+    },
+    "box_length": {
+      "$ref": "../split-schema/float.json"
+    },
+    "joint_distance": {
+      "$ref": "../split-schema/float.json"
+    },
+    "connection_distance": {
+      "$ref": "../split-schema/float.json"
+    },
+    "final_margin": {
+      "$ref": "../split-schema/float.json"
+    },
+    "stock_number_scale": {
+      "$ref": "../split-schema/float.json"
+    }
+  },
+  "required": [
+    "not_last_box_color",
+    "last_box_color",
+    "box_width",
+    "box_length",
+    "joint_distance",
+    "connection_distance",
+    "final_margin",
+    "stock_number_scale"
+  ]
+}

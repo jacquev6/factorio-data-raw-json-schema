@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ProcessionAudio.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "$ref": "../split-schema/ProcessionAudioType.json"
+    },
+    "sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "looped_sound": {
+      "$ref": "../split-schema/InterruptibleSound.json"
+    },
+    "catalogue_id": {
+      "$ref": "../split-schema/uint32.json"
+    }
+  },
+  "required": [
+    "type"
+  ]
+}

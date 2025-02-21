@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ChargableGraphics.html",
+  "type": "object",
+  "properties": {
+    "picture": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "charge_animation": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "charge_animation_is_looped": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "charge_light": {
+      "$ref": "../split-schema/LightDefinition.json"
+    },
+    "charge_cooldown": {
+      "$ref": "../split-schema/uint16.json"
+    },
+    "discharge_animation": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "discharge_light": {
+      "$ref": "../split-schema/LightDefinition.json"
+    },
+    "discharge_cooldown": {
+      "$ref": "../split-schema/uint16.json"
+    }
+  }
+}

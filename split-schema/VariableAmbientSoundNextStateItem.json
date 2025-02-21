@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/VariableAmbientSoundNextStateItem.html",
+  "type": "object",
+  "properties": {
+    "state": {
+      "$ref": "../split-schema/string.json"
+    },
+    "conditions": {
+      "$ref": "../split-schema/VariableAmbientSoundNextStateConditions.json"
+    }
+  },
+  "required": [
+    "state",
+    "conditions"
+  ]
+}

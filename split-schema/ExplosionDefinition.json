@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ExplosionDefinition.html",
+  "anyOf": [
+    {
+      "$ref": "../split-schema/EntityID.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "../split-schema/EntityID.json"
+        },
+        "offset": {
+          "$ref": "../split-schema/Vector.json"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    }
+  ]
+}

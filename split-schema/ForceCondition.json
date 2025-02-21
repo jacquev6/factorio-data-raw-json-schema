@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ForceCondition.html",
+  "anyOf": [
+    {
+      "type": "string",
+      "const": "all"
+    },
+    {
+      "type": "string",
+      "const": "enemy"
+    },
+    {
+      "type": "string",
+      "const": "ally"
+    },
+    {
+      "type": "string",
+      "const": "friend"
+    },
+    {
+      "type": "string",
+      "const": "not-friend"
+    },
+    {
+      "type": "string",
+      "const": "same"
+    },
+    {
+      "type": "string",
+      "const": "not-same"
+    }
+  ]
+}

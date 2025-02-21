@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/RadioButtonStyleSpecification.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/StyleWithClickableGraphicalSetSpecification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "radiobutton_style"
+        },
+        "font": {
+          "$ref": "../split-schema/string.json"
+        },
+        "font_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "disabled_font_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "text_padding": {
+          "$ref": "../split-schema/uint32.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

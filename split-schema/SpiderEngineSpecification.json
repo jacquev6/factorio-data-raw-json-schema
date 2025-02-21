@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/SpiderEngineSpecification.html",
+  "type": "object",
+  "properties": {
+    "legs": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/SpiderLegSpecification.json"
+        },
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/SpiderLegSpecification.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
+    },
+    "walking_group_overlap": {
+      "$ref": "../split-schema/float.json"
+    }
+  },
+  "required": [
+    "legs"
+  ]
+}

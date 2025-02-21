@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/SoundModifierType.html",
+  "anyOf": [
+    {
+      "type": "string",
+      "const": "game"
+    },
+    {
+      "type": "string",
+      "const": "main-menu"
+    },
+    {
+      "type": "string",
+      "const": "tips-and-tricks"
+    },
+    {
+      "type": "string",
+      "const": "driving"
+    },
+    {
+      "type": "string",
+      "const": "elevation"
+    },
+    {
+      "type": "string",
+      "const": "space-platform"
+    }
+  ]
+}

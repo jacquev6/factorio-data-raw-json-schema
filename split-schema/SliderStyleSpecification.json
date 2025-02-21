@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/SliderStyleSpecification.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/BaseStyleSpecification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "slider_style"
+        },
+        "full_bar": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "full_bar_disabled": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "empty_bar": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "empty_bar_disabled": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "draw_notches": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "notch": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "button": {
+          "$ref": "../split-schema/ButtonStyleSpecification.json"
+        },
+        "high_button": {
+          "$ref": "../split-schema/ButtonStyleSpecification.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

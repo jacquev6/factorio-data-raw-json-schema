@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/SoundAccent.html",
+  "type": "object",
+  "properties": {
+    "sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "frame": {
+      "$ref": "../split-schema/uint16.json"
+    },
+    "audible_distance_modifier": {
+      "$ref": "../split-schema/float.json"
+    },
+    "play_for_working_visualisations": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/string.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/OrientedCliffPrototype.html",
+  "type": "object",
+  "properties": {
+    "render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "collision_bounding_box": {
+      "$ref": "../split-schema/BoundingBox.json"
+    },
+    "pictures": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    },
+    "pictures_lower": {
+      "$ref": "../split-schema/SpriteVariations.json"
+    }
+  },
+  "required": [
+    "collision_bounding_box"
+  ]
+}

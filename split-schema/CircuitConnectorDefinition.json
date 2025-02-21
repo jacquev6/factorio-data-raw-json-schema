@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CircuitConnectorDefinition.html",
+  "type": "object",
+  "properties": {
+    "sprites": {
+      "$ref": "../split-schema/CircuitConnectorSprites.json"
+    },
+    "points": {
+      "$ref": "../split-schema/WireConnectionPoint.json"
+    }
+  }
+}

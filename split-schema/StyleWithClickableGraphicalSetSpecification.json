@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/StyleWithClickableGraphicalSetSpecification.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/BaseStyleSpecification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "default_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "hovered_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "clicked_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "disabled_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "selected_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "selected_hovered_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "game_controller_selected_hovered_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "selected_clicked_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "left_click_sound": {
+          "$ref": "../split-schema/Sound.json"
+        }
+      }
+    }
+  ]
+}

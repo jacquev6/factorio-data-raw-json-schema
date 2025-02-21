@@ -1,0 +1,2507 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/prototypes/UtilitySprites.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "utility-sprites"
+    },
+    "name": {
+      "$ref": "../split-schema/string.json"
+    },
+    "order": {
+      "$ref": "../split-schema/Order.json"
+    },
+    "localised_name": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "localised_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "factoriopedia_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "subgroup": {
+      "$ref": "../split-schema/ItemSubGroupID.json"
+    },
+    "hidden": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "hidden_in_factoriopedia": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "parameter": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "factoriopedia_simulation": {
+      "$ref": "../split-schema/SimulationDefinition.json"
+    },
+    "cursor_box": {
+      "type": "object",
+      "properties": {
+        "regular": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/BoxSpecification.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "multiplayer_selection": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/BoxSpecification.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "not_allowed": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/BoxSpecification.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "copy": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/BoxSpecification.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "electricity": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/BoxSpecification.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "logistics": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/BoxSpecification.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "pair": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/BoxSpecification.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "train_visualization": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/BoxSpecification.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "blueprint_snap_rectangle": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/BoxSpecification.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "rts_selected": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/BoxSpecification.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "rts_to_be_selected": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/BoxSpecification.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "regular",
+        "multiplayer_selection",
+        "not_allowed",
+        "copy",
+        "electricity",
+        "logistics",
+        "pair",
+        "train_visualization",
+        "blueprint_snap_rectangle"
+      ]
+    },
+    "platform_entity_build_animations": {
+      "type": "object",
+      "properties": {
+        "back_left": {
+          "$ref": "../split-schema/EntityBuildAnimationPiece.json"
+        },
+        "back_right": {
+          "$ref": "../split-schema/EntityBuildAnimationPiece.json"
+        },
+        "front_left": {
+          "$ref": "../split-schema/EntityBuildAnimationPiece.json"
+        },
+        "front_right": {
+          "$ref": "../split-schema/EntityBuildAnimationPiece.json"
+        }
+      },
+      "required": [
+        "back_left",
+        "back_right",
+        "front_left",
+        "front_right"
+      ]
+    },
+    "bookmark": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "center": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "check_mark": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "check_mark_white": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "check_mark_green": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "check_mark_dark_green": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "not_played_yet_green": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "not_played_yet_dark_green": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "played_green": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "played_dark_green": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "close_fat": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "close": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "close_black": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "backward_arrow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "backward_arrow_black": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "forward_arrow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "forward_arrow_black": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "recipe_arrow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "close_map_preview": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "color_picker": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "change_recipe": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "dropdown": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "downloading": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "downloaded": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "equipment_grid": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "expand_dots": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "export": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "import": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "map": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "map_exchange_string": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "missing_mod_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "not_available": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "not_available_black": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "play": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "stop": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "preset": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "refresh": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "reset": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "reset_white": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "shuffle": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "station_name": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "search": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "sync_mods": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "trash": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "trash_white": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "copy": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "reassign": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "warning": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "warning_white": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "list_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "grid_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "slots_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "reference_point": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "mouse_cursor": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "mouse_cursor_macos": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "mod_category": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "mod_last_updated": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "mod_downloads_count": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "item_to_be_delivered_symbol": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "rebuild_mark": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "any_quality": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "mod_dependency_arrow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "add": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "add_white": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "clone": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "go_to_arrow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "pause": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "speed_down": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "speed_up": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "editor_speed_down": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "editor_pause": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "editor_play": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "editor_speed_up": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "tick_once": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "tick_sixty": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "tick_custom": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "search_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "too_far": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "shoot_cursor_green": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "shoot_cursor_red": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "electricity_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "lightning_warning_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "fuel_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "ammo_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "fluid_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "warning_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "danger_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "destroyed_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "recharge_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "no_path_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "destination_full_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "too_far_from_roboport_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "pump_cannot_connect_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "not_enough_repair_packs_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "not_enough_construction_robots_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "no_building_material_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "no_storage_space_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "no_platform_storage_space_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "asteroid_collector_path_blocked_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "unclaimed_cargo_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "no_roboport_storage_space_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "cargo_bay_not_connected_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "frozen_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "pipeline_disabled_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "electricity_icon_unplugged": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "tooltip_category_spoilable": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "resources_depleted_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "game_stopped_visualization": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "health_bar_green_pip": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "health_bar_yellow_pip": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "health_bar_red_pip": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "ghost_bar_pip": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "bar_gray_pip": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "shield_bar_pip": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "hand": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "hand_black": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "entity_info_dark_background": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "medium_gui_arrow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "small_gui_arrow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "light_medium": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "light_small": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "light_cone": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "color_effect": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "clock": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "default_ammo_damage_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "default_gun_speed_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "default_turret_attack_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "hint_arrow_up": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "hint_arrow_down": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "hint_arrow_right": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "hint_arrow_left": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "fluid_indication_arrow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "fluid_indication_arrow_both_ways": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "heat_exchange_indication": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "indication_arrow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "rail_planner_indication_arrow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "rail_planner_indication_arrow_anchored": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "rail_planner_indication_arrow_too_far": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "rail_path_not_possible": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "indication_line": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "short_indication_line": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "short_indication_line_green": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "empty_module_slot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "empty_armor_slot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "empty_gun_slot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "empty_ammo_slot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "empty_robot_slot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "empty_robot_material_slot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "empty_inserter_hand_slot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "empty_trash_slot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "empty_drop_cargo_slot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "upgrade_blueprint": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "slot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "equipment_slot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "equipment_collision": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "battery": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "green_circle": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "green_dot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "robot_slot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "set_bar_slot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "missing_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "deconstruction_mark": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "buildability_collision": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "buildability_elevated_collision_line": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "buildability_elevated_collision_top": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "buildability_elevated_collision_bottom": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "buildability_collision_elevated": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "upgrade_mark": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "confirm_slot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "export_slot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "import_slot": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "none_editor_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "cable_editor_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "tile_editor_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "decorative_editor_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "asteroid_chunk_editor_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "resource_editor_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "entity_editor_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "item_editor_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "force_editor_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "clone_editor_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "scripting_editor_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "paint_bucket_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "surface_editor_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "time_editor_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "cliff_editor_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "brush_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "spray_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "cursor_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "area_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "line_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "variations_tool_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "lua_snippet_tool_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "editor_selection": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "brush_square_shape": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "brush_circle_shape": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "player_force_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "neutral_force_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "enemy_force_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "nature_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "no_nature_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "multiplayer_waiting_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "spawn_flag": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "questionmark": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "copper_wire": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "green_wire": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "red_wire": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "copper_wire_highlight": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "green_wire_highlight": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "red_wire_highlight": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "wire_shadow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "and_or": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "left_arrow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "right_arrow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "down_arrow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "enter": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "move_tag": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "side_menu_blueprint_library_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "side_menu_production_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "side_menu_bonus_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "side_menu_tutorials_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "side_menu_factoriopedia_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "side_menu_train_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "side_menu_achievements_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "side_menu_menu_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "side_menu_map_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "side_menu_space_platforms_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "side_menu_technology_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "side_menu_logistic_networks_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "side_menu_players_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "circuit_network_panel": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "logistic_network_panel_white": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "logistic_network_panel_black": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "rename_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "achievement_warning": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "achievement_label": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "achievement_label_completed": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "achievement_label_failed": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "rail_signal_placement_indicator": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "train_stop_placement_indicator": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "rail_support_placement_indicator": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "placement_indicator_leg": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "grey_rail_signal_placement_indicator": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "grey_placement_indicator_leg": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "logistic_radius_visualization": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "construction_radius_visualization": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "track_button": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "track_button_white": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "show_logistics_network_in_map_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "show_electric_network_in_map_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "show_turret_range_in_map_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "show_train_station_names_in_map_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "show_player_names_in_map_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "show_tags_in_map_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "show_worker_robots_in_map_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "show_rail_signal_states_in_map_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "show_recipe_icons_in_map_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "show_pipelines_in_map_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "train_stop_in_map_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "train_stop_disabled_in_map_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "train_stop_full_in_map_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "custom_tag_in_map_view": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "covered_chunk": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "white_square": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "white_square_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "white_mask": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "crafting_machine_recipe_not_unlocked": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "filter_blacklist": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "gps_map_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "custom_tag_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "space_age_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "tip_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "underground_remove_belts": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "max_distance_underground_remove_belts": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "underground_remove_pipes": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "underground_pipe_connection": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "ghost_cursor": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "tile_ghost_cursor": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "force_ghost_cursor": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "force_tile_ghost_cursor": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "cross_select": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "crosshair": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "expand": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "collapse": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "status_working": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "status_not_working": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "status_yellow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "status_blue": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "status_inactive": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "gradient": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "output_console_gradient": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "select_icon_white": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "select_icon_black": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "notification": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "alert_arrow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "pin_arrow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "pin_center": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "technology_white": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "feedback": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "sort_by_name": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "sort_by_time": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "parametrise": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "fluid_visualization_connection": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "fluid_visualization_connection_both_ways": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "fluid_visualization_connection_underground": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "fluid_visualization_extent_arrow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "starmap_platform_moving": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "starmap_platform_moving_hovered": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "starmap_platform_moving_clicked": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "starmap_platform_stopped": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "starmap_platform_stopped_hovered": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "starmap_platform_stopped_clicked": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "starmap_platform_stacked": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "starmap_platform_stacked_hovered": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "starmap_platform_stacked_clicked": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "starmap_star": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_a": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_b": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_x": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_y": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_back": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_start": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_leftstick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_rightstick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_leftshoulder": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_rightshoulder": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_dpup": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_dpdown": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_dpleft": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_dpright": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_paddle1": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_paddle2": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_paddle3": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_paddle4": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_righttrigger": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_lefttrigger": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_left_stick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_right_stick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_a": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_b": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_x": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_y": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_back": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_start": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_leftstick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_rightstick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_leftshoulder": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_rightshoulder": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_dpup": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_dpdown": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_dpleft": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_dpright": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_paddle1": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_paddle2": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_paddle3": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_paddle4": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_righttrigger": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_lefttrigger": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_left_stick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_joycon_black_right_stick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_a": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_b": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_x": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_y": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_back": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_start": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_leftstick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_rightstick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_leftshoulder": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_rightshoulder": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_dpup": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_dpdown": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_dpleft": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_dpright": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_righttrigger": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_lefttrigger": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_left_stick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_right_stick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_a": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_b": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_x": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_y": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_back": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_start": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_leftstick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_rightstick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_leftshoulder": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_rightshoulder": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_dpup": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_dpdown": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_dpleft": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_dpright": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_righttrigger": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_lefttrigger": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_left_stick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_xbox_black_right_stick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_a": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_b": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_x": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_y": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_back": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_start": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_leftstick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_rightstick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_leftshoulder": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_rightshoulder": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_dpup": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_dpdown": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_dpleft": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_dpright": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_righttrigger": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_lefttrigger": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_left_stick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_right_stick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_a": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_b": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_x": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_y": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_back": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_start": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_leftstick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_rightstick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_leftshoulder": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_rightshoulder": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_dpup": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_dpdown": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_dpleft": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_dpright": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_righttrigger": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_lefttrigger": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_left_stick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_ps_black_right_stick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_a": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_b": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_x": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_y": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_back": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_start": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_leftstick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_rightstick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_leftshoulder": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_rightshoulder": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_dpup": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_dpdown": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_dpleft": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_dpright": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_paddle1": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_paddle2": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_paddle3": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_paddle4": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_righttrigger": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_lefttrigger": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_left_stick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_right_stick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_a": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_b": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_x": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_y": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_back": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_start": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_leftstick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_rightstick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_leftshoulder": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_rightshoulder": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_dpup": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_dpdown": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_dpleft": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_dpright": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_paddle1": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_paddle2": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_paddle3": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_paddle4": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_righttrigger": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_lefttrigger": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_left_stick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "controller_steamdeck_black_right_stick": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "clouds": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "arrow_button": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "explosion_chart_visualization": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "refresh_white": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "navmesh_pending_icon": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "inserter_stack_size_bonus_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "inserter_stack_size_bonus_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "bulk_inserter_capacity_bonus_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "bulk_inserter_capacity_bonus_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "laboratory_speed_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "laboratory_speed_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_logistic_trash_slots_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_logistic_trash_slots_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "maximum_following_robots_count_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "maximum_following_robots_count_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "worker_robot_speed_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "worker_robot_speed_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "worker_robot_storage_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "worker_robot_storage_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "create_ghost_on_entity_death_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "create_ghost_on_entity_death_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "turret_attack_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "turret_attack_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "ammo_damage_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "ammo_damage_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "give_item_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "give_item_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "gun_speed_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "gun_speed_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "unlock_recipe_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "unlock_recipe_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_crafting_speed_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_crafting_speed_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_mining_speed_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_mining_speed_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_running_speed_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_running_speed_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_build_distance_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_build_distance_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_item_drop_distance_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_item_drop_distance_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_reach_distance_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_reach_distance_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_resource_reach_distance_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_resource_reach_distance_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_item_pickup_distance_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_item_pickup_distance_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_loot_pickup_distance_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_loot_pickup_distance_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_inventory_slots_bonus_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_inventory_slots_bonus_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "deconstruction_time_to_live_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "deconstruction_time_to_live_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "max_failed_attempts_per_tick_per_construction_queue_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "max_failed_attempts_per_tick_per_construction_queue_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "max_successful_attempts_per_tick_per_construction_queue_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "max_successful_attempts_per_tick_per_construction_queue_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_health_bonus_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_health_bonus_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "mining_drill_productivity_bonus_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "mining_drill_productivity_bonus_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "train_braking_force_bonus_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "train_braking_force_bonus_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "worker_robot_battery_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "worker_robot_battery_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "laboratory_productivity_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "laboratory_productivity_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "follower_robot_lifetime_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "follower_robot_lifetime_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "artillery_range_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "artillery_range_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "nothing_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "nothing_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_additional_mining_categories_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_additional_mining_categories_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_logistic_requests_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "character_logistic_requests_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "unlock_space_location_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "unlock_space_location_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "unlock_quality_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "unlock_quality_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "unlock_space_platforms_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "unlock_space_platforms_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "unlock_circuit_network_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "unlock_circuit_network_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "cargo_landing_pad_count_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "cargo_landing_pad_count_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "change_recipe_productivity_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "change_recipe_productivity_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "cliff_deconstruction_enabled_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "cliff_deconstruction_enabled_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "mining_with_fluid_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "mining_with_fluid_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "rail_support_on_deep_oil_ocean_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "rail_support_on_deep_oil_ocean_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "rail_planner_allow_elevated_rails_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "rail_planner_allow_elevated_rails_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "beacon_distribution_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "beacon_distribution_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "belt_stack_size_bonus_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "belt_stack_size_bonus_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "vehicle_logistics_modifier_icon": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "vehicle_logistics_modifier_constant": {
+      "$ref": "../split-schema/Sprite.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "achievement_label",
+    "achievement_label_completed",
+    "achievement_label_failed",
+    "achievement_warning",
+    "add",
+    "add_white",
+    "alert_arrow",
+    "ammo_damage_modifier_icon",
+    "ammo_icon",
+    "and_or",
+    "any_quality",
+    "area_icon",
+    "arrow_button",
+    "artillery_range_modifier_icon",
+    "asteroid_chunk_editor_icon",
+    "asteroid_collector_path_blocked_icon",
+    "backward_arrow",
+    "backward_arrow_black",
+    "bar_gray_pip",
+    "battery",
+    "beacon_distribution_modifier_icon",
+    "belt_stack_size_bonus_modifier_icon",
+    "bookmark",
+    "brush_circle_shape",
+    "brush_icon",
+    "brush_square_shape",
+    "buildability_collision",
+    "buildability_collision_elevated",
+    "buildability_elevated_collision_bottom",
+    "buildability_elevated_collision_line",
+    "buildability_elevated_collision_top",
+    "bulk_inserter_capacity_bonus_modifier_icon",
+    "cable_editor_icon",
+    "cargo_bay_not_connected_icon",
+    "cargo_landing_pad_count_modifier_icon",
+    "center",
+    "change_recipe",
+    "change_recipe_productivity_modifier_icon",
+    "character_additional_mining_categories_modifier_icon",
+    "character_build_distance_modifier_icon",
+    "character_crafting_speed_modifier_icon",
+    "character_health_bonus_modifier_icon",
+    "character_inventory_slots_bonus_modifier_icon",
+    "character_item_drop_distance_modifier_icon",
+    "character_item_pickup_distance_modifier_icon",
+    "character_logistic_requests_modifier_icon",
+    "character_logistic_trash_slots_modifier_icon",
+    "character_loot_pickup_distance_modifier_icon",
+    "character_mining_speed_modifier_icon",
+    "character_reach_distance_modifier_icon",
+    "character_resource_reach_distance_modifier_icon",
+    "character_running_speed_modifier_icon",
+    "check_mark",
+    "check_mark_dark_green",
+    "check_mark_green",
+    "check_mark_white",
+    "circuit_network_panel",
+    "cliff_deconstruction_enabled_modifier_icon",
+    "cliff_editor_icon",
+    "clock",
+    "clone",
+    "clone_editor_icon",
+    "close",
+    "close_black",
+    "close_fat",
+    "close_map_preview",
+    "clouds",
+    "collapse",
+    "color_effect",
+    "color_picker",
+    "confirm_slot",
+    "construction_radius_visualization",
+    "controller_joycon_a",
+    "controller_joycon_b",
+    "controller_joycon_back",
+    "controller_joycon_black_a",
+    "controller_joycon_black_b",
+    "controller_joycon_black_back",
+    "controller_joycon_black_dpdown",
+    "controller_joycon_black_dpleft",
+    "controller_joycon_black_dpright",
+    "controller_joycon_black_dpup",
+    "controller_joycon_black_left_stick",
+    "controller_joycon_black_leftshoulder",
+    "controller_joycon_black_leftstick",
+    "controller_joycon_black_lefttrigger",
+    "controller_joycon_black_paddle1",
+    "controller_joycon_black_paddle2",
+    "controller_joycon_black_paddle3",
+    "controller_joycon_black_paddle4",
+    "controller_joycon_black_right_stick",
+    "controller_joycon_black_rightshoulder",
+    "controller_joycon_black_rightstick",
+    "controller_joycon_black_righttrigger",
+    "controller_joycon_black_start",
+    "controller_joycon_black_x",
+    "controller_joycon_black_y",
+    "controller_joycon_dpdown",
+    "controller_joycon_dpleft",
+    "controller_joycon_dpright",
+    "controller_joycon_dpup",
+    "controller_joycon_left_stick",
+    "controller_joycon_leftshoulder",
+    "controller_joycon_leftstick",
+    "controller_joycon_lefttrigger",
+    "controller_joycon_paddle1",
+    "controller_joycon_paddle2",
+    "controller_joycon_paddle3",
+    "controller_joycon_paddle4",
+    "controller_joycon_right_stick",
+    "controller_joycon_rightshoulder",
+    "controller_joycon_rightstick",
+    "controller_joycon_righttrigger",
+    "controller_joycon_start",
+    "controller_joycon_x",
+    "controller_joycon_y",
+    "controller_ps_a",
+    "controller_ps_b",
+    "controller_ps_back",
+    "controller_ps_black_a",
+    "controller_ps_black_b",
+    "controller_ps_black_back",
+    "controller_ps_black_dpdown",
+    "controller_ps_black_dpleft",
+    "controller_ps_black_dpright",
+    "controller_ps_black_dpup",
+    "controller_ps_black_left_stick",
+    "controller_ps_black_leftshoulder",
+    "controller_ps_black_leftstick",
+    "controller_ps_black_lefttrigger",
+    "controller_ps_black_right_stick",
+    "controller_ps_black_rightshoulder",
+    "controller_ps_black_rightstick",
+    "controller_ps_black_righttrigger",
+    "controller_ps_black_start",
+    "controller_ps_black_x",
+    "controller_ps_black_y",
+    "controller_ps_dpdown",
+    "controller_ps_dpleft",
+    "controller_ps_dpright",
+    "controller_ps_dpup",
+    "controller_ps_left_stick",
+    "controller_ps_leftshoulder",
+    "controller_ps_leftstick",
+    "controller_ps_lefttrigger",
+    "controller_ps_right_stick",
+    "controller_ps_rightshoulder",
+    "controller_ps_rightstick",
+    "controller_ps_righttrigger",
+    "controller_ps_start",
+    "controller_ps_x",
+    "controller_ps_y",
+    "controller_steamdeck_a",
+    "controller_steamdeck_b",
+    "controller_steamdeck_back",
+    "controller_steamdeck_black_a",
+    "controller_steamdeck_black_b",
+    "controller_steamdeck_black_back",
+    "controller_steamdeck_black_dpdown",
+    "controller_steamdeck_black_dpleft",
+    "controller_steamdeck_black_dpright",
+    "controller_steamdeck_black_dpup",
+    "controller_steamdeck_black_left_stick",
+    "controller_steamdeck_black_leftshoulder",
+    "controller_steamdeck_black_leftstick",
+    "controller_steamdeck_black_lefttrigger",
+    "controller_steamdeck_black_paddle1",
+    "controller_steamdeck_black_paddle2",
+    "controller_steamdeck_black_paddle3",
+    "controller_steamdeck_black_paddle4",
+    "controller_steamdeck_black_right_stick",
+    "controller_steamdeck_black_rightshoulder",
+    "controller_steamdeck_black_rightstick",
+    "controller_steamdeck_black_righttrigger",
+    "controller_steamdeck_black_start",
+    "controller_steamdeck_black_x",
+    "controller_steamdeck_black_y",
+    "controller_steamdeck_dpdown",
+    "controller_steamdeck_dpleft",
+    "controller_steamdeck_dpright",
+    "controller_steamdeck_dpup",
+    "controller_steamdeck_left_stick",
+    "controller_steamdeck_leftshoulder",
+    "controller_steamdeck_leftstick",
+    "controller_steamdeck_lefttrigger",
+    "controller_steamdeck_paddle1",
+    "controller_steamdeck_paddle2",
+    "controller_steamdeck_paddle3",
+    "controller_steamdeck_paddle4",
+    "controller_steamdeck_right_stick",
+    "controller_steamdeck_rightshoulder",
+    "controller_steamdeck_rightstick",
+    "controller_steamdeck_righttrigger",
+    "controller_steamdeck_start",
+    "controller_steamdeck_x",
+    "controller_steamdeck_y",
+    "controller_xbox_a",
+    "controller_xbox_b",
+    "controller_xbox_back",
+    "controller_xbox_black_a",
+    "controller_xbox_black_b",
+    "controller_xbox_black_back",
+    "controller_xbox_black_dpdown",
+    "controller_xbox_black_dpleft",
+    "controller_xbox_black_dpright",
+    "controller_xbox_black_dpup",
+    "controller_xbox_black_left_stick",
+    "controller_xbox_black_leftshoulder",
+    "controller_xbox_black_leftstick",
+    "controller_xbox_black_lefttrigger",
+    "controller_xbox_black_right_stick",
+    "controller_xbox_black_rightshoulder",
+    "controller_xbox_black_rightstick",
+    "controller_xbox_black_righttrigger",
+    "controller_xbox_black_start",
+    "controller_xbox_black_x",
+    "controller_xbox_black_y",
+    "controller_xbox_dpdown",
+    "controller_xbox_dpleft",
+    "controller_xbox_dpright",
+    "controller_xbox_dpup",
+    "controller_xbox_left_stick",
+    "controller_xbox_leftshoulder",
+    "controller_xbox_leftstick",
+    "controller_xbox_lefttrigger",
+    "controller_xbox_right_stick",
+    "controller_xbox_rightshoulder",
+    "controller_xbox_rightstick",
+    "controller_xbox_righttrigger",
+    "controller_xbox_start",
+    "controller_xbox_x",
+    "controller_xbox_y",
+    "copper_wire",
+    "copper_wire_highlight",
+    "copy",
+    "covered_chunk",
+    "crafting_machine_recipe_not_unlocked",
+    "create_ghost_on_entity_death_modifier_icon",
+    "cross_select",
+    "crosshair",
+    "cursor_box",
+    "cursor_icon",
+    "custom_tag_icon",
+    "custom_tag_in_map_view",
+    "danger_icon",
+    "deconstruction_mark",
+    "deconstruction_time_to_live_modifier_icon",
+    "decorative_editor_icon",
+    "default_ammo_damage_modifier_icon",
+    "default_gun_speed_modifier_icon",
+    "default_turret_attack_modifier_icon",
+    "destination_full_icon",
+    "destroyed_icon",
+    "down_arrow",
+    "downloaded",
+    "downloading",
+    "dropdown",
+    "editor_pause",
+    "editor_play",
+    "editor_selection",
+    "editor_speed_down",
+    "editor_speed_up",
+    "electricity_icon",
+    "electricity_icon_unplugged",
+    "empty_ammo_slot",
+    "empty_armor_slot",
+    "empty_drop_cargo_slot",
+    "empty_gun_slot",
+    "empty_inserter_hand_slot",
+    "empty_module_slot",
+    "empty_robot_material_slot",
+    "empty_robot_slot",
+    "empty_trash_slot",
+    "enemy_force_icon",
+    "enter",
+    "entity_editor_icon",
+    "entity_info_dark_background",
+    "equipment_collision",
+    "equipment_grid",
+    "equipment_slot",
+    "expand",
+    "expand_dots",
+    "explosion_chart_visualization",
+    "export",
+    "export_slot",
+    "feedback",
+    "filter_blacklist",
+    "fluid_icon",
+    "fluid_indication_arrow",
+    "fluid_indication_arrow_both_ways",
+    "fluid_visualization_connection",
+    "fluid_visualization_connection_both_ways",
+    "fluid_visualization_connection_underground",
+    "fluid_visualization_extent_arrow",
+    "follower_robot_lifetime_modifier_icon",
+    "force_editor_icon",
+    "force_ghost_cursor",
+    "force_tile_ghost_cursor",
+    "forward_arrow",
+    "forward_arrow_black",
+    "frozen_icon",
+    "fuel_icon",
+    "game_stopped_visualization",
+    "ghost_bar_pip",
+    "ghost_cursor",
+    "give_item_modifier_icon",
+    "go_to_arrow",
+    "gps_map_icon",
+    "gradient",
+    "green_circle",
+    "green_dot",
+    "green_wire",
+    "green_wire_highlight",
+    "grey_placement_indicator_leg",
+    "grey_rail_signal_placement_indicator",
+    "grid_view",
+    "gun_speed_modifier_icon",
+    "hand",
+    "hand_black",
+    "health_bar_green_pip",
+    "health_bar_red_pip",
+    "health_bar_yellow_pip",
+    "heat_exchange_indication",
+    "hint_arrow_down",
+    "hint_arrow_left",
+    "hint_arrow_right",
+    "hint_arrow_up",
+    "import",
+    "import_slot",
+    "indication_arrow",
+    "indication_line",
+    "inserter_stack_size_bonus_modifier_icon",
+    "item_editor_icon",
+    "item_to_be_delivered_symbol",
+    "laboratory_productivity_modifier_icon",
+    "laboratory_speed_modifier_icon",
+    "left_arrow",
+    "light_cone",
+    "light_medium",
+    "light_small",
+    "lightning_warning_icon",
+    "line_icon",
+    "list_view",
+    "logistic_network_panel_black",
+    "logistic_network_panel_white",
+    "logistic_radius_visualization",
+    "lua_snippet_tool_icon",
+    "map",
+    "map_exchange_string",
+    "max_distance_underground_remove_belts",
+    "max_failed_attempts_per_tick_per_construction_queue_modifier_icon",
+    "max_successful_attempts_per_tick_per_construction_queue_modifier_icon",
+    "maximum_following_robots_count_modifier_icon",
+    "medium_gui_arrow",
+    "mining_drill_productivity_bonus_modifier_icon",
+    "mining_with_fluid_modifier_icon",
+    "missing_icon",
+    "missing_mod_icon",
+    "mod_category",
+    "mod_dependency_arrow",
+    "mod_downloads_count",
+    "mod_last_updated",
+    "mouse_cursor",
+    "mouse_cursor_macos",
+    "move_tag",
+    "multiplayer_waiting_icon",
+    "name",
+    "nature_icon",
+    "navmesh_pending_icon",
+    "neutral_force_icon",
+    "no_building_material_icon",
+    "no_nature_icon",
+    "no_path_icon",
+    "no_platform_storage_space_icon",
+    "no_roboport_storage_space_icon",
+    "no_storage_space_icon",
+    "none_editor_icon",
+    "not_available",
+    "not_available_black",
+    "not_enough_construction_robots_icon",
+    "not_enough_repair_packs_icon",
+    "not_played_yet_dark_green",
+    "not_played_yet_green",
+    "nothing_modifier_icon",
+    "notification",
+    "output_console_gradient",
+    "paint_bucket_icon",
+    "parametrise",
+    "pause",
+    "pin_arrow",
+    "pin_center",
+    "pipeline_disabled_icon",
+    "placement_indicator_leg",
+    "play",
+    "played_dark_green",
+    "played_green",
+    "player_force_icon",
+    "preset",
+    "pump_cannot_connect_icon",
+    "questionmark",
+    "rail_path_not_possible",
+    "rail_planner_allow_elevated_rails_modifier_icon",
+    "rail_planner_indication_arrow",
+    "rail_planner_indication_arrow_anchored",
+    "rail_planner_indication_arrow_too_far",
+    "rail_signal_placement_indicator",
+    "rail_support_on_deep_oil_ocean_modifier_icon",
+    "rail_support_placement_indicator",
+    "reassign",
+    "rebuild_mark",
+    "recharge_icon",
+    "recipe_arrow",
+    "red_wire",
+    "red_wire_highlight",
+    "reference_point",
+    "refresh",
+    "refresh_white",
+    "rename_icon",
+    "reset",
+    "reset_white",
+    "resource_editor_icon",
+    "resources_depleted_icon",
+    "right_arrow",
+    "robot_slot",
+    "scripting_editor_icon",
+    "search",
+    "search_icon",
+    "select_icon_black",
+    "select_icon_white",
+    "set_bar_slot",
+    "shield_bar_pip",
+    "shoot_cursor_green",
+    "shoot_cursor_red",
+    "short_indication_line",
+    "short_indication_line_green",
+    "show_electric_network_in_map_view",
+    "show_logistics_network_in_map_view",
+    "show_pipelines_in_map_view",
+    "show_player_names_in_map_view",
+    "show_rail_signal_states_in_map_view",
+    "show_recipe_icons_in_map_view",
+    "show_tags_in_map_view",
+    "show_train_station_names_in_map_view",
+    "show_turret_range_in_map_view",
+    "show_worker_robots_in_map_view",
+    "shuffle",
+    "side_menu_achievements_icon",
+    "side_menu_blueprint_library_icon",
+    "side_menu_bonus_icon",
+    "side_menu_factoriopedia_icon",
+    "side_menu_logistic_networks_icon",
+    "side_menu_map_icon",
+    "side_menu_menu_icon",
+    "side_menu_players_icon",
+    "side_menu_production_icon",
+    "side_menu_space_platforms_icon",
+    "side_menu_technology_icon",
+    "side_menu_train_icon",
+    "side_menu_tutorials_icon",
+    "slot",
+    "slots_view",
+    "small_gui_arrow",
+    "sort_by_name",
+    "sort_by_time",
+    "space_age_icon",
+    "spawn_flag",
+    "speed_down",
+    "speed_up",
+    "spray_icon",
+    "starmap_platform_moving",
+    "starmap_platform_moving_clicked",
+    "starmap_platform_moving_hovered",
+    "starmap_platform_stacked",
+    "starmap_platform_stacked_clicked",
+    "starmap_platform_stacked_hovered",
+    "starmap_platform_stopped",
+    "starmap_platform_stopped_clicked",
+    "starmap_platform_stopped_hovered",
+    "starmap_star",
+    "station_name",
+    "status_blue",
+    "status_inactive",
+    "status_not_working",
+    "status_working",
+    "status_yellow",
+    "stop",
+    "surface_editor_icon",
+    "sync_mods",
+    "technology_white",
+    "tick_custom",
+    "tick_once",
+    "tick_sixty",
+    "tile_editor_icon",
+    "tile_ghost_cursor",
+    "time_editor_icon",
+    "tip_icon",
+    "too_far",
+    "too_far_from_roboport_icon",
+    "tooltip_category_spoilable",
+    "track_button",
+    "track_button_white",
+    "train_braking_force_bonus_modifier_icon",
+    "train_stop_disabled_in_map_view",
+    "train_stop_full_in_map_view",
+    "train_stop_in_map_view",
+    "train_stop_placement_indicator",
+    "trash",
+    "trash_white",
+    "turret_attack_modifier_icon",
+    "type",
+    "unclaimed_cargo_icon",
+    "underground_pipe_connection",
+    "underground_remove_belts",
+    "underground_remove_pipes",
+    "unlock_circuit_network_modifier_icon",
+    "unlock_quality_modifier_icon",
+    "unlock_recipe_modifier_icon",
+    "unlock_space_location_modifier_icon",
+    "unlock_space_platforms_modifier_icon",
+    "upgrade_blueprint",
+    "upgrade_mark",
+    "variations_tool_icon",
+    "vehicle_logistics_modifier_icon",
+    "warning",
+    "warning_icon",
+    "warning_white",
+    "white_mask",
+    "white_square",
+    "white_square_icon",
+    "wire_shadow",
+    "worker_robot_battery_modifier_icon",
+    "worker_robot_speed_modifier_icon",
+    "worker_robot_storage_modifier_icon"
+  ]
+}

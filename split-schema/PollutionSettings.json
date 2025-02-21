@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/PollutionSettings.html",
+  "type": "object",
+  "properties": {
+    "enabled": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "diffusion_ratio": {
+      "$ref": "../split-schema/double.json"
+    },
+    "min_to_diffuse": {
+      "$ref": "../split-schema/double.json"
+    },
+    "ageing": {
+      "$ref": "../split-schema/double.json"
+    },
+    "expected_max_per_chunk": {
+      "$ref": "../split-schema/double.json"
+    },
+    "min_to_show_per_chunk": {
+      "$ref": "../split-schema/double.json"
+    },
+    "min_pollution_to_damage_trees": {
+      "$ref": "../split-schema/double.json"
+    },
+    "pollution_with_max_forest_damage": {
+      "$ref": "../split-schema/double.json"
+    },
+    "pollution_restored_per_tree_damage": {
+      "$ref": "../split-schema/double.json"
+    },
+    "pollution_per_tree_damage": {
+      "$ref": "../split-schema/double.json"
+    },
+    "max_pollution_to_restore_trees": {
+      "$ref": "../split-schema/double.json"
+    },
+    "enemy_attack_pollution_consumption_modifier": {
+      "$ref": "../split-schema/double.json"
+    }
+  },
+  "required": [
+    "enabled",
+    "diffusion_ratio",
+    "min_to_diffuse",
+    "ageing",
+    "expected_max_per_chunk",
+    "min_to_show_per_chunk",
+    "min_pollution_to_damage_trees",
+    "pollution_with_max_forest_damage",
+    "pollution_restored_per_tree_damage",
+    "pollution_per_tree_damage",
+    "max_pollution_to_restore_trees",
+    "enemy_attack_pollution_consumption_modifier"
+  ]
+}

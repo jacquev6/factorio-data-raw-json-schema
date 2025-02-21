@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/LightningPriorityRule.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/LightningRuleBase.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "priority_bonus": {
+          "$ref": "../split-schema/int32.json"
+        }
+      },
+      "required": [
+        "priority_bonus"
+      ]
+    }
+  ]
+}

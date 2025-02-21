@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ComparatorString.html",
+  "anyOf": [
+    {
+      "type": "string",
+      "const": "="
+    },
+    {
+      "type": "string",
+      "const": ">"
+    },
+    {
+      "type": "string",
+      "const": "<"
+    },
+    {
+      "type": "string",
+      "const": "\u2265"
+    },
+    {
+      "type": "string",
+      "const": ">="
+    },
+    {
+      "type": "string",
+      "const": "\u2264"
+    },
+    {
+      "type": "string",
+      "const": "<="
+    },
+    {
+      "type": "string",
+      "const": "\u2260"
+    },
+    {
+      "type": "string",
+      "const": "!="
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CloudsEffectProperties.html",
+  "type": "object",
+  "properties": {
+    "shape_noise_texture": {
+      "$ref": "../split-schema/EffectTexture.json"
+    },
+    "detail_noise_texture": {
+      "$ref": "../split-schema/EffectTexture.json"
+    },
+    "warp_sample_1": {
+      "$ref": "../split-schema/CloudsTextureCoordinateTransformation.json"
+    },
+    "warp_sample_2": {
+      "$ref": "../split-schema/CloudsTextureCoordinateTransformation.json"
+    },
+    "warped_shape_sample": {
+      "$ref": "../split-schema/CloudsTextureCoordinateTransformation.json"
+    },
+    "additional_density_sample": {
+      "$ref": "../split-schema/CloudsTextureCoordinateTransformation.json"
+    },
+    "detail_sample_1": {
+      "$ref": "../split-schema/CloudsTextureCoordinateTransformation.json"
+    },
+    "detail_sample_2": {
+      "$ref": "../split-schema/CloudsTextureCoordinateTransformation.json"
+    },
+    "scale": {
+      "$ref": "../split-schema/float.json"
+    },
+    "movement_speed_multiplier": {
+      "$ref": "../split-schema/float.json"
+    },
+    "shape_warp_strength": {
+      "$ref": "../split-schema/float.json"
+    },
+    "shape_warp_weight": {
+      "$ref": "../split-schema/float.json"
+    },
+    "opacity": {
+      "$ref": "../split-schema/float.json"
+    },
+    "opacity_at_night": {
+      "$ref": "../split-schema/float.json"
+    },
+    "density": {
+      "$ref": "../split-schema/float.json"
+    },
+    "density_at_night": {
+      "$ref": "../split-schema/float.json"
+    },
+    "detail_factor": {
+      "$ref": "../split-schema/float.json"
+    },
+    "detail_factor_at_night": {
+      "$ref": "../split-schema/float.json"
+    },
+    "shape_factor": {
+      "$ref": "../split-schema/float.json"
+    },
+    "detail_exponent": {
+      "$ref": "../split-schema/float.json"
+    },
+    "detail_sample_morph_duration": {
+      "$ref": "../split-schema/uint32.json"
+    }
+  },
+  "required": [
+    "shape_noise_texture",
+    "detail_noise_texture",
+    "warp_sample_1",
+    "warp_sample_2",
+    "warped_shape_sample",
+    "additional_density_sample",
+    "detail_sample_1",
+    "detail_sample_2"
+  ]
+}

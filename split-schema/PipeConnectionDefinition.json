@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/PipeConnectionDefinition.html",
+  "type": "object",
+  "properties": {
+    "flow_direction": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "input-output"
+        },
+        {
+          "type": "string",
+          "const": "input"
+        },
+        {
+          "type": "string",
+          "const": "output"
+        }
+      ]
+    },
+    "connection_type": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "normal"
+        },
+        {
+          "type": "string",
+          "const": "underground"
+        },
+        {
+          "type": "string",
+          "const": "linked"
+        }
+      ]
+    },
+    "enable_working_visualisations": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/string.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "direction": {
+      "$ref": "../split-schema/Direction.json"
+    },
+    "position": {
+      "$ref": "../split-schema/MapPosition.json"
+    },
+    "positions": {
+      "type": "array",
+      "items": [
+        {
+          "$ref": "../split-schema/MapPosition.json"
+        },
+        {
+          "$ref": "../split-schema/MapPosition.json"
+        },
+        {
+          "$ref": "../split-schema/MapPosition.json"
+        },
+        {
+          "$ref": "../split-schema/MapPosition.json"
+        }
+      ],
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "connection_category": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/string.json"
+        },
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/string.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
+    },
+    "max_underground_distance": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "max_distance_tint": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "underground_collision_mask": {
+      "$ref": "../split-schema/CollisionMaskConnector.json"
+    },
+    "linked_connection_id": {
+      "$ref": "../split-schema/FluidBoxLinkedConnectionID.json"
+    }
+  }
+}

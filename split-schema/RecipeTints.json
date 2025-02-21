@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/RecipeTints.html",
+  "type": "object",
+  "properties": {
+    "primary": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "secondary": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "tertiary": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "quaternary": {
+      "$ref": "../split-schema/Color.json"
+    }
+  }
+}

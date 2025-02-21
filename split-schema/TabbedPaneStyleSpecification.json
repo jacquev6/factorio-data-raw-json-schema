@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TabbedPaneStyleSpecification.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/BaseStyleSpecification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "tabbed_pane_style"
+        },
+        "vertical_spacing": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "tab_content_frame": {
+          "$ref": "../split-schema/FrameStyleSpecification.json"
+        },
+        "tab_container": {
+          "$ref": "../split-schema/TableStyleSpecification.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

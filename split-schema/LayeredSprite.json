@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/LayeredSprite.html",
+  "anyOf": [
+    {
+      "allOf": [
+        {
+          "$ref": "../split-schema/Sprite.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "render_layer": {
+              "$ref": "../split-schema/RenderLayer.json"
+            }
+          },
+          "required": [
+            "render_layer"
+          ]
+        }
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "../split-schema/LayeredSprite.json"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  ]
+}

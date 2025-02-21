@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/WorldAmbientSoundDefinition.html",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "sound": {
+          "$ref": "../split-schema/Sound.json"
+        },
+        "radius": {
+          "$ref": "../split-schema/double.json"
+        },
+        "min_entity_count": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "max_entity_count": {
+          "$ref": "../split-schema/uint32.json"
+        },
+        "entity_to_sound_ratio": {
+          "$ref": "../split-schema/float.json"
+        },
+        "average_pause_seconds": {
+          "$ref": "../split-schema/double.json"
+        }
+      }
+    },
+    {
+      "$ref": "../split-schema/Sound.json"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CreateFireTriggerEffectItem.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/CreateEntityTriggerEffectItem.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "initial_ground_flame_count": {
+          "$ref": "../split-schema/uint8.json"
+        }
+      }
+    }
+  ]
+}

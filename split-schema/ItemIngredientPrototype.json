@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ItemIngredientPrototype.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "item"
+    },
+    "name": {
+      "$ref": "../split-schema/ItemID.json"
+    },
+    "amount": {
+      "$ref": "../split-schema/uint16.json"
+    },
+    "ignored_by_stats": {
+      "$ref": "../split-schema/uint16.json"
+    }
+  },
+  "required": [
+    "type",
+    "name",
+    "amount"
+  ]
+}

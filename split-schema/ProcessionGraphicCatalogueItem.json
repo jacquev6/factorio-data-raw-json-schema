@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ProcessionGraphicCatalogueItem.html",
+  "type": "object",
+  "properties": {
+    "index": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "animation": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "picture": {
+      "$ref": "../split-schema/Sprite.json"
+    }
+  },
+  "required": [
+    "index"
+  ]
+}

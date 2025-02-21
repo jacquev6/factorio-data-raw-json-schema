@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/UnitSpawnDefinition.html",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "$ref": "../split-schema/EntityID.json"
+        },
+        "spawn_points": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/SpawnPoint.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "unit",
+        "spawn_points"
+      ]
+    },
+    {
+      "type": "array",
+      "items": [
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/EntityID.json"
+            }
+          ]
+        },
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "../split-schema/SpawnPoint.json"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    }
+  ]
+}

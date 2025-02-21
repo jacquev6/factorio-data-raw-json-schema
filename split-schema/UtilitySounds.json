@@ -1,0 +1,305 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/prototypes/UtilitySounds.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "utility-sounds"
+    },
+    "name": {
+      "$ref": "../split-schema/string.json"
+    },
+    "order": {
+      "$ref": "../split-schema/Order.json"
+    },
+    "localised_name": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "localised_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "factoriopedia_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "subgroup": {
+      "$ref": "../split-schema/ItemSubGroupID.json"
+    },
+    "hidden": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "hidden_in_factoriopedia": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "parameter": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "factoriopedia_simulation": {
+      "$ref": "../split-schema/SimulationDefinition.json"
+    },
+    "gui_click": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "list_box_click": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "build_small": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "build_medium": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "build_large": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "build_huge": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "cannot_build": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "build_blueprint_small": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "build_blueprint_medium": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "build_blueprint_large": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "build_blueprint_huge": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "build_ghost_upgrade": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "build_ghost_upgrade_cancel": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "build_animated_small": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "build_animated_medium": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "build_animated_large": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "build_animated_huge": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "deconstruct_small": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "deconstruct_medium": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "deconstruct_large": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "deconstruct_huge": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "deconstruct_robot": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "rotated_small": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "rotated_medium": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "rotated_large": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "rotated_huge": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "axe_mining_ore": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "axe_mining_stone": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "mining_wood": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "axe_fighting": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "alert_destroyed": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "console_message": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "scenario_message": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "new_objective": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "game_lost": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "game_won": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "metal_walking_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "research_completed": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "default_manual_repair": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "crafting_finished": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "inventory_click": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "inventory_move": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "clear_cursor": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "armor_insert": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "armor_remove": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "achievement_unlocked": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "wire_connect_pole": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "wire_disconnect": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "wire_pickup": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "tutorial_notice": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "smart_pipette": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "switch_gun": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "picked_up_item": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "paste_activated": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "item_deleted": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "entity_settings_pasted": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "entity_settings_copied": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "item_spawned": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "confirm": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "undo": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "drop_item": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "rail_plan_start": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "default_driving_sound": {
+      "$ref": "../split-schema/InterruptibleSound.json"
+    },
+    "default_landing_steps": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "segment_dying_sound": {
+      "$ref": "../split-schema/Sound.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "achievement_unlocked",
+    "alert_destroyed",
+    "armor_insert",
+    "armor_remove",
+    "axe_fighting",
+    "axe_mining_ore",
+    "axe_mining_stone",
+    "build_animated_huge",
+    "build_animated_large",
+    "build_animated_medium",
+    "build_animated_small",
+    "build_blueprint_huge",
+    "build_blueprint_large",
+    "build_blueprint_medium",
+    "build_blueprint_small",
+    "build_ghost_upgrade",
+    "build_ghost_upgrade_cancel",
+    "build_huge",
+    "build_large",
+    "build_medium",
+    "build_small",
+    "cannot_build",
+    "clear_cursor",
+    "confirm",
+    "console_message",
+    "crafting_finished",
+    "deconstruct_huge",
+    "deconstruct_large",
+    "deconstruct_medium",
+    "deconstruct_robot",
+    "deconstruct_small",
+    "default_driving_sound",
+    "default_landing_steps",
+    "default_manual_repair",
+    "drop_item",
+    "entity_settings_copied",
+    "entity_settings_pasted",
+    "game_lost",
+    "game_won",
+    "gui_click",
+    "inventory_click",
+    "inventory_move",
+    "item_deleted",
+    "item_spawned",
+    "list_box_click",
+    "metal_walking_sound",
+    "mining_wood",
+    "name",
+    "new_objective",
+    "paste_activated",
+    "picked_up_item",
+    "rail_plan_start",
+    "research_completed",
+    "rotated_huge",
+    "rotated_large",
+    "rotated_medium",
+    "rotated_small",
+    "scenario_message",
+    "smart_pipette",
+    "switch_gun",
+    "tutorial_notice",
+    "type",
+    "undo",
+    "wire_connect_pole",
+    "wire_disconnect",
+    "wire_pickup"
+  ]
+}

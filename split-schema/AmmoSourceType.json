@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/AmmoSourceType.html",
+  "anyOf": [
+    {
+      "type": "string",
+      "const": "default"
+    },
+    {
+      "type": "string",
+      "const": "player"
+    },
+    {
+      "type": "string",
+      "const": "turret"
+    },
+    {
+      "type": "string",
+      "const": "vehicle"
+    }
+  ]
+}

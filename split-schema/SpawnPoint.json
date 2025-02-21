@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/SpawnPoint.html",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "evolution_factor": {
+          "$ref": "../split-schema/double.json"
+        },
+        "spawn_weight": {
+          "$ref": "../split-schema/double.json"
+        }
+      },
+      "required": [
+        "evolution_factor",
+        "spawn_weight"
+      ]
+    },
+    {
+      "type": "array",
+      "items": [
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/double.json"
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/double.json"
+            }
+          ]
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/AutoplaceSpecification.html",
+  "type": "object",
+  "properties": {
+    "control": {
+      "$ref": "../split-schema/AutoplaceControlID.json"
+    },
+    "default_enabled": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "force": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "enemy"
+        },
+        {
+          "type": "string",
+          "const": "player"
+        },
+        {
+          "type": "string",
+          "const": "neutral"
+        },
+        {
+          "$ref": "../split-schema/string.json"
+        }
+      ]
+    },
+    "order": {
+      "$ref": "../split-schema/Order.json"
+    },
+    "placement_density": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "tile_restriction": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "../split-schema/TileID.json"
+              },
+              {
+                "type": "array",
+                "items": [
+                  {
+                    "$ref": "../split-schema/TileID.json"
+                  },
+                  {
+                    "$ref": "../split-schema/TileID.json"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "probability_expression": {
+      "$ref": "../split-schema/NoiseExpression.json"
+    },
+    "richness_expression": {
+      "$ref": "../split-schema/NoiseExpression.json"
+    },
+    "local_expressions": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "../split-schema/NoiseExpression.json"
+      },
+      "propertyNames": {
+        "$ref": "../split-schema/string.json"
+      }
+    },
+    "local_functions": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "../split-schema/NoiseFunction.json"
+      },
+      "propertyNames": {
+        "$ref": "../split-schema/string.json"
+      }
+    }
+  },
+  "required": [
+    "probability_expression"
+  ]
+}

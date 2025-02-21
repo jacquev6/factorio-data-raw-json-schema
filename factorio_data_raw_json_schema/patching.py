@@ -1,5 +1,4 @@
 from typing import Any
-import sys
 
 from .schema import Schema, JsonValue, JsonDict
 
@@ -12,12 +11,10 @@ local_types_for_union: dict[str, Schema.TypeExpression] = {
 
 
 # Empty arrays are serialized as {} instead of []
-def array_to_json_definition(
-    self: Schema.ArrayTypeExpression, referable_types: dict[str, Schema.TypeExpression]
-) -> JsonDict:
+def array_to_json_definition(self: Schema.ArrayTypeExpression, schema: Schema) -> JsonDict:
     return {
         "oneOf": [
-            {"type": "array", "items": self.content.make_json_definition(referable_types)},
+            {"type": "array", "items": self.content.make_json_definition(schema)},
             {"type": "object", "additionalProperties": False},
         ]
     }
@@ -47,10 +44,9 @@ def patch(schema: Any) -> None:
     def add_to_dict(path: str, key: str, value: JsonValue) -> None:
         patch(path, lambda x: {**x, key: value})
 
-    def replace_value(path: str, old_value: JsonValue, new_value: JsonValue) -> None:
-        def fn(x: JsonValue) -> JsonValue:
-            assert x == old_value
-            return new_value
+    def replace_in_value(path: str, pattern: str, replacement: str) -> None:
+        def fn(x: str) -> str:
+            return x.replace(pattern, replacement)
 
         patch(path, fn)
 
@@ -59,9 +55,7 @@ def patch(schema: Any) -> None:
 
     # types/ItemProductPrototype.html#amount_min is documented as uint16
     # but is some sort of floating point in e.g. 'speed-module-recycling'
-    replace_value(
-        "definitions.ItemProductPrototype.properties.amount.$ref", "#/definitions/uint16", "#/definitions/double"
-    )
+    replace_in_value("definitions.ItemProductPrototype.properties.amount.$ref", "uint16", "double")
 
     remove_from_list("definitions.UtilitySprites.properties.cursor_box.required", "rts_selected")
     remove_from_list("definitions.UtilitySprites.properties.cursor_box.required", "rts_to_be_selected")

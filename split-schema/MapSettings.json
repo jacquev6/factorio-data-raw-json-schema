@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/prototypes/MapSettings.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "map-settings"
+    },
+    "name": {
+      "$ref": "../split-schema/string.json"
+    },
+    "pollution": {
+      "$ref": "../split-schema/PollutionSettings.json"
+    },
+    "steering": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "$ref": "../split-schema/StateSteeringSettings.json"
+        },
+        "moving": {
+          "$ref": "../split-schema/StateSteeringSettings.json"
+        }
+      },
+      "required": [
+        "default",
+        "moving"
+      ]
+    },
+    "enemy_evolution": {
+      "$ref": "../split-schema/EnemyEvolutionSettings.json"
+    },
+    "enemy_expansion": {
+      "$ref": "../split-schema/EnemyExpansionSettings.json"
+    },
+    "unit_group": {
+      "$ref": "../split-schema/UnitGroupSettings.json"
+    },
+    "path_finder": {
+      "$ref": "../split-schema/PathFinderSettings.json"
+    },
+    "max_failed_behavior_count": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "difficulty_settings": {
+      "$ref": "../split-schema/DifficultySettings.json"
+    },
+    "asteroids": {
+      "$ref": "../split-schema/AsteroidSettings.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "asteroids",
+    "difficulty_settings",
+    "enemy_evolution",
+    "enemy_expansion",
+    "max_failed_behavior_count",
+    "name",
+    "path_finder",
+    "pollution",
+    "steering",
+    "type",
+    "unit_group"
+  ]
+}

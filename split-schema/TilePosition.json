@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TilePosition.html",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "x": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "y": {
+          "$ref": "../split-schema/int32.json"
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ]
+    },
+    {
+      "type": "array",
+      "items": [
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/int32.json"
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/int32.json"
+            }
+          ]
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    }
+  ]
+}

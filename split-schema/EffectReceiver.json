@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/EffectReceiver.html",
+  "type": "object",
+  "properties": {
+    "base_effect": {
+      "$ref": "../split-schema/Effect.json"
+    },
+    "uses_module_effects": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "uses_beacon_effects": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "uses_surface_effects": {
+      "$ref": "../split-schema/bool.json"
+    }
+  }
+}

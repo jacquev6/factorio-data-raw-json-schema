@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/RailSignalLights.html",
+  "type": "object",
+  "properties": {
+    "red": {
+      "$ref": "../split-schema/RailSignalLightDefinition.json"
+    },
+    "green": {
+      "$ref": "../split-schema/RailSignalLightDefinition.json"
+    },
+    "blue": {
+      "$ref": "../split-schema/RailSignalLightDefinition.json"
+    },
+    "yellow": {
+      "$ref": "../split-schema/RailSignalLightDefinition.json"
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/prototypes/EditorControllerPrototype.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "editor-controller"
+    },
+    "name": {
+      "$ref": "../split-schema/string.json"
+    },
+    "inventory_size": {
+      "$ref": "../split-schema/ItemStackIndex.json"
+    },
+    "gun_inventory_size": {
+      "$ref": "../split-schema/ItemStackIndex.json"
+    },
+    "movement_speed": {
+      "$ref": "../split-schema/double.json"
+    },
+    "item_pickup_distance": {
+      "$ref": "../split-schema/double.json"
+    },
+    "loot_pickup_distance": {
+      "$ref": "../split-schema/double.json"
+    },
+    "mining_speed": {
+      "$ref": "../split-schema/double.json"
+    },
+    "enable_flash_light": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "adjust_speed_based_off_zoom": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "render_as_day": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "instant_blueprint_building": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "instant_deconstruction": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "instant_upgrading": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "instant_rail_planner": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_status_icons": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_hidden_entities": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_entity_tags": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_entity_health_bars": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_additional_entity_info_gui": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "generate_neighbor_chunks": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "fill_built_entity_energy_buffers": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_character_tab_in_controller_gui": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_infinity_filters_in_controller_gui": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "placed_corpses_never_expire": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "ignore_surface_conditions": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "ignore_tile_conditions": {
+      "$ref": "../split-schema/bool.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "adjust_speed_based_off_zoom",
+    "enable_flash_light",
+    "fill_built_entity_energy_buffers",
+    "generate_neighbor_chunks",
+    "gun_inventory_size",
+    "ignore_tile_conditions",
+    "instant_blueprint_building",
+    "instant_deconstruction",
+    "instant_rail_planner",
+    "instant_upgrading",
+    "inventory_size",
+    "item_pickup_distance",
+    "loot_pickup_distance",
+    "mining_speed",
+    "movement_speed",
+    "name",
+    "placed_corpses_never_expire",
+    "render_as_day",
+    "show_additional_entity_info_gui",
+    "show_character_tab_in_controller_gui",
+    "show_entity_health_bars",
+    "show_entity_tags",
+    "show_hidden_entities",
+    "show_infinity_filters_in_controller_gui",
+    "show_status_icons",
+    "type"
+  ]
+}

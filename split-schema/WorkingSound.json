@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/WorkingSound.html",
+  "anyOf": [
+    {
+      "allOf": [
+        {
+          "$ref": "../split-schema/MainSound.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "main_sounds": {
+              "anyOf": [
+                {
+                  "$ref": "../split-schema/MainSound.json"
+                },
+                {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "../split-schema/MainSound.json"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              ]
+            },
+            "apparent_volume": {
+              "$ref": "../split-schema/float.json"
+            },
+            "max_sounds_per_type": {
+              "$ref": "../split-schema/uint8.json"
+            },
+            "extra_sounds_ignore_limit": {
+              "$ref": "../split-schema/bool.json"
+            },
+            "persistent": {
+              "$ref": "../split-schema/bool.json"
+            },
+            "use_doppler_shift": {
+              "$ref": "../split-schema/bool.json"
+            },
+            "idle_sound": {
+              "$ref": "../split-schema/Sound.json"
+            },
+            "activate_sound": {
+              "$ref": "../split-schema/Sound.json"
+            },
+            "deactivate_sound": {
+              "$ref": "../split-schema/Sound.json"
+            },
+            "sound_accents": {
+              "anyOf": [
+                {
+                  "$ref": "../split-schema/SoundAccent.json"
+                },
+                {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "../split-schema/SoundAccent.json"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "$ref": "../split-schema/Sound.json"
+    }
+  ]
+}

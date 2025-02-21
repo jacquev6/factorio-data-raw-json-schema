@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CheckBoxStyleSpecification.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/StyleWithClickableGraphicalSetSpecification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "checkbox_style"
+        },
+        "font": {
+          "$ref": "../split-schema/string.json"
+        },
+        "font_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "disabled_font_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "checkmark": {
+          "$ref": "../split-schema/Sprite.json"
+        },
+        "disabled_checkmark": {
+          "$ref": "../split-schema/Sprite.json"
+        },
+        "intermediate_mark": {
+          "$ref": "../split-schema/Sprite.json"
+        },
+        "text_padding": {
+          "$ref": "../split-schema/uint32.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

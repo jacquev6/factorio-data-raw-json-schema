@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TileBuildabilityRule.html",
+  "type": "object",
+  "properties": {
+    "area": {
+      "$ref": "../split-schema/SimpleBoundingBox.json"
+    },
+    "required_tiles": {
+      "$ref": "../split-schema/CollisionMaskConnector.json"
+    },
+    "colliding_tiles": {
+      "$ref": "../split-schema/CollisionMaskConnector.json"
+    },
+    "remove_on_collision": {
+      "$ref": "../split-schema/bool.json"
+    }
+  },
+  "required": [
+    "area"
+  ]
+}

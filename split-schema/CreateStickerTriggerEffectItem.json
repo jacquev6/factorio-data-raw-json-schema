@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CreateStickerTriggerEffectItem.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/TriggerEffectItem.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "create-sticker"
+        },
+        "sticker": {
+          "$ref": "../split-schema/EntityID.json"
+        },
+        "trigger_created_entity": {
+          "$ref": "../split-schema/bool.json"
+        }
+      },
+      "required": [
+        "type",
+        "sticker"
+      ]
+    }
+  ]
+}

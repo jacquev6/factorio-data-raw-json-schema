@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/UnlockRecipeModifier.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/BaseModifier.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "unlock-recipe"
+        },
+        "use_icon_overlay_constant": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "recipe": {
+          "$ref": "../split-schema/RecipeID.json"
+        }
+      },
+      "required": [
+        "type",
+        "recipe"
+      ]
+    }
+  ]
+}

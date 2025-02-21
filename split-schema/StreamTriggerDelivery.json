@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/StreamTriggerDelivery.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/TriggerDeliveryItem.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "stream"
+        },
+        "stream": {
+          "$ref": "../split-schema/EntityID.json"
+        },
+        "source_offset": {
+          "$ref": "../split-schema/Vector.json"
+        }
+      },
+      "required": [
+        "type",
+        "stream"
+      ]
+    }
+  ]
+}

@@ -47,11 +47,15 @@ fi
 
   $runner python -m factorio_data_raw_json_schema extract \
     --doc-root https://lua-api.factorio.com/2.0.28/ \
-    $extract_options \
-    factorio-data-raw-json-schema.json
+    --split $extract_options \
+    split-schema.json
 
-  if ! git diff --stat --exit-code factorio-data-raw-json-schema.json
+  if ! git diff --stat --exit-code split-schema.json split-schema
   then
-    check-jsonschema --verbose --schemafile factorio-data-raw-json-schema.json game-definitions/*/script-output/data-raw-dump.json
+    check-jsonschema --verbose --schemafile split-schema.json game-definitions/*/script-output/data-raw-dump.json
+
+    python -m factorio_data_raw_json_schema extract \
+    --doc-root https://lua-api.factorio.com/2.0.28/ \
+    factorio-data-raw-json-schema.json
   fi
 )

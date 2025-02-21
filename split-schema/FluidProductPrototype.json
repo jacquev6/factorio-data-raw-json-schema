@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/FluidProductPrototype.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "fluid"
+    },
+    "name": {
+      "$ref": "../split-schema/FluidID.json"
+    },
+    "amount": {
+      "$ref": "../split-schema/FluidAmount.json"
+    },
+    "amount_min": {
+      "$ref": "../split-schema/FluidAmount.json"
+    },
+    "amount_max": {
+      "$ref": "../split-schema/FluidAmount.json"
+    },
+    "probability": {
+      "$ref": "../split-schema/double.json"
+    },
+    "ignored_by_stats": {
+      "$ref": "../split-schema/FluidAmount.json"
+    },
+    "ignored_by_productivity": {
+      "$ref": "../split-schema/FluidAmount.json"
+    },
+    "temperature": {
+      "$ref": "../split-schema/float.json"
+    },
+    "fluidbox_index": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "show_details_in_recipe_tooltip": {
+      "$ref": "../split-schema/bool.json"
+    }
+  },
+  "required": [
+    "type",
+    "name"
+  ]
+}

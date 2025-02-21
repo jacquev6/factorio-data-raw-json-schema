@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TechnologyUnit.html",
+  "type": "object",
+  "properties": {
+    "count": {
+      "$ref": "../split-schema/uint64.json"
+    },
+    "count_formula": {
+      "$ref": "../split-schema/MathExpression.json"
+    },
+    "time": {
+      "$ref": "../split-schema/double.json"
+    },
+    "ingredients": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/ResearchIngredient.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "time",
+    "ingredients"
+  ]
+}

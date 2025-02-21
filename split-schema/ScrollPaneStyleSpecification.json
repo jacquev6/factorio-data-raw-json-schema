@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ScrollPaneStyleSpecification.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/BaseStyleSpecification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "scroll_pane_style"
+        },
+        "vertical_flow_style": {
+          "$ref": "../split-schema/VerticalFlowStyleSpecification.json"
+        },
+        "horizontal_scrollbar_style": {
+          "$ref": "../split-schema/HorizontalScrollBarStyleSpecification.json"
+        },
+        "vertical_scrollbar_style": {
+          "$ref": "../split-schema/VerticalScrollBarStyleSpecification.json"
+        },
+        "graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "background_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "extra_padding_when_activated": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "extra_top_padding_when_activated": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "extra_bottom_padding_when_activated": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "extra_left_padding_when_activated": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "extra_right_padding_when_activated": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "extra_margin_when_activated": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "extra_top_margin_when_activated": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "extra_bottom_margin_when_activated": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "extra_left_margin_when_activated": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "extra_right_margin_when_activated": {
+          "$ref": "../split-schema/int32.json"
+        },
+        "dont_force_clipping_rect_for_contents": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "always_draw_borders": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "scrollbars_go_outside": {
+          "$ref": "../split-schema/bool.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

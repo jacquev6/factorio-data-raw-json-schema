@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/SpriteUsageHint.html",
+  "anyOf": [
+    {
+      "type": "string",
+      "const": "any"
+    },
+    {
+      "type": "string",
+      "const": "mining"
+    },
+    {
+      "type": "string",
+      "const": "tile-artifical"
+    },
+    {
+      "type": "string",
+      "const": "corpse-decay"
+    },
+    {
+      "type": "string",
+      "const": "enemy"
+    },
+    {
+      "type": "string",
+      "const": "player"
+    },
+    {
+      "type": "string",
+      "const": "train"
+    },
+    {
+      "type": "string",
+      "const": "vehicle"
+    },
+    {
+      "type": "string",
+      "const": "explosion"
+    },
+    {
+      "type": "string",
+      "const": "rail"
+    },
+    {
+      "type": "string",
+      "const": "elevated-rail"
+    },
+    {
+      "type": "string",
+      "const": "air"
+    },
+    {
+      "type": "string",
+      "const": "remnant"
+    },
+    {
+      "type": "string",
+      "const": "decorative"
+    }
+  ]
+}

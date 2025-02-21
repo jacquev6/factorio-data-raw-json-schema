@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/PrototypeStrafeSettings.html",
+  "type": "object",
+  "properties": {
+    "max_distance": {
+      "$ref": "../split-schema/double.json"
+    },
+    "ideal_distance": {
+      "$ref": "../split-schema/double.json"
+    },
+    "ideal_distance_tolerance": {
+      "$ref": "../split-schema/double.json"
+    },
+    "ideal_distance_variance": {
+      "$ref": "../split-schema/double.json"
+    },
+    "ideal_distance_importance": {
+      "$ref": "../split-schema/float.json"
+    },
+    "ideal_distance_importance_variance": {
+      "$ref": "../split-schema/float.json"
+    },
+    "clockwise_chance": {
+      "$ref": "../split-schema/float.json"
+    },
+    "face_target": {
+      "$ref": "../split-schema/bool.json"
+    }
+  }
+}

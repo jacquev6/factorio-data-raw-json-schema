@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/FusionGeneratorDirectionGraphicsSet.html",
+  "type": "object",
+  "properties": {
+    "animation": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "working_light": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "fusion_effect_uv_map": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "fluid_input_graphics": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/FusionGeneratorFluidInputGraphics.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

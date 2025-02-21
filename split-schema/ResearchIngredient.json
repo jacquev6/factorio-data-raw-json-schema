@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ResearchIngredient.html",
+  "type": "array",
+  "items": [
+    {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/ItemID.json"
+        }
+      ]
+    },
+    {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/uint16.json"
+        }
+      ]
+    }
+  ],
+  "minItems": 2,
+  "maxItems": 2
+}

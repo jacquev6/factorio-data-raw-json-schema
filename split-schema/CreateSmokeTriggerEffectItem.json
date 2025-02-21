@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CreateSmokeTriggerEffectItem.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/CreateEntityTriggerEffectItem.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "initial_height": {
+          "$ref": "../split-schema/float.json"
+        },
+        "speed": {
+          "$ref": "../split-schema/Vector.json"
+        },
+        "speed_multiplier": {
+          "$ref": "../split-schema/float.json"
+        },
+        "speed_multiplier_deviation": {
+          "$ref": "../split-schema/float.json"
+        },
+        "starting_frame": {
+          "$ref": "../split-schema/float.json"
+        },
+        "starting_frame_deviation": {
+          "$ref": "../split-schema/float.json"
+        },
+        "speed_from_center": {
+          "$ref": "../split-schema/float.json"
+        },
+        "speed_from_center_deviation": {
+          "$ref": "../split-schema/float.json"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/BuildEntityTipTrigger.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/CountBasedTipTrigger.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "build-entity"
+        },
+        "entity": {
+          "$ref": "../split-schema/EntityID.json"
+        },
+        "match_type_only": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "build_by_dragging": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "consecutive": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "linear_power_pole_line": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "build_in_line": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "quality": {
+          "$ref": "../split-schema/QualityID.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

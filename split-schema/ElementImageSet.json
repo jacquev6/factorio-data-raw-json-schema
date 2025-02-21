@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ElementImageSet.html",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "base": {
+          "$ref": "../split-schema/ElementImageSetLayer.json"
+        },
+        "shadow": {
+          "$ref": "../split-schema/ElementImageSetLayer.json"
+        },
+        "glow": {
+          "$ref": "../split-schema/ElementImageSetLayer.json"
+        }
+      }
+    },
+    {
+      "$ref": "../split-schema/ElementImageSetLayer.json"
+    }
+  ]
+}

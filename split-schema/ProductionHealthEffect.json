@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ProductionHealthEffect.html",
+  "type": "object",
+  "properties": {
+    "producing": {
+      "$ref": "../split-schema/float.json"
+    },
+    "not_producing": {
+      "$ref": "../split-schema/float.json"
+    }
+  }
+}

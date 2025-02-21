@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TerritorySettings.html",
+  "type": "object",
+  "properties": {
+    "units": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/EntityID.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "territory_index_expression": {
+      "$ref": "../split-schema/string.json"
+    },
+    "territory_variation_expression": {
+      "$ref": "../split-schema/string.json"
+    },
+    "minimum_territory_size": {
+      "$ref": "../split-schema/uint32.json"
+    }
+  }
+}

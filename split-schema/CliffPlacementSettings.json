@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CliffPlacementSettings.html",
+  "type": "object",
+  "properties": {
+    "name": {
+      "$ref": "../split-schema/EntityID.json"
+    },
+    "control": {
+      "$ref": "../split-schema/AutoplaceControlID.json"
+    },
+    "cliff_elevation_0": {
+      "$ref": "../split-schema/float.json"
+    },
+    "cliff_elevation_interval": {
+      "$ref": "../split-schema/float.json"
+    },
+    "cliff_smoothing": {
+      "$ref": "../split-schema/float.json"
+    },
+    "richness": {
+      "$ref": "../split-schema/float.json"
+    }
+  }
+}

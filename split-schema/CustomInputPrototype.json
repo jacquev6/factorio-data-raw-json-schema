@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/prototypes/CustomInputPrototype.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "custom-input"
+    },
+    "name": {
+      "$ref": "../split-schema/string.json"
+    },
+    "order": {
+      "$ref": "../split-schema/Order.json"
+    },
+    "localised_name": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "localised_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "factoriopedia_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "subgroup": {
+      "$ref": "../split-schema/ItemSubGroupID.json"
+    },
+    "hidden": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "hidden_in_factoriopedia": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "parameter": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "factoriopedia_simulation": {
+      "$ref": "../split-schema/SimulationDefinition.json"
+    },
+    "factoriopedia_alternative": {
+      "$ref": "../split-schema/string.json"
+    },
+    "key_sequence": {
+      "$ref": "../split-schema/string.json"
+    },
+    "alternative_key_sequence": {
+      "$ref": "../split-schema/string.json"
+    },
+    "controller_key_sequence": {
+      "$ref": "../split-schema/string.json"
+    },
+    "controller_alternative_key_sequence": {
+      "$ref": "../split-schema/string.json"
+    },
+    "linked_game_control": {
+      "$ref": "../split-schema/LinkedGameControl.json"
+    },
+    "consuming": {
+      "$ref": "../split-schema/ConsumingType.json"
+    },
+    "enabled": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "enabled_while_spectating": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "enabled_while_in_cutscene": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "include_selected_prototype": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "item_to_spawn": {
+      "$ref": "../split-schema/ItemID.json"
+    },
+    "action": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "lua"
+        },
+        {
+          "type": "string",
+          "const": "spawn-item"
+        },
+        {
+          "type": "string",
+          "const": "toggle-personal-roboport"
+        },
+        {
+          "type": "string",
+          "const": "toggle-personal-logistic-requests"
+        },
+        {
+          "type": "string",
+          "const": "toggle-equipment-movement-bonus"
+        }
+      ]
+    },
+    "block_modifiers": {
+      "$ref": "../split-schema/bool.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "key_sequence",
+    "name",
+    "type"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/MapGenPresetDifficultySettings.html",
+  "type": "object",
+  "properties": {
+    "technology_price_multiplier": {
+      "$ref": "../split-schema/double.json"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TransitionApplication.html",
+  "type": "object",
+  "properties": {
+    "offset": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "pod_offset": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "rotation": {
+      "$ref": "../split-schema/bool.json"
+    }
+  }
+}

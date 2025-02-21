@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/RangeMode.html",
+  "anyOf": [
+    {
+      "type": "string",
+      "const": "center-to-center"
+    },
+    {
+      "type": "string",
+      "const": "bounding-box-to-bounding-box"
+    },
+    {
+      "type": "string",
+      "const": "center-to-bounding-box"
+    }
+  ]
+}

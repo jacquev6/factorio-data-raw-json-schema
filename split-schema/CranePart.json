@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CranePart.html",
+  "type": "object",
+  "properties": {
+    "orientation_shift": {
+      "$ref": "../split-schema/float.json"
+    },
+    "is_contractible_by_cropping": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "should_scale_for_perspective": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "scale_to_fit_model": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "allow_sprite_rotation": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "snap_start": {
+      "$ref": "../split-schema/float.json"
+    },
+    "snap_end": {
+      "$ref": "../split-schema/float.json"
+    },
+    "snap_end_arm_extent_multiplier": {
+      "$ref": "../split-schema/float.json"
+    },
+    "name": {
+      "$ref": "../split-schema/string.json"
+    },
+    "dying_effect": {
+      "$ref": "../split-schema/CranePartDyingEffect.json"
+    },
+    "relative_position": {
+      "$ref": "../split-schema/Vector3D.json"
+    },
+    "relative_position_grappler": {
+      "$ref": "../split-schema/Vector3D.json"
+    },
+    "static_length": {
+      "$ref": "../split-schema/Vector3D.json"
+    },
+    "extendable_length": {
+      "$ref": "../split-schema/Vector3D.json"
+    },
+    "static_length_grappler": {
+      "$ref": "../split-schema/Vector3D.json"
+    },
+    "extendable_length_grappler": {
+      "$ref": "../split-schema/Vector3D.json"
+    },
+    "sprite": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "rotated_sprite": {
+      "$ref": "../split-schema/RotatedSprite.json"
+    },
+    "sprite_shadow": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "rotated_sprite_shadow": {
+      "$ref": "../split-schema/RotatedSprite.json"
+    },
+    "sprite_reflection": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "rotated_sprite_reflection": {
+      "$ref": "../split-schema/RotatedSprite.json"
+    },
+    "layer": {
+      "$ref": "../split-schema/int8.json"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CyclicSound.html",
+  "type": "object",
+  "properties": {
+    "begin_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "middle_sound": {
+      "$ref": "../split-schema/Sound.json"
+    },
+    "end_sound": {
+      "$ref": "../split-schema/Sound.json"
+    }
+  }
+}

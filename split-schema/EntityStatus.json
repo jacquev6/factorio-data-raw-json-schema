@@ -1,0 +1,274 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/EntityStatus.html",
+  "anyOf": [
+    {
+      "type": "string",
+      "const": "working"
+    },
+    {
+      "type": "string",
+      "const": "normal"
+    },
+    {
+      "type": "string",
+      "const": "ghost"
+    },
+    {
+      "type": "string",
+      "const": "not-plugged-in-electric-network"
+    },
+    {
+      "type": "string",
+      "const": "networks-connected"
+    },
+    {
+      "type": "string",
+      "const": "networks-disconnected"
+    },
+    {
+      "type": "string",
+      "const": "no-ammo"
+    },
+    {
+      "type": "string",
+      "const": "waiting-for-target-to-be-built"
+    },
+    {
+      "type": "string",
+      "const": "waiting-for-train"
+    },
+    {
+      "type": "string",
+      "const": "no-power"
+    },
+    {
+      "type": "string",
+      "const": "low-temperature"
+    },
+    {
+      "type": "string",
+      "const": "charging"
+    },
+    {
+      "type": "string",
+      "const": "discharging"
+    },
+    {
+      "type": "string",
+      "const": "fully-charged"
+    },
+    {
+      "type": "string",
+      "const": "no-fuel"
+    },
+    {
+      "type": "string",
+      "const": "no-food"
+    },
+    {
+      "type": "string",
+      "const": "out-of-logistic-network"
+    },
+    {
+      "type": "string",
+      "const": "no-recipe"
+    },
+    {
+      "type": "string",
+      "const": "no-ingredients"
+    },
+    {
+      "type": "string",
+      "const": "no-input-fluid"
+    },
+    {
+      "type": "string",
+      "const": "no-research-in-progress"
+    },
+    {
+      "type": "string",
+      "const": "no-minable-resources"
+    },
+    {
+      "type": "string",
+      "const": "low-input-fluid"
+    },
+    {
+      "type": "string",
+      "const": "low-power"
+    },
+    {
+      "type": "string",
+      "const": "not-connected-to-rail"
+    },
+    {
+      "type": "string",
+      "const": "cant-divide-segments"
+    },
+    {
+      "type": "string",
+      "const": "recharging-after-power-outage"
+    },
+    {
+      "type": "string",
+      "const": "no-modules-to-transmit"
+    },
+    {
+      "type": "string",
+      "const": "disabled-by-control-behavior"
+    },
+    {
+      "type": "string",
+      "const": "opened-by-circuit-network"
+    },
+    {
+      "type": "string",
+      "const": "closed-by-circuit-network"
+    },
+    {
+      "type": "string",
+      "const": "disabled-by-script"
+    },
+    {
+      "type": "string",
+      "const": "disabled"
+    },
+    {
+      "type": "string",
+      "const": "turned-off-during-daytime"
+    },
+    {
+      "type": "string",
+      "const": "fluid-ingredient-shortage"
+    },
+    {
+      "type": "string",
+      "const": "item-ingredient-shortage"
+    },
+    {
+      "type": "string",
+      "const": "full-output"
+    },
+    {
+      "type": "string",
+      "const": "not-enough-space-in-output"
+    },
+    {
+      "type": "string",
+      "const": "full-burnt-result-output"
+    },
+    {
+      "type": "string",
+      "const": "marked-for-deconstruction"
+    },
+    {
+      "type": "string",
+      "const": "missing-required-fluid"
+    },
+    {
+      "type": "string",
+      "const": "missing-science-packs"
+    },
+    {
+      "type": "string",
+      "const": "waiting-for-source-items"
+    },
+    {
+      "type": "string",
+      "const": "waiting-for-space-in-destination"
+    },
+    {
+      "type": "string",
+      "const": "preparing-rocket-for-launch"
+    },
+    {
+      "type": "string",
+      "const": "waiting-to-launch-rocket"
+    },
+    {
+      "type": "string",
+      "const": "waiting-for-space-in-platform-hub"
+    },
+    {
+      "type": "string",
+      "const": "launching-rocket"
+    },
+    {
+      "type": "string",
+      "const": "thrust-not-required"
+    },
+    {
+      "type": "string",
+      "const": "not-enough-thrust"
+    },
+    {
+      "type": "string",
+      "const": "on-the-way"
+    },
+    {
+      "type": "string",
+      "const": "waiting-in-orbit"
+    },
+    {
+      "type": "string",
+      "const": "waiting-for-rocket-to-arrive"
+    },
+    {
+      "type": "string",
+      "const": "no-path"
+    },
+    {
+      "type": "string",
+      "const": "broken"
+    },
+    {
+      "type": "string",
+      "const": "none"
+    },
+    {
+      "type": "string",
+      "const": "frozen"
+    },
+    {
+      "type": "string",
+      "const": "paused"
+    },
+    {
+      "type": "string",
+      "const": "not-connected-to-hub-or-pad"
+    },
+    {
+      "type": "string",
+      "const": "computing-navigation"
+    },
+    {
+      "type": "string",
+      "const": "no-filter"
+    },
+    {
+      "type": "string",
+      "const": "waiting-at-stop"
+    },
+    {
+      "type": "string",
+      "const": "destination-stop-full"
+    },
+    {
+      "type": "string",
+      "const": "pipeline-overextended"
+    },
+    {
+      "type": "string",
+      "const": "no-spot-seedable-by-inputs"
+    },
+    {
+      "type": "string",
+      "const": "waiting-for-plants-to-grow"
+    },
+    {
+      "type": "string",
+      "const": "recipe-not-researched"
+    }
+  ]
+}

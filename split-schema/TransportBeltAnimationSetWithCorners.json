@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TransportBeltAnimationSetWithCorners.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/TransportBeltAnimationSet.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "east_to_north_index": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "north_to_east_index": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "west_to_north_index": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "north_to_west_index": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "south_to_east_index": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "east_to_south_index": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "south_to_west_index": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "west_to_south_index": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "east_to_north_index_frozen": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "north_to_east_index_frozen": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "west_to_north_index_frozen": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "north_to_west_index_frozen": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "south_to_east_index_frozen": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "east_to_south_index_frozen": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "south_to_west_index_frozen": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "west_to_south_index_frozen": {
+          "$ref": "../split-schema/uint8.json"
+        }
+      }
+    }
+  ]
+}

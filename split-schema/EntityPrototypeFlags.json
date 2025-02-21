@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/EntityPrototypeFlags.html",
+  "oneOf": [
+    {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string",
+            "const": "not-rotatable"
+          },
+          {
+            "type": "string",
+            "const": "placeable-neutral"
+          },
+          {
+            "type": "string",
+            "const": "placeable-player"
+          },
+          {
+            "type": "string",
+            "const": "placeable-enemy"
+          },
+          {
+            "type": "string",
+            "const": "placeable-off-grid"
+          },
+          {
+            "type": "string",
+            "const": "player-creation"
+          },
+          {
+            "type": "string",
+            "const": "building-direction-8-way"
+          },
+          {
+            "type": "string",
+            "const": "filter-directions"
+          },
+          {
+            "type": "string",
+            "const": "get-by-unit-number"
+          },
+          {
+            "type": "string",
+            "const": "breaths-air"
+          },
+          {
+            "type": "string",
+            "const": "not-repairable"
+          },
+          {
+            "type": "string",
+            "const": "not-on-map"
+          },
+          {
+            "type": "string",
+            "const": "not-deconstructable"
+          },
+          {
+            "type": "string",
+            "const": "not-blueprintable"
+          },
+          {
+            "type": "string",
+            "const": "hide-alt-info"
+          },
+          {
+            "type": "string",
+            "const": "no-gap-fill-while-building"
+          },
+          {
+            "type": "string",
+            "const": "not-flammable"
+          },
+          {
+            "type": "string",
+            "const": "no-automated-item-removal"
+          },
+          {
+            "type": "string",
+            "const": "no-automated-item-insertion"
+          },
+          {
+            "type": "string",
+            "const": "no-copy-paste"
+          },
+          {
+            "type": "string",
+            "const": "not-selectable-in-game"
+          },
+          {
+            "type": "string",
+            "const": "not-upgradable"
+          },
+          {
+            "type": "string",
+            "const": "not-in-kill-statistics"
+          },
+          {
+            "type": "string",
+            "const": "building-direction-16-way"
+          },
+          {
+            "type": "string",
+            "const": "snap-to-rail-support-spot"
+          },
+          {
+            "type": "string",
+            "const": "not-in-made-in"
+          }
+        ]
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false
+    }
+  ]
+}

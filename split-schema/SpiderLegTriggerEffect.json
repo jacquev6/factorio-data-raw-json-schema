@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/SpiderLegTriggerEffect.html",
+  "type": "object",
+  "properties": {
+    "position": {
+      "$ref": "../split-schema/float.json"
+    },
+    "effect": {
+      "$ref": "../split-schema/TriggerEffect.json"
+    }
+  },
+  "required": [
+    "position",
+    "effect"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/FogEffectProperties.html",
+  "type": "object",
+  "properties": {
+    "fog_type": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "vulcanus"
+        },
+        {
+          "type": "string",
+          "const": "gleba"
+        }
+      ]
+    },
+    "shape_noise_texture": {
+      "$ref": "../split-schema/EffectTexture.json"
+    },
+    "detail_noise_texture": {
+      "$ref": "../split-schema/EffectTexture.json"
+    },
+    "color1": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "color2": {
+      "$ref": "../split-schema/Color.json"
+    },
+    "tick_factor": {
+      "$ref": "../split-schema/float.json"
+    }
+  },
+  "required": [
+    "shape_noise_texture",
+    "detail_noise_texture"
+  ]
+}

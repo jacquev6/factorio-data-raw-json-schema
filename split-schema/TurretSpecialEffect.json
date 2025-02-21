@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TurretSpecialEffect.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "mask-by-circle"
+    },
+    "center": {
+      "$ref": "../split-schema/TurretSpecialEffectCenter.json"
+    },
+    "min_radius": {
+      "$ref": "../split-schema/float.json"
+    },
+    "max_radius": {
+      "$ref": "../split-schema/float.json"
+    },
+    "falloff": {
+      "$ref": "../split-schema/float.json"
+    },
+    "attacking_min_radius": {
+      "$ref": "../split-schema/float.json"
+    },
+    "attacking_max_radius": {
+      "$ref": "../split-schema/float.json"
+    },
+    "attacking_falloff": {
+      "$ref": "../split-schema/float.json"
+    }
+  },
+  "required": [
+    "type"
+  ]
+}

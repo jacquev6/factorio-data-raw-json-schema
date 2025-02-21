@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/FootstepTriggerEffectItem.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/CreateParticleTriggerEffectItem.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "tiles": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/TileID.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "actions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/CreateParticleTriggerEffectItem.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "use_as_default": {
+          "$ref": "../split-schema/bool.json"
+        }
+      },
+      "required": [
+        "tiles"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/Stripe.html",
+  "type": "object",
+  "properties": {
+    "width_in_frames": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "height_in_frames": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "filename": {
+      "$ref": "../split-schema/FileName.json"
+    },
+    "x": {
+      "$ref": "../split-schema/uint32.json"
+    },
+    "y": {
+      "$ref": "../split-schema/uint32.json"
+    }
+  },
+  "required": [
+    "width_in_frames",
+    "height_in_frames",
+    "filename"
+  ]
+}

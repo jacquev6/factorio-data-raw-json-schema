@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/IconSequencePositioning.html",
+  "type": "object",
+  "properties": {
+    "inventory_index": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255
+    },
+    "max_icons_per_row": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "max_icon_rows": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "shift": {
+      "$ref": "../split-schema/Vector.json"
+    },
+    "scale": {
+      "$ref": "../split-schema/float.json"
+    },
+    "separation_multiplier": {
+      "$ref": "../split-schema/float.json"
+    },
+    "multi_row_initial_height_modifier": {
+      "$ref": "../split-schema/float.json"
+    }
+  },
+  "required": [
+    "inventory_index"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/GhostShimmerDistortionData.html",
+  "type": "object",
+  "properties": {
+    "shape": {
+      "$ref": "../split-schema/int32.json"
+    },
+    "intensity": {
+      "$ref": "../split-schema/float.json"
+    },
+    "x": {
+      "$ref": "../split-schema/float.json"
+    },
+    "y": {
+      "$ref": "../split-schema/float.json"
+    }
+  },
+  "required": [
+    "shape",
+    "intensity",
+    "x",
+    "y"
+  ]
+}

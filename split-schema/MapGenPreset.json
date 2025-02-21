@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/MapGenPreset.html",
+  "type": "object",
+  "properties": {
+    "order": {
+      "$ref": "../split-schema/Order.json"
+    },
+    "default": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "basic_settings": {
+      "$ref": "../split-schema/MapGenSettings.json"
+    },
+    "advanced_settings": {
+      "type": "object",
+      "properties": {
+        "asteroids": {
+          "$ref": "../split-schema/MapGenPresetAsteroidSettings.json"
+        },
+        "pollution": {
+          "$ref": "../split-schema/MapGenPresetPollutionSettings.json"
+        },
+        "enemy_evolution": {
+          "$ref": "../split-schema/MapGenPresetEnemyEvolutionSettings.json"
+        },
+        "enemy_expansion": {
+          "$ref": "../split-schema/MapGenPresetEnemyExpansionSettings.json"
+        },
+        "difficulty_settings": {
+          "$ref": "../split-schema/MapGenPresetDifficultySettings.json"
+        }
+      }
+    }
+  },
+  "required": [
+    "order"
+  ]
+}

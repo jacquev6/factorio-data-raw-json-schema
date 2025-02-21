@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/RailSignalStaticSpriteLayer.html",
+  "type": "object",
+  "properties": {
+    "sprites": {
+      "$ref": "../split-schema/Animation.json"
+    },
+    "render_layer": {
+      "$ref": "../split-schema/RenderLayer.json"
+    },
+    "hide_if_simulation": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "hide_if_not_connected_to_rails": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "shifts": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/MapPosition.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "align_to_frame_index": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/uint8.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "sprites"
+  ]
+}

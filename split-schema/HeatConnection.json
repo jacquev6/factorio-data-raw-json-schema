@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/HeatConnection.html",
+  "type": "object",
+  "properties": {
+    "position": {
+      "$ref": "../split-schema/MapPosition.json"
+    },
+    "direction": {
+      "$ref": "../split-schema/Direction.json"
+    }
+  },
+  "required": [
+    "position",
+    "direction"
+  ]
+}

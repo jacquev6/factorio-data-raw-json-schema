@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TrainStopLight.html",
+  "type": "object",
+  "properties": {
+    "picture": {
+      "$ref": "../split-schema/Sprite4Way.json"
+    },
+    "red_picture": {
+      "$ref": "../split-schema/Sprite4Way.json"
+    },
+    "light": {
+      "$ref": "../split-schema/LightDefinition.json"
+    }
+  },
+  "required": [
+    "picture",
+    "red_picture",
+    "light"
+  ]
+}

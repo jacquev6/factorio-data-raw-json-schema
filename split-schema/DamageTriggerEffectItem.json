@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/DamageTriggerEffectItem.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/TriggerEffectItem.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "damage"
+        },
+        "damage": {
+          "$ref": "../split-schema/DamageParameters.json"
+        },
+        "apply_damage_to_trees": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "vaporize": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "use_substitute": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "lower_distance_threshold": {
+          "$ref": "../split-schema/uint16.json"
+        },
+        "upper_distance_threshold": {
+          "$ref": "../split-schema/uint16.json"
+        },
+        "lower_damage_modifier": {
+          "$ref": "../split-schema/float.json"
+        },
+        "upper_damage_modifier": {
+          "$ref": "../split-schema/float.json"
+        }
+      },
+      "required": [
+        "type",
+        "damage"
+      ]
+    }
+  ]
+}

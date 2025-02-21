@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/TableStyleSpecification.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/BaseStyleSpecification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "table_style"
+        },
+        "horizontal_spacing": {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/int32.json"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "../split-schema/SpacingItem.json"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "vertical_spacing": {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/int32.json"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "../split-schema/SpacingItem.json"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "cell_padding": {
+          "$ref": "../split-schema/int16.json"
+        },
+        "top_cell_padding": {
+          "$ref": "../split-schema/int16.json"
+        },
+        "right_cell_padding": {
+          "$ref": "../split-schema/int16.json"
+        },
+        "bottom_cell_padding": {
+          "$ref": "../split-schema/int16.json"
+        },
+        "left_cell_padding": {
+          "$ref": "../split-schema/int16.json"
+        },
+        "apply_row_graphical_set_per_column": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "wide_as_column_count": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "column_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "default_row_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "even_row_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "odd_row_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "hovered_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "clicked_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "selected_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "selected_hovered_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "selected_clicked_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "background_graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "column_alignments": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/ColumnAlignment.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "column_widths": {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/ColumnWidthItem.json"
+            },
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "../split-schema/ColumnWidth.json"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            }
+          ]
+        },
+        "hovered_row_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "selected_row_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "vertical_line_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "horizontal_line_color": {
+          "$ref": "../split-schema/Color.json"
+        },
+        "column_ordering_ascending_button_style": {
+          "$ref": "../split-schema/ButtonStyleSpecification.json"
+        },
+        "column_ordering_descending_button_style": {
+          "$ref": "../split-schema/ButtonStyleSpecification.json"
+        },
+        "inactive_column_ordering_ascending_button_style": {
+          "$ref": "../split-schema/ButtonStyleSpecification.json"
+        },
+        "inactive_column_ordering_descending_button_style": {
+          "$ref": "../split-schema/ButtonStyleSpecification.json"
+        },
+        "border": {
+          "$ref": "../split-schema/BorderImageSet.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/PlayerInputMethodFilter.html",
+  "anyOf": [
+    {
+      "type": "string",
+      "const": "all"
+    },
+    {
+      "type": "string",
+      "const": "keyboard_and_mouse"
+    },
+    {
+      "type": "string",
+      "const": "game_controller"
+    }
+  ]
+}

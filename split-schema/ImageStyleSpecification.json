@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ImageStyleSpecification.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/BaseStyleSpecification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "image_style"
+        },
+        "graphical_set": {
+          "$ref": "../split-schema/ElementImageSet.json"
+        },
+        "stretch_image_to_widget_size": {
+          "$ref": "../split-schema/bool.json"
+        },
+        "invert_colors_of_picture_when_hovered_or_toggled": {
+          "$ref": "../split-schema/bool.json"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    }
+  ]
+}

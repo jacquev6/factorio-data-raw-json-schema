@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ArtilleryRemoteCapsuleAction.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "artillery-remote"
+    },
+    "flare": {
+      "$ref": "../split-schema/EntityID.json"
+    },
+    "play_sound_on_failure": {
+      "$ref": "../split-schema/bool.json"
+    }
+  },
+  "required": [
+    "type",
+    "flare"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/FusionGeneratorFluidInputGraphics.html",
+  "type": "object",
+  "properties": {
+    "sprite": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "working_light": {
+      "$ref": "../split-schema/Sprite.json"
+    },
+    "fusion_effect_uv_map": {
+      "$ref": "../split-schema/Sprite.json"
+    }
+  }
+}

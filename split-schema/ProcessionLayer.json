@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/ProcessionLayer.html",
+  "anyOf": [
+    {
+      "$ref": "../split-schema/PodDistanceTraveledProcessionLayer.json"
+    },
+    {
+      "$ref": "../split-schema/PodMovementProcessionLayer.json"
+    },
+    {
+      "$ref": "../split-schema/PodOpacityProcessionLayer.json"
+    },
+    {
+      "$ref": "../split-schema/SingleGraphicProcessionLayer.json"
+    },
+    {
+      "$ref": "../split-schema/CoverGraphicProcessionLayer.json"
+    },
+    {
+      "$ref": "../split-schema/TintProcessionLayer.json"
+    },
+    {
+      "$ref": "../split-schema/PodAnimationProcessionLayer.json"
+    }
+  ]
+}

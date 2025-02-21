@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/PodOpacityProcessionLayer.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "pod-opacity"
+    },
+    "lut": {
+      "$ref": "../split-schema/ColorLookupTable.json"
+    },
+    "frames": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "timestamp": {
+                "$ref": "../split-schema/MapTick.json"
+              },
+              "cutscene_opacity": {
+                "$ref": "../split-schema/double.json"
+              },
+              "cutscene_opacity_t": {
+                "$ref": "../split-schema/double.json"
+              },
+              "outside_opacity": {
+                "$ref": "../split-schema/double.json"
+              },
+              "outside_opacity_t": {
+                "$ref": "../split-schema/double.json"
+              },
+              "lut_blend": {
+                "$ref": "../split-schema/double.json"
+              },
+              "lut_blend_t": {
+                "$ref": "../split-schema/double.json"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "type",
+    "lut",
+    "frames"
+  ]
+}

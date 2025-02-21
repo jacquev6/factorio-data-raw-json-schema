@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CameraEffectTriggerEffectItem.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/TriggerEffectItem.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "camera-effect"
+        },
+        "duration": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "ease_in_duration": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "ease_out_duration": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "delay": {
+          "$ref": "../split-schema/uint8.json"
+        },
+        "full_strength_max_distance": {
+          "$ref": "../split-schema/uint16.json"
+        },
+        "max_distance": {
+          "$ref": "../split-schema/uint16.json"
+        },
+        "strength": {
+          "$ref": "../split-schema/float.json"
+        }
+      },
+      "required": [
+        "type",
+        "duration"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/EffectTexture.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/SpriteSource.json"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CloudsTextureCoordinateTransformation.html",
+  "type": "object",
+  "properties": {
+    "scale": {
+      "$ref": "../split-schema/float.json"
+    },
+    "wind_speed_factor": {
+      "$ref": "../split-schema/float.json"
+    }
+  },
+  "required": [
+    "scale"
+  ]
+}

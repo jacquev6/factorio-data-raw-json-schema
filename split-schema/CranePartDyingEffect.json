@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CranePartDyingEffect.html",
+  "type": "object",
+  "properties": {
+    "particle_effect_linear_distance_step": {
+      "$ref": "../split-schema/float.json"
+    },
+    "explosion_linear_distance_step": {
+      "$ref": "../split-schema/float.json"
+    },
+    "particle_effects": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/CreateParticleTriggerEffectItem.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "explosion": {
+      "$ref": "../split-schema/ExplosionDefinition.json"
+    }
+  }
+}

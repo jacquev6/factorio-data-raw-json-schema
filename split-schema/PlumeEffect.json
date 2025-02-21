@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/PlumeEffect.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/StatelessVisualisation.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "age_discrimination": {
+          "$ref": "../split-schema/int8.json"
+        }
+      }
+    }
+  ]
+}

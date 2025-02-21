@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CharacterArmorAnimation.html",
+  "type": "object",
+  "properties": {
+    "idle": {
+      "$ref": "../split-schema/RotatedAnimation.json"
+    },
+    "idle_with_gun": {
+      "$ref": "../split-schema/RotatedAnimation.json"
+    },
+    "running": {
+      "$ref": "../split-schema/RotatedAnimation.json"
+    },
+    "running_with_gun": {
+      "$ref": "../split-schema/RotatedAnimation.json"
+    },
+    "mining_with_tool": {
+      "$ref": "../split-schema/RotatedAnimation.json"
+    },
+    "flipped_shadow_running_with_gun": {
+      "$ref": "../split-schema/RotatedAnimation.json"
+    },
+    "idle_in_air": {
+      "$ref": "../split-schema/RotatedAnimation.json"
+    },
+    "idle_with_gun_in_air": {
+      "$ref": "../split-schema/RotatedAnimation.json"
+    },
+    "flying": {
+      "$ref": "../split-schema/RotatedAnimation.json"
+    },
+    "flying_with_gun": {
+      "$ref": "../split-schema/RotatedAnimation.json"
+    },
+    "take_off": {
+      "$ref": "../split-schema/RotatedAnimation.json"
+    },
+    "landing": {
+      "$ref": "../split-schema/RotatedAnimation.json"
+    },
+    "armors": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/ItemID.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "smoke_in_air": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/SmokeSource.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "smoke_cycles_per_tick": {
+      "$ref": "../split-schema/float.json"
+    },
+    "extra_smoke_cycles_per_tile": {
+      "$ref": "../split-schema/float.json"
+    },
+    "mining_with_tool_particles_animation_positions": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/float.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "idle_with_gun",
+    "running_with_gun",
+    "mining_with_tool"
+  ]
+}

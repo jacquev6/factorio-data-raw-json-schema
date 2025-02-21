@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/VariableAmbientSoundCompositionMode.html",
+  "anyOf": [
+    {
+      "type": "string",
+      "const": "randomized"
+    },
+    {
+      "type": "string",
+      "const": "semi-randomized"
+    },
+    {
+      "type": "string",
+      "const": "shuffled"
+    },
+    {
+      "type": "string",
+      "const": "layer-controlled"
+    }
+  ]
+}

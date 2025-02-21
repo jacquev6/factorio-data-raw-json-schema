@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/prototypes/TechnologyPrototype.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "technology"
+    },
+    "name": {
+      "$ref": "../split-schema/string.json"
+    },
+    "order": {
+      "$ref": "../split-schema/Order.json"
+    },
+    "localised_name": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "localised_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "factoriopedia_description": {
+      "$ref": "../split-schema/LocalisedString.json"
+    },
+    "subgroup": {
+      "$ref": "../split-schema/ItemSubGroupID.json"
+    },
+    "hidden": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "hidden_in_factoriopedia": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "parameter": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "factoriopedia_simulation": {
+      "$ref": "../split-schema/SimulationDefinition.json"
+    },
+    "factoriopedia_alternative": {
+      "$ref": "../split-schema/string.json"
+    },
+    "icons": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/IconData.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "icon": {
+      "$ref": "../split-schema/FileName.json"
+    },
+    "icon_size": {
+      "$ref": "../split-schema/SpriteSizeType.json"
+    },
+    "upgrade": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "enabled": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "essential": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "visible_when_disabled": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "ignore_tech_cost_multiplier": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "allows_productivity": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "research_trigger": {
+      "$ref": "../split-schema/TechnologyTrigger.json"
+    },
+    "unit": {
+      "$ref": "../split-schema/TechnologyUnit.json"
+    },
+    "max_level": {
+      "anyOf": [
+        {
+          "$ref": "../split-schema/uint32.json"
+        },
+        {
+          "type": "string",
+          "const": "infinite"
+        }
+      ]
+    },
+    "prerequisites": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/TechnologyID.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "effects": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/Modifier.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "type"
+  ]
+}

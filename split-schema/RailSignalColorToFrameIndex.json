@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/RailSignalColorToFrameIndex.html",
+  "type": "object",
+  "properties": {
+    "none": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "red": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "green": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "blue": {
+      "$ref": "../split-schema/uint8.json"
+    },
+    "yellow": {
+      "$ref": "../split-schema/uint8.json"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/BuildEntityTechnologyTrigger.html",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "build-entity"
+    },
+    "entity": {
+      "$ref": "../split-schema/EntityIDFilter.json"
+    }
+  },
+  "required": [
+    "type",
+    "entity"
+  ]
+}

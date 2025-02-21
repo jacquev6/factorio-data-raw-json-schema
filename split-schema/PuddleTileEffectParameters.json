@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/PuddleTileEffectParameters.html",
+  "type": "object",
+  "properties": {
+    "puddle_noise_texture": {
+      "$ref": "../split-schema/EffectTexture.json"
+    },
+    "water_effect_parameters": {
+      "$ref": "../split-schema/WaterTileEffectParameters.json"
+    },
+    "water_effect": {
+      "$ref": "../split-schema/TileEffectDefinitionID.json"
+    }
+  },
+  "required": [
+    "puddle_noise_texture"
+  ]
+}

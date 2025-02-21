@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/SemiPersistentWorldAmbientSoundDefinition.html",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "sound": {
+          "$ref": "../split-schema/Sound.json"
+        },
+        "delay_mean_seconds": {
+          "$ref": "../split-schema/float.json"
+        },
+        "delay_variance_seconds": {
+          "$ref": "../split-schema/float.json"
+        }
+      },
+      "required": [
+        "sound"
+      ]
+    },
+    {
+      "$ref": "../split-schema/Sound.json"
+    }
+  ]
+}

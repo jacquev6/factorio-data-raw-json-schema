@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/Sprite4Way.html",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "sheets": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/SpriteNWaySheet.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "sheet": {
+          "$ref": "../split-schema/SpriteNWaySheet.json"
+        },
+        "north": {
+          "$ref": "../split-schema/Sprite.json"
+        },
+        "east": {
+          "$ref": "../split-schema/Sprite.json"
+        },
+        "south": {
+          "$ref": "../split-schema/Sprite.json"
+        },
+        "west": {
+          "$ref": "../split-schema/Sprite.json"
+        }
+      }
+    },
+    {
+      "$ref": "../split-schema/Sprite.json"
+    }
+  ]
+}

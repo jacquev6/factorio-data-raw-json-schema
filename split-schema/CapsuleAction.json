@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/CapsuleAction.html",
+  "anyOf": [
+    {
+      "$ref": "../split-schema/ThrowCapsuleAction.json"
+    },
+    {
+      "$ref": "../split-schema/ActivateEquipmentCapsuleAction.json"
+    },
+    {
+      "$ref": "../split-schema/UseOnSelfCapsuleAction.json"
+    },
+    {
+      "$ref": "../split-schema/DestroyCliffsCapsuleAction.json"
+    },
+    {
+      "$ref": "../split-schema/ArtilleryRemoteCapsuleAction.json"
+    }
+  ]
+}

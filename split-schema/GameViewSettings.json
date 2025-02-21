@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/GameViewSettings.html",
+  "type": "object",
+  "properties": {
+    "default_show_value": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_controller_gui": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_minimap": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_research_info": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_entity_info": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_alert_gui": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "update_entity_selection": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_rail_block_visualisation": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_side_menu": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_map_view_options": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_entity_tooltip": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_quickbar": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_shortcut_bar": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_crafting_queue": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_tool_bar": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_hotkey_suggestions": {
+      "$ref": "../split-schema/bool.json"
+    },
+    "show_surface_list": {
+      "$ref": "../split-schema/bool.json"
+    }
+  }
+}

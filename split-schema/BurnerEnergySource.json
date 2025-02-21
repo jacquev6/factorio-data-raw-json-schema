@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/BurnerEnergySource.html",
+  "allOf": [
+    {
+      "$ref": "../split-schema/BaseEnergySource.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "burner"
+        },
+        "fuel_inventory_size": {
+          "$ref": "../split-schema/ItemStackIndex.json"
+        },
+        "burnt_inventory_size": {
+          "$ref": "../split-schema/ItemStackIndex.json"
+        },
+        "smoke": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/SmokeSource.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "light_flicker": {
+          "$ref": "../split-schema/LightFlickeringDefinition.json"
+        },
+        "effectivity": {
+          "$ref": "../split-schema/double.json"
+        },
+        "burner_usage": {
+          "$ref": "../split-schema/BurnerUsageID.json"
+        },
+        "fuel_categories": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/FuelCategoryID.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "initial_fuel": {
+          "$ref": "../split-schema/ItemID.json"
+        },
+        "initial_fuel_percent": {
+          "$ref": "../split-schema/double.json"
+        }
+      },
+      "required": [
+        "type",
+        "fuel_inventory_size"
+      ]
+    }
+  ]
+}

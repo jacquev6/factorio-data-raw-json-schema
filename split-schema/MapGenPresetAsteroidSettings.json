@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "description": "https://lua-api.factorio.com/stable/types/MapGenPresetAsteroidSettings.html",
+  "type": "object",
+  "properties": {
+    "spawning_rate": {
+      "$ref": "../split-schema/double.json"
+    },
+    "max_ray_portals_expanded_per_tick": {
+      "$ref": "../split-schema/uint32.json"
+    }
+  }
+}
