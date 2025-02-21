@@ -534,8 +534,8 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
     "name",
-    "pictures",
-    "type"
+    "pictures"
   ]
 }

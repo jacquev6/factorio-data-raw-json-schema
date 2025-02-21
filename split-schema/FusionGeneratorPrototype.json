@@ -502,11 +502,11 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
+    "name",
     "energy_source",
     "input_fluid_box",
-    "max_fluid_usage",
-    "name",
     "output_fluid_box",
-    "type"
+    "max_fluid_usage"
   ]
 }

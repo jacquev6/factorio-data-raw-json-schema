@@ -84,9 +84,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "amount",
+    "type",
     "name",
     "objective_condition",
-    "type"
+    "amount"
   ]
 }

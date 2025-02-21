@@ -75,8 +75,8 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
     "name",
-    "science_pack",
-    "type"
+    "science_pack"
   ]
 }

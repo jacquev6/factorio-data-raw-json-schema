@@ -539,12 +539,12 @@
   },
   "additionalProperties": false,
   "required": [
-    "energy_source",
-    "energy_usage",
-    "fluid_box",
-    "fluid_source_offset",
+    "type",
     "name",
+    "fluid_box",
     "pumping_speed",
-    "type"
+    "fluid_source_offset",
+    "energy_source",
+    "energy_usage"
   ]
 }

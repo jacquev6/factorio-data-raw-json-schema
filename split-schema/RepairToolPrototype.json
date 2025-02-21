@@ -244,9 +244,9 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
     "name",
-    "speed",
     "stack_size",
-    "type"
+    "speed"
   ]
 }

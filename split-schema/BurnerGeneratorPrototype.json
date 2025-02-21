@@ -505,10 +505,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "burner",
-    "energy_source",
-    "max_power_output",
+    "type",
     "name",
-    "type"
+    "energy_source",
+    "burner",
+    "max_power_output"
   ]
 }

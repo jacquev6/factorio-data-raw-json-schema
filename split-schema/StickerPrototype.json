@@ -443,8 +443,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "duration_in_ticks",
+    "type",
     "name",
-    "type"
+    "duration_in_ticks"
   ]
 }

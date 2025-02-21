@@ -262,10 +262,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "ammo_category",
-    "ammo_type",
+    "type",
     "name",
     "stack_size",
-    "type"
+    "ammo_type",
+    "ammo_category"
   ]
 }

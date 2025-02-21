@@ -86,10 +86,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "name",
-    "procession_style",
-    "timeline",
     "type",
-    "usage"
+    "name",
+    "timeline",
+    "usage",
+    "procession_style"
   ]
 }

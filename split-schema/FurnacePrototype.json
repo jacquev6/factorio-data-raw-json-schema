@@ -598,13 +598,13 @@
   },
   "additionalProperties": false,
   "required": [
-    "crafting_categories",
-    "crafting_speed",
-    "energy_source",
-    "energy_usage",
+    "type",
     "name",
+    "energy_usage",
+    "crafting_speed",
+    "crafting_categories",
+    "energy_source",
     "result_inventory_size",
-    "source_inventory_size",
-    "type"
+    "source_inventory_size"
   ]
 }

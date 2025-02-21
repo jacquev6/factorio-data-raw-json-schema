@@ -93,13 +93,13 @@
   },
   "additionalProperties": false,
   "required": [
-    "categories",
-    "color_lookup",
-    "energy_input",
-    "energy_source",
+    "type",
     "name",
-    "shape",
     "sprite",
-    "type"
+    "shape",
+    "categories",
+    "energy_source",
+    "energy_input",
+    "color_lookup"
   ]
 }

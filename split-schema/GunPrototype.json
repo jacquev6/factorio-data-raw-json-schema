@@ -232,9 +232,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "attack_parameters",
+    "type",
     "name",
     "stack_size",
-    "type"
+    "attack_parameters"
   ]
 }

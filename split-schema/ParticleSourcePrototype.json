@@ -392,12 +392,12 @@
   },
   "additionalProperties": false,
   "required": [
-    "height",
-    "horizontal_speed",
-    "name",
-    "time_before_start",
-    "time_to_live",
     "type",
-    "vertical_speed"
+    "name",
+    "time_to_live",
+    "time_before_start",
+    "height",
+    "vertical_speed",
+    "horizontal_speed"
   ]
 }

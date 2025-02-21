@@ -532,10 +532,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "activation_distance",
+    "type",
     "name",
     "opening_speed",
-    "timeout_to_close",
-    "type"
+    "activation_distance",
+    "timeout_to_close"
   ]
 }

@@ -506,8 +506,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "heat_buffer",
+    "type",
     "name",
-    "type"
+    "heat_buffer"
   ]
 }

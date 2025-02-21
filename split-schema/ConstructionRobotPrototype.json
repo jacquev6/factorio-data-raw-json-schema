@@ -556,10 +556,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "construction_vector",
-    "max_payload_size",
+    "type",
     "name",
     "speed",
-    "type"
+    "max_payload_size",
+    "construction_vector"
   ]
 }

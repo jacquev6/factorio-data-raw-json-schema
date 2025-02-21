@@ -529,9 +529,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "connection_points",
+    "type",
     "name",
     "supply_area_distance",
-    "type"
+    "connection_points"
   ]
 }

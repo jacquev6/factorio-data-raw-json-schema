@@ -58,11 +58,11 @@
   },
   "additionalProperties": false,
   "required": [
-    "affects_evolution",
-    "affects_water_tint",
+    "type",
+    "name",
     "chart_color",
     "icon",
-    "name",
-    "type"
+    "affects_evolution",
+    "affects_water_tint"
   ]
 }

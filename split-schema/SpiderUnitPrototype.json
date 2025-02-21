@@ -538,12 +538,12 @@
   },
   "additionalProperties": false,
   "required": [
-    "attack_parameters",
-    "distraction_cooldown",
-    "height",
+    "type",
     "name",
     "spider_engine",
-    "type",
-    "vision_distance"
+    "height",
+    "attack_parameters",
+    "vision_distance",
+    "distraction_cooldown"
   ]
 }

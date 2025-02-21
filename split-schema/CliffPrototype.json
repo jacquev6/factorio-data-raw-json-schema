@@ -444,10 +444,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "grid_offset",
-    "grid_size",
+    "type",
     "name",
     "orientations",
-    "type"
+    "grid_size",
+    "grid_offset"
   ]
 }

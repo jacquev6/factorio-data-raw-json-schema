@@ -46,8 +46,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "group",
+    "type",
     "name",
-    "type"
+    "group"
   ]
 }

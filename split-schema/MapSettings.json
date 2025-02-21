@@ -52,16 +52,16 @@
   },
   "additionalProperties": false,
   "required": [
-    "asteroids",
-    "difficulty_settings",
-    "enemy_evolution",
-    "enemy_expansion",
-    "max_failed_behavior_count",
+    "type",
     "name",
-    "path_finder",
     "pollution",
     "steering",
-    "type",
-    "unit_group"
+    "enemy_evolution",
+    "enemy_expansion",
+    "unit_group",
+    "path_finder",
+    "max_failed_behavior_count",
+    "difficulty_settings",
+    "asteroids"
   ]
 }

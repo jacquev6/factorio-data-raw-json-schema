@@ -52,8 +52,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "default_value",
+    "type",
     "name",
-    "type"
+    "default_value"
   ]
 }

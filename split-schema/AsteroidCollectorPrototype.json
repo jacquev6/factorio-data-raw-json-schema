@@ -655,13 +655,13 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
+    "name",
+    "graphics_set",
+    "passive_energy_usage",
     "arm_energy_usage",
     "arm_slow_energy_usage",
-    "collection_radius",
     "energy_source",
-    "graphics_set",
-    "name",
-    "passive_energy_usage",
-    "type"
+    "collection_radius"
   ]
 }

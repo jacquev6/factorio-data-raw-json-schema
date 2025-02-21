@@ -263,10 +263,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "alt_select",
+    "type",
     "name",
-    "select",
     "stack_size",
-    "type"
+    "select",
+    "alt_select"
   ]
 }

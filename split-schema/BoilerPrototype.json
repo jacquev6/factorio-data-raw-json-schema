@@ -543,12 +543,12 @@
   },
   "additionalProperties": false,
   "required": [
-    "burning_cooldown",
-    "energy_consumption",
+    "type",
+    "name",
     "energy_source",
     "fluid_box",
-    "name",
     "output_fluid_box",
-    "type"
+    "energy_consumption",
+    "burning_cooldown"
   ]
 }

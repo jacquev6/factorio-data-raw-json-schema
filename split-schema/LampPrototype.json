@@ -574,9 +574,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "energy_source",
-    "energy_usage_per_tick",
+    "type",
     "name",
-    "type"
+    "energy_usage_per_tick",
+    "energy_source"
   ]
 }

@@ -357,11 +357,11 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
+    "name",
     "collision_mask",
     "layer",
-    "map_color",
-    "name",
-    "type",
-    "variants"
+    "variants",
+    "map_color"
   ]
 }

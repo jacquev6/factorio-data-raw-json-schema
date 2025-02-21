@@ -142,9 +142,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "distance",
+    "type",
     "name",
-    "orientation",
-    "type"
+    "distance",
+    "orientation"
   ]
 }

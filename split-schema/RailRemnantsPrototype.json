@@ -473,9 +473,9 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
     "name",
     "pictures",
-    "related_rail",
-    "type"
+    "related_rail"
   ]
 }

@@ -88,9 +88,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "animation",
-    "duration",
+    "type",
     "name",
-    "type"
+    "animation",
+    "duration"
   ]
 }

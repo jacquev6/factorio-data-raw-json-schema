@@ -84,13 +84,13 @@
   },
   "additionalProperties": false,
   "required": [
-    "categories",
-    "energy_consumption",
-    "energy_source",
-    "movement_bonus",
+    "type",
     "name",
-    "shape",
     "sprite",
-    "type"
+    "shape",
+    "categories",
+    "energy_source",
+    "energy_consumption",
+    "movement_bonus"
   ]
 }

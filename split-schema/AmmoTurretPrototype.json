@@ -791,13 +791,13 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
+    "name",
     "attack_parameters",
-    "automated_ammo_count",
-    "call_for_help_radius",
     "folded_animation",
+    "call_for_help_radius",
     "graphics_set",
     "inventory_size",
-    "name",
-    "type"
+    "automated_ammo_count"
   ]
 }

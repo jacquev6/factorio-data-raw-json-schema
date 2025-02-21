@@ -552,8 +552,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "growth_ticks",
+    "type",
     "name",
-    "type"
+    "growth_ticks"
   ]
 }

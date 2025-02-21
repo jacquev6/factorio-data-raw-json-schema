@@ -81,8 +81,8 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
     "name",
-    "to_build",
-    "type"
+    "to_build"
   ]
 }

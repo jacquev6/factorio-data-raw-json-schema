@@ -158,15 +158,15 @@
   },
   "additionalProperties": false,
   "required": [
-    "categories",
-    "charge_approach_distance",
-    "charging_energy",
-    "construction_radius",
-    "energy_source",
+    "type",
     "name",
-    "shape",
-    "spawn_and_station_height",
     "sprite",
-    "type"
+    "shape",
+    "categories",
+    "energy_source",
+    "spawn_and_station_height",
+    "charge_approach_distance",
+    "construction_radius",
+    "charging_energy"
   ]
 }

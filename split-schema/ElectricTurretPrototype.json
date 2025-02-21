@@ -786,12 +786,12 @@
   },
   "additionalProperties": false,
   "required": [
-    "attack_parameters",
-    "call_for_help_radius",
-    "energy_source",
-    "folded_animation",
-    "graphics_set",
+    "type",
     "name",
-    "type"
+    "attack_parameters",
+    "folded_animation",
+    "call_for_help_radius",
+    "graphics_set",
+    "energy_source"
   ]
 }

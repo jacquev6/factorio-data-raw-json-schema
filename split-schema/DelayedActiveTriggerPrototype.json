@@ -58,9 +58,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "action",
-    "delay",
+    "type",
     "name",
-    "type"
+    "action",
+    "delay"
   ]
 }

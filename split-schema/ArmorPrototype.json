@@ -285,8 +285,8 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
     "name",
-    "stack_size",
-    "type"
+    "stack_size"
   ]
 }

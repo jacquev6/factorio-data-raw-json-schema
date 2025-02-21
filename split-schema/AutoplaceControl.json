@@ -69,8 +69,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "category",
+    "type",
     "name",
-    "type"
+    "category"
   ]
 }

@@ -78,9 +78,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "minimum_damage",
+    "type",
     "name",
-    "should_survive",
-    "type"
+    "minimum_damage",
+    "should_survive"
   ]
 }

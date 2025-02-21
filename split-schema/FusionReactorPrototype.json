@@ -517,14 +517,14 @@
   },
   "additionalProperties": false,
   "required": [
-    "burner",
+    "type",
+    "name",
     "energy_source",
+    "burner",
     "graphics_set",
     "input_fluid_box",
-    "max_fluid_usage",
-    "name",
     "output_fluid_box",
     "power_input",
-    "type"
+    "max_fluid_usage"
   ]
 }

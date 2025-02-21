@@ -505,8 +505,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "energy_source",
+    "type",
     "name",
-    "type"
+    "energy_source"
   ]
 }

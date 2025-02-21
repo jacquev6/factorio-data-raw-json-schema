@@ -517,9 +517,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "elevated_picture_set",
-    "ground_picture_set",
+    "type",
     "name",
-    "type"
+    "ground_picture_set",
+    "elevated_picture_set"
   ]
 }

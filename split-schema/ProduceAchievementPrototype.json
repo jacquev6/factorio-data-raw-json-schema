@@ -81,9 +81,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "amount",
-    "limited_to_one_game",
+    "type",
     "name",
-    "type"
+    "amount",
+    "limited_to_one_game"
   ]
 }

@@ -81,11 +81,11 @@
   },
   "additionalProperties": false,
   "required": [
-    "categories",
-    "inventory_size_bonus",
+    "type",
     "name",
-    "shape",
     "sprite",
-    "type"
+    "shape",
+    "categories",
+    "inventory_size_bonus"
   ]
 }

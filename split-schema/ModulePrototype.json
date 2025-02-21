@@ -261,11 +261,11 @@
   },
   "additionalProperties": false,
   "required": [
-    "category",
-    "effect",
+    "type",
     "name",
     "stack_size",
+    "category",
     "tier",
-    "type"
+    "effect"
   ]
 }

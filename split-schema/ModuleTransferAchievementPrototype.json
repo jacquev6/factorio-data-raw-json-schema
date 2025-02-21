@@ -96,8 +96,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "module",
+    "type",
     "name",
-    "type"
+    "module"
   ]
 }

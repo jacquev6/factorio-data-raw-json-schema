@@ -630,15 +630,15 @@
   },
   "additionalProperties": false,
   "required": [
-    "air_resistance",
-    "connection_distance",
-    "energy_per_hit_point",
-    "inventory_size",
-    "joint_distance",
-    "max_speed",
-    "name",
     "type",
+    "name",
+    "weight",
+    "energy_per_hit_point",
+    "max_speed",
+    "air_resistance",
+    "joint_distance",
+    "connection_distance",
     "vertical_selection_shift",
-    "weight"
+    "inventory_size"
   ]
 }

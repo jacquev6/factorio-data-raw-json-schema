@@ -540,11 +540,11 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
+    "name",
     "energy_source",
     "fluid_box",
     "fluid_usage_per_tick",
-    "maximum_temperature",
-    "name",
-    "type"
+    "maximum_temperature"
   ]
 }

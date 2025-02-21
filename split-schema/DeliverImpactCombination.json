@@ -22,10 +22,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "deliver_category",
-    "impact_category",
+    "type",
     "name",
-    "trigger_effect_item",
-    "type"
+    "impact_category",
+    "deliver_category",
+    "trigger_effect_item"
   ]
 }

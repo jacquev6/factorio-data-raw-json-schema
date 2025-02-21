@@ -587,13 +587,13 @@
   },
   "additionalProperties": false,
   "required": [
-    "crane",
-    "crane_energy_usage",
-    "energy_source",
-    "energy_usage",
-    "input_inventory_size",
+    "type",
     "name",
-    "radius",
-    "type"
+    "crane",
+    "energy_source",
+    "input_inventory_size",
+    "energy_usage",
+    "crane_energy_usage",
+    "radius"
   ]
 }

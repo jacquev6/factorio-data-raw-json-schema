@@ -647,18 +647,18 @@
   },
   "additionalProperties": false,
   "required": [
-    "charge_approach_distance",
-    "charging_energy",
-    "construction_radius",
+    "type",
+    "name",
     "energy_source",
     "energy_usage",
-    "logistics_radius",
-    "material_slots_count",
-    "name",
     "recharge_minimum",
-    "request_to_open_door_timeout",
     "robot_slots_count",
+    "material_slots_count",
+    "request_to_open_door_timeout",
     "spawn_and_station_height",
-    "type"
+    "charge_approach_distance",
+    "logistics_radius",
+    "construction_radius",
+    "charging_energy"
   ]
 }

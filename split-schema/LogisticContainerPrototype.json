@@ -572,9 +572,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "inventory_size",
-    "logistic_mode",
+    "type",
     "name",
-    "type"
+    "inventory_size",
+    "logistic_mode"
   ]
 }

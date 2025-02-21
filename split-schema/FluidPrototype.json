@@ -93,10 +93,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "base_color",
-    "default_temperature",
-    "flow_color",
+    "type",
     "name",
-    "type"
+    "default_temperature",
+    "base_color",
+    "flow_color"
   ]
 }

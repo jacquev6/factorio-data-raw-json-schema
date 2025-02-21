@@ -575,13 +575,13 @@
   },
   "additionalProperties": false,
   "required": [
-    "attack_parameters",
-    "distance_per_frame",
-    "distraction_cooldown",
-    "movement_speed",
+    "type",
     "name",
     "run_animation",
-    "type",
+    "attack_parameters",
+    "movement_speed",
+    "distance_per_frame",
+    "distraction_cooldown",
     "vision_distance"
   ]
 }

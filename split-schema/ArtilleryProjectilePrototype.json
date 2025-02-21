@@ -369,9 +369,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "map_color",
+    "type",
     "name",
-    "reveal_map",
-    "type"
+    "map_color",
+    "reveal_map"
   ]
 }

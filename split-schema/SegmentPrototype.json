@@ -536,8 +536,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "animation",
+    "type",
     "name",
-    "type"
+    "animation"
   ]
 }

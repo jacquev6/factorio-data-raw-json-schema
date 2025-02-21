@@ -86,9 +86,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "from",
+    "type",
     "name",
-    "to",
-    "type"
+    "from",
+    "to"
   ]
 }

@@ -235,9 +235,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "capsule_action",
+    "type",
     "name",
     "stack_size",
-    "type"
+    "capsule_action"
   ]
 }

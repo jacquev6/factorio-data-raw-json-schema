@@ -606,16 +606,16 @@
   },
   "additionalProperties": false,
   "required": [
-    "automatic_weapon_cycling",
-    "chain_shooting_cooldown_modifier",
+    "type",
+    "name",
+    "weight",
     "energy_per_hit_point",
     "energy_source",
-    "height",
     "inventory_size",
-    "movement_energy_consumption",
-    "name",
     "spider_engine",
-    "type",
-    "weight"
+    "height",
+    "movement_energy_consumption",
+    "automatic_weapon_cycling",
+    "chain_shooting_cooldown_modifier"
   ]
 }

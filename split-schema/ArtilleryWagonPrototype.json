@@ -706,19 +706,19 @@
   },
   "additionalProperties": false,
   "required": [
-    "air_resistance",
-    "ammo_stack_limit",
-    "connection_distance",
+    "type",
+    "name",
+    "weight",
     "energy_per_hit_point",
+    "max_speed",
+    "air_resistance",
+    "joint_distance",
+    "connection_distance",
+    "vertical_selection_shift",
     "gun",
     "inventory_size",
-    "joint_distance",
-    "manual_range_modifier",
-    "max_speed",
-    "name",
+    "ammo_stack_limit",
     "turret_rotation_speed",
-    "type",
-    "vertical_selection_shift",
-    "weight"
+    "manual_range_modifier"
   ]
 }

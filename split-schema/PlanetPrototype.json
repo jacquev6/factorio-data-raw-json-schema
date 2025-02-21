@@ -178,10 +178,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "distance",
-    "gravity_pull",
+    "type",
     "name",
-    "orientation",
-    "type"
+    "gravity_pull",
+    "distance",
+    "orientation"
   ]
 }

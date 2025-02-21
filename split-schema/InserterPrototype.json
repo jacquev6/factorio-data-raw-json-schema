@@ -614,12 +614,12 @@
   },
   "additionalProperties": false,
   "required": [
-    "energy_source",
-    "extension_speed",
-    "insert_position",
+    "type",
     "name",
-    "pickup_position",
+    "extension_speed",
     "rotation_speed",
-    "type"
+    "insert_position",
+    "pickup_position",
+    "energy_source"
   ]
 }

@@ -512,10 +512,10 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
+    "name",
     "fluid_box",
     "horizontal_window_bounding_box",
-    "name",
-    "type",
     "vertical_window_bounding_box"
   ]
 }

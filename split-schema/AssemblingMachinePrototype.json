@@ -641,11 +641,11 @@
   },
   "additionalProperties": false,
   "required": [
-    "crafting_categories",
-    "crafting_speed",
-    "energy_source",
-    "energy_usage",
+    "type",
     "name",
-    "type"
+    "energy_usage",
+    "crafting_speed",
+    "crafting_categories",
+    "energy_source"
   ]
 }

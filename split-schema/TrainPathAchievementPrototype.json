@@ -72,8 +72,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "minimum_distance",
+    "type",
     "name",
-    "type"
+    "minimum_distance"
   ]
 }

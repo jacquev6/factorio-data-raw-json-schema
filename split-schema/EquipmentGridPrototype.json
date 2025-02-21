@@ -66,10 +66,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "equipment_categories",
-    "height",
-    "name",
     "type",
-    "width"
+    "name",
+    "equipment_categories",
+    "width",
+    "height"
   ]
 }

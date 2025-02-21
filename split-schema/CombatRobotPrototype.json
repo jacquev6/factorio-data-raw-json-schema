@@ -541,10 +541,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "attack_parameters",
+    "type",
     "name",
     "speed",
     "time_to_live",
-    "type"
+    "attack_parameters"
   ]
 }

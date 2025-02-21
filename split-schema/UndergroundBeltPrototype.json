@@ -540,9 +540,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "max_distance",
+    "type",
     "name",
     "speed",
-    "type"
+    "max_distance"
   ]
 }

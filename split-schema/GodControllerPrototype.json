@@ -56,12 +56,12 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
+    "name",
     "inventory_size",
+    "movement_speed",
     "item_pickup_distance",
     "loot_pickup_distance",
-    "mining_speed",
-    "movement_speed",
-    "name",
-    "type"
+    "mining_speed"
   ]
 }

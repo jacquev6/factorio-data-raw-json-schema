@@ -69,7 +69,7 @@
   },
   "additionalProperties": false,
   "required": [
-    "name",
-    "type"
+    "type",
+    "name"
   ]
 }

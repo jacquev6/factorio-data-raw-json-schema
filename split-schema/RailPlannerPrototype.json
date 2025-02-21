@@ -249,9 +249,9 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
     "name",
-    "rails",
     "stack_size",
-    "type"
+    "rails"
   ]
 }

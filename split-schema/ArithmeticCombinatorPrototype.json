@@ -639,15 +639,15 @@
   },
   "additionalProperties": false,
   "required": [
-    "active_energy_usage",
-    "activity_led_light_offsets",
-    "energy_source",
-    "input_connection_bounding_box",
-    "input_connection_points",
+    "type",
     "name",
+    "energy_source",
+    "active_energy_usage",
+    "input_connection_bounding_box",
     "output_connection_bounding_box",
-    "output_connection_points",
+    "activity_led_light_offsets",
     "screen_light_offsets",
-    "type"
+    "input_connection_points",
+    "output_connection_points"
   ]
 }

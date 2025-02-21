@@ -553,10 +553,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "consumption",
-    "energy_source",
-    "heat_buffer",
+    "type",
     "name",
-    "type"
+    "heat_buffer",
+    "energy_source",
+    "consumption"
   ]
 }

@@ -615,13 +615,13 @@
   },
   "additionalProperties": false,
   "required": [
-    "energy_source",
+    "type",
+    "name",
+    "vector_to_place_result",
+    "resource_searching_radius",
     "energy_usage",
     "mining_speed",
-    "name",
-    "resource_categories",
-    "resource_searching_radius",
-    "type",
-    "vector_to_place_result"
+    "energy_source",
+    "resource_categories"
   ]
 }

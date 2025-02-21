@@ -496,9 +496,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "energy_source",
+    "type",
     "name",
-    "production",
-    "type"
+    "energy_source",
+    "production"
   ]
 }

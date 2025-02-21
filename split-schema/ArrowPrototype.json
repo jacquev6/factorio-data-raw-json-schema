@@ -354,8 +354,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "arrow_picture",
+    "type",
     "name",
-    "type"
+    "arrow_picture"
   ]
 }

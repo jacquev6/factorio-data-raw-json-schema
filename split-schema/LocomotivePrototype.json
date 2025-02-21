@@ -655,17 +655,17 @@
   },
   "additionalProperties": false,
   "required": [
-    "air_resistance",
-    "connection_distance",
-    "energy_per_hit_point",
-    "energy_source",
-    "joint_distance",
-    "max_power",
-    "max_speed",
-    "name",
-    "reversing_power_modifier",
     "type",
+    "name",
+    "weight",
+    "energy_per_hit_point",
+    "max_speed",
+    "air_resistance",
+    "joint_distance",
+    "connection_distance",
     "vertical_selection_shift",
-    "weight"
+    "max_power",
+    "reversing_power_modifier",
+    "energy_source"
   ]
 }

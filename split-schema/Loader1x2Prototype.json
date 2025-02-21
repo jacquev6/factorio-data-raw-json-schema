@@ -565,9 +565,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "filter_count",
+    "type",
     "name",
     "speed",
-    "type"
+    "filter_count"
   ]
 }

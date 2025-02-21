@@ -514,8 +514,8 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
     "name",
-    "trigger_radius",
-    "type"
+    "trigger_radius"
   ]
 }

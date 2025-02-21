@@ -506,9 +506,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "inventory_size",
+    "type",
     "name",
-    "spawned_container",
-    "type"
+    "inventory_size",
+    "spawned_container"
   ]
 }

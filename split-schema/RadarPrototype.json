@@ -538,13 +538,13 @@
   },
   "additionalProperties": false,
   "required": [
-    "energy_per_nearby_scan",
-    "energy_per_sector",
-    "energy_source",
-    "energy_usage",
-    "max_distance_of_nearby_sector_revealed",
-    "max_distance_of_sector_revealed",
+    "type",
     "name",
-    "type"
+    "energy_usage",
+    "energy_per_sector",
+    "energy_per_nearby_scan",
+    "energy_source",
+    "max_distance_of_sector_revealed",
+    "max_distance_of_nearby_sector_revealed"
   ]
 }

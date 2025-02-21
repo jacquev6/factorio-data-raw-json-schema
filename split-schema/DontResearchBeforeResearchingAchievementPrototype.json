@@ -123,9 +123,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "dont_research",
+    "type",
     "name",
-    "research_with",
-    "type"
+    "dont_research",
+    "research_with"
   ]
 }

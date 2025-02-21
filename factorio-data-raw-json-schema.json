@@ -24707,9 +24707,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "energy_source",
+        "type",
         "name",
-        "type"
+        "energy_source"
       ]
     },
     "AchievementPrototype": {
@@ -24782,8 +24782,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "ActiveDefenseEquipmentPrototype": {
@@ -24871,14 +24871,14 @@
       },
       "additionalProperties": false,
       "required": [
-        "attack_parameters",
-        "automatic",
+        "type",
+        "name",
+        "sprite",
+        "shape",
         "categories",
         "energy_source",
-        "name",
-        "shape",
-        "sprite",
-        "type"
+        "automatic",
+        "attack_parameters"
       ]
     },
     "AgriculturalTowerPrototype": {
@@ -25469,14 +25469,14 @@
       },
       "additionalProperties": false,
       "required": [
-        "crane",
-        "crane_energy_usage",
-        "energy_source",
-        "energy_usage",
-        "input_inventory_size",
+        "type",
         "name",
-        "radius",
-        "type"
+        "crane",
+        "energy_source",
+        "input_inventory_size",
+        "energy_usage",
+        "crane_energy_usage",
+        "radius"
       ]
     },
     "AirbornePollutantPrototype": {
@@ -25538,12 +25538,12 @@
       },
       "additionalProperties": false,
       "required": [
-        "affects_evolution",
-        "affects_water_tint",
+        "type",
+        "name",
         "chart_color",
         "icon",
-        "name",
-        "type"
+        "affects_evolution",
+        "affects_water_tint"
       ]
     },
     "AmbientSound": {
@@ -25575,9 +25575,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "track_type",
-        "type"
+        "track_type"
       ]
     },
     "AmmoCategory": {
@@ -25647,8 +25647,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "AmmoItemPrototype": {
@@ -25914,11 +25914,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "ammo_category",
-        "ammo_type",
+        "type",
         "name",
         "stack_size",
-        "type"
+        "ammo_type",
+        "ammo_category"
       ]
     },
     "AmmoTurretPrototype": {
@@ -26713,14 +26713,14 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
+        "name",
         "attack_parameters",
-        "automated_ammo_count",
-        "call_for_help_radius",
         "folded_animation",
+        "call_for_help_radius",
         "graphics_set",
         "inventory_size",
-        "name",
-        "type"
+        "automated_ammo_count"
       ]
     },
     "AnimationPrototype": {
@@ -26926,8 +26926,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "ArithmeticCombinatorPrototype": {
@@ -27570,16 +27570,16 @@
       },
       "additionalProperties": false,
       "required": [
-        "active_energy_usage",
-        "activity_led_light_offsets",
-        "energy_source",
-        "input_connection_bounding_box",
-        "input_connection_points",
+        "type",
         "name",
+        "energy_source",
+        "active_energy_usage",
+        "input_connection_bounding_box",
         "output_connection_bounding_box",
-        "output_connection_points",
+        "activity_led_light_offsets",
         "screen_light_offsets",
-        "type"
+        "input_connection_points",
+        "output_connection_points"
       ]
     },
     "ArmorPrototype": {
@@ -27868,9 +27868,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "stack_size",
-        "type"
+        "stack_size"
       ]
     },
     "ArrowPrototype": {
@@ -28228,9 +28228,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "arrow_picture",
+        "type",
         "name",
-        "type"
+        "arrow_picture"
       ]
     },
     "ArtilleryFlarePrototype": {
@@ -28633,10 +28633,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "life_time",
-        "map_color",
+        "type",
         "name",
-        "type"
+        "map_color",
+        "life_time"
       ]
     },
     "ArtilleryProjectilePrototype": {
@@ -29009,10 +29009,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "map_color",
+        "type",
         "name",
-        "reveal_map",
-        "type"
+        "map_color",
+        "reveal_map"
       ]
     },
     "ArtilleryTurretPrototype": {
@@ -29597,14 +29597,14 @@
       },
       "additionalProperties": false,
       "required": [
-        "ammo_stack_limit",
-        "cannon_base_shift",
+        "type",
+        "name",
         "gun",
         "inventory_size",
-        "manual_range_modifier",
-        "name",
+        "ammo_stack_limit",
         "turret_rotation_speed",
-        "type"
+        "manual_range_modifier",
+        "cannon_base_shift"
       ]
     },
     "ArtilleryWagonPrototype": {
@@ -30314,20 +30314,20 @@
       },
       "additionalProperties": false,
       "required": [
-        "air_resistance",
-        "ammo_stack_limit",
-        "connection_distance",
+        "type",
+        "name",
+        "weight",
         "energy_per_hit_point",
+        "max_speed",
+        "air_resistance",
+        "joint_distance",
+        "connection_distance",
+        "vertical_selection_shift",
         "gun",
         "inventory_size",
-        "joint_distance",
-        "manual_range_modifier",
-        "max_speed",
-        "name",
+        "ammo_stack_limit",
         "turret_rotation_speed",
-        "type",
-        "vertical_selection_shift",
-        "weight"
+        "manual_range_modifier"
       ]
     },
     "AssemblingMachinePrototype": {
@@ -30972,12 +30972,12 @@
       },
       "additionalProperties": false,
       "required": [
-        "crafting_categories",
-        "crafting_speed",
-        "energy_source",
-        "energy_usage",
+        "type",
         "name",
-        "type"
+        "energy_usage",
+        "crafting_speed",
+        "crafting_categories",
+        "energy_source"
       ]
     },
     "AsteroidChunkPrototype": {
@@ -31056,8 +31056,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "AsteroidCollectorPrototype": {
@@ -31716,14 +31716,14 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
+        "name",
+        "graphics_set",
+        "passive_energy_usage",
         "arm_energy_usage",
         "arm_slow_energy_usage",
-        "collection_radius",
         "energy_source",
-        "graphics_set",
-        "name",
-        "passive_energy_usage",
-        "type"
+        "collection_radius"
       ]
     },
     "AsteroidPrototype": {
@@ -32217,8 +32217,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "AutoplaceControl": {
@@ -32291,9 +32291,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "category",
+        "type",
         "name",
-        "type"
+        "category"
       ]
     },
     "BatteryEquipmentPrototype": {
@@ -32375,12 +32375,12 @@
       },
       "additionalProperties": false,
       "required": [
-        "categories",
-        "energy_source",
+        "type",
         "name",
-        "shape",
         "sprite",
-        "type"
+        "shape",
+        "categories",
+        "energy_source"
       ]
     },
     "BeaconPrototype": {
@@ -32951,13 +32951,13 @@
       },
       "additionalProperties": false,
       "required": [
-        "distribution_effectivity",
-        "energy_source",
-        "energy_usage",
-        "module_slots",
+        "type",
         "name",
+        "energy_usage",
+        "energy_source",
         "supply_area_distance",
-        "type"
+        "distribution_effectivity",
+        "module_slots"
       ]
     },
     "BeamPrototype": {
@@ -33327,11 +33327,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "damage_interval",
-        "graphics_set",
-        "name",
         "type",
-        "width"
+        "name",
+        "width",
+        "damage_interval",
+        "graphics_set"
       ]
     },
     "BeltImmunityEquipmentPrototype": {
@@ -33416,13 +33416,13 @@
       },
       "additionalProperties": false,
       "required": [
-        "categories",
-        "energy_consumption",
-        "energy_source",
+        "type",
         "name",
-        "shape",
         "sprite",
-        "type"
+        "shape",
+        "categories",
+        "energy_source",
+        "energy_consumption"
       ]
     },
     "BlueprintBookPrototype": {
@@ -33730,10 +33730,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "inventory_size",
+        "type",
         "name",
         "stack_size",
-        "type"
+        "inventory_size"
       ]
     },
     "BlueprintItemPrototype": {
@@ -33997,11 +33997,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "alt_select",
+        "type",
         "name",
-        "select",
         "stack_size",
-        "type"
+        "select",
+        "alt_select"
       ]
     },
     "BoilerPrototype": {
@@ -34548,13 +34548,13 @@
       },
       "additionalProperties": false,
       "required": [
-        "burning_cooldown",
-        "energy_consumption",
+        "type",
+        "name",
         "energy_source",
         "fluid_box",
-        "name",
         "output_fluid_box",
-        "type"
+        "energy_consumption",
+        "burning_cooldown"
       ]
     },
     "BuildEntityAchievementPrototype": {
@@ -34639,9 +34639,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "to_build",
-        "type"
+        "to_build"
       ]
     },
     "BurnerGeneratorPrototype": {
@@ -35150,11 +35150,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "burner",
-        "energy_source",
-        "max_power_output",
+        "type",
         "name",
-        "type"
+        "energy_source",
+        "burner",
+        "max_power_output"
       ]
     },
     "BurnerUsagePrototype": {
@@ -35222,13 +35222,13 @@
       },
       "additionalProperties": false,
       "required": [
-        "accepted_fuel_key",
-        "burned_in_key",
-        "empty_slot_caption",
-        "empty_slot_sprite",
-        "icon",
+        "type",
         "name",
-        "type"
+        "empty_slot_sprite",
+        "empty_slot_caption",
+        "icon",
+        "accepted_fuel_key",
+        "burned_in_key"
       ]
     },
     "CapsulePrototype": {
@@ -35467,10 +35467,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "capsule_action",
+        "type",
         "name",
         "stack_size",
-        "type"
+        "capsule_action"
       ]
     },
     "CaptureRobotPrototype": {
@@ -35994,9 +35994,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "speed",
-        "type"
+        "speed"
       ]
     },
     "CarPrototype": {
@@ -36639,15 +36639,15 @@
       },
       "additionalProperties": false,
       "required": [
-        "consumption",
-        "effectivity",
-        "energy_per_hit_point",
-        "energy_source",
-        "inventory_size",
-        "name",
-        "rotation_speed",
         "type",
-        "weight"
+        "name",
+        "weight",
+        "energy_per_hit_point",
+        "effectivity",
+        "consumption",
+        "rotation_speed",
+        "energy_source",
+        "inventory_size"
       ]
     },
     "CargoBayPrototype": {
@@ -37159,9 +37159,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "inventory_size_bonus",
+        "type",
         "name",
-        "type"
+        "inventory_size_bonus"
       ]
     },
     "CargoLandingPadPrototype": {
@@ -37691,10 +37691,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "cargo_station_parameters",
-        "inventory_size",
+        "type",
         "name",
-        "type"
+        "inventory_size",
+        "cargo_station_parameters"
       ]
     },
     "CargoPodPrototype": {
@@ -38204,10 +38204,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "inventory_size",
+        "type",
         "name",
-        "spawned_container",
-        "type"
+        "inventory_size",
+        "spawned_container"
       ]
     },
     "CargoWagonPrototype": {
@@ -38841,16 +38841,16 @@
       },
       "additionalProperties": false,
       "required": [
-        "air_resistance",
-        "connection_distance",
-        "energy_per_hit_point",
-        "inventory_size",
-        "joint_distance",
-        "max_speed",
-        "name",
         "type",
+        "name",
+        "weight",
+        "energy_per_hit_point",
+        "max_speed",
+        "air_resistance",
+        "joint_distance",
+        "connection_distance",
         "vertical_selection_shift",
-        "weight"
+        "inventory_size"
       ]
     },
     "ChainActiveTriggerPrototype": {
@@ -38924,8 +38924,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "ChangedSurfaceAchievementPrototype": {
@@ -39001,8 +39001,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "CharacterCorpsePrototype": {
@@ -39372,9 +39372,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "time_to_live",
-        "type"
+        "time_to_live"
       ]
     },
     "CharacterPrototype": {
@@ -40084,29 +40084,29 @@
       },
       "additionalProperties": false,
       "required": [
-        "animations",
-        "build_distance",
-        "damage_hit_tint",
-        "distance_per_frame",
-        "drop_item_distance",
-        "eat",
-        "heartbeat",
-        "inventory_size",
-        "item_pickup_distance",
-        "loot_pickup_distance",
-        "maximum_corner_sliding_distance",
-        "mining_speed",
-        "mining_with_tool_particles_animation_positions",
-        "moving_sound_animation_positions",
+        "type",
         "name",
+        "mining_speed",
+        "running_speed",
+        "distance_per_frame",
+        "maximum_corner_sliding_distance",
+        "heartbeat",
+        "eat",
+        "inventory_size",
+        "build_distance",
+        "drop_item_distance",
         "reach_distance",
         "reach_resource_distance",
-        "running_sound_animation_positions",
-        "running_speed",
-        "ticks_to_keep_aiming_direction",
+        "item_pickup_distance",
+        "loot_pickup_distance",
         "ticks_to_keep_gun",
+        "ticks_to_keep_aiming_direction",
         "ticks_to_stay_in_combat",
-        "type"
+        "damage_hit_tint",
+        "mining_with_tool_particles_animation_positions",
+        "running_sound_animation_positions",
+        "moving_sound_animation_positions",
+        "animations"
       ]
     },
     "CliffPrototype": {
@@ -40554,11 +40554,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "grid_offset",
-        "grid_size",
+        "type",
         "name",
         "orientations",
-        "type"
+        "grid_size",
+        "grid_offset"
       ]
     },
     "CollisionLayerPrototype": {
@@ -40605,8 +40605,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "CombatRobotCountAchievementPrototype": {
@@ -40682,8 +40682,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "CombatRobotPrototype": {
@@ -41228,11 +41228,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "attack_parameters",
+        "type",
         "name",
         "speed",
         "time_to_live",
-        "type"
+        "attack_parameters"
       ]
     },
     "CompleteObjectiveAchievementPrototype": {
@@ -41320,9 +41320,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "objective_condition",
-        "type"
+        "objective_condition"
       ]
     },
     "ConstantCombinatorPrototype": {
@@ -41866,10 +41866,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "activity_led_light_offsets",
-        "circuit_wire_connection_points",
+        "type",
         "name",
-        "type"
+        "activity_led_light_offsets",
+        "circuit_wire_connection_points"
       ]
     },
     "ConstructWithRobotsAchievementPrototype": {
@@ -41951,9 +41951,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "limited_to_one_game",
+        "type",
         "name",
-        "type"
+        "limited_to_one_game"
       ]
     },
     "ConstructionRobotPrototype": {
@@ -42513,11 +42513,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "construction_vector",
-        "max_payload_size",
+        "type",
         "name",
         "speed",
-        "type"
+        "max_payload_size",
+        "construction_vector"
       ]
     },
     "ContainerPrototype": {
@@ -43045,9 +43045,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "inventory_size",
+        "type",
         "name",
-        "type"
+        "inventory_size"
       ]
     },
     "CopyPasteToolPrototype": {
@@ -43314,11 +43314,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "alt_select",
+        "type",
         "name",
-        "select",
         "stack_size",
-        "type"
+        "select",
+        "alt_select"
       ]
     },
     "CorpsePrototype": {
@@ -43785,8 +43785,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "CreatePlatformAchievementPrototype": {
@@ -43862,8 +43862,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "CurvedRailAPrototype": {
@@ -44401,9 +44401,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "pictures",
-        "type"
+        "pictures"
       ]
     },
     "CurvedRailBPrototype": {
@@ -44941,9 +44941,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "pictures",
-        "type"
+        "pictures"
       ]
     },
     "CustomEventPrototype": {
@@ -44990,8 +44990,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "CustomInputPrototype": {
@@ -45098,9 +45098,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "key_sequence",
+        "type",
         "name",
-        "type"
+        "key_sequence"
       ]
     },
     "DamageType": {
@@ -45147,8 +45147,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "DeciderCombinatorPrototype": {
@@ -45776,16 +45776,16 @@
       },
       "additionalProperties": false,
       "required": [
-        "active_energy_usage",
-        "activity_led_light_offsets",
-        "energy_source",
-        "input_connection_bounding_box",
-        "input_connection_points",
+        "type",
         "name",
+        "energy_source",
+        "active_energy_usage",
+        "input_connection_bounding_box",
         "output_connection_bounding_box",
-        "output_connection_points",
+        "activity_led_light_offsets",
         "screen_light_offsets",
-        "type"
+        "input_connection_points",
+        "output_connection_points"
       ]
     },
     "DeconstructWithRobotsAchievementPrototype": {
@@ -45861,9 +45861,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "amount",
+        "type",
         "name",
-        "type"
+        "amount"
       ]
     },
     "DeconstructibleTileProxyPrototype": {
@@ -46212,8 +46212,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "DeconstructionItemPrototype": {
@@ -46483,11 +46483,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "alt_select",
+        "type",
         "name",
-        "select",
         "stack_size",
-        "type"
+        "select",
+        "alt_select"
       ]
     },
     "DecorativePrototype": {
@@ -46590,9 +46590,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "pictures",
-        "type"
+        "pictures"
       ]
     },
     "DelayedActiveTriggerPrototype": {
@@ -46654,10 +46654,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "action",
-        "delay",
+        "type",
         "name",
-        "type"
+        "action",
+        "delay"
       ]
     },
     "DeliverByRobotsAchievementPrototype": {
@@ -46733,9 +46733,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "amount",
+        "type",
         "name",
-        "type"
+        "amount"
       ]
     },
     "DeliverCategory": {
@@ -46752,8 +46752,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "DeliverImpactCombination": {
@@ -46779,11 +46779,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "deliver_category",
-        "impact_category",
+        "type",
         "name",
-        "trigger_effect_item",
-        "type"
+        "impact_category",
+        "deliver_category",
+        "trigger_effect_item"
       ]
     },
     "DepleteResourceAchievementPrototype": {
@@ -46862,8 +46862,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "DestroyCliffAchievementPrototype": {
@@ -46942,8 +46942,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "DisplayPanelPrototype": {
@@ -47474,8 +47474,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "DontBuildEntityAchievementPrototype": {
@@ -47609,10 +47609,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "dont_build",
+        "type",
         "name",
         "objective_condition",
-        "type"
+        "dont_build"
       ]
     },
     "DontCraftManuallyAchievementPrototype": {
@@ -47700,10 +47700,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "amount",
+        "type",
         "name",
         "objective_condition",
-        "type"
+        "amount"
       ]
     },
     "DontKillManuallyAchievementPrototype": {
@@ -47794,8 +47794,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "DontResearchBeforeResearchingAchievementPrototype": {
@@ -47922,10 +47922,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "dont_research",
+        "type",
         "name",
-        "research_with",
-        "type"
+        "dont_research",
+        "research_with"
       ]
     },
     "DontUseEntityInEnergyProductionAchievementPrototype": {
@@ -48058,9 +48058,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "excluded",
+        "type",
         "name",
-        "type"
+        "excluded"
       ]
     },
     "EditorControllerPrototype": {
@@ -48152,32 +48152,32 @@
       },
       "additionalProperties": false,
       "required": [
-        "adjust_speed_based_off_zoom",
-        "enable_flash_light",
-        "fill_built_entity_energy_buffers",
-        "generate_neighbor_chunks",
-        "gun_inventory_size",
-        "ignore_tile_conditions",
-        "instant_blueprint_building",
-        "instant_deconstruction",
-        "instant_rail_planner",
-        "instant_upgrading",
+        "type",
+        "name",
         "inventory_size",
+        "gun_inventory_size",
+        "movement_speed",
         "item_pickup_distance",
         "loot_pickup_distance",
         "mining_speed",
-        "movement_speed",
-        "name",
-        "placed_corpses_never_expire",
+        "enable_flash_light",
+        "adjust_speed_based_off_zoom",
         "render_as_day",
-        "show_additional_entity_info_gui",
-        "show_character_tab_in_controller_gui",
-        "show_entity_health_bars",
-        "show_entity_tags",
-        "show_hidden_entities",
-        "show_infinity_filters_in_controller_gui",
+        "instant_blueprint_building",
+        "instant_deconstruction",
+        "instant_upgrading",
+        "instant_rail_planner",
         "show_status_icons",
-        "type"
+        "show_hidden_entities",
+        "show_entity_tags",
+        "show_entity_health_bars",
+        "show_additional_entity_info_gui",
+        "generate_neighbor_chunks",
+        "fill_built_entity_energy_buffers",
+        "show_character_tab_in_controller_gui",
+        "show_infinity_filters_in_controller_gui",
+        "placed_corpses_never_expire",
+        "ignore_tile_conditions"
       ]
     },
     "ElectricEnergyInterfacePrototype": {
@@ -48711,9 +48711,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "energy_source",
+        "type",
         "name",
-        "type"
+        "energy_source"
       ]
     },
     "ElectricPolePrototype": {
@@ -49246,10 +49246,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "connection_points",
+        "type",
         "name",
         "supply_area_distance",
-        "type"
+        "connection_points"
       ]
     },
     "ElectricTurretPrototype": {
@@ -50039,13 +50039,13 @@
       },
       "additionalProperties": false,
       "required": [
-        "attack_parameters",
-        "call_for_help_radius",
-        "energy_source",
-        "folded_animation",
-        "graphics_set",
+        "type",
         "name",
-        "type"
+        "attack_parameters",
+        "folded_animation",
+        "call_for_help_radius",
+        "graphics_set",
+        "energy_source"
       ]
     },
     "ElevatedCurvedRailAPrototype": {
@@ -50583,9 +50583,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "pictures",
-        "type"
+        "pictures"
       ]
     },
     "ElevatedCurvedRailBPrototype": {
@@ -51123,9 +51123,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "pictures",
-        "type"
+        "pictures"
       ]
     },
     "ElevatedHalfDiagonalRailPrototype": {
@@ -51663,9 +51663,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "pictures",
-        "type"
+        "pictures"
       ]
     },
     "ElevatedStraightRailPrototype": {
@@ -52203,9 +52203,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "pictures",
-        "type"
+        "pictures"
       ]
     },
     "EnemySpawnerPrototype": {
@@ -52793,18 +52793,18 @@
       },
       "additionalProperties": false,
       "required": [
-        "call_for_help_radius",
+        "type",
+        "name",
         "graphics_set",
         "max_count_of_owned_units",
         "max_friends_around_to_spawn",
-        "max_richness_for_spawn_shift",
-        "max_spawn_shift",
-        "name",
-        "result_units",
         "spawning_cooldown",
         "spawning_radius",
         "spawning_spacing",
-        "type"
+        "max_richness_for_spawn_shift",
+        "max_spawn_shift",
+        "call_for_help_radius",
+        "result_units"
       ]
     },
     "EnergyShieldEquipmentPrototype": {
@@ -52892,14 +52892,14 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
+        "name",
+        "sprite",
+        "shape",
         "categories",
-        "energy_per_shield",
         "energy_source",
         "max_shield_value",
-        "name",
-        "shape",
-        "sprite",
-        "type"
+        "energy_per_shield"
       ]
     },
     "EntityGhostPrototype": {
@@ -53269,8 +53269,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "EquipArmorAchievementPrototype": {
@@ -53358,11 +53358,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "alternative_armor",
-        "armor",
-        "limit_quality",
+        "type",
         "name",
-        "type"
+        "armor",
+        "alternative_armor",
+        "limit_quality"
       ]
     },
     "EquipmentCategory": {
@@ -53409,8 +53409,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "EquipmentGhostPrototype": {
@@ -53492,9 +53492,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "sprite",
-        "type"
+        "sprite"
       ]
     },
     "EquipmentGridPrototype": {
@@ -53564,11 +53564,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "equipment_categories",
-        "height",
-        "name",
         "type",
-        "width"
+        "name",
+        "equipment_categories",
+        "width",
+        "height"
       ]
     },
     "ExplosionPrototype": {
@@ -54007,9 +54007,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "animations",
+        "type",
         "name",
-        "type"
+        "animations"
       ]
     },
     "FireFlamePrototype": {
@@ -54530,11 +54530,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "damage_per_tick",
+        "type",
         "name",
+        "damage_per_tick",
         "spread_delay",
-        "spread_delay_deviation",
-        "type"
+        "spread_delay_deviation"
       ]
     },
     "FishPrototype": {
@@ -55016,8 +55016,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "FluidPrototype": {
@@ -55114,11 +55114,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "base_color",
-        "default_temperature",
-        "flow_color",
+        "type",
         "name",
-        "type"
+        "default_temperature",
+        "base_color",
+        "flow_color"
       ]
     },
     "FluidStreamPrototype": {
@@ -55565,12 +55565,12 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
+        "particle_spawn_interval",
         "particle_horizontal_speed",
         "particle_horizontal_speed_deviation",
-        "particle_spawn_interval",
-        "particle_vertical_acceleration",
-        "type"
+        "particle_vertical_acceleration"
       ]
     },
     "FluidTurretPrototype": {
@@ -56405,17 +56405,17 @@
       },
       "additionalProperties": false,
       "required": [
-        "activation_buffer_ratio",
-        "attack_parameters",
-        "call_for_help_radius",
-        "fluid_box",
-        "fluid_buffer_input_flow",
-        "fluid_buffer_size",
-        "folded_animation",
-        "graphics_set",
+        "type",
         "name",
+        "attack_parameters",
+        "folded_animation",
+        "call_for_help_radius",
         "turret_base_has_direction",
-        "type"
+        "graphics_set",
+        "fluid_buffer_size",
+        "fluid_buffer_input_flow",
+        "activation_buffer_ratio",
+        "fluid_box"
       ]
     },
     "FluidWagonPrototype": {
@@ -57052,16 +57052,16 @@
       },
       "additionalProperties": false,
       "required": [
-        "air_resistance",
-        "capacity",
-        "connection_distance",
-        "energy_per_hit_point",
-        "joint_distance",
-        "max_speed",
-        "name",
         "type",
+        "name",
+        "weight",
+        "energy_per_hit_point",
+        "max_speed",
+        "air_resistance",
+        "joint_distance",
+        "connection_distance",
         "vertical_selection_shift",
-        "weight"
+        "capacity"
       ]
     },
     "FontPrototype": {
@@ -57096,10 +57096,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "from",
+        "type",
         "name",
         "size",
-        "type"
+        "from"
       ]
     },
     "FuelCategory": {
@@ -57149,8 +57149,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "FurnacePrototype": {
@@ -57752,14 +57752,14 @@
       },
       "additionalProperties": false,
       "required": [
-        "crafting_categories",
-        "crafting_speed",
-        "energy_source",
-        "energy_usage",
+        "type",
         "name",
+        "energy_usage",
+        "crafting_speed",
+        "crafting_categories",
+        "energy_source",
         "result_inventory_size",
-        "source_inventory_size",
-        "type"
+        "source_inventory_size"
       ]
     },
     "FusionGeneratorPrototype": {
@@ -58265,12 +58265,12 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
+        "name",
         "energy_source",
         "input_fluid_box",
-        "max_fluid_usage",
-        "name",
         "output_fluid_box",
-        "type"
+        "max_fluid_usage"
       ]
     },
     "FusionReactorPrototype": {
@@ -58791,15 +58791,15 @@
       },
       "additionalProperties": false,
       "required": [
-        "burner",
+        "type",
+        "name",
         "energy_source",
+        "burner",
         "graphics_set",
         "input_fluid_box",
-        "max_fluid_usage",
-        "name",
         "output_fluid_box",
         "power_input",
-        "type"
+        "max_fluid_usage"
       ]
     },
     "GatePrototype": {
@@ -59335,11 +59335,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "activation_distance",
+        "type",
         "name",
         "opening_speed",
-        "timeout_to_close",
-        "type"
+        "activation_distance",
+        "timeout_to_close"
       ]
     },
     "GeneratorEquipmentPrototype": {
@@ -59427,13 +59427,13 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
+        "name",
+        "sprite",
+        "shape",
         "categories",
         "energy_source",
-        "name",
-        "power",
-        "shape",
-        "sprite",
-        "type"
+        "power"
       ]
     },
     "GeneratorPrototype": {
@@ -59977,12 +59977,12 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
+        "name",
         "energy_source",
         "fluid_box",
         "fluid_usage_per_tick",
-        "maximum_temperature",
-        "name",
-        "type"
+        "maximum_temperature"
       ]
     },
     "GodControllerPrototype": {
@@ -60042,13 +60042,13 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
+        "name",
         "inventory_size",
+        "movement_speed",
         "item_pickup_distance",
         "loot_pickup_distance",
-        "mining_speed",
-        "movement_speed",
-        "name",
-        "type"
+        "mining_speed"
       ]
     },
     "GroupAttackAchievementPrototype": {
@@ -60138,8 +60138,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "GuiStyle": {
@@ -60194,8 +60194,8 @@
         "$ref": "#/definitions/StyleSpecification"
       },
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "GunPrototype": {
@@ -60431,10 +60431,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "attack_parameters",
+        "type",
         "name",
         "stack_size",
-        "type"
+        "attack_parameters"
       ]
     },
     "HalfDiagonalRailPrototype": {
@@ -60972,9 +60972,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "pictures",
-        "type"
+        "pictures"
       ]
     },
     "HeatInterfacePrototype": {
@@ -61484,9 +61484,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "heat_buffer",
+        "type",
         "name",
-        "type"
+        "heat_buffer"
       ]
     },
     "HeatPipePrototype": {
@@ -61986,9 +61986,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "heat_buffer",
+        "type",
         "name",
-        "type"
+        "heat_buffer"
       ]
     },
     "HighlightBoxEntityPrototype": {
@@ -62337,8 +62337,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "ImpactCategory": {
@@ -62355,8 +62355,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "InfinityContainerPrototype": {
@@ -62954,10 +62954,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "erase_contents_when_mined",
-        "inventory_size",
+        "type",
         "name",
-        "type"
+        "inventory_size",
+        "erase_contents_when_mined"
       ]
     },
     "InfinityPipePrototype": {
@@ -63473,10 +63473,10 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
+        "name",
         "fluid_box",
         "horizontal_window_bounding_box",
-        "name",
-        "type",
         "vertical_window_bounding_box"
       ]
     },
@@ -64095,13 +64095,13 @@
       },
       "additionalProperties": false,
       "required": [
-        "energy_source",
-        "extension_speed",
-        "insert_position",
+        "type",
         "name",
-        "pickup_position",
+        "extension_speed",
         "rotation_speed",
-        "type"
+        "insert_position",
+        "pickup_position",
+        "energy_source"
       ]
     },
     "InventoryBonusEquipmentPrototype": {
@@ -64186,12 +64186,12 @@
       },
       "additionalProperties": false,
       "required": [
-        "categories",
-        "inventory_size_bonus",
+        "type",
         "name",
-        "shape",
         "sprite",
-        "type"
+        "shape",
+        "categories",
+        "inventory_size_bonus"
       ]
     },
     "ItemEntityPrototype": {
@@ -64540,8 +64540,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "ItemGroup": {
@@ -64611,8 +64611,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "ItemPrototype": {
@@ -64845,9 +64845,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "stack_size",
-        "type"
+        "stack_size"
       ]
     },
     "ItemRequestProxyPrototype": {
@@ -65199,8 +65199,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "ItemSubGroup": {
@@ -65250,9 +65250,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "group",
+        "type",
         "name",
-        "type"
+        "group"
       ]
     },
     "ItemWithEntityDataPrototype": {
@@ -65525,9 +65525,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "stack_size",
-        "type"
+        "stack_size"
       ]
     },
     "ItemWithInventoryPrototype": {
@@ -65827,10 +65827,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "inventory_size",
+        "type",
         "name",
         "stack_size",
-        "type"
+        "inventory_size"
       ]
     },
     "ItemWithLabelPrototype": {
@@ -66069,9 +66069,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "stack_size",
-        "type"
+        "stack_size"
       ]
     },
     "ItemWithTagsPrototype": {
@@ -66310,9 +66310,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "stack_size",
-        "type"
+        "stack_size"
       ]
     },
     "KillAchievementPrototype": {
@@ -66442,8 +66442,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "LabPrototype": {
@@ -66998,11 +66998,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "energy_source",
-        "energy_usage",
-        "inputs",
+        "type",
         "name",
-        "type"
+        "energy_usage",
+        "energy_source",
+        "inputs"
       ]
     },
     "LampPrototype": {
@@ -67580,10 +67580,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "energy_source",
-        "energy_usage_per_tick",
+        "type",
         "name",
-        "type"
+        "energy_usage_per_tick",
+        "energy_source"
       ]
     },
     "LandMinePrototype": {
@@ -68101,9 +68101,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "trigger_radius",
-        "type"
+        "trigger_radius"
       ]
     },
     "LaneSplitterPrototype": {
@@ -68612,10 +68612,10 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
         "speed",
-        "structure",
-        "type"
+        "structure"
       ]
     },
     "LegacyCurvedRailPrototype": {
@@ -69153,9 +69153,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "pictures",
-        "type"
+        "pictures"
       ]
     },
     "LegacyStraightRailPrototype": {
@@ -69693,9 +69693,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "pictures",
-        "type"
+        "pictures"
       ]
     },
     "LightningAttractorPrototype": {
@@ -70198,8 +70198,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "LightningPrototype": {
@@ -70578,9 +70578,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "effect_duration",
+        "type",
         "name",
-        "type"
+        "effect_duration"
       ]
     },
     "LinkedBeltPrototype": {
@@ -71112,9 +71112,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "speed",
-        "type"
+        "speed"
       ]
     },
     "LinkedContainerPrototype": {
@@ -71652,9 +71652,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "inventory_size",
+        "type",
         "name",
-        "type"
+        "inventory_size"
       ]
     },
     "Loader1x1Prototype": {
@@ -72223,10 +72223,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "filter_count",
+        "type",
         "name",
         "speed",
-        "type"
+        "filter_count"
       ]
     },
     "Loader1x2Prototype": {
@@ -72795,10 +72795,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "filter_count",
+        "type",
         "name",
         "speed",
-        "type"
+        "filter_count"
       ]
     },
     "LocomotivePrototype": {
@@ -73457,18 +73457,18 @@
       },
       "additionalProperties": false,
       "required": [
-        "air_resistance",
-        "connection_distance",
-        "energy_per_hit_point",
-        "energy_source",
-        "joint_distance",
-        "max_power",
-        "max_speed",
-        "name",
-        "reversing_power_modifier",
         "type",
+        "name",
+        "weight",
+        "energy_per_hit_point",
+        "max_speed",
+        "air_resistance",
+        "joint_distance",
+        "connection_distance",
         "vertical_selection_shift",
-        "weight"
+        "max_power",
+        "reversing_power_modifier",
+        "energy_source"
       ]
     },
     "LogisticContainerPrototype": {
@@ -74044,10 +74044,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "inventory_size",
-        "logistic_mode",
+        "type",
         "name",
-        "type"
+        "inventory_size",
+        "logistic_mode"
       ]
     },
     "LogisticRobotPrototype": {
@@ -74595,10 +74595,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "max_payload_size",
+        "type",
         "name",
         "speed",
-        "type"
+        "max_payload_size"
       ]
     },
     "MapGenPresets": {
@@ -74617,8 +74617,8 @@
         "$ref": "#/definitions/MapGenPreset"
       },
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "MapSettings": {
@@ -74674,17 +74674,17 @@
       },
       "additionalProperties": false,
       "required": [
-        "asteroids",
-        "difficulty_settings",
-        "enemy_evolution",
-        "enemy_expansion",
-        "max_failed_behavior_count",
+        "type",
         "name",
-        "path_finder",
         "pollution",
         "steering",
-        "type",
-        "unit_group"
+        "enemy_evolution",
+        "enemy_expansion",
+        "unit_group",
+        "path_finder",
+        "max_failed_behavior_count",
+        "difficulty_settings",
+        "asteroids"
       ]
     },
     "MarketPrototype": {
@@ -75178,8 +75178,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "MiningDrillPrototype": {
@@ -75798,14 +75798,14 @@
       },
       "additionalProperties": false,
       "required": [
-        "energy_source",
+        "type",
+        "name",
+        "vector_to_place_result",
+        "resource_searching_radius",
         "energy_usage",
         "mining_speed",
-        "name",
-        "resource_categories",
-        "resource_searching_radius",
-        "type",
-        "vector_to_place_result"
+        "energy_source",
+        "resource_categories"
       ]
     },
     "ModuleCategory": {
@@ -75852,8 +75852,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "ModulePrototype": {
@@ -76118,12 +76118,12 @@
       },
       "additionalProperties": false,
       "required": [
-        "category",
-        "effect",
+        "type",
         "name",
         "stack_size",
+        "category",
         "tier",
-        "type"
+        "effect"
       ]
     },
     "ModuleTransferAchievementPrototype": {
@@ -76223,9 +76223,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "module",
+        "type",
         "name",
-        "type"
+        "module"
       ]
     },
     "MouseCursor": {
@@ -76283,8 +76283,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "MovementBonusEquipmentPrototype": {
@@ -76372,14 +76372,14 @@
       },
       "additionalProperties": false,
       "required": [
-        "categories",
-        "energy_consumption",
-        "energy_source",
-        "movement_bonus",
+        "type",
         "name",
-        "shape",
         "sprite",
-        "type"
+        "shape",
+        "categories",
+        "energy_source",
+        "energy_consumption",
+        "movement_bonus"
       ]
     },
     "NamedNoiseExpression": {
@@ -76450,9 +76450,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "expression",
+        "type",
         "name",
-        "type"
+        "expression"
       ]
     },
     "NamedNoiseFunction": {
@@ -76534,10 +76534,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "expression",
+        "type",
         "name",
         "parameters",
-        "type"
+        "expression"
       ]
     },
     "NightVisionEquipmentPrototype": {
@@ -76634,14 +76634,14 @@
       },
       "additionalProperties": false,
       "required": [
-        "categories",
-        "color_lookup",
-        "energy_input",
-        "energy_source",
+        "type",
         "name",
-        "shape",
         "sprite",
-        "type"
+        "shape",
+        "categories",
+        "energy_source",
+        "energy_input",
+        "color_lookup"
       ]
     },
     "OffshorePumpPrototype": {
@@ -77184,13 +77184,13 @@
       },
       "additionalProperties": false,
       "required": [
-        "energy_source",
-        "energy_usage",
-        "fluid_box",
-        "fluid_source_offset",
+        "type",
         "name",
+        "fluid_box",
         "pumping_speed",
-        "type"
+        "fluid_source_offset",
+        "energy_source",
+        "energy_usage"
       ]
     },
     "ParticlePrototype": {
@@ -77282,9 +77282,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "life_time",
+        "type",
         "name",
-        "type"
+        "life_time"
       ]
     },
     "ParticleSourcePrototype": {
@@ -77680,13 +77680,13 @@
       },
       "additionalProperties": false,
       "required": [
-        "height",
-        "horizontal_speed",
-        "name",
-        "time_before_start",
-        "time_to_live",
         "type",
-        "vertical_speed"
+        "name",
+        "time_to_live",
+        "time_before_start",
+        "height",
+        "vertical_speed",
+        "horizontal_speed"
       ]
     },
     "PipePrototype": {
@@ -78186,10 +78186,10 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
+        "name",
         "fluid_box",
         "horizontal_window_bounding_box",
-        "name",
-        "type",
         "vertical_window_bounding_box"
       ]
     },
@@ -78696,9 +78696,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "fluid_box",
+        "type",
         "name",
-        "type"
+        "fluid_box"
       ]
     },
     "PlaceEquipmentAchievementPrototype": {
@@ -78786,11 +78786,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "armor",
-        "limit_equip_quality",
-        "limit_quality",
+        "type",
         "name",
-        "type"
+        "armor",
+        "limit_quality",
+        "limit_equip_quality"
       ]
     },
     "PlanetPrototype": {
@@ -78972,11 +78972,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "distance",
-        "gravity_pull",
+        "type",
         "name",
-        "orientation",
-        "type"
+        "gravity_pull",
+        "distance",
+        "orientation"
       ]
     },
     "PlantPrototype": {
@@ -79532,9 +79532,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "growth_ticks",
+        "type",
         "name",
-        "type"
+        "growth_ticks"
       ]
     },
     "PlayerDamagedAchievementPrototype": {
@@ -79616,10 +79616,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "minimum_damage",
+        "type",
         "name",
-        "should_survive",
-        "type"
+        "minimum_damage",
+        "should_survive"
       ]
     },
     "PlayerPortPrototype": {
@@ -80107,8 +80107,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "PowerSwitchPrototype": {
@@ -80635,12 +80635,12 @@
       },
       "additionalProperties": false,
       "required": [
-        "circuit_wire_connection_point",
-        "left_wire_connection_point",
+        "type",
         "name",
         "overlay_start_delay",
-        "right_wire_connection_point",
-        "type"
+        "circuit_wire_connection_point",
+        "left_wire_connection_point",
+        "right_wire_connection_point"
       ]
     },
     "ProcessionLayerInheritanceGroup": {
@@ -80693,8 +80693,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "ProcessionPrototype": {
@@ -80784,11 +80784,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "procession_style",
-        "timeline",
         "type",
-        "usage"
+        "name",
+        "timeline",
+        "usage",
+        "procession_style"
       ]
     },
     "ProduceAchievementPrototype": {
@@ -80873,10 +80873,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "amount",
-        "limited_to_one_game",
+        "type",
         "name",
-        "type"
+        "amount",
+        "limited_to_one_game"
       ]
     },
     "ProducePerHourAchievementPrototype": {
@@ -80958,9 +80958,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "amount",
+        "type",
         "name",
-        "type"
+        "amount"
       ]
     },
     "ProgrammableSpeakerPrototype": {
@@ -81519,12 +81519,12 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
+        "name",
         "energy_source",
         "energy_usage_per_tick",
-        "instruments",
         "maximum_polyphony",
-        "name",
-        "type"
+        "instruments"
       ]
     },
     "ProjectilePrototype": {
@@ -81941,9 +81941,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "acceleration",
+        "type",
         "name",
-        "type"
+        "acceleration"
       ]
     },
     "PumpPrototype": {
@@ -82507,12 +82507,12 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
+        "name",
+        "fluid_box",
         "energy_source",
         "energy_usage",
-        "fluid_box",
-        "name",
-        "pumping_speed",
-        "type"
+        "pumping_speed"
       ]
     },
     "QualityPrototype": {
@@ -82603,10 +82603,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "color",
-        "level",
+        "type",
         "name",
-        "type"
+        "color",
+        "level"
       ]
     },
     "RadarPrototype": {
@@ -83148,14 +83148,14 @@
       },
       "additionalProperties": false,
       "required": [
-        "energy_per_nearby_scan",
-        "energy_per_sector",
-        "energy_source",
-        "energy_usage",
-        "max_distance_of_nearby_sector_revealed",
-        "max_distance_of_sector_revealed",
+        "type",
         "name",
-        "type"
+        "energy_usage",
+        "energy_per_sector",
+        "energy_per_nearby_scan",
+        "energy_source",
+        "max_distance_of_sector_revealed",
+        "max_distance_of_nearby_sector_revealed"
       ]
     },
     "RailChainSignalPrototype": {
@@ -83676,10 +83676,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "elevated_picture_set",
-        "ground_picture_set",
+        "type",
         "name",
-        "type"
+        "ground_picture_set",
+        "elevated_picture_set"
       ]
     },
     "RailPlannerPrototype": {
@@ -83932,10 +83932,10 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "rails",
         "stack_size",
-        "type"
+        "rails"
       ]
     },
     "RailRampPrototype": {
@@ -84479,9 +84479,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "pictures",
-        "type"
+        "pictures"
       ]
     },
     "RailRemnantsPrototype": {
@@ -84958,10 +84958,10 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
         "pictures",
-        "related_rail",
-        "type"
+        "related_rail"
       ]
     },
     "RailSignalPrototype": {
@@ -85482,10 +85482,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "elevated_picture_set",
-        "ground_picture_set",
+        "type",
         "name",
-        "type"
+        "ground_picture_set",
+        "elevated_picture_set"
       ]
     },
     "RailSupportPrototype": {
@@ -86020,9 +86020,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "graphics_set",
+        "type",
         "name",
-        "type"
+        "graphics_set"
       ]
     },
     "ReactorPrototype": {
@@ -86579,11 +86579,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "consumption",
-        "energy_source",
-        "heat_buffer",
+        "type",
         "name",
-        "type"
+        "heat_buffer",
+        "energy_source",
+        "consumption"
       ]
     },
     "RecipeCategory": {
@@ -86630,8 +86630,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "RecipePrototype": {
@@ -86864,8 +86864,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "RemoteControllerPrototype": {
@@ -86885,9 +86885,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "movement_speed",
+        "type",
         "name",
-        "type"
+        "movement_speed"
       ]
     },
     "RepairToolPrototype": {
@@ -87135,10 +87135,10 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "speed",
         "stack_size",
-        "type"
+        "speed"
       ]
     },
     "ResearchAchievementPrototype": {
@@ -87217,8 +87217,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "ResearchWithSciencePackAchievementPrototype": {
@@ -87297,9 +87297,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "science_pack",
-        "type"
+        "science_pack"
       ]
     },
     "ResourceCategory": {
@@ -87346,8 +87346,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "ResourceEntityPrototype": {
@@ -87779,9 +87779,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "stage_counts",
-        "type"
+        "stage_counts"
       ]
     },
     "RoboportEquipmentPrototype": {
@@ -87943,16 +87943,16 @@
       },
       "additionalProperties": false,
       "required": [
-        "categories",
-        "charge_approach_distance",
-        "charging_energy",
-        "construction_radius",
-        "energy_source",
+        "type",
         "name",
-        "shape",
-        "spawn_and_station_height",
         "sprite",
-        "type"
+        "shape",
+        "categories",
+        "energy_source",
+        "spawn_and_station_height",
+        "charge_approach_distance",
+        "construction_radius",
+        "charging_energy"
       ]
     },
     "RoboportPrototype": {
@@ -88603,19 +88603,19 @@
       },
       "additionalProperties": false,
       "required": [
-        "charge_approach_distance",
-        "charging_energy",
-        "construction_radius",
+        "type",
+        "name",
         "energy_source",
         "energy_usage",
-        "logistics_radius",
-        "material_slots_count",
-        "name",
         "recharge_minimum",
-        "request_to_open_door_timeout",
         "robot_slots_count",
+        "material_slots_count",
+        "request_to_open_door_timeout",
         "spawn_and_station_height",
-        "type"
+        "charge_approach_distance",
+        "logistics_radius",
+        "construction_radius",
+        "charging_energy"
       ]
     },
     "RocketSiloPrototype": {
@@ -89431,26 +89431,26 @@
       },
       "additionalProperties": false,
       "required": [
-        "active_energy_usage",
-        "cargo_station_parameters",
-        "crafting_categories",
+        "type",
+        "name",
+        "energy_usage",
         "crafting_speed",
+        "crafting_categories",
+        "energy_source",
+        "active_energy_usage",
+        "lamp_energy_usage",
+        "rocket_entity",
+        "hole_clipping_box",
         "door_back_open_offset",
         "door_front_open_offset",
-        "door_opening_speed",
-        "energy_source",
-        "energy_usage",
-        "hole_clipping_box",
-        "lamp_energy_usage",
+        "silo_fade_out_start_distance",
+        "silo_fade_out_end_distance",
+        "times_to_blink",
         "light_blinking_speed",
-        "name",
-        "rocket_entity",
+        "door_opening_speed",
         "rocket_parts_required",
         "rocket_quick_relaunch_start_offset",
-        "silo_fade_out_end_distance",
-        "silo_fade_out_start_distance",
-        "times_to_blink",
-        "type"
+        "cargo_station_parameters"
       ]
     },
     "RocketSiloRocketPrototype": {
@@ -89913,25 +89913,25 @@
       },
       "additionalProperties": false,
       "required": [
-        "cargo_pod_entity",
-        "effects_fade_in_end_distance",
-        "effects_fade_in_start_distance",
-        "engine_starting_speed",
-        "flying_acceleration",
-        "flying_speed",
-        "full_render_layer_switch_distance",
-        "inventory_size",
+        "type",
         "name",
-        "rising_speed",
+        "cargo_pod_entity",
+        "rocket_rise_offset",
         "rocket_flame_left_rotation",
         "rocket_flame_right_rotation",
-        "rocket_launch_offset",
         "rocket_render_layer_switch_distance",
-        "rocket_rise_offset",
-        "rocket_visible_distance_from_center",
-        "shadow_fade_out_end_ratio",
+        "full_render_layer_switch_distance",
+        "rocket_launch_offset",
+        "effects_fade_in_start_distance",
+        "effects_fade_in_end_distance",
         "shadow_fade_out_start_ratio",
-        "type"
+        "shadow_fade_out_end_ratio",
+        "rocket_visible_distance_from_center",
+        "rising_speed",
+        "engine_starting_speed",
+        "flying_speed",
+        "flying_acceleration",
+        "inventory_size"
       ]
     },
     "RocketSiloRocketShadowPrototype": {
@@ -90280,8 +90280,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "SegmentPrototype": {
@@ -90821,9 +90821,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "animation",
+        "type",
         "name",
-        "type"
+        "animation"
       ]
     },
     "SegmentedUnitPrototype": {
@@ -91431,19 +91431,19 @@
       },
       "additionalProperties": false,
       "required": [
-        "acceleration_rate",
-        "animation",
-        "attacking_speed",
-        "enraged_duration",
-        "enraged_speed",
-        "investigating_speed",
-        "name",
-        "patrolling_speed",
-        "segment_engine",
-        "territory_radius",
-        "turn_radius",
         "type",
-        "vision_distance"
+        "name",
+        "animation",
+        "vision_distance",
+        "territory_radius",
+        "enraged_duration",
+        "patrolling_speed",
+        "investigating_speed",
+        "attacking_speed",
+        "enraged_speed",
+        "acceleration_rate",
+        "turn_radius",
+        "segment_engine"
       ]
     },
     "SelectionToolPrototype": {
@@ -91706,11 +91706,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "alt_select",
+        "type",
         "name",
-        "select",
         "stack_size",
-        "type"
+        "select",
+        "alt_select"
       ]
     },
     "SelectorCombinatorPrototype": {
@@ -92341,16 +92341,16 @@
       },
       "additionalProperties": false,
       "required": [
-        "active_energy_usage",
-        "activity_led_light_offsets",
-        "energy_source",
-        "input_connection_bounding_box",
-        "input_connection_points",
+        "type",
         "name",
+        "energy_source",
+        "active_energy_usage",
+        "input_connection_bounding_box",
         "output_connection_bounding_box",
-        "output_connection_points",
+        "activity_led_light_offsets",
         "screen_light_offsets",
-        "type"
+        "input_connection_points",
+        "output_connection_points"
       ]
     },
     "ShootAchievementPrototype": {
@@ -92429,8 +92429,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "ShortcutPrototype": {
@@ -92600,9 +92600,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "action",
+        "type",
         "name",
-        "type"
+        "action"
       ]
     },
     "SimpleEntityPrototype": {
@@ -93125,8 +93125,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "SimpleEntityWithForcePrototype": {
@@ -93658,8 +93658,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "SimpleEntityWithOwnerPrototype": {
@@ -94191,8 +94191,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "SmokeWithTriggerPrototype": {
@@ -94622,8 +94622,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "SolarPanelEquipmentPrototype": {
@@ -94708,13 +94708,13 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
+        "name",
+        "sprite",
+        "shape",
         "categories",
         "energy_source",
-        "name",
-        "power",
-        "shape",
-        "sprite",
-        "type"
+        "power"
       ]
     },
     "SolarPanelPrototype": {
@@ -95214,10 +95214,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "energy_source",
+        "type",
         "name",
-        "production",
-        "type"
+        "energy_source",
+        "production"
       ]
     },
     "SoundPrototype": {
@@ -95324,8 +95324,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "SpaceConnectionDistanceTraveledAchievementPrototype": {
@@ -95407,11 +95407,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "distance",
+        "type",
         "name",
-        "reversed",
         "tracked_connection",
-        "type"
+        "distance",
+        "reversed"
       ]
     },
     "SpaceConnectionPrototype": {
@@ -95501,10 +95501,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "from",
+        "type",
         "name",
-        "to",
-        "type"
+        "from",
+        "to"
       ]
     },
     "SpaceLocationPrototype": {
@@ -95650,10 +95650,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "distance",
+        "type",
         "name",
-        "orientation",
-        "type"
+        "distance",
+        "orientation"
       ]
     },
     "SpacePlatformHubPrototype": {
@@ -96184,11 +96184,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "cargo_station_parameters",
-        "dump_container",
-        "inventory_size",
+        "type",
         "name",
-        "type"
+        "inventory_size",
+        "dump_container",
+        "cargo_station_parameters"
       ]
     },
     "SpacePlatformStarterPackPrototype": {
@@ -96458,9 +96458,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "stack_size",
-        "type"
+        "stack_size"
       ]
     },
     "SpectatorControllerPrototype": {
@@ -96480,9 +96480,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "movement_speed",
+        "type",
         "name",
-        "type"
+        "movement_speed"
       ]
     },
     "SpeechBubblePrototype": {
@@ -96843,9 +96843,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "style",
-        "type"
+        "style"
       ]
     },
     "SpiderLegPrototype": {
@@ -97441,16 +97441,16 @@
       },
       "additionalProperties": false,
       "required": [
-        "base_position_selection_distance",
-        "initial_movement_speed",
-        "knee_distance_factor",
-        "knee_height",
-        "minimal_step_size",
-        "movement_acceleration",
-        "movement_based_position_selection_distance",
+        "type",
         "name",
+        "knee_height",
+        "knee_distance_factor",
+        "initial_movement_speed",
+        "movement_acceleration",
         "target_position_randomisation_distance",
-        "type"
+        "minimal_step_size",
+        "base_position_selection_distance",
+        "movement_based_position_selection_distance"
       ]
     },
     "SpiderUnitPrototype": {
@@ -97992,13 +97992,13 @@
       },
       "additionalProperties": false,
       "required": [
-        "attack_parameters",
-        "distraction_cooldown",
-        "height",
+        "type",
         "name",
         "spider_engine",
-        "type",
-        "vision_distance"
+        "height",
+        "attack_parameters",
+        "vision_distance",
+        "distraction_cooldown"
       ]
     },
     "SpiderVehiclePrototype": {
@@ -98608,17 +98608,17 @@
       },
       "additionalProperties": false,
       "required": [
-        "automatic_weapon_cycling",
-        "chain_shooting_cooldown_modifier",
+        "type",
+        "name",
+        "weight",
         "energy_per_hit_point",
         "energy_source",
-        "height",
         "inventory_size",
-        "movement_energy_consumption",
-        "name",
         "spider_engine",
-        "type",
-        "weight"
+        "height",
+        "movement_energy_consumption",
+        "automatic_weapon_cycling",
+        "chain_shooting_cooldown_modifier"
       ]
     },
     "SpidertronRemotePrototype": {
@@ -98882,11 +98882,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "alt_select",
+        "type",
         "name",
-        "select",
         "stack_size",
-        "type"
+        "select",
+        "alt_select"
       ]
     },
     "SplitterPrototype": {
@@ -99401,9 +99401,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "speed",
-        "type"
+        "speed"
       ]
     },
     "SpritePrototype": {
@@ -99554,8 +99554,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "StickerPrototype": {
@@ -100002,9 +100002,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "duration_in_ticks",
+        "type",
         "name",
-        "type"
+        "duration_in_ticks"
       ]
     },
     "StorageTankPrototype": {
@@ -100558,11 +100558,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "flow_length_in_ticks",
-        "fluid_box",
-        "name",
         "type",
-        "window_bounding_box"
+        "name",
+        "fluid_box",
+        "window_bounding_box",
+        "flow_length_in_ticks"
       ]
     },
     "StraightRailPrototype": {
@@ -101100,9 +101100,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "pictures",
-        "type"
+        "pictures"
       ]
     },
     "SurfacePropertyPrototype": {
@@ -101158,9 +101158,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "default_value",
+        "type",
         "name",
-        "type"
+        "default_value"
       ]
     },
     "SurfacePrototype": {
@@ -101222,8 +101222,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "TechnologyPrototype": {
@@ -101353,8 +101353,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "TemporaryContainerPrototype": {
@@ -101891,9 +101891,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "inventory_size",
+        "type",
         "name",
-        "type"
+        "inventory_size"
       ]
     },
     "ThrusterPrototype": {
@@ -102399,12 +102399,12 @@
       },
       "additionalProperties": false,
       "required": [
-        "fuel_fluid_box",
-        "max_performance",
-        "min_performance",
+        "type",
         "name",
-        "oxidizer_fluid_box",
-        "type"
+        "min_performance",
+        "max_performance",
+        "fuel_fluid_box",
+        "oxidizer_fluid_box"
       ]
     },
     "TileEffectDefinition": {
@@ -102446,9 +102446,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "shader",
-        "type"
+        "shader"
       ]
     },
     "TileGhostPrototype": {
@@ -102797,8 +102797,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "TilePrototype": {
@@ -103159,12 +103159,12 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
+        "name",
         "collision_mask",
         "layer",
-        "map_color",
-        "name",
-        "type",
-        "variants"
+        "variants",
+        "map_color"
       ]
     },
     "TipsAndTricksItem": {
@@ -103275,8 +103275,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "TipsAndTricksItemCategory": {
@@ -103296,9 +103296,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "order",
-        "type"
+        "order"
       ]
     },
     "ToolPrototype": {
@@ -103544,9 +103544,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "stack_size",
-        "type"
+        "stack_size"
       ]
     },
     "TrainPathAchievementPrototype": {
@@ -103622,9 +103622,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "minimum_distance",
+        "type",
         "name",
-        "type"
+        "minimum_distance"
       ]
     },
     "TrainStopPrototype": {
@@ -104200,9 +104200,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "animation_ticks_per_frame",
+        "type",
         "name",
-        "type"
+        "animation_ticks_per_frame"
       ]
     },
     "TransportBeltPrototype": {
@@ -104728,9 +104728,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "speed",
-        "type"
+        "speed"
       ]
     },
     "TreePrototype": {
@@ -105271,8 +105271,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "TriggerTargetType": {
@@ -105289,8 +105289,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "TrivialSmokePrototype": {
@@ -105382,10 +105382,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "animation",
-        "duration",
+        "type",
         "name",
-        "type"
+        "animation",
+        "duration"
       ]
     },
     "TurretPrototype": {
@@ -106165,12 +106165,12 @@
       },
       "additionalProperties": false,
       "required": [
-        "attack_parameters",
-        "call_for_help_radius",
-        "folded_animation",
-        "graphics_set",
+        "type",
         "name",
-        "type"
+        "attack_parameters",
+        "folded_animation",
+        "call_for_help_radius",
+        "graphics_set"
       ]
     },
     "TutorialDefinition": {
@@ -106217,9 +106217,9 @@
       },
       "additionalProperties": false,
       "required": [
+        "type",
         "name",
-        "scenario",
-        "type"
+        "scenario"
       ]
     },
     "UndergroundBeltPrototype": {
@@ -106763,10 +106763,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "max_distance",
+        "type",
         "name",
         "speed",
-        "type"
+        "max_distance"
       ]
     },
     "UnitPrototype": {
@@ -107345,13 +107345,13 @@
       },
       "additionalProperties": false,
       "required": [
-        "attack_parameters",
-        "distance_per_frame",
-        "distraction_cooldown",
-        "movement_speed",
+        "type",
         "name",
         "run_animation",
-        "type",
+        "attack_parameters",
+        "movement_speed",
+        "distance_per_frame",
+        "distraction_cooldown",
         "vision_distance"
       ]
     },
@@ -107616,11 +107616,11 @@
       },
       "additionalProperties": false,
       "required": [
-        "alt_select",
+        "type",
         "name",
-        "select",
         "stack_size",
-        "type"
+        "select",
+        "alt_select"
       ]
     },
     "UseEntityInEnergyProductionAchievementPrototype": {
@@ -107705,9 +107705,9 @@
       },
       "additionalProperties": false,
       "required": [
-        "entity",
+        "type",
         "name",
-        "type"
+        "entity"
       ]
     },
     "UseItemAchievementPrototype": {
@@ -107792,10 +107792,10 @@
       },
       "additionalProperties": false,
       "required": [
-        "limit_quality",
+        "type",
         "name",
         "to_use",
-        "type"
+        "limit_quality"
       ]
     },
     "UtilityConstants": {
@@ -108684,170 +108684,170 @@
       },
       "additionalProperties": false,
       "required": [
-        "agricultural_range_visualization_color",
-        "artillery_range_visualization_color",
-        "asteroid_collector_blockage_update_tile_distance",
-        "asteroid_collector_max_nurbs_control_point_separation",
-        "asteroid_collector_navmesh_refresh_tick_interval",
-        "asteroid_collector_static_head_swing_segment_count",
-        "asteroid_collector_static_head_swing_strength_scale",
-        "asteroid_fading_range",
-        "asteroid_position_offset_to_speed_coefficient",
-        "asteroid_spawning_offset",
-        "asteroid_spawning_with_random_orientation_max_speed",
-        "bonus_gui_ordering",
-        "building_buildable_tint",
+        "type",
+        "name",
+        "entity_button_background_color",
         "building_buildable_too_far_tint",
-        "building_collision_mask",
+        "building_buildable_tint",
+        "building_not_buildable_tint",
         "building_ignorable_tint",
         "building_no_tint",
-        "building_not_buildable_tint",
-        "capsule_range_visualization_color",
-        "chart",
-        "chart_search_highlight",
-        "checkerboard_black",
-        "checkerboard_white",
-        "clear_cursor_volume_modifier",
-        "clipboard_history_size",
-        "count_button_size",
-        "daytime_color_lookup",
-        "deconstruct_mark_tint",
-        "default_alert_icon_scale",
-        "default_collision_masks",
-        "default_enemy_force_color",
-        "default_item_weight",
-        "default_other_force_color",
-        "default_pipeline_extent",
-        "default_planet_procession_set",
-        "default_platform_procession_set",
-        "default_player_force_color",
-        "default_scorch_mark_color",
-        "disabled_recipe_slot_background_tint",
-        "disabled_recipe_slot_tint",
-        "drop_item_radius",
-        "dynamic_recipe_overload_factor",
-        "ejected_item_direction_variation",
-        "ejected_item_friction",
-        "ejected_item_lifetime",
-        "ejected_item_speed",
-        "enabled_recipe_slot_tint",
-        "enemies_in_simulation_volume_modifier",
-        "entity_button_background_color",
-        "entity_renderer_search_box_limits",
-        "environment_sounds_transition_fade_in_ticks",
-        "equipment_default_background_border_color",
-        "equipment_default_background_color",
-        "equipment_default_grabbed_background_color",
-        "explosions_in_simulation_volume_modifier",
-        "filter_outline_color",
-        "flying_text_ttl",
-        "forced_enabled_recipe_slot_background_tint",
-        "freezing_temperature",
-        "frozen_color_lookup",
-        "ghost_layer",
+        "underground_belt_max_distance_tint",
+        "underground_pipe_max_distance_tint",
         "ghost_shader_tint",
         "ghost_shaderless_tint",
         "ghost_shimmer_settings",
+        "probability_product_count_tint",
+        "zero_count_value_tint",
+        "equipment_default_background_color",
+        "equipment_default_background_border_color",
+        "equipment_default_grabbed_background_color",
+        "turret_range_visualization_color",
+        "capsule_range_visualization_color",
+        "agricultural_range_visualization_color",
+        "artillery_range_visualization_color",
+        "chart",
         "gui_remark_color",
-        "gui_search_match_background_color",
         "gui_search_match_foreground_color",
-        "icon_shadow_color",
-        "icon_shadow_inset",
-        "icon_shadow_radius",
-        "icon_shadow_sharpness",
-        "inserter_hand_stack_items_per_sprite",
-        "inserter_hand_stack_max_sprites",
-        "inventory_width",
-        "item_ammo_magazine_left_bar_color",
-        "item_default_random_tint_strength",
-        "item_health_bar_colors",
-        "item_outline_color",
-        "item_outline_inset",
-        "item_outline_radius",
-        "item_outline_sharpness",
-        "item_tool_durability_bar_color",
-        "landing_area_clear_zone_radius",
-        "landing_area_max_radius",
-        "large_area_size",
-        "large_blueprint_area_size",
-        "light_renderer_search_distance_limit",
-        "lightning_attractor_collection_range_color",
-        "lightning_attractor_protection_range_color",
-        "logistic_gui_selected_network_highlight_tint",
+        "gui_search_match_background_color",
+        "default_player_force_color",
+        "default_enemy_force_color",
+        "default_other_force_color",
+        "deconstruct_mark_tint",
+        "rail_planner_count_button_color",
+        "count_button_size",
         "logistic_gui_unselected_network_highlight_tint",
-        "low_energy_robot_estimate_multiplier",
+        "logistic_gui_selected_network_highlight_tint",
+        "chart_search_highlight",
+        "selected_chart_search_highlight",
+        "zoom_to_world_can_use_nightvision",
+        "zoom_to_world_effect_strength",
+        "max_logistic_filter_count",
+        "max_terrain_building_size",
+        "small_area_size",
+        "medium_area_size",
+        "large_area_size",
+        "small_blueprint_area_size",
+        "medium_blueprint_area_size",
+        "large_blueprint_area_size",
+        "enabled_recipe_slot_tint",
+        "disabled_recipe_slot_tint",
+        "disabled_recipe_slot_background_tint",
+        "forced_enabled_recipe_slot_background_tint",
+        "rail_segment_colors",
+        "player_colors",
+        "server_command_console_chat_color",
+        "script_command_console_chat_color",
+        "default_alert_icon_scale",
+        "bonus_gui_ordering",
+        "daytime_color_lookup",
+        "zoom_to_world_daytime_color_lookup",
+        "frozen_color_lookup",
+        "map_editor",
+        "drop_item_radius",
+        "checkerboard_white",
+        "checkerboard_black",
+        "item_outline_color",
+        "item_outline_radius",
+        "item_outline_inset",
+        "item_outline_sharpness",
+        "item_default_random_tint_strength",
+        "spawner_evolution_factor_health_modifier",
+        "item_health_bar_colors",
+        "item_ammo_magazine_left_bar_color",
+        "item_tool_durability_bar_color",
+        "filter_outline_color",
+        "icon_shadow_radius",
+        "icon_shadow_inset",
+        "icon_shadow_sharpness",
+        "icon_shadow_color",
+        "clipboard_history_size",
+        "recipe_step_limit",
+        "manual_rail_building_reach_modifier",
+        "train_temporary_stop_wait_time",
+        "train_time_wait_condition_default",
+        "train_inactivity_wait_condition_default",
+        "unit_group_pathfind_resolution",
+        "unit_group_max_pursue_distance",
+        "dynamic_recipe_overload_factor",
+        "minimum_recipe_overload_multiplier",
+        "maximum_recipe_overload_multiplier",
+        "entity_renderer_search_box_limits",
+        "light_renderer_search_distance_limit",
+        "tree_leaf_distortion_strength_far",
+        "tree_leaf_distortion_distortion_far",
+        "tree_leaf_distortion_speed_far",
+        "tree_leaf_distortion_strength_near",
+        "tree_leaf_distortion_distortion_near",
+        "tree_leaf_distortion_speed_near",
+        "tree_shadow_roughness",
+        "tree_shadow_speed",
+        "missing_preview_sprite_location",
         "main_menu_background_image_location",
         "main_menu_background_vignette_intensity",
         "main_menu_background_vignette_sharpness",
-        "manual_rail_building_reach_modifier",
-        "map_editor",
-        "max_belt_stack_size",
-        "max_fluid_flow",
-        "max_logistic_filter_count",
-        "max_terrain_building_size",
-        "maximum_recipe_overload_multiplier",
-        "medium_area_size",
-        "medium_blueprint_area_size",
-        "minimap_slot_clicked_tint",
+        "default_scorch_mark_color",
         "minimap_slot_hovered_tint",
-        "minimum_recipe_overload_multiplier",
-        "missing_preview_sprite_location",
-        "module_inventory_width",
-        "moving_sound_count_reduction_rate",
-        "name",
-        "player_colors",
-        "probability_product_count_tint",
-        "rail_planner_count_button_color",
-        "rail_segment_colors",
-        "recipe_step_limit",
-        "remote_view_LPF_max_cutoff_frequency",
-        "remote_view_LPF_min_cutoff_frequency",
-        "rocket_lift_weight",
-        "script_command_console_chat_color",
-        "select_group_row_count",
-        "select_slot_row_count",
-        "selected_chart_search_highlight",
-        "server_command_console_chat_color",
-        "show_chunk_components_collision_mask",
-        "small_area_size",
-        "small_blueprint_area_size",
-        "space_platform_dump_cooldown",
-        "space_platform_max_size",
+        "minimap_slot_clicked_tint",
+        "clear_cursor_volume_modifier",
+        "weapons_in_simulation_volume_modifier",
+        "explosions_in_simulation_volume_modifier",
+        "enemies_in_simulation_volume_modifier",
+        "low_energy_robot_estimate_multiplier",
+        "asteroid_spawning_offset",
+        "asteroid_fading_range",
+        "asteroid_spawning_with_random_orientation_max_speed",
+        "asteroid_position_offset_to_speed_coefficient",
+        "asteroid_collector_navmesh_refresh_tick_interval",
+        "asteroid_collector_blockage_update_tile_distance",
+        "asteroid_collector_max_nurbs_control_point_separation",
+        "asteroid_collector_static_head_swing_strength_scale",
+        "asteroid_collector_static_head_swing_segment_count",
         "space_platform_relative_speed_factor",
         "space_platform_starfield_movement_vector",
-        "spawner_evolution_factor_health_modifier",
-        "time_to_show_full_health_bar",
-        "tooltip_monitor_edge_border",
-        "train_inactivity_wait_condition_default",
-        "train_on_elevated_rail_shadow_shift_multiplier",
-        "train_path_finding",
-        "train_pushed_by_player_ignores_friction",
-        "train_pushed_by_player_max_acceleration",
-        "train_pushed_by_player_max_speed",
-        "train_temporary_stop_wait_time",
-        "train_time_wait_condition_default",
+        "space_platform_max_size",
+        "space_platform_dump_cooldown",
+        "default_item_weight",
+        "rocket_lift_weight",
+        "max_fluid_flow",
+        "default_pipeline_extent",
+        "default_planet_procession_set",
+        "default_platform_procession_set",
+        "landing_area_clear_zone_radius",
+        "landing_area_max_radius",
+        "lightning_attractor_collection_range_color",
+        "lightning_attractor_protection_range_color",
+        "ejected_item_lifetime",
+        "ejected_item_speed",
+        "ejected_item_direction_variation",
+        "ejected_item_friction",
         "train_visualization",
-        "tree_leaf_distortion_distortion_far",
-        "tree_leaf_distortion_distortion_near",
-        "tree_leaf_distortion_speed_far",
-        "tree_leaf_distortion_speed_near",
-        "tree_leaf_distortion_strength_far",
-        "tree_leaf_distortion_strength_near",
-        "tree_shadow_roughness",
-        "tree_shadow_speed",
-        "turret_range_visualization_color",
-        "type",
-        "underground_belt_max_distance_tint",
-        "underground_pipe_max_distance_tint",
-        "unit_group_max_pursue_distance",
-        "unit_group_pathfind_resolution",
-        "walking_sound_count_reduction_rate",
+        "default_collision_masks",
+        "show_chunk_components_collision_mask",
+        "building_collision_mask",
         "water_collision_mask",
-        "weapons_in_simulation_volume_modifier",
-        "zero_count_value_tint",
-        "zoom_to_world_can_use_nightvision",
-        "zoom_to_world_daytime_color_lookup",
-        "zoom_to_world_effect_strength"
+        "ghost_layer",
+        "train_pushed_by_player_max_speed",
+        "train_pushed_by_player_max_acceleration",
+        "train_pushed_by_player_ignores_friction",
+        "freezing_temperature",
+        "train_on_elevated_rail_shadow_shift_multiplier",
+        "select_group_row_count",
+        "select_slot_row_count",
+        "inventory_width",
+        "module_inventory_width",
+        "tooltip_monitor_edge_border",
+        "flying_text_ttl",
+        "train_path_finding",
+        "max_belt_stack_size",
+        "inserter_hand_stack_items_per_sprite",
+        "inserter_hand_stack_max_sprites",
+        "remote_view_LPF_min_cutoff_frequency",
+        "remote_view_LPF_max_cutoff_frequency",
+        "walking_sound_count_reduction_rate",
+        "moving_sound_count_reduction_rate",
+        "environment_sounds_transition_fade_in_ticks",
+        "time_to_show_full_health_bar"
       ]
     },
     "UtilitySounds": {
@@ -109086,72 +109086,72 @@
       },
       "additionalProperties": false,
       "required": [
-        "achievement_unlocked",
-        "alert_destroyed",
-        "armor_insert",
-        "armor_remove",
-        "axe_fighting",
-        "axe_mining_ore",
-        "axe_mining_stone",
-        "build_animated_huge",
-        "build_animated_large",
-        "build_animated_medium",
-        "build_animated_small",
-        "build_blueprint_huge",
-        "build_blueprint_large",
-        "build_blueprint_medium",
+        "type",
+        "name",
+        "gui_click",
+        "list_box_click",
+        "build_small",
+        "build_medium",
+        "build_large",
+        "build_huge",
+        "cannot_build",
         "build_blueprint_small",
+        "build_blueprint_medium",
+        "build_blueprint_large",
+        "build_blueprint_huge",
         "build_ghost_upgrade",
         "build_ghost_upgrade_cancel",
-        "build_huge",
-        "build_large",
-        "build_medium",
-        "build_small",
-        "cannot_build",
-        "clear_cursor",
-        "confirm",
-        "console_message",
-        "crafting_finished",
-        "deconstruct_huge",
-        "deconstruct_large",
-        "deconstruct_medium",
-        "deconstruct_robot",
+        "build_animated_small",
+        "build_animated_medium",
+        "build_animated_large",
+        "build_animated_huge",
         "deconstruct_small",
-        "default_driving_sound",
-        "default_landing_steps",
-        "default_manual_repair",
-        "drop_item",
-        "entity_settings_copied",
-        "entity_settings_pasted",
+        "deconstruct_medium",
+        "deconstruct_large",
+        "deconstruct_huge",
+        "deconstruct_robot",
+        "rotated_small",
+        "rotated_medium",
+        "rotated_large",
+        "rotated_huge",
+        "axe_mining_ore",
+        "axe_mining_stone",
+        "mining_wood",
+        "axe_fighting",
+        "alert_destroyed",
+        "console_message",
+        "scenario_message",
+        "new_objective",
         "game_lost",
         "game_won",
-        "gui_click",
+        "metal_walking_sound",
+        "research_completed",
+        "default_manual_repair",
+        "crafting_finished",
         "inventory_click",
         "inventory_move",
-        "item_deleted",
-        "item_spawned",
-        "list_box_click",
-        "metal_walking_sound",
-        "mining_wood",
-        "name",
-        "new_objective",
-        "paste_activated",
-        "picked_up_item",
-        "rail_plan_start",
-        "research_completed",
-        "rotated_huge",
-        "rotated_large",
-        "rotated_medium",
-        "rotated_small",
-        "scenario_message",
-        "smart_pipette",
-        "switch_gun",
-        "tutorial_notice",
-        "type",
-        "undo",
+        "clear_cursor",
+        "armor_insert",
+        "armor_remove",
+        "achievement_unlocked",
         "wire_connect_pole",
         "wire_disconnect",
-        "wire_pickup"
+        "wire_pickup",
+        "tutorial_notice",
+        "smart_pipette",
+        "switch_gun",
+        "picked_up_item",
+        "paste_activated",
+        "item_deleted",
+        "entity_settings_pasted",
+        "entity_settings_copied",
+        "item_spawned",
+        "confirm",
+        "undo",
+        "drop_item",
+        "rail_plan_start",
+        "default_driving_sound",
+        "default_landing_steps"
       ]
     },
     "UtilitySprites": {
@@ -111125,539 +111125,539 @@
       },
       "additionalProperties": false,
       "required": [
-        "achievement_label",
-        "achievement_label_completed",
-        "achievement_label_failed",
-        "achievement_warning",
-        "add",
-        "add_white",
-        "alert_arrow",
-        "ammo_damage_modifier_icon",
-        "ammo_icon",
-        "and_or",
-        "any_quality",
-        "area_icon",
-        "arrow_button",
-        "artillery_range_modifier_icon",
-        "asteroid_chunk_editor_icon",
-        "asteroid_collector_path_blocked_icon",
-        "backward_arrow",
-        "backward_arrow_black",
-        "bar_gray_pip",
-        "battery",
-        "beacon_distribution_modifier_icon",
-        "belt_stack_size_bonus_modifier_icon",
+        "type",
+        "name",
+        "cursor_box",
         "bookmark",
-        "brush_circle_shape",
-        "brush_icon",
-        "brush_square_shape",
-        "buildability_collision",
-        "buildability_collision_elevated",
-        "buildability_elevated_collision_bottom",
-        "buildability_elevated_collision_line",
-        "buildability_elevated_collision_top",
-        "bulk_inserter_capacity_bonus_modifier_icon",
-        "cable_editor_icon",
-        "cargo_bay_not_connected_icon",
-        "cargo_landing_pad_count_modifier_icon",
         "center",
-        "change_recipe",
-        "change_recipe_productivity_modifier_icon",
-        "character_additional_mining_categories_modifier_icon",
-        "character_build_distance_modifier_icon",
-        "character_crafting_speed_modifier_icon",
-        "character_health_bonus_modifier_icon",
-        "character_inventory_slots_bonus_modifier_icon",
-        "character_item_drop_distance_modifier_icon",
-        "character_item_pickup_distance_modifier_icon",
-        "character_logistic_requests_modifier_icon",
-        "character_logistic_trash_slots_modifier_icon",
-        "character_loot_pickup_distance_modifier_icon",
-        "character_mining_speed_modifier_icon",
-        "character_reach_distance_modifier_icon",
-        "character_resource_reach_distance_modifier_icon",
-        "character_running_speed_modifier_icon",
         "check_mark",
-        "check_mark_dark_green",
-        "check_mark_green",
         "check_mark_white",
-        "circuit_network_panel",
-        "cliff_deconstruction_enabled_modifier_icon",
-        "cliff_editor_icon",
-        "clock",
-        "clone",
-        "clone_editor_icon",
+        "check_mark_green",
+        "check_mark_dark_green",
+        "not_played_yet_green",
+        "not_played_yet_dark_green",
+        "played_green",
+        "played_dark_green",
+        "close_fat",
         "close",
         "close_black",
-        "close_fat",
+        "backward_arrow",
+        "backward_arrow_black",
+        "forward_arrow",
+        "forward_arrow_black",
+        "recipe_arrow",
         "close_map_preview",
-        "clouds",
-        "collapse",
-        "color_effect",
         "color_picker",
-        "confirm_slot",
-        "construction_radius_visualization",
-        "controller_joycon_a",
-        "controller_joycon_b",
-        "controller_joycon_back",
-        "controller_joycon_black_a",
-        "controller_joycon_black_b",
-        "controller_joycon_black_back",
-        "controller_joycon_black_dpdown",
-        "controller_joycon_black_dpleft",
-        "controller_joycon_black_dpright",
-        "controller_joycon_black_dpup",
-        "controller_joycon_black_left_stick",
-        "controller_joycon_black_leftshoulder",
-        "controller_joycon_black_leftstick",
-        "controller_joycon_black_lefttrigger",
-        "controller_joycon_black_paddle1",
-        "controller_joycon_black_paddle2",
-        "controller_joycon_black_paddle3",
-        "controller_joycon_black_paddle4",
-        "controller_joycon_black_right_stick",
-        "controller_joycon_black_rightshoulder",
-        "controller_joycon_black_rightstick",
-        "controller_joycon_black_righttrigger",
-        "controller_joycon_black_start",
-        "controller_joycon_black_x",
-        "controller_joycon_black_y",
-        "controller_joycon_dpdown",
-        "controller_joycon_dpleft",
-        "controller_joycon_dpright",
-        "controller_joycon_dpup",
-        "controller_joycon_left_stick",
-        "controller_joycon_leftshoulder",
-        "controller_joycon_leftstick",
-        "controller_joycon_lefttrigger",
-        "controller_joycon_paddle1",
-        "controller_joycon_paddle2",
-        "controller_joycon_paddle3",
-        "controller_joycon_paddle4",
-        "controller_joycon_right_stick",
-        "controller_joycon_rightshoulder",
-        "controller_joycon_rightstick",
-        "controller_joycon_righttrigger",
-        "controller_joycon_start",
-        "controller_joycon_x",
-        "controller_joycon_y",
-        "controller_ps_a",
-        "controller_ps_b",
-        "controller_ps_back",
-        "controller_ps_black_a",
-        "controller_ps_black_b",
-        "controller_ps_black_back",
-        "controller_ps_black_dpdown",
-        "controller_ps_black_dpleft",
-        "controller_ps_black_dpright",
-        "controller_ps_black_dpup",
-        "controller_ps_black_left_stick",
-        "controller_ps_black_leftshoulder",
-        "controller_ps_black_leftstick",
-        "controller_ps_black_lefttrigger",
-        "controller_ps_black_right_stick",
-        "controller_ps_black_rightshoulder",
-        "controller_ps_black_rightstick",
-        "controller_ps_black_righttrigger",
-        "controller_ps_black_start",
-        "controller_ps_black_x",
-        "controller_ps_black_y",
-        "controller_ps_dpdown",
-        "controller_ps_dpleft",
-        "controller_ps_dpright",
-        "controller_ps_dpup",
-        "controller_ps_left_stick",
-        "controller_ps_leftshoulder",
-        "controller_ps_leftstick",
-        "controller_ps_lefttrigger",
-        "controller_ps_right_stick",
-        "controller_ps_rightshoulder",
-        "controller_ps_rightstick",
-        "controller_ps_righttrigger",
-        "controller_ps_start",
-        "controller_ps_x",
-        "controller_ps_y",
-        "controller_steamdeck_a",
-        "controller_steamdeck_b",
-        "controller_steamdeck_back",
-        "controller_steamdeck_black_a",
-        "controller_steamdeck_black_b",
-        "controller_steamdeck_black_back",
-        "controller_steamdeck_black_dpdown",
-        "controller_steamdeck_black_dpleft",
-        "controller_steamdeck_black_dpright",
-        "controller_steamdeck_black_dpup",
-        "controller_steamdeck_black_left_stick",
-        "controller_steamdeck_black_leftshoulder",
-        "controller_steamdeck_black_leftstick",
-        "controller_steamdeck_black_lefttrigger",
-        "controller_steamdeck_black_paddle1",
-        "controller_steamdeck_black_paddle2",
-        "controller_steamdeck_black_paddle3",
-        "controller_steamdeck_black_paddle4",
-        "controller_steamdeck_black_right_stick",
-        "controller_steamdeck_black_rightshoulder",
-        "controller_steamdeck_black_rightstick",
-        "controller_steamdeck_black_righttrigger",
-        "controller_steamdeck_black_start",
-        "controller_steamdeck_black_x",
-        "controller_steamdeck_black_y",
-        "controller_steamdeck_dpdown",
-        "controller_steamdeck_dpleft",
-        "controller_steamdeck_dpright",
-        "controller_steamdeck_dpup",
-        "controller_steamdeck_left_stick",
-        "controller_steamdeck_leftshoulder",
-        "controller_steamdeck_leftstick",
-        "controller_steamdeck_lefttrigger",
-        "controller_steamdeck_paddle1",
-        "controller_steamdeck_paddle2",
-        "controller_steamdeck_paddle3",
-        "controller_steamdeck_paddle4",
-        "controller_steamdeck_right_stick",
-        "controller_steamdeck_rightshoulder",
-        "controller_steamdeck_rightstick",
-        "controller_steamdeck_righttrigger",
-        "controller_steamdeck_start",
-        "controller_steamdeck_x",
-        "controller_steamdeck_y",
-        "controller_xbox_a",
-        "controller_xbox_b",
-        "controller_xbox_back",
-        "controller_xbox_black_a",
-        "controller_xbox_black_b",
-        "controller_xbox_black_back",
-        "controller_xbox_black_dpdown",
-        "controller_xbox_black_dpleft",
-        "controller_xbox_black_dpright",
-        "controller_xbox_black_dpup",
-        "controller_xbox_black_left_stick",
-        "controller_xbox_black_leftshoulder",
-        "controller_xbox_black_leftstick",
-        "controller_xbox_black_lefttrigger",
-        "controller_xbox_black_right_stick",
-        "controller_xbox_black_rightshoulder",
-        "controller_xbox_black_rightstick",
-        "controller_xbox_black_righttrigger",
-        "controller_xbox_black_start",
-        "controller_xbox_black_x",
-        "controller_xbox_black_y",
-        "controller_xbox_dpdown",
-        "controller_xbox_dpleft",
-        "controller_xbox_dpright",
-        "controller_xbox_dpup",
-        "controller_xbox_left_stick",
-        "controller_xbox_leftshoulder",
-        "controller_xbox_leftstick",
-        "controller_xbox_lefttrigger",
-        "controller_xbox_right_stick",
-        "controller_xbox_rightshoulder",
-        "controller_xbox_rightstick",
-        "controller_xbox_righttrigger",
-        "controller_xbox_start",
-        "controller_xbox_x",
-        "controller_xbox_y",
-        "copper_wire",
-        "copper_wire_highlight",
+        "change_recipe",
+        "dropdown",
+        "downloading",
+        "downloaded",
+        "equipment_grid",
+        "expand_dots",
+        "export",
+        "import",
+        "map",
+        "map_exchange_string",
+        "missing_mod_icon",
+        "not_available",
+        "not_available_black",
+        "play",
+        "stop",
+        "preset",
+        "refresh",
+        "reset",
+        "reset_white",
+        "shuffle",
+        "station_name",
+        "search",
+        "sync_mods",
+        "trash",
+        "trash_white",
         "copy",
-        "covered_chunk",
-        "crafting_machine_recipe_not_unlocked",
-        "create_ghost_on_entity_death_modifier_icon",
-        "cross_select",
-        "crosshair",
-        "cursor_box",
-        "cursor_icon",
-        "custom_tag_icon",
-        "custom_tag_in_map_view",
+        "reassign",
+        "warning",
+        "warning_white",
+        "list_view",
+        "grid_view",
+        "slots_view",
+        "reference_point",
+        "mouse_cursor",
+        "mouse_cursor_macos",
+        "mod_category",
+        "mod_last_updated",
+        "mod_downloads_count",
+        "item_to_be_delivered_symbol",
+        "rebuild_mark",
+        "any_quality",
+        "mod_dependency_arrow",
+        "add",
+        "add_white",
+        "clone",
+        "go_to_arrow",
+        "pause",
+        "speed_down",
+        "speed_up",
+        "editor_speed_down",
+        "editor_pause",
+        "editor_play",
+        "editor_speed_up",
+        "tick_once",
+        "tick_sixty",
+        "tick_custom",
+        "search_icon",
+        "too_far",
+        "shoot_cursor_green",
+        "shoot_cursor_red",
+        "electricity_icon",
+        "lightning_warning_icon",
+        "fuel_icon",
+        "ammo_icon",
+        "fluid_icon",
+        "warning_icon",
         "danger_icon",
-        "deconstruction_mark",
-        "deconstruction_time_to_live_modifier_icon",
-        "decorative_editor_icon",
+        "destroyed_icon",
+        "recharge_icon",
+        "no_path_icon",
+        "destination_full_icon",
+        "too_far_from_roboport_icon",
+        "pump_cannot_connect_icon",
+        "not_enough_repair_packs_icon",
+        "not_enough_construction_robots_icon",
+        "no_building_material_icon",
+        "no_storage_space_icon",
+        "no_platform_storage_space_icon",
+        "asteroid_collector_path_blocked_icon",
+        "unclaimed_cargo_icon",
+        "no_roboport_storage_space_icon",
+        "cargo_bay_not_connected_icon",
+        "frozen_icon",
+        "pipeline_disabled_icon",
+        "electricity_icon_unplugged",
+        "tooltip_category_spoilable",
+        "resources_depleted_icon",
+        "game_stopped_visualization",
+        "health_bar_green_pip",
+        "health_bar_yellow_pip",
+        "health_bar_red_pip",
+        "ghost_bar_pip",
+        "bar_gray_pip",
+        "shield_bar_pip",
+        "hand",
+        "hand_black",
+        "entity_info_dark_background",
+        "medium_gui_arrow",
+        "small_gui_arrow",
+        "light_medium",
+        "light_small",
+        "light_cone",
+        "color_effect",
+        "clock",
         "default_ammo_damage_modifier_icon",
         "default_gun_speed_modifier_icon",
         "default_turret_attack_modifier_icon",
-        "destination_full_icon",
-        "destroyed_icon",
-        "down_arrow",
-        "downloaded",
-        "downloading",
-        "dropdown",
-        "editor_pause",
-        "editor_play",
-        "editor_selection",
-        "editor_speed_down",
-        "editor_speed_up",
-        "electricity_icon",
-        "electricity_icon_unplugged",
-        "empty_ammo_slot",
-        "empty_armor_slot",
-        "empty_drop_cargo_slot",
-        "empty_gun_slot",
-        "empty_inserter_hand_slot",
-        "empty_module_slot",
-        "empty_robot_material_slot",
-        "empty_robot_slot",
-        "empty_trash_slot",
-        "enemy_force_icon",
-        "enter",
-        "entity_editor_icon",
-        "entity_info_dark_background",
-        "equipment_collision",
-        "equipment_grid",
-        "equipment_slot",
-        "expand",
-        "expand_dots",
-        "explosion_chart_visualization",
-        "export",
-        "export_slot",
-        "feedback",
-        "filter_blacklist",
-        "fluid_icon",
+        "hint_arrow_up",
+        "hint_arrow_down",
+        "hint_arrow_right",
+        "hint_arrow_left",
         "fluid_indication_arrow",
         "fluid_indication_arrow_both_ways",
+        "heat_exchange_indication",
+        "indication_arrow",
+        "rail_planner_indication_arrow",
+        "rail_planner_indication_arrow_anchored",
+        "rail_planner_indication_arrow_too_far",
+        "rail_path_not_possible",
+        "indication_line",
+        "short_indication_line",
+        "short_indication_line_green",
+        "empty_module_slot",
+        "empty_armor_slot",
+        "empty_gun_slot",
+        "empty_ammo_slot",
+        "empty_robot_slot",
+        "empty_robot_material_slot",
+        "empty_inserter_hand_slot",
+        "empty_trash_slot",
+        "empty_drop_cargo_slot",
+        "upgrade_blueprint",
+        "slot",
+        "equipment_slot",
+        "equipment_collision",
+        "battery",
+        "green_circle",
+        "green_dot",
+        "robot_slot",
+        "set_bar_slot",
+        "missing_icon",
+        "deconstruction_mark",
+        "buildability_collision",
+        "buildability_elevated_collision_line",
+        "buildability_elevated_collision_top",
+        "buildability_elevated_collision_bottom",
+        "buildability_collision_elevated",
+        "upgrade_mark",
+        "confirm_slot",
+        "export_slot",
+        "import_slot",
+        "none_editor_icon",
+        "cable_editor_icon",
+        "tile_editor_icon",
+        "decorative_editor_icon",
+        "asteroid_chunk_editor_icon",
+        "resource_editor_icon",
+        "entity_editor_icon",
+        "item_editor_icon",
+        "force_editor_icon",
+        "clone_editor_icon",
+        "scripting_editor_icon",
+        "paint_bucket_icon",
+        "surface_editor_icon",
+        "time_editor_icon",
+        "cliff_editor_icon",
+        "brush_icon",
+        "spray_icon",
+        "cursor_icon",
+        "area_icon",
+        "line_icon",
+        "variations_tool_icon",
+        "lua_snippet_tool_icon",
+        "editor_selection",
+        "brush_square_shape",
+        "brush_circle_shape",
+        "player_force_icon",
+        "neutral_force_icon",
+        "enemy_force_icon",
+        "nature_icon",
+        "no_nature_icon",
+        "multiplayer_waiting_icon",
+        "spawn_flag",
+        "questionmark",
+        "copper_wire",
+        "green_wire",
+        "red_wire",
+        "copper_wire_highlight",
+        "green_wire_highlight",
+        "red_wire_highlight",
+        "wire_shadow",
+        "and_or",
+        "left_arrow",
+        "right_arrow",
+        "down_arrow",
+        "enter",
+        "move_tag",
+        "side_menu_blueprint_library_icon",
+        "side_menu_production_icon",
+        "side_menu_bonus_icon",
+        "side_menu_tutorials_icon",
+        "side_menu_factoriopedia_icon",
+        "side_menu_train_icon",
+        "side_menu_achievements_icon",
+        "side_menu_menu_icon",
+        "side_menu_map_icon",
+        "side_menu_space_platforms_icon",
+        "side_menu_technology_icon",
+        "side_menu_logistic_networks_icon",
+        "side_menu_players_icon",
+        "circuit_network_panel",
+        "logistic_network_panel_white",
+        "logistic_network_panel_black",
+        "rename_icon",
+        "achievement_warning",
+        "achievement_label",
+        "achievement_label_completed",
+        "achievement_label_failed",
+        "rail_signal_placement_indicator",
+        "train_stop_placement_indicator",
+        "rail_support_placement_indicator",
+        "placement_indicator_leg",
+        "grey_rail_signal_placement_indicator",
+        "grey_placement_indicator_leg",
+        "logistic_radius_visualization",
+        "construction_radius_visualization",
+        "track_button",
+        "track_button_white",
+        "show_logistics_network_in_map_view",
+        "show_electric_network_in_map_view",
+        "show_turret_range_in_map_view",
+        "show_train_station_names_in_map_view",
+        "show_player_names_in_map_view",
+        "show_tags_in_map_view",
+        "show_worker_robots_in_map_view",
+        "show_rail_signal_states_in_map_view",
+        "show_recipe_icons_in_map_view",
+        "show_pipelines_in_map_view",
+        "train_stop_in_map_view",
+        "train_stop_disabled_in_map_view",
+        "train_stop_full_in_map_view",
+        "custom_tag_in_map_view",
+        "covered_chunk",
+        "white_square",
+        "white_square_icon",
+        "white_mask",
+        "crafting_machine_recipe_not_unlocked",
+        "filter_blacklist",
+        "gps_map_icon",
+        "custom_tag_icon",
+        "space_age_icon",
+        "tip_icon",
+        "underground_remove_belts",
+        "max_distance_underground_remove_belts",
+        "underground_remove_pipes",
+        "underground_pipe_connection",
+        "ghost_cursor",
+        "tile_ghost_cursor",
+        "force_ghost_cursor",
+        "force_tile_ghost_cursor",
+        "cross_select",
+        "crosshair",
+        "expand",
+        "collapse",
+        "status_working",
+        "status_not_working",
+        "status_yellow",
+        "status_blue",
+        "status_inactive",
+        "gradient",
+        "output_console_gradient",
+        "select_icon_white",
+        "select_icon_black",
+        "notification",
+        "alert_arrow",
+        "pin_arrow",
+        "pin_center",
+        "technology_white",
+        "feedback",
+        "sort_by_name",
+        "sort_by_time",
+        "parametrise",
         "fluid_visualization_connection",
         "fluid_visualization_connection_both_ways",
         "fluid_visualization_connection_underground",
         "fluid_visualization_extent_arrow",
-        "follower_robot_lifetime_modifier_icon",
-        "force_editor_icon",
-        "force_ghost_cursor",
-        "force_tile_ghost_cursor",
-        "forward_arrow",
-        "forward_arrow_black",
-        "frozen_icon",
-        "fuel_icon",
-        "game_stopped_visualization",
-        "ghost_bar_pip",
-        "ghost_cursor",
-        "give_item_modifier_icon",
-        "go_to_arrow",
-        "gps_map_icon",
-        "gradient",
-        "green_circle",
-        "green_dot",
-        "green_wire",
-        "green_wire_highlight",
-        "grey_placement_indicator_leg",
-        "grey_rail_signal_placement_indicator",
-        "grid_view",
-        "gun_speed_modifier_icon",
-        "hand",
-        "hand_black",
-        "health_bar_green_pip",
-        "health_bar_red_pip",
-        "health_bar_yellow_pip",
-        "heat_exchange_indication",
-        "hint_arrow_down",
-        "hint_arrow_left",
-        "hint_arrow_right",
-        "hint_arrow_up",
-        "import",
-        "import_slot",
-        "indication_arrow",
-        "indication_line",
+        "starmap_platform_moving",
+        "starmap_platform_moving_hovered",
+        "starmap_platform_moving_clicked",
+        "starmap_platform_stopped",
+        "starmap_platform_stopped_hovered",
+        "starmap_platform_stopped_clicked",
+        "starmap_platform_stacked",
+        "starmap_platform_stacked_hovered",
+        "starmap_platform_stacked_clicked",
+        "starmap_star",
+        "controller_joycon_a",
+        "controller_joycon_b",
+        "controller_joycon_x",
+        "controller_joycon_y",
+        "controller_joycon_back",
+        "controller_joycon_start",
+        "controller_joycon_leftstick",
+        "controller_joycon_rightstick",
+        "controller_joycon_leftshoulder",
+        "controller_joycon_rightshoulder",
+        "controller_joycon_dpup",
+        "controller_joycon_dpdown",
+        "controller_joycon_dpleft",
+        "controller_joycon_dpright",
+        "controller_joycon_paddle1",
+        "controller_joycon_paddle2",
+        "controller_joycon_paddle3",
+        "controller_joycon_paddle4",
+        "controller_joycon_righttrigger",
+        "controller_joycon_lefttrigger",
+        "controller_joycon_left_stick",
+        "controller_joycon_right_stick",
+        "controller_joycon_black_a",
+        "controller_joycon_black_b",
+        "controller_joycon_black_x",
+        "controller_joycon_black_y",
+        "controller_joycon_black_back",
+        "controller_joycon_black_start",
+        "controller_joycon_black_leftstick",
+        "controller_joycon_black_rightstick",
+        "controller_joycon_black_leftshoulder",
+        "controller_joycon_black_rightshoulder",
+        "controller_joycon_black_dpup",
+        "controller_joycon_black_dpdown",
+        "controller_joycon_black_dpleft",
+        "controller_joycon_black_dpright",
+        "controller_joycon_black_paddle1",
+        "controller_joycon_black_paddle2",
+        "controller_joycon_black_paddle3",
+        "controller_joycon_black_paddle4",
+        "controller_joycon_black_righttrigger",
+        "controller_joycon_black_lefttrigger",
+        "controller_joycon_black_left_stick",
+        "controller_joycon_black_right_stick",
+        "controller_xbox_a",
+        "controller_xbox_b",
+        "controller_xbox_x",
+        "controller_xbox_y",
+        "controller_xbox_back",
+        "controller_xbox_start",
+        "controller_xbox_leftstick",
+        "controller_xbox_rightstick",
+        "controller_xbox_leftshoulder",
+        "controller_xbox_rightshoulder",
+        "controller_xbox_dpup",
+        "controller_xbox_dpdown",
+        "controller_xbox_dpleft",
+        "controller_xbox_dpright",
+        "controller_xbox_righttrigger",
+        "controller_xbox_lefttrigger",
+        "controller_xbox_left_stick",
+        "controller_xbox_right_stick",
+        "controller_xbox_black_a",
+        "controller_xbox_black_b",
+        "controller_xbox_black_x",
+        "controller_xbox_black_y",
+        "controller_xbox_black_back",
+        "controller_xbox_black_start",
+        "controller_xbox_black_leftstick",
+        "controller_xbox_black_rightstick",
+        "controller_xbox_black_leftshoulder",
+        "controller_xbox_black_rightshoulder",
+        "controller_xbox_black_dpup",
+        "controller_xbox_black_dpdown",
+        "controller_xbox_black_dpleft",
+        "controller_xbox_black_dpright",
+        "controller_xbox_black_righttrigger",
+        "controller_xbox_black_lefttrigger",
+        "controller_xbox_black_left_stick",
+        "controller_xbox_black_right_stick",
+        "controller_ps_a",
+        "controller_ps_b",
+        "controller_ps_x",
+        "controller_ps_y",
+        "controller_ps_back",
+        "controller_ps_start",
+        "controller_ps_leftstick",
+        "controller_ps_rightstick",
+        "controller_ps_leftshoulder",
+        "controller_ps_rightshoulder",
+        "controller_ps_dpup",
+        "controller_ps_dpdown",
+        "controller_ps_dpleft",
+        "controller_ps_dpright",
+        "controller_ps_righttrigger",
+        "controller_ps_lefttrigger",
+        "controller_ps_left_stick",
+        "controller_ps_right_stick",
+        "controller_ps_black_a",
+        "controller_ps_black_b",
+        "controller_ps_black_x",
+        "controller_ps_black_y",
+        "controller_ps_black_back",
+        "controller_ps_black_start",
+        "controller_ps_black_leftstick",
+        "controller_ps_black_rightstick",
+        "controller_ps_black_leftshoulder",
+        "controller_ps_black_rightshoulder",
+        "controller_ps_black_dpup",
+        "controller_ps_black_dpdown",
+        "controller_ps_black_dpleft",
+        "controller_ps_black_dpright",
+        "controller_ps_black_righttrigger",
+        "controller_ps_black_lefttrigger",
+        "controller_ps_black_left_stick",
+        "controller_ps_black_right_stick",
+        "controller_steamdeck_a",
+        "controller_steamdeck_b",
+        "controller_steamdeck_x",
+        "controller_steamdeck_y",
+        "controller_steamdeck_back",
+        "controller_steamdeck_start",
+        "controller_steamdeck_leftstick",
+        "controller_steamdeck_rightstick",
+        "controller_steamdeck_leftshoulder",
+        "controller_steamdeck_rightshoulder",
+        "controller_steamdeck_dpup",
+        "controller_steamdeck_dpdown",
+        "controller_steamdeck_dpleft",
+        "controller_steamdeck_dpright",
+        "controller_steamdeck_paddle1",
+        "controller_steamdeck_paddle2",
+        "controller_steamdeck_paddle3",
+        "controller_steamdeck_paddle4",
+        "controller_steamdeck_righttrigger",
+        "controller_steamdeck_lefttrigger",
+        "controller_steamdeck_left_stick",
+        "controller_steamdeck_right_stick",
+        "controller_steamdeck_black_a",
+        "controller_steamdeck_black_b",
+        "controller_steamdeck_black_x",
+        "controller_steamdeck_black_y",
+        "controller_steamdeck_black_back",
+        "controller_steamdeck_black_start",
+        "controller_steamdeck_black_leftstick",
+        "controller_steamdeck_black_rightstick",
+        "controller_steamdeck_black_leftshoulder",
+        "controller_steamdeck_black_rightshoulder",
+        "controller_steamdeck_black_dpup",
+        "controller_steamdeck_black_dpdown",
+        "controller_steamdeck_black_dpleft",
+        "controller_steamdeck_black_dpright",
+        "controller_steamdeck_black_paddle1",
+        "controller_steamdeck_black_paddle2",
+        "controller_steamdeck_black_paddle3",
+        "controller_steamdeck_black_paddle4",
+        "controller_steamdeck_black_righttrigger",
+        "controller_steamdeck_black_lefttrigger",
+        "controller_steamdeck_black_left_stick",
+        "controller_steamdeck_black_right_stick",
+        "clouds",
+        "arrow_button",
+        "explosion_chart_visualization",
+        "refresh_white",
+        "navmesh_pending_icon",
         "inserter_stack_size_bonus_modifier_icon",
-        "item_editor_icon",
-        "item_to_be_delivered_symbol",
-        "laboratory_productivity_modifier_icon",
+        "bulk_inserter_capacity_bonus_modifier_icon",
         "laboratory_speed_modifier_icon",
-        "left_arrow",
-        "light_cone",
-        "light_medium",
-        "light_small",
-        "lightning_warning_icon",
-        "line_icon",
-        "list_view",
-        "logistic_network_panel_black",
-        "logistic_network_panel_white",
-        "logistic_radius_visualization",
-        "lua_snippet_tool_icon",
-        "map",
-        "map_exchange_string",
-        "max_distance_underground_remove_belts",
+        "character_logistic_trash_slots_modifier_icon",
+        "maximum_following_robots_count_modifier_icon",
+        "worker_robot_speed_modifier_icon",
+        "worker_robot_storage_modifier_icon",
+        "create_ghost_on_entity_death_modifier_icon",
+        "turret_attack_modifier_icon",
+        "ammo_damage_modifier_icon",
+        "give_item_modifier_icon",
+        "gun_speed_modifier_icon",
+        "unlock_recipe_modifier_icon",
+        "character_crafting_speed_modifier_icon",
+        "character_mining_speed_modifier_icon",
+        "character_running_speed_modifier_icon",
+        "character_build_distance_modifier_icon",
+        "character_item_drop_distance_modifier_icon",
+        "character_reach_distance_modifier_icon",
+        "character_resource_reach_distance_modifier_icon",
+        "character_item_pickup_distance_modifier_icon",
+        "character_loot_pickup_distance_modifier_icon",
+        "character_inventory_slots_bonus_modifier_icon",
+        "deconstruction_time_to_live_modifier_icon",
         "max_failed_attempts_per_tick_per_construction_queue_modifier_icon",
         "max_successful_attempts_per_tick_per_construction_queue_modifier_icon",
-        "maximum_following_robots_count_modifier_icon",
-        "medium_gui_arrow",
+        "character_health_bonus_modifier_icon",
         "mining_drill_productivity_bonus_modifier_icon",
-        "mining_with_fluid_modifier_icon",
-        "missing_icon",
-        "missing_mod_icon",
-        "mod_category",
-        "mod_dependency_arrow",
-        "mod_downloads_count",
-        "mod_last_updated",
-        "mouse_cursor",
-        "mouse_cursor_macos",
-        "move_tag",
-        "multiplayer_waiting_icon",
-        "name",
-        "nature_icon",
-        "navmesh_pending_icon",
-        "neutral_force_icon",
-        "no_building_material_icon",
-        "no_nature_icon",
-        "no_path_icon",
-        "no_platform_storage_space_icon",
-        "no_roboport_storage_space_icon",
-        "no_storage_space_icon",
-        "none_editor_icon",
-        "not_available",
-        "not_available_black",
-        "not_enough_construction_robots_icon",
-        "not_enough_repair_packs_icon",
-        "not_played_yet_dark_green",
-        "not_played_yet_green",
-        "nothing_modifier_icon",
-        "notification",
-        "output_console_gradient",
-        "paint_bucket_icon",
-        "parametrise",
-        "pause",
-        "pin_arrow",
-        "pin_center",
-        "pipeline_disabled_icon",
-        "placement_indicator_leg",
-        "play",
-        "played_dark_green",
-        "played_green",
-        "player_force_icon",
-        "preset",
-        "pump_cannot_connect_icon",
-        "questionmark",
-        "rail_path_not_possible",
-        "rail_planner_allow_elevated_rails_modifier_icon",
-        "rail_planner_indication_arrow",
-        "rail_planner_indication_arrow_anchored",
-        "rail_planner_indication_arrow_too_far",
-        "rail_signal_placement_indicator",
-        "rail_support_on_deep_oil_ocean_modifier_icon",
-        "rail_support_placement_indicator",
-        "reassign",
-        "rebuild_mark",
-        "recharge_icon",
-        "recipe_arrow",
-        "red_wire",
-        "red_wire_highlight",
-        "reference_point",
-        "refresh",
-        "refresh_white",
-        "rename_icon",
-        "reset",
-        "reset_white",
-        "resource_editor_icon",
-        "resources_depleted_icon",
-        "right_arrow",
-        "robot_slot",
-        "scripting_editor_icon",
-        "search",
-        "search_icon",
-        "select_icon_black",
-        "select_icon_white",
-        "set_bar_slot",
-        "shield_bar_pip",
-        "shoot_cursor_green",
-        "shoot_cursor_red",
-        "short_indication_line",
-        "short_indication_line_green",
-        "show_electric_network_in_map_view",
-        "show_logistics_network_in_map_view",
-        "show_pipelines_in_map_view",
-        "show_player_names_in_map_view",
-        "show_rail_signal_states_in_map_view",
-        "show_recipe_icons_in_map_view",
-        "show_tags_in_map_view",
-        "show_train_station_names_in_map_view",
-        "show_turret_range_in_map_view",
-        "show_worker_robots_in_map_view",
-        "shuffle",
-        "side_menu_achievements_icon",
-        "side_menu_blueprint_library_icon",
-        "side_menu_bonus_icon",
-        "side_menu_factoriopedia_icon",
-        "side_menu_logistic_networks_icon",
-        "side_menu_map_icon",
-        "side_menu_menu_icon",
-        "side_menu_players_icon",
-        "side_menu_production_icon",
-        "side_menu_space_platforms_icon",
-        "side_menu_technology_icon",
-        "side_menu_train_icon",
-        "side_menu_tutorials_icon",
-        "slot",
-        "slots_view",
-        "small_gui_arrow",
-        "sort_by_name",
-        "sort_by_time",
-        "space_age_icon",
-        "spawn_flag",
-        "speed_down",
-        "speed_up",
-        "spray_icon",
-        "starmap_platform_moving",
-        "starmap_platform_moving_clicked",
-        "starmap_platform_moving_hovered",
-        "starmap_platform_stacked",
-        "starmap_platform_stacked_clicked",
-        "starmap_platform_stacked_hovered",
-        "starmap_platform_stopped",
-        "starmap_platform_stopped_clicked",
-        "starmap_platform_stopped_hovered",
-        "starmap_star",
-        "station_name",
-        "status_blue",
-        "status_inactive",
-        "status_not_working",
-        "status_working",
-        "status_yellow",
-        "stop",
-        "surface_editor_icon",
-        "sync_mods",
-        "technology_white",
-        "tick_custom",
-        "tick_once",
-        "tick_sixty",
-        "tile_editor_icon",
-        "tile_ghost_cursor",
-        "time_editor_icon",
-        "tip_icon",
-        "too_far",
-        "too_far_from_roboport_icon",
-        "tooltip_category_spoilable",
-        "track_button",
-        "track_button_white",
         "train_braking_force_bonus_modifier_icon",
-        "train_stop_disabled_in_map_view",
-        "train_stop_full_in_map_view",
-        "train_stop_in_map_view",
-        "train_stop_placement_indicator",
-        "trash",
-        "trash_white",
-        "turret_attack_modifier_icon",
-        "type",
-        "unclaimed_cargo_icon",
-        "underground_pipe_connection",
-        "underground_remove_belts",
-        "underground_remove_pipes",
-        "unlock_circuit_network_modifier_icon",
-        "unlock_quality_modifier_icon",
-        "unlock_recipe_modifier_icon",
-        "unlock_space_location_modifier_icon",
-        "unlock_space_platforms_modifier_icon",
-        "upgrade_blueprint",
-        "upgrade_mark",
-        "variations_tool_icon",
-        "vehicle_logistics_modifier_icon",
-        "warning",
-        "warning_icon",
-        "warning_white",
-        "white_mask",
-        "white_square",
-        "white_square_icon",
-        "wire_shadow",
         "worker_robot_battery_modifier_icon",
-        "worker_robot_speed_modifier_icon",
-        "worker_robot_storage_modifier_icon"
+        "laboratory_productivity_modifier_icon",
+        "follower_robot_lifetime_modifier_icon",
+        "artillery_range_modifier_icon",
+        "nothing_modifier_icon",
+        "character_additional_mining_categories_modifier_icon",
+        "character_logistic_requests_modifier_icon",
+        "unlock_space_location_modifier_icon",
+        "unlock_quality_modifier_icon",
+        "unlock_space_platforms_modifier_icon",
+        "unlock_circuit_network_modifier_icon",
+        "cargo_landing_pad_count_modifier_icon",
+        "change_recipe_productivity_modifier_icon",
+        "cliff_deconstruction_enabled_modifier_icon",
+        "mining_with_fluid_modifier_icon",
+        "rail_support_on_deep_oil_ocean_modifier_icon",
+        "rail_planner_allow_elevated_rails_modifier_icon",
+        "beacon_distribution_modifier_icon",
+        "belt_stack_size_bonus_modifier_icon",
+        "vehicle_logistics_modifier_icon"
       ]
     },
     "VirtualSignalPrototype": {
@@ -111724,8 +111724,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     },
     "WallPrototype": {
@@ -112302,8 +112302,8 @@
       },
       "additionalProperties": false,
       "required": [
-        "name",
-        "type"
+        "type",
+        "name"
       ]
     }
   }

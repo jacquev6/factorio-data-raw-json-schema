@@ -443,11 +443,11 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
     "name",
+    "particle_spawn_interval",
     "particle_horizontal_speed",
     "particle_horizontal_speed_deviation",
-    "particle_spawn_interval",
-    "particle_vertical_acceleration",
-    "type"
+    "particle_vertical_acceleration"
   ]
 }

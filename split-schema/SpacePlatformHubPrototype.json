@@ -527,10 +527,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "cargo_station_parameters",
-    "dump_container",
-    "inventory_size",
+    "type",
     "name",
-    "type"
+    "inventory_size",
+    "dump_container",
+    "cargo_station_parameters"
   ]
 }

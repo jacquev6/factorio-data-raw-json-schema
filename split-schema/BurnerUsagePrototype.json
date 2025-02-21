@@ -64,12 +64,12 @@
   },
   "additionalProperties": false,
   "required": [
-    "accepted_fuel_key",
-    "burned_in_key",
-    "empty_slot_caption",
-    "empty_slot_sprite",
-    "icon",
+    "type",
     "name",
-    "type"
+    "empty_slot_sprite",
+    "empty_slot_caption",
+    "icon",
+    "accepted_fuel_key",
+    "burned_in_key"
   ]
 }

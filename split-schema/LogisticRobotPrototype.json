@@ -544,9 +544,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "max_payload_size",
+    "type",
     "name",
     "speed",
-    "type"
+    "max_payload_size"
   ]
 }

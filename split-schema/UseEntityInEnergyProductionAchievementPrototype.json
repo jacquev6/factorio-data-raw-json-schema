@@ -81,8 +81,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "entity",
+    "type",
     "name",
-    "type"
+    "entity"
   ]
 }

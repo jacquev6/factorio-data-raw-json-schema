@@ -551,10 +551,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "energy_source",
-    "energy_usage",
-    "inputs",
+    "type",
     "name",
-    "type"
+    "energy_usage",
+    "energy_source",
+    "inputs"
   ]
 }

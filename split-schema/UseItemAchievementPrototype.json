@@ -81,9 +81,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "limit_quality",
+    "type",
     "name",
     "to_use",
-    "type"
+    "limit_quality"
   ]
 }

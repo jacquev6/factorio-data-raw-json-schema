@@ -366,10 +366,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "damage_interval",
-    "graphics_set",
-    "name",
     "type",
-    "width"
+    "name",
+    "width",
+    "damage_interval",
+    "graphics_set"
   ]
 }

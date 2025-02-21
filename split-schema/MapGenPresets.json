@@ -15,7 +15,7 @@
     "$ref": "../split-schema/MapGenPreset.json"
   },
   "required": [
-    "name",
-    "type"
+    "type",
+    "name"
   ]
 }

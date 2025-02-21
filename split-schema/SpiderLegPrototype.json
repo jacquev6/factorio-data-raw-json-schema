@@ -592,15 +592,15 @@
   },
   "additionalProperties": false,
   "required": [
-    "base_position_selection_distance",
-    "initial_movement_speed",
-    "knee_distance_factor",
-    "knee_height",
-    "minimal_step_size",
-    "movement_acceleration",
-    "movement_based_position_selection_distance",
+    "type",
     "name",
+    "knee_height",
+    "knee_distance_factor",
+    "initial_movement_speed",
+    "movement_acceleration",
     "target_position_randomisation_distance",
-    "type"
+    "minimal_step_size",
+    "base_position_selection_distance",
+    "movement_based_position_selection_distance"
   ]
 }

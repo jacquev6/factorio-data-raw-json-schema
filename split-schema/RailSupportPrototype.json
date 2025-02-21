@@ -531,8 +531,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "graphics_set",
+    "type",
     "name",
-    "type"
+    "graphics_set"
   ]
 }

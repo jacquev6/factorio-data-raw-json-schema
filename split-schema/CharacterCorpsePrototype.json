@@ -366,8 +366,8 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
     "name",
-    "time_to_live",
-    "type"
+    "time_to_live"
   ]
 }

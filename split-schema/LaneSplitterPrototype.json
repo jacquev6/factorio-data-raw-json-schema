@@ -505,9 +505,9 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
     "name",
     "speed",
-    "structure",
-    "type"
+    "structure"
   ]
 }

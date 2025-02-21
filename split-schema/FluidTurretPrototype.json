@@ -831,16 +831,16 @@
   },
   "additionalProperties": false,
   "required": [
-    "activation_buffer_ratio",
-    "attack_parameters",
-    "call_for_help_radius",
-    "fluid_box",
-    "fluid_buffer_input_flow",
-    "fluid_buffer_size",
-    "folded_animation",
-    "graphics_set",
+    "type",
     "name",
+    "attack_parameters",
+    "folded_animation",
+    "call_for_help_radius",
     "turret_base_has_direction",
-    "type"
+    "graphics_set",
+    "fluid_buffer_size",
+    "fluid_buffer_input_flow",
+    "activation_buffer_ratio",
+    "fluid_box"
   ]
 }

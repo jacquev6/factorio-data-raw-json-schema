@@ -84,13 +84,13 @@
   },
   "additionalProperties": false,
   "required": [
-    "attack_parameters",
-    "automatic",
+    "type",
+    "name",
+    "sprite",
+    "shape",
     "categories",
     "energy_source",
-    "name",
-    "shape",
-    "sprite",
-    "type"
+    "automatic",
+    "attack_parameters"
   ]
 }

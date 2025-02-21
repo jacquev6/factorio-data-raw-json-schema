@@ -523,11 +523,11 @@
   },
   "additionalProperties": false,
   "required": [
-    "circuit_wire_connection_point",
-    "left_wire_connection_point",
+    "type",
     "name",
     "overlay_start_delay",
-    "right_wire_connection_point",
-    "type"
+    "circuit_wire_connection_point",
+    "left_wire_connection_point",
+    "right_wire_connection_point"
   ]
 }

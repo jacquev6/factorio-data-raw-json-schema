@@ -581,13 +581,13 @@
   },
   "additionalProperties": false,
   "required": [
-    "ammo_stack_limit",
-    "cannon_base_shift",
+    "type",
+    "name",
     "gun",
     "inventory_size",
-    "manual_range_modifier",
-    "name",
+    "ammo_stack_limit",
     "turret_rotation_speed",
-    "type"
+    "manual_range_modifier",
+    "cannon_base_shift"
   ]
 }

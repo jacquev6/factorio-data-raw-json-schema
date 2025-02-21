@@ -84,13 +84,13 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
+    "name",
+    "sprite",
+    "shape",
     "categories",
-    "energy_per_shield",
     "energy_source",
     "max_shield_value",
-    "name",
-    "shape",
-    "sprite",
-    "type"
+    "energy_per_shield"
   ]
 }

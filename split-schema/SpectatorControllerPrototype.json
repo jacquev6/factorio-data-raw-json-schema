@@ -16,8 +16,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "movement_speed",
+    "type",
     "name",
-    "type"
+    "movement_speed"
   ]
 }

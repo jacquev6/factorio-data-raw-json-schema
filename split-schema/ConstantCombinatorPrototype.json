@@ -540,9 +540,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "activity_led_light_offsets",
-    "circuit_wire_connection_points",
+    "type",
     "name",
-    "type"
+    "activity_led_light_offsets",
+    "circuit_wire_connection_points"
   ]
 }

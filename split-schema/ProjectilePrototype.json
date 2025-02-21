@@ -413,8 +413,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "acceleration",
+    "type",
     "name",
-    "type"
+    "acceleration"
   ]
 }

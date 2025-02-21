@@ -31,9 +31,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "from",
+    "type",
     "name",
     "size",
-    "type"
+    "from"
   ]
 }

@@ -129,8 +129,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "excluded",
+    "type",
     "name",
-    "type"
+    "excluded"
   ]
 }

@@ -524,8 +524,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "inventory_size",
+    "type",
     "name",
-    "type"
+    "inventory_size"
   ]
 }

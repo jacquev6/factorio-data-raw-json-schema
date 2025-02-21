@@ -176,7 +176,11 @@ class Schema:
                 definition["additionalProperties"] = self.custom_properties.make_json_definition(schema)
 
             if any(required.values()):
-                definition["required"] = [json_value(v) for v in sorted(k for k, v in required.items() if v)]
+                definition["required"] = [
+                    json_value(property_name)
+                    for property_name in properties.keys()
+                    if required.get(property_name, False)
+                ]
 
             return definition
 

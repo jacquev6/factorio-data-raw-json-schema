@@ -428,8 +428,8 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
     "name",
-    "stage_counts",
-    "type"
+    "stage_counts"
   ]
 }

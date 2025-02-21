@@ -84,10 +84,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "armor",
-    "limit_equip_quality",
-    "limit_quality",
+    "type",
     "name",
-    "type"
+    "armor",
+    "limit_quality",
+    "limit_equip_quality"
   ]
 }

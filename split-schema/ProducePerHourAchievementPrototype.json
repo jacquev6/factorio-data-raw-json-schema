@@ -78,8 +78,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "amount",
+    "type",
     "name",
-    "type"
+    "amount"
   ]
 }

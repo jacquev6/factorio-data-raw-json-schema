@@ -81,12 +81,12 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
+    "name",
+    "sprite",
+    "shape",
     "categories",
     "energy_source",
-    "name",
-    "power",
-    "shape",
-    "sprite",
-    "type"
+    "power"
   ]
 }

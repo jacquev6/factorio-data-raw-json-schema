@@ -594,9 +594,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "erase_contents_when_mined",
-    "inventory_size",
+    "type",
     "name",
-    "type"
+    "inventory_size",
+    "erase_contents_when_mined"
   ]
 }

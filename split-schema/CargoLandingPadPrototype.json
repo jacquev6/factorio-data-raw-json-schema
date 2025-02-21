@@ -526,9 +526,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "cargo_station_parameters",
-    "inventory_size",
+    "type",
     "name",
-    "type"
+    "inventory_size",
+    "cargo_station_parameters"
   ]
 }

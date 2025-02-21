@@ -130,9 +130,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "dont_build",
+    "type",
     "name",
     "objective_condition",
-    "type"
+    "dont_build"
   ]
 }

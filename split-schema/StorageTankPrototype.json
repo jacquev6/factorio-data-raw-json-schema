@@ -550,10 +550,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "flow_length_in_ticks",
-    "fluid_box",
-    "name",
     "type",
-    "window_bounding_box"
+    "name",
+    "fluid_box",
+    "window_bounding_box",
+    "flow_length_in_ticks"
   ]
 }

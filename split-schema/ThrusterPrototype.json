@@ -502,11 +502,11 @@
   },
   "additionalProperties": false,
   "required": [
-    "fuel_fluid_box",
-    "max_performance",
-    "min_performance",
+    "type",
     "name",
-    "oxidizer_fluid_box",
-    "type"
+    "min_performance",
+    "max_performance",
+    "fuel_fluid_box",
+    "oxidizer_fluid_box"
   ]
 }

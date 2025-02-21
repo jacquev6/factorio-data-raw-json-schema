@@ -639,14 +639,14 @@
   },
   "additionalProperties": false,
   "required": [
-    "consumption",
-    "effectivity",
-    "energy_per_hit_point",
-    "energy_source",
-    "inventory_size",
-    "name",
-    "rotation_speed",
     "type",
-    "weight"
+    "name",
+    "weight",
+    "energy_per_hit_point",
+    "effectivity",
+    "consumption",
+    "rotation_speed",
+    "energy_source",
+    "inventory_size"
   ]
 }

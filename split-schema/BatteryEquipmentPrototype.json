@@ -78,11 +78,11 @@
   },
   "additionalProperties": false,
   "required": [
-    "categories",
-    "energy_source",
+    "type",
     "name",
-    "shape",
     "sprite",
-    "type"
+    "shape",
+    "categories",
+    "energy_source"
   ]
 }

@@ -567,12 +567,12 @@
   },
   "additionalProperties": false,
   "required": [
-    "distribution_effectivity",
-    "energy_source",
-    "energy_usage",
-    "module_slots",
+    "type",
     "name",
+    "energy_usage",
+    "energy_source",
     "supply_area_distance",
-    "type"
+    "distribution_effectivity",
+    "module_slots"
   ]
 }

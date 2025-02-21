@@ -51,7 +51,7 @@
     "$ref": "../split-schema/StyleSpecification.json"
   },
   "required": [
-    "name",
-    "type"
+    "type",
+    "name"
   ]
 }

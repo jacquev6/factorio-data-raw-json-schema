@@ -103,8 +103,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "key_sequence",
+    "type",
     "name",
-    "type"
+    "key_sequence"
   ]
 }

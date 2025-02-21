@@ -304,9 +304,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "inventory_size",
+    "type",
     "name",
     "stack_size",
-    "type"
+    "inventory_size"
   ]
 }

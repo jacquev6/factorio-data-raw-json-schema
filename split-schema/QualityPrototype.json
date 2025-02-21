@@ -87,9 +87,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "color",
-    "level",
+    "type",
     "name",
-    "type"
+    "color",
+    "level"
   ]
 }

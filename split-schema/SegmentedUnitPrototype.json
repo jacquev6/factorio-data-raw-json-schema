@@ -604,18 +604,18 @@
   },
   "additionalProperties": false,
   "required": [
-    "acceleration_rate",
-    "animation",
-    "attacking_speed",
-    "enraged_duration",
-    "enraged_speed",
-    "investigating_speed",
-    "name",
-    "patrolling_speed",
-    "segment_engine",
-    "territory_radius",
-    "turn_radius",
     "type",
-    "vision_distance"
+    "name",
+    "animation",
+    "vision_distance",
+    "territory_radius",
+    "enraged_duration",
+    "patrolling_speed",
+    "investigating_speed",
+    "attacking_speed",
+    "enraged_speed",
+    "acceleration_rate",
+    "turn_radius",
+    "segment_engine"
   ]
 }

@@ -375,8 +375,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "effect_duration",
+    "type",
     "name",
-    "type"
+    "effect_duration"
   ]
 }

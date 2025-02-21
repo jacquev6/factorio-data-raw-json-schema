@@ -508,8 +508,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "inventory_size_bonus",
+    "type",
     "name",
-    "type"
+    "inventory_size_bonus"
   ]
 }

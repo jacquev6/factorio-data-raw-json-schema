@@ -517,10 +517,10 @@
   },
   "additionalProperties": false,
   "required": [
-    "damage_per_tick",
+    "type",
     "name",
+    "damage_per_tick",
     "spread_delay",
-    "spread_delay_deviation",
-    "type"
+    "spread_delay_deviation"
   ]
 }

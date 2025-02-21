@@ -555,11 +555,11 @@
   },
   "additionalProperties": false,
   "required": [
+    "type",
+    "name",
     "energy_source",
     "energy_usage_per_tick",
-    "instruments",
     "maximum_polyphony",
-    "name",
-    "type"
+    "instruments"
   ]
 }

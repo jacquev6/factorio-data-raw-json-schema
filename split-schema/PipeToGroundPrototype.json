@@ -502,8 +502,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "fluid_box",
+    "type",
     "name",
-    "type"
+    "fluid_box"
   ]
 }

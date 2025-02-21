@@ -584,17 +584,17 @@
   },
   "additionalProperties": false,
   "required": [
-    "call_for_help_radius",
+    "type",
+    "name",
     "graphics_set",
     "max_count_of_owned_units",
     "max_friends_around_to_spawn",
-    "max_richness_for_spawn_shift",
-    "max_spawn_shift",
-    "name",
-    "result_units",
     "spawning_cooldown",
     "spawning_radius",
     "spawning_spacing",
-    "type"
+    "max_richness_for_spawn_shift",
+    "max_spawn_shift",
+    "call_for_help_radius",
+    "result_units"
   ]
 }

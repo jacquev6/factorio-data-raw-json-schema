@@ -399,9 +399,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "life_time",
-    "map_color",
+    "type",
     "name",
-    "type"
+    "map_color",
+    "life_time"
   ]
 }
