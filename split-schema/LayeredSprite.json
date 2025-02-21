@@ -144,7 +144,6 @@
         }
       },
       "required": [
-        "filename",
         "render_layer"
       ]
     },

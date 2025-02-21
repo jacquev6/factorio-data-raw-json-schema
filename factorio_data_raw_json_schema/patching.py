@@ -46,6 +46,7 @@ def patch(schema: Any) -> None:
 
     def replace_in_value(path: str, pattern: str, replacement: str) -> None:
         def fn(x: str) -> str:
+            assert pattern in x
             return x.replace(pattern, replacement)
 
         patch(path, fn)
@@ -55,7 +56,23 @@ def patch(schema: Any) -> None:
 
     # https://lua-api.factorio.com/2.0.28/types/ItemProductPrototype.html#amount_min is documented as uint16
     # @todo Identify counter-example(s)
-    replace_in_value("definitions.ItemProductPrototype.properties.amount.$ref", "uint16", "double")
+    replace_in_value("definitions.ItemProductPrototype.properties.amount.$ref", "/uint16", "/double")
+
+    # https://lua-api.factorio.com/2.0.28/types/TechnologySlotStyleSpecification.html#level_offset_y is documented as int32
+    # @todo Identify counter-example(s)
+    # (Probably applies to level_offset_x as well)
+    replace_in_value("definitions.TechnologySlotStyleSpecification.properties.level_offset_y.$ref", "/int32", "/double")
+    replace_in_value("definitions.TechnologySlotStyleSpecification.properties.level_offset_x.$ref", "/int32", "/double")
+
+    # https://lua-api.factorio.com/2.0.28/types/TechnologySlotStyleSpecification.html#level_range_offset_y is documented as int32
+    # @todo Identify counter-example(s)
+    # (Probably applies to level_range_offset_x as well)
+    replace_in_value(
+        "definitions.TechnologySlotStyleSpecification.properties.level_range_offset_y.$ref", "/int32", "/double"
+    )
+    replace_in_value(
+        "definitions.TechnologySlotStyleSpecification.properties.level_range_offset_x.$ref", "/int32", "/double"
+    )
 
     # https://lua-api.factorio.com/2.0.28/prototypes/UtilitySprites.html#cursor_box documents these two attributes as required
     # @todo Identify counter-example(s)
@@ -123,8 +140,6 @@ def patch(schema: Any) -> None:
     remove_all_constraints("Sound")
     remove_all_constraints("Sprite")
     remove_all_constraints("SpriteVariations")
-    # Removing next line requires handling overridden properties in types (https://lua-api.factorio.com/2.0.28/types/DoubleSliderStyleSpecification.html#type)
-    remove_all_constraints("StyleSpecification")
     remove_all_constraints("ThrusterGraphicsSet")
     remove_all_constraints("Trigger")
     remove_all_constraints("CargoBayConnectableGraphicsSet")

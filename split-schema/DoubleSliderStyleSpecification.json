@@ -140,7 +140,7 @@
     },
     "type": {
       "type": "string",
-      "const": "slider_style"
+      "const": "double_slider_style"
     },
     "full_bar": {
       "$ref": "../split-schema/ElementImageSet.json"

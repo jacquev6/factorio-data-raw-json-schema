@@ -167,7 +167,7 @@
     },
     "type": {
       "type": "string",
-      "const": "button_style"
+      "const": "technology_slot_style"
     },
     "font": {
       "$ref": "../split-schema/string.json"
@@ -230,10 +230,10 @@
       "$ref": "../split-schema/ElementImageSet.json"
     },
     "level_offset_x": {
-      "$ref": "../split-schema/int32.json"
+      "$ref": "../split-schema/double.json"
     },
     "level_offset_y": {
-      "$ref": "../split-schema/int32.json"
+      "$ref": "../split-schema/double.json"
     },
     "level_band_width": {
       "$ref": "../split-schema/uint32.json"
@@ -266,10 +266,10 @@
       "$ref": "../split-schema/ElementImageSet.json"
     },
     "level_range_offset_x": {
-      "$ref": "../split-schema/int32.json"
+      "$ref": "../split-schema/double.json"
     },
     "level_range_offset_y": {
-      "$ref": "../split-schema/int32.json"
+      "$ref": "../split-schema/double.json"
     },
     "ingredients_height": {
       "$ref": "../split-schema/uint32.json"

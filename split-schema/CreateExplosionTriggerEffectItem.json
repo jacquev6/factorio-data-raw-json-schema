@@ -23,7 +23,7 @@
     },
     "type": {
       "type": "string",
-      "const": "create-entity"
+      "const": "create-explosion"
     },
     "entity_name": {
       "$ref": "../split-schema/EntityID.json"

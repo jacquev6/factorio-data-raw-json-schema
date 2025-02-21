@@ -166,7 +166,6 @@
     }
   },
   "required": [
-    "filename",
     "variation_count"
   ]
 }

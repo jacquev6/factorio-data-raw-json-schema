@@ -140,7 +140,7 @@
     },
     "type": {
       "type": "string",
-      "const": "empty_widget_style"
+      "const": "camera_style"
     },
     "graphical_set": {
       "$ref": "../split-schema/ElementImageSet.json"

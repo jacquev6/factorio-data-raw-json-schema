@@ -2450,7 +2450,6 @@
         }
       },
       "required": [
-        "filename",
         "variation_count"
       ]
     },
@@ -4267,7 +4266,7 @@
         },
         "type": {
           "type": "string",
-          "const": "empty_widget_style"
+          "const": "camera_style"
         },
         "graphical_set": {
           "$ref": "#/definitions/ElementImageSet"
@@ -7175,7 +7174,7 @@
         },
         "type": {
           "type": "string",
-          "const": "create-entity"
+          "const": "create-explosion"
         },
         "entity_name": {
           "$ref": "#/definitions/EntityID"
@@ -7269,7 +7268,7 @@
         },
         "type": {
           "type": "string",
-          "const": "create-entity"
+          "const": "create-fire"
         },
         "entity_name": {
           "$ref": "#/definitions/EntityID"
@@ -7510,7 +7509,7 @@
         },
         "type": {
           "type": "string",
-          "const": "create-entity"
+          "const": "create-smoke"
         },
         "entity_name": {
           "$ref": "#/definitions/EntityID"
@@ -8555,7 +8554,7 @@
         },
         "type": {
           "type": "string",
-          "const": "slider_style"
+          "const": "double_slider_style"
         },
         "full_bar": {
           "$ref": "#/definitions/ElementImageSet"
@@ -13817,7 +13816,6 @@
             }
           },
           "required": [
-            "filename",
             "render_layer"
           ]
         },
@@ -16348,7 +16346,7 @@
         },
         "type": {
           "type": "string",
-          "const": "empty_widget_style"
+          "const": "minimap_style"
         },
         "graphical_set": {
           "$ref": "#/definitions/ElementImageSet"
@@ -24220,7 +24218,102 @@
       ]
     },
     "StyleSpecification": {
-      "description": "https://lua-api.factorio.com/stable/types/StyleSpecification.html"
+      "description": "https://lua-api.factorio.com/stable/types/StyleSpecification.html",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/ActivityBarStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/ButtonStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/CameraStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/CheckBoxStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/DropDownStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/FlowStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/FrameStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/GraphStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/HorizontalFlowStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/LineStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/ImageStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/LabelStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/ListBoxStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/ProgressBarStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/RadioButtonStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/HorizontalScrollBarStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/VerticalScrollBarStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/ScrollPaneStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/SliderStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/SwitchStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/TableStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/TabStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/TextBoxStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/VerticalFlowStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/TabbedPaneStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/EmptyWidgetStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/MinimapStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/TechnologySlotStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/GlowStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/SpeechBubbleStyleSpecification"
+        },
+        {
+          "$ref": "#/definitions/DoubleSliderStyleSpecification"
+        }
+      ]
     },
     "SurfaceCondition": {
       "description": "https://lua-api.factorio.com/stable/types/SurfaceCondition.html",
@@ -25329,7 +25422,7 @@
         },
         "type": {
           "type": "string",
-          "const": "button_style"
+          "const": "technology_slot_style"
         },
         "font": {
           "$ref": "#/definitions/string"
@@ -25392,10 +25485,10 @@
           "$ref": "#/definitions/ElementImageSet"
         },
         "level_offset_x": {
-          "$ref": "#/definitions/int32"
+          "$ref": "#/definitions/double"
         },
         "level_offset_y": {
-          "$ref": "#/definitions/int32"
+          "$ref": "#/definitions/double"
         },
         "level_band_width": {
           "$ref": "#/definitions/uint32"
@@ -25428,10 +25521,10 @@
           "$ref": "#/definitions/ElementImageSet"
         },
         "level_range_offset_x": {
-          "$ref": "#/definitions/int32"
+          "$ref": "#/definitions/double"
         },
         "level_range_offset_y": {
-          "$ref": "#/definitions/int32"
+          "$ref": "#/definitions/double"
         },
         "ingredients_height": {
           "$ref": "#/definitions/uint32"

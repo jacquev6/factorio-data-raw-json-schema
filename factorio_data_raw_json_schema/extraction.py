@@ -88,10 +88,19 @@ class _Extractor:
             type_expression = m.group(1).replace(" - abstract", "")
             if "struct" in type_expression:
                 properties_div_soup = soup.find("div", id="attributes-body-main")
+
+                overridden_properties_soup = soup.find("div", id="attributes-body-overridden")
+                if overridden_properties_soup is None:
+                    overridden_properties = []
+                else:
+                    overridden_properties = list(
+                        extract_struct_properties(type_name, overridden_properties_soup, self.all_type_names)
+                    )
+
                 local_types["struct"] = Schema.StructTypeExpression(
                     base=extract_struct_base(soup),
                     properties=list(extract_struct_properties(type_name, properties_div_soup, self.all_type_names)),
-                    overridden_properties=[],
+                    overridden_properties=overridden_properties,
                     custom_properties=None,
                 )
 
