@@ -10,7 +10,7 @@
           "$ref": "../split-schema/MapPosition.json"
         },
         "direction": {
-          "$ref": "../split-schema/MapPosition.json"
+          "$ref": "../split-schema/uint8.json"
         }
       },
       "required": [

@@ -46,7 +46,7 @@
       "$ref": "../split-schema/float.json"
     },
     "lead_target_for_projectile_delay": {
-      "$ref": "../split-schema/uint32.json"
+      "$ref": "../split-schema/double.json"
     },
     "movement_slow_down_cooldown": {
       "$ref": "../split-schema/float.json"

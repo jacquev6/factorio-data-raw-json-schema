@@ -1,4 +1,15 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
-  "description": "https://lua-api.factorio.com/stable/types/AttackParameters.html"
+  "description": "https://lua-api.factorio.com/stable/types/AttackParameters.html",
+  "anyOf": [
+    {
+      "$ref": "../split-schema/ProjectileAttackParameters.json"
+    },
+    {
+      "$ref": "../split-schema/BeamAttackParameters.json"
+    },
+    {
+      "$ref": "../split-schema/StreamAttackParameters.json"
+    }
+  ]
 }

@@ -1,4 +1,69 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
-  "description": "https://lua-api.factorio.com/stable/types/BoundingBox.html"
+  "description": "https://lua-api.factorio.com/stable/types/BoundingBox.html",
+  "anyOf": [
+    {
+      "type": "object",
+      "properties": {
+        "left_top": {
+          "$ref": "../split-schema/MapPosition.json"
+        },
+        "right_bottom": {
+          "$ref": "../split-schema/MapPosition.json"
+        },
+        "orientation": {
+          "$ref": "../split-schema/RealOrientation.json"
+        }
+      },
+      "required": [
+        "left_top",
+        "right_bottom"
+      ]
+    },
+    {
+      "type": "array",
+      "items": [
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/MapPosition.json"
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/MapPosition.json"
+            }
+          ]
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    },
+    {
+      "type": "array",
+      "items": [
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/MapPosition.json"
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "../split-schema/MapPosition.json"
+            }
+          ]
+        },
+        {
+          "$ref": "../split-schema/float.json"
+        }
+      ],
+      "minItems": 3,
+      "maxItems": 3
+    }
+  ]
 }

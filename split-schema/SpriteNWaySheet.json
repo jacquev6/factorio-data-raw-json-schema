@@ -117,8 +117,5 @@
     "frames": {
       "$ref": "../split-schema/uint32.json"
     }
-  },
-  "required": [
-    "filename"
-  ]
+  }
 }

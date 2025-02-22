@@ -20,7 +20,7 @@
       "$ref": "../split-schema/bool.json"
     },
     "max_length": {
-      "$ref": "../split-schema/uint32.json"
+      "$ref": "../split-schema/double.json"
     },
     "duration": {
       "$ref": "../split-schema/uint32.json"

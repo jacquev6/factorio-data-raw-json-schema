@@ -1,6 +1,7 @@
 from typing import Any
+import typing
 
-from .schema import Schema, JsonValue, JsonDict
+from .schema import Schema, JsonDict
 
 
 # I believe 'DamageEntityTriggerEffectItem' is a typo in https://lua-api.factorio.com/2.0.28/types/TriggerEffect.html
@@ -65,6 +66,15 @@ def patch_schema(schema: Schema) -> None:
     # (Probably applies to level_range_offset_x as well)
     schema.get_type_def("TechnologySlotStyleSpecification", Schema.StructTypeExpression).get_property_type(
         "level_range_offset_x", Schema.RefTypeExpression
+    ).ref = "double"
+
+    # https://lua-api.factorio.com/2.0.28/types/BaseAttackParameters.html#lead_target_for_projectile_delay is documented as uint32
+    # but is some kind of floating point number in:
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."segmented-unit"."big-demolisher".revenge_attack_parameters.lead_target_for_projectile_delay'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."segmented-unit"."medium-demolisher".revenge_attack_parameters.lead_target_for_projectile_delay'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."segmented-unit"."small-demolisher".revenge_attack_parameters.lead_target_for_projectile_delay'
+    schema.get_type_def("BaseAttackParameters", Schema.StructTypeExpression).get_property_type(
+        "lead_target_for_projectile_delay", Schema.RefTypeExpression
     ).ref = "double"
 
     # https://lua-api.factorio.com/2.0.28/types/WorkingVisualisations.html#working_visualisations is documented as array[WorkingVisualisation]
@@ -224,21 +234,114 @@ def patch_schema(schema: Schema) -> None:
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."dont-use-entity-in-energy-production-achievement".solaris'
     schema.get_prototype("AchievementPrototypeWithCondition").get_property("objective_condition").required = False
 
-    # https://lua-api.factorio.com/2.0.28/prototypes/UtilitySprites.html#cursor_box documents attributes 'rts_selected' as required
-    # but is absent from:
+    # https://lua-api.factorio.com/2.0.28/prototypes/UtilitySprites.html#cursor_box documents attribute 'rts_selected' as required
+    # but it's absent from:
     #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."utility-sprites".default.cursor_box'
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."utility-sprites".default.cursor_box'
     schema.get_prototype("UtilitySprites").get_property_type("cursor_box", Schema.StructTypeExpression).get_property(
         "rts_selected"
     ).required = False
 
-    # https://lua-api.factorio.com/2.0.28/prototypes/UtilitySprites.html#cursor_box documents attributes 'rts_to_be_selected' as required
-    # but is absent from:
+    # https://lua-api.factorio.com/2.0.28/prototypes/UtilitySprites.html#cursor_box documents attribute 'rts_to_be_selected' as required
+    # but it's absent from:
     #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."utility-sprites".default.cursor_box'
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."utility-sprites".default.cursor_box'
     schema.get_prototype("UtilitySprites").get_property_type("cursor_box", Schema.StructTypeExpression).get_property(
         "rts_to_be_selected"
     ).required = False
+
+    # https://lua-api.factorio.com/2.0.28/types/SingleGraphicProcessionLayer.html#frames documents attribute 'frame' as required
+    # but it's absent from:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.procession."default-b".timeline.layers[5].frames[0]'
+    # (and many others)
+    typing.cast(
+        Schema.StructTypeExpression,
+        schema.get_type_def("SingleGraphicProcessionLayer", Schema.StructTypeExpression)
+        .get_property_type("frames", Schema.ArrayTypeExpression)
+        .content,
+    ).get_property("frame").required = False
+
+    # https://lua-api.factorio.com/2.0.28/types/ProcessionTimeline.html#audio_events is documented as required
+    # but is absent from:
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.procession."default-intermezzo".timeline'
+    schema.get_type_def("ProcessionTimeline", Schema.StructTypeExpression).get_property("audio_events").required = False
+
+    # https://lua-api.factorio.com/2.0.28/types/RailPictureSet.html#rail_endings is documented as required
+    # but is absent from:
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."rail-ramp"."dummy-rail-ramp".pictures'
+    schema.get_type_def("RailPictureSet", Schema.StructTypeExpression).get_property("rail_endings").required = False
+
+    # https://lua-api.factorio.com/2.0.28/types/SpriteSource.html#filename is documented as required
+    # but is absent from:
+    #  cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.wall."stone-wall".pictures.ending_left'
+    # (and many others)
+    schema.get_type_def("SpriteSource", Schema.StructTypeExpression).get_property("filename").required = False
+
+    # https://lua-api.factorio.com/2.0.28/types/NeighbourConnectableConnectionDefinition.html#location documents attributes 'direction' as a 'MapPosition'
+    # but it's an integer in:
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."fusion-reactor"."fusion-reactor".neighbour_connectable.connections'
+    # (probably a https://lua-api.factorio.com/2.0.28/defines.html#defines.direction)
+    schema.get_type_def("NeighbourConnectableConnectionDefinition", Schema.StructTypeExpression).get_property_type(
+        "location", Schema.StructTypeExpression
+    ).set_property_type("direction", Schema.RefTypeExpression(ref="uint8"))
+
+    # https://lua-api.factorio.com/2.0.28/types/BoundingBox.html is documented as a 2-tuple,
+    # but the prose explains it can also be a 3-tuple with a 'float' as third element.
+    schema.get_type_def("BoundingBox", Schema.UnionTypeExpression).members.append(
+        Schema.TupleTypeExpression(
+            members=typing.cast(
+                Schema.TupleTypeExpression, schema.get_type_def("BoundingBox", Schema.UnionTypeExpression).members[1]
+            ).members
+            + [Schema.RefTypeExpression(ref="float")]
+        )
+    )
+
+    # https://lua-api.factorio.com/2.0.28/types/SingleGraphicProcessionLayer.html#frames documents attribute 'timestamp' as 'MapTick', which is an alias for 'uint64'
+    # but it's some kind of floating point number in:
+    #  cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.procession."planet-to-platform-a".timeline.layers[33].frames[0].timestamp'
+    typing.cast(
+        Schema.StructTypeExpression,
+        schema.get_type_def("SingleGraphicProcessionLayer", Schema.StructTypeExpression)
+        .get_property_type("frames", Schema.ArrayTypeExpression)
+        .content,
+    ).set_property_type("timestamp", Schema.RefTypeExpression(ref="double"))
+
+    # https://lua-api.factorio.com/2.0.28/types/Sound.html doesn't mention a plain string (filename) as a possible value
+    # but many sounds are plain filenames:
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."rocket-silo"."rocket-silo".alarm_sound'
+    # (and many others)
+    schema.get_type_def("Sound", Schema.UnionTypeExpression).members.append(Schema.RefTypeExpression(ref="string"))
+
+    # https://lua-api.factorio.com/2.0.28/types/CreateDecorativesTriggerEffectItem.html#type is documented as required
+    # but is absent from:
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.turret."medium-worm-turret".spawn_decoration[0]'
+    # (and many others)
+    schema.get_type_def("CreateDecorativesTriggerEffectItem", Schema.StructTypeExpression).get_property(
+        "type"
+    ).required = False
+
+    # @todo Document documentation issue
+    schema.get_type_def("CreateParticleTriggerEffectItem", Schema.StructTypeExpression).get_property(
+        "type"
+    ).required = False
+    schema.get_type_def("CreateParticleTriggerEffectItem", Schema.StructTypeExpression).get_property(
+        "particle_name"
+    ).required = False
+    schema.get_type_def("CreateParticleTriggerEffectItem", Schema.StructTypeExpression).get_property(
+        "initial_height"
+    ).required = False
+    schema.get_type_def("TriggerEffectItem", Schema.StructTypeExpression).set_property_type(
+        "repeat_count", Schema.RefTypeExpression(ref="double")
+    )
+    schema.get_type_def("CreateParticleTriggerEffectItem", Schema.StructTypeExpression).set_property_type(
+        "tail_length_deviation", Schema.RefTypeExpression(ref="double")
+    )
+    schema.get_type_def("BeamTriggerDelivery", Schema.StructTypeExpression).set_property_type(
+        "max_length", Schema.RefTypeExpression(ref="double")
+    )
+    schema.get_type_def("DamageTileTriggerEffectItem", Schema.StructTypeExpression).get_property_type(
+        "type", Schema.LiteralStringTypeExpression
+    ).value = "damage-tile"
 
 
 def patch_json(schema: Any) -> None:
@@ -248,27 +351,6 @@ def patch_json(schema: Any) -> None:
         if "type" in previous_definition:
             new_definition["type"] = previous_definition["type"]
         schema["definitions"][type_name] = new_definition
-
-    # Patches to investigate and document
-    remove_all_constraints("Animation")
-    remove_all_constraints("AttackParameters")
-    remove_all_constraints("BoundingBox")
-    remove_all_constraints("CraftingMachineGraphicsSet")
-    remove_all_constraints("CreateDecorativesTriggerEffectItem")
-    remove_all_constraints("EntityBuildAnimationPiece")
-    remove_all_constraints("FootstepTriggerEffectList")
-    remove_all_constraints("NeighbourConnectable")
-    remove_all_constraints("ProcessionTimeline")
-    remove_all_constraints("RailPictureSet")
-    remove_all_constraints("RotatedAnimation")
-    remove_all_constraints("RotatedSprite")
-    remove_all_constraints("Sound")
-    remove_all_constraints("Sprite")
-    remove_all_constraints("SpriteVariations")
-    remove_all_constraints("ThrusterGraphicsSet")
-    remove_all_constraints("Trigger")
-    remove_all_constraints("CargoBayConnectableGraphicsSet")
-    remove_all_constraints("LayeredSpriteVariations")
 
     # Preemptive: this type uses "Fade" as a base, but "Fade" is not a struct. Deal with that later.
     remove_all_constraints("PersistentWorldAmbientSoundsDefinitionCrossfade")

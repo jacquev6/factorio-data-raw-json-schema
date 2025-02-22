@@ -163,8 +163,5 @@
     "dice_y": {
       "$ref": "../split-schema/SpriteSizeType.json"
     }
-  },
-  "required": [
-    "filename"
-  ]
+  }
 }

@@ -1558,7 +1558,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -2227,7 +2227,198 @@
     },
     "Animation": {
       "description": "https://lua-api.factorio.com/stable/types/Animation.html",
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "filename": {
+          "$ref": "#/definitions/FileName"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/SpriteSizeType"
+                },
+                {
+                  "$ref": "#/definitions/SpriteSizeType"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          ]
+        },
+        "width": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "height": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "x": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "y": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "position": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "load_in_minimal_mode": {
+          "$ref": "#/definitions/bool"
+        },
+        "premul_alpha": {
+          "$ref": "#/definitions/bool"
+        },
+        "allow_forced_downscale": {
+          "$ref": "#/definitions/bool"
+        },
+        "priority": {
+          "$ref": "#/definitions/SpritePriority"
+        },
+        "flags": {
+          "$ref": "#/definitions/SpriteFlags"
+        },
+        "shift": {
+          "$ref": "#/definitions/Vector"
+        },
+        "rotate_shift": {
+          "$ref": "#/definitions/bool"
+        },
+        "apply_special_effect": {
+          "$ref": "#/definitions/bool"
+        },
+        "scale": {
+          "$ref": "#/definitions/double"
+        },
+        "draw_as_shadow": {
+          "$ref": "#/definitions/bool"
+        },
+        "draw_as_glow": {
+          "$ref": "#/definitions/bool"
+        },
+        "draw_as_light": {
+          "$ref": "#/definitions/bool"
+        },
+        "mipmap_count": {
+          "$ref": "#/definitions/uint8"
+        },
+        "apply_runtime_tint": {
+          "$ref": "#/definitions/bool"
+        },
+        "tint_as_overlay": {
+          "$ref": "#/definitions/bool"
+        },
+        "invert_colors": {
+          "$ref": "#/definitions/bool"
+        },
+        "tint": {
+          "$ref": "#/definitions/Color"
+        },
+        "blend_mode": {
+          "$ref": "#/definitions/BlendMode"
+        },
+        "generate_sdf": {
+          "$ref": "#/definitions/bool"
+        },
+        "surface": {
+          "$ref": "#/definitions/SpriteUsageSurfaceHint"
+        },
+        "usage": {
+          "$ref": "#/definitions/SpriteUsageHint"
+        },
+        "run_mode": {
+          "$ref": "#/definitions/AnimationRunMode"
+        },
+        "frame_count": {
+          "$ref": "#/definitions/uint32"
+        },
+        "line_length": {
+          "$ref": "#/definitions/uint32"
+        },
+        "animation_speed": {
+          "$ref": "#/definitions/float"
+        },
+        "max_advance": {
+          "$ref": "#/definitions/float"
+        },
+        "repeat_count": {
+          "$ref": "#/definitions/uint8"
+        },
+        "dice": {
+          "$ref": "#/definitions/uint8"
+        },
+        "dice_x": {
+          "$ref": "#/definitions/uint8"
+        },
+        "dice_y": {
+          "$ref": "#/definitions/uint8"
+        },
+        "frame_sequence": {
+          "$ref": "#/definitions/AnimationFrameSequence"
+        },
+        "layers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Animation"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "stripes": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Stripe"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "filenames": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FileName"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "slice": {
+          "$ref": "#/definitions/uint32"
+        },
+        "lines_per_file": {
+          "$ref": "#/definitions/uint32"
+        }
+      }
     },
     "Animation4Way": {
       "description": "https://lua-api.factorio.com/stable/types/Animation4Way.html",
@@ -2877,7 +3068,18 @@
       ]
     },
     "AttackParameters": {
-      "description": "https://lua-api.factorio.com/stable/types/AttackParameters.html"
+      "description": "https://lua-api.factorio.com/stable/types/AttackParameters.html",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/ProjectileAttackParameters"
+        },
+        {
+          "$ref": "#/definitions/BeamAttackParameters"
+        },
+        {
+          "$ref": "#/definitions/StreamAttackParameters"
+        }
+      ]
     },
     "AttackReactionItem": {
       "description": "https://lua-api.factorio.com/stable/types/AttackReactionItem.html",
@@ -3326,7 +3528,7 @@
           "$ref": "#/definitions/float"
         },
         "lead_target_for_projectile_delay": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "movement_slow_down_cooldown": {
           "$ref": "#/definitions/float"
@@ -3448,7 +3650,7 @@
           "$ref": "#/definitions/bool"
         },
         "max_length": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "duration": {
           "$ref": "#/definitions/uint32"
@@ -3647,7 +3849,72 @@
       }
     },
     "BoundingBox": {
-      "description": "https://lua-api.factorio.com/stable/types/BoundingBox.html"
+      "description": "https://lua-api.factorio.com/stable/types/BoundingBox.html",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "left_top": {
+              "$ref": "#/definitions/MapPosition"
+            },
+            "right_bottom": {
+              "$ref": "#/definitions/MapPosition"
+            },
+            "orientation": {
+              "$ref": "#/definitions/RealOrientation"
+            }
+          },
+          "required": [
+            "left_top",
+            "right_bottom"
+          ]
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/MapPosition"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/MapPosition"
+                }
+              ]
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/MapPosition"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/MapPosition"
+                }
+              ]
+            },
+            {
+              "$ref": "#/definitions/float"
+            }
+          ],
+          "minItems": 3,
+          "maxItems": 3
+        }
+      ]
     },
     "BoxSpecification": {
       "description": "https://lua-api.factorio.com/stable/types/BoxSpecification.html",
@@ -4120,7 +4387,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -4357,7 +4624,21 @@
     },
     "CargoBayConnectableGraphicsSet": {
       "description": "https://lua-api.factorio.com/stable/types/CargoBayConnectableGraphicsSet.html",
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "picture": {
+          "$ref": "#/definitions/LayeredSprite"
+        },
+        "animation": {
+          "$ref": "#/definitions/Animation"
+        },
+        "animation_render_layer": {
+          "$ref": "#/definitions/RenderLayer"
+        },
+        "connections": {
+          "$ref": "#/definitions/CargoBayConnections"
+        }
+      }
     },
     "CargoBayConnections": {
       "description": "https://lua-api.factorio.com/stable/types/CargoBayConnections.html",
@@ -6908,7 +7189,104 @@
     },
     "CraftingMachineGraphicsSet": {
       "description": "https://lua-api.factorio.com/stable/types/CraftingMachineGraphicsSet.html",
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "animation": {
+          "$ref": "#/definitions/Animation4Way"
+        },
+        "idle_animation": {
+          "$ref": "#/definitions/Animation4Way"
+        },
+        "always_draw_idle_animation": {
+          "$ref": "#/definitions/bool"
+        },
+        "default_recipe_tint": {
+          "$ref": "#/definitions/GlobalRecipeTints"
+        },
+        "recipe_not_set_tint": {
+          "$ref": "#/definitions/GlobalRecipeTints"
+        },
+        "states": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VisualState"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "working_visualisations": {
+          "anyOf": [
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorkingVisualisation"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": {
+                "$ref": "#/definitions/WorkingVisualisation"
+              }
+            }
+          ]
+        },
+        "shift_animation_waypoints": {
+          "$ref": "#/definitions/ShiftAnimationWaypoints"
+        },
+        "shift_animation_waypoint_stop_duration": {
+          "$ref": "#/definitions/double"
+        },
+        "shift_animation_transition_duration": {
+          "$ref": "#/definitions/uint16"
+        },
+        "status_colors": {
+          "$ref": "#/definitions/StatusColors"
+        },
+        "frozen_patch": {
+          "$ref": "#/definitions/Sprite4Way"
+        },
+        "circuit_connector_layer": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/RenderLayer"
+            },
+            {
+              "$ref": "#/definitions/CircuitConnectorLayer"
+            }
+          ]
+        },
+        "circuit_connector_secondary_draw_order": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/int8"
+            },
+            {
+              "$ref": "#/definitions/CircuitConnectorSecondaryDrawOrder"
+            }
+          ]
+        },
+        "animation_progress": {
+          "$ref": "#/definitions/float"
+        },
+        "reset_animation_when_frozen": {
+          "$ref": "#/definitions/bool"
+        }
+      }
     },
     "CranePart": {
       "description": "https://lua-api.factorio.com/stable/types/CranePart.html",
@@ -7067,7 +7445,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -7116,14 +7494,68 @@
     },
     "CreateDecorativesTriggerEffectItem": {
       "description": "https://lua-api.factorio.com/stable/types/CreateDecorativesTriggerEffectItem.html",
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "repeat_count": {
+          "$ref": "#/definitions/double"
+        },
+        "repeat_count_deviation": {
+          "$ref": "#/definitions/uint16"
+        },
+        "probability": {
+          "$ref": "#/definitions/float"
+        },
+        "affects_target": {
+          "$ref": "#/definitions/bool"
+        },
+        "show_in_tooltip": {
+          "$ref": "#/definitions/bool"
+        },
+        "damage_type_filters": {
+          "$ref": "#/definitions/DamageTypeFilters"
+        },
+        "type": {
+          "type": "string",
+          "const": "create-decorative"
+        },
+        "decorative": {
+          "$ref": "#/definitions/DecorativeID"
+        },
+        "spawn_max": {
+          "$ref": "#/definitions/uint16"
+        },
+        "spawn_min_radius": {
+          "$ref": "#/definitions/float"
+        },
+        "spawn_max_radius": {
+          "$ref": "#/definitions/float"
+        },
+        "spawn_min": {
+          "$ref": "#/definitions/uint16"
+        },
+        "radius_curve": {
+          "$ref": "#/definitions/float"
+        },
+        "apply_projection": {
+          "$ref": "#/definitions/bool"
+        },
+        "spread_evenly": {
+          "$ref": "#/definitions/bool"
+        }
+      },
+      "required": [
+        "decorative",
+        "spawn_max",
+        "spawn_min_radius",
+        "spawn_max_radius"
+      ]
     },
     "CreateEntityTriggerEffectItem": {
       "description": "https://lua-api.factorio.com/stable/types/CreateEntityTriggerEffectItem.html",
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -7205,7 +7637,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -7299,7 +7731,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -7427,7 +7859,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -7502,7 +7934,7 @@
           "$ref": "#/definitions/uint8"
         },
         "tail_length_deviation": {
-          "$ref": "#/definitions/uint8"
+          "$ref": "#/definitions/double"
         },
         "tail_width": {
           "$ref": "#/definitions/float"
@@ -7528,19 +7960,14 @@
         "tint": {
           "$ref": "#/definitions/Color"
         }
-      },
-      "required": [
-        "type",
-        "particle_name",
-        "initial_height"
-      ]
+      }
     },
     "CreateSmokeTriggerEffectItem": {
       "description": "https://lua-api.factorio.com/stable/types/CreateSmokeTriggerEffectItem.html",
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -7659,7 +8086,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -7697,7 +8124,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -7856,7 +8283,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -7875,7 +8302,7 @@
         },
         "type": {
           "type": "string",
-          "const": "damage"
+          "const": "damage-tile"
         },
         "damage": {
           "$ref": "#/definitions/DamageParameters"
@@ -7894,7 +8321,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -8166,7 +8593,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -8207,7 +8634,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -8934,10 +9361,7 @@
         "allow_forced_downscale": {
           "$ref": "#/definitions/bool"
         }
-      },
-      "required": [
-        "filename"
-      ]
+      }
     },
     "EffectTypeLimitation": {
       "description": "https://lua-api.factorio.com/stable/types/EffectTypeLimitation.html",
@@ -9660,7 +10084,19 @@
     },
     "EntityBuildAnimationPiece": {
       "description": "https://lua-api.factorio.com/stable/types/EntityBuildAnimationPiece.html",
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "top": {
+          "$ref": "#/definitions/Animation"
+        },
+        "body": {
+          "$ref": "#/definitions/Animation"
+        }
+      },
+      "required": [
+        "top",
+        "body"
+      ]
     },
     "EntityID": {
       "description": "https://lua-api.factorio.com/stable/types/EntityID.html",
@@ -10907,7 +11343,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -10982,7 +11418,7 @@
           "$ref": "#/definitions/uint8"
         },
         "tail_length_deviation": {
-          "$ref": "#/definitions/uint8"
+          "$ref": "#/definitions/double"
         },
         "tail_width": {
           "$ref": "#/definitions/float"
@@ -11041,14 +11477,27 @@
         }
       },
       "required": [
-        "type",
-        "particle_name",
-        "initial_height",
         "tiles"
       ]
     },
     "FootstepTriggerEffectList": {
-      "description": "https://lua-api.factorio.com/stable/types/FootstepTriggerEffectList.html"
+      "description": "https://lua-api.factorio.com/stable/types/FootstepTriggerEffectList.html",
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/FootstepTriggerEffectItem"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
     },
     "ForceCondition": {
       "description": "https://lua-api.factorio.com/stable/types/ForceCondition.html",
@@ -13018,7 +13467,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -13145,7 +13594,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -13890,7 +14339,23 @@
       ]
     },
     "LayeredSpriteVariations": {
-      "description": "https://lua-api.factorio.com/stable/types/LayeredSpriteVariations.html"
+      "description": "https://lua-api.factorio.com/stable/types/LayeredSpriteVariations.html",
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/LayeredSprite"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
     },
     "LightDefinition": {
       "description": "https://lua-api.factorio.com/stable/types/LightDefinition.html",
@@ -16832,7 +17297,32 @@
     },
     "NeighbourConnectable": {
       "description": "https://lua-api.factorio.com/stable/types/NeighbourConnectable.html",
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "affected_by_direction": {
+          "$ref": "#/definitions/bool"
+        },
+        "neighbour_search_distance": {
+          "$ref": "#/definitions/float"
+        },
+        "connections": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NeighbourConnectableConnectionDefinition"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "connections"
+      ]
     },
     "NeighbourConnectableConnectionCategory": {
       "description": "https://lua-api.factorio.com/stable/types/NeighbourConnectableConnectionCategory.html",
@@ -16853,7 +17343,7 @@
               "$ref": "#/definitions/MapPosition"
             },
             "direction": {
-              "$ref": "#/definitions/MapPosition"
+              "$ref": "#/definitions/uint8"
             }
           },
           "required": [
@@ -16889,7 +17379,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -17871,7 +18361,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -18722,7 +19212,56 @@
     },
     "ProcessionTimeline": {
       "description": "https://lua-api.factorio.com/stable/types/ProcessionTimeline.html",
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "duration": {
+          "$ref": "#/definitions/MapTick"
+        },
+        "special_action_tick": {
+          "$ref": "#/definitions/MapTick"
+        },
+        "draw_switch_tick": {
+          "$ref": "#/definitions/MapTick"
+        },
+        "intermezzo_min_duration": {
+          "$ref": "#/definitions/MapTick"
+        },
+        "intermezzo_max_duration": {
+          "$ref": "#/definitions/MapTick"
+        },
+        "layers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProcessionLayer"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "audio_events": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProcessionAudioEvent"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "duration",
+        "layers"
+      ]
     },
     "ProductPrototype": {
       "description": "https://lua-api.factorio.com/stable/types/ProductPrototype.html",
@@ -19016,7 +19555,7 @@
           "$ref": "#/definitions/float"
         },
         "lead_target_for_projectile_delay": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "movement_slow_down_cooldown": {
           "$ref": "#/definitions/float"
@@ -19303,7 +19842,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -19667,7 +20206,96 @@
     },
     "RailPictureSet": {
       "description": "https://lua-api.factorio.com/stable/types/RailPictureSet.html",
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "north": {
+          "$ref": "#/definitions/RailPieceLayers"
+        },
+        "northeast": {
+          "$ref": "#/definitions/RailPieceLayers"
+        },
+        "east": {
+          "$ref": "#/definitions/RailPieceLayers"
+        },
+        "southeast": {
+          "$ref": "#/definitions/RailPieceLayers"
+        },
+        "south": {
+          "$ref": "#/definitions/RailPieceLayers"
+        },
+        "southwest": {
+          "$ref": "#/definitions/RailPieceLayers"
+        },
+        "west": {
+          "$ref": "#/definitions/RailPieceLayers"
+        },
+        "northwest": {
+          "$ref": "#/definitions/RailPieceLayers"
+        },
+        "front_rail_endings": {
+          "$ref": "#/definitions/Sprite16Way"
+        },
+        "back_rail_endings": {
+          "$ref": "#/definitions/Sprite16Way"
+        },
+        "rail_endings": {
+          "$ref": "#/definitions/Sprite16Way"
+        },
+        "segment_visualisation_endings": {
+          "$ref": "#/definitions/RotatedAnimation"
+        },
+        "render_layers": {
+          "$ref": "#/definitions/RailRenderLayers"
+        },
+        "secondary_render_layers": {
+          "$ref": "#/definitions/RailRenderLayers"
+        },
+        "slice_origin": {
+          "type": "object",
+          "properties": {
+            "north": {
+              "$ref": "#/definitions/Vector"
+            },
+            "east": {
+              "$ref": "#/definitions/Vector"
+            },
+            "south": {
+              "$ref": "#/definitions/Vector"
+            },
+            "west": {
+              "$ref": "#/definitions/Vector"
+            }
+          }
+        },
+        "fog_mask": {
+          "type": "object",
+          "properties": {
+            "north": {
+              "$ref": "#/definitions/FogMaskShapeDefinition"
+            },
+            "east": {
+              "$ref": "#/definitions/FogMaskShapeDefinition"
+            },
+            "south": {
+              "$ref": "#/definitions/FogMaskShapeDefinition"
+            },
+            "west": {
+              "$ref": "#/definitions/FogMaskShapeDefinition"
+            }
+          }
+        }
+      },
+      "required": [
+        "north",
+        "northeast",
+        "east",
+        "southeast",
+        "south",
+        "southwest",
+        "west",
+        "northwest",
+        "render_layers"
+      ]
     },
     "RailPieceLayers": {
       "description": "https://lua-api.factorio.com/stable/types/RailPieceLayers.html",
@@ -20554,7 +21182,219 @@
     },
     "RotatedAnimation": {
       "description": "https://lua-api.factorio.com/stable/types/RotatedAnimation.html",
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "filename": {
+          "$ref": "#/definitions/FileName"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/SpriteSizeType"
+                },
+                {
+                  "$ref": "#/definitions/SpriteSizeType"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          ]
+        },
+        "width": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "height": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "x": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "y": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "position": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "load_in_minimal_mode": {
+          "$ref": "#/definitions/bool"
+        },
+        "premul_alpha": {
+          "$ref": "#/definitions/bool"
+        },
+        "allow_forced_downscale": {
+          "$ref": "#/definitions/bool"
+        },
+        "priority": {
+          "$ref": "#/definitions/SpritePriority"
+        },
+        "flags": {
+          "$ref": "#/definitions/SpriteFlags"
+        },
+        "shift": {
+          "$ref": "#/definitions/Vector"
+        },
+        "rotate_shift": {
+          "$ref": "#/definitions/bool"
+        },
+        "apply_special_effect": {
+          "$ref": "#/definitions/bool"
+        },
+        "scale": {
+          "$ref": "#/definitions/double"
+        },
+        "draw_as_shadow": {
+          "$ref": "#/definitions/bool"
+        },
+        "draw_as_glow": {
+          "$ref": "#/definitions/bool"
+        },
+        "draw_as_light": {
+          "$ref": "#/definitions/bool"
+        },
+        "mipmap_count": {
+          "$ref": "#/definitions/uint8"
+        },
+        "apply_runtime_tint": {
+          "$ref": "#/definitions/bool"
+        },
+        "tint_as_overlay": {
+          "$ref": "#/definitions/bool"
+        },
+        "invert_colors": {
+          "$ref": "#/definitions/bool"
+        },
+        "tint": {
+          "$ref": "#/definitions/Color"
+        },
+        "blend_mode": {
+          "$ref": "#/definitions/BlendMode"
+        },
+        "generate_sdf": {
+          "$ref": "#/definitions/bool"
+        },
+        "surface": {
+          "$ref": "#/definitions/SpriteUsageSurfaceHint"
+        },
+        "usage": {
+          "$ref": "#/definitions/SpriteUsageHint"
+        },
+        "run_mode": {
+          "$ref": "#/definitions/AnimationRunMode"
+        },
+        "frame_count": {
+          "$ref": "#/definitions/uint32"
+        },
+        "line_length": {
+          "$ref": "#/definitions/uint32"
+        },
+        "animation_speed": {
+          "$ref": "#/definitions/float"
+        },
+        "max_advance": {
+          "$ref": "#/definitions/float"
+        },
+        "repeat_count": {
+          "$ref": "#/definitions/uint8"
+        },
+        "dice": {
+          "$ref": "#/definitions/uint8"
+        },
+        "dice_x": {
+          "$ref": "#/definitions/uint8"
+        },
+        "dice_y": {
+          "$ref": "#/definitions/uint8"
+        },
+        "frame_sequence": {
+          "$ref": "#/definitions/AnimationFrameSequence"
+        },
+        "layers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RotatedAnimation"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "direction_count": {
+          "$ref": "#/definitions/uint32"
+        },
+        "filenames": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FileName"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "lines_per_file": {
+          "$ref": "#/definitions/uint32"
+        },
+        "slice": {
+          "$ref": "#/definitions/uint32"
+        },
+        "still_frame": {
+          "$ref": "#/definitions/uint32"
+        },
+        "axially_symmetrical": {
+          "$ref": "#/definitions/bool"
+        },
+        "counterclockwise": {
+          "$ref": "#/definitions/bool"
+        },
+        "middle_orientation": {
+          "$ref": "#/definitions/RealOrientation"
+        },
+        "orientation_range": {
+          "$ref": "#/definitions/float"
+        },
+        "apply_projection": {
+          "$ref": "#/definitions/bool"
+        },
+        "stripes": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Stripe"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      }
     },
     "RotatedAnimation8Way": {
       "description": "https://lua-api.factorio.com/stable/types/RotatedAnimation8Way.html",
@@ -20624,7 +21464,195 @@
     },
     "RotatedSprite": {
       "description": "https://lua-api.factorio.com/stable/types/RotatedSprite.html",
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "filename": {
+          "$ref": "#/definitions/FileName"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/SpriteSizeType"
+                },
+                {
+                  "$ref": "#/definitions/SpriteSizeType"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          ]
+        },
+        "width": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "height": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "x": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "y": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "position": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "load_in_minimal_mode": {
+          "$ref": "#/definitions/bool"
+        },
+        "premul_alpha": {
+          "$ref": "#/definitions/bool"
+        },
+        "allow_forced_downscale": {
+          "$ref": "#/definitions/bool"
+        },
+        "priority": {
+          "$ref": "#/definitions/SpritePriority"
+        },
+        "flags": {
+          "$ref": "#/definitions/SpriteFlags"
+        },
+        "shift": {
+          "$ref": "#/definitions/Vector"
+        },
+        "rotate_shift": {
+          "$ref": "#/definitions/bool"
+        },
+        "apply_special_effect": {
+          "$ref": "#/definitions/bool"
+        },
+        "scale": {
+          "$ref": "#/definitions/double"
+        },
+        "draw_as_shadow": {
+          "$ref": "#/definitions/bool"
+        },
+        "draw_as_glow": {
+          "$ref": "#/definitions/bool"
+        },
+        "draw_as_light": {
+          "$ref": "#/definitions/bool"
+        },
+        "mipmap_count": {
+          "$ref": "#/definitions/uint8"
+        },
+        "apply_runtime_tint": {
+          "$ref": "#/definitions/bool"
+        },
+        "tint_as_overlay": {
+          "$ref": "#/definitions/bool"
+        },
+        "invert_colors": {
+          "$ref": "#/definitions/bool"
+        },
+        "tint": {
+          "$ref": "#/definitions/Color"
+        },
+        "blend_mode": {
+          "$ref": "#/definitions/BlendMode"
+        },
+        "generate_sdf": {
+          "$ref": "#/definitions/bool"
+        },
+        "surface": {
+          "$ref": "#/definitions/SpriteUsageSurfaceHint"
+        },
+        "usage": {
+          "$ref": "#/definitions/SpriteUsageHint"
+        },
+        "layers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RotatedSprite"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "direction_count": {
+          "$ref": "#/definitions/uint16"
+        },
+        "filenames": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FileName"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "lines_per_file": {
+          "$ref": "#/definitions/uint64"
+        },
+        "dice": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "dice_x": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "dice_y": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "axially_symmetrical": {
+          "$ref": "#/definitions/bool"
+        },
+        "back_equals_front": {
+          "$ref": "#/definitions/bool"
+        },
+        "apply_projection": {
+          "$ref": "#/definitions/bool"
+        },
+        "counterclockwise": {
+          "$ref": "#/definitions/bool"
+        },
+        "line_length": {
+          "$ref": "#/definitions/uint32"
+        },
+        "allow_low_quality_rotation": {
+          "$ref": "#/definitions/bool"
+        },
+        "frames": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RotatedSpriteFrame"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      }
     },
     "RotatedSpriteFrame": {
       "description": "https://lua-api.factorio.com/stable/types/RotatedSpriteFrame.html",
@@ -20652,7 +21680,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -21445,7 +22473,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -21589,7 +22617,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -21932,7 +22960,7 @@
                 "type": "object",
                 "properties": {
                   "timestamp": {
-                    "$ref": "#/definitions/MapTick"
+                    "$ref": "#/definitions/double"
                   },
                   "opacity": {
                     "$ref": "#/definitions/double"
@@ -21973,10 +23001,7 @@
                   "frame": {
                     "$ref": "#/definitions/float"
                   }
-                },
-                "required": [
-                  "frame"
-                ]
+                }
               }
             },
             {
@@ -22238,7 +23263,125 @@
       ]
     },
     "Sound": {
-      "description": "https://lua-api.factorio.com/stable/types/Sound.html"
+      "description": "https://lua-api.factorio.com/stable/types/Sound.html",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "category": {
+              "$ref": "#/definitions/SoundType"
+            },
+            "priority": {
+              "$ref": "#/definitions/uint8"
+            },
+            "aggregation": {
+              "$ref": "#/definitions/AggregationSpecification"
+            },
+            "allow_random_repeat": {
+              "$ref": "#/definitions/bool"
+            },
+            "audible_distance_modifier": {
+              "$ref": "#/definitions/double"
+            },
+            "game_controller_vibration_data": {
+              "$ref": "#/definitions/GameControllerVibrationData"
+            },
+            "advanced_volume_control": {
+              "$ref": "#/definitions/AdvancedVolumeControl"
+            },
+            "speed_smoothing_window_size": {
+              "$ref": "#/definitions/uint32"
+            },
+            "variations": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/SoundDefinition"
+                },
+                {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/SoundDefinition"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              ]
+            },
+            "filename": {
+              "$ref": "#/definitions/FileName"
+            },
+            "volume": {
+              "$ref": "#/definitions/float"
+            },
+            "min_volume": {
+              "$ref": "#/definitions/float"
+            },
+            "max_volume": {
+              "$ref": "#/definitions/float"
+            },
+            "preload": {
+              "$ref": "#/definitions/bool"
+            },
+            "speed": {
+              "$ref": "#/definitions/float"
+            },
+            "min_speed": {
+              "$ref": "#/definitions/float"
+            },
+            "max_speed": {
+              "$ref": "#/definitions/float"
+            },
+            "modifiers": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/SoundModifier"
+                },
+                {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/SoundModifier"
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/SoundDefinition"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        {
+          "$ref": "#/definitions/string"
+        }
+      ]
     },
     "SoundAccent": {
       "description": "https://lua-api.factorio.com/stable/types/SoundAccent.html",
@@ -23176,7 +24319,143 @@
     },
     "Sprite": {
       "description": "https://lua-api.factorio.com/stable/types/Sprite.html",
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "filename": {
+          "$ref": "#/definitions/FileName"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/SpriteSizeType"
+                },
+                {
+                  "$ref": "#/definitions/SpriteSizeType"
+                }
+              ],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          ]
+        },
+        "width": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "height": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "x": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "y": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "position": {
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            },
+            {
+              "$ref": "#/definitions/SpriteSizeType"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "load_in_minimal_mode": {
+          "$ref": "#/definitions/bool"
+        },
+        "premul_alpha": {
+          "$ref": "#/definitions/bool"
+        },
+        "allow_forced_downscale": {
+          "$ref": "#/definitions/bool"
+        },
+        "priority": {
+          "$ref": "#/definitions/SpritePriority"
+        },
+        "flags": {
+          "$ref": "#/definitions/SpriteFlags"
+        },
+        "shift": {
+          "$ref": "#/definitions/Vector"
+        },
+        "rotate_shift": {
+          "$ref": "#/definitions/bool"
+        },
+        "apply_special_effect": {
+          "$ref": "#/definitions/bool"
+        },
+        "scale": {
+          "$ref": "#/definitions/double"
+        },
+        "draw_as_shadow": {
+          "$ref": "#/definitions/bool"
+        },
+        "draw_as_glow": {
+          "$ref": "#/definitions/bool"
+        },
+        "draw_as_light": {
+          "$ref": "#/definitions/bool"
+        },
+        "mipmap_count": {
+          "$ref": "#/definitions/uint8"
+        },
+        "apply_runtime_tint": {
+          "$ref": "#/definitions/bool"
+        },
+        "tint_as_overlay": {
+          "$ref": "#/definitions/bool"
+        },
+        "invert_colors": {
+          "$ref": "#/definitions/bool"
+        },
+        "tint": {
+          "$ref": "#/definitions/Color"
+        },
+        "blend_mode": {
+          "$ref": "#/definitions/BlendMode"
+        },
+        "generate_sdf": {
+          "$ref": "#/definitions/bool"
+        },
+        "surface": {
+          "$ref": "#/definitions/SpriteUsageSurfaceHint"
+        },
+        "usage": {
+          "$ref": "#/definitions/SpriteUsageHint"
+        },
+        "layers": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Sprite"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "dice": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "dice_x": {
+          "$ref": "#/definitions/SpriteSizeType"
+        },
+        "dice_y": {
+          "$ref": "#/definitions/SpriteSizeType"
+        }
+      }
     },
     "Sprite16Way": {
       "description": "https://lua-api.factorio.com/stable/types/Sprite16Way.html",
@@ -23557,10 +24836,7 @@
         "frames": {
           "$ref": "#/definitions/uint32"
         }
-      },
-      "required": [
-        "filename"
-      ]
+      }
     },
     "SpritePriority": {
       "description": "https://lua-api.factorio.com/stable/types/SpritePriority.html",
@@ -23759,10 +25035,7 @@
         "dice_y": {
           "$ref": "#/definitions/SpriteSizeType"
         }
-      },
-      "required": [
-        "filename"
-      ]
+      }
     },
     "SpriteSizeType": {
       "description": "https://lua-api.factorio.com/stable/types/SpriteSizeType.html",
@@ -23867,7 +25140,41 @@
       ]
     },
     "SpriteVariations": {
-      "description": "https://lua-api.factorio.com/stable/types/SpriteVariations.html"
+      "description": "https://lua-api.factorio.com/stable/types/SpriteVariations.html",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "sheet": {
+              "$ref": "#/definitions/SpriteSheet"
+            }
+          },
+          "required": [
+            "sheet"
+          ]
+        },
+        {
+          "$ref": "#/definitions/SpriteSheet"
+        },
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/Sprite"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
     },
     "StackTransferTipTrigger": {
       "description": "https://lua-api.factorio.com/stable/types/StackTransferTipTrigger.html",
@@ -24162,7 +25469,7 @@
           "$ref": "#/definitions/float"
         },
         "lead_target_for_projectile_delay": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "movement_slow_down_cooldown": {
           "$ref": "#/definitions/float"
@@ -26032,7 +27339,96 @@
     },
     "ThrusterGraphicsSet": {
       "description": "https://lua-api.factorio.com/stable/types/ThrusterGraphicsSet.html",
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "animation": {
+          "$ref": "#/definitions/Animation4Way"
+        },
+        "idle_animation": {
+          "$ref": "#/definitions/Animation4Way"
+        },
+        "always_draw_idle_animation": {
+          "$ref": "#/definitions/bool"
+        },
+        "default_recipe_tint": {
+          "$ref": "#/definitions/GlobalRecipeTints"
+        },
+        "recipe_not_set_tint": {
+          "$ref": "#/definitions/GlobalRecipeTints"
+        },
+        "states": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VisualState"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "working_visualisations": {
+          "anyOf": [
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorkingVisualisation"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": {
+                "$ref": "#/definitions/WorkingVisualisation"
+              }
+            }
+          ]
+        },
+        "shift_animation_waypoints": {
+          "$ref": "#/definitions/ShiftAnimationWaypoints"
+        },
+        "shift_animation_waypoint_stop_duration": {
+          "$ref": "#/definitions/double"
+        },
+        "shift_animation_transition_duration": {
+          "$ref": "#/definitions/uint16"
+        },
+        "status_colors": {
+          "$ref": "#/definitions/StatusColors"
+        },
+        "flame": {
+          "$ref": "#/definitions/Sprite"
+        },
+        "flame_effect": {
+          "$ref": "#/definitions/EffectTexture"
+        },
+        "flame_position": {
+          "$ref": "#/definitions/Vector"
+        },
+        "flame_effect_height": {
+          "$ref": "#/definitions/float"
+        },
+        "flame_effect_width": {
+          "$ref": "#/definitions/float"
+        },
+        "flame_half_height": {
+          "$ref": "#/definitions/float"
+        },
+        "flame_effect_offset": {
+          "$ref": "#/definitions/float"
+        }
+      }
     },
     "ThrusterPerformancePoint": {
       "description": "https://lua-api.factorio.com/stable/types/ThrusterPerformancePoint.html",
@@ -28113,7 +29509,48 @@
       ]
     },
     "Trigger": {
-      "description": "https://lua-api.factorio.com/stable/types/Trigger.html"
+      "description": "https://lua-api.factorio.com/stable/types/Trigger.html",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/DirectTriggerItem"
+        },
+        {
+          "$ref": "#/definitions/AreaTriggerItem"
+        },
+        {
+          "$ref": "#/definitions/LineTriggerItem"
+        },
+        {
+          "$ref": "#/definitions/ClusterTriggerItem"
+        },
+        {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/DirectTriggerItem"
+                  },
+                  {
+                    "$ref": "#/definitions/AreaTriggerItem"
+                  },
+                  {
+                    "$ref": "#/definitions/LineTriggerItem"
+                  },
+                  {
+                    "$ref": "#/definitions/ClusterTriggerItem"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
     },
     "TriggerDelivery": {
       "description": "https://lua-api.factorio.com/stable/types/TriggerDelivery.html",
@@ -28304,7 +29741,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"

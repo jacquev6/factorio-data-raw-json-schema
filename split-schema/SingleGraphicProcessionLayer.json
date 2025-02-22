@@ -45,7 +45,7 @@
             "type": "object",
             "properties": {
               "timestamp": {
-                "$ref": "../split-schema/MapTick.json"
+                "$ref": "../split-schema/double.json"
               },
               "opacity": {
                 "$ref": "../split-schema/double.json"
@@ -86,10 +86,7 @@
               "frame": {
                 "$ref": "../split-schema/float.json"
               }
-            },
-            "required": [
-              "frame"
-            ]
+            }
           }
         },
         {

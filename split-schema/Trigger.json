@@ -1,4 +1,45 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
-  "description": "https://lua-api.factorio.com/stable/types/Trigger.html"
+  "description": "https://lua-api.factorio.com/stable/types/Trigger.html",
+  "anyOf": [
+    {
+      "$ref": "../split-schema/DirectTriggerItem.json"
+    },
+    {
+      "$ref": "../split-schema/AreaTriggerItem.json"
+    },
+    {
+      "$ref": "../split-schema/LineTriggerItem.json"
+    },
+    {
+      "$ref": "../split-schema/ClusterTriggerItem.json"
+    },
+    {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "../split-schema/DirectTriggerItem.json"
+              },
+              {
+                "$ref": "../split-schema/AreaTriggerItem.json"
+              },
+              {
+                "$ref": "../split-schema/LineTriggerItem.json"
+              },
+              {
+                "$ref": "../split-schema/ClusterTriggerItem.json"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  ]
 }

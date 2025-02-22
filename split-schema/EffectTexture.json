@@ -60,8 +60,5 @@
     "allow_forced_downscale": {
       "$ref": "../split-schema/bool.json"
     }
-  },
-  "required": [
-    "filename"
-  ]
+  }
 }

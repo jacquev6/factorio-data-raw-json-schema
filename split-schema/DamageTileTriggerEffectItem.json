@@ -4,7 +4,7 @@
   "type": "object",
   "properties": {
     "repeat_count": {
-      "$ref": "../split-schema/uint16.json"
+      "$ref": "../split-schema/double.json"
     },
     "repeat_count_deviation": {
       "$ref": "../split-schema/uint16.json"
@@ -23,7 +23,7 @@
     },
     "type": {
       "type": "string",
-      "const": "damage"
+      "const": "damage-tile"
     },
     "damage": {
       "$ref": "../split-schema/DamageParameters.json"
