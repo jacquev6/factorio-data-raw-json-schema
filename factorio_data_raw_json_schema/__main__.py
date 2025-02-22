@@ -49,16 +49,19 @@ def extract(doc_root: str, output: click.utils.LazyFile, split: bool, do_patch: 
     else:
         make_reference = None
 
-    schema = extraction.extract(crawler=crawler, workers=workers).to_json(make_reference=make_reference)
+    schema = extraction.extract(crawler=crawler, workers=workers)
     if do_patch:
-        patching.patch(schema)
+        patching.patch_schema(schema)
+    json_schema = schema.to_json(make_reference=make_reference)
+    if do_patch:
+        patching.patch_json(json_schema)
     if split:
         assert make_reference is not None
-        definitions = typing.cast(dict[str, dict[str, Any]], schema.pop("definitions"))
+        definitions = typing.cast(dict[str, dict[str, Any]], json_schema.pop("definitions"))
         for name, value in definitions.items():
             with open(make_reference(False, name), "w") as f:
-                json.dump({"$schema": schema["$schema"]} | value, f, indent=2)
-    json.dump(schema, output, indent=2)
+                json.dump({"$schema": json_schema["$schema"]} | value, f, indent=2)
+    json.dump(json_schema, output, indent=2)
 
 
 if __name__ == "__main__":

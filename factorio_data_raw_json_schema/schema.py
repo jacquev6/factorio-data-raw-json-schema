@@ -3,6 +3,7 @@ from __future__ import annotations
 import sys
 from typing import Callable, Literal
 import dataclasses
+import typing
 
 from . import patching
 
@@ -19,8 +20,11 @@ def json_value(value: JsonValue) -> JsonValue:
     return value
 
 
+T = typing.TypeVar("T")
+
+
 class Schema:
-    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    @dataclasses.dataclass(kw_only=True, eq=False)
     class BuiltinTypeExpression:
         kind: Literal["builtin"] = "builtin"
         json_definition: JsonDict
@@ -49,7 +53,7 @@ class Schema:
         ),
     }
 
-    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    @dataclasses.dataclass(kw_only=True, eq=False)
     class LiteralBoolTypeExpression:
         kind: Literal["literal_bool"] = "literal_bool"
         value: bool
@@ -57,7 +61,7 @@ class Schema:
         def make_json_definition(self, schema: Schema) -> JsonDict:
             return {"type": "boolean", "const": self.value}
 
-    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    @dataclasses.dataclass(kw_only=True, eq=False)
     class LiteralStringTypeExpression:
         kind: Literal["literal_string"] = "literal_string"
         value: str
@@ -65,7 +69,7 @@ class Schema:
         def make_json_definition(self, schema: Schema) -> JsonDict:
             return {"type": "string", "const": self.value}
 
-    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    @dataclasses.dataclass(kw_only=True, eq=False)
     class LiteralIntegerTypeExpression:
         kind: Literal["literal_integer"] = "literal_integer"
         value: int
@@ -73,7 +77,7 @@ class Schema:
         def make_json_definition(self, schema: Schema) -> JsonDict:
             return {"type": "integer", "const": self.value}
 
-    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    @dataclasses.dataclass(kw_only=True, eq=False)
     class RefTypeExpression:
         kind: Literal["ref"] = "ref"
         ref: str
@@ -81,7 +85,7 @@ class Schema:
         def make_json_definition(self, schema: Schema) -> JsonDict:
             return {"$ref": schema.make_reference(True, self.ref)}
 
-    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    @dataclasses.dataclass(kw_only=True, eq=False)
     class UnionTypeExpression:
         kind: Literal["union"] = "union"
         members: list[Schema.TypeExpression]
@@ -89,7 +93,7 @@ class Schema:
         def make_json_definition(self, schema: Schema) -> JsonDict:
             return {"anyOf": [member.make_json_definition(schema) for member in self.members]}
 
-    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    @dataclasses.dataclass(kw_only=True, eq=False)
     class ArrayTypeExpression:
         kind: Literal["array"] = "array"
         content: Schema.TypeExpression
@@ -97,7 +101,7 @@ class Schema:
         def make_json_definition(self, schema: Schema) -> JsonDict:
             return patching.array_to_json_definition(self, schema)
 
-    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    @dataclasses.dataclass(kw_only=True, eq=False)
     class DictionaryTypeExpression:
         kind: Literal["dictionary"] = "dictionary"
         keys: Schema.TypeExpression
@@ -110,19 +114,33 @@ class Schema:
                 "propertyNames": self.keys.make_json_definition(schema),
             }
 
-    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    @dataclasses.dataclass(kw_only=True, eq=False)
     class Property:
         names: list[str]
         type: Schema.TypeExpression
         required: bool = False
 
-    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    @dataclasses.dataclass(kw_only=True, eq=False)
     class StructTypeExpression:
         kind: Literal["struct"] = "struct"
         base: str | None
         properties: list[Schema.Property]
         overridden_properties: list[Schema.Property]
         custom_properties: Schema.TypeExpression | Literal[False] | None
+
+        def get_property_type(self, name: str, t: type[T]) -> T:
+            for property in self.properties:
+                if name in property.names:
+                    assert isinstance(property.type, t), property
+                    return property.type
+            raise ValueError(f"Property {name!r} not found")
+
+        def set_property_type(self, name: str, type: Schema.TypeExpression) -> None:
+            for property in self.properties:
+                if name in property.names:
+                    property.type = type
+                    return
+            raise ValueError(f"Property {name!r} not found")
 
         def make_json_definition(self, schema: Schema) -> JsonDict:
             properties: JsonDict = {}
@@ -166,7 +184,7 @@ class Schema:
 
             return definition
 
-    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    @dataclasses.dataclass(kw_only=True, eq=False)
     class TupleTypeExpression:
         kind: Literal["tuple"] = "tuple"
         members: list[Schema.TypeExpression]
@@ -192,12 +210,12 @@ class Schema:
         | TupleTypeExpression
     )
 
-    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    @dataclasses.dataclass(kw_only=True, eq=False)
     class Type:
         name: str
         definition: Schema.TypeExpression
 
-    @dataclasses.dataclass(frozen=True, kw_only=True, repr=False, eq=False)
+    @dataclasses.dataclass(kw_only=True, eq=False)
     class Prototype:
         name: str
         key: str | None
@@ -229,6 +247,13 @@ class Schema:
     def __init__(self, *, types: list[Type], prototypes: list[Prototype]) -> None:
         self.types = types
         self.prototypes = prototypes
+
+    def get_type_def(self, name: str, t: type[T]) -> T:
+        for type in self.types:
+            if type.name == name:
+                assert isinstance(type.definition, t), type
+                return type.definition
+        raise ValueError(f"Type {name!r} not found")
 
     def make_reference(self, deep: bool, name: str) -> str:
         self.references_needed.add(name)

@@ -20,7 +20,44 @@ def array_to_json_definition(self: Schema.ArrayTypeExpression, schema: Schema) -
     }
 
 
-def patch(schema: Any) -> None:
+def patch_schema(schema: Schema) -> None:
+    # https://lua-api.factorio.com/2.0.28/types/WorkingVisualisations.html#shift_animation_waypoint_stop_duration is documented as uint16
+    # but is some kind of float in:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".graphics_set.shift_animation_waypoint_stop_duration'
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".wet_mining_graphics_set.shift_animation_waypoint_stop_duration'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".graphics_set.shift_animation_waypoint_stop_duration'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".wet_mining_graphics_set.shift_animation_waypoint_stop_duration'
+    schema.get_type_def("WorkingVisualisations", Schema.StructTypeExpression).get_property_type(
+        "shift_animation_waypoint_stop_duration", Schema.RefTypeExpression
+    ).ref = "double"
+
+    # https://lua-api.factorio.com/2.0.28/types/WorkingVisualisations.html#working_visualisations is documented as array[WorkingVisualisation]
+    # but is actually an object, with string keys looking like integers in:
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."big-mining-drill".graphics_set.working_visualisations'
+    # Note that is is an array as expected in:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".graphics_set.working_visualisations'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".graphics_set.working_visualisations'
+    schema.get_type_def("WorkingVisualisations", Schema.StructTypeExpression).set_property_type(
+        "working_visualisations",
+        Schema.UnionTypeExpression(
+            members=[
+                schema.get_type_def("WorkingVisualisations", Schema.StructTypeExpression).get_property_type(
+                    "working_visualisations", Schema.ArrayTypeExpression
+                ),
+                Schema.StructTypeExpression(
+                    base=None,
+                    properties=[],
+                    overridden_properties=[],
+                    custom_properties=schema.get_type_def("WorkingVisualisations", Schema.StructTypeExpression)
+                    .get_property_type("working_visualisations", Schema.ArrayTypeExpression)
+                    .content,
+                ),
+            ]
+        ),
+    )
+
+
+def patch_json(schema: Any) -> None:
     def remove_all_constraints(type_name: str) -> None:
         previous_definition = schema["definitions"][type_name]
         new_definition = {"description": previous_definition["description"]}
@@ -147,7 +184,7 @@ def patch(schema: Any) -> None:
     remove_all_constraints("CreateDecorativesTriggerEffectItem")
     remove_all_constraints("EntityBuildAnimationPiece")
     remove_all_constraints("FootstepTriggerEffectList")
-    remove_all_constraints("MiningDrillGraphicsSet")
+    # remove_all_constraints("MiningDrillGraphicsSet")
     remove_all_constraints("NeighbourConnectable")
     remove_all_constraints("ProcessionTimeline")
     remove_all_constraints("RailPictureSet")

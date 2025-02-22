@@ -16404,7 +16404,107 @@
     },
     "MiningDrillGraphicsSet": {
       "description": "https://lua-api.factorio.com/stable/types/MiningDrillGraphicsSet.html",
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "animation": {
+          "$ref": "#/definitions/Animation4Way"
+        },
+        "idle_animation": {
+          "$ref": "#/definitions/Animation4Way"
+        },
+        "always_draw_idle_animation": {
+          "$ref": "#/definitions/bool"
+        },
+        "default_recipe_tint": {
+          "$ref": "#/definitions/GlobalRecipeTints"
+        },
+        "recipe_not_set_tint": {
+          "$ref": "#/definitions/GlobalRecipeTints"
+        },
+        "states": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VisualState"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        },
+        "working_visualisations": {
+          "anyOf": [
+            {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/WorkingVisualisation"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": {
+                "$ref": "#/definitions/WorkingVisualisation"
+              }
+            }
+          ]
+        },
+        "shift_animation_waypoints": {
+          "$ref": "#/definitions/ShiftAnimationWaypoints"
+        },
+        "shift_animation_waypoint_stop_duration": {
+          "$ref": "#/definitions/double"
+        },
+        "shift_animation_transition_duration": {
+          "$ref": "#/definitions/uint16"
+        },
+        "status_colors": {
+          "$ref": "#/definitions/StatusColors"
+        },
+        "frozen_patch": {
+          "$ref": "#/definitions/Sprite4Way"
+        },
+        "reset_animation_when_frozen": {
+          "$ref": "#/definitions/bool"
+        },
+        "circuit_connector_layer": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/RenderLayer"
+            },
+            {
+              "$ref": "#/definitions/CircuitConnectorLayer"
+            }
+          ]
+        },
+        "circuit_connector_secondary_draw_order": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/int8"
+            },
+            {
+              "$ref": "#/definitions/CircuitConnectorSecondaryDrawOrder"
+            }
+          ]
+        },
+        "drilling_vertical_movement_duration": {
+          "$ref": "#/definitions/uint16"
+        },
+        "animation_progress": {
+          "$ref": "#/definitions/float"
+        }
+      }
     },
     "MiningDrillProductivityBonusModifier": {
       "description": "https://lua-api.factorio.com/stable/types/MiningDrillProductivityBonusModifier.html",
