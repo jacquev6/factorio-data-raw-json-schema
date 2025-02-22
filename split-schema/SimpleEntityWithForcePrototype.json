@@ -526,7 +526,6 @@
       "$ref": "../split-schema/ForceCondition.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name"

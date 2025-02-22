@@ -704,7 +704,6 @@
       "$ref": "../split-schema/Vector3D.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

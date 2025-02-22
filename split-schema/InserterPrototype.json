@@ -612,7 +612,6 @@
       "maxItems": 4
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

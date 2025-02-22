@@ -500,7 +500,6 @@
       "$ref": "../split-schema/PlumesSpecification.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

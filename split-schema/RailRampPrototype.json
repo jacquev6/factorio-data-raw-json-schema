@@ -538,7 +538,6 @@
       "$ref": "../split-schema/CollisionMaskConnector.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

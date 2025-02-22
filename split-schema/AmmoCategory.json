@@ -64,7 +64,6 @@
       "$ref": "../split-schema/SpriteSizeType.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name"

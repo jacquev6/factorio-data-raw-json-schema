@@ -550,7 +550,6 @@
       "$ref": "../split-schema/RecipeTints.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

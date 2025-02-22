@@ -532,7 +532,6 @@
       "$ref": "../split-schema/CircuitConnectorDefinition.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

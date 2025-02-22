@@ -500,7 +500,6 @@
       "$ref": "../split-schema/PerceivedPerformance.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

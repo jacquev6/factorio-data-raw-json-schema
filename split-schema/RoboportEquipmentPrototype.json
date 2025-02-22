@@ -156,7 +156,6 @@
       "$ref": "../split-schema/Energy.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

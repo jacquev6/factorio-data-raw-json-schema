@@ -36,7 +36,6 @@
       "$ref": "../split-schema/PuddleTileEffectParameters.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

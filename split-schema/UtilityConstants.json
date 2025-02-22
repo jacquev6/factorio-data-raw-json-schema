@@ -872,18 +872,8 @@
     },
     "time_to_show_full_health_bar": {
       "$ref": "../split-schema/MapTick.json"
-    },
-    "factoriopedia_recycling_recipe_categories": {},
-    "feedback_screenshot_file_name": {},
-    "feedback_screenshot_subfolder_name": {},
-    "gui_move_switch_vibration": {},
-    "space_platform_acceleration_expression": {},
-    "starmap_orbit_clicked_color": {},
-    "starmap_orbit_default_color": {},
-    "starmap_orbit_disabled_color": {},
-    "starmap_orbit_hovered_color": {}
+    }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

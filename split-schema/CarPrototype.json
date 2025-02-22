@@ -637,7 +637,6 @@
       ]
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

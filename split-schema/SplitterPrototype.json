@@ -509,7 +509,6 @@
       "$ref": "../split-schema/EntityID.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

@@ -86,7 +86,6 @@
       "$ref": "../split-schema/uint16.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

@@ -536,7 +536,6 @@
       "$ref": "../split-schema/UnitAISettings.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

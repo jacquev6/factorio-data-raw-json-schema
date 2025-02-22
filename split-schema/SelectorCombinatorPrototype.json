@@ -625,7 +625,6 @@
       "$ref": "../split-schema/Sprite4Way.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

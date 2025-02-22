@@ -542,7 +542,6 @@
       "$ref": "../split-schema/RotatedAnimation.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

@@ -176,7 +176,6 @@
       "$ref": "../split-schema/LightningProperties.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

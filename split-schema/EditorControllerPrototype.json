@@ -86,7 +86,6 @@
       "$ref": "../split-schema/bool.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

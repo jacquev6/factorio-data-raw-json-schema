@@ -20,7 +20,6 @@
       "$ref": "../split-schema/TriggerEffectItem.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

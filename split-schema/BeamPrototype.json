@@ -364,7 +364,6 @@
       "$ref": "../split-schema/BeamGraphicsSet.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

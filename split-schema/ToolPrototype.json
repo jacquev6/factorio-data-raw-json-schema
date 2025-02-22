@@ -237,10 +237,8 @@
     },
     "infinite": {
       "$ref": "../split-schema/bool.json"
-    },
-    "factoriopedia_durability_description_key": {}
+    }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

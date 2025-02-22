@@ -355,7 +355,6 @@
       "$ref": "../split-schema/uint32.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

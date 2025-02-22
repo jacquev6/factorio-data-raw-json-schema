@@ -50,7 +50,6 @@
       "$ref": "../split-schema/AsteroidSettings.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

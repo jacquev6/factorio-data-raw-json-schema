@@ -494,7 +494,6 @@
       "$ref": "../split-schema/SpriteVariations.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

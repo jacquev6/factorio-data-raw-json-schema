@@ -501,10 +501,8 @@
     },
     "spawned_container": {
       "$ref": "../split-schema/EntityID.json"
-    },
-    "impact_trigger": {}
+    }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

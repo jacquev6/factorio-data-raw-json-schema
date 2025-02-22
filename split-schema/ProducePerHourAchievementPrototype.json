@@ -76,7 +76,6 @@
       "$ref": "../split-schema/FluidID.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

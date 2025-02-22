@@ -238,7 +238,6 @@
     "infinite": {
       "$ref": "../split-schema/bool.json"
     },
-    "factoriopedia_durability_description_key": {},
     "equipment_grid": {
       "$ref": "../split-schema/EquipmentGridID.json"
     },
@@ -284,7 +283,6 @@
       "$ref": "../split-schema/Sound.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

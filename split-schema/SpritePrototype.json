@@ -145,7 +145,6 @@
       "$ref": "../split-schema/SpriteUsageHint.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name"

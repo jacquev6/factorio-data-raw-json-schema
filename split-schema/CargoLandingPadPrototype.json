@@ -524,7 +524,6 @@
       "$ref": "../split-schema/Color.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

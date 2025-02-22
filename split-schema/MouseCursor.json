@@ -52,7 +52,6 @@
       "$ref": "../split-schema/int16.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name"

@@ -411,7 +411,6 @@
       "$ref": "../split-schema/RotatedAnimationVariations.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

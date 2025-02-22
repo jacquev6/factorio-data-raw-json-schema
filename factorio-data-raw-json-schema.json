@@ -1534,7 +1534,6 @@
       }
     }
   },
-  "additionalProperties": false,
   "definitions": {
     "ActivateEquipmentCapsuleAction": {
       "description": "https://lua-api.factorio.com/stable/types/ActivateEquipmentCapsuleAction.html",
@@ -32791,7 +32790,6 @@
           "$ref": "#/definitions/SignalIDConnector"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -32866,7 +32864,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -32955,7 +32952,6 @@
           "$ref": "#/definitions/AttackParameters"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -33553,7 +33549,6 @@
           "$ref": "#/definitions/CircuitConnectorDefinition"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -33622,7 +33617,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -33659,7 +33653,6 @@
           "$ref": "#/definitions/VariableAmbientSoundVariableSound"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -33731,7 +33724,6 @@
           "$ref": "#/definitions/SpriteSizeType"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -33998,7 +33990,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -34797,7 +34788,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -35010,7 +35000,6 @@
           "$ref": "#/definitions/uint32"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -35654,7 +35643,6 @@
           "$ref": "#/definitions/Sprite4Way"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -35907,7 +35895,6 @@
         "infinite": {
           "$ref": "#/definitions/bool"
         },
-        "factoriopedia_durability_description_key": {},
         "equipment_grid": {
           "$ref": "#/definitions/EquipmentGridID"
         },
@@ -35953,7 +35940,6 @@
           "$ref": "#/definitions/Sound"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -36313,7 +36299,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -36718,7 +36703,6 @@
           "$ref": "#/definitions/AmmoCategoryID"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -37094,7 +37078,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -37682,7 +37665,6 @@
           "$ref": "#/definitions/Vector3D"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -38399,7 +38381,6 @@
           "$ref": "#/definitions/Vector3D"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -39057,7 +39038,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -39141,7 +39121,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -39801,7 +39780,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -40302,7 +40280,6 @@
           "$ref": "#/definitions/AsteroidGraphicsSet"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -40376,7 +40353,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -40460,7 +40436,6 @@
           "$ref": "#/definitions/Color"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -41036,7 +41011,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -41412,7 +41386,6 @@
           "$ref": "#/definitions/BeamGraphicsSet"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -41501,7 +41474,6 @@
           "$ref": "#/definitions/Energy"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -41815,7 +41787,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -42082,7 +42053,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -42633,7 +42603,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -42724,7 +42693,6 @@
           "$ref": "#/definitions/MapTick"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -43235,7 +43203,6 @@
           "$ref": "#/definitions/PerceivedPerformance"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -43307,7 +43274,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -43552,7 +43518,6 @@
           "$ref": "#/definitions/Color"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -44079,7 +44044,6 @@
           "$ref": "#/definitions/Animation"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -44724,7 +44688,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -45244,7 +45207,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -45776,7 +45738,6 @@
           "$ref": "#/definitions/Color"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -46286,10 +46247,8 @@
         },
         "spawned_container": {
           "$ref": "#/definitions/EntityID"
-        },
-        "impact_trigger": {}
+        }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -46926,7 +46885,6 @@
           "$ref": "#/definitions/ItemStackIndex"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -47009,7 +46967,6 @@
           "$ref": "#/definitions/uint32"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -47086,7 +47043,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -47457,7 +47413,6 @@
           }
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -48169,7 +48124,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -48639,7 +48593,6 @@
           "$ref": "#/definitions/CraterPlacementDefinition"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -48690,7 +48643,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -48767,7 +48719,6 @@
           "$ref": "#/definitions/uint32"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -49313,7 +49264,6 @@
           "$ref": "#/definitions/LightDefinition"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -49409,7 +49359,6 @@
           "$ref": "#/definitions/MapTick"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -49954,7 +49903,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -50039,7 +49987,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -50601,7 +50548,6 @@
           "$ref": "#/definitions/LightDefinition"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -51133,7 +51079,6 @@
           "$ref": "#/definitions/EntityStatus"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -51402,7 +51347,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -51873,7 +51817,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -51950,7 +51893,6 @@
           "$ref": "#/definitions/uint32"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -52489,7 +52431,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -53029,7 +52970,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -53078,7 +53018,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -53186,7 +53125,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -53235,7 +53173,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -53864,7 +53801,6 @@
           "$ref": "#/definitions/Sprite4Way"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -53949,7 +53885,6 @@
           "$ref": "#/definitions/uint32"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -54300,7 +54235,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -54571,7 +54505,6 @@
           "$ref": "#/definitions/ItemStackIndex"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -54678,7 +54611,6 @@
           "$ref": "#/definitions/AutoplaceSpecification"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -54742,7 +54674,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -54821,7 +54752,6 @@
           "$ref": "#/definitions/uint32"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -54840,7 +54770,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -54867,7 +54796,6 @@
           "$ref": "#/definitions/TriggerEffectItem"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -54950,7 +54878,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -55030,7 +54957,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -55562,7 +55488,6 @@
           "maxItems": 4
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -55697,7 +55622,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -55791,7 +55715,6 @@
           "$ref": "#/definitions/uint32"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -55888,7 +55811,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -56020,7 +55942,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -56160,7 +56081,6 @@
           "$ref": "#/definitions/Energy"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -56254,7 +56174,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -56813,7 +56732,6 @@
           "$ref": "#/definitions/Animation4Way"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -57345,10 +57263,8 @@
         },
         "auto_connect_up_to_n_wires": {
           "$ref": "#/definitions/uint8"
-        },
-        "track_coverage_during_drag_building": {}
+        }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -58141,7 +58057,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -58685,7 +58600,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -59225,7 +59139,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -59765,7 +59678,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -60305,7 +60217,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -60895,7 +60806,6 @@
           "$ref": "#/definitions/EntityID"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -60994,7 +60904,6 @@
           "$ref": "#/definitions/Energy"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -61371,7 +61280,6 @@
           "$ref": "#/definitions/Sound"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -61460,7 +61368,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -61511,7 +61418,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -61594,7 +61500,6 @@
           "$ref": "#/definitions/Color"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -61666,7 +61571,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -62109,7 +62013,6 @@
           "$ref": "#/definitions/float"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -62632,7 +62535,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -63118,7 +63020,6 @@
           "$ref": "#/definitions/SpriteVariations"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -63216,7 +63117,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -63667,7 +63567,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -64507,7 +64406,6 @@
           "$ref": "#/definitions/Sprite"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -65154,7 +65052,6 @@
           "$ref": "#/definitions/uint8"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -65198,7 +65095,6 @@
           "$ref": "#/definitions/Color"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -65251,7 +65147,6 @@
           "$ref": "#/definitions/LocalisedString"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -65854,7 +65749,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -66367,7 +66261,6 @@
           "$ref": "#/definitions/PerceivedPerformance"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -66893,7 +66786,6 @@
           "$ref": "#/definitions/PerceivedPerformance"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -67437,7 +67329,6 @@
           "$ref": "#/definitions/CollisionMaskConnector"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -67529,7 +67420,6 @@
           "$ref": "#/definitions/BurnerEnergySource"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -68079,7 +67969,6 @@
           "$ref": "#/definitions/Energy"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -68144,7 +68033,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -68240,7 +68128,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -68533,7 +68420,6 @@
           "$ref": "#/definitions/AttackParameters"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -69074,7 +68960,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -69586,7 +69471,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -70088,7 +69972,6 @@
           "$ref": "#/definitions/float"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -70439,7 +70322,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -70457,7 +70339,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -71056,7 +70937,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -71575,7 +71455,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -72197,7 +72076,6 @@
           "maxItems": 4
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -72288,7 +72166,6 @@
           "$ref": "#/definitions/ItemStackIndex"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -72642,7 +72519,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -72713,7 +72589,6 @@
           "$ref": "#/definitions/Order"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -72947,7 +72822,6 @@
           "$ref": "#/definitions/uint8"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -73301,7 +73175,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -73352,7 +73225,6 @@
           "$ref": "#/definitions/ItemGroupID"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -73627,7 +73499,6 @@
           "$ref": "#/definitions/SpriteSizeType"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -73929,7 +73800,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -74171,7 +74041,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -74412,7 +74281,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -74544,7 +74412,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -75100,7 +74967,6 @@
           "$ref": "#/definitions/ItemStackIndex"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -75682,7 +75548,6 @@
           "$ref": "#/definitions/SignalIDConnector"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -76203,7 +76068,6 @@
           "$ref": "#/definitions/CollisionMaskConnector"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -76714,7 +76578,6 @@
           "$ref": "#/definitions/Animation4Way"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -77255,7 +77118,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -77795,7 +77657,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -78300,7 +78161,6 @@
           "$ref": "#/definitions/ElectricEnergySource"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -78680,7 +78540,6 @@
           "$ref": "#/definitions/uint16"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -79214,7 +79073,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -79754,7 +79612,6 @@
           "$ref": "#/definitions/CircuitConnectorDefinition"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -80325,7 +80182,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -80897,7 +80753,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -81559,7 +81414,6 @@
           "$ref": "#/definitions/float"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -82146,7 +82000,6 @@
           "$ref": "#/definitions/Sound"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -82697,7 +82550,6 @@
           "$ref": "#/definitions/RotatedAnimation"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -82776,7 +82628,6 @@
           "$ref": "#/definitions/AsteroidSettings"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -83280,7 +83131,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -83900,7 +83750,6 @@
           "$ref": "#/definitions/uint8"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -83954,7 +83803,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -84220,7 +84068,6 @@
           }
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -84325,7 +84172,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -84385,7 +84231,6 @@
           "$ref": "#/definitions/int16"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -84474,7 +84319,6 @@
           "$ref": "#/definitions/double"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -84552,7 +84396,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -84636,7 +84479,6 @@
           }
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -84736,7 +84578,6 @@
           "$ref": "#/definitions/Sound"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -85286,7 +85127,6 @@
           "maxItems": 4
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -85384,7 +85224,6 @@
           "$ref": "#/definitions/uint16"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -85782,7 +85621,6 @@
           "$ref": "#/definitions/float"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -86288,7 +86126,6 @@
           "$ref": "#/definitions/PipePictures"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -86798,7 +86635,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -86888,7 +86724,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -87074,7 +86909,6 @@
           "$ref": "#/definitions/LightningProperties"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -87633,7 +87467,6 @@
           "$ref": "#/definitions/RecipeTints"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -87717,7 +87550,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -88208,7 +88040,6 @@
           "$ref": "#/definitions/double"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -88736,7 +88567,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -88794,7 +88624,6 @@
           "$ref": "#/definitions/TransitionApplication"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -88885,7 +88714,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -88974,7 +88802,6 @@
           "$ref": "#/definitions/FluidID"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -89059,7 +88886,6 @@
           "$ref": "#/definitions/FluidID"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -89620,7 +89446,6 @@
           "$ref": "#/definitions/CircuitConnectorDefinition"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -90042,7 +89867,6 @@
           "$ref": "#/definitions/RotatedAnimationVariations"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -90608,7 +90432,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -90704,7 +90527,6 @@
           "$ref": "#/definitions/float"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -91249,7 +91071,6 @@
           "$ref": "#/definitions/float"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -91777,7 +91598,6 @@
           "$ref": "#/definitions/uint8"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -92033,7 +91853,6 @@
           "$ref": "#/definitions/double"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -92580,7 +92399,6 @@
           "$ref": "#/definitions/CollisionMaskConnector"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -93059,7 +92877,6 @@
           "$ref": "#/definitions/BoundingBox"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -93583,7 +93400,6 @@
           "$ref": "#/definitions/uint8"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -94121,7 +93937,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -94680,7 +94495,6 @@
           "$ref": "#/definitions/SignalIDConnector"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -94731,7 +94545,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -94965,7 +94778,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -94986,7 +94798,6 @@
           "$ref": "#/definitions/double"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -95232,12 +95043,10 @@
         "infinite": {
           "$ref": "#/definitions/bool"
         },
-        "factoriopedia_durability_description_key": {},
         "speed": {
           "$ref": "#/definitions/float"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -95319,7 +95128,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -95399,7 +95207,6 @@
           "$ref": "#/definitions/uint32"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -95448,7 +95255,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -95881,7 +95687,6 @@
           "$ref": "#/definitions/Color"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -96045,7 +95850,6 @@
           "$ref": "#/definitions/Energy"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -96702,10 +96506,8 @@
         },
         "logistics_connection_distance": {
           "$ref": "#/definitions/float"
-        },
-        "default_roboport_count_output_signal": {}
+        }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -97533,7 +97335,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -98015,7 +97816,6 @@
           "$ref": "#/definitions/ItemStackIndex"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -98382,7 +98182,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -98923,7 +98722,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -99533,7 +99331,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -99808,7 +99605,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -100443,7 +100239,6 @@
           "$ref": "#/definitions/Sprite4Way"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -100531,7 +100326,6 @@
           "$ref": "#/definitions/uint32"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -100702,7 +100496,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -101227,7 +101020,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -101760,7 +101552,6 @@
           "$ref": "#/definitions/ForceCondition"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -102293,7 +102084,6 @@
           "$ref": "#/definitions/ForceCondition"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -102724,7 +102514,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -102810,7 +102599,6 @@
           "$ref": "#/definitions/Energy"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -103316,7 +103104,6 @@
           "$ref": "#/definitions/SpriteVariations"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -103426,7 +103213,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -103509,7 +103295,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -103603,7 +103388,6 @@
           "$ref": "#/definitions/SpriteSizeType"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -103752,7 +103536,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -104286,7 +104069,6 @@
           "$ref": "#/definitions/CargoStationParameters"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -104560,7 +104342,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -104582,7 +104363,6 @@
           "$ref": "#/definitions/double"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -104945,7 +104725,6 @@
           "$ref": "#/definitions/uint32"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -105543,7 +105322,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -106094,7 +105872,6 @@
           "$ref": "#/definitions/UnitAISettings"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -106710,7 +106487,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -106984,7 +106760,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -107503,7 +107278,6 @@
           "$ref": "#/definitions/EntityID"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -107656,7 +107430,6 @@
           "$ref": "#/definitions/SpriteUsageHint"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -108104,7 +107877,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -108660,7 +108432,6 @@
           "maxItems": 4
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -109202,7 +108973,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -109260,7 +109030,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -109324,7 +109093,6 @@
           "$ref": "#/definitions/SpriteSizeType"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -109455,7 +109223,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -109993,7 +109760,6 @@
           "$ref": "#/definitions/uint32"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -110501,7 +110267,6 @@
           "$ref": "#/definitions/PlumesSpecification"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -110548,7 +110313,6 @@
           "$ref": "#/definitions/PuddleTileEffectParameters"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -110899,7 +110663,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -111261,7 +111024,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -111377,7 +111139,6 @@
           "$ref": "#/definitions/SpriteSizeType"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -111398,7 +111159,6 @@
           "$ref": "#/definitions/Order"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -111643,10 +111403,8 @@
         },
         "infinite": {
           "$ref": "#/definitions/bool"
-        },
-        "factoriopedia_durability_description_key": {}
+        }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -111724,7 +111482,6 @@
           "$ref": "#/definitions/double"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -112302,7 +112059,6 @@
           "maxItems": 4
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -112830,7 +112586,6 @@
           "$ref": "#/definitions/EntityID"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -113373,7 +113128,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -113391,7 +113145,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -113484,7 +113237,6 @@
           "$ref": "#/definitions/RenderLayer"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -114267,7 +114019,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -114319,7 +114070,6 @@
           "$ref": "#/definitions/string"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -114865,7 +114615,6 @@
           "$ref": "#/definitions/Color"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -115447,7 +115196,6 @@
           ]
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -115718,7 +115466,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -115807,7 +115554,6 @@
           "$ref": "#/definitions/EntityID"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -115894,7 +115640,6 @@
           "$ref": "#/definitions/bool"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -116775,18 +116520,8 @@
         },
         "time_to_show_full_health_bar": {
           "$ref": "#/definitions/MapTick"
-        },
-        "factoriopedia_recycling_recipe_categories": {},
-        "feedback_screenshot_file_name": {},
-        "feedback_screenshot_subfolder_name": {},
-        "gui_move_switch_vibration": {},
-        "space_platform_acceleration_expression": {},
-        "starmap_orbit_clicked_color": {},
-        "starmap_orbit_default_color": {},
-        "starmap_orbit_disabled_color": {},
-        "starmap_orbit_hovered_color": {}
+        }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -117188,7 +116923,6 @@
           "$ref": "#/definitions/Sound"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -119227,7 +118961,6 @@
           "$ref": "#/definitions/Sprite"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name",
@@ -119826,7 +119559,6 @@
           "$ref": "#/definitions/SpriteSizeType"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"
@@ -120404,7 +120136,6 @@
           "$ref": "#/definitions/Sprite"
         }
       },
-      "additionalProperties": false,
       "required": [
         "type",
         "name"

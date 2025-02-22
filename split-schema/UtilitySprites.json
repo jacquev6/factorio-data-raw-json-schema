@@ -1968,7 +1968,6 @@
       "$ref": "../split-schema/Sprite.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

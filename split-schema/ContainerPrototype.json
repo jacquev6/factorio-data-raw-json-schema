@@ -522,7 +522,6 @@
       "$ref": "../split-schema/EntityStatus.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

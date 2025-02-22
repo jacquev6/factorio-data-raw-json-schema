@@ -138,7 +138,7 @@ class _Extractor:
 
         custom_properties_div_soup = soup.find("div", id="custom_properties")
         if custom_properties_div_soup is None:
-            custom_properties: Schema.TypeExpression | Literal[False] = False
+            custom_properties: Schema.TypeExpression | None = None
         else:
             custom_properties_text = tag(tag(tag(custom_properties_div_soup).parent).find("h3")).text
             assert custom_properties_text.startswith("Custom properties  \xa0::\xa0string → ")

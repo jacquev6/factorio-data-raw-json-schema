@@ -14,7 +14,6 @@
       "$ref": "../split-schema/double.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

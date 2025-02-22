@@ -233,7 +233,6 @@
       "$ref": "../split-schema/Sound.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

@@ -497,7 +497,6 @@
       "$ref": "../split-schema/ElectricEnergySource.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name"

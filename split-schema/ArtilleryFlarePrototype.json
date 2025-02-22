@@ -397,7 +397,6 @@
       "$ref": "../split-schema/AmmoCategoryID.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

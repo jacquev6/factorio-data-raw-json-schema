@@ -503,7 +503,6 @@
       "$ref": "../split-schema/Animation4Way.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

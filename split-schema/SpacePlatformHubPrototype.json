@@ -525,7 +525,6 @@
       "$ref": "../split-schema/CargoStationParameters.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

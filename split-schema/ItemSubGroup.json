@@ -44,7 +44,6 @@
       "$ref": "../split-schema/ItemGroupID.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

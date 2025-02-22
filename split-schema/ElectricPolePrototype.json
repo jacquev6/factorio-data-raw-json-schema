@@ -524,10 +524,8 @@
     },
     "auto_connect_up_to_n_wires": {
       "$ref": "../split-schema/uint8.json"
-    },
-    "track_coverage_during_drag_building": {}
+    }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

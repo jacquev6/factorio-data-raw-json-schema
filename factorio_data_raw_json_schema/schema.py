@@ -128,7 +128,7 @@ class Schema:
         base: str | None
         properties: list[Schema.Property]
         overridden_properties: list[Schema.Property]
-        custom_properties: Schema.TypeExpression | Literal[False] | None
+        custom_properties: Schema.TypeExpression | None
 
         def get_property(self, name: str) -> Schema.Property:
             for property in self.properties:
@@ -186,8 +186,6 @@ class Schema:
 
             if self.custom_properties is None:
                 pass
-            elif self.custom_properties is False:
-                definition["additionalProperties"] = False
             else:
                 definition["additionalProperties"] = self.custom_properties.make_json_definition(schema)
 
@@ -239,7 +237,7 @@ class Schema:
 
         properties: list[Schema.Property]
         overridden_properties: list[Schema.Property]
-        custom_properties: Schema.TypeExpression | Literal[False] | None
+        custom_properties: Schema.TypeExpression | None
 
         def get_property(self, name: str) -> Schema.Property:
             for property in self.properties:
@@ -334,8 +332,6 @@ class Schema:
                 "description": json_value(f"https://lua-api.factorio.com/stable/types/{type.name}.html")
             } | type.definition.make_json_definition(self)
 
-        # @todo Add "additionalProperties": false to all definitions
-
         for prototype in self.prototypes:
             if prototype.key is not None:
                 self.references_needed = references_needed_by[prototype.name] = set()
@@ -356,6 +352,5 @@ class Schema:
             "title": "Factorio Data.raw",
             "type": "object",
             "properties": properties,
-            "additionalProperties": False,
             "definitions": {name: definition for name, definition in definitions.items() if name in references_needed},
         }

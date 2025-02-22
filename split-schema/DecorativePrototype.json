@@ -97,7 +97,6 @@
       "$ref": "../split-schema/AutoplaceSpecification.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

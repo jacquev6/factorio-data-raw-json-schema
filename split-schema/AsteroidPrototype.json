@@ -488,7 +488,6 @@
       "$ref": "../split-schema/AsteroidGraphicsSet.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name"

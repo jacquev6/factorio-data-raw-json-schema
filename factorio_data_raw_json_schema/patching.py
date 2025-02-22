@@ -1,4 +1,3 @@
-from typing import Any
 import typing
 
 from .schema import Schema, JsonDict
@@ -100,77 +99,6 @@ def patch_schema(schema: Schema) -> None:
                 ),
             ]
         ),
-    )
-
-    # Properties 'factoriopedia_recycling_recipe_categories', 'feedback_screenshot_file_name', 'feedback_screenshot_subfolder_name', 'gui_move_switch_vibration', 'space_platform_acceleration_expression', 'starmap_orbit_clicked_color', 'starmap_orbit_default_color', 'starmap_orbit_disabled_color' and 'starmap_orbit_hovered_color'
-    # are not documented in https://lua-api.factorio.com/2.0.28/prototypes/UtilityConstants.html
-    # but are present in:
-    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.utility-constants.default'
-    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'utility-constants.default'
-    for property_name in [
-        "factoriopedia_recycling_recipe_categories",
-        "feedback_screenshot_file_name",
-        "feedback_screenshot_subfolder_name",
-        "gui_move_switch_vibration",
-        "space_platform_acceleration_expression",
-        "starmap_orbit_clicked_color",
-        "starmap_orbit_default_color",
-        "starmap_orbit_disabled_color",
-        "starmap_orbit_hovered_color",
-    ]:
-        schema.get_prototype("UtilityConstants").properties.append(
-            Schema.Property(names=[property_name], type=Schema.unconstrained_type, required=False)
-        )
-
-    # Property 'impact_trigger' is not documented in https://lua-api.factorio.com/2.0.28/prototypes/CargoPodPrototype.html
-    # but is present in:
-    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."cargo-pod"."cargo-pod"'
-    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '"cargo-pod"."cargo-pod"'
-    schema.get_prototype("CargoPodPrototype").properties.append(
-        Schema.Property(names=["impact_trigger"], type=Schema.unconstrained_type, required=False)
-    )
-
-    # Property 'track_coverage_during_drag_building' is not documented in https://lua-api.factorio.com/2.0.28/prototypes/ElectricPolePrototype.html
-    # but is present in:
-    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."electric-pole"."big-electric-pole"'
-    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '"electric-pole"."big-electric-pole"'
-    schema.get_prototype("ElectricPolePrototype").properties.append(
-        Schema.Property(names=["track_coverage_during_drag_building"], type=Schema.unconstrained_type, required=False)
-    )
-
-    # Property 'default_roboport_count_output_signal' is not documented in https://lua-api.factorio.com/2.0.28/prototypes/RoboportPrototype.html
-    # but is present in:
-    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.roboport.roboport'
-    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'roboport.roboport'
-    schema.get_prototype("RoboportPrototype").properties.append(
-        Schema.Property(names=["default_roboport_count_output_signal"], type=Schema.unconstrained_type, required=False)
-    )
-
-    # Property 'factoriopedia_durability_description_key' is not documented in https://lua-api.factorio.com/2.0.28/prototypes/ToolPrototype.html
-    # but is present in:
-    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.tool."military-science-pack"'
-    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.tool."production-science-pack"'
-    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.tool."chemical-science-pack"'
-    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.tool."logistic-science-pack"'
-    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.tool."automation-science-pack"'
-    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.tool."utility-science-pack"'
-    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.tool."space-science-pack"'
-    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."utility-science-pack"'
-    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."space-science-pack"'
-    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."logistic-science-pack"'
-    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."electromagnetic-science-pack"'
-    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."production-science-pack"'
-    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."military-science-pack"'
-    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."agricultural-science-pack"'
-    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."automation-science-pack"'
-    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."promethium-science-pack"'
-    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."chemical-science-pack"'
-    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."metallurgic-science-pack"'
-    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."cryogenic-science-pack"'
-    schema.get_prototype("ToolPrototype").properties.append(
-        Schema.Property(
-            names=["factoriopedia_durability_description_key"], type=Schema.unconstrained_type, required=False
-        )
     )
 
     # https://lua-api.factorio.com/2.0.28/types/CranePartDyingEffect.html#particle_effects is documented as 'array[CreateParticleTriggerEffectItem]'
@@ -320,7 +248,7 @@ def patch_schema(schema: Schema) -> None:
         "type"
     ).required = False
 
-    # @todo Document documentation issue
+    # @todo Document documentation issues
     schema.get_type_def("CreateParticleTriggerEffectItem", Schema.StructTypeExpression).get_property(
         "type"
     ).required = False

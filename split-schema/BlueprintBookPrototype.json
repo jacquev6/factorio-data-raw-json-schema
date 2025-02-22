@@ -302,7 +302,6 @@
       "$ref": "../split-schema/string.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

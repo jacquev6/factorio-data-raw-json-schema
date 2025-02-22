@@ -264,7 +264,6 @@
       "$ref": "../split-schema/ItemStackIndex.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

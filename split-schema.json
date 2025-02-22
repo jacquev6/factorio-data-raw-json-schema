@@ -1533,6 +1533,5 @@
         "$ref": "split-schema/WallPrototype.json"
       }
     }
-  },
-  "additionalProperties": false
+  }
 }

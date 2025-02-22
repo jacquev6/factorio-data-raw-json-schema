@@ -82,7 +82,6 @@
       "$ref": "../split-schema/AttackParameters.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

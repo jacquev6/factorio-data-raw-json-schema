@@ -554,7 +554,6 @@
       "$ref": "../split-schema/LightDefinition.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

@@ -503,7 +503,6 @@
       "$ref": "../split-schema/SignalIDConnector.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

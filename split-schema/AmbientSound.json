@@ -26,7 +26,6 @@
       "$ref": "../split-schema/VariableAmbientSoundVariableSound.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

@@ -442,7 +442,6 @@
       "$ref": "../split-schema/CraterPlacementDefinition.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

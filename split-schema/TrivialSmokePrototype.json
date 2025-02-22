@@ -86,7 +86,6 @@
       "$ref": "../split-schema/RenderLayer.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

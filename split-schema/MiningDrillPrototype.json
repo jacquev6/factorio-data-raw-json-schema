@@ -613,7 +613,6 @@
       "$ref": "../split-schema/uint8.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

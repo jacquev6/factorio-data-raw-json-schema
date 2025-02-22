@@ -390,7 +390,6 @@
       "$ref": "../split-schema/float.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

@@ -642,10 +642,8 @@
     },
     "logistics_connection_distance": {
       "$ref": "../split-schema/float.json"
-    },
-    "default_roboport_count_output_signal": {}
+    }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

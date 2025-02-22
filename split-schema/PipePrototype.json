@@ -494,7 +494,6 @@
       "$ref": "../split-schema/PipePictures.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",

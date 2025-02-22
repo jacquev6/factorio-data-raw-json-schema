@@ -47,7 +47,6 @@
       "$ref": "../split-schema/TransitionApplication.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name"

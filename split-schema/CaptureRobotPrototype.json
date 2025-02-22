@@ -518,7 +518,6 @@
       "$ref": "../split-schema/Animation.json"
     }
   },
-  "additionalProperties": false,
   "required": [
     "type",
     "name",
