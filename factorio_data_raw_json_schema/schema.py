@@ -53,6 +53,8 @@ class Schema:
         ),
     }
 
+    unconstrained_type = BuiltinTypeExpression(json_definition={})
+
     @dataclasses.dataclass(kw_only=True, eq=False)
     class LiteralBoolTypeExpression:
         kind: Literal["literal_bool"] = "literal_bool"
@@ -128,19 +130,25 @@ class Schema:
         overridden_properties: list[Schema.Property]
         custom_properties: Schema.TypeExpression | Literal[False] | None
 
-        def get_property_type(self, name: str, t: type[T]) -> T:
+        def get_property(self, name: str) -> Schema.Property:
             for property in self.properties:
                 if name in property.names:
-                    assert isinstance(property.type, t), property
-                    return property.type
+                    return property
             raise ValueError(f"Property {name!r} not found")
 
+        @typing.overload
+        def get_property_type(self, name: str) -> Schema.TypeExpression: ...
+        @typing.overload
+        def get_property_type(self, name: str, t: type[T]) -> T: ...
+        def get_property_type(self, name: str, t: type[T] | None = None) -> Schema.TypeExpression | T:
+            property = self.get_property(name)
+            if t is not None:
+                assert isinstance(property.type, t), property
+            return property.type
+
         def set_property_type(self, name: str, type: Schema.TypeExpression) -> None:
-            for property in self.properties:
-                if name in property.names:
-                    property.type = type
-                    return
-            raise ValueError(f"Property {name!r} not found")
+            property = self.get_property(name)
+            property.type = type
 
         def make_json_definition(self, schema: Schema) -> JsonDict:
             properties: JsonDict = {}
@@ -225,6 +233,26 @@ class Schema:
         overridden_properties: list[Schema.Property]
         custom_properties: Schema.TypeExpression | Literal[False] | None
 
+        def get_property(self, name: str) -> Schema.Property:
+            for property in self.properties:
+                if name in property.names:
+                    return property
+            raise ValueError(f"Property {name!r} not found")
+
+        @typing.overload
+        def get_property_type(self, name: str) -> Schema.TypeExpression: ...
+        @typing.overload
+        def get_property_type(self, name: str, t: type[T]) -> T: ...
+        def get_property_type(self, name: str, t: type[T] | None = None) -> Schema.TypeExpression | T:
+            property = self.get_property(name)
+            if t is not None:
+                assert isinstance(property.type, t), property
+            return property.type
+
+        def set_property_type(self, name: str, type: Schema.TypeExpression) -> None:
+            property = self.get_property(name)
+            property.type = type
+
         def make_definition(self) -> Schema.TypeExpression:
             type_property = (
                 None
@@ -248,12 +276,23 @@ class Schema:
         self.types = types
         self.prototypes = prototypes
 
-    def get_type_def(self, name: str, t: type[T]) -> T:
+    @typing.overload
+    def get_type_def(self, name: str) -> TypeExpression: ...
+    @typing.overload
+    def get_type_def(self, name: str, t: type[T]) -> T: ...
+    def get_type_def(self, name: str, t: type[T] | None = None) -> TypeExpression | T:
         for type in self.types:
             if type.name == name:
-                assert isinstance(type.definition, t), type
+                if t is not None:
+                    assert isinstance(type.definition, t), type
                 return type.definition
         raise ValueError(f"Type {name!r} not found")
+
+    def get_prototype(self, name: str) -> Prototype:
+        for prototype in self.prototypes:
+            if prototype.name == name:
+                return prototype
+        raise ValueError(f"Prototype {name!r} not found")
 
     def make_reference(self, deep: bool, name: str) -> str:
         self.references_needed.add(name)

@@ -238,6 +238,7 @@
     "infinite": {
       "$ref": "../split-schema/bool.json"
     },
+    "factoriopedia_durability_description_key": {},
     "speed": {
       "$ref": "../split-schema/float.json"
     }

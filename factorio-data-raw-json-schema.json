@@ -6996,16 +6996,20 @@
           "$ref": "#/definitions/float"
         },
         "particle_effects": {
-          "oneOf": [
+          "anyOf": [
             {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CreateParticleTriggerEffectItem"
-              }
-            },
-            {
-              "type": "object",
-              "additionalProperties": false
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CreateParticleTriggerEffectItem"
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              ]
             },
             {
               "$ref": "#/definitions/CreateParticleTriggerEffectItem"
@@ -34417,6 +34421,7 @@
         "infinite": {
           "$ref": "#/definitions/bool"
         },
+        "factoriopedia_durability_description_key": {},
         "equipment_grid": {
           "$ref": "#/definitions/EquipmentGridID"
         },
@@ -47907,6 +47912,10 @@
             {
               "type": "string",
               "const": "rocket-launched"
+            },
+            {
+              "type": "string",
+              "const": "late-research"
             }
           ]
         },
@@ -47917,8 +47926,7 @@
       "additionalProperties": false,
       "required": [
         "type",
-        "name",
-        "objective_condition"
+        "name"
       ]
     },
     "ConstantCombinatorPrototype": {
@@ -54207,7 +54215,6 @@
       "required": [
         "type",
         "name",
-        "objective_condition",
         "dont_build"
       ]
     },
@@ -54287,6 +54294,10 @@
             {
               "type": "string",
               "const": "rocket-launched"
+            },
+            {
+              "type": "string",
+              "const": "late-research"
             }
           ]
         },
@@ -54298,7 +54309,6 @@
       "required": [
         "type",
         "name",
-        "objective_condition",
         "amount"
       ]
     },
@@ -54378,6 +54388,10 @@
             {
               "type": "string",
               "const": "rocket-launched"
+            },
+            {
+              "type": "string",
+              "const": "late-research"
             }
           ]
         },
@@ -54470,6 +54484,10 @@
             {
               "type": "string",
               "const": "rocket-launched"
+            },
+            {
+              "type": "string",
+              "const": "late-research"
             }
           ]
         },
@@ -54600,6 +54618,10 @@
             {
               "type": "string",
               "const": "rocket-launched"
+            },
+            {
+              "type": "string",
+              "const": "late-research"
             }
           ]
         },
@@ -85570,7 +85592,6 @@
       "required": [
         "type",
         "name",
-        "gravity_pull",
         "distance",
         "orientation"
       ]
@@ -93725,6 +93746,7 @@
         "infinite": {
           "$ref": "#/definitions/bool"
         },
+        "factoriopedia_durability_description_key": {},
         "speed": {
           "$ref": "#/definitions/float"
         }

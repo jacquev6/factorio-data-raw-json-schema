@@ -10,16 +10,20 @@
       "$ref": "../split-schema/float.json"
     },
     "particle_effects": {
-      "oneOf": [
+      "anyOf": [
         {
-          "type": "array",
-          "items": {
-            "$ref": "../split-schema/CreateParticleTriggerEffectItem.json"
-          }
-        },
-        {
-          "type": "object",
-          "additionalProperties": false
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "../split-schema/CreateParticleTriggerEffectItem.json"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
         },
         {
           "$ref": "../split-schema/CreateParticleTriggerEffectItem.json"

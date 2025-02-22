@@ -180,7 +180,6 @@
   "required": [
     "type",
     "name",
-    "gravity_pull",
     "distance",
     "orientation"
   ]

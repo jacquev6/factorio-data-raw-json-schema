@@ -22,13 +22,49 @@ def array_to_json_definition(self: Schema.ArrayTypeExpression, schema: Schema) -
 
 def patch_schema(schema: Schema) -> None:
     # https://lua-api.factorio.com/2.0.28/types/WorkingVisualisations.html#shift_animation_waypoint_stop_duration is documented as uint16
-    # but is some kind of float in:
+    # but is some kind of floating point number in:
     #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".graphics_set.shift_animation_waypoint_stop_duration'
     #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".wet_mining_graphics_set.shift_animation_waypoint_stop_duration'
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".graphics_set.shift_animation_waypoint_stop_duration'
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".wet_mining_graphics_set.shift_animation_waypoint_stop_duration'
     schema.get_type_def("WorkingVisualisations", Schema.StructTypeExpression).get_property_type(
         "shift_animation_waypoint_stop_duration", Schema.RefTypeExpression
+    ).ref = "double"
+
+    # https://lua-api.factorio.com/2.0.28/types/ItemProductPrototype.html#amount is documented as uint16
+    # but is some kind of floating point number in:
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.recipe."accumulator-recycling".results[0].amount'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.recipe."accumulator-recycling".results[1].amount'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.recipe."active-provider-chest-recycling".results[0].amount'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.recipe."active-provider-chest-recycling".results[1].amount'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.recipe."active-provider-chest-recycling".results[2].amount'
+    # And many other recycling recipes.
+    schema.get_type_def("ItemProductPrototype", Schema.StructTypeExpression).get_property_type(
+        "amount", Schema.RefTypeExpression
+    ).ref = "double"
+
+    # https://lua-api.factorio.com/2.0.28/types/TechnologySlotStyleSpecification.html#level_offset_y is documented as int32
+    # but is some kind of floating point number in:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."gui-style".default.technology_slot.level_offset_y'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."gui-style".default.technology_slot.level_offset_y'
+    schema.get_type_def("TechnologySlotStyleSpecification", Schema.StructTypeExpression).get_property_type(
+        "level_offset_y", Schema.RefTypeExpression
+    ).ref = "double"
+    # (Probably applies to level_offset_x as well)
+    schema.get_type_def("TechnologySlotStyleSpecification", Schema.StructTypeExpression).get_property_type(
+        "level_offset_x", Schema.RefTypeExpression
+    ).ref = "double"
+
+    # https://lua-api.factorio.com/2.0.28/types/TechnologySlotStyleSpecification.html#level_range_offset_y is documented as int32
+    # but is some kind of floating point number in:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."gui-style".default.technology_slot.level_range_offset_y'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."gui-style".default.technology_slot.level_range_offset_y'
+    schema.get_type_def("TechnologySlotStyleSpecification", Schema.StructTypeExpression).get_property_type(
+        "level_range_offset_y", Schema.RefTypeExpression
+    ).ref = "double"
+    # (Probably applies to level_range_offset_x as well)
+    schema.get_type_def("TechnologySlotStyleSpecification", Schema.StructTypeExpression).get_property_type(
+        "level_range_offset_x", Schema.RefTypeExpression
     ).ref = "double"
 
     # https://lua-api.factorio.com/2.0.28/types/WorkingVisualisations.html#working_visualisations is documented as array[WorkingVisualisation]
@@ -42,7 +78,7 @@ def patch_schema(schema: Schema) -> None:
         Schema.UnionTypeExpression(
             members=[
                 schema.get_type_def("WorkingVisualisations", Schema.StructTypeExpression).get_property_type(
-                    "working_visualisations", Schema.ArrayTypeExpression
+                    "working_visualisations"
                 ),
                 Schema.StructTypeExpression(
                     base=None,
@@ -56,6 +92,154 @@ def patch_schema(schema: Schema) -> None:
         ),
     )
 
+    # Properties 'factoriopedia_recycling_recipe_categories', 'feedback_screenshot_file_name', 'feedback_screenshot_subfolder_name', 'gui_move_switch_vibration', 'space_platform_acceleration_expression', 'starmap_orbit_clicked_color', 'starmap_orbit_default_color', 'starmap_orbit_disabled_color' and 'starmap_orbit_hovered_color'
+    # are not documented in https://lua-api.factorio.com/2.0.28/prototypes/UtilityConstants.html
+    # but are present in:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.utility-constants.default'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'utility-constants.default'
+    for property_name in [
+        "factoriopedia_recycling_recipe_categories",
+        "feedback_screenshot_file_name",
+        "feedback_screenshot_subfolder_name",
+        "gui_move_switch_vibration",
+        "space_platform_acceleration_expression",
+        "starmap_orbit_clicked_color",
+        "starmap_orbit_default_color",
+        "starmap_orbit_disabled_color",
+        "starmap_orbit_hovered_color",
+    ]:
+        schema.get_prototype("UtilityConstants").properties.append(
+            Schema.Property(names=[property_name], type=Schema.unconstrained_type, required=False)
+        )
+
+    # Property 'impact_trigger' is not documented in https://lua-api.factorio.com/2.0.28/prototypes/CargoPodPrototype.html
+    # but is present in:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."cargo-pod"."cargo-pod"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '"cargo-pod"."cargo-pod"'
+    schema.get_prototype("CargoPodPrototype").properties.append(
+        Schema.Property(names=["impact_trigger"], type=Schema.unconstrained_type, required=False)
+    )
+
+    # Property 'track_coverage_during_drag_building' is not documented in https://lua-api.factorio.com/2.0.28/prototypes/ElectricPolePrototype.html
+    # but is present in:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."electric-pole"."big-electric-pole"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '"electric-pole"."big-electric-pole"'
+    schema.get_prototype("ElectricPolePrototype").properties.append(
+        Schema.Property(names=["track_coverage_during_drag_building"], type=Schema.unconstrained_type, required=False)
+    )
+
+    # Property 'default_roboport_count_output_signal' is not documented in https://lua-api.factorio.com/2.0.28/prototypes/RoboportPrototype.html
+    # but is present in:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.roboport.roboport'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'roboport.roboport'
+    schema.get_prototype("RoboportPrototype").properties.append(
+        Schema.Property(names=["default_roboport_count_output_signal"], type=Schema.unconstrained_type, required=False)
+    )
+
+    # Property 'factoriopedia_durability_description_key' is not documented in https://lua-api.factorio.com/2.0.28/prototypes/ToolPrototype.html
+    # but is present in:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.tool."military-science-pack"'
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.tool."production-science-pack"'
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.tool."chemical-science-pack"'
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.tool."logistic-science-pack"'
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.tool."automation-science-pack"'
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.tool."utility-science-pack"'
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.tool."space-science-pack"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."utility-science-pack"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."space-science-pack"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."logistic-science-pack"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."electromagnetic-science-pack"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."production-science-pack"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."military-science-pack"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."agricultural-science-pack"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."automation-science-pack"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."promethium-science-pack"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."chemical-science-pack"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."metallurgic-science-pack"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq 'tool."cryogenic-science-pack"'
+    schema.get_prototype("ToolPrototype").properties.append(
+        Schema.Property(
+            names=["factoriopedia_durability_description_key"], type=Schema.unconstrained_type, required=False
+        )
+    )
+
+    # https://lua-api.factorio.com/2.0.28/types/CranePartDyingEffect.html#particle_effects is documented as 'array[CreateParticleTriggerEffectItem]'
+    # but is a single 'CreateParticleTriggerEffectItem' in:
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."agricultural-tower"."agricultural-tower".crane.parts[0].dying_effect.particle_effects'
+    schema.get_type_def("CranePartDyingEffect", Schema.StructTypeExpression).set_property_type(
+        "particle_effects",
+        Schema.UnionTypeExpression(
+            members=[
+                schema.get_type_def("CranePartDyingEffect", Schema.StructTypeExpression).get_property_type(
+                    "particle_effects"
+                ),
+                schema.get_type_def("CranePartDyingEffect", Schema.StructTypeExpression)
+                .get_property_type("particle_effects", Schema.ArrayTypeExpression)
+                .content,
+            ]
+        ),
+    )
+
+    # https://lua-api.factorio.com/2.0.28/prototypes/ShortcutPrototype.html#action doesn't mention "redo" as a possible value
+    # but that value is used in:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.shortcut.redo.action'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.shortcut.redo.action'
+    schema.get_prototype("ShortcutPrototype").get_property_type("action", Schema.UnionTypeExpression).members.append(
+        Schema.LiteralStringTypeExpression(value="redo")
+    )
+
+    # https://lua-api.factorio.com/2.0.28/prototypes/AchievementPrototypeWithCondition.html#objective_condition doesn't mention "late-research" as a possible value
+    # and is not overridden in https://lua-api.factorio.com/2.0.28/prototypes/DontBuildEntityAchievementPrototype.html
+    # but that value is used in:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."dont-build-entity-achievement"."logistic-network-embargo".objective_condition'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."dont-build-entity-achievement"."logistic-network-embargo".objective_condition'
+    schema.get_prototype("AchievementPrototypeWithCondition").get_property_type(
+        "objective_condition", Schema.UnionTypeExpression
+    ).members.append(Schema.LiteralStringTypeExpression(value="late-research"))
+
+    # https://lua-api.factorio.com/2.0.28/prototypes/UtilityConstants.html#space_platform_default_speed_formula is documented as required
+    # but is absent from:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."utility-constants".default'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."utility-constants".default'
+    schema.get_prototype("UtilityConstants").get_property("space_platform_default_speed_formula").required = False
+
+    # https://lua-api.factorio.com/2.0.28/prototypes/SpaceLocationPrototype.html#gravity_pull is documented as required
+    # but is absent from:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."space-location"."space-location-unknown"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."space-location"."space-location-unknown"'
+    schema.get_prototype("SpaceLocationPrototype").get_property("gravity_pull").required = False
+
+    # https://lua-api.factorio.com/2.0.28/prototypes/EditorControllerPrototype.html#ignore_surface_conditions is documented as required
+    # but is absent from:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."editor-controller".default'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."editor-controller".default'
+    schema.get_prototype("EditorControllerPrototype").get_property("ignore_surface_conditions").required = False
+
+    # https://lua-api.factorio.com/2.0.28/prototypes/AchievementPrototypeWithCondition.html#objective_condition is documented as required
+    # but is absent from:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."dont-kill-manually-achievement"."keeping-your-hands-clean"'
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."dont-use-entity-in-energy-production-achievement".solaris'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."dont-kill-manually-achievement"."keeping-your-hands-clean"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."dont-research-before-researching-achievement"."rush-to-space"'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."dont-use-entity-in-energy-production-achievement".solaris'
+    schema.get_prototype("AchievementPrototypeWithCondition").get_property("objective_condition").required = False
+
+    # https://lua-api.factorio.com/2.0.28/prototypes/UtilitySprites.html#cursor_box documents attributes 'rts_selected' as required
+    # but is absent from:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."utility-sprites".default.cursor_box'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."utility-sprites".default.cursor_box'
+    schema.get_prototype("UtilitySprites").get_property_type("cursor_box", Schema.StructTypeExpression).get_property(
+        "rts_selected"
+    ).required = False
+
+    # https://lua-api.factorio.com/2.0.28/prototypes/UtilitySprites.html#cursor_box documents attributes 'rts_to_be_selected' as required
+    # but is absent from:
+    #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."utility-sprites".default.cursor_box'
+    #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."utility-sprites".default.cursor_box'
+    schema.get_prototype("UtilitySprites").get_property_type("cursor_box", Schema.StructTypeExpression).get_property(
+        "rts_to_be_selected"
+    ).required = False
+
 
 def patch_json(schema: Any) -> None:
     def remove_all_constraints(type_name: str) -> None:
@@ -65,118 +249,7 @@ def patch_json(schema: Any) -> None:
             new_definition["type"] = previous_definition["type"]
         schema["definitions"][type_name] = new_definition
 
-    def patch(path: str, fn: Any) -> None:
-        d = schema
-        parts = path.split(".")
-        for p in parts[:-1]:
-            d = d[p]
-        d[parts[-1]] = fn(d[parts[-1]])
-
-    def remove_from_list(path: str, key: str) -> None:
-        patch(path, lambda x: [v for v in x if v != key])
-
-    def add_to_list(path: str, value: Any) -> None:
-        patch(path, lambda x: x + [value])
-
-    def add_to_dict(path: str, key: str, value: JsonValue) -> None:
-        patch(path, lambda x: {**x, key: value})
-
-    def replace_in_value(path: str, pattern: str, replacement: str) -> None:
-        def fn(x: str) -> str:
-            assert pattern in x
-            return x.replace(pattern, replacement)
-
-        patch(path, fn)
-
-    def allow_single_element_instead_of_array(type_name: str, property_name: str) -> None:
-        path = f"definitions.{type_name}.properties.{property_name}"
-
-        def fn(x: Any) -> Any:
-            assert x["oneOf"][0]["type"] == "array", x
-            assert x["oneOf"][1] == {"type": "object", "additionalProperties": False}, x
-            x["oneOf"].append(x["oneOf"][0]["items"])
-            return x
-
-        patch(path, fn)
-
-    # Ad-hoc patches because the doc doesn't match the actual data
-    # ============================================================
-
-    # https://lua-api.factorio.com/2.0.28/types/ItemProductPrototype.html#amount_min is documented as uint16
-    # @todo Identify counter-example(s)
-    replace_in_value("definitions.ItemProductPrototype.properties.amount.$ref", "/uint16", "/double")
-
-    # https://lua-api.factorio.com/2.0.28/types/TechnologySlotStyleSpecification.html#level_offset_y is documented as int32
-    # @todo Identify counter-example(s)
-    # (Probably applies to level_offset_x as well)
-    replace_in_value("definitions.TechnologySlotStyleSpecification.properties.level_offset_y.$ref", "/int32", "/double")
-    replace_in_value("definitions.TechnologySlotStyleSpecification.properties.level_offset_x.$ref", "/int32", "/double")
-
-    # https://lua-api.factorio.com/2.0.28/types/TechnologySlotStyleSpecification.html#level_range_offset_y is documented as int32
-    # @todo Identify counter-example(s)
-    # (Probably applies to level_range_offset_x as well)
-    replace_in_value(
-        "definitions.TechnologySlotStyleSpecification.properties.level_range_offset_y.$ref", "/int32", "/double"
-    )
-    replace_in_value(
-        "definitions.TechnologySlotStyleSpecification.properties.level_range_offset_x.$ref", "/int32", "/double"
-    )
-
-    # https://lua-api.factorio.com/2.0.28/prototypes/UtilitySprites.html#cursor_box documents these two attributes as required
-    # @todo Identify counter-example(s)
-    remove_from_list("definitions.UtilitySprites.properties.cursor_box.required", "rts_selected")
-    remove_from_list("definitions.UtilitySprites.properties.cursor_box.required", "rts_to_be_selected")
-
-    # https://lua-api.factorio.com/2.0.28/prototypes/UtilityConstants.html#space_platform_default_speed_formula is documented as required
-    # @todo Identify counter-example(s)
-    remove_from_list("definitions.UtilityConstants.required", "space_platform_default_speed_formula")
-
-    # https://lua-api.factorio.com/2.0.28/prototypes/SpaceLocationPrototype.html#gravity_pull is documented as required
-    # @todo Identify counter-example(s)
-    remove_from_list("definitions.SpaceLocationPrototype.required", "gravity_pull")
-
-    # https://lua-api.factorio.com/2.0.28/prototypes/EditorControllerPrototype.html#ignore_surface_conditions is documented as required
-    # @todo Identify counter-example(s)
-    remove_from_list("definitions.EditorControllerPrototype.required", "ignore_surface_conditions")
-
-    # https://lua-api.factorio.com/2.0.28/prototypes/AchievementPrototypeWithCondition.html#objective_condition is documented as required
-    # @todo Identify counter-example(s)
-    remove_from_list("definitions.DontResearchBeforeResearchingAchievementPrototype.required", "objective_condition")
-    remove_from_list("definitions.DontUseEntityInEnergyProductionAchievementPrototype.required", "objective_condition")
-    remove_from_list("definitions.DontKillManuallyAchievementPrototype.required", "objective_condition")
-
-    # https://lua-api.factorio.com/2.0.28/prototypes/ShortcutPrototype.html#action doesn't mention "redo" as a possible value
-    add_to_list("definitions.ShortcutPrototype.properties.action.anyOf", {"type": "string", "const": "redo"})
-
-    # https://lua-api.factorio.com/2.0.28/prototypes/AchievementPrototypeWithCondition.html#objective_condition doesn't mention "late-research" as a possible value
-    # and is not overridden in https://lua-api.factorio.com/2.0.28/prototypes/DontBuildEntityAchievementPrototype.html
-    add_to_list(
-        "definitions.DontBuildEntityAchievementPrototype.properties.objective_condition.anyOf",
-        {"type": "string", "const": "late-research"},
-    )
-
-    # https://lua-api.factorio.com/2.0.28/types/CranePartDyingEffect.html#particle_effects is documented as 'array[CreateParticleTriggerEffectItem]'
-    # but can be a single 'CreateParticleTriggerEffectItem'.
-    # Example: cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."agricultural-tower"."agricultural-tower".crane.parts[0].dying_effect.particle_effects'
-    allow_single_element_instead_of_array("CranePartDyingEffect", "particle_effects")
-
-    # Undocumented properties
-    add_to_dict("definitions.ToolPrototype.properties", "factoriopedia_durability_description_key", {})
-    add_to_dict("definitions.CargoPodPrototype.properties", "impact_trigger", {})
-    add_to_dict("definitions.ElectricPolePrototype.properties", "track_coverage_during_drag_building", {})
-    add_to_dict("definitions.RoboportPrototype.properties", "default_roboport_count_output_signal", {})
-    add_to_dict("definitions.UtilityConstants.properties", "factoriopedia_recycling_recipe_categories", {})
-    add_to_dict("definitions.UtilityConstants.properties", "feedback_screenshot_file_name", {})
-    add_to_dict("definitions.UtilityConstants.properties", "feedback_screenshot_subfolder_name", {})
-    add_to_dict("definitions.UtilityConstants.properties", "gui_move_switch_vibration", {})
-    add_to_dict("definitions.UtilityConstants.properties", "space_platform_acceleration_expression", {})
-    add_to_dict("definitions.UtilityConstants.properties", "starmap_orbit_clicked_color", {})
-    add_to_dict("definitions.UtilityConstants.properties", "starmap_orbit_default_color", {})
-    add_to_dict("definitions.UtilityConstants.properties", "starmap_orbit_disabled_color", {})
-    add_to_dict("definitions.UtilityConstants.properties", "starmap_orbit_hovered_color", {})
-
     # Patches to investigate and document
-    # remove_all_constraints("AgriculturalCraneProperties")
     remove_all_constraints("Animation")
     remove_all_constraints("AttackParameters")
     remove_all_constraints("BoundingBox")
@@ -184,7 +257,6 @@ def patch_json(schema: Any) -> None:
     remove_all_constraints("CreateDecorativesTriggerEffectItem")
     remove_all_constraints("EntityBuildAnimationPiece")
     remove_all_constraints("FootstepTriggerEffectList")
-    # remove_all_constraints("MiningDrillGraphicsSet")
     remove_all_constraints("NeighbourConnectable")
     remove_all_constraints("ProcessionTimeline")
     remove_all_constraints("RailPictureSet")

@@ -75,6 +75,10 @@
         {
           "type": "string",
           "const": "rocket-launched"
+        },
+        {
+          "type": "string",
+          "const": "late-research"
         }
       ]
     },
@@ -86,7 +90,6 @@
   "required": [
     "type",
     "name",
-    "objective_condition",
     "amount"
   ]
 }

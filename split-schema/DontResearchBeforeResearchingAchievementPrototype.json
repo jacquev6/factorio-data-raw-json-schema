@@ -75,6 +75,10 @@
         {
           "type": "string",
           "const": "rocket-launched"
+        },
+        {
+          "type": "string",
+          "const": "late-research"
         }
       ]
     },
