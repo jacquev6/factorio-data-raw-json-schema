@@ -1,5 +1,54 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/PersistentWorldAmbientSoundsDefinitionCrossfade.html",
-  "type": "object"
+  "type": "object",
+  "properties": {
+    "curve_type": {
+      "$ref": "../split-schema/AttenuationType.json"
+    },
+    "tuning_parameter": {
+      "$ref": "../split-schema/float.json"
+    },
+    "from": {
+      "$ref": "../split-schema/ControlPoint.json"
+    },
+    "to": {
+      "$ref": "../split-schema/ControlPoint.json"
+    },
+    "order": {
+      "type": "array",
+      "items": [
+        {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "wind"
+            },
+            {
+              "type": "string",
+              "const": "base_ambience"
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "wind"
+            },
+            {
+              "type": "string",
+              "const": "base_ambience"
+            }
+          ]
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    }
+  },
+  "required": [
+    "curve_type",
+    "order"
+  ]
 }

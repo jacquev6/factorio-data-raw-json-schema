@@ -17897,7 +17897,56 @@
     },
     "PersistentWorldAmbientSoundsDefinitionCrossfade": {
       "description": "https://lua-api.factorio.com/stable/types/PersistentWorldAmbientSoundsDefinitionCrossfade.html",
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "curve_type": {
+          "$ref": "#/definitions/AttenuationType"
+        },
+        "tuning_parameter": {
+          "$ref": "#/definitions/float"
+        },
+        "from": {
+          "$ref": "#/definitions/ControlPoint"
+        },
+        "to": {
+          "$ref": "#/definitions/ControlPoint"
+        },
+        "order": {
+          "type": "array",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "wind"
+                },
+                {
+                  "type": "string",
+                  "const": "base_ambience"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "wind"
+                },
+                {
+                  "type": "string",
+                  "const": "base_ambience"
+                }
+              ]
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "required": [
+        "curve_type",
+        "order"
+      ]
     },
     "PipeConnectionDefinition": {
       "description": "https://lua-api.factorio.com/stable/types/PipeConnectionDefinition.html",

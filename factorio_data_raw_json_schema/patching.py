@@ -342,15 +342,3 @@ def patch_schema(schema: Schema) -> None:
     schema.get_type_def("DamageTileTriggerEffectItem", Schema.StructTypeExpression).get_property_type(
         "type", Schema.LiteralStringTypeExpression
     ).value = "damage-tile"
-
-
-def patch_json(schema: Any) -> None:
-    def remove_all_constraints(type_name: str) -> None:
-        previous_definition = schema["definitions"][type_name]
-        new_definition = {"description": previous_definition["description"]}
-        if "type" in previous_definition:
-            new_definition["type"] = previous_definition["type"]
-        schema["definitions"][type_name] = new_definition
-
-    # Preemptive: this type uses "Fade" as a base, but "Fade" is not a struct. Deal with that later.
-    remove_all_constraints("PersistentWorldAmbientSoundsDefinitionCrossfade")

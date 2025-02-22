@@ -159,12 +159,20 @@ class Schema:
                     base = schema.referable_types[prototype.base]
                     if isinstance(base, Schema.StructTypeExpression):
                         rec(base)
+                    elif isinstance(base, Schema.UnionTypeExpression):
+                        for member in base.members:
+                            if isinstance(member, Schema.StructTypeExpression):
+                                rec(member)
+                                break
+                            else:
+                                print(
+                                    f"{prototype.base} has union type and is used as a base, but it has no member of struct type",
+                                    file=sys.stderr,
+                                )
                     else:
-                        if prototype.base not in ["Fade"]:
-                            print(
-                                f"{prototype.base} is used as a base but is not a struct; it's a {base.kind}",
-                                file=sys.stderr,
-                            )
+                        print(
+                            f"{prototype.base} is used as a base but has unexpected type: {base.kind}", file=sys.stderr
+                        )
                 all_properties = prototype.properties + prototype.overridden_properties
                 properties.update(
                     {name: p.type.make_json_definition(schema) for p in all_properties for name in p.names}

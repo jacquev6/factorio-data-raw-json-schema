@@ -53,8 +53,6 @@ def extract(doc_root: str, output: click.utils.LazyFile, split: bool, do_patch: 
     if do_patch:
         patching.patch_schema(schema)
     json_schema = schema.to_json(make_reference=make_reference)
-    if do_patch:
-        patching.patch_json(json_schema)
     if split:
         assert make_reference is not None
         definitions = typing.cast(dict[str, dict[str, Any]], json_schema.pop("definitions"))
