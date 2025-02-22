@@ -1,5 +1,48 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "description": "https://lua-api.factorio.com/stable/types/AgriculturalCraneProperties.html",
-  "type": "object"
+  "type": "object",
+  "properties": {
+    "speed": {
+      "$ref": "../split-schema/AgriculturalCraneSpeed.json"
+    },
+    "min_arm_extent": {
+      "$ref": "../split-schema/double.json"
+    },
+    "min_grappler_extent": {
+      "$ref": "../split-schema/double.json"
+    },
+    "operation_angle": {
+      "$ref": "../split-schema/float.json"
+    },
+    "telescope_default_extention": {
+      "$ref": "../split-schema/double.json"
+    },
+    "origin": {
+      "$ref": "../split-schema/Vector3D.json"
+    },
+    "shadow_direction": {
+      "$ref": "../split-schema/Vector3D.json"
+    },
+    "parts": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../split-schema/CranePart.json"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "speed",
+    "origin",
+    "shadow_direction",
+    "parts"
+  ]
 }

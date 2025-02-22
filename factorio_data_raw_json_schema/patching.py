@@ -51,6 +51,17 @@ def patch(schema: Any) -> None:
 
         patch(path, fn)
 
+    def allow_single_element_instead_of_array(type_name: str, property_name: str) -> None:
+        path = f"definitions.{type_name}.properties.{property_name}"
+
+        def fn(x: Any) -> Any:
+            assert x["oneOf"][0]["type"] == "array", x
+            assert x["oneOf"][1] == {"type": "object", "additionalProperties": False}, x
+            x["oneOf"].append(x["oneOf"][0]["items"])
+            return x
+
+        patch(path, fn)
+
     # Ad-hoc patches because the doc doesn't match the actual data
     # ============================================================
 
@@ -107,6 +118,11 @@ def patch(schema: Any) -> None:
         {"type": "string", "const": "late-research"},
     )
 
+    # https://lua-api.factorio.com/2.0.28/types/CranePartDyingEffect.html#particle_effects is documented as 'array[CreateParticleTriggerEffectItem]'
+    # but can be a single 'CreateParticleTriggerEffectItem'.
+    # Example: cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."agricultural-tower"."agricultural-tower".crane.parts[0].dying_effect.particle_effects'
+    allow_single_element_instead_of_array("CranePartDyingEffect", "particle_effects")
+
     # Undocumented properties
     add_to_dict("definitions.ToolPrototype.properties", "factoriopedia_durability_description_key", {})
     add_to_dict("definitions.CargoPodPrototype.properties", "impact_trigger", {})
@@ -123,7 +139,7 @@ def patch(schema: Any) -> None:
     add_to_dict("definitions.UtilityConstants.properties", "starmap_orbit_hovered_color", {})
 
     # Patches to investigate and document
-    remove_all_constraints("AgriculturalCraneProperties")
+    # remove_all_constraints("AgriculturalCraneProperties")
     remove_all_constraints("Animation")
     remove_all_constraints("AttackParameters")
     remove_all_constraints("BoundingBox")

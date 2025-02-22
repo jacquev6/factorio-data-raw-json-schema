@@ -1860,7 +1860,50 @@
     },
     "AgriculturalCraneProperties": {
       "description": "https://lua-api.factorio.com/stable/types/AgriculturalCraneProperties.html",
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "speed": {
+          "$ref": "#/definitions/AgriculturalCraneSpeed"
+        },
+        "min_arm_extent": {
+          "$ref": "#/definitions/double"
+        },
+        "min_grappler_extent": {
+          "$ref": "#/definitions/double"
+        },
+        "operation_angle": {
+          "$ref": "#/definitions/float"
+        },
+        "telescope_default_extention": {
+          "$ref": "#/definitions/double"
+        },
+        "origin": {
+          "$ref": "#/definitions/Vector3D"
+        },
+        "shadow_direction": {
+          "$ref": "#/definitions/Vector3D"
+        },
+        "parts": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CranePart"
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "speed",
+        "origin",
+        "shadow_direction",
+        "parts"
+      ]
     },
     "AgriculturalCraneSpeed": {
       "description": "https://lua-api.factorio.com/stable/types/AgriculturalCraneSpeed.html",
@@ -6963,6 +7006,9 @@
             {
               "type": "object",
               "additionalProperties": false
+            },
+            {
+              "$ref": "#/definitions/CreateParticleTriggerEffectItem"
             }
           ]
         },
