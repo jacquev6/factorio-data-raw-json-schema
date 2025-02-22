@@ -52,7 +52,11 @@ fi
 
   if ! git diff --stat --exit-code split-schema.json split-schema
   then
-    check-jsonschema --verbose --schemafile split-schema.json game-definitions/*/script-output/data-raw-dump.json
+    for data in game-definitions/*/script-output/data-raw-dump.json
+    do
+      echo check-jsonschema --verbose --schemafile split-schema.json $data
+    done \
+    | parallel
 
     python -m factorio_data_raw_json_schema extract \
     --doc-root https://lua-api.factorio.com/2.0.28/ \
