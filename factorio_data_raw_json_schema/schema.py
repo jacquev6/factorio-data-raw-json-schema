@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import sys
-from typing import Callable, Literal
+from typing import Callable, Iterable, Literal
 import dataclasses
 import typing
 
@@ -304,7 +304,13 @@ class Schema:
         self.references_needed.add(name)
         return self.do_make_reference(deep, name)
 
-    def to_json(self, *, make_reference: Callable[[bool, str], str] | None = None) -> JsonDict:
+    def to_json(
+        self,
+        *,
+        make_reference: Callable[[bool, str], str] | None,
+        limit_to: Iterable[str] | None,
+        include_descendants: bool,
+    ) -> JsonDict:
         if make_reference is None:
             self.do_make_reference: Callable[[bool, str], str] = lambda deep, name: f"#/definitions/{name}"
         else:
@@ -314,6 +320,32 @@ class Schema:
             type.name: type.definition for type in self.types
         }
 
+        if limit_to is None:
+            prototypes_to_include = {prototype.name for prototype in self.prototypes}
+        else:
+            prototypes_by_name = {
+                prototype.name: prototype for prototype in self.prototypes if prototype.name is not None
+            }
+            prototypes_to_include = set()
+            for name in limit_to:
+                name = name + "Prototype"
+                prototype = prototypes_by_name.get(name)
+                assert prototype is not None, f"Prototype {name!r} not found"
+                prototypes_to_include.add(prototype.name)
+            if include_descendants:
+                children_by_parent: dict[str, set[str]] = {}
+                for prototype in self.prototypes:
+                    if prototype.base is not None:
+                        children_by_parent.setdefault(prototype.base, set()).add(prototype.name)
+                to_explore = set(prototypes_to_include)
+                while to_explore:
+                    name = to_explore.pop()
+                    children = children_by_parent.get(name, set())
+                    prototypes_to_include |= children
+                    to_explore |= children
+
+        # @todo Generate a json file capturing the prototypes hierarchy
+
         references_needed_by: dict[str, set[str]] = {}
         self.references_needed = references_needed_by["root"] = set()
         properties = {
@@ -321,7 +353,7 @@ class Schema:
                 {"type": "object", "additionalProperties": {"$ref": self.make_reference(False, prototype.name)}}
             )
             for prototype in self.prototypes
-            if prototype.key is not None
+            if prototype.key is not None and prototype.name in prototypes_to_include
         }
 
         definitions: JsonDict = {}
@@ -340,7 +372,7 @@ class Schema:
                 } | prototype.make_json_definition(self)
 
         references_needed: set[str] = set()
-        to_explore = references_needed_by["root"]
+        to_explore = set(prototypes_to_include)
         while to_explore:
             name = to_explore.pop()
             if name not in references_needed:

@@ -47,19 +47,23 @@ fi
 
   $runner python -m factorio_data_raw_json_schema extract \
     --doc-root https://lua-api.factorio.com/2.0.28/ \
-    --split $extract_options \
-    split-schema.json
+    $extract_options \
+    factorio-data-raw-json-schema.full.json
 
-  if ! git diff --stat --exit-code split-schema.json split-schema
-  then
-    for data in game-definitions/*/script-output/data-raw-dump.json
-    do
-      echo check-jsonschema --verbose --schemafile split-schema.json $data
-    done \
-    | parallel
-
-    python -m factorio_data_raw_json_schema extract \
+  python -m factorio_data_raw_json_schema extract \
     --doc-root https://lua-api.factorio.com/2.0.28/ \
-    factorio-data-raw-json-schema.json
-  fi
+    --limit-to Recipe --limit-to Entity --limit-to Item \
+    factorio-data-raw-json-schema.recipes-entities-items.json
+
+  for schema in factorio-data-raw-json-schema.*.json
+  do
+    if ! git diff --stat --exit-code $schema 1>&2
+    then
+      for data in game-definitions/*/script-output/data-raw-dump.json
+      do
+        echo check-jsonschema --verbose --schemafile $schema $data
+      done \
+    fi
+  done \
+  | parallel
 )

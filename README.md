@@ -31,7 +31,7 @@ Then, it's "just" a matter of validating the input file (using a JSON schema val
 Using the schema
 ================
 
-Just [download it](https://raw.githubusercontent.com/jacquev6/factorio-data-raw-json-schema/refs/heads/main/factorio-data-raw-json-schema.json) from GitHub.
+Just [download it](https://raw.githubusercontent.com/jacquev6/factorio-data-raw-json-schema/refs/heads/main/factorio-data-raw-json-schema.full.json) from GitHub.
 
 Quirks
 ======

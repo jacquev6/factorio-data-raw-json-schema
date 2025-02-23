@@ -1,6 +1,6 @@
 import os
 import shutil
-from typing import Any, Callable
+from typing import Any, Callable, Iterable
 import json
 import typing
 
@@ -34,9 +34,29 @@ def main() -> None:
     show_default=True,
 )
 @click.option(
+    "--limit-to",
+    type=str,
+    multiple=True,
+    help="Limit the schema to the specified prototypes. Can be specified multiple times.",
+)
+@click.option(
+    "--include-descendants/--no-include-descendants",
+    default=True,
+    help="Include descendants of the specified prototypes in the schema.",
+    show_default=True,
+)
+@click.option(
     "--workers", type=int, default=-1, help="Number of worker threads to use. Default is the number of CPU cores."
 )
-def extract(doc_root: str, output: click.utils.LazyFile, split: bool, do_patch: bool, workers: int) -> None:
+def extract(
+    doc_root: str,
+    output: click.utils.LazyFile,
+    split: bool,
+    do_patch: bool,
+    limit_to: list[str],
+    include_descendants: bool,
+    workers: int,
+) -> None:
     crawler = crawling.Crawler(doc_root)
 
     if split:
@@ -52,7 +72,9 @@ def extract(doc_root: str, output: click.utils.LazyFile, split: bool, do_patch: 
     schema = extraction.extract(crawler=crawler, workers=workers)
     if do_patch:
         patching.patch_schema(schema)
-    json_schema = schema.to_json(make_reference=make_reference)
+    json_schema = schema.to_json(
+        make_reference=make_reference, limit_to=limit_to or None, include_descendants=include_descendants
+    )
     if split:
         assert make_reference is not None
         definitions = typing.cast(dict[str, dict[str, Any]], json_schema.pop("definitions"))
