@@ -59,6 +59,8 @@ def extract(
 ) -> None:
     crawler = crawling.Crawler(doc_root)
 
+    # @todo Add --forbid flag to list types that are excluded from the schema. E.g. --forbi Sound --forbid Sprite would remove all attributes related to these types
+    
     if split:
         definitions_dir = os.path.splitext(output.name)[0]
         shutil.rmtree(definitions_dir, ignore_errors=True)
