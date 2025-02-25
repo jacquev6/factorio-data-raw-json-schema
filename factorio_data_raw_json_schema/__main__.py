@@ -1,6 +1,6 @@
 import os
 import shutil
-from typing import Any, Callable, Iterable
+from typing import Any, Callable
 import json
 import typing
 
@@ -9,6 +9,7 @@ import click
 from . import crawling
 from . import extraction
 from . import patching
+from . import schema
 
 
 @click.group()
@@ -71,11 +72,14 @@ def extract(
     else:
         make_reference = None
 
-    schema = extraction.extract(crawler=crawler, workers=workers)
+    factorio_schema = extraction.extract(crawler=crawler, workers=workers)
     if do_patch:
-        patching.patch_schema(schema)
-    json_schema = schema.to_json(
-        make_reference=make_reference, limit_to=limit_to or None, include_descendants=include_descendants
+        patching.patch_schema(factorio_schema)
+    json_schema = schema.make_json(
+        factorio_schema,
+        make_reference=make_reference,
+        limit_to=limit_to or None,
+        include_descendants=include_descendants,
     )
     if split:
         assert make_reference is not None

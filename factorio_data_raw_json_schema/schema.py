@@ -29,7 +29,7 @@ class Schema:
         kind: Literal["builtin"] = "builtin"
         json_definition: JsonDict
 
-        def make_json_definition(self, schema: Schema) -> JsonDict:
+        def make_json_definition(self, make: JsonMaker) -> JsonDict:
             return self.json_definition
 
     builtin_types: dict[str, BuiltinTypeExpression] = {
@@ -60,7 +60,7 @@ class Schema:
         kind: Literal["literal_bool"] = "literal_bool"
         value: bool
 
-        def make_json_definition(self, schema: Schema) -> JsonDict:
+        def make_json_definition(self, maker: JsonMaker) -> JsonDict:
             return {"type": "boolean", "const": self.value}
 
     @dataclasses.dataclass(kw_only=True, eq=False)
@@ -68,7 +68,7 @@ class Schema:
         kind: Literal["literal_string"] = "literal_string"
         value: str
 
-        def make_json_definition(self, schema: Schema) -> JsonDict:
+        def make_json_definition(self, maker: JsonMaker) -> JsonDict:
             return {"type": "string", "const": self.value}
 
     @dataclasses.dataclass(kw_only=True, eq=False)
@@ -76,7 +76,7 @@ class Schema:
         kind: Literal["literal_integer"] = "literal_integer"
         value: int
 
-        def make_json_definition(self, schema: Schema) -> JsonDict:
+        def make_json_definition(self, maker: JsonMaker) -> JsonDict:
             return {"type": "integer", "const": self.value}
 
     @dataclasses.dataclass(kw_only=True, eq=False)
@@ -84,24 +84,24 @@ class Schema:
         kind: Literal["ref"] = "ref"
         ref: str
 
-        def make_json_definition(self, schema: Schema) -> JsonDict:
-            return {"$ref": schema.make_reference(True, self.ref)}
+        def make_json_definition(self, maker: JsonMaker) -> JsonDict:
+            return {"$ref": maker.make_reference(True, self.ref)}
 
     @dataclasses.dataclass(kw_only=True, eq=False)
     class UnionTypeExpression:
         kind: Literal["union"] = "union"
         members: list[Schema.TypeExpression]
 
-        def make_json_definition(self, schema: Schema) -> JsonDict:
-            return {"anyOf": [member.make_json_definition(schema) for member in self.members]}
+        def make_json_definition(self, maker: JsonMaker) -> JsonDict:
+            return {"anyOf": [member.make_json_definition(maker) for member in self.members]}
 
     @dataclasses.dataclass(kw_only=True, eq=False)
     class ArrayTypeExpression:
         kind: Literal["array"] = "array"
         content: Schema.TypeExpression
 
-        def make_json_definition(self, schema: Schema) -> JsonDict:
-            return patching.array_to_json_definition(self, schema)
+        def make_json_definition(self, maker: JsonMaker) -> JsonDict:
+            return patching.array_to_json_definition(self, maker)
 
     @dataclasses.dataclass(kw_only=True, eq=False)
     class DictionaryTypeExpression:
@@ -109,11 +109,11 @@ class Schema:
         keys: Schema.TypeExpression
         values: Schema.TypeExpression
 
-        def make_json_definition(self, schema: Schema) -> JsonDict:
+        def make_json_definition(self, maker: JsonMaker) -> JsonDict:
             return {
                 "type": "object",
-                "additionalProperties": self.values.make_json_definition(schema),
-                "propertyNames": self.keys.make_json_definition(schema),
+                "additionalProperties": self.values.make_json_definition(maker),
+                "propertyNames": self.keys.make_json_definition(maker),
             }
 
     @dataclasses.dataclass(kw_only=True, eq=False)
@@ -150,13 +150,13 @@ class Schema:
             property = self.get_property(name)
             property.type = type
 
-        def make_json_definition(self, schema: Schema) -> JsonDict:
+        def make_json_definition(self, maker: JsonMaker) -> JsonDict:
             properties: JsonDict = {}
             required: dict[str, bool] = {}
 
             def rec(prototype: Schema.StructTypeExpression) -> None:
                 if prototype.base is not None:
-                    base = schema.referable_types[prototype.base]
+                    base = maker.referable_types[prototype.base]
                     if isinstance(base, Schema.StructTypeExpression):
                         rec(base)
                     elif isinstance(base, Schema.UnionTypeExpression):
@@ -175,7 +175,7 @@ class Schema:
                         )
                 all_properties = prototype.properties + prototype.overridden_properties
                 properties.update(
-                    {name: p.type.make_json_definition(schema) for p in all_properties for name in p.names}
+                    {name: p.type.make_json_definition(maker) for p in all_properties for name in p.names}
                 )
                 # @todo When there are multiple property names, and the property is required, enforce that at least one property name is present
                 required.update({name: p.required for p in all_properties for name in p.names if len(p.names) == 1})
@@ -187,7 +187,7 @@ class Schema:
             if self.custom_properties is None:
                 pass
             else:
-                definition["additionalProperties"] = self.custom_properties.make_json_definition(schema)
+                definition["additionalProperties"] = self.custom_properties.make_json_definition(maker)
 
             if any(required.values()):
                 definition["required"] = [
@@ -203,10 +203,10 @@ class Schema:
         kind: Literal["tuple"] = "tuple"
         members: list[Schema.TypeExpression]
 
-        def make_json_definition(self, schema: Schema) -> JsonDict:
+        def make_json_definition(self, maker: JsonMaker) -> JsonDict:
             return {
                 "type": "array",
-                "items": [member.make_json_definition(schema) for member in self.members],
+                "items": [member.make_json_definition(maker) for member in self.members],
                 "minItems": len(self.members),
                 "maxItems": len(self.members),
             }
@@ -275,8 +275,8 @@ class Schema:
                 custom_properties=self.custom_properties,
             )
 
-        def make_json_definition(self, schema: Schema) -> JsonDict:
-            return self.make_definition().make_json_definition(schema)
+        def make_json_definition(self, maker: JsonMaker) -> JsonDict:
+            return self.make_definition().make_json_definition(maker)
 
     def __init__(self, *, types: list[Type], prototypes: list[Prototype]) -> None:
         self.types = types
@@ -300,6 +300,25 @@ class Schema:
                 return prototype
         raise ValueError(f"Prototype {name!r} not found")
 
+
+def make_json(
+    schema: Schema,
+    *,
+    make_reference: Callable[[bool, str], str] | None,
+    limit_to: Iterable[str] | None,
+    include_descendants: bool,
+) -> JsonDict:
+    return JsonMaker(schema=schema).to_json(
+        make_reference=make_reference,
+        limit_to=limit_to,
+        include_descendants=include_descendants,
+    )
+
+
+class JsonMaker:
+    def __init__(self, *, schema: Schema) -> None:
+        self.schema = schema
+
     def make_reference(self, deep: bool, name: str) -> str:
         self.references_needed.add(name)
         return self.do_make_reference(deep, name)
@@ -316,15 +335,15 @@ class Schema:
         else:
             self.do_make_reference = make_reference
 
-        self.referable_types = {prototype.name: prototype.make_definition() for prototype in self.prototypes} | {
-            type.name: type.definition for type in self.types
+        self.referable_types = {prototype.name: prototype.make_definition() for prototype in self.schema.prototypes} | {
+            type.name: type.definition for type in self.schema.types
         }
 
         if limit_to is None:
-            prototypes_to_include = {prototype.name for prototype in self.prototypes}
+            prototypes_to_include = {prototype.name for prototype in self.schema.prototypes}
         else:
             prototypes_by_name = {
-                prototype.name: prototype for prototype in self.prototypes if prototype.name is not None
+                prototype.name: prototype for prototype in self.schema.prototypes if prototype.name is not None
             }
             prototypes_to_include = set()
             for name in limit_to:
@@ -334,7 +353,7 @@ class Schema:
                 prototypes_to_include.add(prototype.name)
             if include_descendants:
                 children_by_parent: dict[str, set[str]] = {}
-                for prototype in self.prototypes:
+                for prototype in self.schema.prototypes:
                     if prototype.base is not None:
                         children_by_parent.setdefault(prototype.base, set()).add(prototype.name)
                 to_explore = set(prototypes_to_include)
@@ -352,19 +371,19 @@ class Schema:
             prototype.key: json_value(
                 {"type": "object", "additionalProperties": {"$ref": self.make_reference(False, prototype.name)}}
             )
-            for prototype in self.prototypes
+            for prototype in self.schema.prototypes
             if prototype.key is not None and prototype.name in prototypes_to_include
         }
 
         definitions: JsonDict = {}
 
-        for type in self.types:
+        for type in self.schema.types:
             self.references_needed = references_needed_by[type.name] = set()
             definitions[type.name] = {
                 "description": json_value(f"https://lua-api.factorio.com/stable/types/{type.name}.html")
             } | type.definition.make_json_definition(self)
 
-        for prototype in self.prototypes:
+        for prototype in self.schema.prototypes:
             if prototype.key is not None:
                 self.references_needed = references_needed_by[prototype.name] = set()
                 definitions[prototype.name] = {
