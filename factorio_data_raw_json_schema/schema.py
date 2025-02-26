@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import itertools
 import sys
 from typing import Callable, Iterable, Literal
 import dataclasses
@@ -156,7 +157,7 @@ class Schema:
 
             def rec(prototype: Schema.StructTypeExpression) -> None:
                 if prototype.base is not None:
-                    base = maker.referable_types[prototype.base]
+                    base = maker.get_referable_types(prototype.base)
                     if isinstance(base, Schema.StructTypeExpression):
                         rec(base)
                     elif isinstance(base, Schema.UnionTypeExpression):
@@ -173,12 +174,14 @@ class Schema:
                         print(
                             f"{prototype.base} is used as a base but has unexpected type: {base.kind}", file=sys.stderr
                         )
-                all_properties = prototype.properties + prototype.overridden_properties
-                properties.update(
-                    {name: p.type.make_json_definition(maker) for p in all_properties for name in p.names}
-                )
-                # @todo When there are multiple property names, and the property is required, enforce that at least one property name is present
-                required.update({name: p.required for p in all_properties for name in p.names if len(p.names) == 1})
+
+                for property in itertools.chain(prototype.properties, prototype.overridden_properties):
+                    property_definition = property.type.make_json_definition(maker)
+                    for name in property.names:
+                        properties[name] = property_definition
+                    # @todo When there are multiple property names, and the property is required, enforce that at least one property name is present
+                    if len(property.names) == 1:
+                        required[property.names[0]] = property.required
 
             rec(self)
 
@@ -305,98 +308,128 @@ def make_json(
     schema: Schema,
     *,
     make_reference: Callable[[bool, str], str] | None,
-    limit_to: Iterable[str] | None,
+    limit_to_prototype_names: Iterable[str] | None,
     include_descendants: bool,
 ) -> JsonDict:
-    return JsonMaker(schema=schema).to_json(
+    return JsonMaker(
+        schema=schema,
         make_reference=make_reference,
-        limit_to=limit_to,
+        limit_to_prototype_names=limit_to_prototype_names,
         include_descendants=include_descendants,
-    )
+    ).to_json()
 
 
 class JsonMaker:
-    def __init__(self, *, schema: Schema) -> None:
-        self.schema = schema
-
-    def make_reference(self, deep: bool, name: str) -> str:
-        self.references_needed.add(name)
-        return self.do_make_reference(deep, name)
-
-    def to_json(
+    def __init__(
         self,
         *,
+        schema: Schema,
         make_reference: Callable[[bool, str], str] | None,
-        limit_to: Iterable[str] | None,
+        limit_to_prototype_names: Iterable[str] | None,
         include_descendants: bool,
-    ) -> JsonDict:
+    ) -> None:
+        self.schema = schema
+
         if make_reference is None:
             self.do_make_reference: Callable[[bool, str], str] = lambda deep, name: f"#/definitions/{name}"
         else:
             self.do_make_reference = make_reference
 
+        self.prototypes_to_include = set(
+            self.__init_prototypes_to_include(limit_to_prototype_names, include_descendants)
+        )
+
         self.referable_types = {prototype.name: prototype.make_definition() for prototype in self.schema.prototypes} | {
             type.name: type.definition for type in self.schema.types
         }
 
-        if limit_to is None:
-            prototypes_to_include = {prototype.name for prototype in self.schema.prototypes}
+        self.references_needed_by = dict(self.__init_references_needed_by())
+
+    def __init_prototypes_to_include(
+        self, limit_to_prototype_names: Iterable[str] | None, include_descendants: bool
+    ) -> Iterable[str]:
+        if limit_to_prototype_names is None:
+            for prototype in self.schema.prototypes:
+                yield prototype.name
         else:
             prototypes_by_name = {
                 prototype.name: prototype for prototype in self.schema.prototypes if prototype.name is not None
             }
-            prototypes_to_include = set()
-            for name in limit_to:
+
+            seed_prototypes = set()
+            for name in limit_to_prototype_names:
                 name = name + "Prototype"
-                prototype = prototypes_by_name.get(name)
-                assert prototype is not None, f"Prototype {name!r} not found"
-                prototypes_to_include.add(prototype.name)
+                assert name in prototypes_by_name, f"Prototype {name!r} not found"
+                seed_prototypes.add(name)
+
+            yield from seed_prototypes
+
             if include_descendants:
                 children_by_parent: dict[str, set[str]] = {}
                 for prototype in self.schema.prototypes:
                     if prototype.base is not None:
                         children_by_parent.setdefault(prototype.base, set()).add(prototype.name)
-                to_explore = set(prototypes_to_include)
+
+                to_explore = set(seed_prototypes)
                 while to_explore:
                     name = to_explore.pop()
                     children = children_by_parent.get(name, set())
-                    prototypes_to_include |= children
+                    yield from children
                     to_explore |= children
 
-        # @todo Generate a json file capturing the prototypes hierarchy
+    def __init_references_needed_by(self) -> Iterable[tuple[str, set[str]]]:
+        # This function relies on side-effects: 'make_reference' modifies 'self.references_needed'
+        # Rationale: keep the many 'TypeExpression' classes simple: they only need to define 'make_json_definition',
+        # and not some variant of 'gather_references_needed'.
 
-        references_needed_by: dict[str, set[str]] = {}
-        self.references_needed = references_needed_by["root"] = set()
+        for prototype in self.schema.prototypes:
+            self.references_needed: set[str] = set()
+            prototype.make_json_definition(self)  # Trigger the side-effect
+            yield prototype.name, self.references_needed
+
+        for type in self.schema.types:
+            self.references_needed = set()
+            type.definition.make_json_definition(self)  # Trigger the side-effect
+            yield type.name, self.references_needed
+
+        self.references_needed = set()
+
+    def make_reference(self, deep: bool, name: str) -> str:
+        self.references_needed.add(name)  # Side effect for '__init_references_needed_by'
+        return self.do_make_reference(deep, name)
+
+    def get_referable_types(self, name: str) -> Schema.TypeExpression:
+        return self.referable_types[name]
+
+    def to_json(self) -> JsonDict:
         properties = {
             prototype.key: json_value(
                 {"type": "object", "additionalProperties": {"$ref": self.make_reference(False, prototype.name)}}
             )
             for prototype in self.schema.prototypes
-            if prototype.key is not None and prototype.name in prototypes_to_include
+            if prototype.key is not None and prototype.name in self.prototypes_to_include
         }
 
-        definitions: JsonDict = {}
-
-        for type in self.schema.types:
-            self.references_needed = references_needed_by[type.name] = set()
-            definitions[type.name] = {
-                "description": json_value(f"https://lua-api.factorio.com/stable/types/{type.name}.html")
-            } | type.definition.make_json_definition(self)
-
-        for prototype in self.schema.prototypes:
-            if prototype.key is not None:
-                self.references_needed = references_needed_by[prototype.name] = set()
-                definitions[prototype.name] = {
-                    "description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{prototype.name}.html")
-                } | prototype.make_json_definition(self)
+        definitions = {
+            type.name: {"description": json_value(f"https://lua-api.factorio.com/stable/types/{type.name}.html")}
+            | type.definition.make_json_definition(self)
+            for type in self.schema.types
+        } | {
+            prototype.name: {
+                "description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{prototype.name}.html")
+            }
+            | prototype.make_json_definition(self)
+            for prototype in self.schema.prototypes
+            if prototype.key is not None
+        }
 
         references_needed: set[str] = set()
-        to_explore = set(prototypes_to_include)
+        to_explore = set(self.prototypes_to_include)
         while to_explore:
             name = to_explore.pop()
             if name not in references_needed:
                 references_needed.add(name)
-                to_explore |= references_needed_by.get(name, set())
+                to_explore |= self.references_needed_by.get(name, set())
 
         return {
             "$schema": "https://json-schema.org/draft/2019-09/schema",

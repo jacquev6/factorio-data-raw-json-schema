@@ -61,7 +61,8 @@ def extract(
     crawler = crawling.Crawler(doc_root)
 
     # @todo Add --forbid flag to list types that are excluded from the schema. E.g. --forbi Sound --forbid Sprite would remove all attributes related to these types
-    
+    # @todo Generate a json file capturing the prototypes hierarchy
+
     if split:
         definitions_dir = os.path.splitext(output.name)[0]
         shutil.rmtree(definitions_dir, ignore_errors=True)
@@ -78,7 +79,7 @@ def extract(
     json_schema = schema.make_json(
         factorio_schema,
         make_reference=make_reference,
-        limit_to=limit_to or None,
+        limit_to_prototype_names=limit_to or None,
         include_descendants=include_descendants,
     )
     if split:
