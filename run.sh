@@ -53,6 +53,7 @@ fi
   python -m factorio_data_raw_json_schema extract \
     --doc-root https://lua-api.factorio.com/2.0.28/ \
     --limit-to Recipe --limit-to Entity --limit-to Item \
+    --forbid SoundDefinition --forbid SpriteSource \
     factorio-data-raw-json-schema.recipes-entities-items.json
 
   for schema in factorio-data-raw-json-schema.*.json

@@ -47,6 +47,12 @@ def main() -> None:
     show_default=True,
 )
 @click.option(
+    "--forbid",
+    type=str,
+    multiple=True,
+    help="Forbid the specified type from appearing in the schema. Can be specified multiple times.",
+)
+@click.option(
     "--workers", type=int, default=-1, help="Number of worker threads to use. Default is the number of CPU cores."
 )
 def extract(
@@ -56,11 +62,11 @@ def extract(
     do_patch: bool,
     limit_to: list[str],
     include_descendants: bool,
+    forbid: list[str],
     workers: int,
 ) -> None:
     crawler = crawling.Crawler(doc_root)
 
-    # @todo Add --forbid flag to list types that are excluded from the schema. E.g. --forbi Sound --forbid Sprite would remove all attributes related to these types
     # @todo Generate a json file capturing the prototypes hierarchy
 
     if split:
@@ -81,6 +87,7 @@ def extract(
         make_reference=make_reference,
         limit_to_prototype_names=limit_to or None,
         include_descendants=include_descendants,
+        forbid_type_names=forbid,
     )
     if split:
         assert make_reference is not None

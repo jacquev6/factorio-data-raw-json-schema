@@ -21,6 +21,10 @@ def json_value(value: JsonValue) -> JsonValue:
     return value
 
 
+class Forbidden(Exception):
+    pass
+
+
 T = typing.TypeVar("T")
 
 
@@ -30,7 +34,7 @@ class Schema:
         kind: Literal["builtin"] = "builtin"
         json_definition: JsonDict
 
-        def make_json_definition(self, make: JsonMaker) -> JsonDict:
+        def make_json_definition(self, maker: JsonMaker) -> JsonDict:
             return self.json_definition
 
     builtin_types: dict[str, BuiltinTypeExpression] = {
@@ -157,7 +161,7 @@ class Schema:
 
             def rec(prototype: Schema.StructTypeExpression) -> None:
                 if prototype.base is not None:
-                    base = maker.get_referable_types(prototype.base)
+                    base = maker.get_referable_type(prototype.base)
                     if isinstance(base, Schema.StructTypeExpression):
                         rec(base)
                     elif isinstance(base, Schema.UnionTypeExpression):
@@ -176,14 +180,21 @@ class Schema:
                         )
 
                 for property in itertools.chain(prototype.properties, prototype.overridden_properties):
-                    property_definition = property.type.make_json_definition(maker)
-                    for name in property.names:
-                        properties[name] = property_definition
-                    # @todo When there are multiple property names, and the property is required, enforce that at least one property name is present
-                    if len(property.names) == 1:
-                        required[property.names[0]] = property.required
+                    try:
+                        property_definition = property.type.make_json_definition(maker)
+                    except Forbidden:
+                        continue
+                    else:
+                        for name in property.names:
+                            properties[name] = property_definition
+                        # @todo When there are multiple property names, and the property is required, enforce that at least one property name is present
+                        if len(property.names) == 1:
+                            required[property.names[0]] = property.required
 
             rec(self)
+
+            if len(properties) == 0 and self.custom_properties is None:
+                raise Forbidden
 
             definition: JsonDict = {"type": "object", "properties": properties}
 
@@ -310,12 +321,14 @@ def make_json(
     make_reference: Callable[[bool, str], str] | None,
     limit_to_prototype_names: Iterable[str] | None,
     include_descendants: bool,
+    forbid_type_names: Iterable[str],
 ) -> JsonDict:
     return JsonMaker(
         schema=schema,
         make_reference=make_reference,
         limit_to_prototype_names=limit_to_prototype_names,
         include_descendants=include_descendants,
+        forbid_type_names=forbid_type_names,
     ).to_json()
 
 
@@ -327,23 +340,46 @@ class JsonMaker:
         make_reference: Callable[[bool, str], str] | None,
         limit_to_prototype_names: Iterable[str] | None,
         include_descendants: bool,
+        forbid_type_names: Iterable[str],
     ) -> None:
         self.schema = schema
+
+        self.types_by_name = {type.name: type for type in schema.types}
+        self.prototypes_by_name = {prototype.name: prototype for prototype in schema.prototypes}
+
+        self.__references_needed: set[str] = set()
 
         if make_reference is None:
             self.do_make_reference: Callable[[bool, str], str] = lambda deep, name: f"#/definitions/{name}"
         else:
             self.do_make_reference = make_reference
 
+        self.__init_forbidden_type_names(forbid_type_names)
+        # self.forbidden_type_names: set[str] = set()
+
         self.prototypes_to_include = set(
             self.__init_prototypes_to_include(limit_to_prototype_names, include_descendants)
         )
 
-        self.referable_types = {prototype.name: prototype.make_definition() for prototype in self.schema.prototypes} | {
-            type.name: type.definition for type in self.schema.types
-        }
-
         self.references_needed_by = dict(self.__init_references_needed_by())
+
+    def __init_forbidden_type_names(self, forbid_type_names: Iterable[str]) -> None:
+        self.forbidden_type_names = set(forbid_type_names)
+
+        # @todo Use a proper graph exploration algorithm!
+        while True:
+            some_type_is_newly_forbidden = False
+            for type in self.schema.types:
+                if type.name not in self.forbidden_type_names:
+                    self.__references_needed = set()
+                    try:
+                        type.definition.make_json_definition(self)
+                    except Forbidden:
+                        self.forbidden_type_names.add(type.name)
+                        some_type_is_newly_forbidden = True
+
+            if not some_type_is_newly_forbidden:
+                break
 
     def __init_prototypes_to_include(
         self, limit_to_prototype_names: Iterable[str] | None, include_descendants: bool
@@ -383,23 +419,36 @@ class JsonMaker:
         # and not some variant of 'gather_references_needed'.
 
         for prototype in self.schema.prototypes:
-            self.references_needed: set[str] = set()
+            self.__references_needed = set()
             prototype.make_json_definition(self)  # Trigger the side-effect
-            yield prototype.name, self.references_needed
+            yield prototype.name, self.__references_needed
 
         for type in self.schema.types:
-            self.references_needed = set()
-            type.definition.make_json_definition(self)  # Trigger the side-effect
-            yield type.name, self.references_needed
+            if type.name not in self.forbidden_type_names:
+                self.__references_needed = set()
+                type.definition.make_json_definition(self)  # Trigger the side-effect
+                yield type.name, self.__references_needed
 
-        self.references_needed = set()
+        self.__references_needed = set()
 
     def make_reference(self, deep: bool, name: str) -> str:
-        self.references_needed.add(name)  # Side effect for '__init_references_needed_by'
+        if name in self.forbidden_type_names:
+            assert name in self.types_by_name
+            raise Forbidden
+
+        self.__references_needed.add(name)  # Side effect for '__init_references_needed_by'
         return self.do_make_reference(deep, name)
 
-    def get_referable_types(self, name: str) -> Schema.TypeExpression:
-        return self.referable_types[name]
+    def get_referable_type(self, name: str) -> Schema.TypeExpression:
+        if name in self.forbidden_type_names:
+            assert name in self.types_by_name
+            raise Forbidden
+
+        type = self.types_by_name.get(name)
+        if type is None:
+            return self.prototypes_by_name[name].make_definition()
+        else:
+            return type.definition
 
     def to_json(self) -> JsonDict:
         properties = {
@@ -414,6 +463,7 @@ class JsonMaker:
             type.name: {"description": json_value(f"https://lua-api.factorio.com/stable/types/{type.name}.html")}
             | type.definition.make_json_definition(self)
             for type in self.schema.types
+            if type.name not in self.forbidden_type_names
         } | {
             prototype.name: {
                 "description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{prototype.name}.html")
