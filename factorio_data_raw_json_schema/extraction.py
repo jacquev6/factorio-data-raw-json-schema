@@ -307,8 +307,9 @@ class TypeExpressionTransformer(lark.Transformer[lark.Token, Schema.TypeExpressi
     def type_expression(self, items: list[Schema.TypeExpression]) -> Schema.TypeExpression:
         return items[0]
 
-    def named_type(self, items: list[str]) -> Schema.TypeExpression:
-        type_name = items[0]
+    def named_type(self, items: list[lark.Token]) -> Schema.TypeExpression:
+        assert isinstance(items, list) and all(isinstance(item, lark.Token) for item in items)
+        type_name = items[0].value
         if type_name == "true":
             return Schema.LiteralBoolTypeExpression(value=True)
         elif type_name == "false":
@@ -320,19 +321,23 @@ class TypeExpressionTransformer(lark.Transformer[lark.Token, Schema.TypeExpressi
         else:
             assert False, f"unknown type: {type_name!r}"
 
-    def literal_string(self, items: list[str]) -> Schema.TypeExpression:
-        value = items[0]
+    def literal_string(self, items: list[lark.Token]) -> Schema.TypeExpression:
+        assert isinstance(items, list) and all(isinstance(item, lark.Token) for item in items)
+        value = items[0].value
         assert value.startswith('"') and value.endswith('"')
         return Schema.LiteralStringTypeExpression(value=value.strip('"'))
 
-    def literal_integer(self, items: list[str]) -> Schema.TypeExpression:
-        value = items[0]
+    def literal_integer(self, items: list[lark.Token]) -> Schema.TypeExpression:
+        assert isinstance(items, list) and all(isinstance(item, lark.Token) for item in items)
+        value = items[0].value
         return Schema.LiteralIntegerTypeExpression(value=int(value))
 
     def array_type(self, items: list[Schema.TypeExpression]) -> Schema.TypeExpression:
+        assert isinstance(items, list) and all(isinstance(item, Schema.TypeExpression) for item in items)
         return Schema.ArrayTypeExpression(content=items[0])
 
     def union_type(self, items: list[Schema.TypeExpression]) -> Schema.TypeExpression:
+        assert isinstance(items, list) and all(isinstance(item, Schema.TypeExpression) for item in items)
         members: list[Schema.TypeExpression] = []
         for item in items:
             if item.kind == "union":
@@ -342,12 +347,15 @@ class TypeExpressionTransformer(lark.Transformer[lark.Token, Schema.TypeExpressi
         return Schema.UnionTypeExpression(members=members)
 
     def dictionary_type(self, items: list[Schema.TypeExpression]) -> Schema.TypeExpression:
+        assert isinstance(items, list) and all(isinstance(item, Schema.TypeExpression) for item in items)
         return Schema.DictionaryTypeExpression(keys=items[0], values=items[1])
 
     def tuple_type(self, items: list[Schema.TypeExpression]) -> Schema.TypeExpression:
+        assert isinstance(items, list) and all(isinstance(item, Schema.TypeExpression) for item in items)
         return Schema.TupleTypeExpression(members=items)
 
-    def adhoc_type(self, items: list[str]) -> Schema.TypeExpression:
+    def adhoc_type(self, items: list[lark.Token]) -> Schema.TypeExpression:
+        assert isinstance(items, list) and all(isinstance(item, lark.Token) for item in items)
         return Schema.builtin_types["uint8"]
 
 
