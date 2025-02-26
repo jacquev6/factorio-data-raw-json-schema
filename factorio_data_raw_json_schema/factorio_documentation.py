@@ -28,7 +28,7 @@ class Forbidden(Exception):
 T = typing.TypeVar("T")
 
 
-class Schema:
+class Doc:
     @dataclasses.dataclass(kw_only=True, eq=False)
     class BuiltinTypeExpression:
         kind: Literal["builtin"] = "builtin"
@@ -95,7 +95,7 @@ class Schema:
     @dataclasses.dataclass(kw_only=True, eq=False)
     class UnionTypeExpression:
         kind: Literal["union"] = "union"
-        members: list[Schema.TypeExpression]
+        members: list[Doc.TypeExpression]
 
         def make_json_definition(self, maker: JsonMaker) -> JsonDict:
             return {"anyOf": [member.make_json_definition(maker) for member in self.members]}
@@ -103,7 +103,7 @@ class Schema:
     @dataclasses.dataclass(kw_only=True, eq=False)
     class ArrayTypeExpression:
         kind: Literal["array"] = "array"
-        content: Schema.TypeExpression
+        content: Doc.TypeExpression
 
         def make_json_definition(self, maker: JsonMaker) -> JsonDict:
             return patching.array_to_json_definition(self, maker)
@@ -111,8 +111,8 @@ class Schema:
     @dataclasses.dataclass(kw_only=True, eq=False)
     class DictionaryTypeExpression:
         kind: Literal["dictionary"] = "dictionary"
-        keys: Schema.TypeExpression
-        values: Schema.TypeExpression
+        keys: Doc.TypeExpression
+        values: Doc.TypeExpression
 
         def make_json_definition(self, maker: JsonMaker) -> JsonDict:
             return {
@@ -124,34 +124,34 @@ class Schema:
     @dataclasses.dataclass(kw_only=True, eq=False)
     class Property:
         names: list[str]
-        type: Schema.TypeExpression
+        type: Doc.TypeExpression
         required: bool = False
 
     @dataclasses.dataclass(kw_only=True, eq=False)
     class StructTypeExpression:
         kind: Literal["struct"] = "struct"
         base: str | None
-        properties: list[Schema.Property]
-        overridden_properties: list[Schema.Property]
-        custom_properties: Schema.TypeExpression | None
+        properties: list[Doc.Property]
+        overridden_properties: list[Doc.Property]
+        custom_properties: Doc.TypeExpression | None
 
-        def get_property(self, name: str) -> Schema.Property:
+        def get_property(self, name: str) -> Doc.Property:
             for property in self.properties:
                 if name in property.names:
                     return property
             raise ValueError(f"Property {name!r} not found")
 
         @typing.overload
-        def get_property_type(self, name: str) -> Schema.TypeExpression: ...
+        def get_property_type(self, name: str) -> Doc.TypeExpression: ...
         @typing.overload
         def get_property_type(self, name: str, t: type[T]) -> T: ...
-        def get_property_type(self, name: str, t: type[T] | None = None) -> Schema.TypeExpression | T:
+        def get_property_type(self, name: str, t: type[T] | None = None) -> Doc.TypeExpression | T:
             property = self.get_property(name)
             if t is not None:
                 assert isinstance(property.type, t), property
             return property.type
 
-        def set_property_type(self, name: str, type: Schema.TypeExpression) -> None:
+        def set_property_type(self, name: str, type: Doc.TypeExpression) -> None:
             property = self.get_property(name)
             property.type = type
 
@@ -159,14 +159,14 @@ class Schema:
             properties: JsonDict = {}
             required: dict[str, bool] = {}
 
-            def rec(prototype: Schema.StructTypeExpression) -> None:
+            def rec(prototype: Doc.StructTypeExpression) -> None:
                 if prototype.base is not None:
                     base = maker.get_referable_type(prototype.base)
-                    if isinstance(base, Schema.StructTypeExpression):
+                    if isinstance(base, Doc.StructTypeExpression):
                         rec(base)
-                    elif isinstance(base, Schema.UnionTypeExpression):
+                    elif isinstance(base, Doc.UnionTypeExpression):
                         for member in base.members:
-                            if isinstance(member, Schema.StructTypeExpression):
+                            if isinstance(member, Doc.StructTypeExpression):
                                 rec(member)
                                 break
                             else:
@@ -215,7 +215,7 @@ class Schema:
     @dataclasses.dataclass(kw_only=True, eq=False)
     class TupleTypeExpression:
         kind: Literal["tuple"] = "tuple"
-        members: list[Schema.TypeExpression]
+        members: list[Doc.TypeExpression]
 
         def make_json_definition(self, maker: JsonMaker) -> JsonDict:
             return {
@@ -241,7 +241,7 @@ class Schema:
     @dataclasses.dataclass(kw_only=True, eq=False)
     class Type:
         name: str
-        definition: Schema.TypeExpression
+        definition: Doc.TypeExpression
 
     @dataclasses.dataclass(kw_only=True, eq=False)
     class Prototype:
@@ -249,40 +249,40 @@ class Schema:
         key: str | None
         base: str | None
 
-        properties: list[Schema.Property]
-        overridden_properties: list[Schema.Property]
-        custom_properties: Schema.TypeExpression | None
+        properties: list[Doc.Property]
+        overridden_properties: list[Doc.Property]
+        custom_properties: Doc.TypeExpression | None
 
-        def get_property(self, name: str) -> Schema.Property:
+        def get_property(self, name: str) -> Doc.Property:
             for property in self.properties:
                 if name in property.names:
                     return property
             raise ValueError(f"Property {name!r} not found")
 
         @typing.overload
-        def get_property_type(self, name: str) -> Schema.TypeExpression: ...
+        def get_property_type(self, name: str) -> Doc.TypeExpression: ...
         @typing.overload
         def get_property_type(self, name: str, t: type[T]) -> T: ...
-        def get_property_type(self, name: str, t: type[T] | None = None) -> Schema.TypeExpression | T:
+        def get_property_type(self, name: str, t: type[T] | None = None) -> Doc.TypeExpression | T:
             property = self.get_property(name)
             if t is not None:
                 assert isinstance(property.type, t), property
             return property.type
 
-        def set_property_type(self, name: str, type: Schema.TypeExpression) -> None:
+        def set_property_type(self, name: str, type: Doc.TypeExpression) -> None:
             property = self.get_property(name)
             property.type = type
 
-        def make_definition(self) -> Schema.TypeExpression:
+        def make_definition(self) -> Doc.TypeExpression:
             type_property = (
                 None
                 if self.key is None
-                else Schema.Property(
-                    names=["type"], type=Schema.LiteralStringTypeExpression(value=self.key), required=True
+                else Doc.Property(
+                    names=["type"], type=Doc.LiteralStringTypeExpression(value=self.key), required=True
                 )
             )
 
-            return Schema.StructTypeExpression(
+            return Doc.StructTypeExpression(
                 base=self.base,
                 properties=self.properties + list(filter(None, [type_property])),
                 overridden_properties=self.overridden_properties,
@@ -316,7 +316,7 @@ class Schema:
 
 
 def make_json(
-    schema: Schema,
+    schema: Doc,
     *,
     make_reference: Callable[[bool, str], str] | None,
     limit_to_prototype_names: Iterable[str] | None,
@@ -336,7 +336,7 @@ class JsonMaker:
     def __init__(
         self,
         *,
-        schema: Schema,
+        schema: Doc,
         make_reference: Callable[[bool, str], str] | None,
         limit_to_prototype_names: Iterable[str] | None,
         include_descendants: bool,
@@ -439,7 +439,7 @@ class JsonMaker:
         self.__references_needed.add(name)  # Side effect for '__init_references_needed_by'
         return self.do_make_reference(deep, name)
 
-    def get_referable_type(self, name: str) -> Schema.TypeExpression:
+    def get_referable_type(self, name: str) -> Doc.TypeExpression:
         if name in self.forbidden_type_names:
             assert name in self.types_by_name
             raise Forbidden

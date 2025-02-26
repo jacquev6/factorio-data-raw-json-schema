@@ -8,10 +8,10 @@ import tqdm
 
 from . import patching
 from .crawling import Crawler
-from .schema import Schema
+from .factorio_documentation import Doc
 
 
-def extract(*, crawler: Crawler, workers: int) -> Schema:
+def extract(*, crawler: Crawler, workers: int) -> Doc:
     extractor = _Extractor(crawler=crawler, workers=workers)
 
     with tqdm.tqdm(total=2) as progress:
@@ -35,8 +35,8 @@ class _Extractor:
         self._workers = workers
         self.all_type_names: set[str] = set()
         self.all_prototype_names: set[str] = set()
-        self.types: list[Schema.Type] = []
-        self.prototypes: list[Schema.Prototype] = []
+        self.types: list[Doc.Type] = []
+        self.prototypes: list[Doc.Prototype] = []
 
     def extract_all_type_names(self) -> None:
         def gen() -> Iterable[str]:
@@ -75,13 +75,13 @@ class _Extractor:
             self.prototypes.append(prototype)
             yield None
 
-    def _extract_type(self, type_name: str) -> Schema.Type:
+    def _extract_type(self, type_name: str) -> Doc.Type:
         soup = self.crawler.get("types", type_name)
 
         h2_text = tag(soup.find("h2")).text
         if (m := re.match(r"^" + type_name + r"\s*::\s*(.*?)\s*(Example code)?$", h2_text)) is not None:
-            local_types: dict[str, Schema.TypeExpression] = {
-                name: Schema.UnionTypeExpression(members=[Schema.RefTypeExpression(ref=name)])
+            local_types: dict[str, Doc.TypeExpression] = {
+                name: Doc.UnionTypeExpression(members=[Doc.RefTypeExpression(ref=name)])
                 for name in self.all_type_names
             }
 
@@ -97,7 +97,7 @@ class _Extractor:
                         extract_struct_properties(type_name, overridden_properties_soup, self.all_type_names)
                     )
 
-                local_types["struct"] = Schema.StructTypeExpression(
+                local_types["struct"] = Doc.StructTypeExpression(
                     base=extract_struct_base(soup),
                     properties=list(extract_struct_properties(type_name, properties_div_soup, self.all_type_names)),
                     overridden_properties=overridden_properties,
@@ -105,24 +105,24 @@ class _Extractor:
                 )
 
             if "union" in type_expression:
-                local_types["union"] = Schema.UnionTypeExpression(
+                local_types["union"] = Doc.UnionTypeExpression(
                     members=list(extract_union_members(soup, self.all_type_names))
                 )
 
             try:
                 type_expression_tree = type_expression_parser.parse(type_expression)
-                return Schema.Type(
+                return Doc.Type(
                     name=type_name,
                     definition=TypeExpressionTransformer(set(), local_types).transform(type_expression_tree),
                 )
             except lark.exceptions.LarkError:
                 assert False, f"failed to parse type expression: {type_expression!r}"
         elif (m := re.match(r"^" + type_name + r"\s* builtin\s*(Example code)?$", h2_text)) is not None:
-            return Schema.Type(name=type_name, definition=Schema.builtin_types[type_name])
+            return Doc.Type(name=type_name, definition=Doc.builtin_types[type_name])
         else:
             assert False, f"failed to regex-match type header: {h2_text!r}"
 
-    def _extract_prototype(self, prototype_name: str) -> Schema.Prototype:
+    def _extract_prototype(self, prototype_name: str) -> Doc.Prototype:
         soup = self.crawler.get("prototypes", prototype_name)
         properties = list(
             extract_struct_properties(prototype_name, soup.find("div", id="attributes-body-main"), self.all_type_names)
@@ -138,14 +138,14 @@ class _Extractor:
 
         custom_properties_div_soup = soup.find("div", id="custom_properties")
         if custom_properties_div_soup is None:
-            custom_properties: Schema.TypeExpression | None = None
+            custom_properties: Doc.TypeExpression | None = None
         else:
             custom_properties_text = tag(tag(tag(custom_properties_div_soup).parent).find("h3")).text
             assert custom_properties_text.startswith("Custom properties  \xa0::\xa0string → ")
             custom_properties_type_name = custom_properties_text[32:]
-            custom_properties = Schema.RefTypeExpression(ref=custom_properties_type_name)
+            custom_properties = Doc.RefTypeExpression(ref=custom_properties_type_name)
 
-        return Schema.Prototype(
+        return Doc.Prototype(
             name=prototype_name,
             key=extract_prototype_key(soup),
             base=extract_struct_base(soup),
@@ -154,13 +154,13 @@ class _Extractor:
             custom_properties=custom_properties,
         )
 
-    def make_schema(self) -> Schema:
-        return Schema(types=self.types, prototypes=self.prototypes)
+    def make_schema(self) -> Doc:
+        return Doc(types=self.types, prototypes=self.prototypes)
 
 
 def extract_union_members(
     soup: bs4.element.PageElement | None, global_types: set[str]
-) -> Iterable[Schema.TypeExpression]:
+) -> Iterable[Doc.TypeExpression]:
     if soup is not None:
         transformer = TypeExpressionTransformer(global_types, patching.local_types_for_union)
 
@@ -196,13 +196,13 @@ def extract_struct_base(soup: bs4.BeautifulSoup) -> str | None:
 
 def extract_struct_properties(
     type_name: str, properties_div_soup: bs4.element.PageElement | None, global_types: set[str]
-) -> Iterable[Schema.Property]:
+) -> Iterable[Doc.Property]:
     if properties_div_soup is not None:
         for property_div_soup in (tag(el) for el in tag(properties_div_soup).find_all("div", recursive=False)):
             property_header_soup = tag(property_div_soup.find("h3", recursive=False))
             property_names = str(tag(property_header_soup.contents[0]).contents[0]).strip().split(" or ")
 
-            local_types: dict[str, Schema.TypeExpression] = {}
+            local_types: dict[str, Doc.TypeExpression] = {}
             for local_type_div_soup in (tag(el) for el in property_div_soup.find_all("div", class_="inline-type")):
                 local_type_header_text = tag(local_type_div_soup.find("h4")).text
                 if (m := re.match(r"^(.*?)\s*::\s*(.*?)\s*$", local_type_header_text)) is not None:
@@ -216,14 +216,14 @@ def extract_struct_properties(
                                     global_types,
                                 )
                             )
-                            local_types[local_type_name] = Schema.StructTypeExpression(
+                            local_types[local_type_name] = Doc.StructTypeExpression(
                                 base=None,
                                 properties=local_type_properties,
                                 overridden_properties=[],
                                 custom_properties=None,
                             )
                         case "union":
-                            local_types[local_type_name] = Schema.UnionTypeExpression(
+                            local_types[local_type_name] = Doc.UnionTypeExpression(
                                 members=list(
                                     extract_union_members(
                                         tag(local_type_div_soup.find("h4", string="Union members")).next_sibling,
@@ -252,7 +252,7 @@ def extract_struct_properties(
 
             match m.group(1):
                 case "union":
-                    property_type: Schema.TypeExpression = Schema.UnionTypeExpression(
+                    property_type: Doc.TypeExpression = Doc.UnionTypeExpression(
                         members=list(
                             extract_union_members(
                                 tag(property_div_soup.find("h4", string="Union members")).next_sibling, global_types
@@ -270,7 +270,7 @@ def extract_struct_properties(
                             False
                         ), f"failed to parse type expression for {type_name}.{property_names[0]}: {type_expression!r}"
 
-            yield Schema.Property(
+            yield Doc.Property(
                 names=property_names, type=property_type, required=not optional and len(property_names) == 1
             )
 
@@ -299,64 +299,64 @@ type_expression_parser = lark.Lark(
 )
 
 
-class TypeExpressionTransformer(lark.Transformer[lark.Token, Schema.TypeExpression]):
-    def __init__(self, global_types: set[str], local_types: dict[str, Schema.TypeExpression]) -> None:
+class TypeExpressionTransformer(lark.Transformer[lark.Token, Doc.TypeExpression]):
+    def __init__(self, global_types: set[str], local_types: dict[str, Doc.TypeExpression]) -> None:
         self.global_types = global_types
         self.local_types = local_types
 
-    def type_expression(self, items: list[Schema.TypeExpression]) -> Schema.TypeExpression:
+    def type_expression(self, items: list[Doc.TypeExpression]) -> Doc.TypeExpression:
         return items[0]
 
-    def named_type(self, items: list[lark.Token]) -> Schema.TypeExpression:
+    def named_type(self, items: list[lark.Token]) -> Doc.TypeExpression:
         assert isinstance(items, list) and all(isinstance(item, lark.Token) for item in items)
         type_name = items[0].value
         if type_name == "true":
-            return Schema.LiteralBoolTypeExpression(value=True)
+            return Doc.LiteralBoolTypeExpression(value=True)
         elif type_name == "false":
-            return Schema.LiteralBoolTypeExpression(value=False)
+            return Doc.LiteralBoolTypeExpression(value=False)
         elif type_name in self.global_types:
-            return Schema.RefTypeExpression(ref=type_name)
+            return Doc.RefTypeExpression(ref=type_name)
         elif type_name in self.local_types:
             return self.local_types[type_name]
         else:
             assert False, f"unknown type: {type_name!r}"
 
-    def literal_string(self, items: list[lark.Token]) -> Schema.TypeExpression:
+    def literal_string(self, items: list[lark.Token]) -> Doc.TypeExpression:
         assert isinstance(items, list) and all(isinstance(item, lark.Token) for item in items)
         value = items[0].value
         assert value.startswith('"') and value.endswith('"')
-        return Schema.LiteralStringTypeExpression(value=value.strip('"'))
+        return Doc.LiteralStringTypeExpression(value=value.strip('"'))
 
-    def literal_integer(self, items: list[lark.Token]) -> Schema.TypeExpression:
+    def literal_integer(self, items: list[lark.Token]) -> Doc.TypeExpression:
         assert isinstance(items, list) and all(isinstance(item, lark.Token) for item in items)
         value = items[0].value
-        return Schema.LiteralIntegerTypeExpression(value=int(value))
+        return Doc.LiteralIntegerTypeExpression(value=int(value))
 
-    def array_type(self, items: list[Schema.TypeExpression]) -> Schema.TypeExpression:
-        assert isinstance(items, list) and all(isinstance(item, Schema.TypeExpression) for item in items)
-        return Schema.ArrayTypeExpression(content=items[0])
+    def array_type(self, items: list[Doc.TypeExpression]) -> Doc.TypeExpression:
+        assert isinstance(items, list) and all(isinstance(item, Doc.TypeExpression) for item in items)
+        return Doc.ArrayTypeExpression(content=items[0])
 
-    def union_type(self, items: list[Schema.TypeExpression]) -> Schema.TypeExpression:
-        assert isinstance(items, list) and all(isinstance(item, Schema.TypeExpression) for item in items)
-        members: list[Schema.TypeExpression] = []
+    def union_type(self, items: list[Doc.TypeExpression]) -> Doc.TypeExpression:
+        assert isinstance(items, list) and all(isinstance(item, Doc.TypeExpression) for item in items)
+        members: list[Doc.TypeExpression] = []
         for item in items:
             if item.kind == "union":
                 members.extend(item.members)
             else:
                 members.append(item)
-        return Schema.UnionTypeExpression(members=members)
+        return Doc.UnionTypeExpression(members=members)
 
-    def dictionary_type(self, items: list[Schema.TypeExpression]) -> Schema.TypeExpression:
-        assert isinstance(items, list) and all(isinstance(item, Schema.TypeExpression) for item in items)
-        return Schema.DictionaryTypeExpression(keys=items[0], values=items[1])
+    def dictionary_type(self, items: list[Doc.TypeExpression]) -> Doc.TypeExpression:
+        assert isinstance(items, list) and all(isinstance(item, Doc.TypeExpression) for item in items)
+        return Doc.DictionaryTypeExpression(keys=items[0], values=items[1])
 
-    def tuple_type(self, items: list[Schema.TypeExpression]) -> Schema.TypeExpression:
-        assert isinstance(items, list) and all(isinstance(item, Schema.TypeExpression) for item in items)
-        return Schema.TupleTypeExpression(members=items)
+    def tuple_type(self, items: list[Doc.TypeExpression]) -> Doc.TypeExpression:
+        assert isinstance(items, list) and all(isinstance(item, Doc.TypeExpression) for item in items)
+        return Doc.TupleTypeExpression(members=items)
 
-    def adhoc_type(self, items: list[lark.Token]) -> Schema.TypeExpression:
+    def adhoc_type(self, items: list[lark.Token]) -> Doc.TypeExpression:
         assert isinstance(items, list) and all(isinstance(item, lark.Token) for item in items)
-        return Schema.builtin_types["uint8"]
+        return Doc.builtin_types["uint8"]
 
 
 def tag(tag: bs4.element.PageElement | None) -> bs4.element.Tag:
