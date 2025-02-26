@@ -79,11 +79,11 @@ def extract(
     else:
         make_reference = None
 
-    factorio_schema = extraction.extract(crawler=crawler, workers=workers)
+    doc = extraction.extract(crawler=crawler, workers=workers)
     if do_patch:
-        patching.patch_schema(factorio_schema)
-    json_schema = factorio_documentation.make_json(
-        factorio_schema,
+        patching.patch_doc(doc)
+    json_schema = factorio_documentation.make_json_schema(
+        doc,
         make_reference=make_reference,
         limit_to_prototype_names=limit_to or None,
         include_descendants=include_descendants,
