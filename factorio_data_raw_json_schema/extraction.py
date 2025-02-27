@@ -117,7 +117,7 @@ class _Extractor:
             except lark.exceptions.LarkError:
                 assert False, f"failed to parse type expression: {type_expression!r}"
         elif (m := re.match(r"^" + type_name + r"\s* builtin\s*(Example code)?$", h2_text)) is not None:
-            return fd.Type(name=type_name, definition=fd.builtin_types[type_name])
+            return fd.Type(name=type_name, definition=fd.BuiltinTypeExpression(name=type_name))
         else:
             assert False, f"failed to regex-match type header: {h2_text!r}"
 
@@ -353,7 +353,7 @@ class TypeExpressionTransformer(lark.Transformer[lark.Token, fd.TypeExpression])
 
     def adhoc_type(self, items: list[lark.Token]) -> fd.TypeExpression:
         assert isinstance(items, list) and all(isinstance(item, lark.Token) for item in items)
-        return fd.builtin_types["uint8"]
+        return fd.BuiltinTypeExpression(name="uint8")
 
 
 def tag(tag: bs4.element.PageElement | None) -> bs4.element.Tag:

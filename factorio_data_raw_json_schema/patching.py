@@ -1,7 +1,7 @@
 import typing
 
 from . import factorio_documentation as fd
-from .factorio_documentation import JsonSchemaMaker, JsonDict
+from .factorio_documentation import JsonDict
 
 
 # I believe 'DamageEntityTriggerEffectItem' is a typo in https://lua-api.factorio.com/2.0.28/types/TriggerEffect.html
@@ -12,13 +12,8 @@ local_types_for_union: dict[str, fd.TypeExpression] = {
 
 
 # Empty arrays are serialized as {} instead of []
-def array_to_json_definition(self: fd.ArrayTypeExpression, maker: JsonSchemaMaker) -> JsonDict:
-    return {
-        "oneOf": [
-            {"type": "array", "items": self.content.make_json_definition(maker)},
-            {"type": "object", "additionalProperties": False},
-        ]
-    }
+def array_to_json_definition(content: JsonDict) -> JsonDict:
+    return {"oneOf": [{"type": "array", "items": content}, {"type": "object", "additionalProperties": False}]}
 
 
 def patch_doc(doc: fd.Doc) -> None:

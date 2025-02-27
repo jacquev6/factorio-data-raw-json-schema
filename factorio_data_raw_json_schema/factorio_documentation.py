@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import abc
 import itertools
 import sys
 from typing import Callable, Iterable, Literal
@@ -31,30 +32,7 @@ T = typing.TypeVar("T")
 @dataclasses.dataclass(kw_only=True, eq=False)
 class BuiltinTypeExpression:
     kind: Literal["builtin"] = "builtin"
-    json_definition: JsonDict
-
-    def make_json_definition(self, maker: JsonSchemaMaker) -> JsonDict:
-        return self.json_definition
-
-
-builtin_types: dict[str, BuiltinTypeExpression] = {
-    "string": BuiltinTypeExpression(json_definition={"type": "string"}),
-    "float": BuiltinTypeExpression(json_definition={"type": "number"}),
-    "double": BuiltinTypeExpression(json_definition={"type": "number"}),
-    "bool": BuiltinTypeExpression(json_definition={"type": "boolean"}),
-    "uint8": BuiltinTypeExpression(json_definition={"type": "integer", "minimum": 0, "maximum": 255}),
-    "uint16": BuiltinTypeExpression(json_definition={"type": "integer", "minimum": 0, "maximum": 65535}),
-    "uint32": BuiltinTypeExpression(json_definition={"type": "integer", "minimum": 0, "maximum": 4294967295}),
-    "uint64": BuiltinTypeExpression(json_definition={"type": "integer", "minimum": 0, "maximum": 18446744073709551615}),
-    "int8": BuiltinTypeExpression(json_definition={"type": "integer", "minimum": -128, "maximum": 127}),
-    "int16": BuiltinTypeExpression(json_definition={"type": "integer", "minimum": -32768, "maximum": 32767}),
-    "int32": BuiltinTypeExpression(json_definition={"type": "integer", "minimum": -2147483648, "maximum": 2147483647}),
-    "int64": BuiltinTypeExpression(
-        json_definition={"type": "integer", "minimum": -9223372036854775808, "maximum": 9223372036854775807}
-    ),
-}
-
-unconstrained_type = BuiltinTypeExpression(json_definition={})
+    name: str
 
 
 @dataclasses.dataclass(kw_only=True, eq=False)
@@ -62,17 +40,11 @@ class LiteralBoolTypeExpression:
     kind: Literal["literal_bool"] = "literal_bool"
     value: bool
 
-    def make_json_definition(self, maker: JsonSchemaMaker) -> JsonDict:
-        return {"type": "boolean", "const": self.value}
-
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class LiteralStringTypeExpression:
     kind: Literal["literal_string"] = "literal_string"
     value: str
-
-    def make_json_definition(self, maker: JsonSchemaMaker) -> JsonDict:
-        return {"type": "string", "const": self.value}
 
 
 @dataclasses.dataclass(kw_only=True, eq=False)
@@ -80,17 +52,11 @@ class LiteralIntegerTypeExpression:
     kind: Literal["literal_integer"] = "literal_integer"
     value: int
 
-    def make_json_definition(self, maker: JsonSchemaMaker) -> JsonDict:
-        return {"type": "integer", "const": self.value}
-
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class RefTypeExpression:
     kind: Literal["ref"] = "ref"
     ref: str
-
-    def make_json_definition(self, maker: JsonSchemaMaker) -> JsonDict:
-        return {"$ref": maker.make_reference(True, self.ref)}
 
 
 @dataclasses.dataclass(kw_only=True, eq=False)
@@ -98,17 +64,11 @@ class UnionTypeExpression:
     kind: Literal["union"] = "union"
     members: list[TypeExpression]
 
-    def make_json_definition(self, maker: JsonSchemaMaker) -> JsonDict:
-        return {"anyOf": [member.make_json_definition(maker) for member in self.members]}
-
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class ArrayTypeExpression:
     kind: Literal["array"] = "array"
     content: TypeExpression
-
-    def make_json_definition(self, maker: JsonSchemaMaker) -> JsonDict:
-        return patching.array_to_json_definition(self, maker)
 
 
 @dataclasses.dataclass(kw_only=True, eq=False)
@@ -116,13 +76,6 @@ class DictionaryTypeExpression:
     kind: Literal["dictionary"] = "dictionary"
     keys: TypeExpression
     values: TypeExpression
-
-    def make_json_definition(self, maker: JsonSchemaMaker) -> JsonDict:
-        return {
-            "type": "object",
-            "additionalProperties": self.values.make_json_definition(maker),
-            "propertyNames": self.keys.make_json_definition(maker),
-        }
 
 
 @dataclasses.dataclass(kw_only=True, eq=False)
@@ -160,72 +113,11 @@ class StructTypeExpression:
         property = self.get_property(name)
         property.type = type
 
-    def make_json_definition(self, maker: JsonSchemaMaker) -> JsonDict:
-        properties: JsonDict = {}
-        required: dict[str, bool] = {}
-
-        def rec(prototype: StructTypeExpression) -> None:
-            if prototype.base is not None:
-                base = maker.get_referable_type(prototype.base)
-                if isinstance(base, StructTypeExpression):
-                    rec(base)
-                elif isinstance(base, UnionTypeExpression):
-                    for member in base.members:
-                        if isinstance(member, StructTypeExpression):
-                            rec(member)
-                            break
-                        else:
-                            print(
-                                f"{prototype.base} has union type and is used as a base, but it has no member of struct type",
-                                file=sys.stderr,
-                            )
-                else:
-                    print(f"{prototype.base} is used as a base but has unexpected type: {base.kind}", file=sys.stderr)
-
-            for property in itertools.chain(prototype.properties, prototype.overridden_properties):
-                try:
-                    property_definition = property.type.make_json_definition(maker)
-                except Forbidden:
-                    continue
-                else:
-                    for name in property.names:
-                        properties[name] = property_definition
-                    # @todo When there are multiple property names, and the property is required, enforce that at least one property name is present
-                    if len(property.names) == 1:
-                        required[property.names[0]] = property.required
-
-        rec(self)
-
-        if len(properties) == 0 and self.custom_properties is None:
-            raise Forbidden
-
-        definition: JsonDict = {"type": "object", "properties": properties}
-
-        if self.custom_properties is None:
-            pass
-        else:
-            definition["additionalProperties"] = self.custom_properties.make_json_definition(maker)
-
-        if any(required.values()):
-            definition["required"] = [
-                json_value(property_name) for property_name in properties.keys() if required.get(property_name, False)
-            ]
-
-        return definition
-
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class TupleTypeExpression:
     kind: Literal["tuple"] = "tuple"
     members: list[TypeExpression]
-
-    def make_json_definition(self, maker: JsonSchemaMaker) -> JsonDict:
-        return {
-            "type": "array",
-            "items": [member.make_json_definition(maker) for member in self.members],
-            "minItems": len(self.members),
-            "maxItems": len(self.members),
-        }
 
 
 TypeExpression = (
@@ -240,6 +132,132 @@ TypeExpression = (
     | StructTypeExpression
     | TupleTypeExpression
 )
+
+
+E = typing.TypeVar("E")
+
+
+@dataclasses.dataclass(kw_only=True, eq=False)
+class VisitedProperty[E]:
+    names: list[str]
+    type: E
+    required: bool = False
+
+
+@dataclasses.dataclass(kw_only=True, eq=False)
+class VisitedStruct[E]:
+    base: str | None
+    properties: list[VisitedProperty[E]]
+    overridden_properties: list[VisitedProperty[E]]
+    custom_properties: E | None
+
+
+class TypeExpressionVisitor[E](abc.ABC):
+    @abc.abstractmethod
+    def get_base_named(self, name: str) -> TypeExpression: ...
+
+    @abc.abstractmethod
+    def visit_builtin(self, name: str) -> E: ...
+
+    @abc.abstractmethod
+    def visit_literal_bool(self, value: bool) -> E: ...
+
+    @abc.abstractmethod
+    def visit_literal_string(self, value: str) -> E: ...
+
+    @abc.abstractmethod
+    def visit_literal_integer(self, value: int) -> E: ...
+
+    @abc.abstractmethod
+    def visit_ref(self, ref: str) -> E: ...
+
+    @abc.abstractmethod
+    def visit_union(self, members: list[E]) -> E: ...
+
+    @abc.abstractmethod
+    def visit_array(self, content: E) -> E: ...
+
+    @abc.abstractmethod
+    def visit_dictionary(self, keys: E, values: E) -> E: ...
+
+    @abc.abstractmethod
+    def visit_struct(self, hierarchy: list[VisitedStruct[E]]) -> E: ...  # Base first, then derived
+
+    @abc.abstractmethod
+    def visit_tuple(self, members: list[E]) -> E: ...
+
+
+def visit_type_expression(visitor: TypeExpressionVisitor[E], type: TypeExpression) -> E:
+    # Should this be implemented as a method 'visit' on each TypeExpression class?
+    if isinstance(type, BuiltinTypeExpression):
+        return visitor.visit_builtin(type.name)
+    elif isinstance(type, LiteralBoolTypeExpression):
+        return visitor.visit_literal_bool(type.value)
+    elif isinstance(type, LiteralStringTypeExpression):
+        return visitor.visit_literal_string(type.value)
+    elif isinstance(type, LiteralIntegerTypeExpression):
+        return visitor.visit_literal_integer(type.value)
+    elif isinstance(type, RefTypeExpression):
+        return visitor.visit_ref(type.ref)
+    elif isinstance(type, UnionTypeExpression):
+        members = [visit_type_expression(visitor, member) for member in type.members]
+        return visitor.visit_union(members)
+    elif isinstance(type, ArrayTypeExpression):
+        content = visit_type_expression(visitor, type.content)
+        return visitor.visit_array(content)
+    elif isinstance(type, DictionaryTypeExpression):
+        keys = visit_type_expression(visitor, type.keys)
+        values = visit_type_expression(visitor, type.values)
+        return visitor.visit_dictionary(keys, values)
+    elif isinstance(type, StructTypeExpression):
+        hierarchy: list[VisitedStruct[E]] = []
+
+        def visit_properties(properties: list[Property]) -> Iterable[VisitedProperty[E]]:
+            for property in properties:
+                try:
+                    visited_type = visit_type_expression(visitor, property.type)
+                except Forbidden:
+                    pass
+                else:
+                    yield VisitedProperty(names=property.names, type=visited_type, required=property.required)
+
+        def rec(t: StructTypeExpression) -> None:
+            if t.base is not None:
+                base = visitor.get_base_named(t.base)
+                if isinstance(base, StructTypeExpression):
+                    rec(base)
+                elif isinstance(base, UnionTypeExpression):
+                    for member in base.members:
+                        if isinstance(member, StructTypeExpression):
+                            rec(member)
+                            break
+                        else:
+                            print(
+                                f"{t.base} has union type and is used as a base, but it has no member of struct type",
+                                file=sys.stderr,
+                            )
+                else:
+                    print(f"{t.base} is used as a base but has unexpected type: {base.kind}", file=sys.stderr)
+
+            hierarchy.append(
+                VisitedStruct(
+                    base=t.base,
+                    properties=list(visit_properties(t.properties)),
+                    overridden_properties=list(visit_properties(t.overridden_properties)),
+                    custom_properties=(
+                        None if t.custom_properties is None else visit_type_expression(visitor, t.custom_properties)
+                    ),
+                )
+            )
+
+        rec(type)
+
+        return visitor.visit_struct(hierarchy)
+    elif isinstance(type, TupleTypeExpression):
+        members = [visit_type_expression(visitor, member) for member in type.members]
+        return visitor.visit_tuple(members)
+    else:
+        assert False
 
 
 @dataclasses.dataclass(kw_only=True, eq=False)
@@ -292,9 +310,6 @@ class Prototype:
             custom_properties=self.custom_properties,
         )
 
-    def make_json_definition(self, maker: JsonSchemaMaker) -> JsonDict:
-        return self.make_definition().make_json_definition(maker)
-
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class Doc:
@@ -337,6 +352,91 @@ def make_json_schema(
     ).to_json()
 
 
+class JsonDefinitionMaker(TypeExpressionVisitor[JsonDict]):
+    def __init__(self, maker: JsonSchemaMaker) -> None:
+        self.maker = maker
+
+    def get_base_named(self, name: str) -> TypeExpression:
+        return self.maker.get_referable_type(name)
+
+    def visit_builtin(self, name: str) -> JsonDict:
+        return {
+            "string": JsonDict({"type": "string"}),
+            "float": JsonDict({"type": "number"}),
+            "double": JsonDict({"type": "number"}),
+            "bool": JsonDict({"type": "boolean"}),
+            "uint8": JsonDict({"type": "integer", "minimum": 0, "maximum": 255}),
+            "uint16": JsonDict({"type": "integer", "minimum": 0, "maximum": 65535}),
+            "uint32": JsonDict({"type": "integer", "minimum": 0, "maximum": 4294967295}),
+            "uint64": JsonDict({"type": "integer", "minimum": 0, "maximum": 18446744073709551615}),
+            "int8": JsonDict({"type": "integer", "minimum": -128, "maximum": 127}),
+            "int16": JsonDict({"type": "integer", "minimum": -32768, "maximum": 32767}),
+            "int32": JsonDict({"type": "integer", "minimum": -2147483648, "maximum": 2147483647}),
+            "int64": JsonDict({"type": "integer", "minimum": -9223372036854775808, "maximum": 9223372036854775807}),
+        }[name]
+
+    def visit_literal_bool(self, value: bool) -> JsonDict:
+        return {"type": "boolean", "const": value}
+
+    def visit_literal_string(self, value: str) -> JsonDict:
+        return {"type": "string", "const": value}
+
+    def visit_literal_integer(self, value: int) -> JsonDict:
+        return {"type": "integer", "const": value}
+
+    def visit_ref(self, ref: str) -> JsonDict:
+        return {"$ref": self.maker.make_reference(True, ref)}
+
+    def visit_union(self, members: list[JsonDict]) -> JsonDict:
+        return {"anyOf": json_value([json_value(member) for member in members])}
+
+    def visit_array(self, content: JsonDict) -> JsonDict:
+        return patching.array_to_json_definition(content)
+
+    def visit_dictionary(self, keys: JsonDict, values: JsonDict) -> JsonDict:
+        return {"type": "object", "additionalProperties": values, "propertyNames": keys}
+
+    def visit_struct(self, hierarchy: list[VisitedStruct[JsonDict]]) -> JsonDict:
+        properties: JsonDict = {}
+        required: dict[str, bool] = {}
+        custom_properties: JsonDict | None = None
+
+        for struct in hierarchy:
+            for property in itertools.chain(struct.properties, struct.overridden_properties):
+                for name in property.names:
+                    properties[name] = property.type
+                # @todo When there are multiple property names, and the property is required, enforce that at least one property name is present
+                if len(property.names) == 1:
+                    required[property.names[0]] = property.required
+
+            if struct.custom_properties is not None:
+                assert custom_properties is None
+                custom_properties = struct.custom_properties
+
+        definition: JsonDict = {"type": "object", "properties": properties}
+
+        if custom_properties is None:
+            if len(properties) == 0:
+                raise Forbidden
+        else:
+            definition["additionalProperties"] = custom_properties
+
+        if any(required.values()):
+            definition["required"] = [
+                json_value(property_name) for property_name in properties.keys() if required.get(property_name, False)
+            ]
+
+        return definition
+
+    def visit_tuple(self, members: list[JsonDict]) -> JsonDict:
+        return {
+            "type": "array",
+            "items": [json_value(member) for member in members],
+            "minItems": len(members),
+            "maxItems": len(members),
+        }
+
+
 class JsonSchemaMaker:
     def __init__(
         self,
@@ -360,7 +460,6 @@ class JsonSchemaMaker:
             self.do_make_reference = make_reference
 
         self.__init_forbidden_type_names(forbid_type_names)
-        # self.forbidden_type_names: set[str] = set()
 
         self.prototypes_to_include = set(
             self.__init_prototypes_to_include(limit_to_prototype_names, include_descendants)
@@ -378,7 +477,7 @@ class JsonSchemaMaker:
                 if type.name not in self.forbidden_type_names:
                     self.__references_needed = set()
                     try:
-                        type.definition.make_json_definition(self)
+                        self.make_json_definition(type.definition)
                     except Forbidden:
                         self.forbidden_type_names.add(type.name)
                         some_type_is_newly_forbidden = True
@@ -425,13 +524,13 @@ class JsonSchemaMaker:
 
         for prototype in self.doc.prototypes:
             self.__references_needed = set()
-            prototype.make_json_definition(self)  # Trigger the side-effect
+            self.make_json_definition(prototype.make_definition())  # Trigger the side-effect
             yield prototype.name, self.__references_needed
 
         for type in self.doc.types:
             if type.name not in self.forbidden_type_names:
                 self.__references_needed = set()
-                type.definition.make_json_definition(self)  # Trigger the side-effect
+                self.make_json_definition(type.definition)  # Trigger the side-effect
                 yield type.name, self.__references_needed
 
         self.__references_needed = set()
@@ -455,6 +554,9 @@ class JsonSchemaMaker:
         else:
             return type.definition
 
+    def make_json_definition(self, type: TypeExpression) -> JsonDict:
+        return visit_type_expression(JsonDefinitionMaker(self), type)
+
     def to_json(self) -> JsonDict:
         properties = {
             prototype.key: json_value(
@@ -466,14 +568,14 @@ class JsonSchemaMaker:
 
         definitions = {
             type.name: {"description": json_value(f"https://lua-api.factorio.com/stable/types/{type.name}.html")}
-            | type.definition.make_json_definition(self)
+            | self.make_json_definition(type.definition)
             for type in self.doc.types
             if type.name not in self.forbidden_type_names
         } | {
             prototype.name: {
                 "description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{prototype.name}.html")
             }
-            | prototype.make_json_definition(self)
+            | self.make_json_definition(prototype.make_definition())
             for prototype in self.doc.prototypes
             if prototype.key is not None
         }
