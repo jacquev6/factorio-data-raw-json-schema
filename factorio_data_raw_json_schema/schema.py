@@ -25,14 +25,12 @@ def json_value(value: JsonValue) -> JsonValue:
 def make_json_schema(
     doc: documentation.Doc,
     *,
-    make_reference: Callable[[bool, str], str] | None,
     limit_to_prototype_names: Iterable[str] | None,
     include_descendants: bool,
     forbid_type_names: Iterable[str],
 ) -> JsonDict:
     return JsonSchemaMaker(
         doc=doc,
-        make_reference=make_reference,
         limit_to_prototype_names=limit_to_prototype_names,
         include_descendants=include_descendants,
         forbid_type_names=forbid_type_names,
@@ -44,7 +42,6 @@ class JsonSchemaMaker:
         self,
         *,
         doc: documentation.Doc,
-        make_reference: Callable[[bool, str], str] | None,
         limit_to_prototype_names: Iterable[str] | None,
         include_descendants: bool,
         forbid_type_names: Iterable[str],
@@ -53,11 +50,6 @@ class JsonSchemaMaker:
 
         self.types_by_name = {type.name: type for type in doc.types}
         self.prototypes_by_name = {prototype.name: prototype for prototype in doc.prototypes}
-
-        if make_reference is None:
-            self.do_make_reference: Callable[[bool, str], str] = lambda deep, name: f"#/definitions/{name}"
-        else:
-            self.do_make_reference = make_reference
 
         self.init_forbidden_type_names(forbid_type_names)
 
@@ -118,13 +110,6 @@ class JsonSchemaMaker:
 
     def gather_references_needed_by(self, t: documentation.TypeExpression) -> Iterable[str]:
         return set(t.accept(NeededReferencesGatherer(self)))
-
-    def make_reference(self, deep: bool, name: str) -> str:
-        if name in self.forbidden_type_names:
-            assert name in self.types_by_name
-            raise documentation.Forbidden
-
-        return self.do_make_reference(deep, name)
 
     def get_referable_type(self, name: str) -> documentation.TypeExpression:
         if name in self.forbidden_type_names:
@@ -192,7 +177,7 @@ class BaseTypeExpressionVisitor[E](documentation.TypeExpressionVisitor[E]):
     def __init__(self, maker: JsonSchemaMaker) -> None:
         self.maker = maker
 
-    def get_base_named(self, name: str) -> documentation.TypeExpression:
+    def get_referable_type(self, name: str) -> documentation.TypeExpression:
         return self.maker.get_referable_type(name)
 
 
@@ -223,7 +208,8 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDict]):
         return {"type": "integer", "const": value}
 
     def visit_ref(self, ref: str) -> JsonDict:
-        return {"$ref": self.maker.make_reference(True, ref)}
+        self.get_referable_type(ref)  # Ensure the reference is not forbidden
+        return {"$ref": f"#/definitions/{ref}"}
 
     def visit_union(self, members: list[JsonDict]) -> JsonDict:
         return {"anyOf": json_value([json_value(member) for member in members])}

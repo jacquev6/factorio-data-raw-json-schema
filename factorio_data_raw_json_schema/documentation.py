@@ -136,7 +136,7 @@ class StructTypeExpression:
 
         def rec(t: StructTypeExpression) -> None:
             if t.base is not None:
-                base = visitor.get_base_named(t.base)
+                base = visitor.get_referable_type(t.base)
                 if isinstance(base, StructTypeExpression):
                     rec(base)
                 elif isinstance(base, UnionTypeExpression):
@@ -209,7 +209,7 @@ class VisitedStruct[E]:
 
 class TypeExpressionVisitor[E](abc.ABC):
     @abc.abstractmethod
-    def get_base_named(self, name: str) -> TypeExpression: ...
+    def get_referable_type(self, name: str) -> TypeExpression: ...
 
     @abc.abstractmethod
     def visit_builtin(self, name: str) -> E: ...

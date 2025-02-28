@@ -1,8 +1,4 @@
-from typing import Any, Callable
 import json
-import os
-import shutil
-import typing
 
 import click
 
@@ -25,9 +21,6 @@ def main() -> None:
     show_default=True,
 )
 @click.argument("output", type=click.File("w"), default="-")
-@click.option(
-    "--split/--no-split", default=False, help="Split the schema into multiple files, one per type.", show_default=True
-)
 @click.option(
     "--do-patch/--skip-patch",
     default=True,
@@ -58,7 +51,6 @@ def main() -> None:
 def extract(
     doc_root: str,
     output: click.utils.LazyFile,
-    split: bool,
     do_patch: bool,
     limit_to: list[str],
     include_descendants: bool,
@@ -69,32 +61,15 @@ def extract(
 
     # @todo Generate a json file capturing the prototypes hierarchy
 
-    if split:
-        definitions_dir = os.path.splitext(output.name)[0]
-        shutil.rmtree(definitions_dir, ignore_errors=True)
-        os.makedirs(definitions_dir, exist_ok=True)
-        make_reference: Callable[[bool, str], str] | None = (
-            lambda deep, name: f"{'../' if deep else ''}{definitions_dir}/{name}.json"
-        )
-    else:
-        make_reference = None
-
     doc = extraction.extract(crawler=crawler, workers=workers)
     if do_patch:
         patching.patch_doc(doc)
     json_schema = schema.make_json_schema(
         doc,
-        make_reference=make_reference,
         limit_to_prototype_names=limit_to or None,
         include_descendants=include_descendants,
         forbid_type_names=forbid,
     )
-    if split:
-        assert make_reference is not None
-        definitions = typing.cast(dict[str, dict[str, Any]], json_schema.pop("definitions"))
-        for name, value in definitions.items():
-            with open(make_reference(False, name), "w") as f:
-                json.dump({"$schema": json_schema["$schema"]} | value, f, indent=2)
     json.dump(json_schema, output, indent=2)
 
 
