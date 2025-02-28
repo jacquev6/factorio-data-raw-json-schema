@@ -145,36 +145,45 @@ class JsonSchemaMaker:
     def to_json(self) -> JsonDict:
         properties = {
             prototype.key: json_value(
-                {"type": "object", "additionalProperties": {"$ref": self.make_reference(False, prototype.name)}}
+                self.make_json_definition(
+                    documentation.StructTypeExpression(
+                        base=None,
+                        properties=[],
+                        overridden_properties=[],
+                        custom_properties=documentation.RefTypeExpression(ref=prototype.name),
+                    )
+                )
             )
             for prototype in self.doc.prototypes
             if prototype.key is not None and prototype.name in self.prototypes_to_include
-        }
-
-        definitions = {
-            type.name: {"description": json_value(f"https://lua-api.factorio.com/stable/types/{type.name}.html")}
-            | self.make_json_definition(type.definition)
-            for type in self.doc.types
-            if type.name not in self.forbidden_type_names
-        } | {
-            prototype.name: {
-                "description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{prototype.name}.html")
-            }
-            | self.make_json_definition(prototype.make_definition())
-            for prototype in self.doc.prototypes
-            if prototype.key is not None
         }
 
         references_needed = self.prototypes_to_include | set(
             itertools.chain.from_iterable(self.all_references_needed_by[name] for name in self.prototypes_to_include)
         )
 
+        definitions = {
+            type.name: json_value(
+                {"description": json_value(f"https://lua-api.factorio.com/stable/types/{type.name}.html")}
+                | self.make_json_definition(type.definition)
+            )
+            for type in self.doc.types
+            if type.name not in self.forbidden_type_names and type.name in references_needed
+        } | {
+            prototype.name: json_value(
+                {"description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{prototype.name}.html")}
+                | self.make_json_definition(prototype.make_definition())
+            )
+            for prototype in self.doc.prototypes
+            if prototype.key is not None and prototype.name in references_needed
+        }
+
         return {
             "$schema": "https://json-schema.org/draft/2019-09/schema",
             "title": "Factorio Data.raw",
             "type": "object",
             "properties": properties,
-            "definitions": {name: definition for name, definition in definitions.items() if name in references_needed},
+            "definitions": definitions,
         }
 
 
