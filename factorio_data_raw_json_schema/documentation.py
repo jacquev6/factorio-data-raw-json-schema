@@ -19,11 +19,17 @@ class BuiltinTypeExpression:
     kind: Literal["builtin"] = "builtin"
     name: str
 
+    def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
+        return visitor.visit_builtin(self.name)
+
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class LiteralBoolTypeExpression:
     kind: Literal["literal_bool"] = "literal_bool"
     value: bool
+
+    def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
+        return visitor.visit_literal_bool(self.value)
 
 
 @dataclasses.dataclass(kw_only=True, eq=False)
@@ -31,11 +37,17 @@ class LiteralStringTypeExpression:
     kind: Literal["literal_string"] = "literal_string"
     value: str
 
+    def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
+        return visitor.visit_literal_string(self.value)
+
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class LiteralIntegerTypeExpression:
     kind: Literal["literal_integer"] = "literal_integer"
     value: int
+
+    def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
+        return visitor.visit_literal_integer(self.value)
 
 
 @dataclasses.dataclass(kw_only=True, eq=False)
@@ -43,11 +55,17 @@ class RefTypeExpression:
     kind: Literal["ref"] = "ref"
     ref: str
 
+    def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
+        return visitor.visit_ref(self.ref)
+
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class UnionTypeExpression:
     kind: Literal["union"] = "union"
     members: list[TypeExpression]
+
+    def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
+        return visitor.visit_union([member.accept(visitor) for member in self.members])
 
 
 @dataclasses.dataclass(kw_only=True, eq=False)
@@ -55,12 +73,18 @@ class ArrayTypeExpression:
     kind: Literal["array"] = "array"
     content: TypeExpression
 
+    def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
+        return visitor.visit_array(self.content.accept(visitor))
+
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class DictionaryTypeExpression:
     kind: Literal["dictionary"] = "dictionary"
     keys: TypeExpression
     values: TypeExpression
+
+    def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
+        return visitor.visit_dictionary(self.keys.accept(visitor), self.values.accept(visitor))
 
 
 @dataclasses.dataclass(kw_only=True, eq=False)
@@ -98,11 +122,57 @@ class StructTypeExpression:
         property = self.get_property(name)
         property.type = type
 
+    def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
+        hierarchy: list[VisitedStruct[E]] = []
+
+        def visit_properties(properties: list[Property]) -> Iterable[VisitedProperty[E]]:
+            for property in properties:
+                try:
+                    yield VisitedProperty(
+                        names=property.names, type=property.type.accept(visitor), required=property.required
+                    )
+                except Forbidden:
+                    pass
+
+        def rec(t: StructTypeExpression) -> None:
+            if t.base is not None:
+                base = visitor.get_base_named(t.base)
+                if isinstance(base, StructTypeExpression):
+                    rec(base)
+                elif isinstance(base, UnionTypeExpression):
+                    for member in base.members:
+                        if isinstance(member, StructTypeExpression):
+                            rec(member)
+                            break
+                        else:
+                            print(
+                                f"{t.base} has union type and is used as a base, but it has no member of struct type",
+                                file=sys.stderr,
+                            )
+                else:
+                    print(f"{t.base} is used as a base but has unexpected type: {base.kind}", file=sys.stderr)
+
+            hierarchy.append(
+                VisitedStruct(
+                    base=t.base,
+                    properties=list(visit_properties(t.properties)),
+                    overridden_properties=list(visit_properties(t.overridden_properties)),
+                    custom_properties=(None if t.custom_properties is None else t.custom_properties.accept(visitor)),
+                )
+            )
+
+        rec(self)
+
+        return visitor.visit_struct(hierarchy)
+
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class TupleTypeExpression:
     kind: Literal["tuple"] = "tuple"
     members: list[TypeExpression]
+
+    def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
+        return visitor.visit_tuple([member.accept(visitor) for member in self.members])
 
 
 TypeExpression = (
@@ -170,79 +240,6 @@ class TypeExpressionVisitor[E](abc.ABC):
 
     @abc.abstractmethod
     def visit_tuple(self, members: list[E]) -> E: ...
-
-
-def visit_type_expression(visitor: TypeExpressionVisitor[E], type: TypeExpression) -> E:
-    # Should this be implemented as a method 'visit' on each TypeExpression class?
-    if isinstance(type, BuiltinTypeExpression):
-        return visitor.visit_builtin(type.name)
-    elif isinstance(type, LiteralBoolTypeExpression):
-        return visitor.visit_literal_bool(type.value)
-    elif isinstance(type, LiteralStringTypeExpression):
-        return visitor.visit_literal_string(type.value)
-    elif isinstance(type, LiteralIntegerTypeExpression):
-        return visitor.visit_literal_integer(type.value)
-    elif isinstance(type, RefTypeExpression):
-        return visitor.visit_ref(type.ref)
-    elif isinstance(type, UnionTypeExpression):
-        members = [visit_type_expression(visitor, member) for member in type.members]
-        return visitor.visit_union(members)
-    elif isinstance(type, ArrayTypeExpression):
-        content = visit_type_expression(visitor, type.content)
-        return visitor.visit_array(content)
-    elif isinstance(type, DictionaryTypeExpression):
-        keys = visit_type_expression(visitor, type.keys)
-        values = visit_type_expression(visitor, type.values)
-        return visitor.visit_dictionary(keys, values)
-    elif isinstance(type, StructTypeExpression):
-        hierarchy: list[VisitedStruct[E]] = []
-
-        def visit_properties(properties: list[Property]) -> Iterable[VisitedProperty[E]]:
-            for property in properties:
-                try:
-                    visited_type = visit_type_expression(visitor, property.type)
-                except Forbidden:
-                    pass
-                else:
-                    yield VisitedProperty(names=property.names, type=visited_type, required=property.required)
-
-        def rec(t: StructTypeExpression) -> None:
-            if t.base is not None:
-                base = visitor.get_base_named(t.base)
-                if isinstance(base, StructTypeExpression):
-                    rec(base)
-                elif isinstance(base, UnionTypeExpression):
-                    for member in base.members:
-                        if isinstance(member, StructTypeExpression):
-                            rec(member)
-                            break
-                        else:
-                            print(
-                                f"{t.base} has union type and is used as a base, but it has no member of struct type",
-                                file=sys.stderr,
-                            )
-                else:
-                    print(f"{t.base} is used as a base but has unexpected type: {base.kind}", file=sys.stderr)
-
-            hierarchy.append(
-                VisitedStruct(
-                    base=t.base,
-                    properties=list(visit_properties(t.properties)),
-                    overridden_properties=list(visit_properties(t.overridden_properties)),
-                    custom_properties=(
-                        None if t.custom_properties is None else visit_type_expression(visitor, t.custom_properties)
-                    ),
-                )
-            )
-
-        rec(type)
-
-        return visitor.visit_struct(hierarchy)
-    elif isinstance(type, TupleTypeExpression):
-        members = [visit_type_expression(visitor, member) for member in type.members]
-        return visitor.visit_tuple(members)
-    else:
-        assert False
 
 
 @dataclasses.dataclass(kw_only=True, eq=False)

@@ -239,7 +239,7 @@ class JsonSchemaMaker:
             return type.definition
 
     def make_json_definition(self, type: documentation.TypeExpression) -> JsonDict:
-        return documentation.visit_type_expression(JsonDefinitionMaker(self), type)
+        return type.accept(JsonDefinitionMaker(self))
 
     def to_json(self) -> JsonDict:
         properties = {
