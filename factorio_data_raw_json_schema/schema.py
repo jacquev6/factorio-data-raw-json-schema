@@ -244,7 +244,10 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDict]):
                 assert custom_properties is None
                 custom_properties = struct.custom_properties
 
-        definition: JsonDict = {"type": "object", "properties": properties}
+        definition: JsonDict = {"type": "object"}
+
+        if len(properties) > 0:
+            definition["properties"] = properties
 
         if custom_properties is None:
             if len(properties) == 0:

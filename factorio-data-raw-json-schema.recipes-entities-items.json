@@ -2976,7 +2976,6 @@
             },
             {
               "type": "object",
-              "properties": {},
               "additionalProperties": {
                 "$ref": "#/definitions/WorkingVisualisation"
               }
@@ -7017,7 +7016,6 @@
             },
             {
               "type": "object",
-              "properties": {},
               "additionalProperties": {
                 "$ref": "#/definitions/WorkingVisualisation"
               }
@@ -10568,7 +10566,6 @@
             },
             {
               "type": "object",
-              "properties": {},
               "additionalProperties": {
                 "$ref": "#/definitions/WorkingVisualisation"
               }
