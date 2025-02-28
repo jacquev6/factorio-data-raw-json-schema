@@ -9,7 +9,7 @@ import click
 from . import crawling
 from . import extraction
 from . import patching
-from . import factorio_documentation
+from . import schema
 
 
 @click.group()
@@ -82,7 +82,7 @@ def extract(
     doc = extraction.extract(crawler=crawler, workers=workers)
     if do_patch:
         patching.patch_doc(doc)
-    json_schema = factorio_documentation.make_json_schema(
+    json_schema = schema.make_json_schema(
         doc,
         make_reference=make_reference,
         limit_to_prototype_names=limit_to or None,

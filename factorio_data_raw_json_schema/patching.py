@@ -1,7 +1,7 @@
 import typing
 
 from . import factorio_documentation as fd
-from .factorio_documentation import JsonDict
+from .schema import JsonDict
 
 
 # I believe 'DamageEntityTriggerEffectItem' is a typo in https://lua-api.factorio.com/2.0.28/types/TriggerEffect.html
