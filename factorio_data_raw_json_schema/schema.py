@@ -180,16 +180,7 @@ class JsonSchemaMaker:
             for prototype in self.doc.prototypes:
                 yield prototype.name
         else:
-            prototypes_by_name = {
-                prototype.name: prototype for prototype in self.doc.prototypes if prototype.name is not None
-            }
-
-            seed_prototypes = set()
-            for name in limit_to_prototype_names:
-                name = name + "Prototype"
-                assert name in prototypes_by_name, f"Prototype {name!r} not found"
-                seed_prototypes.add(name)
-
+            seed_prototypes = {name + "Prototype"for name in limit_to_prototype_names}
             yield from seed_prototypes
 
             if include_descendants:
