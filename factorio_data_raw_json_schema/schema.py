@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import itertools
 from typing import Callable, Iterable
+import typing
 
 import networkx as nx
 
@@ -177,13 +178,18 @@ class JsonSchemaMaker:
         }
 
 
-class JsonDefinitionMaker(documentation.TypeExpressionVisitor[JsonDict]):
+E = typing.TypeVar("E")
+
+
+class BaseTypeExpressionVisitor[E](documentation.TypeExpressionVisitor[E]):
     def __init__(self, maker: JsonSchemaMaker) -> None:
         self.maker = maker
 
     def get_base_named(self, name: str) -> documentation.TypeExpression:
         return self.maker.get_referable_type(name)
 
+
+class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDict]):
     def visit_builtin(self, name: str) -> JsonDict:
         return {
             "string": JsonDict({"type": "string"}),
@@ -262,13 +268,7 @@ class JsonDefinitionMaker(documentation.TypeExpressionVisitor[JsonDict]):
         }
 
 
-class NeededReferencesGatherer(documentation.TypeExpressionVisitor[Iterable[str]]):
-    def __init__(self, maker: JsonSchemaMaker) -> None:
-        self.maker = maker
-
-    def get_base_named(self, name: str) -> documentation.TypeExpression:
-        return self.maker.get_referable_type(name)
-
+class NeededReferencesGatherer(BaseTypeExpressionVisitor[Iterable[str]]):
     def visit_builtin(self, name: str) -> Iterable[str]:
         return []
 
