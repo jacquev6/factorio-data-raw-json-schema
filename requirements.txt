@@ -7,9 +7,11 @@ joblib-stubs
 lark
 lxml
 mypy
+networkx[default]
 py-spy
 requests
 requests-cache
 requests-file
 tqdm
+types-networkx
 types-tqdm

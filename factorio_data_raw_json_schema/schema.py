@@ -3,6 +3,8 @@ from __future__ import annotations
 import itertools
 from typing import Callable, Iterable
 
+import networkx as nx
+
 from . import documentation
 from . import patching
 
@@ -147,14 +149,21 @@ class JsonSchemaMaker:
             self.__init_prototypes_to_include(limit_to_prototype_names, include_descendants)
         )
 
-        self.references_needed_by = {
-            type.name: type.definition.accept(NeededReferencesGatherer(self))
-            for type in self.doc.types
-            if type.name not in self.forbidden_type_names
-        } | {
-            prototype.name: prototype.make_definition().accept(NeededReferencesGatherer(self))
-            for prototype in self.doc.prototypes
-        }
+        self.all_references_needed_by = nx.transitive_closure(
+            nx.DiGraph(
+                {
+                    name: self.__gather_references_needed_by(definition)
+                    for (name, definition) in itertools.chain(
+                        (
+                            (type.name, type.definition)
+                            for type in self.doc.types
+                            if type.name not in self.forbidden_type_names
+                        ),
+                        ((prototype.name, prototype.make_definition()) for prototype in self.doc.prototypes),
+                    )
+                }
+            )
+        )
 
     def __init_forbidden_type_names(self, forbid_type_names: Iterable[str]) -> None:
         self.forbidden_type_names = set(forbid_type_names)
@@ -180,21 +189,21 @@ class JsonSchemaMaker:
             for prototype in self.doc.prototypes:
                 yield prototype.name
         else:
-            seed_prototypes = {name + "Prototype"for name in limit_to_prototype_names}
+            seed_prototypes = {name + "Prototype" for name in limit_to_prototype_names}
             yield from seed_prototypes
 
             if include_descendants:
-                children_by_parent: dict[str, set[str]] = {}
+                parent_child_graph: nx.DiGraph[str] = nx.DiGraph()
                 for prototype in self.doc.prototypes:
                     if prototype.base is not None:
-                        children_by_parent.setdefault(prototype.base, set()).add(prototype.name)
+                        parent_child_graph.add_edge(prototype.base, prototype.name)
 
-                to_explore = set(seed_prototypes)
-                while to_explore:
-                    name = to_explore.pop()
-                    children = children_by_parent.get(name, set())
-                    yield from children
-                    to_explore |= children
+                parent_descendants_graph = nx.transitive_closure(parent_child_graph)
+                for name in seed_prototypes:
+                    yield from parent_descendants_graph[name]
+
+    def __gather_references_needed_by(self, t: documentation.TypeExpression) -> Iterable[str]:
+        return set(t.accept(NeededReferencesGatherer(self)))
 
     def make_reference(self, deep: bool, name: str) -> str:
         if name in self.forbidden_type_names:
@@ -214,8 +223,8 @@ class JsonSchemaMaker:
         else:
             return type.definition
 
-    def make_json_definition(self, type: documentation.TypeExpression) -> JsonDict:
-        return type.accept(JsonDefinitionMaker(self))
+    def make_json_definition(self, t: documentation.TypeExpression) -> JsonDict:
+        return t.accept(JsonDefinitionMaker(self))
 
     def to_json(self) -> JsonDict:
         properties = {
@@ -240,13 +249,9 @@ class JsonSchemaMaker:
             if prototype.key is not None
         }
 
-        references_needed: set[str] = set()
-        to_explore = set(self.prototypes_to_include)
-        while to_explore:
-            name = to_explore.pop()
-            if name not in references_needed:
-                references_needed.add(name)
-                to_explore |= self.references_needed_by.get(name, set())
+        references_needed = self.prototypes_to_include | set(
+            itertools.chain.from_iterable(self.all_references_needed_by[name] for name in self.prototypes_to_include)
+        )
 
         return {
             "$schema": "https://json-schema.org/draft/2019-09/schema",
@@ -257,47 +262,46 @@ class JsonSchemaMaker:
         }
 
 
-class NeededReferencesGatherer(documentation.TypeExpressionVisitor[set[str]]):
+class NeededReferencesGatherer(documentation.TypeExpressionVisitor[Iterable[str]]):
     def __init__(self, maker: JsonSchemaMaker) -> None:
         self.maker = maker
 
     def get_base_named(self, name: str) -> documentation.TypeExpression:
         return self.maker.get_referable_type(name)
 
-    def visit_builtin(self, name: str) -> set[str]:
-        return set()
+    def visit_builtin(self, name: str) -> Iterable[str]:
+        return []
 
-    def visit_literal_bool(self, value: bool) -> set[str]:
-        return set()
+    def visit_literal_bool(self, value: bool) -> Iterable[str]:
+        return []
 
-    def visit_literal_string(self, value: str) -> set[str]:
-        return set()
+    def visit_literal_string(self, value: str) -> Iterable[str]:
+        return []
 
-    def visit_literal_integer(self, value: int) -> set[str]:
-        return set()
+    def visit_literal_integer(self, value: int) -> Iterable[str]:
+        return []
 
-    def visit_ref(self, ref: str) -> set[str]:
-        return {ref}
+    def visit_ref(self, ref: str) -> Iterable[str]:
+        yield ref
 
-    def visit_union(self, members: list[set[str]]) -> set[str]:
-        return set().union(*members)
+    def visit_union(self, members: list[Iterable[str]]) -> Iterable[str]:
+        for member in members:
+            yield from member
 
-    def visit_array(self, content: set[str]) -> set[str]:
+    def visit_array(self, content: Iterable[str]) -> Iterable[str]:
         return content
 
-    def visit_dictionary(self, keys: set[str], values: set[str]) -> set[str]:
-        return keys | values
+    def visit_dictionary(self, keys: Iterable[str], values: Iterable[str]) -> Iterable[str]:
+        yield from keys
+        yield from values
 
-    def visit_struct(self, hierarchy: list[documentation.VisitedStruct[set[str]]]) -> set[str]:
-        refs = set()
-
+    def visit_struct(self, hierarchy: list[documentation.VisitedStruct[Iterable[str]]]) -> Iterable[str]:
         for struct in hierarchy:
             for property in itertools.chain(struct.properties, struct.overridden_properties):
-                refs |= property.type
+                yield from property.type
             if struct.custom_properties is not None:
-                refs |= struct.custom_properties
+                yield from struct.custom_properties
 
-        return refs
-
-    def visit_tuple(self, members: list[set[str]]) -> set[str]:
-        return set().union(*members)
+    def visit_tuple(self, members: list[Iterable[str]]) -> Iterable[str]:
+        for member in members:
+            yield from member
