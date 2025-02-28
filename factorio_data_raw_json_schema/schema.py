@@ -38,91 +38,6 @@ def make_json_schema(
     ).to_json()
 
 
-class JsonDefinitionMaker(documentation.TypeExpressionVisitor[JsonDict]):
-    def __init__(self, maker: JsonSchemaMaker) -> None:
-        self.maker = maker
-
-    def get_base_named(self, name: str) -> documentation.TypeExpression:
-        return self.maker.get_referable_type(name)
-
-    def visit_builtin(self, name: str) -> JsonDict:
-        return {
-            "string": JsonDict({"type": "string"}),
-            "float": JsonDict({"type": "number"}),
-            "double": JsonDict({"type": "number"}),
-            "bool": JsonDict({"type": "boolean"}),
-            "uint8": JsonDict({"type": "integer", "minimum": 0, "maximum": 255}),
-            "uint16": JsonDict({"type": "integer", "minimum": 0, "maximum": 65535}),
-            "uint32": JsonDict({"type": "integer", "minimum": 0, "maximum": 4294967295}),
-            "uint64": JsonDict({"type": "integer", "minimum": 0, "maximum": 18446744073709551615}),
-            "int8": JsonDict({"type": "integer", "minimum": -128, "maximum": 127}),
-            "int16": JsonDict({"type": "integer", "minimum": -32768, "maximum": 32767}),
-            "int32": JsonDict({"type": "integer", "minimum": -2147483648, "maximum": 2147483647}),
-            "int64": JsonDict({"type": "integer", "minimum": -9223372036854775808, "maximum": 9223372036854775807}),
-        }[name]
-
-    def visit_literal_bool(self, value: bool) -> JsonDict:
-        return {"type": "boolean", "const": value}
-
-    def visit_literal_string(self, value: str) -> JsonDict:
-        return {"type": "string", "const": value}
-
-    def visit_literal_integer(self, value: int) -> JsonDict:
-        return {"type": "integer", "const": value}
-
-    def visit_ref(self, ref: str) -> JsonDict:
-        return {"$ref": self.maker.make_reference(True, ref)}
-
-    def visit_union(self, members: list[JsonDict]) -> JsonDict:
-        return {"anyOf": json_value([json_value(member) for member in members])}
-
-    def visit_array(self, content: JsonDict) -> JsonDict:
-        return patching.array_to_json_definition(content)
-
-    def visit_dictionary(self, keys: JsonDict, values: JsonDict) -> JsonDict:
-        return {"type": "object", "additionalProperties": values, "propertyNames": keys}
-
-    def visit_struct(self, hierarchy: list[documentation.VisitedStruct[JsonDict]]) -> JsonDict:
-        properties: JsonDict = {}
-        required: dict[str, bool] = {}
-        custom_properties: JsonDict | None = None
-
-        for struct in hierarchy:
-            for property in itertools.chain(struct.properties, struct.overridden_properties):
-                for name in property.names:
-                    properties[name] = property.type
-                # @todo When there are multiple property names, and the property is required, enforce that at least one property name is present
-                if len(property.names) == 1:
-                    required[property.names[0]] = property.required
-
-            if struct.custom_properties is not None:
-                assert custom_properties is None
-                custom_properties = struct.custom_properties
-
-        definition: JsonDict = {"type": "object", "properties": properties}
-
-        if custom_properties is None:
-            if len(properties) == 0:
-                raise documentation.Forbidden
-        else:
-            definition["additionalProperties"] = custom_properties
-
-        if any(required.values()):
-            definition["required"] = [
-                json_value(property_name) for property_name in properties.keys() if required.get(property_name, False)
-            ]
-
-        return definition
-
-    def visit_tuple(self, members: list[JsonDict]) -> JsonDict:
-        return {
-            "type": "array",
-            "items": [json_value(member) for member in members],
-            "minItems": len(members),
-            "maxItems": len(members),
-        }
-
-
 class JsonSchemaMaker:
     def __init__(
         self,
@@ -259,6 +174,91 @@ class JsonSchemaMaker:
             "type": "object",
             "properties": properties,
             "definitions": {name: definition for name, definition in definitions.items() if name in references_needed},
+        }
+
+
+class JsonDefinitionMaker(documentation.TypeExpressionVisitor[JsonDict]):
+    def __init__(self, maker: JsonSchemaMaker) -> None:
+        self.maker = maker
+
+    def get_base_named(self, name: str) -> documentation.TypeExpression:
+        return self.maker.get_referable_type(name)
+
+    def visit_builtin(self, name: str) -> JsonDict:
+        return {
+            "string": JsonDict({"type": "string"}),
+            "float": JsonDict({"type": "number"}),
+            "double": JsonDict({"type": "number"}),
+            "bool": JsonDict({"type": "boolean"}),
+            "uint8": JsonDict({"type": "integer", "minimum": 0, "maximum": 255}),
+            "uint16": JsonDict({"type": "integer", "minimum": 0, "maximum": 65535}),
+            "uint32": JsonDict({"type": "integer", "minimum": 0, "maximum": 4294967295}),
+            "uint64": JsonDict({"type": "integer", "minimum": 0, "maximum": 18446744073709551615}),
+            "int8": JsonDict({"type": "integer", "minimum": -128, "maximum": 127}),
+            "int16": JsonDict({"type": "integer", "minimum": -32768, "maximum": 32767}),
+            "int32": JsonDict({"type": "integer", "minimum": -2147483648, "maximum": 2147483647}),
+            "int64": JsonDict({"type": "integer", "minimum": -9223372036854775808, "maximum": 9223372036854775807}),
+        }[name]
+
+    def visit_literal_bool(self, value: bool) -> JsonDict:
+        return {"type": "boolean", "const": value}
+
+    def visit_literal_string(self, value: str) -> JsonDict:
+        return {"type": "string", "const": value}
+
+    def visit_literal_integer(self, value: int) -> JsonDict:
+        return {"type": "integer", "const": value}
+
+    def visit_ref(self, ref: str) -> JsonDict:
+        return {"$ref": self.maker.make_reference(True, ref)}
+
+    def visit_union(self, members: list[JsonDict]) -> JsonDict:
+        return {"anyOf": json_value([json_value(member) for member in members])}
+
+    def visit_array(self, content: JsonDict) -> JsonDict:
+        return patching.array_to_json_definition(content)
+
+    def visit_dictionary(self, keys: JsonDict, values: JsonDict) -> JsonDict:
+        return {"type": "object", "additionalProperties": values, "propertyNames": keys}
+
+    def visit_struct(self, hierarchy: list[documentation.VisitedStruct[JsonDict]]) -> JsonDict:
+        properties: JsonDict = {}
+        required: dict[str, bool] = {}
+        custom_properties: JsonDict | None = None
+
+        for struct in hierarchy:
+            for property in itertools.chain(struct.properties, struct.overridden_properties):
+                for name in property.names:
+                    properties[name] = property.type
+                # @todo When there are multiple property names, and the property is required, enforce that at least one property name is present
+                if len(property.names) == 1:
+                    required[property.names[0]] = property.required
+
+            if struct.custom_properties is not None:
+                assert custom_properties is None
+                custom_properties = struct.custom_properties
+
+        definition: JsonDict = {"type": "object", "properties": properties}
+
+        if custom_properties is None:
+            if len(properties) == 0:
+                raise documentation.Forbidden
+        else:
+            definition["additionalProperties"] = custom_properties
+
+        if any(required.values()):
+            definition["required"] = [
+                json_value(property_name) for property_name in properties.keys() if required.get(property_name, False)
+            ]
+
+        return definition
+
+    def visit_tuple(self, members: list[JsonDict]) -> JsonDict:
+        return {
+            "type": "array",
+            "items": [json_value(member) for member in members],
+            "minItems": len(members),
+            "maxItems": len(members),
         }
 
 
