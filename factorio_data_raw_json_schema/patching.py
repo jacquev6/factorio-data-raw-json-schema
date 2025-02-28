@@ -1,13 +1,13 @@
 import typing
 
-from . import factorio_documentation as fd
+from . import documentation
 from .schema import JsonDict
 
 
 # I believe 'DamageEntityTriggerEffectItem' is a typo in https://lua-api.factorio.com/2.0.28/types/TriggerEffect.html
 # and actually refers to 'DamageTriggerEffectItem'
-local_types_for_union: dict[str, fd.TypeExpression] = {
-    "DamageEntityTriggerEffectItem": fd.RefTypeExpression(ref="DamageTriggerEffectItem")
+local_types_for_union: dict[str, documentation.TypeExpression] = {
+    "DamageEntityTriggerEffectItem": documentation.RefTypeExpression(ref="DamageTriggerEffectItem")
 }
 
 
@@ -16,15 +16,15 @@ def array_to_json_definition(content: JsonDict) -> JsonDict:
     return {"oneOf": [{"type": "array", "items": content}, {"type": "object", "additionalProperties": False}]}
 
 
-def patch_doc(doc: fd.Doc) -> None:
+def patch_doc(doc: documentation.Doc) -> None:
     # https://lua-api.factorio.com/2.0.28/types/WorkingVisualisations.html#shift_animation_waypoint_stop_duration is documented as uint16
     # but is some kind of floating point number in:
     #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".graphics_set.shift_animation_waypoint_stop_duration'
     #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".wet_mining_graphics_set.shift_animation_waypoint_stop_duration'
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".graphics_set.shift_animation_waypoint_stop_duration'
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".wet_mining_graphics_set.shift_animation_waypoint_stop_duration'
-    doc.get_type_def("WorkingVisualisations", fd.StructTypeExpression).get_property_type(
-        "shift_animation_waypoint_stop_duration", fd.RefTypeExpression
+    doc.get_type_def("WorkingVisualisations", documentation.StructTypeExpression).get_property_type(
+        "shift_animation_waypoint_stop_duration", documentation.RefTypeExpression
     ).ref = "double"
 
     # https://lua-api.factorio.com/2.0.28/types/ItemProductPrototype.html#amount is documented as uint16
@@ -35,32 +35,32 @@ def patch_doc(doc: fd.Doc) -> None:
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.recipe."active-provider-chest-recycling".results[1].amount'
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.recipe."active-provider-chest-recycling".results[2].amount'
     # And many other recycling recipes.
-    doc.get_type_def("ItemProductPrototype", fd.StructTypeExpression).get_property_type(
-        "amount", fd.RefTypeExpression
+    doc.get_type_def("ItemProductPrototype", documentation.StructTypeExpression).get_property_type(
+        "amount", documentation.RefTypeExpression
     ).ref = "double"
 
     # https://lua-api.factorio.com/2.0.28/types/TechnologySlotStyleSpecification.html#level_offset_y is documented as int32
     # but is some kind of floating point number in:
     #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."gui-style".default.technology_slot.level_offset_y'
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."gui-style".default.technology_slot.level_offset_y'
-    doc.get_type_def("TechnologySlotStyleSpecification", fd.StructTypeExpression).get_property_type(
-        "level_offset_y", fd.RefTypeExpression
+    doc.get_type_def("TechnologySlotStyleSpecification", documentation.StructTypeExpression).get_property_type(
+        "level_offset_y", documentation.RefTypeExpression
     ).ref = "double"
     # (Probably applies to level_offset_x as well)
-    doc.get_type_def("TechnologySlotStyleSpecification", fd.StructTypeExpression).get_property_type(
-        "level_offset_x", fd.RefTypeExpression
+    doc.get_type_def("TechnologySlotStyleSpecification", documentation.StructTypeExpression).get_property_type(
+        "level_offset_x", documentation.RefTypeExpression
     ).ref = "double"
 
     # https://lua-api.factorio.com/2.0.28/types/TechnologySlotStyleSpecification.html#level_range_offset_y is documented as int32
     # but is some kind of floating point number in:
     #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."gui-style".default.technology_slot.level_range_offset_y'
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."gui-style".default.technology_slot.level_range_offset_y'
-    doc.get_type_def("TechnologySlotStyleSpecification", fd.StructTypeExpression).get_property_type(
-        "level_range_offset_y", fd.RefTypeExpression
+    doc.get_type_def("TechnologySlotStyleSpecification", documentation.StructTypeExpression).get_property_type(
+        "level_range_offset_y", documentation.RefTypeExpression
     ).ref = "double"
     # (Probably applies to level_range_offset_x as well)
-    doc.get_type_def("TechnologySlotStyleSpecification", fd.StructTypeExpression).get_property_type(
-        "level_range_offset_x", fd.RefTypeExpression
+    doc.get_type_def("TechnologySlotStyleSpecification", documentation.StructTypeExpression).get_property_type(
+        "level_range_offset_x", documentation.RefTypeExpression
     ).ref = "double"
 
     # https://lua-api.factorio.com/2.0.28/types/BaseAttackParameters.html#lead_target_for_projectile_delay is documented as uint32
@@ -68,8 +68,8 @@ def patch_doc(doc: fd.Doc) -> None:
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."segmented-unit"."big-demolisher".revenge_attack_parameters.lead_target_for_projectile_delay'
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."segmented-unit"."medium-demolisher".revenge_attack_parameters.lead_target_for_projectile_delay'
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."segmented-unit"."small-demolisher".revenge_attack_parameters.lead_target_for_projectile_delay'
-    doc.get_type_def("BaseAttackParameters", fd.StructTypeExpression).get_property_type(
-        "lead_target_for_projectile_delay", fd.RefTypeExpression
+    doc.get_type_def("BaseAttackParameters", documentation.StructTypeExpression).get_property_type(
+        "lead_target_for_projectile_delay", documentation.RefTypeExpression
     ).ref = "double"
 
     # https://lua-api.factorio.com/2.0.28/types/WorkingVisualisations.html#working_visualisations is documented as array[WorkingVisualisation]
@@ -78,19 +78,19 @@ def patch_doc(doc: fd.Doc) -> None:
     # Note that is is an array as expected in:
     #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".graphics_set.working_visualisations'
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".graphics_set.working_visualisations'
-    doc.get_type_def("WorkingVisualisations", fd.StructTypeExpression).set_property_type(
+    doc.get_type_def("WorkingVisualisations", documentation.StructTypeExpression).set_property_type(
         "working_visualisations",
-        fd.UnionTypeExpression(
+        documentation.UnionTypeExpression(
             members=[
-                doc.get_type_def("WorkingVisualisations", fd.StructTypeExpression).get_property_type(
+                doc.get_type_def("WorkingVisualisations", documentation.StructTypeExpression).get_property_type(
                     "working_visualisations"
                 ),
-                fd.StructTypeExpression(
+                documentation.StructTypeExpression(
                     base=None,
                     properties=[],
                     overridden_properties=[],
-                    custom_properties=doc.get_type_def("WorkingVisualisations", fd.StructTypeExpression)
-                    .get_property_type("working_visualisations", fd.ArrayTypeExpression)
+                    custom_properties=doc.get_type_def("WorkingVisualisations", documentation.StructTypeExpression)
+                    .get_property_type("working_visualisations", documentation.ArrayTypeExpression)
                     .content,
                 ),
             ]
@@ -100,13 +100,15 @@ def patch_doc(doc: fd.Doc) -> None:
     # https://lua-api.factorio.com/2.0.28/types/CranePartDyingEffect.html#particle_effects is documented as 'array[CreateParticleTriggerEffectItem]'
     # but is a single 'CreateParticleTriggerEffectItem' in:
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."agricultural-tower"."agricultural-tower".crane.parts[0].dying_effect.particle_effects'
-    doc.get_type_def("CranePartDyingEffect", fd.StructTypeExpression).set_property_type(
+    doc.get_type_def("CranePartDyingEffect", documentation.StructTypeExpression).set_property_type(
         "particle_effects",
-        fd.UnionTypeExpression(
+        documentation.UnionTypeExpression(
             members=[
-                doc.get_type_def("CranePartDyingEffect", fd.StructTypeExpression).get_property_type("particle_effects"),
-                doc.get_type_def("CranePartDyingEffect", fd.StructTypeExpression)
-                .get_property_type("particle_effects", fd.ArrayTypeExpression)
+                doc.get_type_def("CranePartDyingEffect", documentation.StructTypeExpression).get_property_type(
+                    "particle_effects"
+                ),
+                doc.get_type_def("CranePartDyingEffect", documentation.StructTypeExpression)
+                .get_property_type("particle_effects", documentation.ArrayTypeExpression)
                 .content,
             ]
         ),
@@ -116,9 +118,9 @@ def patch_doc(doc: fd.Doc) -> None:
     # but that value is used in:
     #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.shortcut.redo.action'
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.shortcut.redo.action'
-    doc.get_prototype("ShortcutPrototype").get_property_type("action", fd.UnionTypeExpression).members.append(
-        fd.LiteralStringTypeExpression(value="redo")
-    )
+    doc.get_prototype("ShortcutPrototype").get_property_type(
+        "action", documentation.UnionTypeExpression
+    ).members.append(documentation.LiteralStringTypeExpression(value="redo"))
 
     # https://lua-api.factorio.com/2.0.28/prototypes/AchievementPrototypeWithCondition.html#objective_condition doesn't mention "late-research" as a possible value
     # and is not overridden in https://lua-api.factorio.com/2.0.28/prototypes/DontBuildEntityAchievementPrototype.html
@@ -126,8 +128,8 @@ def patch_doc(doc: fd.Doc) -> None:
     #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."dont-build-entity-achievement"."logistic-network-embargo".objective_condition'
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."dont-build-entity-achievement"."logistic-network-embargo".objective_condition'
     doc.get_prototype("AchievementPrototypeWithCondition").get_property_type(
-        "objective_condition", fd.UnionTypeExpression
-    ).members.append(fd.LiteralStringTypeExpression(value="late-research"))
+        "objective_condition", documentation.UnionTypeExpression
+    ).members.append(documentation.LiteralStringTypeExpression(value="late-research"))
 
     # https://lua-api.factorio.com/2.0.28/prototypes/UtilityConstants.html#space_platform_default_speed_formula is documented as required
     # but is absent from:
@@ -160,61 +162,64 @@ def patch_doc(doc: fd.Doc) -> None:
     # but it's absent from:
     #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."utility-sprites".default.cursor_box'
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."utility-sprites".default.cursor_box'
-    doc.get_prototype("UtilitySprites").get_property_type("cursor_box", fd.StructTypeExpression).get_property(
-        "rts_selected"
-    ).required = False
+    doc.get_prototype("UtilitySprites").get_property_type(
+        "cursor_box", documentation.StructTypeExpression
+    ).get_property("rts_selected").required = False
 
     # https://lua-api.factorio.com/2.0.28/prototypes/UtilitySprites.html#cursor_box documents attribute 'rts_to_be_selected' as required
     # but it's absent from:
     #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '."utility-sprites".default.cursor_box'
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."utility-sprites".default.cursor_box'
-    doc.get_prototype("UtilitySprites").get_property_type("cursor_box", fd.StructTypeExpression).get_property(
-        "rts_to_be_selected"
-    ).required = False
+    doc.get_prototype("UtilitySprites").get_property_type(
+        "cursor_box", documentation.StructTypeExpression
+    ).get_property("rts_to_be_selected").required = False
 
     # https://lua-api.factorio.com/2.0.28/types/SingleGraphicProcessionLayer.html#frames documents attribute 'frame' as required
     # but it's absent from:
     #   cat game-definitions/base-2.0.28/script-output/data-raw-dump.json | jq '.procession."default-b".timeline.layers[5].frames[0]'
     # (and many others)
     typing.cast(
-        fd.StructTypeExpression,
-        doc.get_type_def("SingleGraphicProcessionLayer", fd.StructTypeExpression)
-        .get_property_type("frames", fd.ArrayTypeExpression)
+        documentation.StructTypeExpression,
+        doc.get_type_def("SingleGraphicProcessionLayer", documentation.StructTypeExpression)
+        .get_property_type("frames", documentation.ArrayTypeExpression)
         .content,
     ).get_property("frame").required = False
 
     # https://lua-api.factorio.com/2.0.28/types/ProcessionTimeline.html#audio_events is documented as required
     # but is absent from:
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.procession."default-intermezzo".timeline'
-    doc.get_type_def("ProcessionTimeline", fd.StructTypeExpression).get_property("audio_events").required = False
+    doc.get_type_def("ProcessionTimeline", documentation.StructTypeExpression).get_property(
+        "audio_events"
+    ).required = False
 
     # https://lua-api.factorio.com/2.0.28/types/RailPictureSet.html#rail_endings is documented as required
     # but is absent from:
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."rail-ramp"."dummy-rail-ramp".pictures'
-    doc.get_type_def("RailPictureSet", fd.StructTypeExpression).get_property("rail_endings").required = False
+    doc.get_type_def("RailPictureSet", documentation.StructTypeExpression).get_property("rail_endings").required = False
 
     # https://lua-api.factorio.com/2.0.28/types/SpriteSource.html#filename is documented as required
     # but is absent from:
     #  cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.wall."stone-wall".pictures.ending_left'
     # (and many others)
-    doc.get_type_def("SpriteSource", fd.StructTypeExpression).get_property("filename").required = False
+    doc.get_type_def("SpriteSource", documentation.StructTypeExpression).get_property("filename").required = False
 
     # https://lua-api.factorio.com/2.0.28/types/NeighbourConnectableConnectionDefinition.html#location documents attributes 'direction' as a 'MapPosition'
     # but it's an integer in:
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."fusion-reactor"."fusion-reactor".neighbour_connectable.connections'
     # (probably a https://lua-api.factorio.com/2.0.28/defines.html#defines.direction)
-    doc.get_type_def("NeighbourConnectableConnectionDefinition", fd.StructTypeExpression).get_property_type(
-        "location", fd.StructTypeExpression
-    ).set_property_type("direction", fd.RefTypeExpression(ref="uint8"))
+    doc.get_type_def("NeighbourConnectableConnectionDefinition", documentation.StructTypeExpression).get_property_type(
+        "location", documentation.StructTypeExpression
+    ).set_property_type("direction", documentation.RefTypeExpression(ref="uint8"))
 
     # https://lua-api.factorio.com/2.0.28/types/BoundingBox.html is documented as a 2-tuple,
     # but the prose explains it can also be a 3-tuple with a 'float' as third element.
-    doc.get_type_def("BoundingBox", fd.UnionTypeExpression).members.append(
-        fd.TupleTypeExpression(
+    doc.get_type_def("BoundingBox", documentation.UnionTypeExpression).members.append(
+        documentation.TupleTypeExpression(
             members=typing.cast(
-                fd.TupleTypeExpression, doc.get_type_def("BoundingBox", fd.UnionTypeExpression).members[1]
+                documentation.TupleTypeExpression,
+                doc.get_type_def("BoundingBox", documentation.UnionTypeExpression).members[1],
             ).members
-            + [fd.RefTypeExpression(ref="float")]
+            + [documentation.RefTypeExpression(ref="float")]
         )
     )
 
@@ -222,43 +227,47 @@ def patch_doc(doc: fd.Doc) -> None:
     # but it's some kind of floating point number in:
     #  cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.procession."planet-to-platform-a".timeline.layers[33].frames[0].timestamp'
     typing.cast(
-        fd.StructTypeExpression,
-        doc.get_type_def("SingleGraphicProcessionLayer", fd.StructTypeExpression)
-        .get_property_type("frames", fd.ArrayTypeExpression)
+        documentation.StructTypeExpression,
+        doc.get_type_def("SingleGraphicProcessionLayer", documentation.StructTypeExpression)
+        .get_property_type("frames", documentation.ArrayTypeExpression)
         .content,
-    ).set_property_type("timestamp", fd.RefTypeExpression(ref="double"))
+    ).set_property_type("timestamp", documentation.RefTypeExpression(ref="double"))
 
     # https://lua-api.factorio.com/2.0.28/types/Sound.html doesn't mention a plain string (filename) as a possible value
     # but many sounds are plain filenames:
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '."rocket-silo"."rocket-silo".alarm_sound'
     # (and many others)
-    doc.get_type_def("Sound", fd.UnionTypeExpression).members.append(fd.RefTypeExpression(ref="string"))
+    doc.get_type_def("Sound", documentation.UnionTypeExpression).members.append(
+        documentation.RefTypeExpression(ref="string")
+    )
 
     # https://lua-api.factorio.com/2.0.28/types/CreateDecorativesTriggerEffectItem.html#type is documented as required
     # but is absent from:
     #   cat game-definitions/space-age-2.0.28/script-output/data-raw-dump.json | jq '.turret."medium-worm-turret".spawn_decoration[0]'
     # (and many others)
-    doc.get_type_def("CreateDecorativesTriggerEffectItem", fd.StructTypeExpression).get_property(
+    doc.get_type_def("CreateDecorativesTriggerEffectItem", documentation.StructTypeExpression).get_property(
         "type"
     ).required = False
 
     # @todo Document documentation issues
-    doc.get_type_def("CreateParticleTriggerEffectItem", fd.StructTypeExpression).get_property("type").required = False
-    doc.get_type_def("CreateParticleTriggerEffectItem", fd.StructTypeExpression).get_property(
+    doc.get_type_def("CreateParticleTriggerEffectItem", documentation.StructTypeExpression).get_property(
+        "type"
+    ).required = False
+    doc.get_type_def("CreateParticleTriggerEffectItem", documentation.StructTypeExpression).get_property(
         "particle_name"
     ).required = False
-    doc.get_type_def("CreateParticleTriggerEffectItem", fd.StructTypeExpression).get_property(
+    doc.get_type_def("CreateParticleTriggerEffectItem", documentation.StructTypeExpression).get_property(
         "initial_height"
     ).required = False
-    doc.get_type_def("TriggerEffectItem", fd.StructTypeExpression).set_property_type(
-        "repeat_count", fd.RefTypeExpression(ref="double")
+    doc.get_type_def("TriggerEffectItem", documentation.StructTypeExpression).set_property_type(
+        "repeat_count", documentation.RefTypeExpression(ref="double")
     )
-    doc.get_type_def("CreateParticleTriggerEffectItem", fd.StructTypeExpression).set_property_type(
-        "tail_length_deviation", fd.RefTypeExpression(ref="double")
+    doc.get_type_def("CreateParticleTriggerEffectItem", documentation.StructTypeExpression).set_property_type(
+        "tail_length_deviation", documentation.RefTypeExpression(ref="double")
     )
-    doc.get_type_def("BeamTriggerDelivery", fd.StructTypeExpression).set_property_type(
-        "max_length", fd.RefTypeExpression(ref="double")
+    doc.get_type_def("BeamTriggerDelivery", documentation.StructTypeExpression).set_property_type(
+        "max_length", documentation.RefTypeExpression(ref="double")
     )
-    doc.get_type_def("DamageTileTriggerEffectItem", fd.StructTypeExpression).get_property_type(
-        "type", fd.LiteralStringTypeExpression
+    doc.get_type_def("DamageTileTriggerEffectItem", documentation.StructTypeExpression).get_property_type(
+        "type", documentation.LiteralStringTypeExpression
     ).value = "damage-tile"

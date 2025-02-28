@@ -3,15 +3,8 @@ from __future__ import annotations
 import itertools
 from typing import Callable, Iterable
 
+from . import documentation
 from . import patching
-from .factorio_documentation import (
-    Doc,
-    Forbidden,
-    TypeExpression,
-    TypeExpressionVisitor,
-    VisitedStruct,
-    visit_type_expression,
-)
 
 
 JsonValue = None | bool | int | float | str | list["JsonValue"] | dict[str, "JsonValue"]
@@ -27,7 +20,7 @@ def json_value(value: JsonValue) -> JsonValue:
 
 
 def make_json_schema(
-    doc: Doc,
+    doc: documentation.Doc,
     *,
     make_reference: Callable[[bool, str], str] | None,
     limit_to_prototype_names: Iterable[str] | None,
@@ -43,11 +36,11 @@ def make_json_schema(
     ).to_json()
 
 
-class JsonDefinitionMaker(TypeExpressionVisitor[JsonDict]):
+class JsonDefinitionMaker(documentation.TypeExpressionVisitor[JsonDict]):
     def __init__(self, maker: JsonSchemaMaker) -> None:
         self.maker = maker
 
-    def get_base_named(self, name: str) -> TypeExpression:
+    def get_base_named(self, name: str) -> documentation.TypeExpression:
         return self.maker.get_referable_type(name)
 
     def visit_builtin(self, name: str) -> JsonDict:
@@ -87,7 +80,7 @@ class JsonDefinitionMaker(TypeExpressionVisitor[JsonDict]):
     def visit_dictionary(self, keys: JsonDict, values: JsonDict) -> JsonDict:
         return {"type": "object", "additionalProperties": values, "propertyNames": keys}
 
-    def visit_struct(self, hierarchy: list[VisitedStruct[JsonDict]]) -> JsonDict:
+    def visit_struct(self, hierarchy: list[documentation.VisitedStruct[JsonDict]]) -> JsonDict:
         properties: JsonDict = {}
         required: dict[str, bool] = {}
         custom_properties: JsonDict | None = None
@@ -108,7 +101,7 @@ class JsonDefinitionMaker(TypeExpressionVisitor[JsonDict]):
 
         if custom_properties is None:
             if len(properties) == 0:
-                raise Forbidden
+                raise documentation.Forbidden
         else:
             definition["additionalProperties"] = custom_properties
 
@@ -132,7 +125,7 @@ class JsonSchemaMaker:
     def __init__(
         self,
         *,
-        doc: Doc,
+        doc: documentation.Doc,
         make_reference: Callable[[bool, str], str] | None,
         limit_to_prototype_names: Iterable[str] | None,
         include_descendants: bool,
@@ -169,7 +162,7 @@ class JsonSchemaMaker:
                     self.__references_needed = set()
                     try:
                         self.make_json_definition(type.definition)
-                    except Forbidden:
+                    except documentation.Forbidden:
                         self.forbidden_type_names.add(type.name)
                         some_type_is_newly_forbidden = True
 
@@ -229,15 +222,15 @@ class JsonSchemaMaker:
     def make_reference(self, deep: bool, name: str) -> str:
         if name in self.forbidden_type_names:
             assert name in self.types_by_name
-            raise Forbidden
+            raise documentation.Forbidden
 
         self.__references_needed.add(name)  # Side effect for '__init_references_needed_by'
         return self.do_make_reference(deep, name)
 
-    def get_referable_type(self, name: str) -> TypeExpression:
+    def get_referable_type(self, name: str) -> documentation.TypeExpression:
         if name in self.forbidden_type_names:
             assert name in self.types_by_name
-            raise Forbidden
+            raise documentation.Forbidden
 
         type = self.types_by_name.get(name)
         if type is None:
@@ -245,8 +238,8 @@ class JsonSchemaMaker:
         else:
             return type.definition
 
-    def make_json_definition(self, type: TypeExpression) -> JsonDict:
-        return visit_type_expression(JsonDefinitionMaker(self), type)
+    def make_json_definition(self, type: documentation.TypeExpression) -> JsonDict:
+        return documentation.visit_type_expression(JsonDefinitionMaker(self), type)
 
     def to_json(self) -> JsonDict:
         properties = {

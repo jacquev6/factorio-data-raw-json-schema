@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-import abc
-import sys
 from typing import Iterable, Literal
+import abc
 import dataclasses
+import sys
 import typing
 
 
