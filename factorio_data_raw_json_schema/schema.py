@@ -136,8 +136,6 @@ class JsonSchemaMaker:
         self.types_by_name = {type.name: type for type in doc.types}
         self.prototypes_by_name = {prototype.name: prototype for prototype in doc.prototypes}
 
-        self.__references_needed: set[str] = set()
-
         if make_reference is None:
             self.do_make_reference: Callable[[bool, str], str] = lambda deep, name: f"#/definitions/{name}"
         else:
@@ -149,7 +147,14 @@ class JsonSchemaMaker:
             self.__init_prototypes_to_include(limit_to_prototype_names, include_descendants)
         )
 
-        self.references_needed_by = dict(self.__init_references_needed_by())
+        self.references_needed_by = {
+            type.name: type.definition.accept(NeededReferencesGatherer(self))
+            for type in self.doc.types
+            if type.name not in self.forbidden_type_names
+        } | {
+            prototype.name: prototype.make_definition().accept(NeededReferencesGatherer(self))
+            for prototype in self.doc.prototypes
+        }
 
     def __init_forbidden_type_names(self, forbid_type_names: Iterable[str]) -> None:
         self.forbidden_type_names = set(forbid_type_names)
@@ -159,7 +164,6 @@ class JsonSchemaMaker:
             some_type_is_newly_forbidden = False
             for type in self.doc.types:
                 if type.name not in self.forbidden_type_names:
-                    self.__references_needed = set()
                     try:
                         self.make_json_definition(type.definition)
                     except documentation.Forbidden:
@@ -201,30 +205,11 @@ class JsonSchemaMaker:
                     yield from children
                     to_explore |= children
 
-    def __init_references_needed_by(self) -> Iterable[tuple[str, set[str]]]:
-        # This function relies on side-effects: 'make_reference' modifies 'self.references_needed'
-        # Rationale: keep the many 'TypeExpression' classes simple: they only need to define 'make_json_definition',
-        # and not some variant of 'gather_references_needed'.
-
-        for prototype in self.doc.prototypes:
-            self.__references_needed = set()
-            self.make_json_definition(prototype.make_definition())  # Trigger the side-effect
-            yield prototype.name, self.__references_needed
-
-        for type in self.doc.types:
-            if type.name not in self.forbidden_type_names:
-                self.__references_needed = set()
-                self.make_json_definition(type.definition)  # Trigger the side-effect
-                yield type.name, self.__references_needed
-
-        self.__references_needed = set()
-
     def make_reference(self, deep: bool, name: str) -> str:
         if name in self.forbidden_type_names:
             assert name in self.types_by_name
             raise documentation.Forbidden
 
-        self.__references_needed.add(name)  # Side effect for '__init_references_needed_by'
         return self.do_make_reference(deep, name)
 
     def get_referable_type(self, name: str) -> documentation.TypeExpression:
@@ -279,3 +264,49 @@ class JsonSchemaMaker:
             "properties": properties,
             "definitions": {name: definition for name, definition in definitions.items() if name in references_needed},
         }
+
+
+class NeededReferencesGatherer(documentation.TypeExpressionVisitor[set[str]]):
+    def __init__(self, maker: JsonSchemaMaker) -> None:
+        self.maker = maker
+
+    def get_base_named(self, name: str) -> documentation.TypeExpression:
+        return self.maker.get_referable_type(name)
+
+    def visit_builtin(self, name: str) -> set[str]:
+        return set()
+
+    def visit_literal_bool(self, value: bool) -> set[str]:
+        return set()
+
+    def visit_literal_string(self, value: str) -> set[str]:
+        return set()
+
+    def visit_literal_integer(self, value: int) -> set[str]:
+        return set()
+
+    def visit_ref(self, ref: str) -> set[str]:
+        return {ref}
+
+    def visit_union(self, members: list[set[str]]) -> set[str]:
+        return set().union(*members)
+
+    def visit_array(self, content: set[str]) -> set[str]:
+        return content
+
+    def visit_dictionary(self, keys: set[str], values: set[str]) -> set[str]:
+        return keys | values
+
+    def visit_struct(self, hierarchy: list[documentation.VisitedStruct[set[str]]]) -> set[str]:
+        refs = set()
+
+        for struct in hierarchy:
+            for property in itertools.chain(struct.properties, struct.overridden_properties):
+                refs |= property.type
+            if struct.custom_properties is not None:
+                refs |= struct.custom_properties
+
+        return refs
+
+    def visit_tuple(self, members: list[set[str]]) -> set[str]:
+        return set().union(*members)
