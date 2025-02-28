@@ -36,7 +36,7 @@ def make_json_schema(
         limit_to_prototype_names=limit_to_prototype_names,
         include_descendants=include_descendants,
         forbid_type_names=forbid_type_names,
-    ).to_json()
+    ).make_json()
 
 
 class JsonSchemaMaker:
@@ -59,16 +59,14 @@ class JsonSchemaMaker:
         else:
             self.do_make_reference = make_reference
 
-        self.__init_forbidden_type_names(forbid_type_names)
+        self.init_forbidden_type_names(forbid_type_names)
 
-        self.prototypes_to_include = set(
-            self.__init_prototypes_to_include(limit_to_prototype_names, include_descendants)
-        )
+        self.prototypes_to_include = set(self.init_prototypes_to_include(limit_to_prototype_names, include_descendants))
 
         self.all_references_needed_by = nx.transitive_closure(
             nx.DiGraph(
                 {
-                    name: self.__gather_references_needed_by(definition)
+                    name: self.gather_references_needed_by(definition)
                     for (name, definition) in itertools.chain(
                         (
                             (type.name, type.definition)
@@ -81,7 +79,7 @@ class JsonSchemaMaker:
             )
         )
 
-    def __init_forbidden_type_names(self, forbid_type_names: Iterable[str]) -> None:
+    def init_forbidden_type_names(self, forbid_type_names: Iterable[str]) -> None:
         self.forbidden_type_names = set(forbid_type_names)
 
         # @todo Use a proper graph exploration algorithm!
@@ -98,7 +96,7 @@ class JsonSchemaMaker:
             if not some_type_is_newly_forbidden:
                 break
 
-    def __init_prototypes_to_include(
+    def init_prototypes_to_include(
         self, limit_to_prototype_names: Iterable[str] | None, include_descendants: bool
     ) -> Iterable[str]:
         if limit_to_prototype_names is None:
@@ -109,16 +107,16 @@ class JsonSchemaMaker:
             yield from seed_prototypes
 
             if include_descendants:
-                parent_child_graph: nx.DiGraph[str] = nx.DiGraph()
+                parent_children_graph: nx.DiGraph[str] = nx.DiGraph()
                 for prototype in self.doc.prototypes:
                     if prototype.base is not None:
-                        parent_child_graph.add_edge(prototype.base, prototype.name)
+                        parent_children_graph.add_edge(prototype.base, prototype.name)
 
-                parent_descendants_graph = nx.transitive_closure(parent_child_graph)
+                parent_descendants_graph = nx.transitive_closure(parent_children_graph)
                 for name in seed_prototypes:
                     yield from parent_descendants_graph[name]
 
-    def __gather_references_needed_by(self, t: documentation.TypeExpression) -> Iterable[str]:
+    def gather_references_needed_by(self, t: documentation.TypeExpression) -> Iterable[str]:
         return set(t.accept(NeededReferencesGatherer(self)))
 
     def make_reference(self, deep: bool, name: str) -> str:
@@ -142,7 +140,7 @@ class JsonSchemaMaker:
     def make_json_definition(self, t: documentation.TypeExpression) -> JsonDict:
         return t.accept(JsonDefinitionMaker(self))
 
-    def to_json(self) -> JsonDict:
+    def make_json(self) -> JsonDict:
         properties = {
             prototype.key: json_value(
                 self.make_json_definition(
