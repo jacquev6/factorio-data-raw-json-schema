@@ -279,15 +279,13 @@ class Prototype:
         property.type = type
 
     def make_definition(self) -> TypeExpression:
-        type_property = (
-            None
-            if self.key is None
-            else Property(names=["type"], type=LiteralStringTypeExpression(value=self.key), required=True)
-        )
+        properties = list(self.properties)
+        if self.key is not None:
+            properties.append(Property(names=["type"], type=LiteralStringTypeExpression(value=self.key), required=True))
 
         return StructTypeExpression(
             base=self.base,
-            properties=self.properties + list(filter(None, [type_property])),
+            properties=properties,
             overridden_properties=self.overridden_properties,
             custom_properties=self.custom_properties,
         )
