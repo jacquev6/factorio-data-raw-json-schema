@@ -16,7 +16,7 @@ class TypeExpression(abc.ABC):
     def accept(self, visitor: TypeExpressionVisitor[E]) -> E: ...
 
 
-@dataclasses.dataclass(kw_only=True, eq=False)
+@dataclasses.dataclass
 class BuiltinTypeExpression(TypeExpression):
     name: str
 
@@ -24,7 +24,7 @@ class BuiltinTypeExpression(TypeExpression):
         return visitor.visit_builtin(self.name)
 
 
-@dataclasses.dataclass(kw_only=True, eq=False)
+@dataclasses.dataclass
 class LiteralBoolTypeExpression(TypeExpression):
     value: bool
 
@@ -32,7 +32,7 @@ class LiteralBoolTypeExpression(TypeExpression):
         return visitor.visit_literal_bool(self.value)
 
 
-@dataclasses.dataclass(kw_only=True, eq=False)
+@dataclasses.dataclass
 class LiteralStringTypeExpression(TypeExpression):
     value: str
 
@@ -40,7 +40,7 @@ class LiteralStringTypeExpression(TypeExpression):
         return visitor.visit_literal_string(self.value)
 
 
-@dataclasses.dataclass(kw_only=True, eq=False)
+@dataclasses.dataclass
 class LiteralIntegerTypeExpression(TypeExpression):
     value: int
 
@@ -48,7 +48,7 @@ class LiteralIntegerTypeExpression(TypeExpression):
         return visitor.visit_literal_integer(self.value)
 
 
-@dataclasses.dataclass(kw_only=True, eq=False)
+@dataclasses.dataclass
 class RefTypeExpression(TypeExpression):
     ref: str
 
@@ -56,7 +56,7 @@ class RefTypeExpression(TypeExpression):
         return visitor.visit_ref(self.ref)
 
 
-@dataclasses.dataclass(kw_only=True, eq=False)
+@dataclasses.dataclass
 class UnionTypeExpression(TypeExpression):
     members: list[TypeExpression]
 
@@ -64,7 +64,7 @@ class UnionTypeExpression(TypeExpression):
         return visitor.visit_union([member.accept(visitor) for member in self.members])
 
 
-@dataclasses.dataclass(kw_only=True, eq=False)
+@dataclasses.dataclass
 class ArrayTypeExpression(TypeExpression):
     content: TypeExpression
 
@@ -72,7 +72,7 @@ class ArrayTypeExpression(TypeExpression):
         return visitor.visit_array(self.content.accept(visitor))
 
 
-@dataclasses.dataclass(kw_only=True, eq=False)
+@dataclasses.dataclass
 class DictionaryTypeExpression(TypeExpression):
     keys: TypeExpression
     values: TypeExpression
@@ -81,14 +81,14 @@ class DictionaryTypeExpression(TypeExpression):
         return visitor.visit_dictionary(self.keys.accept(visitor), self.values.accept(visitor))
 
 
-@dataclasses.dataclass(kw_only=True, eq=False)
+@dataclasses.dataclass
 class Property:
     names: list[str]
     type: TypeExpression
     required: bool = False
 
 
-@dataclasses.dataclass(kw_only=True, eq=False)
+@dataclasses.dataclass
 class StructTypeExpression(TypeExpression):
     base: str | None
     properties: list[Property]
@@ -130,7 +130,7 @@ class StructTypeExpression(TypeExpression):
         )
 
 
-@dataclasses.dataclass(kw_only=True, eq=False)
+@dataclasses.dataclass
 class TupleTypeExpression(TypeExpression):
     members: list[TypeExpression]
 
@@ -138,7 +138,7 @@ class TupleTypeExpression(TypeExpression):
         return visitor.visit_tuple([member.accept(visitor) for member in self.members])
 
 
-@dataclasses.dataclass(kw_only=True, eq=False)
+@dataclasses.dataclass
 class VisitedProperty[E]:
     names: list[str]
     type: E
@@ -183,13 +183,13 @@ class TypeExpressionVisitor[E](abc.ABC):
     def visit_tuple(self, members: list[E]) -> E: ...
 
 
-@dataclasses.dataclass(kw_only=True, eq=False)
+@dataclasses.dataclass
 class Type:
     name: str
     definition: TypeExpression
 
 
-@dataclasses.dataclass(kw_only=True, eq=False)
+@dataclasses.dataclass
 class Prototype:
     name: str
     key: str | None
@@ -232,7 +232,7 @@ class Prototype:
         )
 
 
-@dataclasses.dataclass(kw_only=True, eq=False)
+@dataclasses.dataclass
 class Doc:
     types: list[Type]
     prototypes: list[Prototype]
