@@ -11,16 +11,8 @@ from . import documentation
 from . import patching
 
 
-JsonValue = None | bool | int | float | str | list["JsonValue"] | dict[str, "JsonValue"]
+JsonValue = None | bool | int | float | str | typing.Collection["JsonValue"] | typing.Mapping[str, "JsonValue"]
 JsonDict = dict[str, JsonValue]
-
-
-def json_value(value: JsonValue) -> JsonValue:
-    """
-    Statically assert that a value is a JsonValue and erase its concrete type.
-    Helps with type checking where invariant (as opposed to covariant or contravariant) containers are involved (e.g. list and dict).
-    """
-    return value
 
 
 def make_json_schema(
@@ -29,7 +21,7 @@ def make_json_schema(
     limit_to_prototype_names: Iterable[str] | None,
     include_descendants: bool,
     forbid_type_names: Iterable[str],
-) -> JsonDict:
+) -> JsonValue:
     return JsonSchemaMaker(
         doc=doc,
         limit_to_prototype_names=limit_to_prototype_names,
@@ -136,18 +128,16 @@ class JsonSchemaMaker:
 
     def make_json(self) -> JsonDict:
         properties = {
-            prototype.key: json_value(
-                typing.cast(
-                    JsonDict,
-                    self.make_json_definition(
-                        documentation.StructTypeExpression(
-                            base=None,
-                            properties=[],
-                            overridden_properties=[],
-                            custom_properties=documentation.RefTypeExpression(ref=prototype.name),
-                        )
-                    ),
-                )
+            prototype.key: typing.cast(
+                JsonDict,
+                self.make_json_definition(
+                    documentation.StructTypeExpression(
+                        base=None,
+                        properties=[],
+                        overridden_properties=[],
+                        custom_properties=documentation.RefTypeExpression(ref=prototype.name),
+                    )
+                ),
             )
             for prototype in self.doc.prototypes
             if prototype.key is not None and prototype.name in self.prototypes_to_include
@@ -158,17 +148,13 @@ class JsonSchemaMaker:
         )
 
         definitions = {
-            type.name: json_value(
-                {"description": json_value(f"https://lua-api.factorio.com/stable/types/{type.name}.html")}
-                | typing.cast(JsonDict, self.make_json_definition(type.definition))
-            )
+            type.name: {"description": f"https://lua-api.factorio.com/stable/types/{type.name}.html"}
+            | typing.cast(JsonDict, self.make_json_definition(type.definition))
             for type in self.doc.types
             if type.name not in self.forbidden_type_names and type.name in references_needed
         } | {
-            prototype.name: json_value(
-                {"description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{prototype.name}.html")}
-                | typing.cast(JsonDict, self.make_json_definition(prototype.make_definition()))
-            )
+            prototype.name: {"description": f"https://lua-api.factorio.com/stable/prototypes/{prototype.name}.html"}
+            | typing.cast(JsonDict, self.make_json_definition(prototype.make_definition()))
             for prototype in self.doc.prototypes
             if prototype.key is not None and prototype.name in references_needed
         }
@@ -249,7 +235,7 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
         for member in members:
             if isinstance(member, Forbidden):
                 return forbidden
-            anyOf.append(json_value(member))
+            anyOf.append(member)
         return {"anyOf": anyOf}
 
     def visit_array(self, content: JsonDictOrForbidden) -> JsonDictOrForbidden:
@@ -310,9 +296,9 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
         else:
             definition["additionalProperties"] = json_custom_properties
 
-        json_required = [json_value(name) for name in json_properties.keys() if required_by_name.get(name, False)]
+        json_required = [name for name in json_properties.keys() if required_by_name.get(name, False)]
         if len(json_required) > 0:
-            definition["required"] = json_value(json_required)
+            definition["required"] = json_required
 
         return definition
 
@@ -321,7 +307,7 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
         for member in members:
             if isinstance(member, Forbidden):
                 return forbidden
-            items.append(json_value(member))
+            items.append(member)
         return {"type": "array", "items": items, "minItems": len(members), "maxItems": len(members)}
 
 
