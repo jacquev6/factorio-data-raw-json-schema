@@ -290,6 +290,7 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
         json_properties = typing.cast(JsonDict, base_definition.get("properties", {}))
         required_by_name = {k: True for k in typing.cast(list[str], base_definition.get("required", []))}
         json_custom_properties = typing.cast(JsonDict | None, base_definition.get("additionalProperties", None))
+        json_all_of = typing.cast(list[JsonDict], base_definition.get("allOf", []))
 
         for property in itertools.chain(properties, overridden_properties):
             for name in property.names:
@@ -297,12 +298,12 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
                     json_properties.pop(name, None)
                 else:
                     json_properties[name] = property.type
-            # @todo When there are multiple property names, and the property is required, enforce that at least one property name is present
             if len(property.names) == 1:
                 required_by_name[property.names[0]] = property.required
             else:
                 for name in property.names:
                     required_by_name[name] = False
+                json_all_of.append({"anyOf": [{"required": [name]} for name in property.names]})
 
         if custom_properties is not None:
             assert json_custom_properties is None
@@ -323,6 +324,9 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
         json_required = [name for name in json_properties.keys() if required_by_name.get(name, False)]
         if len(json_required) > 0:
             definition["required"] = json_required
+
+        if len(json_all_of) > 0:
+            definition["allOf"] = json_all_of
 
         return definition
 

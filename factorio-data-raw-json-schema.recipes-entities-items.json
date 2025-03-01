@@ -17208,6 +17208,36 @@
         "ammo_stack_limit",
         "turret_rotation_speed",
         "manual_range_modifier"
+      ],
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "required": [
+                "braking_power"
+              ]
+            },
+            {
+              "required": [
+                "braking_force"
+              ]
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "friction"
+              ]
+            },
+            {
+              "required": [
+                "friction_force"
+              ]
+            }
+          ]
+        }
       ]
     },
     "AssemblingMachinePrototype": {
@@ -22408,6 +22438,36 @@
         "rotation_speed",
         "energy_source",
         "inventory_size"
+      ],
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "required": [
+                "braking_power"
+              ]
+            },
+            {
+              "required": [
+                "braking_force"
+              ]
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "friction"
+              ]
+            },
+            {
+              "required": [
+                "friction_force"
+              ]
+            }
+          ]
+        }
       ]
     },
     "CargoBayPrototype": {
@@ -24384,6 +24444,36 @@
         "connection_distance",
         "vertical_selection_shift",
         "inventory_size"
+      ],
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "required": [
+                "braking_power"
+              ]
+            },
+            {
+              "required": [
+                "braking_force"
+              ]
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "friction"
+              ]
+            },
+            {
+              "required": [
+                "friction_force"
+              ]
+            }
+          ]
+        }
       ]
     },
     "CharacterCorpsePrototype": {
@@ -38344,6 +38434,36 @@
         "connection_distance",
         "vertical_selection_shift",
         "capacity"
+      ],
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "required": [
+                "braking_power"
+              ]
+            },
+            {
+              "required": [
+                "braking_force"
+              ]
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "friction"
+              ]
+            },
+            {
+              "required": [
+                "friction_force"
+              ]
+            }
+          ]
+        }
       ]
     },
     "FurnacePrototype": {
@@ -52313,6 +52433,36 @@
         "max_power",
         "reversing_power_modifier",
         "energy_source"
+      ],
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "required": [
+                "braking_power"
+              ]
+            },
+            {
+              "required": [
+                "braking_force"
+              ]
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "friction"
+              ]
+            },
+            {
+              "required": [
+                "friction_force"
+              ]
+            }
+          ]
+        }
       ]
     },
     "LogisticContainerPrototype": {
@@ -72160,6 +72310,36 @@
         "movement_energy_consumption",
         "automatic_weapon_cycling",
         "chain_shooting_cooldown_modifier"
+      ],
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "required": [
+                "braking_power"
+              ]
+            },
+            {
+              "required": [
+                "braking_force"
+              ]
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "friction"
+              ]
+            },
+            {
+              "required": [
+                "friction_force"
+              ]
+            }
+          ]
+        }
       ]
     },
     "SpidertronRemotePrototype": {
