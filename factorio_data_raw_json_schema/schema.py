@@ -30,7 +30,7 @@ def make_json_schema(
     ).make_json()
 
 
-class Forbidden(Exception):
+class Forbidden:
     pass
 
 
@@ -112,10 +112,10 @@ class JsonSchemaMaker:
     def gather_references_needed_by(self, t: documentation.TypeExpression) -> Iterable[str]:
         return set(t.accept(NeededReferencesGatherer(self)))
 
-    def get_referable_type(self, name: str) -> documentation.TypeExpression:
+    def get_referable_type(self, name: str) -> documentation.TypeExpression | Forbidden:
         if name in self.forbidden_type_names:
             assert name in self.types_by_name
-            raise Forbidden
+            return forbidden
 
         type = self.types_by_name.get(name)
         if type is None:
@@ -175,13 +175,15 @@ class BaseTypeExpressionVisitor[E](documentation.TypeExpressionVisitor[E]):
     def __init__(self, maker: JsonSchemaMaker) -> None:
         self.maker = maker
 
-    def get_referable_type(self, name: str) -> documentation.TypeExpression:
+    def get_referable_type(self, name: str) -> documentation.TypeExpression | Forbidden:
         return self.maker.get_referable_type(name)
 
-    def maybe_visit_base(self, base: str | None) -> E | None:
+    def maybe_visit_base(self, base: str | None) -> E | Forbidden | None:
         if base is not None:
             base_type = self.get_referable_type(base)
-            if isinstance(base_type, documentation.StructTypeExpression):
+            if isinstance(base_type, Forbidden):
+                return forbidden
+            elif isinstance(base_type, documentation.StructTypeExpression):
                 return base_type.accept(self)
             elif isinstance(base_type, documentation.UnionTypeExpression):
                 for member in base_type.members:
@@ -224,11 +226,10 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
         return {"type": "integer", "const": value}
 
     def visit_ref(self, ref: str) -> JsonDictOrForbidden:
-        try:
-            self.get_referable_type(ref)  # Ensure the reference is not forbidden
-            return {"$ref": f"#/definitions/{ref}"}
-        except Forbidden:
+        if isinstance(self.get_referable_type(ref), Forbidden):
             return forbidden
+        else:
+            return {"$ref": f"#/definitions/{ref}"}
 
     def visit_union(self, members: list[JsonDictOrForbidden]) -> JsonDictOrForbidden:
         anyOf: list[JsonValue] = []
@@ -255,10 +256,7 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
         overridden_properties: list[documentation.VisitedProperty[JsonDictOrForbidden]],
         custom_properties: JsonDictOrForbidden | None,
     ) -> JsonDictOrForbidden:
-        try:
-            base_definition = self.maybe_visit_base(base) or {}
-        except Forbidden:
-            return forbidden
+        base_definition = self.maybe_visit_base(base) or {}
 
         if isinstance(base_definition, Forbidden):
             return forbidden
@@ -346,6 +344,8 @@ class NeededReferencesGatherer(BaseTypeExpressionVisitor[Iterable[str]]):
         custom_properties: Iterable[str] | None,
     ) -> Iterable[str]:
         references_needed_by_base = self.maybe_visit_base(base)
+        assert not isinstance(references_needed_by_base, Forbidden)
+
         if references_needed_by_base is not None:
             yield from references_needed_by_base
 
