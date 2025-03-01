@@ -1,14 +1,9 @@
 from __future__ import annotations
 
-from typing import Iterable, Literal
+from typing import Literal
 import abc
 import dataclasses
-import sys
 import typing
-
-
-class Forbidden(Exception):
-    pass
 
 
 T = typing.TypeVar("T")
@@ -123,47 +118,18 @@ class StructTypeExpression:
         property.type = type
 
     def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
-        hierarchy: list[VisitedStruct[E]] = []
+        def visit_properties(properties: list[Property]) -> list[VisitedProperty[E]]:
+            return [
+                VisitedProperty(names=property.names, type=property.type.accept(visitor), required=property.required)
+                for property in properties
+            ]
 
-        def visit_properties(properties: list[Property]) -> Iterable[VisitedProperty[E]]:
-            for property in properties:
-                try:
-                    yield VisitedProperty(
-                        names=property.names, type=property.type.accept(visitor), required=property.required
-                    )
-                except Forbidden:
-                    pass
-
-        def rec(t: StructTypeExpression) -> None:
-            if t.base is not None:
-                base = visitor.get_referable_type(t.base)
-                if isinstance(base, StructTypeExpression):
-                    rec(base)
-                elif isinstance(base, UnionTypeExpression):
-                    for member in base.members:
-                        if isinstance(member, StructTypeExpression):
-                            rec(member)
-                            break
-                        else:
-                            print(
-                                f"{t.base} has union type and is used as a base, but it has no member of struct type",
-                                file=sys.stderr,
-                            )
-                else:
-                    print(f"{t.base} is used as a base but has unexpected type: {base.kind}", file=sys.stderr)
-
-            hierarchy.append(
-                VisitedStruct(
-                    base=t.base,
-                    properties=list(visit_properties(t.properties)),
-                    overridden_properties=list(visit_properties(t.overridden_properties)),
-                    custom_properties=(None if t.custom_properties is None else t.custom_properties.accept(visitor)),
-                )
-            )
-
-        rec(self)
-
-        return visitor.visit_struct(hierarchy)
+        return visitor.visit_struct(
+            base=self.base,
+            properties=visit_properties(self.properties),
+            overridden_properties=visit_properties(self.overridden_properties),
+            custom_properties=(None if self.custom_properties is None else self.custom_properties.accept(visitor)),
+        )
 
 
 @dataclasses.dataclass(kw_only=True, eq=False)
@@ -199,18 +165,7 @@ class VisitedProperty[E]:
     required: bool = False
 
 
-@dataclasses.dataclass(kw_only=True, eq=False)
-class VisitedStruct[E]:
-    base: str | None
-    properties: list[VisitedProperty[E]]
-    overridden_properties: list[VisitedProperty[E]]
-    custom_properties: E | None
-
-
 class TypeExpressionVisitor[E](abc.ABC):
-    @abc.abstractmethod
-    def get_referable_type(self, name: str) -> TypeExpression: ...
-
     @abc.abstractmethod
     def visit_builtin(self, name: str) -> E: ...
 
@@ -236,7 +191,13 @@ class TypeExpressionVisitor[E](abc.ABC):
     def visit_dictionary(self, keys: E, values: E) -> E: ...
 
     @abc.abstractmethod
-    def visit_struct(self, hierarchy: list[VisitedStruct[E]]) -> E: ...  # Base first, then derived
+    def visit_struct(
+        self,
+        base: str | None,
+        properties: list[VisitedProperty[E]],
+        overridden_properties: list[VisitedProperty[E]],
+        custom_properties: E | None,
+    ) -> E: ...
 
     @abc.abstractmethod
     def visit_tuple(self, members: list[E]) -> E: ...

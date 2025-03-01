@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import itertools
-from typing import Callable, Iterable
+import sys
+from typing import Iterable
 import typing
 
 import networkx as nx
@@ -35,6 +36,16 @@ def make_json_schema(
         include_descendants=include_descendants,
         forbid_type_names=forbid_type_names,
     ).make_json()
+
+
+class Forbidden(Exception):
+    pass
+
+
+forbidden = Forbidden()
+
+
+JsonDictOrForbidden = JsonDict | Forbidden
 
 
 class JsonSchemaMaker:
@@ -79,9 +90,7 @@ class JsonSchemaMaker:
             some_type_is_newly_forbidden = False
             for type in self.doc.types:
                 if type.name not in self.forbidden_type_names:
-                    try:
-                        self.make_json_definition(type.definition)
-                    except documentation.Forbidden:
+                    if self.make_json_definition(type.definition) is forbidden:
                         self.forbidden_type_names.add(type.name)
                         some_type_is_newly_forbidden = True
 
@@ -114,7 +123,7 @@ class JsonSchemaMaker:
     def get_referable_type(self, name: str) -> documentation.TypeExpression:
         if name in self.forbidden_type_names:
             assert name in self.types_by_name
-            raise documentation.Forbidden
+            raise Forbidden
 
         type = self.types_by_name.get(name)
         if type is None:
@@ -122,19 +131,22 @@ class JsonSchemaMaker:
         else:
             return type.definition
 
-    def make_json_definition(self, t: documentation.TypeExpression) -> JsonDict:
+    def make_json_definition(self, t: documentation.TypeExpression) -> JsonDictOrForbidden:
         return t.accept(JsonDefinitionMaker(self))
 
     def make_json(self) -> JsonDict:
         properties = {
             prototype.key: json_value(
-                self.make_json_definition(
-                    documentation.StructTypeExpression(
-                        base=None,
-                        properties=[],
-                        overridden_properties=[],
-                        custom_properties=documentation.RefTypeExpression(ref=prototype.name),
-                    )
+                typing.cast(
+                    JsonDict,
+                    self.make_json_definition(
+                        documentation.StructTypeExpression(
+                            base=None,
+                            properties=[],
+                            overridden_properties=[],
+                            custom_properties=documentation.RefTypeExpression(ref=prototype.name),
+                        )
+                    ),
                 )
             )
             for prototype in self.doc.prototypes
@@ -148,14 +160,14 @@ class JsonSchemaMaker:
         definitions = {
             type.name: json_value(
                 {"description": json_value(f"https://lua-api.factorio.com/stable/types/{type.name}.html")}
-                | self.make_json_definition(type.definition)
+                | typing.cast(JsonDict, self.make_json_definition(type.definition))
             )
             for type in self.doc.types
             if type.name not in self.forbidden_type_names and type.name in references_needed
         } | {
             prototype.name: json_value(
                 {"description": json_value(f"https://lua-api.factorio.com/stable/prototypes/{prototype.name}.html")}
-                | self.make_json_definition(prototype.make_definition())
+                | typing.cast(JsonDict, self.make_json_definition(prototype.make_definition()))
             )
             for prototype in self.doc.prototypes
             if prototype.key is not None and prototype.name in references_needed
@@ -180,8 +192,26 @@ class BaseTypeExpressionVisitor[E](documentation.TypeExpressionVisitor[E]):
     def get_referable_type(self, name: str) -> documentation.TypeExpression:
         return self.maker.get_referable_type(name)
 
+    def maybe_visit_base(self, base: str | None) -> E | None:
+        if base is not None:
+            base_type = self.get_referable_type(base)
+            if isinstance(base_type, documentation.StructTypeExpression):
+                return base_type.accept(self)
+            elif isinstance(base_type, documentation.UnionTypeExpression):
+                for member in base_type.members:
+                    if isinstance(member, documentation.StructTypeExpression):
+                        return member.accept(self)
+                else:
+                    print(
+                        f"{base} has union type and is used as a base, but it has no member of struct type",
+                        file=sys.stderr,
+                    )
+            else:
+                print(f"{base} is used as a base but has unexpected type: {base_type.kind}", file=sys.stderr)
+        return None
 
-class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDict]):
+
+class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
     def visit_builtin(self, name: str) -> JsonDict:
         return {
             "string": JsonDict({"type": "string"}),
@@ -207,61 +237,92 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDict]):
     def visit_literal_integer(self, value: int) -> JsonDict:
         return {"type": "integer", "const": value}
 
-    def visit_ref(self, ref: str) -> JsonDict:
-        self.get_referable_type(ref)  # Ensure the reference is not forbidden
-        return {"$ref": f"#/definitions/{ref}"}
+    def visit_ref(self, ref: str) -> JsonDictOrForbidden:
+        try:
+            self.get_referable_type(ref)  # Ensure the reference is not forbidden
+            return {"$ref": f"#/definitions/{ref}"}
+        except Forbidden:
+            return forbidden
 
-    def visit_union(self, members: list[JsonDict]) -> JsonDict:
-        return {"anyOf": json_value([json_value(member) for member in members])}
+    def visit_union(self, members: list[JsonDictOrForbidden]) -> JsonDictOrForbidden:
+        anyOf: list[JsonValue] = []
+        for member in members:
+            if isinstance(member, Forbidden):
+                return forbidden
+            anyOf.append(json_value(member))
+        return {"anyOf": anyOf}
 
-    def visit_array(self, content: JsonDict) -> JsonDict:
+    def visit_array(self, content: JsonDictOrForbidden) -> JsonDictOrForbidden:
+        if isinstance(content, Forbidden):
+            return forbidden
         return patching.array_to_json_definition(content)
 
-    def visit_dictionary(self, keys: JsonDict, values: JsonDict) -> JsonDict:
+    def visit_dictionary(self, keys: JsonDictOrForbidden, values: JsonDictOrForbidden) -> JsonDictOrForbidden:
+        if isinstance(keys, Forbidden) or isinstance(values, Forbidden):
+            return forbidden
         return {"type": "object", "additionalProperties": values, "propertyNames": keys}
 
-    def visit_struct(self, hierarchy: list[documentation.VisitedStruct[JsonDict]]) -> JsonDict:
-        properties: JsonDict = {}
-        required: dict[str, bool] = {}
-        custom_properties: JsonDict | None = None
+    def visit_struct(
+        self,
+        base: str | None,
+        properties: list[documentation.VisitedProperty[JsonDictOrForbidden]],
+        overridden_properties: list[documentation.VisitedProperty[JsonDictOrForbidden]],
+        custom_properties: JsonDictOrForbidden | None,
+    ) -> JsonDictOrForbidden:
+        try:
+            base_definition = self.maybe_visit_base(base) or {}
+        except Forbidden:
+            return forbidden
 
-        for struct in hierarchy:
-            for property in itertools.chain(struct.properties, struct.overridden_properties):
+        if isinstance(base_definition, Forbidden):
+            return forbidden
+
+        json_properties = typing.cast(JsonDict, base_definition.get("properties", {}))
+        required_by_name = {k: True for k in typing.cast(list[str], base_definition.get("required", []))}
+        json_custom_properties = typing.cast(JsonDict | None, base_definition.get("additionalProperties", None))
+
+        for property in itertools.chain(properties, overridden_properties):
+            for name in property.names:
+                if isinstance(property.type, Forbidden):
+                    json_properties.pop(name, None)
+                else:
+                    json_properties[name] = property.type
+            # @todo When there are multiple property names, and the property is required, enforce that at least one property name is present
+            if len(property.names) == 1:
+                required_by_name[property.names[0]] = property.required
+            else:
                 for name in property.names:
-                    properties[name] = property.type
-                # @todo When there are multiple property names, and the property is required, enforce that at least one property name is present
-                if len(property.names) == 1:
-                    required[property.names[0]] = property.required
+                    required_by_name[name] = False
 
-            if struct.custom_properties is not None:
-                assert custom_properties is None
-                custom_properties = struct.custom_properties
+        if custom_properties is not None:
+            assert json_custom_properties is None
+            assert not isinstance(custom_properties, Forbidden)
+            json_custom_properties = custom_properties
 
         definition: JsonDict = {"type": "object"}
 
-        if len(properties) > 0:
-            definition["properties"] = properties
+        if len(json_properties) > 0:
+            definition["properties"] = json_properties
 
         if custom_properties is None:
-            if len(properties) == 0:
-                raise documentation.Forbidden
+            if len(json_properties) == 0:
+                return forbidden
         else:
-            definition["additionalProperties"] = custom_properties
+            definition["additionalProperties"] = json_custom_properties
 
-        if any(required.values()):
-            definition["required"] = [
-                json_value(property_name) for property_name in properties.keys() if required.get(property_name, False)
-            ]
+        json_required = [json_value(name) for name in json_properties.keys() if required_by_name.get(name, False)]
+        if len(json_required) > 0:
+            definition["required"] = json_value(json_required)
 
         return definition
 
-    def visit_tuple(self, members: list[JsonDict]) -> JsonDict:
-        return {
-            "type": "array",
-            "items": [json_value(member) for member in members],
-            "minItems": len(members),
-            "maxItems": len(members),
-        }
+    def visit_tuple(self, members: list[JsonDictOrForbidden]) -> JsonDictOrForbidden:
+        items = []
+        for member in members:
+            if isinstance(member, Forbidden):
+                return forbidden
+            items.append(json_value(member))
+        return {"type": "array", "items": items, "minItems": len(members), "maxItems": len(members)}
 
 
 class NeededReferencesGatherer(BaseTypeExpressionVisitor[Iterable[str]]):
@@ -291,12 +352,21 @@ class NeededReferencesGatherer(BaseTypeExpressionVisitor[Iterable[str]]):
         yield from keys
         yield from values
 
-    def visit_struct(self, hierarchy: list[documentation.VisitedStruct[Iterable[str]]]) -> Iterable[str]:
-        for struct in hierarchy:
-            for property in itertools.chain(struct.properties, struct.overridden_properties):
-                yield from property.type
-            if struct.custom_properties is not None:
-                yield from struct.custom_properties
+    def visit_struct(
+        self,
+        base: str | None,
+        properties: list[documentation.VisitedProperty[Iterable[str]]],
+        overridden_properties: list[documentation.VisitedProperty[Iterable[str]]],
+        custom_properties: Iterable[str] | None,
+    ) -> Iterable[str]:
+        references_needed_by_base = self.maybe_visit_base(base)
+        if references_needed_by_base is not None:
+            yield from references_needed_by_base
+
+        for property in itertools.chain(properties, overridden_properties):
+            yield from property.type
+        if custom_properties is not None:
+            yield from custom_properties
 
     def visit_tuple(self, members: list[Iterable[str]]) -> Iterable[str]:
         for member in members:
