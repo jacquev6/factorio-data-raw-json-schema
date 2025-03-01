@@ -4,6 +4,8 @@ from . import documentation
 from .schema import JsonDict
 
 
+# @todo Report to Factorio developers
+
 # Serialization issue
 #####################
 
