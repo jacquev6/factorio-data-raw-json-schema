@@ -1,8 +1,9 @@
 from __future__ import annotations
 
+from typing import Iterable
+import enum
 import itertools
 import sys
-from typing import Iterable
 import typing
 
 import networkx as nx
@@ -30,11 +31,12 @@ def make_json_schema(
     ).make_json()
 
 
-class Forbidden:
-    pass
+class Forbidden(enum.Enum):
+    # https://github.com/python/typing/issues/236#issuecomment-227180301
+    forbidden = 0
 
 
-forbidden = Forbidden()
+forbidden: typing.Final = Forbidden.forbidden
 
 
 JsonDictOrForbidden = JsonDict | Forbidden
@@ -181,7 +183,7 @@ class BaseTypeExpressionVisitor[E](documentation.TypeExpressionVisitor[E]):
     def maybe_visit_base(self, base: str | None) -> E | Forbidden | None:
         if base is not None:
             base_type = self.get_referable_type(base)
-            if isinstance(base_type, Forbidden):
+            if base_type is forbidden:
                 return forbidden
             elif isinstance(base_type, documentation.StructTypeExpression):
                 return base_type.accept(self)
@@ -226,7 +228,7 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
         return {"type": "integer", "const": value}
 
     def visit_ref(self, ref: str) -> JsonDictOrForbidden:
-        if isinstance(self.get_referable_type(ref), Forbidden):
+        if self.get_referable_type(ref) is forbidden:
             return forbidden
         else:
             return {"$ref": f"#/definitions/{ref}"}
@@ -234,18 +236,18 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
     def visit_union(self, members: list[JsonDictOrForbidden]) -> JsonDictOrForbidden:
         anyOf: list[JsonValue] = []
         for member in members:
-            if isinstance(member, Forbidden):
+            if member is forbidden:
                 return forbidden
             anyOf.append(member)
         return {"anyOf": anyOf}
 
     def visit_array(self, content: JsonDictOrForbidden) -> JsonDictOrForbidden:
-        if isinstance(content, Forbidden):
+        if content is forbidden:
             return forbidden
         return patching.array_to_json_definition(content)
 
     def visit_dictionary(self, keys: JsonDictOrForbidden, values: JsonDictOrForbidden) -> JsonDictOrForbidden:
-        if isinstance(keys, Forbidden) or isinstance(values, Forbidden):
+        if keys is forbidden or values is forbidden:
             return forbidden
         return {"type": "object", "additionalProperties": values, "propertyNames": keys}
 
@@ -258,7 +260,7 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
     ) -> JsonDictOrForbidden:
         base_definition = self.maybe_visit_base(base) or {}
 
-        if isinstance(base_definition, Forbidden):
+        if base_definition is forbidden:
             return forbidden
 
         json_properties = typing.cast(JsonDict, base_definition.get("properties", {}))
@@ -267,7 +269,7 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
 
         for property in itertools.chain(properties, overridden_properties):
             for name in property.names:
-                if isinstance(property.type, Forbidden):
+                if property.type is forbidden:
                     json_properties.pop(name, None)
                 else:
                     json_properties[name] = property.type
@@ -280,7 +282,7 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
 
         if custom_properties is not None:
             assert json_custom_properties is None
-            assert not isinstance(custom_properties, Forbidden)
+            assert not custom_properties is forbidden
             json_custom_properties = custom_properties
 
         definition: JsonDict = {"type": "object"}
@@ -303,7 +305,7 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
     def visit_tuple(self, members: list[JsonDictOrForbidden]) -> JsonDictOrForbidden:
         items = []
         for member in members:
-            if isinstance(member, Forbidden):
+            if member is forbidden:
                 return forbidden
             items.append(member)
         return {"type": "array", "items": items, "minItems": len(members), "maxItems": len(members)}
@@ -344,7 +346,7 @@ class NeededReferencesGatherer(BaseTypeExpressionVisitor[Iterable[str]]):
         custom_properties: Iterable[str] | None,
     ) -> Iterable[str]:
         references_needed_by_base = self.maybe_visit_base(base)
-        assert not isinstance(references_needed_by_base, Forbidden)
+        assert not references_needed_by_base is forbidden
 
         if references_needed_by_base is not None:
             yield from references_needed_by_base
