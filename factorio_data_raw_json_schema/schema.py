@@ -28,7 +28,7 @@ def make_json_schema(
         limit_to_prototype_names=limit_to_prototype_names,
         include_descendants=include_descendants,
         forbid_type_names=forbid_type_names,
-    ).make_json()
+    ).json_schema
 
 
 class Forbidden(enum.Enum):
@@ -53,29 +53,24 @@ class JsonSchemaMaker:
     ) -> None:
         self.doc = doc
 
-        self.types_by_name = {type.name: type for type in doc.types}
-        self.prototypes_by_name = {prototype.name: prototype for prototype in doc.prototypes}
+        self.all_type_definitions_by_name = {type.name: type.definition for type in doc.types} | {
+            prototype.name: prototype.make_definition() for prototype in doc.prototypes
+        }
 
         self.forbidden_type_names = set(forbid_type_names)
         self.extend_forbidden_type_names()
 
-        self.prototypes_to_include = set(self.init_prototypes_to_include(limit_to_prototype_names, include_descendants))
-
-        self.all_references_needed_by = nx.transitive_closure(
-            nx.DiGraph(
-                {
-                    name: self.gather_references_needed_by(definition)
-                    for (name, definition) in itertools.chain(
-                        (
-                            (type.name, type.definition)
-                            for type in self.doc.types
-                            if type.name not in self.forbidden_type_names
-                        ),
-                        ((prototype.name, prototype.make_definition()) for prototype in self.doc.prototypes),
-                    )
-                }
-            )
+        prototype_names_to_include = set(
+            self.make_prototype_names_to_include(limit_to_prototype_names, include_descendants)
         )
+        self.prototypes_to_include = [
+            prototype for prototype in self.doc.prototypes if prototype.name in prototype_names_to_include
+        ]
+
+        type_names_to_include = set(self.make_type_names_to_include())
+        self.types_to_include = [type for type in self.doc.types if type.name in type_names_to_include]
+
+        self.json_schema = self.make_json_schema()
 
     def extend_forbidden_type_names(self) -> None:
         # A type is forbidden if either:
@@ -95,48 +90,67 @@ class JsonSchemaMaker:
         while some_type_is_newly_forbidden:
             some_type_is_newly_forbidden = False
             for type in self.doc.types:
-                if type.name not in self.forbidden_type_names and self.make_json_definition(type.definition) is forbidden:
+                if type.name not in self.forbidden_type_names and self.is_now_forbidden(type.definition):
                     self.forbidden_type_names.add(type.name)
                     some_type_is_newly_forbidden = True
 
-    def init_prototypes_to_include(
+    def is_now_forbidden(self, t: documentation.TypeExpression) -> bool:
+        # @todo Try one more time to decouple making the JSON schema from checking if a type is forbidden
+        return t.accept(JsonDefinitionMaker(self.forbidden_type_names, self.all_type_definitions_by_name)) is forbidden
+
+    def make_prototype_names_to_include(
         self, limit_to_prototype_names: Iterable[str] | None, include_descendants: bool
     ) -> Iterable[str]:
-        if limit_to_prototype_names is None:
-            for prototype in self.doc.prototypes:
-                yield prototype.name
-        else:
-            seed_prototypes = {name + "Prototype" for name in limit_to_prototype_names}
-            yield from seed_prototypes
-
-            if include_descendants:
-                parent_children_graph: nx.DiGraph[str] = nx.DiGraph()
+        def gen() -> Iterable[documentation.Prototype]:
+            if limit_to_prototype_names is None:
                 for prototype in self.doc.prototypes:
-                    if prototype.base is not None:
-                        parent_children_graph.add_edge(prototype.base, prototype.name)
+                    yield prototype
+            else:
+                prototypes_by_name = {prototype.name: prototype for prototype in self.doc.prototypes}
 
-                parent_descendants_graph = nx.transitive_closure(parent_children_graph)
-                for name in seed_prototypes:
-                    yield from parent_descendants_graph[name]
+                seed_prototype_names = {name + "Prototype" for name in limit_to_prototype_names}
+                for prototype_name in seed_prototype_names:
+                    yield prototypes_by_name[prototype_name]
 
-    def gather_references_needed_by(self, t: documentation.TypeExpression) -> Iterable[str]:
-        return set(t.accept(NeededReferencesGatherer(self)))
+                if include_descendants:
+                    parent_children_graph: nx.DiGraph[str] = nx.DiGraph()
+                    for prototype in self.doc.prototypes:
+                        if prototype.base is not None:
+                            parent_children_graph.add_edge(prototype.base, prototype.name)
 
-    def get_referable_type(self, name: str) -> documentation.TypeExpression | Forbidden:
-        if name in self.forbidden_type_names:
-            assert name in self.types_by_name
-            return forbidden
+                    parent_descendants_graph = nx.transitive_closure(parent_children_graph)
+                    for prototype_name in seed_prototype_names:
+                        for descendant_name in parent_descendants_graph[prototype_name]:
+                            yield prototypes_by_name[descendant_name]
 
-        type = self.types_by_name.get(name)
-        if type is None:
-            return self.prototypes_by_name[name].make_definition()
-        else:
-            return type.definition
+        for prototype in gen():
+            if prototype.key is not None:
+                yield prototype.name
 
-    def make_json_definition(self, t: documentation.TypeExpression) -> JsonDictOrForbidden:
-        return t.accept(JsonDefinitionMaker(self))
+    def make_type_names_to_include(self) -> Iterable[str]:
+        all_types_needed_by = nx.transitive_closure(
+            nx.DiGraph(
+                {
+                    name: self.gather_types_needed_by(definition)
+                    for (name, definition) in itertools.chain(
+                        (
+                            (type.name, type.definition)
+                            for type in self.doc.types
+                            if type.name not in self.forbidden_type_names
+                        ),
+                        ((prototype.name, prototype.make_definition()) for prototype in self.prototypes_to_include),
+                    )
+                }
+            )
+        )
 
-    def make_json(self) -> JsonDict:
+        for prototype in self.prototypes_to_include:
+            yield from all_types_needed_by[prototype.name]
+
+    def gather_types_needed_by(self, t: documentation.TypeExpression) -> Iterable[str]:
+        return set(t.accept(NeededTypesGatherer(self.forbidden_type_names, self.all_type_definitions_by_name)))
+
+    def make_json_schema(self) -> JsonDict:
         properties = {
             prototype.key: typing.cast(
                 JsonDict,
@@ -149,24 +163,17 @@ class JsonSchemaMaker:
                     )
                 ),
             )
-            for prototype in self.doc.prototypes
-            if prototype.key is not None and prototype.name in self.prototypes_to_include
+            for prototype in self.prototypes_to_include
         }
-
-        references_needed = self.prototypes_to_include | set(
-            itertools.chain.from_iterable(self.all_references_needed_by[name] for name in self.prototypes_to_include)
-        )
 
         definitions = {
             type.name: {"description": f"https://lua-api.factorio.com/stable/types/{type.name}.html"}
             | typing.cast(JsonDict, self.make_json_definition(type.definition))
-            for type in self.doc.types
-            if type.name not in self.forbidden_type_names and type.name in references_needed
+            for type in self.types_to_include
         } | {
             prototype.name: {"description": f"https://lua-api.factorio.com/stable/prototypes/{prototype.name}.html"}
             | typing.cast(JsonDict, self.make_json_definition(prototype.make_definition()))
-            for prototype in self.doc.prototypes
-            if prototype.key is not None and prototype.name in references_needed
+            for prototype in self.prototypes_to_include
         }
 
         return {
@@ -177,20 +184,29 @@ class JsonSchemaMaker:
             "definitions": definitions,
         }
 
+    def make_json_definition(self, t: documentation.TypeExpression) -> JsonDictOrForbidden:
+        return t.accept(JsonDefinitionMaker(self.forbidden_type_names, self.all_type_definitions_by_name))
+
 
 E = typing.TypeVar("E")
 
 
 class BaseTypeExpressionVisitor[E](documentation.TypeExpressionVisitor[E]):
-    def __init__(self, maker: JsonSchemaMaker) -> None:
-        self.maker = maker
+    def __init__(
+        self, forbidden_type_names: set[str], all_type_definitions_by_name: dict[str, documentation.TypeExpression]
+    ) -> None:
+        self.forbidden_type_names = forbidden_type_names
+        self.all_type_definitions_by_name = all_type_definitions_by_name
 
-    def get_referable_type(self, name: str) -> documentation.TypeExpression | Forbidden:
-        return self.maker.get_referable_type(name)
+    def get_type_definition(self, name: str) -> documentation.TypeExpression | Forbidden:
+        if name in self.forbidden_type_names:
+            return forbidden
 
-    def maybe_visit_base(self, base: str | None) -> E | Forbidden | None:
-        if base is not None:
-            base_type = self.get_referable_type(base)
+        return self.all_type_definitions_by_name[name]
+
+    def maybe_visit_base(self, base_name: str | None) -> E | Forbidden | None:
+        if base_name is not None:
+            base_type = self.get_type_definition(base_name)
             if base_type is forbidden:
                 return forbidden
             elif isinstance(base_type, documentation.StructTypeExpression):
@@ -201,11 +217,11 @@ class BaseTypeExpressionVisitor[E](documentation.TypeExpressionVisitor[E]):
                         return member.accept(self)
                 else:
                     print(
-                        f"{base} has union type and is used as a base, but it has no member of struct type",
+                        f"{base_name} has union type and is used as a base, but it has no member of struct type",
                         file=sys.stderr,
                     )
             else:
-                print(f"{base} is used as a base but has unexpected type: {base_type.__class__}", file=sys.stderr)
+                print(f"{base_name} is used as a base but has unexpected type: {base_type.__class__}", file=sys.stderr)
         return None
 
 
@@ -236,7 +252,7 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
         return {"type": "integer", "const": value}
 
     def visit_ref(self, ref: str) -> JsonDictOrForbidden:
-        if self.get_referable_type(ref) is forbidden:
+        if self.get_type_definition(ref) is forbidden:
             return forbidden
         else:
             return {"$ref": f"#/definitions/{ref}"}
@@ -261,12 +277,12 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
 
     def visit_struct(
         self,
-        base: str | None,
+        base_name: str | None,
         properties: list[documentation.VisitedProperty[JsonDictOrForbidden]],
         overridden_properties: list[documentation.VisitedProperty[JsonDictOrForbidden]],
         custom_properties: JsonDictOrForbidden | None,
     ) -> JsonDictOrForbidden:
-        base_definition = self.maybe_visit_base(base) or {}
+        base_definition = self.maybe_visit_base(base_name) or {}
 
         if base_definition is forbidden:
             return forbidden
@@ -319,7 +335,7 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
         return {"type": "array", "items": items, "minItems": len(members), "maxItems": len(members)}
 
 
-class NeededReferencesGatherer(BaseTypeExpressionVisitor[Iterable[str]]):
+class NeededTypesGatherer(BaseTypeExpressionVisitor[Iterable[str]]):
     def visit_builtin(self, name: str) -> Iterable[str]:
         return []
 
@@ -333,7 +349,8 @@ class NeededReferencesGatherer(BaseTypeExpressionVisitor[Iterable[str]]):
         return []
 
     def visit_ref(self, ref: str) -> Iterable[str]:
-        yield ref
+        if self.get_type_definition(ref) is not forbidden:
+            yield ref
 
     def visit_union(self, members: list[Iterable[str]]) -> Iterable[str]:
         for member in members:
@@ -348,12 +365,12 @@ class NeededReferencesGatherer(BaseTypeExpressionVisitor[Iterable[str]]):
 
     def visit_struct(
         self,
-        base: str | None,
+        base_name: str | None,
         properties: list[documentation.VisitedProperty[Iterable[str]]],
         overridden_properties: list[documentation.VisitedProperty[Iterable[str]]],
         custom_properties: Iterable[str] | None,
     ) -> Iterable[str]:
-        references_needed_by_base = self.maybe_visit_base(base)
+        references_needed_by_base = self.maybe_visit_base(base_name)
         assert not references_needed_by_base is forbidden
 
         if references_needed_by_base is not None:

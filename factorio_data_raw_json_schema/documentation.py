@@ -123,7 +123,7 @@ class StructTypeExpression(TypeExpression):
             ]
 
         return visitor.visit_struct(
-            base=self.base,
+            base_name=self.base,
             properties=visit_properties(self.properties),
             overridden_properties=visit_properties(self.overridden_properties),
             custom_properties=(None if self.custom_properties is None else self.custom_properties.accept(visitor)),
@@ -173,7 +173,7 @@ class TypeExpressionVisitor[E](abc.ABC):
     @abc.abstractmethod
     def visit_struct(
         self,
-        base: str | None,
+        base_name: str | None,
         properties: list[VisitedProperty[E]],
         overridden_properties: list[VisitedProperty[E]],
         custom_properties: E | None,
