@@ -16648,6 +16648,9 @@
         "include_in_show_counts": {
           "$ref": "#/definitions/bool"
         },
+        "transfer_entity_health_to_products": {
+          "$ref": "#/definitions/bool"
+        },
         "results": {
           "oneOf": [
             {
@@ -46940,6 +46943,9 @@
         },
         "inventory_size": {
           "$ref": "#/definitions/ItemStackIndex"
+        },
+        "quality_affects_inventory_size": {
+          "$ref": "#/definitions/bool"
         }
       },
       "required": [
@@ -49988,6 +49994,9 @@
         },
         "draw_circuit_wires": {
           "$ref": "#/definitions/bool"
+        },
+        "pulse_duration": {
+          "$ref": "#/definitions/uint32"
         }
       },
       "required": [
@@ -63652,6 +63661,9 @@
         },
         "shadow_scale_enabled": {
           "$ref": "#/definitions/bool"
+        },
+        "target_initial_position_only": {
+          "$ref": "#/definitions/bool"
         }
       },
       "required": [
@@ -65134,6 +65146,9 @@
         },
         "capacity": {
           "$ref": "#/definitions/FluidAmount"
+        },
+        "quality_affects_capacity": {
+          "$ref": "#/definitions/bool"
         },
         "tank_count": {
           "$ref": "#/definitions/uint8"
@@ -116686,6 +116701,12 @@
         "remote_view_LPF_max_cutoff_frequency": {
           "$ref": "#/definitions/float"
         },
+        "space_LPF_min_cutoff_frequency": {
+          "$ref": "#/definitions/float"
+        },
+        "space_LPF_max_cutoff_frequency": {
+          "$ref": "#/definitions/float"
+        },
         "walking_sound_count_reduction_rate": {
           "$ref": "#/definitions/float"
         },
@@ -116860,6 +116881,8 @@
         "inserter_hand_stack_max_sprites",
         "remote_view_LPF_min_cutoff_frequency",
         "remote_view_LPF_max_cutoff_frequency",
+        "space_LPF_min_cutoff_frequency",
+        "space_LPF_max_cutoff_frequency",
         "walking_sound_count_reduction_rate",
         "moving_sound_count_reduction_rate",
         "environment_sounds_transition_fade_in_ticks",
