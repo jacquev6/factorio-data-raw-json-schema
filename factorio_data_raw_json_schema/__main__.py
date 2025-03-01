@@ -59,8 +59,6 @@ def extract(
 ) -> None:
     crawler = crawling.Crawler(doc_root)
 
-    # @todo Generate a json file capturing the prototypes hierarchy
-
     doc = extraction.extract(crawler=crawler, workers=workers)
     if do_patch:
         patching.patch_doc(doc)
