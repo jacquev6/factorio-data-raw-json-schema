@@ -56,7 +56,8 @@ class JsonSchemaMaker:
         self.types_by_name = {type.name: type for type in doc.types}
         self.prototypes_by_name = {prototype.name: prototype for prototype in doc.prototypes}
 
-        self.init_forbidden_type_names(forbid_type_names)
+        self.forbidden_type_names = set(forbid_type_names)
+        self.extend_forbidden_type_names()
 
         self.prototypes_to_include = set(self.init_prototypes_to_include(limit_to_prototype_names, include_descendants))
 
@@ -76,20 +77,27 @@ class JsonSchemaMaker:
             )
         )
 
-    def init_forbidden_type_names(self, forbid_type_names: Iterable[str]) -> None:
-        self.forbidden_type_names = set(forbid_type_names)
-
-        # @todo Use a proper graph exploration algorithm!
-        while True:
+    def extend_forbidden_type_names(self) -> None:
+        # A type is forbidden if either:
+        # - it is explicitly forbidden by the user
+        # - it is a union with at least one forbidden member
+        # - it is an array with a forbidden content type
+        # - it is a dictionary with a forbidden key type or value type
+        # - it is a tuple with at least one forbidden member
+        # - it is a struct with a forbidden base type
+        # - it is a struct whose properties are all forbidden
+        # (Those rules are implemented in the 'JsonDefinitionMaker' visitor)
+        # Because of that last point, being forbidden is not captured by a graph like "if this type is forbidden then this other type is forbidden".
+        # So, being forbidden is not a transitive property, and cannot be computed using 'nx.transitive_closure'.
+        # (Strictly speaking, there might be a graph where the nodes are set of types, but I don't feel like this would be any simpler.)
+        # So instead, we iteratively check if any new type is forbidden.
+        some_type_is_newly_forbidden = True
+        while some_type_is_newly_forbidden:
             some_type_is_newly_forbidden = False
             for type in self.doc.types:
-                if type.name not in self.forbidden_type_names:
-                    if self.make_json_definition(type.definition) is forbidden:
-                        self.forbidden_type_names.add(type.name)
-                        some_type_is_newly_forbidden = True
-
-            if not some_type_is_newly_forbidden:
-                break
+                if type.name not in self.forbidden_type_names and self.make_json_definition(type.definition) is forbidden:
+                    self.forbidden_type_names.add(type.name)
+                    some_type_is_newly_forbidden = True
 
     def init_prototypes_to_include(
         self, limit_to_prototype_names: Iterable[str] | None, include_descendants: bool
