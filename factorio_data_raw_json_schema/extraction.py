@@ -340,7 +340,7 @@ class TypeExpressionTransformer(lark.Transformer[lark.Token, documentation.TypeE
         assert isinstance(items, list) and all(isinstance(item, documentation.TypeExpression) for item in items)
         members: list[documentation.TypeExpression] = []
         for item in items:
-            if item.kind == "union":
+            if isinstance(item, documentation.UnionTypeExpression):
                 members.extend(item.members)
             else:
                 members.append(item)

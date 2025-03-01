@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from typing import Literal
 import abc
 import dataclasses
 import typing
@@ -11,7 +10,6 @@ T = typing.TypeVar("T")
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class BuiltinTypeExpression:
-    kind: Literal["builtin"] = "builtin"
     name: str
 
     def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
@@ -20,7 +18,6 @@ class BuiltinTypeExpression:
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class LiteralBoolTypeExpression:
-    kind: Literal["literal_bool"] = "literal_bool"
     value: bool
 
     def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
@@ -29,7 +26,6 @@ class LiteralBoolTypeExpression:
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class LiteralStringTypeExpression:
-    kind: Literal["literal_string"] = "literal_string"
     value: str
 
     def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
@@ -38,7 +34,6 @@ class LiteralStringTypeExpression:
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class LiteralIntegerTypeExpression:
-    kind: Literal["literal_integer"] = "literal_integer"
     value: int
 
     def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
@@ -47,7 +42,6 @@ class LiteralIntegerTypeExpression:
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class RefTypeExpression:
-    kind: Literal["ref"] = "ref"
     ref: str
 
     def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
@@ -56,7 +50,6 @@ class RefTypeExpression:
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class UnionTypeExpression:
-    kind: Literal["union"] = "union"
     members: list[TypeExpression]
 
     def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
@@ -65,7 +58,6 @@ class UnionTypeExpression:
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class ArrayTypeExpression:
-    kind: Literal["array"] = "array"
     content: TypeExpression
 
     def accept(self, visitor: TypeExpressionVisitor[E]) -> E:
@@ -74,7 +66,6 @@ class ArrayTypeExpression:
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class DictionaryTypeExpression:
-    kind: Literal["dictionary"] = "dictionary"
     keys: TypeExpression
     values: TypeExpression
 
@@ -91,7 +82,6 @@ class Property:
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class StructTypeExpression:
-    kind: Literal["struct"] = "struct"
     base: str | None
     properties: list[Property]
     overridden_properties: list[Property]
@@ -134,7 +124,6 @@ class StructTypeExpression:
 
 @dataclasses.dataclass(kw_only=True, eq=False)
 class TupleTypeExpression:
-    kind: Literal["tuple"] = "tuple"
     members: list[TypeExpression]
 
     def accept(self, visitor: TypeExpressionVisitor[E]) -> E:

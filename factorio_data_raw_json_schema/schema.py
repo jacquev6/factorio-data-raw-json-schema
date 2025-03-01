@@ -207,7 +207,7 @@ class BaseTypeExpressionVisitor[E](documentation.TypeExpressionVisitor[E]):
                         file=sys.stderr,
                     )
             else:
-                print(f"{base} is used as a base but has unexpected type: {base_type.kind}", file=sys.stderr)
+                print(f"{base} is used as a base but has unexpected type: {base_type.__class__}", file=sys.stderr)
         return None
 
 
