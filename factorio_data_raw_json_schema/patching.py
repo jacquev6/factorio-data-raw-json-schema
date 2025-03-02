@@ -27,7 +27,7 @@ local_types_for_union: dict[str, documentation.TypeExpression] = {
 }
 
 
-def patch_doc(doc: documentation.Doc) -> None:
+def patch_doc(doc: documentation.Doc, strict_numbers: bool) -> None:
     # Confusion around TriggerEffect (continued)
     ################################
 
@@ -67,84 +67,89 @@ def patch_doc(doc: documentation.Doc) -> None:
     # Properties documented as integers that are actually floating point numbers
     ############################################################################
 
-    # https://lua-api.factorio.com/2.0.32/types/WorkingVisualisations.html#shift_animation_waypoint_stop_duration is documented as uint16
-    # but is some kind of floating point number in, for example:
-    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".graphics_set.shift_animation_waypoint_stop_duration'
-    doc.get_type_def("WorkingVisualisations", documentation.StructTypeExpression).get_property_type(
-        "shift_animation_waypoint_stop_duration", documentation.RefTypeExpression
-    ).ref = "double"
+    if strict_numbers:
+        # https://lua-api.factorio.com/2.0.32/types/WorkingVisualisations.html#shift_animation_waypoint_stop_duration is documented as uint16
+        # but is some kind of floating point number in, for example:
+        #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."mining-drill"."electric-mining-drill".graphics_set.shift_animation_waypoint_stop_duration'
+        doc.get_type_def("WorkingVisualisations", documentation.StructTypeExpression).get_property_type(
+            "shift_animation_waypoint_stop_duration", documentation.RefTypeExpression
+        ).ref = "double"
 
-    # https://lua-api.factorio.com/2.0.32/types/ItemProductPrototype.html#amount is documented as uint16
-    # but is some kind of floating point number in, for example:
-    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '.recipe."accumulator-recycling".results[0].amount'
-    doc.get_type_def("ItemProductPrototype", documentation.StructTypeExpression).get_property_type(
-        "amount", documentation.RefTypeExpression
-    ).ref = "double"
+        # https://lua-api.factorio.com/2.0.32/types/ItemProductPrototype.html#amount is documented as uint16
+        # but is some kind of floating point number in, for example:
+        #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '.recipe."accumulator-recycling".results[0].amount'
+        doc.get_type_def("ItemProductPrototype", documentation.StructTypeExpression).get_property_type(
+            "amount", documentation.RefTypeExpression
+        ).ref = "double"
 
-    # https://lua-api.factorio.com/2.0.32/types/TechnologySlotStyleSpecification.html#level_offset_y is documented as int32
-    # but is some kind of floating point number in, for example:
-    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."gui-style".default.technology_slot.level_offset_y'
-    doc.get_type_def("TechnologySlotStyleSpecification", documentation.StructTypeExpression).get_property_type(
-        "level_offset_y", documentation.RefTypeExpression
-    ).ref = "double"
-    # This probably applies to https://lua-api.factorio.com/2.0.32/types/TechnologySlotStyleSpecification.html#level_offset_x as well
-    doc.get_type_def("TechnologySlotStyleSpecification", documentation.StructTypeExpression).get_property_type(
-        "level_offset_x", documentation.RefTypeExpression
-    ).ref = "double"
+        # https://lua-api.factorio.com/2.0.32/types/TechnologySlotStyleSpecification.html#level_offset_y is documented as int32
+        # but is some kind of floating point number in, for example:
+        #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."gui-style".default.technology_slot.level_offset_y'
+        doc.get_type_def("TechnologySlotStyleSpecification", documentation.StructTypeExpression).get_property_type(
+            "level_offset_y", documentation.RefTypeExpression
+        ).ref = "double"
+        # This probably applies to https://lua-api.factorio.com/2.0.32/types/TechnologySlotStyleSpecification.html#level_offset_x as well
+        doc.get_type_def("TechnologySlotStyleSpecification", documentation.StructTypeExpression).get_property_type(
+            "level_offset_x", documentation.RefTypeExpression
+        ).ref = "double"
 
-    # https://lua-api.factorio.com/2.0.32/types/TechnologySlotStyleSpecification.html#level_range_offset_y is documented as int32
-    # but is some kind of floating point number in, for example:
-    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."gui-style".default.technology_slot.level_range_offset_y'
-    doc.get_type_def("TechnologySlotStyleSpecification", documentation.StructTypeExpression).get_property_type(
-        "level_range_offset_y", documentation.RefTypeExpression
-    ).ref = "double"
-    # This probably applies to https://lua-api.factorio.com/2.0.32/types/TechnologySlotStyleSpecification.html#level_range_offset_x as well
-    doc.get_type_def("TechnologySlotStyleSpecification", documentation.StructTypeExpression).get_property_type(
-        "level_range_offset_x", documentation.RefTypeExpression
-    ).ref = "double"
+        # https://lua-api.factorio.com/2.0.32/types/TechnologySlotStyleSpecification.html#level_range_offset_y is documented as int32
+        # but is some kind of floating point number in, for example:
+        #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."gui-style".default.technology_slot.level_range_offset_y'
+        doc.get_type_def("TechnologySlotStyleSpecification", documentation.StructTypeExpression).get_property_type(
+            "level_range_offset_y", documentation.RefTypeExpression
+        ).ref = "double"
+        # This probably applies to https://lua-api.factorio.com/2.0.32/types/TechnologySlotStyleSpecification.html#level_range_offset_x as well
+        doc.get_type_def("TechnologySlotStyleSpecification", documentation.StructTypeExpression).get_property_type(
+            "level_range_offset_x", documentation.RefTypeExpression
+        ).ref = "double"
 
-    # https://lua-api.factorio.com/2.0.32/types/BaseAttackParameters.html#lead_target_for_projectile_delay is documented as uint32
-    # but is some kind of floating point number in, for example:
-    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."segmented-unit"."big-demolisher".revenge_attack_parameters.lead_target_for_projectile_delay'
-    doc.get_type_def("BaseAttackParameters", documentation.StructTypeExpression).get_property_type(
-        "lead_target_for_projectile_delay", documentation.RefTypeExpression
-    ).ref = "double"
+        # https://lua-api.factorio.com/2.0.32/types/BaseAttackParameters.html#lead_target_for_projectile_delay is documented as uint32
+        # but is some kind of floating point number in, for example:
+        #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."segmented-unit"."big-demolisher".revenge_attack_parameters.lead_target_for_projectile_delay'
+        doc.get_type_def("BaseAttackParameters", documentation.StructTypeExpression).get_property_type(
+            "lead_target_for_projectile_delay", documentation.RefTypeExpression
+        ).ref = "double"
 
-    # https://lua-api.factorio.com/2.0.32/types/TriggerEffectItem.html#repeat_count is documented as uint16
-    # but is some kind of floating point number in, for example:
-    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '.segment."medium-demolisher-segment-x0_6525".update_effects[1].effect[0].repeat_count'
-    doc.get_type_def("TriggerEffectItem", documentation.StructTypeExpression).get_property_type(
-        "repeat_count", documentation.RefTypeExpression
-    ).ref = "double"
+        # https://lua-api.factorio.com/2.0.32/types/TriggerEffectItem.html#repeat_count is documented as uint16
+        # but is some kind of floating point number in, for example:
+        #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '.segment."medium-demolisher-segment-x0_6525".update_effects[1].effect[0].repeat_count'
+        doc.get_type_def("TriggerEffectItem", documentation.StructTypeExpression).get_property_type(
+            "repeat_count", documentation.RefTypeExpression
+        ).ref = "double"
 
-    # https://lua-api.factorio.com/2.0.32/types/CreateParticleTriggerEffectItem.html#tail_length_deviation is documented as uint16
-    # but is some kind of floating point number in, for example:
-    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."optimized-particle"."vulcanus-stone-particle-smoke-small".ended_in_water_trigger_effect[1].tail_length_deviation'
-    doc.get_type_def("CreateParticleTriggerEffectItem", documentation.StructTypeExpression).get_property_type(
-        "tail_length_deviation", documentation.RefTypeExpression
-    ).ref = "double"
+        # https://lua-api.factorio.com/2.0.32/types/CreateParticleTriggerEffectItem.html#tail_length_deviation is documented as uint16
+        # but is some kind of floating point number in, for example:
+        #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."optimized-particle"."vulcanus-stone-particle-smoke-small".ended_in_water_trigger_effect[1].tail_length_deviation'
+        doc.get_type_def("CreateParticleTriggerEffectItem", documentation.StructTypeExpression).get_property_type(
+            "tail_length_deviation", documentation.RefTypeExpression
+        ).ref = "double"
 
-    # https://lua-api.factorio.com/2.0.32/types/BeamTriggerDelivery.html#max_length is documented as uint16
-    # but is some kind of floating point number in, for example:
-    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."chain-active-trigger"."chain-tesla-turret-chain".action.action_delivery.max_length'
-    doc.get_type_def("BeamTriggerDelivery", documentation.StructTypeExpression).get_property_type(
-        "max_length", documentation.RefTypeExpression
-    ).ref = "double"
+        # https://lua-api.factorio.com/2.0.32/types/BeamTriggerDelivery.html#max_length is documented as uint16
+        # but is some kind of floating point number in, for example:
+        #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."chain-active-trigger"."chain-tesla-turret-chain".action.action_delivery.max_length'
+        doc.get_type_def("BeamTriggerDelivery", documentation.StructTypeExpression).get_property_type(
+            "max_length", documentation.RefTypeExpression
+        ).ref = "double"
 
-    # https://lua-api.factorio.com/2.0.32/types/SingleGraphicProcessionLayer.html#frames documents its attribute 'timestamp' as 'MapTick', which is an alias for 'uint64'
-    # but it's some kind of floating point number in, for example:
-    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '.procession."planet-to-platform-a".timeline.layers[33].frames[0].timestamp'
-    typing.cast(
-        documentation.StructTypeExpression,
-        doc.get_type_def("SingleGraphicProcessionLayer", documentation.StructTypeExpression)
-        .get_property_type("frames", documentation.ArrayTypeExpression)
-        .content,
-    ).get_property_type("timestamp", documentation.RefTypeExpression).ref = "double"
+        # https://lua-api.factorio.com/2.0.32/types/SingleGraphicProcessionLayer.html#frames documents its attribute 'timestamp' as 'MapTick', which is an alias for 'uint64'
+        # but it's some kind of floating point number in, for example:
+        #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '.procession."planet-to-platform-a".timeline.layers[33].frames[0].timestamp'
+        typing.cast(
+            documentation.StructTypeExpression,
+            doc.get_type_def("SingleGraphicProcessionLayer", documentation.StructTypeExpression)
+            .get_property_type("frames", documentation.ArrayTypeExpression)
+            .content,
+        ).get_property_type("timestamp", documentation.RefTypeExpression).ref = "double"
 
-    # https://lua-api.factorio.com/stable/prototypes/ItemPrototype.html#spoil_ticks is documented as uint32
-    # but is some kind of floating point number in, for example:
-    #   cat game-definitions/space-age-with-planet-mods/script-output/data-raw-dump.json | jq '.item."maraxsis-electricity".spoil_ticks'
-    doc.get_prototype("ItemPrototype").get_property_type("spoil_ticks", documentation.RefTypeExpression).ref = "double"
+        # https://lua-api.factorio.com/stable/prototypes/ItemPrototype.html#spoil_ticks is documented as uint32
+        # but is some kind of floating point number in, for example:
+        #   cat game-definitions/space-age-with-planet-mods/script-output/data-raw-dump.json | jq '.item."maraxsis-electricity".spoil_ticks'
+        # This happens only in a modded game, making this very difficult to anticipate.
+        # This is the initial motivation for the '--strict-numbers' option defaulting to lenient numbers.
+        doc.get_prototype("ItemPrototype").get_property_type(
+            "spoil_ticks", documentation.RefTypeExpression
+        ).ref = "double"
 
     # Properties documented as required that are sometimes absent
     #############################################################

@@ -71,6 +71,14 @@ The schemas produced by this project account for these quirks.
 
 They are documented in [`patching.py`](factorio_data_raw_json_schema/patching.py) and will soon be reported to [the Factorio forum](https://forums.factorio.com/viewforum.php?f=7).
 
+Numbers
+-------
+
+Many numbers are documented as integers but can be floating point numbers, both in the official game and in mods.
+You can find a few examples in `patching.py`.
+It's difficult to decide which numbers are actually integers so by default, the generated schemas is lenient and specifies all as plain JSON numbers.
+Use the `--strict-numbers` command-line flag to generate schemas with stricter constraints on numbers.
+
 Contribute
 ==========
 

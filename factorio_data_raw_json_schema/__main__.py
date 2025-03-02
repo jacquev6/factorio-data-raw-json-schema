@@ -28,6 +28,12 @@ def main() -> None:
     show_default=True,
 )
 @click.option(
+    "--strict-numbers/--lenient-numbers",
+    default=False,
+    help="Add strict constraints on number types (e.g. integer vs. floating point, min/max values for integers). NOT RECOMMENDED because many mods do not follow these constraints.",
+    show_default=True,
+)
+@click.option(
     "--limit-to",
     type=str,
     multiple=True,
@@ -52,6 +58,7 @@ def extract(
     doc_root: str,
     output: click.utils.LazyFile,
     do_patch: bool,
+    strict_numbers: bool,
     limit_to: list[str],
     include_descendants: bool,
     forbid: list[str],
@@ -61,9 +68,10 @@ def extract(
 
     doc = extraction.extract(crawler=crawler, workers=workers)
     if do_patch:
-        patching.patch_doc(doc)
+        patching.patch_doc(doc, strict_numbers=strict_numbers)
     json_schema = schema.make_json_schema(
         doc,
+        strict_numbers=strict_numbers,
         limit_to_prototype_names=limit_to or None,
         include_descendants=include_descendants,
         forbid_type_names=forbid,

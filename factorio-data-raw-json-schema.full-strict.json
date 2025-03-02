@@ -1557,7 +1557,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -3527,7 +3527,7 @@
           "$ref": "#/definitions/float"
         },
         "lead_target_for_projectile_delay": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "movement_slow_down_cooldown": {
           "$ref": "#/definitions/float"
@@ -3649,7 +3649,7 @@
           "$ref": "#/definitions/bool"
         },
         "max_length": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "duration": {
           "$ref": "#/definitions/uint32"
@@ -4386,7 +4386,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -7247,7 +7247,7 @@
           "$ref": "#/definitions/ShiftAnimationWaypoints"
         },
         "shift_animation_waypoint_stop_duration": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "shift_animation_transition_duration": {
           "$ref": "#/definitions/uint16"
@@ -7443,7 +7443,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -7495,7 +7495,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -7553,7 +7553,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -7635,7 +7635,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -7729,7 +7729,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -7857,7 +7857,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -7932,7 +7932,7 @@
           "$ref": "#/definitions/uint8"
         },
         "tail_length_deviation": {
-          "$ref": "#/definitions/uint8"
+          "$ref": "#/definitions/double"
         },
         "tail_width": {
           "$ref": "#/definitions/float"
@@ -7965,7 +7965,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -8084,7 +8084,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -8122,7 +8122,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -8281,7 +8281,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -8319,7 +8319,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -8591,7 +8591,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -8632,7 +8632,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -11341,7 +11341,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -11416,7 +11416,7 @@
           "$ref": "#/definitions/uint8"
         },
         "tail_length_deviation": {
-          "$ref": "#/definitions/uint8"
+          "$ref": "#/definitions/double"
         },
         "tail_width": {
           "$ref": "#/definitions/float"
@@ -13265,7 +13265,9 @@
       "type": "object",
       "properties": {
         "inventory_index": {
-          "type": "number"
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
         },
         "max_icons_per_row": {
           "$ref": "#/definitions/uint8"
@@ -13463,7 +13465,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -13590,7 +13592,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -13704,7 +13706,7 @@
           "$ref": "#/definitions/ItemID"
         },
         "amount": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "amount_min": {
           "$ref": "#/definitions/uint16"
@@ -16931,7 +16933,7 @@
           "$ref": "#/definitions/ShiftAnimationWaypoints"
         },
         "shift_animation_waypoint_stop_duration": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "shift_animation_transition_duration": {
           "$ref": "#/definitions/uint16"
@@ -17377,7 +17379,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -18408,7 +18410,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -19602,7 +19604,7 @@
           "$ref": "#/definitions/float"
         },
         "lead_target_for_projectile_delay": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "movement_slow_down_cooldown": {
           "$ref": "#/definitions/float"
@@ -19889,7 +19891,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -21727,7 +21729,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -22520,7 +22522,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -22664,7 +22666,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -23007,7 +23009,7 @@
                 "type": "object",
                 "properties": {
                   "timestamp": {
-                    "$ref": "#/definitions/MapTick"
+                    "$ref": "#/definitions/double"
                   },
                   "opacity": {
                     "$ref": "#/definitions/double"
@@ -25516,7 +25518,7 @@
           "$ref": "#/definitions/float"
         },
         "lead_target_for_projectile_delay": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "movement_slow_down_cooldown": {
           "$ref": "#/definitions/float"
@@ -26989,10 +26991,10 @@
           "$ref": "#/definitions/ElementImageSet"
         },
         "level_offset_x": {
-          "$ref": "#/definitions/int32"
+          "$ref": "#/definitions/double"
         },
         "level_offset_y": {
-          "$ref": "#/definitions/int32"
+          "$ref": "#/definitions/double"
         },
         "level_band_width": {
           "$ref": "#/definitions/uint32"
@@ -27025,10 +27027,10 @@
           "$ref": "#/definitions/ElementImageSet"
         },
         "level_range_offset_x": {
-          "$ref": "#/definitions/int32"
+          "$ref": "#/definitions/double"
         },
         "level_range_offset_y": {
-          "$ref": "#/definitions/int32"
+          "$ref": "#/definitions/double"
         },
         "ingredients_height": {
           "$ref": "#/definitions/uint32"
@@ -27445,7 +27447,7 @@
           "$ref": "#/definitions/ShiftAnimationWaypoints"
         },
         "shift_animation_waypoint_stop_duration": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "shift_animation_transition_duration": {
           "$ref": "#/definitions/uint16"
@@ -29787,7 +29789,7 @@
       "type": "object",
       "properties": {
         "repeat_count": {
-          "$ref": "#/definitions/uint16"
+          "$ref": "#/definitions/double"
         },
         "repeat_count_deviation": {
           "$ref": "#/definitions/uint16"
@@ -32240,15 +32242,21 @@
     },
     "int16": {
       "description": "https://lua-api.factorio.com/stable/types/int16.html",
-      "type": "number"
+      "type": "integer",
+      "minimum": -32768,
+      "maximum": 32767
     },
     "int32": {
       "description": "https://lua-api.factorio.com/stable/types/int32.html",
-      "type": "number"
+      "type": "integer",
+      "minimum": -2147483648,
+      "maximum": 2147483647
     },
     "int8": {
       "description": "https://lua-api.factorio.com/stable/types/int8.html",
-      "type": "number"
+      "type": "integer",
+      "minimum": -128,
+      "maximum": 127
     },
     "string": {
       "description": "https://lua-api.factorio.com/stable/types/string.html",
@@ -32256,19 +32264,27 @@
     },
     "uint16": {
       "description": "https://lua-api.factorio.com/stable/types/uint16.html",
-      "type": "number"
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 65535
     },
     "uint32": {
       "description": "https://lua-api.factorio.com/stable/types/uint32.html",
-      "type": "number"
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
     },
     "uint64": {
       "description": "https://lua-api.factorio.com/stable/types/uint64.html",
-      "type": "number"
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
     },
     "uint8": {
       "description": "https://lua-api.factorio.com/stable/types/uint8.html",
-      "type": "number"
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255
     },
     "AccumulatorPrototype": {
       "description": "https://lua-api.factorio.com/stable/prototypes/AccumulatorPrototype.html",
@@ -33858,7 +33874,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -35785,7 +35801,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -41644,7 +41660,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -41954,7 +41970,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -43443,7 +43459,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -51311,7 +51327,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -54466,7 +54482,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -68450,7 +68466,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -72855,7 +72871,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -73492,7 +73508,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -73767,7 +73783,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -74068,7 +74084,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -74308,7 +74324,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -84099,7 +84115,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -91896,7 +91912,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -95095,7 +95111,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -99638,7 +99654,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -104368,7 +104384,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -106823,7 +106839,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -111486,7 +111502,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -115529,7 +115545,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"

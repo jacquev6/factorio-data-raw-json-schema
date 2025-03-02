@@ -19,12 +19,14 @@ JsonDict = dict[str, JsonValue]
 def make_json_schema(
     doc: documentation.Doc,
     *,
+    strict_numbers: bool,
     limit_to_prototype_names: Iterable[str] | None,
     include_descendants: bool,
     forbid_type_names: Iterable[str],
 ) -> JsonValue:
     return JsonSchemaMaker(
         doc=doc,
+        strict_numbers=strict_numbers,
         limit_to_prototype_names=limit_to_prototype_names,
         include_descendants=include_descendants,
         forbid_type_names=forbid_type_names,
@@ -47,11 +49,13 @@ class JsonSchemaMaker:
         self,
         *,
         doc: documentation.Doc,
+        strict_numbers: bool,
         limit_to_prototype_names: Iterable[str] | None,
         include_descendants: bool,
         forbid_type_names: Iterable[str],
     ) -> None:
         self.doc = doc
+        self.strict_numbers = strict_numbers
 
         self.all_type_definitions_by_name = {type.name: type.definition for type in doc.types} | {
             prototype.name: prototype.make_definition() for prototype in doc.prototypes
@@ -96,7 +100,12 @@ class JsonSchemaMaker:
 
     def is_now_forbidden(self, t: documentation.TypeExpression) -> bool:
         # @todo Try one more time to decouple making the JSON schema from checking if a type is forbidden
-        return t.accept(JsonDefinitionMaker(self.forbidden_type_names, self.all_type_definitions_by_name)) is forbidden
+        return (
+            t.accept(
+                JsonDefinitionMaker(self.forbidden_type_names, self.all_type_definitions_by_name, self.strict_numbers)
+            )
+            is forbidden
+        )
 
     def make_prototype_names_to_include(
         self, limit_to_prototype_names: Iterable[str] | None, include_descendants: bool
@@ -185,7 +194,9 @@ class JsonSchemaMaker:
         }
 
     def make_json_definition(self, t: documentation.TypeExpression) -> JsonDictOrForbidden:
-        return t.accept(JsonDefinitionMaker(self.forbidden_type_names, self.all_type_definitions_by_name))
+        return t.accept(
+            JsonDefinitionMaker(self.forbidden_type_names, self.all_type_definitions_by_name, self.strict_numbers)
+        )
 
 
 E = typing.TypeVar("E")
@@ -226,21 +237,47 @@ class BaseTypeExpressionVisitor[E](documentation.TypeExpressionVisitor[E]):
 
 
 class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
+    strict_builtins = {
+        "string": JsonDict({"type": "string"}),
+        "float": JsonDict({"type": "number"}),
+        "double": JsonDict({"type": "number"}),
+        "bool": JsonDict({"type": "boolean"}),
+        "uint8": JsonDict({"type": "integer", "minimum": 0, "maximum": 255}),
+        "uint16": JsonDict({"type": "integer", "minimum": 0, "maximum": 65535}),
+        "uint32": JsonDict({"type": "integer", "minimum": 0, "maximum": 4294967295}),
+        "uint64": JsonDict({"type": "integer", "minimum": 0, "maximum": 18446744073709551615}),
+        "int8": JsonDict({"type": "integer", "minimum": -128, "maximum": 127}),
+        "int16": JsonDict({"type": "integer", "minimum": -32768, "maximum": 32767}),
+        "int32": JsonDict({"type": "integer", "minimum": -2147483648, "maximum": 2147483647}),
+        "int64": JsonDict({"type": "integer", "minimum": -9223372036854775808, "maximum": 9223372036854775807}),
+    }
+
+    lenient_builtins = {
+        "string": JsonDict({"type": "string"}),
+        "float": JsonDict({"type": "number"}),
+        "double": JsonDict({"type": "number"}),
+        "bool": JsonDict({"type": "boolean"}),
+        "uint8": JsonDict({"type": "number"}),
+        "uint16": JsonDict({"type": "number"}),
+        "uint32": JsonDict({"type": "number"}),
+        "uint64": JsonDict({"type": "number"}),
+        "int8": JsonDict({"type": "number"}),
+        "int16": JsonDict({"type": "number"}),
+        "int32": JsonDict({"type": "number"}),
+        "int64": JsonDict({"type": "number"}),
+    }
+
+    def __init__(
+        self,
+        forbidden_type_names: set[str],
+        all_type_definitions_by_name: dict[str, documentation.TypeExpression],
+        strict_numbers: bool,
+    ) -> None:
+        super().__init__(forbidden_type_names, all_type_definitions_by_name)
+        self.builtins = self.strict_builtins if strict_numbers else self.lenient_builtins
+
     def visit_builtin(self, name: str) -> JsonDict:
-        return {
-            "string": JsonDict({"type": "string"}),
-            "float": JsonDict({"type": "number"}),
-            "double": JsonDict({"type": "number"}),
-            "bool": JsonDict({"type": "boolean"}),
-            "uint8": JsonDict({"type": "integer", "minimum": 0, "maximum": 255}),
-            "uint16": JsonDict({"type": "integer", "minimum": 0, "maximum": 65535}),
-            "uint32": JsonDict({"type": "integer", "minimum": 0, "maximum": 4294967295}),
-            "uint64": JsonDict({"type": "integer", "minimum": 0, "maximum": 18446744073709551615}),
-            "int8": JsonDict({"type": "integer", "minimum": -128, "maximum": 127}),
-            "int16": JsonDict({"type": "integer", "minimum": -32768, "maximum": 32767}),
-            "int32": JsonDict({"type": "integer", "minimum": -2147483648, "maximum": 2147483647}),
-            "int64": JsonDict({"type": "integer", "minimum": -9223372036854775808, "maximum": 9223372036854775807}),
-        }[name]
+        return self.builtins[name]
 
     def visit_literal_bool(self, value: bool) -> JsonDict:
         return {"type": "boolean", "const": value}
