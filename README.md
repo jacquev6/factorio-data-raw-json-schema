@@ -94,8 +94,10 @@ Questions, remarks, bugs? [Open an issue](https://github.com/jacquev6/factorio-d
 
 I'm especially interested in the following topics:
 
-- if you find out that the schemas could be stricter, and you can justify that by pointing at the API documentation
-- if you find out that the schemas are too strict, and you can provide a `mod-list.json` file that produces a `data-raw-dump.json` that doesn't validate against a generated schema
+- you think I'm not understanding something correctly in the LUA documentation
+- you think the schemas could be stricter, and you can justify that by pointing at the API documentation
+- you think the schemas are too strict, and you can provide a `mod-list.json` file that produces a `data-raw-dump.json` that doesn't validate against a generated schema
+- you think the partial schema generation doesn't work as advertised
 
 How
 ===
