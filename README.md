@@ -79,6 +79,14 @@ You can find a few examples in `patching.py`.
 It's difficult to decide which numbers are actually integers so by default, the generated schemas is lenient and specifies all as plain JSON numbers.
 Use the `--strict-numbers` command-line flag to generate schemas with stricter constraints on numbers.
 
+Additional properties
+---------------------
+
+I've decided to allow unspecified properties everywhere for two reasons:
+
+- there are undocumented properties already in the official game and I didn't feel like listing them all in `patching.py`
+- this makes the generated schemas more future-proof because they will still be valid when new properties are added
+
 Contribute
 ==========
 
