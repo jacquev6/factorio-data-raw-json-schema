@@ -13416,7 +13416,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -14923,7 +14923,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -19837,7 +19837,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -20129,7 +20129,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -21310,7 +21310,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -27960,7 +27960,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -30442,7 +30442,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -41056,7 +41056,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -44814,7 +44814,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -45337,7 +45337,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -45594,7 +45594,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -45877,7 +45877,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -46099,7 +46099,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -54623,7 +54623,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -60351,7 +60351,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -63155,7 +63155,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -66795,7 +66795,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -70306,7 +70306,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -72500,7 +72500,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -75819,7 +75819,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"
@@ -79187,7 +79187,7 @@
           "$ref": "#/definitions/ItemPrototypeFlags"
         },
         "spoil_ticks": {
-          "$ref": "#/definitions/uint32"
+          "$ref": "#/definitions/double"
         },
         "fuel_value": {
           "$ref": "#/definitions/Energy"

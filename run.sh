@@ -58,13 +58,20 @@ fi
 
   for schema in factorio-data-raw-json-schema.*.json
   do
-    if ! git diff --stat --exit-code $schema 1>&2
-    then
-      for data in game-definitions/*/script-output/data-raw-dump.json
-      do
-        echo check-jsonschema --verbose --schemafile $schema $data
-      done \
-    fi
+    schema_slug=${schema%.json}
+    schema_slug=${schema_slug#factorio-data-raw-json-schema.}
+    for data in game-definitions/*/script-output/data-raw-dump.json
+    do
+      data_slug=${data%/script-output/data-raw-dump.json}
+      data_slug=${data_slug#game-definitions/}
+      if md5sum --status --check game-definitions/last-check-of-$data_slug-with-$schema_slug.txt 2>/dev/null
+      then
+        echo "The $data_slug game definition has already been checked with this version of the $schema_slug schema" >&2
+      else
+        echo "Checking the $data_slug game definition with the $schema_slug schema" >&2
+        echo "check-jsonschema --verbose --schemafile $schema $data && md5sum $schema $data >game-definitions/last-check-of-$data_slug-with-$schema_slug.txt"
+      fi
+    done \
   done \
   | parallel
 )
