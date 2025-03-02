@@ -46,17 +46,14 @@ fi
     --line-length 120
 
   $runner python -m factorio_data_raw_json_schema extract \
-    --doc-root https://lua-api.factorio.com/2.0.32/ \
     $extract_options \
     factorio-data-raw-json-schema.full.json
 
   python -m factorio_data_raw_json_schema extract \
-    --doc-root https://lua-api.factorio.com/2.0.32/ \
     --strict-numbers \
     factorio-data-raw-json-schema.full-strict.json
 
   python -m factorio_data_raw_json_schema extract \
-    --doc-root https://lua-api.factorio.com/2.0.32/ \
     --limit-to Recipe --limit-to Entity --limit-to Item \
     --forbid SoundDefinition --forbid SpriteSource \
     factorio-data-raw-json-schema.recipes-entities-items.json
