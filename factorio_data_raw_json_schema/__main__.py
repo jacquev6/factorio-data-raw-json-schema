@@ -8,12 +8,7 @@ from . import patching
 from . import schema
 
 
-@click.group()
-def main() -> None:
-    pass
-
-
-@main.command()
+@click.command(help="Generate a JSON schema for Factorio Data.raw from the Factorio Lua API documentation.")
 @click.option(
     "--doc-root",
     default="https://lua-api.factorio.com/stable/",
@@ -54,7 +49,7 @@ def main() -> None:
 @click.option(
     "--workers", type=int, default=-1, help="Number of worker threads to use. Default is the number of CPU cores."
 )
-def extract(
+def main(
     doc_root: str,
     output: click.utils.LazyFile,
     do_patch: bool,

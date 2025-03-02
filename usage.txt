@@ -1,0 +1,37 @@
+factorio_data_raw_json_schema --help
+====================================
+
+Usage: python -m factorio_data_raw_json_schema [OPTIONS] [OUTPUT]
+
+  Generate a JSON schema for Factorio Data.raw from the Factorio Lua API
+  documentation.
+
+Options:
+  --doc-root TEXT                 Root URL of the Factorio Lua API
+                                  documentation. You may want to use something
+                                  like file:///path/to/factorio/doc-html/ to
+                                  avoid downloading it, or something like
+                                  https://lua-api.factorio.com/2.0.28/ or
+                                  https://lua-api.factorio.com/latest/ to
+                                  extract from a specific version.  [default:
+                                  https://lua-api.factorio.com/stable/]
+  --do-patch / --skip-patch       Apply ad-hoc patches to the schema (see
+                                  "Quirks" section in the README).  [default:
+                                  do-patch]
+  --strict-numbers / --lenient-numbers
+                                  Add strict constraints on number types (e.g.
+                                  integer vs. floating point, min/max values
+                                  for integers). NOT RECOMMENDED because many
+                                  mods do not follow these constraints.
+                                  [default: lenient-numbers]
+  --limit-to TEXT                 Limit the schema to the specified
+                                  prototypes. Can be specified multiple times.
+  --include-descendants / --no-include-descendants
+                                  Include descendants of the specified
+                                  prototypes in the schema.  [default:
+                                  include-descendants]
+  --forbid TEXT                   Forbid the specified type from appearing in
+                                  the schema. Can be specified multiple times.
+  --workers INTEGER               Number of worker threads to use. Default is
+                                  the number of CPU cores.
+  --help                          Show this message and exit.

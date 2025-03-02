@@ -45,15 +45,24 @@ fi
     --skip-magic-trailing-comma \
     --line-length 120
 
-  $runner python -m factorio_data_raw_json_schema extract \
+  (
+    echo "factorio_data_raw_json_schema --help"
+    echo "===================================="
+    echo
+    python -m factorio_data_raw_json_schema --help
+  ) >usage.txt
+
+  rm -f factorio-data-raw-json-schema.*.json
+
+  $runner python -m factorio_data_raw_json_schema \
     $extract_options \
     factorio-data-raw-json-schema.full.json
 
-  python -m factorio_data_raw_json_schema extract \
+  python -m factorio_data_raw_json_schema \
     --strict-numbers \
     factorio-data-raw-json-schema.full-strict.json
 
-  python -m factorio_data_raw_json_schema extract \
+  python -m factorio_data_raw_json_schema \
     --limit-to Recipe --limit-to Entity --limit-to Item \
     --forbid SoundDefinition --forbid SpriteSource \
     factorio-data-raw-json-schema.recipes-entities-items.json
