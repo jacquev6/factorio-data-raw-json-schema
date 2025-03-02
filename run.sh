@@ -56,16 +56,21 @@ fi
 
   $runner python -m factorio_data_raw_json_schema \
     $extract_options \
+    --pickle-doc-to doc.pickle \
     factorio-data-raw-json-schema.full.json
 
   python -m factorio_data_raw_json_schema \
+    --unpickle-doc-from doc.pickle \
     --strict-numbers \
     factorio-data-raw-json-schema.full-strict.json
 
   python -m factorio_data_raw_json_schema \
+    --unpickle-doc-from doc.pickle \
     --limit-to Recipe --limit-to Entity --limit-to Item \
     --forbid SoundDefinition --forbid SpriteSource \
     factorio-data-raw-json-schema.recipes-entities-items.json
+
+  rm doc.pickle
 
   for schema in factorio-data-raw-json-schema.*.json
   do

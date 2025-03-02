@@ -1,4 +1,5 @@
 import json
+import pickle
 
 import click
 
@@ -49,6 +50,8 @@ from . import schema
 @click.option(
     "--workers", type=int, default=-1, help="Number of worker threads to use. Default is the number of CPU cores."
 )
+@click.option("--pickle-doc-to", type=click.File("wb"), hidden=True)
+@click.option("--unpickle-doc-from", type=click.File("rb"), hidden=True)
 def main(
     doc_root: str,
     output: click.utils.LazyFile,
@@ -58,12 +61,20 @@ def main(
     include_descendants: bool,
     forbid: list[str],
     workers: int,
+    pickle_doc_to: click.utils.LazyFile | None,
+    unpickle_doc_from: click.utils.LazyFile | None,
 ) -> None:
-    crawler = crawling.Crawler(doc_root)
+    if unpickle_doc_from is None:
+        doc = extraction.extract(crawler=crawling.Crawler(doc_root), workers=workers)
+    else:
+        doc = pickle.load(unpickle_doc_from)
 
-    doc = extraction.extract(crawler=crawler, workers=workers)
+    if pickle_doc_to is not None:
+        pickle.dump(doc, pickle_doc_to)
+
     if do_patch:
         patching.patch_doc(doc, strict_numbers=strict_numbers)
+
     json_schema = schema.make_json_schema(
         doc,
         strict_numbers=strict_numbers,
@@ -71,6 +82,7 @@ def main(
         include_descendants=include_descendants,
         forbid_type_names=forbid,
     )
+
     json.dump(json_schema, output, indent=2)
 
 
