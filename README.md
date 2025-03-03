@@ -5,7 +5,7 @@ What
 
 [Factorio](https://factorio.com/) is an wonderful automation game, with extensive modding support built-in.
 Mods change the game by modifying `Data.raw`, a data structure described in [the LUA API documentation](https://lua-api.factorio.com/latest/types/Data.html#raw) of the game.
-Factorio provides a command-line option `--dump-data-raw` that outputs that data structure in JSON format to the file `script-output/data-raw-dump.json`.
+Factorio provides a command-line option `--dump-data-raw` that outputs that data structure in [JSON format](https://www.json.org/) to the file `script-output/data-raw-dump.json`.
 
 This project provides [JSON schemas](https://json-schema.org/) for that file.
 
