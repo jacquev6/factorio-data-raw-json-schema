@@ -46,7 +46,7 @@ See next section if this becomes an issue for you.
 Partial schemas
 ---------------
 
-To generate your own schemas, because I have not (yet?) published the package on PyPI, you'll need to `git clone` the repository, then create a virtual environment (`python -m venv .venv`), activate it (`source .venv/bin/activate`) and install the depenceies (`pip install -r requirements.txt`).
+To generate your own schemas, because I have not (yet?) published the package on PyPI, you'll need to `git clone` the repository, then create a virtual environment (`python -m venv .venv`), activate it (`source .venv/bin/activate`) and install the dependencies (`pip install -r requirements.txt`).
 You should then be able to run `python -m factorio_data_raw_json_schema --help`.
 
 This project provides two ways to generate *partial* schemas:
