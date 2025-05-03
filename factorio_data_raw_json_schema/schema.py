@@ -117,7 +117,7 @@ class JsonSchemaMaker:
             else:
                 prototypes_by_name = {prototype.name: prototype for prototype in self.doc.prototypes}
 
-                seed_prototype_names = {name + "Prototype" for name in limit_to_prototype_names}
+                seed_prototype_names = set(limit_to_prototype_names)
                 for prototype_name in seed_prototype_names:
                     yield prototypes_by_name[prototype_name]
 

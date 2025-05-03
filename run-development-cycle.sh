@@ -66,7 +66,7 @@ fi
 
   python -m factorio_data_raw_json_schema \
     --unpickle-doc-from doc.pickle \
-    --limit-to Recipe --limit-to Entity --limit-to Item \
+    --limit-to RecipePrototype --limit-to EntityPrototype --limit-to ItemPrototype \
     --forbid SoundDefinition --forbid SpriteSource \
     factorio-data-raw-json-schema.recipes-entities-items.json
 

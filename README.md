@@ -57,7 +57,7 @@ This project provides two ways to generate *partial* schemas:
 So if you need items and recipes, and don't care about sounds and sprites, you may want to generate a schema with:
 
     python -m factorio_data_raw_json_schema \
-      --limit-to Recipe --limit-to Item \
+      --limit-to RecipePrototype --limit-to ItemPrototype \
       --forbid SoundDefinition --forbid SpriteSource
 
 (This will also include prototypes derived from `ItemPrototype` or `RecipePrototype`.)
