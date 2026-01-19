@@ -269,3 +269,17 @@ def patch_doc(doc: documentation.Doc, strict_numbers: bool) -> None:
     doc.get_type_def("Sound", documentation.UnionTypeExpression).members.append(
         documentation.RefTypeExpression(ref="string")
     )
+
+    # https://lua-api.factorio.com/stable/prototypes/StickerPrototype.html#hidden_in_factoriopedia is documented as required
+    # but is absent from, for example
+    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '.sticker."demolisher-ash-sticker".hidden_in_factoriopedia'
+    doc.get_prototype("StickerPrototype").get_property(
+        "hidden_in_factoriopedia"
+    ).required = False
+
+    # https://lua-api.factorio.com/stable/prototypes/StickerPrototype.html#hidden is documented as required
+    # but is absent from, for example:
+    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '.sticker."demolisher-ash-sticker".hidden'
+    doc.get_prototype("StickerPrototype").get_property(
+        "hidden"
+    ).required = False
