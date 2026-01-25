@@ -1,4 +1,5 @@
 from __future__ import annotations
+import itertools
 
 import abc
 import dataclasses
@@ -199,7 +200,7 @@ class Prototype:
     custom_properties: TypeExpression | None
 
     def get_property(self, name: str) -> Property:
-        for property in self.properties:
+        for property in itertools.chain(self.properties, self.overridden_properties):
             if name in property.names:
                 return property
         raise ValueError(f"Property {name!r} not found")

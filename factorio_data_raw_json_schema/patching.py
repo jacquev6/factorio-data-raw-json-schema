@@ -153,11 +153,6 @@ def patch_doc(doc: documentation.Doc, strict_numbers: bool) -> None:
     # Properties documented as required that are sometimes absent
     #############################################################
 
-    # https://lua-api.factorio.com/stable/prototypes/UtilityConstants.html#space_platform_default_speed_formula is documented as required
-    # but is absent from, for example:
-    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."utility-constants".default'
-    doc.get_prototype("UtilityConstants").get_property("space_platform_default_speed_formula").required = False
-
     # https://lua-api.factorio.com/stable/prototypes/SpaceLocationPrototype.html#gravity_pull is documented as required
     # but is absent from, for example:
     #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."space-location"."space-location-unknown"'
@@ -166,26 +161,12 @@ def patch_doc(doc: documentation.Doc, strict_numbers: bool) -> None:
     # https://lua-api.factorio.com/stable/prototypes/EditorControllerPrototype.html#ignore_surface_conditions is documented as required
     # but is absent from, for example:
     #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."editor-controller".default'
-    doc.get_prototype("EditorControllerPrototype").get_property("ignore_surface_conditions").required = False
+    # doc.get_prototype("EditorControllerPrototype").get_property("ignore_surface_conditions").required = False
 
     # https://lua-api.factorio.com/stable/prototypes/AchievementPrototypeWithCondition.html#objective_condition is documented as required
     # but is absent from, for example:
     #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."dont-kill-manually-achievement"."keeping-your-hands-clean"'
     doc.get_prototype("AchievementPrototypeWithCondition").get_property("objective_condition").required = False
-
-    # https://lua-api.factorio.com/stable/prototypes/UtilitySprites.html#cursor_box documents its attribute 'rts_selected' as required
-    # but it's absent from, for example:
-    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."utility-sprites".default.cursor_box'
-    doc.get_prototype("UtilitySprites").get_property_type(
-        "cursor_box", documentation.StructTypeExpression
-    ).get_property("rts_selected").required = False
-
-    # https://lua-api.factorio.com/stable/prototypes/UtilitySprites.html#cursor_box documents its attribute 'rts_to_be_selected' as required
-    # but it's absent from, for example:
-    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."utility-sprites".default.cursor_box'
-    doc.get_prototype("UtilitySprites").get_property_type(
-        "cursor_box", documentation.StructTypeExpression
-    ).get_property("rts_to_be_selected").required = False
 
     # https://lua-api.factorio.com/stable/types/SingleGraphicProcessionLayer.html#frames documents its attribute 'frame' as required
     # but it's absent from, for example:
@@ -246,23 +227,6 @@ def patch_doc(doc: documentation.Doc, strict_numbers: bool) -> None:
     # Miscellaneous
     ###############
 
-    # https://lua-api.factorio.com/stable/types/CranePartDyingEffect.html#particle_effects is documented as 'array[CreateParticleTriggerEffectItem]'
-    # but is a single 'CreateParticleTriggerEffectItem' in, for example:
-    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '."agricultural-tower"."agricultural-tower".crane.parts[0].dying_effect.particle_effects'
-    doc.get_type_def("CranePartDyingEffect", documentation.StructTypeExpression).set_property_type(
-        "particle_effects",
-        documentation.UnionTypeExpression(
-            members=[
-                doc.get_type_def("CranePartDyingEffect", documentation.StructTypeExpression).get_property_type(
-                    "particle_effects"
-                ),
-                doc.get_type_def("CranePartDyingEffect", documentation.StructTypeExpression)
-                .get_property_type("particle_effects", documentation.ArrayTypeExpression)
-                .content,
-            ]
-        ),
-    )
-
     # https://lua-api.factorio.com/stable/prototypes/ShortcutPrototype.html#action doesn't mention "redo" as a possible value
     # but that value is used in, for example:
     #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '.shortcut.redo.action'
@@ -304,3 +268,17 @@ def patch_doc(doc: documentation.Doc, strict_numbers: bool) -> None:
     doc.get_type_def("Sound", documentation.UnionTypeExpression).members.append(
         documentation.RefTypeExpression(ref="string")
     )
+
+    # https://lua-api.factorio.com/stable/prototypes/StickerPrototype.html#hidden_in_factoriopedia is documented as required
+    # but is absent from, for example
+    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '.sticker."demolisher-ash-sticker".hidden_in_factoriopedia'
+    doc.get_prototype("StickerPrototype").get_property(
+        "hidden_in_factoriopedia"
+    ).required = False
+
+    # https://lua-api.factorio.com/stable/prototypes/StickerPrototype.html#hidden is documented as required
+    # but is absent from, for example:
+    #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '.sticker."demolisher-ash-sticker".hidden'
+    doc.get_prototype("StickerPrototype").get_property(
+        "hidden"
+    ).required = False
