@@ -56,6 +56,7 @@ fi
 
   $runner python -m factorio_data_raw_json_schema \
     $extract_options \
+    --doc-root https://lua-api.factorio.com/2.0.28/ \
     --pickle-doc-to doc.pickle \
     factorio-data-raw-json-schema.full.json
 

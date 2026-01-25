@@ -212,7 +212,9 @@ def extract_struct_properties(
                             local_type_properties = list(
                                 extract_struct_properties(
                                     f"{type_name}.{local_type_name}",
-                                    tag(local_type_div_soup.find("h2", string="Properties")).next_sibling,
+                                    tag(
+                                        local_type_div_soup.find("h2", string="Properties")  # type: ignore
+                                    ).next_sibling,
                                     global_types,
                                 )
                             )
@@ -226,7 +228,9 @@ def extract_struct_properties(
                             local_types[local_type_name] = documentation.UnionTypeExpression(
                                 members=list(
                                     extract_union_members(
-                                        tag(local_type_div_soup.find("h4", string="Union members")).next_sibling,
+                                        tag(
+                                            local_type_div_soup.find("h4", string="Union members")  # type: ignore
+                                        ).next_sibling,
                                         global_types,
                                     )
                                 )
@@ -255,7 +259,8 @@ def extract_struct_properties(
                     property_type: documentation.TypeExpression = documentation.UnionTypeExpression(
                         members=list(
                             extract_union_members(
-                                tag(property_div_soup.find("h4", string="Union members")).next_sibling, global_types
+                                tag(property_div_soup.find("h4", string="Union members")).next_sibling,  # type: ignore
+                                global_types,
                             )
                         )
                     )

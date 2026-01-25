@@ -11,7 +11,6 @@ import networkx as nx
 from . import documentation
 from . import patching
 
-
 JsonValue = None | bool | int | float | str | typing.Collection["JsonValue"] | typing.Mapping[str, "JsonValue"]
 JsonDict = dict[str, JsonValue]
 

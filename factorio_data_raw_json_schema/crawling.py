@@ -3,7 +3,7 @@ from typing import Any, cast
 from bs4 import BeautifulSoup
 import requests
 import requests_cache
-import requests_file  # type: ignore
+import requests_file
 
 
 # Work around non-pickeability of `requests_cache.CachedSession`
