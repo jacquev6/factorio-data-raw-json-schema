@@ -251,6 +251,7 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
         "int16": JsonDict({"type": "integer", "minimum": -32768, "maximum": 32767}),
         "int32": JsonDict({"type": "integer", "minimum": -2147483648, "maximum": 2147483647}),
         "int64": JsonDict({"type": "integer", "minimum": -9223372036854775808, "maximum": 9223372036854775807}),
+        "table": JsonDict({}),
     }
 
     lenient_builtins = {
@@ -268,6 +269,7 @@ class JsonDefinitionMaker(BaseTypeExpressionVisitor[JsonDictOrForbidden]):
         "int16": JsonDict({"type": "number"}),
         "int32": JsonDict({"type": "number"}),
         "int64": JsonDict({"type": "number"}),
+        "table": JsonDict({}),
     }
 
     def __init__(

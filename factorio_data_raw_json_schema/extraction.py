@@ -291,7 +291,7 @@ type_expression_parser = lark.Lark(
     union_type : type_expression "or" type_expression
     dictionary_type : "dictionary" "[" type_expression "→" type_expression "]"
     tuple_type : "{" type_expression ("," type_expression)* "}"
-    adhoc_type : "defines.inventory"
+    adhoc_type : "defines.inventory" | "defines.direction"
 
     %import common.ESCAPED_STRING
     %import common.INT

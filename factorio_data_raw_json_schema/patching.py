@@ -272,13 +272,24 @@ def patch_doc(doc: documentation.Doc, strict_numbers: bool) -> None:
     # https://lua-api.factorio.com/stable/prototypes/StickerPrototype.html#hidden_in_factoriopedia is documented as required
     # but is absent from, for example
     #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '.sticker."demolisher-ash-sticker".hidden_in_factoriopedia'
-    doc.get_prototype("StickerPrototype").get_property(
-        "hidden_in_factoriopedia"
-    ).required = False
+    doc.get_prototype("StickerPrototype").get_property("hidden_in_factoriopedia").required = False
 
     # https://lua-api.factorio.com/stable/prototypes/StickerPrototype.html#hidden is documented as required
     # but is absent from, for example:
     #   cat game-definitions/space-age/script-output/data-raw-dump.json | jq '.sticker."demolisher-ash-sticker".hidden'
-    doc.get_prototype("StickerPrototype").get_property(
-        "hidden"
-    ).required = False
+    doc.get_prototype("StickerPrototype").get_property("hidden").required = False
+
+    # https://lua-api.factorio.com/stable/types/SpiderVehicleGraphicsSet.html#default_color is documented as a struct
+    # but can also be a Color, for example:
+    #   cat game-definitions/2.0.73-space-age-with-planets/script-output/data-raw-dump.json | jq '."spider-vehicle"."maraxsis-diesel-submarine".graphics_set.default_color'
+    doc.get_type_def("SpiderVehicleGraphicsSet", documentation.StructTypeExpression).set_property_type(
+        "default_color",
+        documentation.UnionTypeExpression(
+            members=[
+                doc.get_type_def("SpiderVehicleGraphicsSet", documentation.StructTypeExpression).get_property_type(
+                    "default_color"
+                ),
+                documentation.RefTypeExpression(ref="Color"),
+            ]
+        ),
+    )

@@ -56,7 +56,7 @@ fi
 
   $runner python -m factorio_data_raw_json_schema \
     $extract_options \
-    --doc-root https://lua-api.factorio.com/2.0.28/ \
+    --doc-root https://lua-api.factorio.com/2.0.73/ \
     --pickle-doc-to doc.pickle \
     factorio-data-raw-json-schema.full.json
 
@@ -86,6 +86,7 @@ fi
         echo "The $data_slug game definition has already been checked with this version of the $schema_slug schema" >&2
       else
         echo "Checking the $data_slug game definition with the $schema_slug schema" >&2
+        rm -f game-definitions/last-check-of-$data_slug-with-$schema_slug.txt
         echo "check-jsonschema --verbose --schemafile $schema $data && md5sum $schema $data >game-definitions/last-check-of-$data_slug-with-$schema_slug.txt"
       fi
     done \

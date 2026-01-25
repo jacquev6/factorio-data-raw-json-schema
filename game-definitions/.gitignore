@@ -1,2 +1,11 @@
-/*/script-output/data-raw-dump.json
+/factorio-headless_linux_*.tar.xz
+/factorio-headless_linux_*-pristine/
+/*/data/
+/*/bin/
+/*/script-output/
+/*/config-path.cfg
+/*/factorio-current.log
+/*/factorio-previous.log
+/*/mods/*.zip
+/*/mods/mod-settings.dat
 /last-check-*.txt
