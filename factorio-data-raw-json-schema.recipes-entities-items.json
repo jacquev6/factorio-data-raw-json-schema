@@ -11242,11 +11242,7 @@
         "water_reflection": {
           "$ref": "#/definitions/WaterReflectionDefinition"
         }
-      },
-      "required": [
-        "leaf_generation",
-        "branch_generation"
-      ]
+      }
     },
     "Trigger": {
       "description": "https://lua-api.factorio.com/stable/types/Trigger.html",
@@ -23481,7 +23477,6 @@
         "effectivity",
         "consumption",
         "rotation_speed",
-        "rotation_snap_angle",
         "energy_source",
         "inventory_size"
       ],

@@ -1,0 +1,486 @@
+
+{
+  "mods": 
+  [
+    
+    {
+      "name": "base",
+      "enabled": true
+    },
+    
+    {
+      "name": "elevated-rails",
+      "enabled": true
+    },
+    
+    {
+      "name": "quality",
+      "enabled": true
+    },
+    
+    {
+      "name": "space-age",
+      "enabled": true
+    },
+    
+    {
+      "name": "Accumulator-V2",
+      "enabled": true
+    },
+    
+    {
+      "name": "aquilo-seabloom-algaculture",
+      "enabled": true
+    },
+    
+    {
+      "name": "astroponics",
+      "enabled": true
+    },
+    
+    {
+      "name": "barreling-group2",
+      "enabled": true
+    },
+    
+    {
+      "name": "belt-visualizer",
+      "enabled": true
+    },
+    
+    {
+      "name": "bioprocessing-tab",
+      "enabled": true
+    },
+    
+    {
+      "name": "BottleneckLite",
+      "enabled": true
+    },
+    
+    {
+      "name": "bplib",
+      "enabled": true
+    },
+    
+    {
+      "name": "canal-excavator",
+      "enabled": true
+    },
+    
+    {
+      "name": "canal-excavator-graphics",
+      "enabled": true
+    },
+    
+    {
+      "name": "cargo-ships",
+      "enabled": true
+    },
+    
+    {
+      "name": "cargo-ships-graphics",
+      "enabled": true
+    },
+    
+    {
+      "name": "cargo_crates",
+      "enabled": true
+    },
+    
+    {
+      "name": "cerys-lunaponics",
+      "enabled": true
+    },
+    
+    {
+      "name": "Cerys-Moon-of-Fulgora",
+      "enabled": true
+    },
+    
+    {
+      "name": "cf-lib",
+      "enabled": true
+    },
+    
+    {
+      "name": "CleanFloor",
+      "enabled": true
+    },
+    
+    {
+      "name": "Clones",
+      "enabled": true
+    },
+    
+    {
+      "name": "colorful_biochamber",
+      "enabled": true
+    },
+    
+    {
+      "name": "corrundum",
+      "enabled": true
+    },
+    
+    {
+      "name": "cubium",
+      "enabled": true
+    },
+    
+    {
+      "name": "diesel_cargo_ships",
+      "enabled": true
+    },
+    
+    {
+      "name": "diesel_engine",
+      "enabled": true
+    },
+    
+    {
+      "name": "diesel_machines",
+      "enabled": true
+    },
+    
+    {
+      "name": "Early-mech-armor",
+      "enabled": true
+    },
+    
+    {
+      "name": "EditorExtensions",
+      "enabled": true
+    },
+    
+    {
+      "name": "elevated-pipes",
+      "enabled": true
+    },
+    
+    {
+      "name": "EvenDistributionLite",
+      "enabled": true
+    },
+    
+    {
+      "name": "factorissimo-2-notnotmelon",
+      "enabled": true
+    },
+    
+    {
+      "name": "factoryplanner",
+      "enabled": true
+    },
+    
+    {
+      "name": "FactorySearch",
+      "enabled": true
+    },
+    
+    {
+      "name": "fdsl",
+      "enabled": true
+    },
+    
+    {
+      "name": "Flare Stack",
+      "enabled": true
+    },
+    
+    {
+      "name": "flib",
+      "enabled": true
+    },
+    
+    {
+      "name": "FluidMustFlow",
+      "enabled": true
+    },
+    
+    {
+      "name": "fulgora-coralmium-agriculture",
+      "enabled": true
+    },
+    
+    {
+      "name": "FusionPoweredRobots",
+      "enabled": true
+    },
+    
+    {
+      "name": "gleba-water-cane",
+      "enabled": true
+    },
+    
+    {
+      "name": "GUI_Unifyer",
+      "enabled": true
+    },
+    
+    {
+      "name": "Gun_Turret_Alerts",
+      "enabled": true
+    },
+    
+    {
+      "name": "inventory-repair",
+      "enabled": true
+    },
+    
+    {
+      "name": "lignumis",
+      "enabled": true
+    },
+    
+    {
+      "name": "lignumis-assets",
+      "enabled": true
+    },
+    
+    {
+      "name": "long_range_delivery_drones_talandar_fork",
+      "enabled": true
+    },
+    
+    {
+      "name": "long_stack_inserter",
+      "enabled": true
+    },
+    
+    {
+      "name": "machine-upgrades",
+      "enabled": true
+    },
+    
+    {
+      "name": "maraxsis",
+      "enabled": true
+    },
+    
+    {
+      "name": "Mined-Inserters-Dont-Leave-Items",
+      "enabled": true
+    },
+    
+    {
+      "name": "minimalist-rails",
+      "enabled": true
+    },
+    
+    {
+      "name": "Moshine",
+      "enabled": true
+    },
+    
+    {
+      "name": "Moshine-assets",
+      "enabled": true
+    },
+    
+    {
+      "name": "MouseOverConstruction",
+      "enabled": true
+    },
+    
+    {
+      "name": "Paracelsin",
+      "enabled": true
+    },
+    
+    {
+      "name": "Paracelsin-Graphics",
+      "enabled": true
+    },
+    
+    {
+      "name": "pelagos",
+      "enabled": true
+    },
+    
+    {
+      "name": "pipe-visualization-overlay",
+      "enabled": true
+    },
+    
+    {
+      "name": "pirateship",
+      "enabled": true
+    },
+    
+    {
+      "name": "PlanetsLib",
+      "enabled": true
+    },
+    
+    {
+      "name": "pollution-as-surface-property",
+      "enabled": true
+    },
+    
+    {
+      "name": "power-grid-comb",
+      "enabled": true
+    },
+    
+    {
+      "name": "RateCalculator",
+      "enabled": true
+    },
+    
+    {
+      "name": "research-control-tower",
+      "enabled": true
+    },
+    
+    {
+      "name": "resourcehighlighter-dark",
+      "enabled": true
+    },
+    
+    {
+      "name": "RocketCargoInsertion",
+      "enabled": true
+    },
+    
+    {
+      "name": "rubia",
+      "enabled": true
+    },
+    
+    {
+      "name": "rubia-assets",
+      "enabled": true
+    },
+    
+    {
+      "name": "se-space-trains",
+      "enabled": true
+    },
+    
+    {
+      "name": "secretas",
+      "enabled": true
+    },
+    
+    {
+      "name": "show-all-recipe-signals",
+      "enabled": true
+    },
+    
+    {
+      "name": "show-max-underground-distance",
+      "enabled": true
+    },
+    
+    {
+      "name": "skewer_planet_vesta",
+      "enabled": true
+    },
+    
+    {
+      "name": "skewer_planet_vesta_assets",
+      "enabled": true
+    },
+    
+    {
+      "name": "skewer_planet_vesta_assets_2",
+      "enabled": true
+    },
+    
+    {
+      "name": "SmartArtilleryWagons",
+      "enabled": true
+    },
+    
+    {
+      "name": "snouz-big-accumulator",
+      "enabled": true
+    },
+    
+    {
+      "name": "snouz-big-solar-panel",
+      "enabled": true
+    },
+    
+    {
+      "name": "snouz_better_substation",
+      "enabled": true
+    },
+    
+    {
+      "name": "solar-calc",
+      "enabled": true
+    },
+    
+    {
+      "name": "SolarMatrix",
+      "enabled": true
+    },
+    
+    {
+      "name": "some-autoresearch",
+      "enabled": true
+    },
+    
+    {
+      "name": "SpidertronEnhancements",
+      "enabled": true
+    },
+    
+    {
+      "name": "SpidertronPatrols",
+      "enabled": true
+    },
+    
+    {
+      "name": "stdlib2",
+      "enabled": true
+    },
+    
+    {
+      "name": "talandar_cargo_ships_tweaks",
+      "enabled": true
+    },
+    
+    {
+      "name": "TaskList",
+      "enabled": true
+    },
+    
+    {
+      "name": "ThickerLines",
+      "enabled": true
+    },
+    
+    {
+      "name": "utility-combinators-quality",
+      "enabled": true
+    },
+    
+    {
+      "name": "visible-planets",
+      "enabled": true
+    },
+    
+    {
+      "name": "vulcanus-sulfuric-bacteria",
+      "enabled": true
+    },
+    
+    {
+      "name": "wood-logistics",
+      "enabled": true
+    },
+    
+    {
+      "name": "Wood-Walls",
+      "enabled": true
+    },
+    
+    {
+      "name": "wooden_platform",
+      "enabled": true
+    }
+  ]
+}

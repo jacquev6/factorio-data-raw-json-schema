@@ -293,3 +293,11 @@ def patch_doc(doc: documentation.Doc, strict_numbers: bool) -> None:
             ]
         ),
     )
+
+    doc.get_type_def("TreeVariation", documentation.StructTypeExpression).get_property(
+        "leaf_generation"
+    ).required = False
+    doc.get_type_def("TreeVariation", documentation.StructTypeExpression).get_property(
+        "branch_generation"
+    ).required = False
+    doc.get_prototype("CarPrototype").get_property("rotation_snap_angle").required = False

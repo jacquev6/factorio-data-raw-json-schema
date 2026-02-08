@@ -29811,9 +29811,7 @@
       },
       "required": [
         "trunk",
-        "leaves",
-        "leaf_generation",
-        "branch_generation"
+        "leaves"
       ]
     },
     "Trigger": {
@@ -45977,7 +45975,6 @@
         "effectivity",
         "consumption",
         "rotation_speed",
-        "rotation_snap_angle",
         "energy_source",
         "inventory_size"
       ],
